@@ -15,7 +15,8 @@ function ECScreenWordCard() {
   };
 
   return (
-    <div style={{ height: '100%', background: '#000', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ height: '100%', background: '#000', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
       {/* Hero image — full bleed, blurred edges */}
       <div style={{ position: 'absolute', inset: 0 }}>
         <ECPlaceholder height="100%" tint={word.tint} radius={0} label="hero · airport scene"/>
@@ -143,7 +144,8 @@ function ECScreenWordCard() {
             background: i < 3 ? T.text : 'rgba(255,255,255,0.22)',
           }} />
         ))}
-      </div>
+      </div>{/* end card area */}
+      <ECTabBar active="cards" />
     </div>
   );
 }

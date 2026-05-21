@@ -20,7 +20,8 @@ function ECScreenSentenceCard() {
   ];
 
   return (
-    <div style={{ height: '100%', background: T.bg1, position: 'relative', overflow: 'hidden' }}>
+    <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
       <ECStatusBar />
 
       {/* Top bar */}
@@ -172,7 +173,8 @@ function ECScreenSentenceCard() {
             background: i < 3 ? T.accent : T.hairStr,
           }} />
         ))}
-      </div>
+      </div>{/* end card area */}
+      <ECTabBar active="cards" />
     </div>
   );
 }
