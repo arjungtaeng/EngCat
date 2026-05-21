@@ -1,0 +1,18 @@
+{
+  "name": "EngCat",
+  "short_name": "EngCat",
+  "description": "B1-B2 영어 단어·문장 학습 앱",
+  "start_url": "/EngCat/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0B0B0E",
+  "theme_color": "#0B0B0E",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
