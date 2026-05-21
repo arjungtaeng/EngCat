@@ -144,9 +144,10 @@ function ECScreenWordCard() {
             background: i < 3 ? T.text : 'rgba(255,255,255,0.22)',
           }} />
         ))}
-      </div>{/* end card area */}
-      <ECTabBar active="cards" />
+      </div>
     </div>
+    <ECTabBar active="cards" />
+  </div>
   );
 }
 

@@ -173,9 +173,10 @@ function ECScreenSentenceCard() {
             background: i < 3 ? T.accent : T.hairStr,
           }} />
         ))}
-      </div>{/* end card area */}
-      <ECTabBar active="cards" />
+      </div>
     </div>
+    <ECTabBar active="cards" />
+  </div>
   );
 }
 
