@@ -57,7 +57,7 @@ function ECScreenLogin() {
 
       setScramble({ text: chars, fontSize, letterSpacing });
 
-      if (frame === Math.floor(TOTAL_FRAMES * 0.5)) {
+      if (frame === Math.floor(TOTAL_FRAMES * 0.7)) {
         setTaglineVisible(true);
       }
       if (frame >= TOTAL_FRAMES) {
