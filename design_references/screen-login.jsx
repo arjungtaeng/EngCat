@@ -68,17 +68,7 @@ function ECScreenLogin() {
   }, []);
   // ─────────────────────────────────────────────────────────────────
 
-  const handleGoogleResponse = (response) => {
-    try {
-      const b64 = response.credential.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
-      const payload = JSON.parse(atob(b64));
-      const user = { name: payload.name, email: payload.email, picture: payload.picture || null };
-      localStorage.setItem('engcat_user', JSON.stringify(user));
-      window.ECNav && window.ECNav.go('home');
-    } catch (e) {
-      console.error('Google login error', e);
-    }
-  };
+  const tokenClientRef = React.useRef(null);
 
   // Inject pop keyframe
   React.useEffect(() => {
@@ -102,10 +92,22 @@ function ECScreenLogin() {
   React.useEffect(function() {
     const init = function() {
       if (!window.google || !window.google.accounts) return;
-      window.google.accounts.id.initialize({
+      tokenClientRef.current = window.google.accounts.oauth2.initTokenClient({
         client_id: CLIENT_ID,
-        callback: handleGoogleResponse,
-        ux_mode: 'popup',
+        scope: 'openid profile email',
+        callback: (tokenResponse) => {
+          if (tokenResponse.error) { console.error('Google OAuth error', tokenResponse); return; }
+          fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+            headers: { Authorization: 'Bearer ' + tokenResponse.access_token },
+          })
+            .then((r) => r.json())
+            .then((info) => {
+              const user = { name: info.name, email: info.email, picture: info.picture || null };
+              localStorage.setItem('engcat_user', JSON.stringify(user));
+              window.ECNav && window.ECNav.go('home');
+            })
+            .catch((e) => console.error('userinfo fetch error', e));
+        },
       });
       setGsiReady(true);
     };
@@ -118,8 +120,8 @@ function ECScreenLogin() {
   }, []);
 
   const handleGoogleClick = () => {
-    if (window.google && window.google.accounts) {
-      window.google.accounts.id.prompt();
+    if (tokenClientRef.current) {
+      tokenClientRef.current.requestAccessToken({ prompt: 'select_account' });
     }
   };
 
