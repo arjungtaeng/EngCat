@@ -118,7 +118,7 @@ function ECScreenLogin() {
         <img
           src="icons/icon-1024.png"
           alt="EngCat"
-          style={{ width: 100, height: 100, mixBlendMode: 'lighten' }}
+          style={{ width: 140, height: 140, mixBlendMode: 'lighten' }}
         />
       </div>
 
