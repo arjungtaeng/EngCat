@@ -22,10 +22,10 @@ function ECScreenLogin() {
   const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   const TARGET = 'ENGCAT';
   const START_COUNT = 14;
-  const START_FONT = 16;
-  const END_FONT = 9.5;
-  const START_SPACING = 5;
-  const END_SPACING = 2.8;
+  const START_FONT = 46;
+  const END_FONT = 34;
+  const START_SPACING = 10;
+  const END_SPACING = 6;
   const TOTAL_FRAMES = 52;
 
   const [scramble, setScramble] = React.useState(() => ({
@@ -38,26 +38,20 @@ function ECScreenLogin() {
     let frame = 0;
     const id = setInterval(() => {
       frame++;
-      const p = frame / TOTAL_FRAMES; // 0 → 1
+      const p = frame / TOTAL_FRAMES;
 
-      // Char count: 14 → 6, eases out so collapse slows near the end
       const eased = 1 - Math.pow(1 - p, 2);
       const currentCount = Math.max(6, Math.round(START_COUNT - (START_COUNT - 6) * eased));
-
-      // Font size & spacing ease in the same curve
       const fontSize = START_FONT - (START_FONT - END_FONT) * eased;
       const letterSpacing = START_SPACING - (START_SPACING - END_SPACING) * eased;
 
-      // Extra random chars (left side, collapsing away)
       const extraCount = currentCount - 6;
       let chars = '';
       for (let i = 0; i < extraCount; i++) {
         chars += POOL[Math.floor(Math.random() * POOL.length)];
       }
-
-      // ENGCAT positions: each letter locks in staggered from left
       TARGET.split('').forEach((letter, i) => {
-        const lockAt = 0.52 + (i / (TARGET.length - 1)) * 0.38; // lock between 52–90%
+        const lockAt = 0.52 + (i / (TARGET.length - 1)) * 0.38;
         chars += p >= lockAt ? letter : POOL[Math.floor(Math.random() * POOL.length)];
       });
 
@@ -120,26 +114,29 @@ function ECScreenLogin() {
     }}>
 
       {/* Logo */}
-      <div style={{ textAlign: 'center', marginBottom: 6 }}>
+      <div style={{ textAlign: 'center', marginBottom: 20 }}>
         <img
           src="icons/icon-1024.png"
           alt="EngCat"
-          style={{ width: 140, height: 140, mixBlendMode: 'lighten' }}
+          style={{ width: 100, height: 100, mixBlendMode: 'lighten' }}
         />
       </div>
 
-      {/* ENGCAT label — collapse scramble */}
+      {/* ENGCAT headline — collapse scramble */}
       <div style={{
         fontFamily: T.mono,
         fontSize: scramble.fontSize,
         letterSpacing: scramble.letterSpacing,
-        color: T.textMute,
+        color: T.text,
         textTransform: 'uppercase',
-        marginBottom: 10,
-        minHeight: 20,
+        marginBottom: 16,
+        minHeight: 48,
+        display: 'flex', alignItems: 'center',
+        overflow: 'hidden',
+        maxWidth: '100%',
       }}>{scramble.text}</div>
 
-      {/* Tagline — fades in after scramble */}
+      {/* Tagline */}
       <div style={{
         fontFamily: T.sans, fontSize: 13.5, color: T.textDim,
         lineHeight: 1.7, textAlign: 'center', marginBottom: 52,
