@@ -19,13 +19,13 @@ function ECScreenLogin() {
   const [buttonsVisible, setButtonsVisible] = React.useState(false);
 
   // ── Collapse-scramble effect ──────────────────────────────────────
-  const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const TARGET = 'ENGCAT';
+  const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const TARGET = 'EngCat';
   const START_COUNT = 14;
-  const START_FONT = 46;
-  const END_FONT = 34;
-  const START_SPACING = 10;
-  const END_SPACING = 6;
+  const START_FONT = 48;
+  const END_FONT = 38;
+  const START_SPACING = 4;
+  const END_SPACING = 1;
   const TOTAL_FRAMES = 52;
 
   const [scramble, setScramble] = React.useState(() => ({
@@ -122,15 +122,15 @@ function ECScreenLogin() {
         />
       </div>
 
-      {/* ENGCAT headline — collapse scramble */}
+      {/* EngCat headline — collapse scramble */}
       <div style={{
-        fontFamily: T.mono,
+        fontFamily: T.serif,
+        fontStyle: 'italic',
         fontSize: scramble.fontSize,
         letterSpacing: scramble.letterSpacing,
         color: T.text,
-        textTransform: 'uppercase',
-        marginBottom: 16,
-        minHeight: 48,
+        marginBottom: 14,
+        minHeight: 52,
         display: 'flex', alignItems: 'center',
         overflow: 'hidden',
         maxWidth: '100%',
