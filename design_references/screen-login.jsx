@@ -124,8 +124,7 @@ function ECScreenLogin() {
 
       {/* EngCat headline — collapse scramble */}
       <div style={{
-        fontFamily: T.serif,
-        fontStyle: 'italic',
+        fontFamily: "'Playfair Display', serif",
         fontSize: scramble.fontSize,
         letterSpacing: scramble.letterSpacing,
         color: T.text,
