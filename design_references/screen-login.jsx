@@ -16,6 +16,41 @@ function ECScreenLogin() {
   const [gsiReady, setGsiReady] = React.useState(false);
   const [pressing, setPressing] = React.useState(false);
 
+  // ── Scramble effect ───────────────────────────────────────────────
+  const TARGET = 'ENGCAT';
+  const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const TOTAL_FRAMES = 36;            // ~1.08s @ 30ms
+  const REVEAL_FRAMES = 24;           // letters lock in over first 24 frames
+
+  const [displayText, setDisplayText] = React.useState(() =>
+    Array.from({ length: TARGET.length }, () => POOL[Math.floor(Math.random() * POOL.length)]).join('')
+  );
+  const [taglineVisible, setTaglineVisible] = React.useState(false);
+  const [buttonsVisible, setButtonsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    let frame = 0;
+    const id = setInterval(() => {
+      frame++;
+      const next = TARGET.split('').map((letter, i) => {
+        // Each letter locks in at a staggered frame
+        const lockFrame = Math.round((i / (TARGET.length - 1)) * REVEAL_FRAMES);
+        if (frame >= lockFrame + 4) return letter;
+        return POOL[Math.floor(Math.random() * POOL.length)];
+      }).join('');
+      setDisplayText(next);
+
+      if (frame >= TOTAL_FRAMES) {
+        clearInterval(id);
+        setDisplayText(TARGET);
+        setTimeout(() => setTaglineVisible(true), 120);
+        setTimeout(() => setButtonsVisible(true), 400);
+      }
+    }, 30);
+    return () => clearInterval(id);
+  }, []);
+  // ─────────────────────────────────────────────────────────────────
+
   const handleGoogleResponse = (response) => {
     try {
       const b64 = response.credential.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
@@ -70,22 +105,28 @@ function ECScreenLogin() {
         />
       </div>
 
-      {/* Label */}
+      {/* ENGCAT label — scramble */}
       <div style={{
         fontFamily: T.mono, fontSize: 9.5, letterSpacing: 2.8,
         color: T.textMute, textTransform: 'uppercase', marginBottom: 10,
-      }}>EngCat</div>
+      }}>{displayText}</div>
 
-      {/* Tagline */}
+      {/* Tagline — fades in after scramble */}
       <div style={{
         fontFamily: T.sans, fontSize: 13.5, color: T.textDim,
         lineHeight: 1.7, textAlign: 'center', marginBottom: 52,
+        opacity: taglineVisible ? 1 : 0,
+        transition: 'opacity 0.6s ease',
       }}>
         매일 10단어, 5문장으로<br/>영어 실력을 키워보세요.
       </div>
 
-      {/* Google button */}
-      <div style={{ width: '100%', maxWidth: 380 }}>
+      {/* Google button — fades in after tagline */}
+      <div style={{
+        width: '100%', maxWidth: 380,
+        opacity: buttonsVisible ? 1 : 0,
+        transition: 'opacity 0.5s ease',
+      }}>
         <button
           onClick={handleGoogleClick}
           onMouseDown={() => setPressing(true)}
@@ -111,8 +152,12 @@ function ECScreenLogin() {
         </button>
       </div>
 
-      {/* Guest */}
-      <div style={{ marginTop: 32, textAlign: 'center' }}>
+      {/* Guest — fades in with buttons */}
+      <div style={{
+        marginTop: 32, textAlign: 'center',
+        opacity: buttonsVisible ? 1 : 0,
+        transition: 'opacity 0.5s ease 0.1s',
+      }}>
         <span
           onClick={() => {
             localStorage.setItem('engcat_user', JSON.stringify({ name: '게스트', email: 'guest@engcat.app', picture: null }));
