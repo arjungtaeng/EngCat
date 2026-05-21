@@ -15,36 +15,59 @@ function ECScreenLogin() {
 
   const [gsiReady, setGsiReady] = React.useState(false);
   const [pressing, setPressing] = React.useState(false);
-
-  // ── Scramble effect ───────────────────────────────────────────────
-  const TARGET = 'ENGCAT';
-  const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const TOTAL_FRAMES = 36;            // ~1.08s @ 30ms
-  const REVEAL_FRAMES = 24;           // letters lock in over first 24 frames
-
-  const [displayText, setDisplayText] = React.useState(() =>
-    Array.from({ length: TARGET.length }, () => POOL[Math.floor(Math.random() * POOL.length)]).join('')
-  );
   const [taglineVisible, setTaglineVisible] = React.useState(false);
   const [buttonsVisible, setButtonsVisible] = React.useState(false);
+
+  // ── Collapse-scramble effect ──────────────────────────────────────
+  const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const TARGET = 'ENGCAT';
+  const START_COUNT = 14;
+  const START_FONT = 16;
+  const END_FONT = 9.5;
+  const START_SPACING = 5;
+  const END_SPACING = 2.8;
+  const TOTAL_FRAMES = 52;
+
+  const [scramble, setScramble] = React.useState(() => ({
+    text: Array.from({ length: START_COUNT }, () => POOL[Math.floor(Math.random() * POOL.length)]).join(''),
+    fontSize: START_FONT,
+    letterSpacing: START_SPACING,
+  }));
 
   React.useEffect(() => {
     let frame = 0;
     const id = setInterval(() => {
       frame++;
-      const next = TARGET.split('').map((letter, i) => {
-        // Each letter locks in at a staggered frame
-        const lockFrame = Math.round((i / (TARGET.length - 1)) * REVEAL_FRAMES);
-        if (frame >= lockFrame + 4) return letter;
-        return POOL[Math.floor(Math.random() * POOL.length)];
-      }).join('');
-      setDisplayText(next);
+      const p = frame / TOTAL_FRAMES; // 0 → 1
+
+      // Char count: 14 → 6, eases out so collapse slows near the end
+      const eased = 1 - Math.pow(1 - p, 2);
+      const currentCount = Math.max(6, Math.round(START_COUNT - (START_COUNT - 6) * eased));
+
+      // Font size & spacing ease in the same curve
+      const fontSize = START_FONT - (START_FONT - END_FONT) * eased;
+      const letterSpacing = START_SPACING - (START_SPACING - END_SPACING) * eased;
+
+      // Extra random chars (left side, collapsing away)
+      const extraCount = currentCount - 6;
+      let chars = '';
+      for (let i = 0; i < extraCount; i++) {
+        chars += POOL[Math.floor(Math.random() * POOL.length)];
+      }
+
+      // ENGCAT positions: each letter locks in staggered from left
+      TARGET.split('').forEach((letter, i) => {
+        const lockAt = 0.52 + (i / (TARGET.length - 1)) * 0.38; // lock between 52–90%
+        chars += p >= lockAt ? letter : POOL[Math.floor(Math.random() * POOL.length)];
+      });
+
+      setScramble({ text: chars, fontSize, letterSpacing });
 
       if (frame >= TOTAL_FRAMES) {
         clearInterval(id);
-        setDisplayText(TARGET);
+        setScramble({ text: TARGET, fontSize: END_FONT, letterSpacing: END_SPACING });
         setTimeout(() => setTaglineVisible(true), 120);
-        setTimeout(() => setButtonsVisible(true), 400);
+        setTimeout(() => setButtonsVisible(true), 380);
       }
     }, 30);
     return () => clearInterval(id);
@@ -105,11 +128,16 @@ function ECScreenLogin() {
         />
       </div>
 
-      {/* ENGCAT label — scramble */}
+      {/* ENGCAT label — collapse scramble */}
       <div style={{
-        fontFamily: T.mono, fontSize: 9.5, letterSpacing: 2.8,
-        color: T.textMute, textTransform: 'uppercase', marginBottom: 10,
-      }}>{displayText}</div>
+        fontFamily: T.mono,
+        fontSize: scramble.fontSize,
+        letterSpacing: scramble.letterSpacing,
+        color: T.textMute,
+        textTransform: 'uppercase',
+        marginBottom: 10,
+        minHeight: 20,
+      }}>{scramble.text}</div>
 
       {/* Tagline — fades in after scramble */}
       <div style={{
@@ -121,7 +149,7 @@ function ECScreenLogin() {
         매일 10단어, 5문장으로<br/>영어 실력을 키워보세요.
       </div>
 
-      {/* Google button — fades in after tagline */}
+      {/* Google button */}
       <div style={{
         width: '100%', maxWidth: 380,
         opacity: buttonsVisible ? 1 : 0,
@@ -152,7 +180,7 @@ function ECScreenLogin() {
         </button>
       </div>
 
-      {/* Guest — fades in with buttons */}
+      {/* Guest */}
       <div style={{
         marginTop: 32, textAlign: 'center',
         opacity: buttonsVisible ? 1 : 0,
