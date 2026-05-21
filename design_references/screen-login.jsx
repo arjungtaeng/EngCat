@@ -57,12 +57,10 @@ function ECScreenLogin() {
 
       setScramble({ text: chars, fontSize, letterSpacing });
 
-      if (frame === Math.floor(TOTAL_FRAMES * 0.9)) {
-        setTaglineVisible(true);
-      }
       if (frame >= TOTAL_FRAMES) {
         clearInterval(id);
         setScramble({ text: TARGET, fontSize: END_FONT, letterSpacing: END_SPACING });
+        setTaglineVisible(true);
         setTimeout(() => setButtonsVisible(true), 260);
       }
     }, 30);
