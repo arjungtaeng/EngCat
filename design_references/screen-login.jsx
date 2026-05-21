@@ -64,15 +64,15 @@ function ECScreenLogin() {
     }}>
 
       {/* Logo */}
-      <div style={{ marginBottom: 40, textAlign: 'center' }}>
+      <div style={{ marginBottom: 36, textAlign: 'center' }}>
         <img
           src="icons/icon-1024.png"
           alt="EngCat"
-          style={{ width: 96, height: 96, borderRadius: 22 }}
+          style={{ width: 140, height: 140, borderRadius: 32 }}
         />
         <div style={{
           fontFamily: T.mono, fontSize: 9.5, letterSpacing: 2.5,
-          color: T.textMute, textTransform: 'uppercase', marginTop: 14,
+          color: T.textMute, textTransform: 'uppercase', marginTop: 4,
         }}>EngCat</div>
         <div style={{
           fontFamily: T.sans, fontSize: 13.5, color: T.textDim,
