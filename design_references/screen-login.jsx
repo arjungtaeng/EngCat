@@ -221,8 +221,8 @@ function ECScreenLogin() {
             window.ECNav && window.ECNav.go('home');
           }}
           style={{
-            fontFamily: T.mono, fontSize: 9.5, letterSpacing: 1.2,
-            color: T.textFaint, cursor: 'pointer', textTransform: 'uppercase',
+            fontFamily: T.mono, fontSize: 11, letterSpacing: 1.2,
+            color: T.textDim, cursor: 'pointer', textTransform: 'uppercase',
           }}
         >
           로그인 없이 둘러보기
