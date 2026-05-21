@@ -26,7 +26,7 @@ function ECScreenLogin() {
   const END_FONT = 28;
   const START_SPACING = 6;
   const END_SPACING = 3;
-  const TOTAL_FRAMES = 52;
+  const TOTAL_FRAMES = 36;
 
   const [scramble, setScramble] = React.useState(() => ({
     text: Array.from({ length: START_COUNT }, () => POOL[Math.floor(Math.random() * POOL.length)]).join(''),
