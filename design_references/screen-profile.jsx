@@ -28,7 +28,8 @@ function ECScreenProfile() {
   );
 
   return (
-    <div style={{ height: '100%', background: T.bg1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
+    <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
       <ECStatusBar />
 
       {/* Header */}
@@ -145,7 +146,7 @@ function ECScreenProfile() {
         </div>
       </div>
 
-      <div style={{ height: 100 }} />
+      </div>{/* end scrollable */}
       <ECTabBar active="me" />
     </div>
   );

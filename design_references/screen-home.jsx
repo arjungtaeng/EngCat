@@ -15,7 +15,8 @@ function ECScreenHome() {
   const firstName = (user?.name || '학습자').split(' ')[0];
 
   return (
-    <div style={{ height: '100%', background: T.bg1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
+    <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
       <ECStatusBar />
 
       {/* Top bar */}
@@ -154,9 +155,7 @@ function ECScreenHome() {
         ))}
       </div>
 
-      {/* Tab bar spacer */}
-      <div style={{ height: 90 }} />
-
+      </div>{/* end scrollable */}
       <ECTabBar active="home" />
     </div>
   );
@@ -172,8 +171,8 @@ function ECTabBar({ active = 'home' }) {
   ];
   return (
     <div style={{
-      position: 'fixed', bottom: 0, left: 0, right: 0,
-      padding: `10px 12px calc(env(safe-area-inset-bottom, 0px) + 10px)`,
+      flexShrink: 0,
+      padding: '10px 12px 16px',
       background: T.bg1,
       display: 'flex', justifyContent: 'space-around',
       borderTop: `1px solid ${T.hair}`,
