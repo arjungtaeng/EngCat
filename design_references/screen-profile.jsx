@@ -7,6 +7,17 @@ function ECScreenProfile() {
     try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; }
   })();
 
+  const [editingNick, setEditingNick] = React.useState(false);
+  const [nickVal, setNickVal] = React.useState(() => localStorage.getItem('engcat_nickname') || '');
+
+  const saveNick = () => {
+    const trimmed = nickVal.trim();
+    if (trimmed) localStorage.setItem('engcat_nickname', trimmed);
+    else localStorage.removeItem('engcat_nickname');
+    setNickVal(trimmed);
+    setEditingNick(false);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('engcat_user');
     window.ECNav?.go('login');
@@ -62,6 +73,40 @@ function ECScreenProfile() {
           <div style={{ flex: 1 }}>
             <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1.1, letterSpacing: -0.3 }}>{user?.name || '사용자'}</div>
             <div style={{ fontSize: 12.5, color: T.textDim, marginTop: 4 }}>{user?.email || ''}</div>
+
+            {/* Nickname */}
+            {editingNick ? (
+              <div style={{ marginTop: 8, display: 'flex', gap: 6, alignItems: 'center' }}>
+                <input
+                  value={nickVal}
+                  onChange={e => setNickVal(e.target.value)}
+                  onKeyDown={e => { if (e.key === 'Enter') saveNick(); }}
+                  placeholder="불리고 싶은 이름"
+                  autoFocus
+                  style={{
+                    flex: 1, padding: '5px 10px', borderRadius: 8,
+                    background: T.bg3, border: `1px solid ${T.hairStr}`,
+                    color: T.text, fontSize: 13, fontFamily: T.sans, outline: 'none',
+                  }}
+                />
+                <span
+                  onClick={saveNick}
+                  style={{ fontSize: 12, color: T.accent, fontFamily: T.mono, cursor: 'pointer', whiteSpace: 'nowrap' }}
+                >완료</span>
+              </div>
+            ) : (
+              <div
+                onClick={() => setEditingNick(true)}
+                style={{ marginTop: 7, display: 'inline-flex', alignItems: 'center', gap: 5, cursor: 'pointer' }}
+              >
+                <span style={{ fontSize: 10.5, color: T.textMute, fontFamily: T.mono, letterSpacing: 0.5 }}>호칭</span>
+                <span style={{ fontSize: 13, color: nickVal ? T.text : T.textMute }}>
+                  {nickVal || '설정하기'}
+                </span>
+                <span style={{ fontSize: 11, color: T.textMute }}>✎</span>
+              </div>
+            )}
+
             <div style={{ marginTop: 8, display: 'flex', gap: 6 }}>
               <span style={{
                 padding: '3px 8px', borderRadius: 6, background: T.accentSoft,

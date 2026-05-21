@@ -12,7 +12,15 @@ function ECScreenHome() {
   const dateStr = `${month}월 ${day}일 ${dayNames[now.getDay()]}요일`;
   const hour = now.getHours();
   const greetingWord = hour < 12 ? '좋은 아침이에요,' : hour < 18 ? '안녕하세요,' : '좋은 저녁이에요,';
-  const firstName = (user?.name || '학습자').split(' ')[0];
+  const savedNick = localStorage.getItem('engcat_nickname');
+  const rawName = user?.name || '학습자';
+  const displayName = savedNick
+    ? savedNick
+    : rawName.includes(' ')
+      ? rawName.split(' ')[0]                                      // 서양식: 첫 토큰 (given name)
+      : /^[가-힣]+$/.test(rawName) && rawName.length >= 3
+        ? rawName.slice(1)                                         // 한국식: 성(첫 글자) 제외
+        : rawName;
 
   return (
     <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
@@ -50,7 +58,7 @@ function ECScreenHome() {
         </div>
         <div style={{ fontFamily: T.serif, fontSize: 30, lineHeight: 1.18, color: T.text, letterSpacing: -0.4 }}>
           {greetingWord}<br/>
-          <span style={{ fontStyle: 'italic', color: T.accent }}>{firstName}님.</span>
+          <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}님.</span>
         </div>
       </div>
 
