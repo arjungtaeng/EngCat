@@ -80,6 +80,21 @@ function ECScreenLogin() {
     }
   };
 
+  // Inject pop keyframe
+  React.useEffect(() => {
+    const s = document.createElement('style');
+    s.textContent = `@keyframes ec-pop {
+      0%   { opacity:0; transform: scale(0.3) translateY(6px); }
+      55%  { transform: scale(1.22) translateY(-3px); }
+      100% { opacity:1; transform: scale(1) translateY(0); }
+    }`;
+    document.head.appendChild(s);
+    return () => document.head.removeChild(s);
+  }, []);
+
+  const taglineLines = ['매일 10단어, 5문장으로', '영어 실력을 키워보세요.'];
+  const line0Len = [...taglineLines[0]].length;
+
   React.useEffect(function() {
     const init = function() {
       if (!window.google || !window.google.accounts) return;
@@ -136,14 +151,28 @@ function ECScreenLogin() {
         maxWidth: '100%',
       }}>{scramble.text}</div>
 
-      {/* Tagline */}
+      {/* Tagline — 글자별 뽁뽁 */}
       <div style={{
         fontFamily: T.sans, fontSize: 13.5, color: T.textDim,
         lineHeight: 1.7, textAlign: 'center', marginBottom: 52,
-        opacity: taglineVisible ? 1 : 0,
-        transition: 'opacity 0.6s ease',
       }}>
-        매일 10단어, 5문장으로<br/>영어 실력을 키워보세요.
+        {taglineLines.map((line, li) => (
+          <div key={li}>
+            {[...line].map((char, ci) => {
+              const idx = li === 0 ? ci : line0Len + ci;
+              return (
+                <span key={ci} style={{
+                  display: 'inline-block',
+                  whiteSpace: 'pre',
+                  opacity: taglineVisible ? 1 : 0,
+                  animation: taglineVisible
+                    ? `ec-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.04}s both`
+                    : 'none',
+                }}>{char}</span>
+              );
+            })}
+          </div>
+        ))}
       </div>
 
       {/* Google button */}
