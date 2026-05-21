@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EngCat · App Design</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"/>
+
+<style>
+  html, body { margin: 0; padding: 0; background: #1b1a17; font-family: 'Pretendard Variable', system-ui, sans-serif; }
+  * { box-sizing: border-box; }
+</style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="tokens.jsx"></script>
+<script type="text/babel" src="icons.jsx"></script>
+<script type="text/babel" src="screen-onboarding.jsx"></script>
+<script type="text/babel" src="screen-home.jsx"></script>
+<script type="text/babel" src="screen-word-card.jsx"></script>
+<script type="text/babel" src="screen-sentence-card.jsx"></script>
+<script type="text/babel" src="screen-quiz.jsx"></script>
+<script type="text/babel" src="screen-stats.jsx"></script>
+<script type="text/babel" src="screen-profile.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+  const PHONE_W = 390;
+  const PHONE_H = 844;
+
+  // Phone wrapper — every screen rendered inside our custom ECPhone shell.
+  function Phone({ children, label }) {
+    return (
+      <div data-screen-label={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <ECPhone width={PHONE_W} height={PHONE_H}>{children}</ECPhone>
+      </div>
+    );
+  }
+
+  function App() {
+    return (
+      <DesignCanvas
+        title="EngCat"
+        subtitle="영어 단어 · 문장 학습 앱 — Premium dark, B1-B2 학습자 · 공손한 존댓말"
+      >
+        <DCSection
+          id="core"
+          title="Core flow"
+          subtitle="홈에서 시작 → 카드 학습 → 퀴즈로 마무리"
+        >
+          <DCArtboard id="home" label="01 · 홈"               width={PHONE_W + 12} height={PHONE_H + 12}>
+            <Phone label="01 Home"><ECScreenHome/></Phone>
+          </DCArtboard>
+          <DCArtboard id="word" label="02 · 단어 카드"        width={PHONE_W + 12} height={PHONE_H + 12}>
+            <Phone label="02 Word Card"><ECScreenWordCard/></Phone>
+          </DCArtboard>
+          <DCArtboard id="sentence" label="03 · 문장 카드"     width={PHONE_W + 12} height={PHONE_H + 12}>
+            <Phone label="03 Sentence Card"><ECScreenSentenceCard/></Phone>
+          </DCArtboard>
+          <DCArtboard id="quiz" label="04 · 퀴즈"              width={PHONE_W + 12} height={PHONE_H + 12}>
+            <Phone label="04 Quiz"><ECScreenQuiz/></Phone>
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection
+          id="self"
+          title="내 정보 & 진도"
+          subtitle="학습 데이터, 스트릭, 설정"
+        >
+          <DCArtboard id="stats" label="05 · 진도"             width={PHONE_W + 12} height={PHONE_H + 12}>
+            <Phone label="05 Stats"><ECScreenStats/></Phone>
+          </DCArtboard>
+          <DCArtboard id="profile" label="06 · 프로필 · 설정" width={PHONE_W + 12} height={PHONE_H + 12}>
+            <Phone label="06 Profile"><ECScreenProfile/></Phone>
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection
+          id="onboarding"
+          title="Onboarding"
+          subtitle="첫 실행 — 레벨 선택 + 일일 목표 설정"
+        >
+          <DCArtboard id="onb-level" label="A · 레벨 선택"     width={PHONE_W + 12} height={PHONE_H + 12}>
+            <Phone label="A Onboarding Level"><ECScreenOnboarding/></Phone>
+          </DCArtboard>
+          <DCArtboard id="onb-goal"  label="B · 목표 설정"     width={PHONE_W + 12} height={PHONE_H + 12}>
+            <Phone label="B Onboarding Goal"><ECScreenOnboardingGoal/></Phone>
+          </DCArtboard>
+        </DCSection>
+      </DesignCanvas>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+
+</body>
+</html>
