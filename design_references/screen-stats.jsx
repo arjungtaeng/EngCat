@@ -4,14 +4,10 @@ function ECScreenStats() {
   const T = ECTokens;
 
   // 12 weeks streak grid data — value 0..3 represents activity
-  const grid = [
-    3,2,3,3,1,0,0, 3,3,2,3,3,2,1, 0,1,2,3,3,3,2, 3,3,3,2,1,0,3,
-    3,3,2,3,3,3,3, 2,3,3,3,2,1,3, 3,3,3,3,3,2,0, 0,3,3,3,3,3,2,
-    3,3,3,3,3,3,3, 3,2,3,3,3,1,2, 2,3,3,3,3,3,3, 3,3,2,1,0,0,0,
-  ];
+  const grid = Array(84).fill(0);
   const tints = ['rgba(244,241,235,0.06)', 'rgba(232,178,106,0.28)', 'rgba(232,178,106,0.6)', T.accent];
 
-  const weekBars = [60, 78, 45, 92, 70, 55, 88];
+  const weekBars = [0, 0, 0, 0, 0, 0, 0];
 
   return (
     <div style={{ height: '100%', background: T.bg1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
@@ -44,11 +40,11 @@ function ECScreenStats() {
                 연속 학습
               </div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 6 }}>
-                <div style={{ fontFamily: T.serif, fontSize: 56, color: T.text, lineHeight: 1, letterSpacing: -1.5 }}>27</div>
+                <div style={{ fontFamily: T.serif, fontSize: 56, color: T.text, lineHeight: 1, letterSpacing: -1.5 }}>0</div>
                 <div style={{ fontSize: 16, color: T.textDim }}>일</div>
               </div>
               <div style={{ marginTop: 8, fontSize: 12.5, color: T.textDim }}>
-                개인 최고 기록은 <span style={{ color: T.text, fontWeight: 600 }}>42일</span>이에요.
+                아직 학습 기록이 없어요. 오늘 시작해 보세요!
               </div>
             </div>
             <div style={{ color: T.accent }}>{ECIcon.flame(T.accent, 48)}</div>
@@ -59,9 +55,9 @@ function ECScreenStats() {
       {/* Three stat tiles */}
       <div style={{ padding: '12px 18px 0', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
         {[
-          { num: '342', label: '익힌 단어' },
-          { num: '128', label: '문장' },
-          { num: '94%', label: '정답률' },
+          { num: '0', label: '익힌 단어' },
+          { num: '0', label: '문장' },
+          { num: '—', label: '정답률' },
         ].map((s, i) => (
           <div key={i} style={{
             padding: '14px 14px', borderRadius: 16, background: T.bg2, border: `1px solid ${T.hair}`,
@@ -75,7 +71,7 @@ function ECScreenStats() {
       {/* Weekly chart */}
       <div style={{ padding: '22px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <div style={{ fontSize: 16, fontWeight: 600, color: T.text }}>이번 주 학습 시간</div>
-        <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>총 2시간 18분</div>
+        <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>총 0분</div>
       </div>
 
       <div style={{ padding: '14px 22px 0' }}>

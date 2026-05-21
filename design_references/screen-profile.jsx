@@ -48,13 +48,16 @@ function ECScreenProfile() {
           background: T.bg2, border: `1px solid ${T.hair}`,
           display: 'flex', alignItems: 'center', gap: 16,
         }}>
-          <div style={{
-            width: 64, height: 64, borderRadius: 999,
-            background: `linear-gradient(135deg, ${T.art1} 0%, ${T.art2} 100%)`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: T.serif, fontSize: 24, color: T.text, fontStyle: 'italic',
-            border: `1px solid ${T.hairStr}`,
-          }}>{(user?.name || '?').slice(0, 2)}</div>
+          {user?.picture
+            ? <img src={user.picture} alt={user.name} referrerPolicy="no-referrer" style={{ width: 64, height: 64, borderRadius: 999, objectFit: 'cover', border: `1px solid ${T.hairStr}` }} />
+            : <div style={{
+                width: 64, height: 64, borderRadius: 999,
+                background: `linear-gradient(135deg, ${T.art1} 0%, ${T.art2} 100%)`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontFamily: T.serif, fontSize: 24, color: T.text, fontStyle: 'italic',
+                border: `1px solid ${T.hairStr}`,
+              }}>{(user?.name || '?').slice(0, 2)}</div>
+          }
           <div style={{ flex: 1 }}>
             <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1.1, letterSpacing: -0.3 }}>{user?.name || '사용자'}</div>
             <div style={{ fontSize: 12.5, color: T.textDim, marginTop: 4 }}>{user?.email || ''}</div>
@@ -79,13 +82,13 @@ function ECScreenProfile() {
           background: T.bg2, borderTop: `1px solid ${T.hair}`, borderLeft: `1px solid ${T.hair}`, borderBottom: `1px solid ${T.hair}`,
           textAlign: 'center',
         }}>
-          <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1 }}>27</div>
+          <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1 }}>0</div>
           <div style={{ fontSize: 10.5, color: T.textDim, marginTop: 5, letterSpacing: 0.3 }}>스트릭</div>
         </div>
         <div style={{
           padding: '14px 8px', background: T.bg2, border: `1px solid ${T.hair}`, textAlign: 'center',
         }}>
-          <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1 }}>342</div>
+          <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1 }}>0</div>
           <div style={{ fontSize: 10.5, color: T.textDim, marginTop: 5, letterSpacing: 0.3 }}>단어</div>
         </div>
         <div style={{
@@ -93,7 +96,7 @@ function ECScreenProfile() {
           background: T.bg2, borderTop: `1px solid ${T.hair}`, borderRight: `1px solid ${T.hair}`, borderBottom: `1px solid ${T.hair}`,
           textAlign: 'center',
         }}>
-          <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1 }}>14</div>
+          <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1 }}>—</div>
           <div style={{ fontSize: 10.5, color: T.textDim, marginTop: 5, letterSpacing: 0.3 }}>랭킹</div>
         </div>
       </div>

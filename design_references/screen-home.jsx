@@ -4,6 +4,16 @@
 function ECScreenHome() {
   const T = ECTokens;
 
+  const user = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
+  const now = new Date();
+  const month = now.getMonth() + 1;
+  const day = now.getDate();
+  const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+  const dateStr = `${month}월 ${day}일 ${dayNames[now.getDay()]}요일`;
+  const hour = now.getHours();
+  const greetingWord = hour < 12 ? '좋은 아침이에요,' : hour < 18 ? '안녕하세요,' : '좋은 저녁이에요,';
+  const firstName = (user?.name || '학습자').split(' ')[0];
+
   return (
     <div style={{ height: '100%', background: T.bg1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
       <ECStatusBar />
@@ -20,7 +30,7 @@ function ECScreenHome() {
             background: T.bg2, border: `1px solid ${T.hair}`,
           }}>
             <span style={{ color: T.accent }}>{ECIcon.flame(T.accent, 14)}</span>
-            <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>27</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>0</span>
           </div>
           <div onClick={() => window.ECNav?.go('profile')} style={{
             width: 36, height: 36, borderRadius: 999, background: T.bg2,
@@ -35,11 +45,11 @@ function ECScreenHome() {
       {/* Greeting */}
       <div style={{ padding: '24px 22px 18px' }}>
         <div style={{ fontSize: 13, color: T.textDim, marginBottom: 6 }}>
-          5월 21일 목요일
+          {dateStr}
         </div>
         <div style={{ fontFamily: T.serif, fontSize: 30, lineHeight: 1.18, color: T.text, letterSpacing: -0.4 }}>
-          좋은 아침이에요,<br/>
-          <span style={{ fontStyle: 'italic', color: T.accent }}>지민님.</span>
+          {greetingWord}<br/>
+          <span style={{ fontStyle: 'italic', color: T.accent }}>{firstName}님.</span>
         </div>
       </div>
 
@@ -67,9 +77,9 @@ function ECScreenHome() {
           {/* progress */}
           <div style={{ marginTop: 18, display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ flex: 1, height: 6, borderRadius: 3, background: T.hair, overflow: 'hidden' }}>
-              <div style={{ width: '40%', height: '100%', background: T.accent, borderRadius: 3 }} />
+              <div style={{ width: '0%', height: '100%', background: T.accent, borderRadius: 3 }} />
             </div>
-            <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>6 / 15</div>
+            <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>0 / 15</div>
           </div>
 
           {/* CTA */}
@@ -79,7 +89,7 @@ function ECScreenHome() {
             color: T.bg0, fontWeight: 600, fontSize: 15, cursor: 'pointer',
           }}>
             {ECIcon.play(T.bg0, 16)}
-            <span>이어서 학습하기</span>
+            <span>학습 시작하기</span>
           </div>
         </div>
       </div>
@@ -87,13 +97,13 @@ function ECScreenHome() {
       {/* Section: Daily set */}
       <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>오늘의 단어</div>
-        <div style={{ fontSize: 12, color: T.textDim }}>10개 중 4개 완료</div>
+        <div style={{ fontSize: 12, color: T.textDim }}>10개 중 0개 완료</div>
       </div>
 
       <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto' }}>
         {[
-          { w: 'itinerary', k: '여정',    tint: T.art1, done: true },
-          { w: 'layover',   k: '경유',    tint: T.art2, done: true },
+          { w: 'itinerary', k: '여정',    tint: T.art1, done: false },
+          { w: 'layover',   k: '경유',    tint: T.art2, done: false },
           { w: 'jet lag',   k: '시차',    tint: T.art5, done: false },
           { w: 'boarding',  k: '탑승',    tint: T.art4, done: false },
         ].map((c, i) => (
@@ -162,8 +172,9 @@ function ECTabBar({ active = 'home' }) {
   ];
   return (
     <div style={{
-      position: 'absolute', bottom: 0, left: 0, right: 0,
-      padding: '10px 12px 30px', background: `linear-gradient(to top, ${T.bg1} 60%, transparent)`,
+      position: 'fixed', bottom: 0, left: 0, right: 0,
+      padding: `10px 12px calc(env(safe-area-inset-bottom, 0px) + 10px)`,
+      background: T.bg1,
       display: 'flex', justifyContent: 'space-around',
       borderTop: `1px solid ${T.hair}`,
     }}>
