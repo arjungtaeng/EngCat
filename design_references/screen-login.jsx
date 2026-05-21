@@ -19,13 +19,13 @@ function ECScreenLogin() {
   const [buttonsVisible, setButtonsVisible] = React.useState(false);
 
   // ── Collapse-scramble effect ──────────────────────────────────────
-  const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  const TARGET = 'EngCat';
+  const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const TARGET = 'ENGCAT';
   const START_COUNT = 14;
-  const START_FONT = 48;
-  const END_FONT = 38;
-  const START_SPACING = 4;
-  const END_SPACING = 1;
+  const START_FONT = 42;
+  const END_FONT = 28;
+  const START_SPACING = 6;
+  const END_SPACING = 3;
   const TOTAL_FRAMES = 52;
 
   const [scramble, setScramble] = React.useState(() => ({
