@@ -16,30 +16,6 @@ function ECScreenLogin() {
   const [gsiReady, setGsiReady] = React.useState(false);
   const [pressing, setPressing] = React.useState(false);
 
-  // Inject keyframes once
-  React.useEffect(function() {
-    const id = 'ec-login-keyframes';
-    if (!document.getElementById(id)) {
-      const s = document.createElement('style');
-      s.id = id;
-      s.textContent = `
-        @keyframes ec-float {
-          0%, 100% { transform: translateY(0px); }
-          50%       { transform: translateY(-10px); }
-        }
-        @keyframes ec-glow {
-          0%, 100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); }
-          50%       { opacity: 1;   transform: translate(-50%,-50%) scale(1.2); }
-        }
-        @keyframes ec-fade-up {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `;
-      document.head.appendChild(s);
-    }
-  }, []);
-
   const handleGoogleResponse = (response) => {
     try {
       const b64 = response.credential.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
@@ -76,54 +52,32 @@ function ECScreenLogin() {
     }
   };
 
-  const anim = (delay) => ({
-    animation: 'ec-fade-up 0.65s cubic-bezier(0.16,1,0.3,1) both',
-    animationDelay: delay,
-  });
-
   return (
     <div style={{
       height: '100%',
       background: T.bg1,
-      backgroundImage: 'radial-gradient(ellipse 70% 45% at 50% 20%, rgba(232,178,106,0.07) 0%, transparent 100%)',
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
       padding: '0 32px',
     }}>
 
-      {/* Logo + glow */}
-      <div style={{ ...anim('0s'), position: 'relative', textAlign: 'center', marginBottom: 6 }}>
-
-        {/* Amber glow behind cat */}
-        <div style={{
-          position: 'absolute', top: '50%', left: '50%',
-          width: 220, height: 220, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(232,178,106,0.22) 0%, transparent 70%)',
-          animation: 'ec-glow 4s ease-in-out infinite',
-          pointerEvents: 'none',
-        }} />
-
+      {/* Logo */}
+      <div style={{ textAlign: 'center', marginBottom: 6 }}>
         <img
           src="icons/icon-1024.png"
           alt="EngCat"
-          style={{
-            width: 140, height: 140,
-            mixBlendMode: 'lighten',
-            position: 'relative', zIndex: 1,
-          }}
+          style={{ width: 140, height: 140, mixBlendMode: 'lighten' }}
         />
       </div>
 
       {/* Label */}
       <div style={{
-        ...anim('0.12s'),
         fontFamily: T.mono, fontSize: 9.5, letterSpacing: 2.8,
         color: T.textMute, textTransform: 'uppercase', marginBottom: 10,
       }}>EngCat</div>
 
       {/* Tagline */}
       <div style={{
-        ...anim('0.22s'),
         fontFamily: T.sans, fontSize: 13.5, color: T.textDim,
         lineHeight: 1.7, textAlign: 'center', marginBottom: 52,
       }}>
@@ -131,7 +85,7 @@ function ECScreenLogin() {
       </div>
 
       {/* Google button */}
-      <div style={{ ...anim('0.36s'), width: '100%', maxWidth: 380 }}>
+      <div style={{ width: '100%', maxWidth: 380 }}>
         <button
           onClick={handleGoogleClick}
           onMouseDown={() => setPressing(true)}
@@ -158,7 +112,7 @@ function ECScreenLogin() {
       </div>
 
       {/* Guest */}
-      <div style={{ ...anim('0.5s'), marginTop: 32, textAlign: 'center' }}>
+      <div style={{ marginTop: 32, textAlign: 'center' }}>
         <span
           onClick={() => {
             localStorage.setItem('engcat_user', JSON.stringify({ name: '게스트', email: 'guest@engcat.app', picture: null }));
