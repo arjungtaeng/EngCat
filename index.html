@@ -8,32 +8,11 @@
 <meta name="apple-mobile-web-app-title" content="EngCat"/>
 <meta name="theme-color" content="#0B0B0E"/>
 <link rel="manifest" href="manifest.json"/>
-<link rel="icon" type="image/svg+xml" href="icon.svg"/>
+<link rel="icon" type="image/png" href="icons/icon-1024.png"/>
+<link rel="apple-touch-icon" href="icons/icon-180.png"/>
+<link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png"/>
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png"/>
 <title>EngCat</title>
-<script>
-  /* apple-touch-icon: canvas로 PNG 생성 (iOS SVG 미지원 대응) */
-  (function () {
-    var c = document.createElement('canvas');
-    c.width = c.height = 512;
-    var ctx = c.getContext('2d');
-    ctx.fillStyle = '#0B0B0E';
-    ctx.fillRect(0, 0, 512, 512);
-    var grd = ctx.createRadialGradient(280, 175, 0, 280, 175, 340);
-    grd.addColorStop(0, 'rgba(232,178,106,0.28)');
-    grd.addColorStop(1, 'rgba(232,178,106,0)');
-    ctx.fillStyle = grd;
-    ctx.fillRect(0, 0, 512, 512);
-    ctx.fillStyle = '#E8B26A';
-    ctx.font = 'italic 228px Georgia, serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'alphabetic';
-    ctx.fillText('EC', 256, 322);
-    var link = document.createElement('link');
-    link.rel = 'apple-touch-icon';
-    link.href = c.toDataURL('image/png');
-    document.head.appendChild(link);
-  })();
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"/>
