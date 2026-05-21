@@ -97,10 +97,7 @@ function ECScreenLogin() {
   }, []);
 
   const taglineWords = [['매일', '10단어,', '5문장으로'], ['영어', '실력을', '키워보세요.']];
-  const popcornDelays = React.useMemo(
-    () => Array.from({ length: 6 }, () => +(Math.random() * 0.7).toFixed(3)),
-    []
-  );
+  const popcornDelays = [0, 0.1, 0.2, 0.3, 0.4, 0.5];
 
   React.useEffect(function() {
     const init = function() {
