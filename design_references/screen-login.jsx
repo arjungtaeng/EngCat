@@ -140,19 +140,18 @@ function ECScreenLogin() {
         />
       </div>
 
-      {/* EngCat headline — collapse scramble */}
-      <div style={{
-        fontFamily: T.mono,
-        fontWeight: 500,
-        fontSize: scramble.fontSize,
-        letterSpacing: scramble.letterSpacing,
-        color: T.text,
-        marginBottom: 14,
-        minHeight: 52,
-        display: 'flex', alignItems: 'center',
-        overflow: 'hidden',
-        maxWidth: '100%',
-      }}>{scramble.text}</div>
+      {/* EngCat headline — collapse scramble (fixed-height wrapper prevents layout shift) */}
+      <div style={{ height: 52, marginBottom: 14, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{
+          fontFamily: T.mono,
+          fontWeight: 500,
+          fontSize: scramble.fontSize,
+          letterSpacing: scramble.letterSpacing,
+          color: T.text,
+          overflow: 'hidden',
+          maxWidth: '100%',
+        }}>{scramble.text}</div>
+      </div>
 
       {/* Tagline — 글자별 뽁뽁 */}
       <div style={{
