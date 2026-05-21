@@ -84,19 +84,23 @@ function ECScreenLogin() {
   React.useEffect(() => {
     const s = document.createElement('style');
     s.textContent = `
-      @keyframes ec-pop {
-        0%   { opacity:0; transform: scale(0) translateY(4px); }
-        60%  { opacity:1; transform: scale(1.25) translateY(-3px); }
-        80%  { transform: scale(0.92); }
-        100% { transform: scale(1) translateY(0); }
+      @keyframes ec-popcorn {
+        0%   { opacity:0; transform: scale(0.2) translateY(0px); }
+        45%  { opacity:1; transform: scale(1.35) translateY(-10px); }
+        70%  { transform: scale(0.88) translateY(3px); }
+        85%  { transform: scale(1.08) translateY(-2px); }
+        100% { transform: scale(1) translateY(0px); }
       }
     `;
     document.head.appendChild(s);
     return () => document.head.removeChild(s);
   }, []);
 
-  const taglineLines = ['매일 10단어, 5문장으로', '영어 실력을 키워보세요.'];
-  const line0Len = [...taglineLines[0]].length;
+  const taglineWords = [['매일', '10단어,', '5문장으로'], ['영어', '실력을', '키워보세요.']];
+  const popcornDelays = React.useMemo(
+    () => Array.from({ length: 6 }, () => +(Math.random() * 0.7).toFixed(3)),
+    []
+  );
 
   React.useEffect(function() {
     const init = function() {
@@ -153,24 +157,24 @@ function ECScreenLogin() {
         }}>{scramble.text}</div>
       </div>
 
-      {/* Tagline — 글자별 뽁뽁 */}
+      {/* Tagline — 단어별 팝콘 */}
       <div style={{
         fontFamily: T.sans, fontSize: 13.5, color: T.textDim,
         lineHeight: 1.7, textAlign: 'center', marginBottom: 52,
       }}>
-        {taglineLines.map((line, li) => (
+        {taglineWords.map((words, li) => (
           <div key={li}>
-            {[...line].map((char, ci) => {
-              const idx = li === 0 ? ci : line0Len + ci;
+            {words.map((word, wi) => {
+              const idx = li * 3 + wi;
               return (
-                <span key={ci} style={{
+                <span key={wi} style={{
                   display: 'inline-block',
-                  whiteSpace: 'pre',
+                  marginRight: wi < words.length - 1 ? '0.3em' : 0,
                   opacity: taglineVisible ? 1 : 0,
                   animation: taglineVisible
-                    ? `ec-pop 0.45s cubic-bezier(0.34,1.56,0.64,1) ${idx * 0.04}s both`
+                    ? `ec-popcorn 0.5s cubic-bezier(0.34,1.56,0.64,1) ${popcornDelays[idx]}s both`
                     : 'none',
-                }}>{char}</span>
+                }}>{word}</span>
               );
             })}
           </div>
