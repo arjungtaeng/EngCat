@@ -180,7 +180,8 @@ function ECTabBar({ active = 'home' }) {
   return (
     <div style={{
       flexShrink: 0,
-      padding: '10px 12px env(safe-area-inset-bottom, 10px)',
+      paddingTop: 10, paddingLeft: 12, paddingRight: 12,
+      paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) / 2 + 8px)',
       background: T.bg1,
       display: 'flex', justifyContent: 'space-around',
       borderTop: `1px solid ${T.hair}`,
