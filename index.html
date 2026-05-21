@@ -57,17 +57,21 @@
       window.ECNav.go = setScreen;
     }, []);
 
-    const screens = {
-      'login':           <ECScreenLogin />,
-      'onboarding':      <ECScreenOnboarding />,
-      'onboarding-goal': <ECScreenOnboardingGoal />,
-      'home':            <ECScreenHome />,
-      'word-card':       <ECScreenWordCard />,
-      'sentence-card':   <ECScreenSentenceCard />,
-      'quiz':            <ECScreenQuiz />,
-      'stats':           <ECScreenStats />,
-      'profile':         <ECScreenProfile />,
+    // Lazy map — component functions, not JSX elements.
+    // Only the current screen's function is called, preventing crashes from other screens.
+    const screenMap = {
+      'login':           ECScreenLogin,
+      'onboarding':      ECScreenOnboarding,
+      'onboarding-goal': ECScreenOnboardingGoal,
+      'home':            ECScreenHome,
+      'word-card':       ECScreenWordCard,
+      'sentence-card':   ECScreenSentenceCard,
+      'quiz':            ECScreenQuiz,
+      'stats':           ECScreenStats,
+      'profile':         ECScreenProfile,
     };
+
+    const Screen = screenMap[screen] || screenMap['home'] || (() => null);
 
     return (
       <div style={{
@@ -76,7 +80,7 @@
         paddingTop: 'env(safe-area-inset-top, 0px)',
         paddingBottom: 'env(safe-area-inset-bottom, 0px)',
       }}>
-        {screens[screen] ?? screens['home']}
+        <Screen />
       </div>
     );
   }

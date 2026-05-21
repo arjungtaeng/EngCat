@@ -12,23 +12,11 @@ function ECScreenLogin() {
   const [error, setError] = React.useState('');
   const [gsiReady, setGsiReady] = React.useState(false);
 
-  const handleGoogleResponse = (response) => {
-    try {
-      // JWT payload decode (client-side, no server needed)
-      const b64 = response.credential.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
-      const payload = JSON.parse(atob(b64));
-      const user = { name: payload.name, email: payload.email, picture: payload.picture || null };
-      localStorage.setItem('engcat_user', JSON.stringify(user));
-      window.ECNav?.go('home');
-    } catch (e) {
-      setError('구글 로그인 중 오류가 발생했어요. 다시 시도해주세요.');
-    }
-  };
-
+  // gsi-btn div has NO React children — Google renders into it directly.
+  // We must never call innerHTML='' on it; React and Google would fight for DOM control.
   const renderGSIButton = () => {
     const container = document.getElementById('gsi-btn');
-    if (!container || !window.google?.accounts) return;
-    container.innerHTML = '';
+    if (!container || !window.google || !window.google.accounts) return;
     window.google.accounts.id.renderButton(container, {
       theme: 'filled_black',
       size: 'large',
@@ -41,36 +29,43 @@ function ECScreenLogin() {
     setGsiReady(true);
   };
 
-  React.useEffect(() => {
-    const init = () => {
-      if (!window.google?.accounts) return;
+  const handleGoogleResponse = (response) => {
+    try {
+      const b64 = response.credential.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+      const payload = JSON.parse(atob(b64));
+      const user = { name: payload.name, email: payload.email, picture: payload.picture || null };
+      localStorage.setItem('engcat_user', JSON.stringify(user));
+      window.ECNav && window.ECNav.go('home');
+    } catch (e) {
+      setError('구글 로그인 중 오류가 발생했어요. 다시 시도해주세요.');
+    }
+  };
+
+  React.useEffect(function() {
+    var init = function() {
+      if (!window.google || !window.google.accounts) return;
       window.google.accounts.id.initialize({
         client_id: CLIENT_ID,
         callback: handleGoogleResponse,
         ux_mode: 'popup',
       });
-      // renderButton needs the DOM node to exist — slight delay for safety
-      setTimeout(renderGSIButton, 80);
+      setTimeout(renderGSIButton, 100);
     };
 
-    if (window.google?.accounts) {
+    if (window.google && window.google.accounts) {
       init();
     } else {
-      const prev = window.onGoogleLibraryLoad;
-      window.onGoogleLibraryLoad = () => { if (prev) prev(); init(); };
+      var prev = window.onGoogleLibraryLoad;
+      window.onGoogleLibraryLoad = function() {
+        if (prev) prev();
+        init();
+      };
     }
   }, []);
 
-  // Re-render button when email panel closes (DOM slot becomes visible again)
-  React.useEffect(() => {
-    if (!showEmail && window.google?.accounts) {
-      setTimeout(renderGSIButton, 80);
-    }
-  }, [showEmail]);
-
   const inputStyle = {
     width: '100%', padding: '14px 16px',
-    background: T.bg3, border: `1px solid ${T.hair}`,
+    background: T.bg3, border: '1px solid ' + T.hair,
     borderRadius: 12, color: T.text,
     fontSize: 15, fontFamily: T.sans,
     outline: 'none', WebkitAppearance: 'none',
@@ -83,7 +78,7 @@ function ECScreenLogin() {
       if (!name.trim() || !email.trim() || !password.trim()) { setError('모든 항목을 입력해주세요.'); return; }
       if (password.length < 6) { setError('비밀번호는 6자 이상이어야 해요.'); return; }
       localStorage.setItem('engcat_user', JSON.stringify({ name: name.trim(), email: email.trim() }));
-      window.ECNav?.go('home');
+      window.ECNav && window.ECNav.go('home');
     } else {
       if (!email.trim() || !password.trim()) { setError('이메일과 비밀번호를 입력해주세요.'); return; }
       const stored = localStorage.getItem('engcat_user');
@@ -93,7 +88,7 @@ function ECScreenLogin() {
       } else {
         localStorage.setItem('engcat_user', JSON.stringify({ name: email.split('@')[0], email: email.trim() }));
       }
-      window.ECNav?.go('home');
+      window.ECNav && window.ECNav.go('home');
     }
   };
 
@@ -125,21 +120,26 @@ function ECScreenLogin() {
       {/* Form area */}
       <div style={{ width: '100%', maxWidth: 380 }}>
 
-        {/* Google Sign-In button slot */}
+        {/* Loading placeholder — React-managed, SEPARATE from the gsi-btn div */}
+        {!gsiReady && (
+          <div style={{
+            width: '100%', minHeight: 46, borderRadius: 12,
+            background: T.bg3, display: 'flex',
+            alignItems: 'center', justifyContent: 'center',
+            marginBottom: 0,
+          }}>
+            <div style={{ fontSize: 13, color: T.textMute }}>구글 로그인 불러오는 중...</div>
+          </div>
+        )}
+
+        {/* Google button container — NO React children, Google owns this DOM node */}
         <div
           id="gsi-btn"
           style={{
             width: '100%', borderRadius: 12, overflow: 'hidden',
-            minHeight: 46,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: gsiReady ? 'transparent' : T.bg3,
-            transition: 'background 0.2s',
+            display: gsiReady ? 'block' : 'none',
           }}
-        >
-          {!gsiReady && (
-            <div style={{ fontSize: 13, color: T.textMute }}>구글 로그인 불러오는 중...</div>
-          )}
-        </div>
+        />
 
         {/* Divider */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '18px 0' }}>
@@ -155,7 +155,7 @@ function ECScreenLogin() {
             style={{
               width: '100%', padding: '14px',
               background: T.bg2, borderRadius: 12,
-              border: `1px solid ${T.hair}`,
+              border: '1px solid ' + T.hair,
               color: T.textDim, fontSize: 14, fontFamily: T.sans,
               cursor: 'pointer', WebkitAppearance: 'none', appearance: 'none',
             }}
@@ -165,9 +165,8 @@ function ECScreenLogin() {
         ) : (
           <div style={{
             background: T.bg2, borderRadius: 18,
-            border: `1px solid ${T.hair}`, padding: '20px 18px',
+            border: '1px solid ' + T.hair, padding: '20px 18px',
           }}>
-            {/* Form header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
               <div style={{ fontFamily: T.serif, fontSize: 19, color: T.text, letterSpacing: -0.3 }}>
                 {mode === 'login' ? '이메일 로그인' : '이메일 가입'}
@@ -215,7 +214,7 @@ function ECScreenLogin() {
               {mode === 'login' ? '계정이 없으신가요?' : '이미 계정이 있으신가요?'}
               {' '}
               <span
-                onClick={() => { setMode(m => m === 'login' ? 'register' : 'login'); setError(''); }}
+                onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError(''); }}
                 style={{ color: T.accent, cursor: 'pointer', fontWeight: 600 }}
               >
                 {mode === 'login' ? '회원가입' : '로그인'}
@@ -230,7 +229,7 @@ function ECScreenLogin() {
         <span
           onClick={() => {
             localStorage.setItem('engcat_user', JSON.stringify({ name: '게스트', email: 'guest@engcat.app', picture: null }));
-            window.ECNav?.go('home');
+            window.ECNav && window.ECNav.go('home');
           }}
           style={{
             fontFamily: T.mono, fontSize: 9.5, letterSpacing: 1.2,
