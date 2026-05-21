@@ -109,7 +109,6 @@ function ECScreenLogin() {
           style={{
             width: 140, height: 140,
             mixBlendMode: 'lighten',
-            animation: 'ec-float 4s ease-in-out infinite',
             position: 'relative', zIndex: 1,
           }}
         />
