@@ -3,11 +3,24 @@
 function ECScreenProfile() {
   const T = ECTokens;
 
-  const Row = ({ label, value, last, danger }) => (
-    <div style={{
-      padding: '15px 18px', display: 'flex', alignItems: 'center', gap: 12,
-      borderBottom: last ? 'none' : `1px solid ${T.hair}`,
-    }}>
+  const user = (() => {
+    try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; }
+  })();
+
+  const handleLogout = () => {
+    localStorage.removeItem('engcat_user');
+    window.ECNav?.go('login');
+  };
+
+  const Row = ({ label, value, last, danger, onPress }) => (
+    <div
+      onClick={onPress}
+      style={{
+        padding: '15px 18px', display: 'flex', alignItems: 'center', gap: 12,
+        borderBottom: last ? 'none' : `1px solid ${T.hair}`,
+        cursor: onPress ? 'pointer' : 'default',
+      }}
+    >
       <div style={{ flex: 1, fontSize: 15, color: danger ? T.bad : T.text, fontWeight: 500 }}>{label}</div>
       {value && <div style={{ fontSize: 13, color: T.textDim }}>{value}</div>}
       {!danger && <div style={{ color: T.textMute }}>{ECIcon.chev('right', T.textMute, 14)}</div>}
@@ -41,10 +54,10 @@ function ECScreenProfile() {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontFamily: T.serif, fontSize: 24, color: T.text, fontStyle: 'italic',
             border: `1px solid ${T.hairStr}`,
-          }}>지민</div>
+          }}>{(user?.name || '?').slice(0, 2)}</div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1.1, letterSpacing: -0.3 }}>이지민</div>
-            <div style={{ fontSize: 12.5, color: T.textDim, marginTop: 4 }}>jimin@engcat.app</div>
+            <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1.1, letterSpacing: -0.3 }}>{user?.name || '사용자'}</div>
+            <div style={{ fontSize: 12.5, color: T.textDim, marginTop: 4 }}>{user?.email || ''}</div>
             <div style={{ marginTop: 8, display: 'flex', gap: 6 }}>
               <span style={{
                 padding: '3px 8px', borderRadius: 6, background: T.accentSoft,
@@ -118,7 +131,7 @@ function ECScreenProfile() {
       <div style={{ padding: '0 18px 24px' }}>
         <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}` }}>
           <Row label="개인정보 보호"  value=""/>
-          <Row label="로그아웃"        value="" danger last/>
+          <Row label="로그아웃" danger last onPress={handleLogout}/>
         </div>
       </div>
 

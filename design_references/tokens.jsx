@@ -83,9 +83,8 @@ function ECPlaceholder({ label, height = 200, tint = ECTokens.art1, radius = 16,
 
 // Status bar — minimal, white glyphs for dark UI
 function ECStatusBar({ time = '9:41' }) {
-  if (window.ECRealDevice) {
-    return <div style={{ height: 'env(safe-area-inset-top, 44px)' }} />;
-  }
+  // 실제 기기: 컨테이너가 paddingTop으로 safe area 처리하므로 null 반환
+  if (window.ECRealDevice) return null;
   return (
     <div style={{
       height: 54, paddingTop: 18, paddingLeft: 30, paddingRight: 30,

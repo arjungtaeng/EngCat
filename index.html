@@ -56,6 +56,7 @@
 
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
+<script type="text/babel" src="design_references/screen-login.jsx"></script>
 <script type="text/babel" src="design_references/screen-onboarding.jsx"></script>
 <script type="text/babel" src="design_references/screen-home.jsx"></script>
 <script type="text/babel" src="design_references/screen-word-card.jsx"></script>
@@ -68,13 +69,15 @@
   window.ECNav = { go: () => {} };
 
   function App() {
-    const [screen, setScreen] = React.useState('onboarding');
+    const savedUser = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
+    const [screen, setScreen] = React.useState(savedUser ? 'home' : 'login');
 
     React.useEffect(() => {
       window.ECNav.go = setScreen;
     }, []);
 
     const screens = {
+      'login':           <ECScreenLogin />,
       'onboarding':      <ECScreenOnboarding />,
       'onboarding-goal': <ECScreenOnboardingGoal />,
       'home':            <ECScreenHome />,
@@ -89,6 +92,7 @@
       <div style={{
         width: '100%', height: '100%',
         background: '#131318',
+        paddingTop: 'env(safe-area-inset-top, 0px)',
         paddingBottom: 'env(safe-area-inset-bottom, 0px)',
       }}>
         {screens[screen] ?? screens['home']}
