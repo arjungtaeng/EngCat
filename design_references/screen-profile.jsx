@@ -135,6 +135,13 @@ function ECScreenProfile() {
         </div>
       </div>
 
+      {/* Credits */}
+      <div style={{ padding: '8px 22px 28px', textAlign: 'center' }}>
+        <div style={{ fontSize: 11, color: T.textFaint, lineHeight: 1.8, fontFamily: T.mono, letterSpacing: 0.3 }}>
+          App icon "Cat" by Icojam, SVG Repo · CC BY 4.0
+        </div>
+      </div>
+
       <div style={{ height: 100 }} />
       <ECTabBar active="me" />
     </div>
