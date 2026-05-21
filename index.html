@@ -87,13 +87,14 @@
 
   ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 
-  // 30초마다 version.json을 체크해서 새 버전이 있으면 자동 새로고침
-  setInterval(() => {
+  // 앱이 포그라운드로 돌아올 때 버전 체크 → 새 버전이면 자동 새로고침
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
     fetch('version.json?t=' + Date.now())
       .then(r => r.json())
       .then(data => { if (data.v !== EC_VER) location.reload(); })
       .catch(() => {});
-  }, 30000);
+  });
 </script>
 </body>
 </html>
