@@ -25,7 +25,7 @@ function ECScreenHome() {
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}>
       <ECStatusBar />
 
       {/* Top bar */}
@@ -172,7 +172,7 @@ function ECScreenHome() {
   );
 }
 
-function ECTabBar({ active = 'home' }) {
+function ECTabBar({ active = 'home', visible = true }) {
   const T = ECTokens;
   const items = [
     { id: 'home',   label: '홈',      icon: ECIcon.home,  screen: 'home' },
@@ -183,12 +183,17 @@ function ECTabBar({ active = 'home' }) {
   return (
     <div id="ec-tabbar" style={{
       position: 'fixed',
-      bottom: -80,
-      left: 0, right: 0, zIndex: 100,
+      bottom: 0,
+      left: 14, right: 14, zIndex: 1050,
       background: T.bg1,
-      borderTop: `1px solid ${T.hair}`,
+      border: `1px solid ${T.hair}`,
+      borderRadius: 20,
       paddingBottom: 'env(safe-area-inset-bottom, 0px)',
       display: 'flex', flexDirection: 'column',
+      opacity: visible ? 1 : 0,
+      transform: visible ? 'translateY(0)' : 'translateY(80px)',
+      transition: 'opacity 0.25s ease, transform 0.25s ease',
+      pointerEvents: visible ? 'auto' : 'none',
     }}>
       <div style={{ paddingTop: 8, display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
         {items.map(it => {
