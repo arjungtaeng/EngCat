@@ -13,7 +13,7 @@ function ECScreenQuiz() {
   const isCorrect = answered && (choices.find(c => c.id === selected)?.ok ?? false);
 
   return (
-    <div style={{ flex: 1, minHeight: 0, background: T.bg1, position: 'relative', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: T.bg1, position: 'relative', display: 'flex', flexDirection: 'column' }}>
       <ECStatusBar />
 
       {/* Top: progress + lives */}

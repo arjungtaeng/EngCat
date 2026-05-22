@@ -24,8 +24,8 @@ function ECScreenHome() {
         : rawName;
 
   return (
-    <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div ref={scrollRef} style={{ flex: 1, minHeight: 0, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
+    <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 'calc(42px + env(safe-area-inset-bottom, 0px))' }}>
       <ECStatusBar />
 
       {/* Top bar */}
