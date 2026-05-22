@@ -1,0 +1,19 @@
+{
+  "name": "engcat",
+  "version": "1.0.0",
+  "description": "> **B1-B2 한국인 영어 학습자를 위한 프리미엄 다크 모드 학습 앱** > 매일 단어 10개 + 문장 5개를 이미지·짧은 애니메이션과 함께 제공",
+  "main": "sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:39895/git/arschooling/EngCat"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/parser": "^7.29.3"
+  }
+}
