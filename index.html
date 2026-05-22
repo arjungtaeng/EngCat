@@ -27,7 +27,7 @@
 </script>
 <style>
   html { margin: 0; padding: 0; height: var(--app-h, 100dvh); background: #0D0D11; }
-  body { margin: 0; padding: 0; height: var(--app-h, 100dvh); font-family: 'Pretendard Variable', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden; }
+  body { margin: 0; padding: 0; height: var(--app-h, 100dvh); font-family: 'Pretendard Variable', system-ui, sans-serif; display: flex; flex-direction: column; }
   * { box-sizing: border-box; }
   #root { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 </style>
@@ -41,7 +41,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 42;</script>
+<script>window.EC_VER = 43;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/screen-login.jsx"></script>
@@ -59,12 +59,28 @@
   function App() {
     const savedUser = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
     const [screen, setScreen] = React.useState(savedUser ? 'home' : 'login');
+    const [dbg, setDbg] = React.useState('loading...');
 
     React.useEffect(() => {
       window.ECNav.go = (s) => {
         setScreen(s);
         if (window._swReg) window._swReg.update();
       };
+    }, []);
+
+    React.useEffect(() => {
+      const capture = (label) => {
+        const ih = window.innerHeight;
+        const vvh = window.visualViewport ? Math.round(window.visualViewport.height) : '?';
+        const vvot = window.visualViewport ? Math.round(window.visualViewport.offsetTop) : '?';
+        const bodyH = document.body.offsetHeight;
+        const rootH = document.getElementById('root')?.offsetHeight ?? '?';
+        const appH = document.documentElement.style.getPropertyValue('--app-h');
+        setDbg(`[${label}] ih=${ih} vvh=${vvh} vvot=${vvot} bodyH=${bodyH} rootH=${rootH} --app-h=${appH}`);
+      };
+      capture('mount');
+      window.addEventListener('scroll', () => capture('scroll'), { once: true });
+      window.visualViewport?.addEventListener('scroll', () => capture('vpscroll'), { once: true });
     }, []);
 
     // Lazy map — component functions, not JSX elements.
@@ -91,6 +107,12 @@
         paddingTop: 'env(safe-area-inset-top, 0px)',
         minHeight: 0,
       }}>
+        <div style={{
+          position: 'fixed', top: 'env(safe-area-inset-top, 0px)', left: 0, right: 0,
+          background: 'rgba(255,0,0,0.9)', color: '#fff',
+          fontSize: 9, fontFamily: 'monospace', padding: '3px 6px',
+          zIndex: 9999, wordBreak: 'break-all', lineHeight: 1.4,
+        }}>{dbg}</div>
         <Screen />
       </div>
     );
