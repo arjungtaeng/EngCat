@@ -35,7 +35,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 47;</script>
+<script>window.EC_VER = 48;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/screen-login.jsx"></script>
@@ -68,12 +68,14 @@
         const offset = window.innerHeight - window.visualViewport.height - window.visualViewport.offsetTop;
         el.style.bottom = Math.max(0, offset) + 'px';
       };
+      window._ecVVUpdate = update;
       update();
       window.visualViewport.addEventListener('scroll', update);
       window.visualViewport.addEventListener('resize', update);
       return () => {
         window.visualViewport.removeEventListener('scroll', update);
         window.visualViewport.removeEventListener('resize', update);
+        window._ecVVUpdate = null;
       };
     }, []);
 
