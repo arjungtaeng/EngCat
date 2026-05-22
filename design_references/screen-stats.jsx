@@ -3,7 +3,6 @@
 function ECScreenStats() {
   const T = ECTokens;
   const scrollRef = React.useRef(null);
-  const tabVisible = ECUseHideOnScroll(scrollRef);
 
   // 12 weeks streak grid data — value 0..3 represents activity
   const grid = Array(84).fill(0);
@@ -133,7 +132,7 @@ function ECScreenStats() {
       </div>
 
       </div>{/* end scrollable */}
-      <ECTabBar active="stats" visible={tabVisible} />
+      <ECTabBar active="stats" />
     </div>
   );
 }

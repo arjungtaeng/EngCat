@@ -4,7 +4,6 @@
 function ECScreenWordCard() {
   const T = ECTokens;
   const scrollRef = React.useRef(null);
-  const tabVisible = ECUseHideOnScroll(scrollRef);
   const word = {
     en: 'itinerary',
     ipa: '/aɪˈtɪnərəri/',
@@ -148,7 +147,7 @@ function ECScreenWordCard() {
         ))}
       </div>
     </div>
-    <ECTabBar active="cards" visible={tabVisible} />
+    <ECTabBar active="cards" />
   </div>
   );
 }

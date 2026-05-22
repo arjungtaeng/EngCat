@@ -3,7 +3,6 @@
 function ECScreenProfile() {
   const T = ECTokens;
   const scrollRef = React.useRef(null);
-  const tabVisible = ECUseHideOnScroll(scrollRef);
 
   const user = (() => {
     try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; }
@@ -194,7 +193,7 @@ function ECScreenProfile() {
       </div>
 
       </div>{/* end scrollable */}
-      <ECTabBar active="me" visible={tabVisible} />
+      <ECTabBar active="me" />
     </div>
   );
 }

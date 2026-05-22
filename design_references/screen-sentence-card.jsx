@@ -4,7 +4,6 @@
 function ECScreenSentenceCard() {
   const T = ECTokens;
   const scrollRef = React.useRef(null);
-  const tabVisible = ECUseHideOnScroll(scrollRef);
   const s = {
     en: "Could you keep an eye on my bag for a sec?",
     ipa: '/kʊd ju kiːp ən aɪ ɒn maɪ bæɡ/',
@@ -177,7 +176,7 @@ function ECScreenSentenceCard() {
         ))}
       </div>
     </div>
-    <ECTabBar active="cards" visible={tabVisible} />
+    <ECTabBar active="cards" />
   </div>
   );
 }
