@@ -183,7 +183,7 @@ function ECTabBar({ active = 'home' }) {
   return (
     <div style={{
       flexShrink: 0,
-      padding: '10px 12px 8px',
+      padding: '6px 12px 6px',
       background: T.bg1,
       display: 'flex', justifyContent: 'space-around',
       borderTop: `1px solid ${T.hair}`,
@@ -192,9 +192,9 @@ function ECTabBar({ active = 'home' }) {
         const on = active === it.id;
         const c = on ? T.text : T.textMute;
         return (
-          <div key={it.id} onClick={() => window.ECNav?.go(it.screen)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, flex: 1, cursor: 'pointer' }}>
-            <div style={{ color: c }}>{it.icon(c, 22)}</div>
-            <div style={{ fontSize: 10.5, color: c, fontWeight: on ? 600 : 500 }}>{it.label}</div>
+          <div key={it.id} onClick={() => window.ECNav?.go(it.screen)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: 1, cursor: 'pointer' }}>
+            <div style={{ color: c }}>{it.icon(c, 20)}</div>
+            <div style={{ fontSize: 10, color: c, fontWeight: on ? 600 : 500 }}>{it.label}</div>
           </div>
         );
       })}
