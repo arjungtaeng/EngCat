@@ -127,7 +127,7 @@ function ECScreenLogin() {
 
   return (
     <div style={{
-      height: '100%',
+      flex: 1, minHeight: 0,
       background: T.bg1,
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
