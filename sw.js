@@ -1,22 +1,14 @@
 // 배포할 때 이 값만 올리면 됩니다
-const CACHE = 'engcat-v22';
+const CACHE = 'engcat-v23';
+
+// index.html과 app 파일들은 항상 네트워크 우선
+const NETWORK_FIRST = ['/', '/index.html', '/design_references/'];
 
 const ASSETS = [
-  '/',
   '/manifest.json',
   '/vendor/react.development.js',
   '/vendor/react-dom.development.js',
   '/vendor/babel.min.js',
-  '/design_references/tokens.jsx',
-  '/design_references/icons.jsx',
-  '/design_references/screen-login.jsx',
-  '/design_references/screen-onboarding.jsx',
-  '/design_references/screen-home.jsx',
-  '/design_references/screen-word-card.jsx',
-  '/design_references/screen-sentence-card.jsx',
-  '/design_references/screen-quiz.jsx',
-  '/design_references/screen-stats.jsx',
-  '/design_references/screen-profile.jsx',
   '/icons/icon-180.png',
   '/icons/icon-167.png',
   '/icons/icon-152.png',
@@ -40,11 +32,27 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (!e.request.url.startsWith(self.location.origin)) return;
-  e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request).then(res => {
-      const clone = res.clone();
-      caches.open(CACHE).then(c => c.put(e.request, clone));
-      return res;
-    }))
-  );
+
+  const path = new URL(e.request.url).pathname;
+  const isNetworkFirst = NETWORK_FIRST.some(p => path === p || path.startsWith(p));
+
+  if (isNetworkFirst) {
+    // 항상 네트워크에서 최신 버전 가져오기, 실패 시 캐시 폴백
+    e.respondWith(
+      fetch(e.request).then(res => {
+        const clone = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, clone));
+        return res;
+      }).catch(() => caches.match(e.request))
+    );
+  } else {
+    // 벤더 파일 등은 캐시 우선
+    e.respondWith(
+      caches.match(e.request).then(cached => cached || fetch(e.request).then(res => {
+        const clone = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, clone));
+        return res;
+      }))
+    );
+  }
 });
