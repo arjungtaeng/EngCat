@@ -184,10 +184,9 @@ function ECTabBar({ active = 'home', visible = true }) {
     <div id="ec-tabbar" style={{
       position: 'fixed',
       bottom: 0,
-      left: 14, right: 14, zIndex: 1050,
+      left: 0, right: 0, zIndex: 1050,
       background: T.bg1,
-      border: `1px solid ${T.hair}`,
-      borderRadius: 20,
+      borderTop: `1px solid ${T.hair}`,
       paddingBottom: 'env(safe-area-inset-bottom, 0px)',
       display: 'flex', flexDirection: 'column',
       opacity: visible ? 1 : 0,
