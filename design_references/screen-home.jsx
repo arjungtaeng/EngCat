@@ -185,20 +185,19 @@ function ECTabBar({ active = 'home' }) {
       width: '100%', flexShrink: 0,
       background: T.bg1,
       borderTop: `1px solid ${T.hair}`,
+      padding: '8px 12px 6px',
+      display: 'flex', justifyContent: 'space-around', alignItems: 'center',
     }}>
-      <div style={{ padding: '8px 12px 0', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-        {items.map(it => {
-          const on = active === it.id;
-          const c = on ? T.text : T.textMute;
-          return (
-            <div key={it.id} onClick={() => window.ECNav?.go(it.screen)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: 1, cursor: 'pointer' }}>
-              <div style={{ color: c }}>{it.icon(c, 20)}</div>
-              <div style={{ fontSize: 10, color: c, fontWeight: on ? 600 : 500 }}>{it.label}</div>
-            </div>
-          );
-        })}
-      </div>
-      <div style={{ height: 'env(safe-area-inset-bottom, 0px)' }} />
+      {items.map(it => {
+        const on = active === it.id;
+        const c = on ? T.text : T.textMute;
+        return (
+          <div key={it.id} onClick={() => window.ECNav?.go(it.screen)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: 1, cursor: 'pointer' }}>
+            <div style={{ color: c }}>{it.icon(c, 20)}</div>
+            <div style={{ fontSize: 10, color: c, fontWeight: on ? 600 : 500 }}>{it.label}</div>
+          </div>
+        );
+      })}
     </div>
   );
 }
