@@ -35,7 +35,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 85;</script>
+<script>window.EC_VER = 86;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/screen-login.jsx"></script>
@@ -91,6 +91,7 @@
         <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
           <Screen />
         </div>
+        {showTab && <div style={{ height: 50, flexShrink: 0 }} />}
         {showTab && <ECTabBar active={tabActive[screen]} />}
       </div>
     );
