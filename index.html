@@ -35,7 +35,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 15;</script>
+<script>window.EC_VER = 16;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/screen-login.jsx"></script>
@@ -90,16 +90,14 @@
 
 <script>
   if ('serviceWorker' in navigator) {
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) { refreshing = true; location.reload(); }
+    });
     navigator.serviceWorker.register('/sw.js').then(reg => {
-      reg.update();
+      if (reg.active) reg.update();
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible') reg.update();
-      });
-      reg.addEventListener('updatefound', () => {
-        if (!reg.active) return; // 최초 설치 시 reload 불필요
-        reg.installing.addEventListener('statechange', function() {
-          if (this.state === 'activated') location.reload();
-        });
       });
     });
   }
