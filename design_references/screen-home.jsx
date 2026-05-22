@@ -185,13 +185,13 @@ function ECTabBar({ active = 'home', visible = true }) {
   return (
     <div style={{
       flexShrink: 0,
-      maxHeight: visible ? 80 : 0,
+      maxHeight: visible ? 'calc(80px + env(safe-area-inset-bottom, 0px))' : 0,
       opacity: visible ? 1 : 0,
       overflow: 'hidden',
       transition: 'max-height 0.25s ease, opacity 0.2s ease',
     }}>
       <div style={{
-        padding: '6px 12px 6px',
+        padding: '6px 12px calc(6px + env(safe-area-inset-bottom, 0px))',
         background: T.bg1,
         display: 'flex', justifyContent: 'space-around',
         borderTop: `1px solid ${T.hair}`,
