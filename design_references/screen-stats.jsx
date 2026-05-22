@@ -2,6 +2,8 @@
 
 function ECScreenStats() {
   const T = ECTokens;
+  const scrollRef = React.useRef(null);
+  const tabVisible = ECUseHideOnScroll(scrollRef);
 
   // 12 weeks streak grid data — value 0..3 represents activity
   const grid = Array(84).fill(0);
@@ -11,7 +13,7 @@ function ECScreenStats() {
 
   return (
     <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
       <ECStatusBar />
 
       {/* Header */}
@@ -131,7 +133,7 @@ function ECScreenStats() {
       </div>
 
       </div>{/* end scrollable */}
-      <ECTabBar active="stats" />
+      <ECTabBar active="stats" visible={tabVisible} />
     </div>
   );
 }

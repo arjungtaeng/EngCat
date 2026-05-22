@@ -141,4 +141,24 @@ function ECPhone({ children, width = 390, height = 844, bg = ECTokens.bg1 }) {
   );
 }
 
-Object.assign(window, { ECTokens, ECPlaceholder, ECStatusBar, ECHomeIndicator, ECIsland, ECPhone });
+// 스크롤 다운하면 false, 스크롤 업/상단 근처면 true 반환
+function ECUseHideOnScroll(ref) {
+  const [visible, setVisible] = React.useState(true);
+  const last = React.useRef(0);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onScroll = () => {
+      const cur = el.scrollTop;
+      if (cur < 12) setVisible(true);
+      else if (cur > last.current + 6) setVisible(false);
+      else if (cur < last.current - 6) setVisible(true);
+      last.current = cur;
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, [ref]);
+  return visible;
+}
+
+Object.assign(window, { ECTokens, ECPlaceholder, ECStatusBar, ECHomeIndicator, ECIsland, ECPhone, ECUseHideOnScroll });

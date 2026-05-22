@@ -3,6 +3,8 @@
 
 function ECScreenHome() {
   const T = ECTokens;
+  const scrollRef = React.useRef(null);
+  const tabVisible = ECUseHideOnScroll(scrollRef);
 
   const user = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
   const now = new Date();
@@ -24,7 +26,7 @@ function ECScreenHome() {
 
   return (
     <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
       <ECStatusBar />
 
       {/* Top bar */}
@@ -167,12 +169,12 @@ function ECScreenHome() {
       </div>
 
       </div>{/* end scrollable */}
-      <ECTabBar active="home" />
+      <ECTabBar active="home" visible={tabVisible} />
     </div>
   );
 }
 
-function ECTabBar({ active = 'home' }) {
+function ECTabBar({ active = 'home', visible = true }) {
   const T = ECTokens;
   const items = [
     { id: 'home',   label: '홈',      icon: ECIcon.home,  screen: 'home' },
@@ -183,21 +185,28 @@ function ECTabBar({ active = 'home' }) {
   return (
     <div style={{
       flexShrink: 0,
-      padding: '6px 12px 6px',
-      background: T.bg1,
-      display: 'flex', justifyContent: 'space-around',
-      borderTop: `1px solid ${T.hair}`,
+      maxHeight: visible ? 80 : 0,
+      opacity: visible ? 1 : 0,
+      overflow: 'hidden',
+      transition: 'max-height 0.25s ease, opacity 0.2s ease',
     }}>
-      {items.map(it => {
-        const on = active === it.id;
-        const c = on ? T.text : T.textMute;
-        return (
-          <div key={it.id} onClick={() => window.ECNav?.go(it.screen)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: 1, cursor: 'pointer' }}>
-            <div style={{ color: c }}>{it.icon(c, 20)}</div>
-            <div style={{ fontSize: 10, color: c, fontWeight: on ? 600 : 500 }}>{it.label}</div>
-          </div>
-        );
-      })}
+      <div style={{
+        padding: '6px 12px 6px',
+        background: T.bg1,
+        display: 'flex', justifyContent: 'space-around',
+        borderTop: `1px solid ${T.hair}`,
+      }}>
+        {items.map(it => {
+          const on = active === it.id;
+          const c = on ? T.text : T.textMute;
+          return (
+            <div key={it.id} onClick={() => window.ECNav?.go(it.screen)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: 1, cursor: 'pointer' }}>
+              <div style={{ color: c }}>{it.icon(c, 20)}</div>
+              <div style={{ fontSize: 10, color: c, fontWeight: on ? 600 : 500 }}>{it.label}</div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
