@@ -184,7 +184,7 @@ function ECTabBar({ active = 'home' }) {
   return (
     <div id="ec-tabbar" style={{
       width: '100%', flexShrink: 0,
-      height: '40px',
+      height: '50px',
       padding: '0 12px',
       background: T.bg1,
       borderTop: `1px solid ${T.hair}`,
