@@ -35,7 +35,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 18;</script>
+<script>window.EC_VER = 19;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/screen-login.jsx"></script>
@@ -55,7 +55,10 @@
     const [screen, setScreen] = React.useState(savedUser ? 'home' : 'login');
 
     React.useEffect(() => {
-      window.ECNav.go = setScreen;
+      window.ECNav.go = (s) => {
+        setScreen(s);
+        if (window._swReg) window._swReg.update();
+      };
     }, []);
 
     // Lazy map — component functions, not JSX elements.
@@ -95,7 +98,8 @@
       if (!refreshing) { refreshing = true; location.reload(); }
     });
     navigator.serviceWorker.register('/sw.js').then(reg => {
-      if (reg.active) reg.update();
+      window._swReg = reg;
+      reg.update();
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible') reg.update();
       });
