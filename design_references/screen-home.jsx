@@ -185,10 +185,10 @@ function ECTabBar({ active = 'home' }) {
     <div id="ec-tabbar" style={{
       width: '100%', flexShrink: 0,
       height: '50px',
-      padding: '0 12px 8px',
+      padding: '0 12px',
       background: T.bg1,
       borderTop: `1px solid ${T.hair}`,
-      display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end',
+      display: 'flex', justifyContent: 'space-around', alignItems: 'center',
     }}>
       {items.map(it => {
         const on = active === it.id;
