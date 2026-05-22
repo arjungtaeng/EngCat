@@ -25,7 +25,7 @@ function ECScreenHome() {
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 'calc(58px + env(safe-area-inset-bottom, 34px))' }}>
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 'calc(50px + env(safe-area-inset-bottom, 0px))' }}>
       <ECStatusBar />
 
       {/* Top bar */}
@@ -185,19 +185,20 @@ function ECTabBar({ active = 'home' }) {
       position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
       background: T.bg1,
       borderTop: `1px solid ${T.hair}`,
-      paddingTop: 8, paddingLeft: 12, paddingRight: 12, paddingBottom: 'env(safe-area-inset-bottom, 34px)',
-      display: 'flex', justifyContent: 'space-around', alignItems: 'flex-start',
+      paddingBottom: 'env(safe-area-inset-bottom, 34px)',
     }}>
-      {items.map(it => {
-        const on = active === it.id;
-        const c = on ? T.text : T.textMute;
-        return (
-          <div key={it.id} onClick={() => window.ECNav?.go(it.screen)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: 1, cursor: 'pointer' }}>
-            <div style={{ color: c }}>{it.icon(c, 20)}</div>
-            <div style={{ fontSize: 10, color: c, fontWeight: on ? 600 : 500 }}>{it.label}</div>
-          </div>
-        );
-      })}
+      <div style={{ padding: '8px 12px 6px', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+        {items.map(it => {
+          const on = active === it.id;
+          const c = on ? T.text : T.textMute;
+          return (
+            <div key={it.id} onClick={() => window.ECNav?.go(it.screen)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: 1, cursor: 'pointer' }}>
+              <div style={{ color: c }}>{it.icon(c, 20)}</div>
+              <div style={{ fontSize: 10, color: c, fontWeight: on ? 600 : 500 }}>{it.label}</div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -41,7 +41,7 @@ function ECScreenProfile() {
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 'calc(58px + env(safe-area-inset-bottom, 34px))' }}>
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 'calc(50px + env(safe-area-inset-bottom, 0px))' }}>
       <ECStatusBar />
 
       {/* Header */}
