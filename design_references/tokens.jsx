@@ -5,17 +5,17 @@
 const ECTokens = {
   // ── Palette (oklch-based dark theme) ─────────────────────────
   // Background scale — warm-cool neutral with very low saturation
-  bg0:    '#0B0B0E',           // deepest (outside cards)
-  bg1:    '#131318',           // app background
-  bg2:    '#1A1A21',           // card surface
-  bg3:    '#22222B',           // raised surface
-  bg4:    '#2C2C37',           // hover / pressed
+  bg0:    '#08080C',           // deepest (outside cards)
+  bg1:    '#0D0D11',           // app background
+  bg2:    '#161619',           // card surface
+  bg3:    '#1E1E26',           // raised surface
+  bg4:    '#27272F',           // hover / pressed
 
   // Text
-  text:   '#F4F1EB',           // primary (warm off-white)
-  textDim:'rgba(244,241,235,0.62)',
-  textMute:'rgba(244,241,235,0.38)',
-  textFaint:'rgba(244,241,235,0.18)',
+  text:   '#F8F5EF',           // primary (warm off-white)
+  textDim:'rgba(248,245,239,0.70)',
+  textMute:'rgba(248,245,239,0.50)',
+  textFaint:'rgba(248,245,239,0.22)',
 
   // Accent — warm amber (single signature color)
   accent:    '#E8B26A',        // primary CTA / streak / highlights
