@@ -3,6 +3,7 @@
 
 function ECScreenSentenceCard() {
   const T = ECTokens;
+  const scrollRef = React.useRef(null);
   const s = {
     en: "Could you keep an eye on my bag for a sec?",
     ipa: '/kʊd ju kiːp ən aɪ ɒn maɪ bæɡ/',
@@ -21,7 +22,7 @@ function ECScreenSentenceCard() {
 
   return (
     <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+      <div ref={scrollRef} style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
       <ECStatusBar />
 
       {/* Top bar */}
@@ -173,9 +174,10 @@ function ECScreenSentenceCard() {
             background: i < 3 ? T.accent : T.hairStr,
           }} />
         ))}
-      </div>{/* end card area */}
-      <ECTabBar active="cards" />
+      </div>
     </div>
+    <ECTabBar active="cards" />
+  </div>
   );
 }
 

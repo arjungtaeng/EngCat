@@ -2,6 +2,7 @@
 
 function ECScreenProfile() {
   const T = ECTokens;
+  const scrollRef = React.useRef(null);
 
   const user = (() => {
     try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; }
@@ -40,7 +41,7 @@ function ECScreenProfile() {
 
   return (
     <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
       <ECStatusBar />
 
       {/* Header */}
