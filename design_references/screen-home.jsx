@@ -175,7 +175,7 @@ function ECScreenHome() {
 
 function ECTabBar({ active = 'home' }) {
   const T = ECTokens;
-  React.useEffect(() => { window._ecVVUpdate?.(); }, []);
+  React.useLayoutEffect(() => { window._ecVVUpdate?.(); }, []);
   const items = [
     { id: 'home',   label: '홈',      icon: ECIcon.home,  screen: 'home' },
     { id: 'cards',  label: '카드',    icon: ECIcon.cards, screen: 'word-card' },
