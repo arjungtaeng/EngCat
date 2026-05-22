@@ -16,7 +16,7 @@ function ECScreenWordCard() {
   };
 
   return (
-    <div style={{ height: '100dvh', background: '#000', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: '#000', display: 'flex', flexDirection: 'column' }}>
       <div ref={scrollRef} style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
       {/* Hero image — full bleed, blurred edges */}
       <div style={{ position: 'absolute', inset: 0 }}>

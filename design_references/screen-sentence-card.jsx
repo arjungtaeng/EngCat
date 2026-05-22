@@ -21,7 +21,7 @@ function ECScreenSentenceCard() {
   ];
 
   return (
-    <div style={{ height: '100dvh', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
       <div ref={scrollRef} style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
       <ECStatusBar />
 
