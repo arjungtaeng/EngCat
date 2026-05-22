@@ -8,10 +8,10 @@
 <meta name="apple-mobile-web-app-title" content="EngCat"/>
 <meta name="theme-color" content="#0B0B0E"/>
 <link rel="manifest" href="manifest.json"/>
-<link rel="icon" type="image/png" href="icons/icon-1024.png?v=6"/>
-<link rel="apple-touch-icon" href="icons/icon-180.png?v=5"/>
-<link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png?v=5"/>
-<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png?v=5"/>
+<link rel="icon" type="image/png" href="icons/icon-1024.png"/>
+<link rel="apple-touch-icon" href="icons/icon-180.png"/>
+<link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png"/>
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png"/>
 <!-- App icon: "Cat" by Icojam, SVG Repo (https://www.svgrepo.com) · CC BY 4.0 -->
 <title>EngCat</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -36,16 +36,16 @@
 <script>window.ECRealDevice = true;</script>
 
 <script>window.EC_VER = 9;</script>
-<script type="text/babel" src="design_references/tokens.jsx?v=9"></script>
-<script type="text/babel" src="design_references/icons.jsx?v=9"></script>
-<script type="text/babel" src="design_references/screen-login.jsx?v=9"></script>
-<script type="text/babel" src="design_references/screen-onboarding.jsx?v=9"></script>
-<script type="text/babel" src="design_references/screen-home.jsx?v=9"></script>
-<script type="text/babel" src="design_references/screen-word-card.jsx?v=9"></script>
-<script type="text/babel" src="design_references/screen-sentence-card.jsx?v=9"></script>
-<script type="text/babel" src="design_references/screen-quiz.jsx?v=9"></script>
-<script type="text/babel" src="design_references/screen-stats.jsx?v=9"></script>
-<script type="text/babel" src="design_references/screen-profile.jsx?v=9"></script>
+<script type="text/babel" src="design_references/tokens.jsx"></script>
+<script type="text/babel" src="design_references/icons.jsx"></script>
+<script type="text/babel" src="design_references/screen-login.jsx"></script>
+<script type="text/babel" src="design_references/screen-onboarding.jsx"></script>
+<script type="text/babel" src="design_references/screen-home.jsx"></script>
+<script type="text/babel" src="design_references/screen-word-card.jsx"></script>
+<script type="text/babel" src="design_references/screen-sentence-card.jsx"></script>
+<script type="text/babel" src="design_references/screen-quiz.jsx"></script>
+<script type="text/babel" src="design_references/screen-stats.jsx"></script>
+<script type="text/babel" src="design_references/screen-profile.jsx"></script>
 
 <script type="text/babel" data-presets="react">
   window.ECNav = { go: () => {} };
@@ -87,15 +87,23 @@
   }
 
   ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
 
-  // 앱이 포그라운드로 돌아올 때 버전 체크 → 새 버전이면 자동 새로고침
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState !== 'visible') return;
-    fetch('version.json?t=' + Date.now())
-      .then(r => r.json())
-      .then(data => { if (data.v !== window.EC_VER) location.reload(); })
-      .catch(() => {});
-  });
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+      reg.update();
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') reg.update();
+      });
+      reg.addEventListener('updatefound', () => {
+        if (!reg.active) return; // 최초 설치 시 reload 불필요
+        reg.installing.addEventListener('statechange', function() {
+          if (this.state === 'activated') location.reload();
+        });
+      });
+    });
+  }
 </script>
 </body>
 </html>
