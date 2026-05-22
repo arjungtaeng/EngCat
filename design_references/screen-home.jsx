@@ -182,12 +182,14 @@ function ECTabBar({ active = 'home' }) {
     { id: 'me',     label: '내 정보', icon: ECIcon.user,  screen: 'profile' },
   ];
   return (
-    <div style={{
-      flexShrink: 0,
+    <div id="ec-tabbar" style={{
+      position: 'fixed',
+      bottom: 0, left: 0, right: 0,
       padding: '10px 12px env(safe-area-inset-bottom, 0px)',
       background: T.bg1,
       display: 'flex', justifyContent: 'space-around',
       borderTop: `1px solid ${T.hair}`,
+      zIndex: 100,
     }}>
       {items.map(it => {
         const on = active === it.id;

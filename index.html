@@ -35,7 +35,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 45;</script>
+<script>window.EC_VER = 46;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/screen-login.jsx"></script>
@@ -53,8 +53,6 @@
   function App() {
     const savedUser = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
     const [screen, setScreen] = React.useState(savedUser ? 'home' : 'login');
-    const [dbg, setDbg] = React.useState('');
-
     React.useEffect(() => {
       window.ECNav.go = (s) => {
         setScreen(s);
@@ -63,19 +61,20 @@
     }, []);
 
     React.useEffect(() => {
-      const snap = (tag) => {
-        const ih = window.innerHeight;
-        const vvh = window.visualViewport ? Math.round(window.visualViewport.height) : '-';
-        const vvt = window.visualViewport ? Math.round(window.visualViewport.offsetTop) : '-';
-        const bh  = document.body.offsetHeight;
-        const rh  = document.getElementById('root')?.offsetHeight ?? '-';
-        setDbg(`[${tag}] ih=${ih} vvH=${vvh} vvTop=${vvt} bodyH=${bh} rootH=${rh}`);
+      if (!window.visualViewport) return;
+      const update = () => {
+        const el = document.getElementById('ec-tabbar');
+        if (!el) return;
+        const offset = window.innerHeight - window.visualViewport.height - window.visualViewport.offsetTop;
+        el.style.bottom = Math.max(0, offset) + 'px';
       };
-      snap('mount');
-      const onScroll = () => snap('scroll');
-      window.addEventListener('scroll', onScroll, { once: true });
-      window.visualViewport?.addEventListener('scroll', () => snap('vpscroll'), { once: true });
-      window.visualViewport?.addEventListener('resize', () => snap('vpresize'), { once: true });
+      update();
+      window.visualViewport.addEventListener('scroll', update);
+      window.visualViewport.addEventListener('resize', update);
+      return () => {
+        window.visualViewport.removeEventListener('scroll', update);
+        window.visualViewport.removeEventListener('resize', update);
+      };
     }, []);
 
     // Lazy map — component functions, not JSX elements.
@@ -100,11 +99,6 @@
         background: '#0D0D11',
         paddingTop: 'env(safe-area-inset-top, 0px)',
       }}>
-        {dbg ? <div style={{
-          position: 'fixed', top: 'env(safe-area-inset-top,0px)', left: 0, right: 0, zIndex: 9999,
-          background: 'rgba(220,0,0,0.92)', color: '#fff', fontSize: 10,
-          fontFamily: 'monospace', padding: '4px 8px', lineHeight: 1.5,
-        }}>{dbg}</div> : null}
         <Screen />
       </div>
     );
