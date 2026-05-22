@@ -26,8 +26,8 @@
   });
 </script>
 <style>
-  html { margin: 0; padding: 0; height: var(--app-h, 100dvh); background: #0D0D11; }
-  body { margin: 0; padding: 0; height: var(--app-h, 100dvh); font-family: 'Pretendard Variable', system-ui, sans-serif; display: flex; flex-direction: column; }
+  html { margin: 0; padding: 0; height: var(--app-h, 100dvh); background: #0D0D11; overflow: hidden; }
+  body { margin: 0; padding: 0; height: var(--app-h, 100dvh); font-family: 'Pretendard Variable', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden; }
   * { box-sizing: border-box; }
   #root { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 </style>
@@ -41,7 +41,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 40;</script>
+<script>window.EC_VER = 41;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/screen-login.jsx"></script>
