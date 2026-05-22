@@ -183,7 +183,7 @@ function ECTabBar({ active = 'home' }) {
   ];
   return (
     <div style={{
-      flexShrink: 0,
+      position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
       padding: '6px 12px calc(6px + env(safe-area-inset-bottom, 0px))',
       background: T.bg1,
       display: 'flex', justifyContent: 'space-around',
