@@ -35,17 +35,17 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>const EC_VER = 8;</script>
-<script type="text/babel" src="design_references/tokens.jsx?v=8"></script>
-<script type="text/babel" src="design_references/icons.jsx?v=8"></script>
-<script type="text/babel" src="design_references/screen-login.jsx?v=8"></script>
-<script type="text/babel" src="design_references/screen-onboarding.jsx?v=8"></script>
-<script type="text/babel" src="design_references/screen-home.jsx?v=8"></script>
-<script type="text/babel" src="design_references/screen-word-card.jsx?v=8"></script>
-<script type="text/babel" src="design_references/screen-sentence-card.jsx?v=8"></script>
-<script type="text/babel" src="design_references/screen-quiz.jsx?v=8"></script>
-<script type="text/babel" src="design_references/screen-stats.jsx?v=8"></script>
-<script type="text/babel" src="design_references/screen-profile.jsx?v=8"></script>
+<script>window.EC_VER = 9;</script>
+<script type="text/babel" src="design_references/tokens.jsx?v=9"></script>
+<script type="text/babel" src="design_references/icons.jsx?v=9"></script>
+<script type="text/babel" src="design_references/screen-login.jsx?v=9"></script>
+<script type="text/babel" src="design_references/screen-onboarding.jsx?v=9"></script>
+<script type="text/babel" src="design_references/screen-home.jsx?v=9"></script>
+<script type="text/babel" src="design_references/screen-word-card.jsx?v=9"></script>
+<script type="text/babel" src="design_references/screen-sentence-card.jsx?v=9"></script>
+<script type="text/babel" src="design_references/screen-quiz.jsx?v=9"></script>
+<script type="text/babel" src="design_references/screen-stats.jsx?v=9"></script>
+<script type="text/babel" src="design_references/screen-profile.jsx?v=9"></script>
 
 <script type="text/babel" data-presets="react">
   window.ECNav = { go: () => {} };
@@ -93,7 +93,7 @@
     if (document.visibilityState !== 'visible') return;
     fetch('version.json?t=' + Date.now())
       .then(r => r.json())
-      .then(data => { if (data.v !== EC_VER) location.reload(); })
+      .then(data => { if (data.v !== window.EC_VER) location.reload(); })
       .catch(() => {});
   });
 </script>
