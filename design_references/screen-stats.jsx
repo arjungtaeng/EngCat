@@ -132,7 +132,6 @@ function ECScreenStats() {
       </div>
 
       </div>{/* end scrollable */}
-      <ECTabBar active="stats" />
     </div>
   );
 }

@@ -176,7 +176,6 @@ function ECScreenSentenceCard() {
         ))}
       </div>
     </div>
-    <ECTabBar active="cards" />
   </div>
   );
 }

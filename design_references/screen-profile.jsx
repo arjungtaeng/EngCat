@@ -193,7 +193,6 @@ function ECScreenProfile() {
       </div>
 
       </div>{/* end scrollable */}
-      <ECTabBar active="me" />
     </div>
   );
 }

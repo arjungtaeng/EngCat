@@ -147,7 +147,6 @@ function ECScreenWordCard() {
         ))}
       </div>
     </div>
-    <ECTabBar active="cards" />
   </div>
   );
 }

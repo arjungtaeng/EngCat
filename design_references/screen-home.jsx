@@ -168,7 +168,6 @@ function ECScreenHome() {
       </div>
 
       </div>{/* end scrollable */}
-      <ECTabBar active="home" />
     </div>
   );
 }
