@@ -35,7 +35,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 44;</script>
+<script>window.EC_VER = 45;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/screen-login.jsx"></script>
@@ -53,11 +53,29 @@
   function App() {
     const savedUser = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
     const [screen, setScreen] = React.useState(savedUser ? 'home' : 'login');
+    const [dbg, setDbg] = React.useState('');
+
     React.useEffect(() => {
       window.ECNav.go = (s) => {
         setScreen(s);
         if (window._swReg) window._swReg.update();
       };
+    }, []);
+
+    React.useEffect(() => {
+      const snap = (tag) => {
+        const ih = window.innerHeight;
+        const vvh = window.visualViewport ? Math.round(window.visualViewport.height) : '-';
+        const vvt = window.visualViewport ? Math.round(window.visualViewport.offsetTop) : '-';
+        const bh  = document.body.offsetHeight;
+        const rh  = document.getElementById('root')?.offsetHeight ?? '-';
+        setDbg(`[${tag}] ih=${ih} vvH=${vvh} vvTop=${vvt} bodyH=${bh} rootH=${rh}`);
+      };
+      snap('mount');
+      const onScroll = () => snap('scroll');
+      window.addEventListener('scroll', onScroll, { once: true });
+      window.visualViewport?.addEventListener('scroll', () => snap('vpscroll'), { once: true });
+      window.visualViewport?.addEventListener('resize', () => snap('vpresize'), { once: true });
     }, []);
 
     // Lazy map — component functions, not JSX elements.
@@ -82,6 +100,11 @@
         background: '#0D0D11',
         paddingTop: 'env(safe-area-inset-top, 0px)',
       }}>
+        {dbg ? <div style={{
+          position: 'fixed', top: 'env(safe-area-inset-top,0px)', left: 0, right: 0, zIndex: 9999,
+          background: 'rgba(220,0,0,0.92)', color: '#fff', fontSize: 10,
+          fontFamily: 'monospace', padding: '4px 8px', lineHeight: 1.5,
+        }}>{dbg}</div> : null}
         <Screen />
       </div>
     );
