@@ -187,7 +187,7 @@ function ECTabBar({ active = 'home' }) {
       left: 0, right: 0, zIndex: 100,
       background: T.bg1,
       borderTop: `1px solid ${T.hair}`,
-      padding: '8px 12px 6px',
+      padding: '0 12px',
       display: 'flex', justifyContent: 'space-around', alignItems: 'center',
     }}>
       {items.map(it => {
