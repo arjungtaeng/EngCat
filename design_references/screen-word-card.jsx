@@ -3,6 +3,8 @@
 
 function ECScreenWordCard() {
   const T = ECTokens;
+  const scrollRef = React.useRef(null);
+  const tabVisible = ECUseHideOnScroll(scrollRef);
   const word = {
     en: 'itinerary',
     ipa: '/aɪˈtɪnərəri/',
@@ -16,7 +18,7 @@ function ECScreenWordCard() {
 
   return (
     <div style={{ height: '100%', background: '#000', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+      <div ref={scrollRef} style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
       {/* Hero image — full bleed, blurred edges */}
       <div style={{ position: 'absolute', inset: 0 }}>
         <ECPlaceholder height="100%" tint={word.tint} radius={0} label="hero · airport scene"/>
@@ -146,7 +148,7 @@ function ECScreenWordCard() {
         ))}
       </div>
     </div>
-    <ECTabBar active="cards" />
+    <ECTabBar active="cards" visible={tabVisible} />
   </div>
   );
 }
