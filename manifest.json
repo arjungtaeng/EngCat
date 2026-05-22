@@ -5,8 +5,8 @@
   "start_url": "/EngCat/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0B0B0E",
-  "theme_color": "#0B0B0E",
+  "background_color": "#0D0D11",
+  "theme_color": "#0D0D11",
   "icons": [
     {
       "src": "icons/icon-152.png",
