@@ -183,7 +183,7 @@ function ECTabBar({ active = 'home' }) {
   return (
     <div id="ec-tabbar" style={{
       position: 'fixed',
-      bottom: -44,
+      bottom: 0,
       left: 0, right: 0, zIndex: 100,
       background: T.bg1,
       borderTop: `1px solid ${T.hair}`,
