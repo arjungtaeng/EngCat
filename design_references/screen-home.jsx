@@ -183,23 +183,25 @@ function ECTabBar({ active = 'home' }) {
   return (
     <div id="ec-tabbar" style={{
       position: 'fixed',
-      bottom: 0,
+      bottom: 'calc(-1 * env(safe-area-inset-bottom, 0px))',
       left: 0, right: 0, zIndex: 100,
       background: T.bg1,
       borderTop: `1px solid ${T.hair}`,
-      padding: '0 12px',
-      display: 'flex', justifyContent: 'space-around', alignItems: 'center',
+      paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+      display: 'flex', flexDirection: 'column',
     }}>
-      {items.map(it => {
-        const on = active === it.id;
-        const c = on ? T.text : T.textMute;
-        return (
-          <div key={it.id} onClick={() => window.ECNav?.go(it.screen)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: 1, cursor: 'pointer' }}>
-            <div style={{ color: c }}>{it.icon(c, 20)}</div>
-            <div style={{ fontSize: 10, color: c, fontWeight: on ? 600 : 500 }}>{it.label}</div>
-          </div>
-        );
-      })}
+      <div style={{ padding: '8px 12px 6px', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+        {items.map(it => {
+          const on = active === it.id;
+          const c = on ? T.text : T.textMute;
+          return (
+            <div key={it.id} onClick={() => window.ECNav?.go(it.screen)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flex: 1, cursor: 'pointer' }}>
+              <div style={{ color: c }}>{it.icon(c, 20)}</div>
+              <div style={{ fontSize: 10, color: c, fontWeight: on ? 600 : 500 }}>{it.label}</div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
