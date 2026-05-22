@@ -183,14 +183,14 @@ function ECTabBar({ active = 'home' }) {
   return (
     <div id="ec-tabbar" style={{
       position: 'fixed',
-      bottom: 'calc(-1 * env(safe-area-inset-bottom, 0px))',
+      bottom: -34,
       left: 0, right: 0, zIndex: 100,
       background: T.bg1,
       borderTop: `1px solid ${T.hair}`,
       paddingBottom: 'env(safe-area-inset-bottom, 0px)',
       display: 'flex', flexDirection: 'column',
     }}>
-      <div style={{ padding: '8px 12px 6px', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+      <div style={{ paddingTop: 8, display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
         {items.map(it => {
           const on = active === it.id;
           const c = on ? T.text : T.textMute;
