@@ -187,7 +187,7 @@ function ECTabBar({ active = 'home' }) {
       paddingBottom: 'env(safe-area-inset-bottom, 0px)',
       background: T.bg1,
       borderTop: `1px solid ${T.hair}`,
-      display: 'flex', justifyContent: 'space-around', alignItems: 'center',
+      display: 'flex', justifyContent: 'space-around', alignItems: 'flex-start',
     }}>
       {items.map(it => {
         const on = active === it.id;
