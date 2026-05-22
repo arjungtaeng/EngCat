@@ -4,6 +4,12 @@
 function ECScreenHome() {
   const T = ECTokens;
   const scrollRef = React.useRef(null);
+  const session = window.ECSession || { completedWordIds: new Set(), completedSentenceIds: new Set() };
+  const doneWords = session.completedWordIds.size;
+  const doneSentences = session.completedSentenceIds.size;
+  const totalDone = doneWords + doneSentences;
+  const totalCards = 15;
+  const progressPct = Math.round((totalDone / totalCards) * 100);
 
   const user = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
   const now = new Date();
@@ -90,9 +96,9 @@ function ECScreenHome() {
           {/* progress */}
           <div style={{ marginTop: 18, display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ flex: 1, height: 6, borderRadius: 3, background: T.hair, overflow: 'hidden' }}>
-              <div style={{ width: '0%', height: '100%', background: T.accent, borderRadius: 3 }} />
+              <div style={{ width: progressPct + '%', height: '100%', background: T.accent, borderRadius: 3, transition: 'width 0.4s ease' }} />
             </div>
-            <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>0 / 15</div>
+            <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>{totalDone} / {totalCards}</div>
           </div>
 
           {/* CTA */}
@@ -102,7 +108,7 @@ function ECScreenHome() {
             color: T.bg0, fontWeight: 600, fontSize: 15, cursor: 'pointer',
           }}>
             {ECIcon.play(T.bg0, 16)}
-            <span>학습 시작하기</span>
+            <span>{totalDone > 0 ? '이어서 학습하기' : '학습 시작하기'}</span>
           </div>
         </div>
       </div>
@@ -110,53 +116,49 @@ function ECScreenHome() {
       {/* Section: Daily set */}
       <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>오늘의 단어</div>
-        <div style={{ fontSize: 12, color: T.textDim }}>10개 중 0개 완료</div>
+        <div style={{ fontSize: 12, color: T.textDim }}>10개 중 {doneWords}개 완료</div>
       </div>
 
-      <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto' }}>
-        {[
-          { w: 'itinerary', k: '여정',    tint: T.art1, done: false },
-          { w: 'layover',   k: '경유',    tint: T.art2, done: false },
-          { w: 'jet lag',   k: '시차',    tint: T.art5, done: false },
-          { w: 'boarding',  k: '탑승',    tint: T.art4, done: false },
-        ].map((c, i) => (
-          <div key={i} onClick={() => window.ECNav?.go('word-card')} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
-            <div style={{ position: 'relative' }}>
-              <ECPlaceholder height={150} tint={c.tint} radius={14} label={c.w}/>
-              {c.done && (
-                <div style={{
-                  position: 'absolute', top: 8, right: 8, width: 22, height: 22, borderRadius: 11,
-                  background: T.good, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
-                  {ECIcon.check(T.bg0, 14)}
-                </div>
-              )}
+      <div style={{ padding: ‘0 22px’, display: ‘flex’, gap: 10, overflowX: ‘auto’ }}>
+        {(window.ECData ? window.ECData.words.slice(0, 4) : []).map((c, i) => {
+          const done = session.completedWordIds.has(c.id);
+          return (
+            <div key={i} onClick={() => { window.ECSession && (window.ECSession.wordIndex = i); window.ECNav?.go(‘word-card’); }} style={{ flex: ‘0 0 130px’, cursor: ‘pointer’ }}>
+              <div style={{ position: ‘relative’ }}>
+                <ECPlaceholder height={150} tint={c.tint} radius={14} label={c.en}/>
+                {done && (
+                  <div style={{
+                    position: ‘absolute’, top: 8, right: 8, width: 22, height: 22, borderRadius: 11,
+                    background: T.good, display: ‘flex’, alignItems: ‘center’, justifyContent: ‘center’,
+                  }}>
+                    {ECIcon.check(T.bg0, 14)}
+                  </div>
+                )}
+              </div>
+              <div style={{ marginTop: 8, fontFamily: T.serif, fontSize: 17, color: T.text, fontStyle: ‘italic’ }}>{c.en}</div>
+              <div style={{ fontSize: 12, color: T.textDim, marginTop: 1 }}>{c.ko.split(‘,’)[0]}</div>
             </div>
-            <div style={{ marginTop: 8, fontFamily: T.serif, fontSize: 17, color: T.text, fontStyle: 'italic' }}>{c.w}</div>
-            <div style={{ fontSize: 12, color: T.textDim, marginTop: 1 }}>{c.k}</div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Section: Sentence */}
-      <div style={{ padding: '28px 22px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+      <div style={{ padding: ‘28px 22px 10px’, display: ‘flex’, justifyContent: ‘space-between’, alignItems: ‘baseline’ }}>
         <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>오늘의 문장</div>
-        <div onClick={() => window.ECNav?.go('sentence-card')} style={{ fontSize: 12, color: T.accent, cursor: 'pointer' }}>전체 보기</div>
+        <div onClick={() => window.ECNav?.go(‘sentence-card’)} style={{ fontSize: 12, color: T.accent, cursor: ‘pointer’ }}>전체 보기</div>
       </div>
 
-      <div style={{ padding: '0 22px 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {[
-          { en: 'Could you keep an eye on my bag?', ko: '제 가방 좀 봐주실 수 있을까요?' },
-          { en: 'I’d like to check in early, please.',  ko: '일찍 체크인하고 싶어요.' },
-        ].map((s, i) => (
-          <div key={i} onClick={() => window.ECNav?.go('sentence-card')} style={{
-            padding: '14px 16px', borderRadius: 14,
+      <div style={{ padding: ‘0 22px 24px’, display: ‘flex’, flexDirection: ‘column’, gap: 10 }}>
+        {(window.ECData ? window.ECData.sentences.slice(0, 2) : []).map((s, i) => (
+          <div key={i} onClick={() => { window.ECSession && (window.ECSession.sentenceIndex = i); window.ECNav?.go(‘sentence-card’); }} style={{
+            padding: ‘14px 16px’, borderRadius: 14,
             background: T.bg2, border: `1px solid ${T.hair}`,
-            display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer',
+            display: ‘flex’, alignItems: ‘center’, gap: 12, cursor: ‘pointer’,
+            opacity: session.completedSentenceIds.has(s.id) ? 0.65 : 1,
           }}>
             <div style={{
               width: 38, height: 38, borderRadius: 10, background: T.bg3,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              display: ‘flex’, alignItems: ‘center’, justifyContent: ‘center’, flexShrink: 0,
               color: T.accent,
             }}>{ECIcon.speaker(T.accent, 18)}</div>
             <div style={{ flex: 1, minWidth: 0 }}>
