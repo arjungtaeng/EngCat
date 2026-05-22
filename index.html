@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="EngCat"/>
-<meta name="theme-color" content="#08080C"/>
+<meta name="theme-color" content="#0D0D11"/>
 <link rel="manifest" href="manifest.json"/>
 <link rel="icon" type="image/png" href="icons/icon-1024.png"/>
 <link rel="apple-touch-icon" href="icons/icon-180.png"/>
@@ -21,7 +21,7 @@
 <script src="https://accounts.google.com/gsi/client" async></script>
 <style>
   html { margin: 0; padding: 0; height: 100dvh; background: #0D0D11; overscroll-behavior: none; }
-  body { margin: 0; padding: 0; height: 100dvh; font-family: 'Pretendard Variable', system-ui, sans-serif; overscroll-behavior: none; }
+  body { margin: 0; padding: 0; height: 100dvh; background: #0D0D11; font-family: 'Pretendard Variable', system-ui, sans-serif; overscroll-behavior: none; }
   * { box-sizing: border-box; }
   #root { height: 100dvh; }
 </style>
@@ -35,7 +35,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 84;</script>
+<script>window.EC_VER = 85;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/screen-login.jsx"></script>
@@ -87,7 +87,6 @@
         background: '#0D0D11',
         display: 'flex', flexDirection: 'column',
         paddingTop: 'env(safe-area-inset-top, 0px)',
-        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
       }}>
         <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
           <Screen />
