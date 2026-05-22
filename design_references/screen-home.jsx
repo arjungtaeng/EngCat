@@ -25,7 +25,7 @@ function ECScreenHome() {
 
   return (
     <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 'calc(60px + env(safe-area-inset-bottom, 0px))' }}>
       <ECStatusBar />
 
       {/* Top bar */}
@@ -183,8 +183,7 @@ function ECTabBar({ active = 'home' }) {
   ];
   return (
     <div id="ec-tabbar" style={{
-      width: '100%',
-      flexShrink: 0,
+      position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
       background: T.bg1,
       borderTop: `1px solid ${T.hair}`,
       display: 'flex', justifyContent: 'space-around', alignItems: 'center',
