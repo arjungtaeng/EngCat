@@ -190,6 +190,8 @@ function ECTabBar({ active = 'home' }) {
       display: 'flex', justifyContent: 'space-around',
       borderTop: `1px solid ${T.hair}`,
       zIndex: 100,
+      transform: 'translateZ(0)',
+      WebkitTransform: 'translateZ(0)',
     }}>
       {items.map(it => {
         const on = active === it.id;
