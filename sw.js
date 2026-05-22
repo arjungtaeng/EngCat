@@ -1,5 +1,5 @@
 // 배포할 때 이 값만 올리면 됩니다
-const CACHE = 'engcat-v17';
+const CACHE = 'engcat-v18';
 
 const ASSETS = [
   '/',
