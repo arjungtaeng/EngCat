@@ -25,7 +25,7 @@ function ECScreenHome() {
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 'calc(58px + env(safe-area-inset-bottom, 34px))' }}>
       <ECStatusBar />
 
       {/* Top bar */}
@@ -185,8 +185,8 @@ function ECTabBar({ active = 'home' }) {
       position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
       background: T.bg1,
       borderTop: `1px solid ${T.hair}`,
-      padding: '8px 12px 6px',
-      display: 'flex', justifyContent: 'space-around', alignItems: 'center',
+      paddingTop: 8, paddingLeft: 12, paddingRight: 12, paddingBottom: 'env(safe-area-inset-bottom, 34px)',
+      display: 'flex', justifyContent: 'space-around', alignItems: 'flex-start',
     }}>
       {items.map(it => {
         const on = active === it.id;
