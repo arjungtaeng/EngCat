@@ -120,7 +120,7 @@ function ECScreenHome() {
       </div>
 
       <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto' }}>
-        {(window.ECData ? window.ECData.words : []).map((c, i) => {
+        {(window.ECData ? window.ECData.words.slice(0, 10) : []).map((c, i) => {
           const done = session.completedWordIds.has(c.id);
           return (
             <div key={i} onClick={() => { window.ECSession && (window.ECSession.wordIndex = i); window.ECNav?.go('word-card'); }} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
@@ -152,7 +152,7 @@ function ECScreenHome() {
       </div>
 
       <div style={{ padding: '0 22px 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {(window.ECData ? window.ECData.sentences : []).map((s, i) => (
+        {(window.ECData ? window.ECData.sentences.slice(0, 5) : []).map((s, i) => (
           <div key={i} onClick={() => { window.ECSession && (window.ECSession.sentenceIndex = i); window.ECNav?.go('sentence-card'); }} style={{
             padding: '14px 16px', borderRadius: 14,
             background: T.bg2, border: `1px solid ${T.hair}`,
