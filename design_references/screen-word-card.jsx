@@ -252,7 +252,7 @@ function ECScreenWordCard() {
             fontSize: 9.5, fontFamily: T.mono, color: T.textMute,
             letterSpacing: 1, marginBottom: 4, textTransform: 'uppercase',
           }}>예문</div>
-          <div style={{ fontFamily: T.thin, fontWeight: 200, fontSize: 14.5, color: T.text, lineHeight: 1.35 }}>
+          <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 14.5, color: T.text, lineHeight: 1.35 }}>
             "{renderEx(word.ex)}"
           </div>
         </div>
@@ -338,7 +338,7 @@ function ECScreenWordCard() {
                   display: 'flex', alignItems: 'flex-start', gap: 12,
                 }}>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontFamily: T.thin, fontWeight: 200, fontSize: 15, color: T.text, lineHeight: 1.5 }}>
+                    <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 15, color: T.text, lineHeight: 1.5 }}>
                       "{renderEx(ex)}"
                     </div>
                   </div>
