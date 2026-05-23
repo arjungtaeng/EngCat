@@ -156,8 +156,8 @@ function ECScreenWordCard() {
 
         {/* Word */}
         <div style={{
-          fontFamily: T.mono, fontSize: 56, lineHeight: 1, color: T.text,
-          letterSpacing: -1, marginBottom: 6,
+          fontFamily: T.display, fontSize: 56, lineHeight: 1, color: T.text,
+          fontStyle: 'italic', letterSpacing: -1, marginBottom: 6,
         }}>{word.en}</div>
 
         {/* Korean meaning */}
@@ -181,7 +181,7 @@ function ECScreenWordCard() {
             fontSize: 9.5, fontFamily: T.mono, color: 'rgba(255,255,255,0.5)',
             letterSpacing: 1, marginBottom: 6, textTransform: 'uppercase',
           }}>예문</div>
-          <div style={{ fontFamily: T.mono, fontSize: 15, color: T.text, lineHeight: 1.35 }}>
+          <div style={{ fontFamily: T.display, fontSize: 15, fontStyle: 'italic', color: T.text, lineHeight: 1.35 }}>
             "{renderEx(word.ex)}"
           </div>
         </div>

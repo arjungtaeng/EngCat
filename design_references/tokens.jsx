@@ -42,10 +42,11 @@ const ECTokens = {
   hairStr: 'rgba(244,241,235,0.16)',
 
   // ── Typography ───────────────────────────────────────────────
-  // Pretendard for Korean (loaded via CDN), Instrument Serif for English emphasis
-  sans:  '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", system-ui, sans-serif',
-  serif: '"Instrument Serif", "Iowan Old Style", "Apple Garamond", Georgia, serif',
-  mono:  '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace',
+  // Pretendard for Korean, Playfair Display for English words/sentences, JetBrains Mono for labels
+  sans:    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", system-ui, sans-serif',
+  serif:   '"Instrument Serif", "Iowan Old Style", "Apple Garamond", Georgia, serif',
+  display: '"Playfair Display", Georgia, serif',
+  mono:    '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace',
 
   // ── Spacing & radii ─────────────────────────────────────────
   r:  { sm: 10, md: 14, lg: 20, xl: 28, pill: 999 },
