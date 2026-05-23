@@ -6,88 +6,126 @@
 <title>EngCat Setup</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #0D0D11; color: #F4F1EB; font-family: system-ui, sans-serif; padding: 40px 24px; min-height: 100vh; }
+  body { background: #0D0D11; color: #F4F1EB; font-family: system-ui, sans-serif; padding: 40px 24px 60px; min-height: 100vh; }
   h1 { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
   .sub { font-size: 13px; color: rgba(244,241,235,0.45); margin-bottom: 36px; }
-  label { display: block; font-size: 12px; color: rgba(244,241,235,0.5); letter-spacing: 0.5px; margin-bottom: 8px; }
-  input {
+  label { display: block; font-size: 12px; color: rgba(244,241,235,0.5); letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase; }
+  input, select {
     width: 100%; padding: 14px 16px; border-radius: 12px;
     background: #1A1A22; border: 1px solid rgba(244,241,235,0.12);
-    color: #F4F1EB; font-size: 14px; margin-bottom: 20px;
-    font-family: monospace;
+    color: #F4F1EB; font-size: 14px; margin-bottom: 24px;
+    font-family: monospace; appearance: none;
   }
-  input:focus { outline: none; border-color: #E8B26A; }
-  button {
+  input:focus, select:focus { outline: none; border-color: #E8B26A; }
+  select option { background: #1A1A22; }
+  .voice-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .voice-card {
+    padding: 14px 16px; border-radius: 12px;
+    background: #1A1A22; border: 2px solid rgba(244,241,235,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; transition: border-color 0.15s;
+  }
+  .voice-card.selected { border-color: #E8B26A; }
+  .voice-card .name { font-size: 14px; font-weight: 500; color: #F4F1EB; }
+  .voice-card .desc { font-size: 12px; color: rgba(244,241,235,0.45); margin-top: 2px; }
+  .play-btn {
+    width: 36px; height: 36px; border-radius: 999px; flex-shrink: 0;
+    background: rgba(232,178,106,0.12); border: 1px solid rgba(232,178,106,0.25);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+  }
+  .play-btn.loading { opacity: 0.5; }
+  button.save-btn {
     width: 100%; padding: 16px; border-radius: 14px;
     background: #E8B26A; color: #0D0D11;
     font-size: 15px; font-weight: 600; border: none; cursor: pointer;
   }
-  .result {
-    margin-top: 20px; padding: 16px; border-radius: 12px;
-    font-size: 14px; display: none;
-  }
+  .result { margin-top: 16px; padding: 14px 16px; border-radius: 12px; font-size: 14px; display: none; }
   .result.ok { background: rgba(100,200,100,0.12); border: 1px solid rgba(100,200,100,0.3); color: #6dc87a; }
   .result.err { background: rgba(255,80,80,0.12); border: 1px solid rgba(255,80,80,0.3); color: #ff6b6b; }
-  .current { margin-top: 32px; padding: 16px; border-radius: 12px; background: #1A1A22; border: 1px solid rgba(244,241,235,0.08); font-size: 13px; color: rgba(244,241,235,0.5); }
+  .section { height: 1px; background: rgba(244,241,235,0.07); margin: 28px 0; }
+  .current { padding: 16px; border-radius: 12px; background: #1A1A22; border: 1px solid rgba(244,241,235,0.08); font-size: 13px; color: rgba(244,241,235,0.5); line-height: 1.8; }
   .current b { color: #E8B26A; }
-  .test-btn { margin-top: 12px; padding: 10px 16px; border-radius: 10px; background: #1A1A22; border: 1px solid rgba(244,241,235,0.15); color: #F4F1EB; font-size: 13px; cursor: pointer; }
 </style>
 </head>
 <body>
 
-<h1>Azure TTS 설정</h1>
-<div class="sub">한 번만 저장하면 이 기기에서 계속 사용돼요.</div>
+<h1>EngCat 설정</h1>
+<div class="sub">Azure TTS 키와 음성을 설정하세요.</div>
 
 <label>Azure Speech API 키</label>
 <input type="text" id="key" placeholder="키를 붙여넣으세요" autocomplete="off" autocorrect="off" spellcheck="false"/>
 
-<label>지역 (기본값: koreacentral)</label>
+<label>지역</label>
 <input type="text" id="region" value="koreacentral"/>
 
-<button onclick="save()">저장</button>
+<div class="section"></div>
 
+<label>음성 선택</label>
+<div class="voice-grid" id="voiceGrid"></div>
+
+<button class="save-btn" onclick="save()">저장</button>
 <div id="result" class="result"></div>
 
+<div class="section"></div>
 <div class="current" id="current"></div>
 
 <script>
-function showCurrent() {
-  const key = localStorage.getItem('ec_azure_key');
-  const region = localStorage.getItem('ec_azure_region');
-  const el = document.getElementById('current');
-  if (key) {
-    el.innerHTML = `현재 저장된 키: <b>${key.slice(0,8)}…${key.slice(-4)}</b><br>지역: <b>${region || 'koreacentral'}</b><br><button class="test-btn" onclick="testSpeak()">🔊 테스트 듣기</button>`;
-  } else {
-    el.innerHTML = '저장된 키 없음';
-  }
+const VOICES = [
+  { name: 'en-US-JennyNeural',   label: 'Jenny',   desc: '여성 · 친근하고 자연스러움 (기본)' },
+  { name: 'en-US-AriaNeural',    label: 'Aria',    desc: '여성 · 표현력 풍부, 차분함' },
+  { name: 'en-US-NancyNeural',   label: 'Nancy',   desc: '여성 · 명확하고 또렷한 발음' },
+  { name: 'en-US-SaraNeural',    label: 'Sara',    desc: '여성 · 밝고 활기찬 톤' },
+  { name: 'en-US-GuyNeural',     label: 'Guy',     desc: '남성 · 깊고 안정적인 목소리' },
+  { name: 'en-US-DavisNeural',   label: 'Davis',   desc: '남성 · 캐주얼하고 편안함' },
+  { name: 'en-US-TonyNeural',    label: 'Tony',    desc: '남성 · 친절하고 자신감 있음' },
+];
+
+const SAMPLE = 'My flight has a layover in Tokyo before arriving in Hawaii.';
+
+let selectedVoice = localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural';
+
+function buildVoiceGrid() {
+  const grid = document.getElementById('voiceGrid');
+  grid.innerHTML = '';
+  VOICES.forEach(v => {
+    const card = document.createElement('div');
+    card.className = 'voice-card' + (selectedVoice === v.name ? ' selected' : '');
+    card.dataset.voice = v.name;
+    card.innerHTML = `
+      <div style="flex:1" onclick="selectVoice('${v.name}')">
+        <div class="name">${v.label}</div>
+        <div class="desc">${v.desc}</div>
+      </div>
+      <div class="play-btn" id="btn-${v.name}" onclick="previewVoice(event,'${v.name}')">
+        <svg width="14" height="14" viewBox="0 0 24 24"><path d="M7 5l13 7-13 7V5z" fill="#E8B26A"/></svg>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
 }
 
-function save() {
-  const key = document.getElementById('key').value.trim();
-  const region = document.getElementById('region').value.trim() || 'koreacentral';
-  const result = document.getElementById('result');
-  if (!key) {
-    result.textContent = '키를 입력해주세요.';
-    result.className = 'result err';
-    result.style.display = 'block';
-    return;
-  }
-  localStorage.setItem('ec_azure_key', key);
-  localStorage.setItem('ec_azure_region', region);
-  result.textContent = '저장됐어요! 앱에서 듣기 버튼을 눌러보세요.';
-  result.className = 'result ok';
-  result.style.display = 'block';
-  document.getElementById('key').value = '';
-  showCurrent();
+function selectVoice(name) {
+  selectedVoice = name;
+  document.querySelectorAll('.voice-card').forEach(c => {
+    c.classList.toggle('selected', c.dataset.voice === name);
+  });
 }
 
-async function testSpeak() {
-  const key = localStorage.getItem('ec_azure_key');
-  const region = localStorage.getItem('ec_azure_region') || 'koreacentral';
+async function previewVoice(e, voiceName) {
+  e.stopPropagation();
+  const key = document.getElementById('key').value.trim() || localStorage.getItem('ec_azure_key');
+  const region = document.getElementById('region').value.trim() || localStorage.getItem('ec_azure_region') || 'koreacentral';
+  if (!key) { alert('키를 먼저 입력하거나 저장해주세요.'); return; }
+  const btn = document.getElementById('btn-' + voiceName);
+  btn.classList.add('loading');
+  await azureSpeak(SAMPLE, voiceName, key, region);
+  btn.classList.remove('loading');
+}
+
+async function azureSpeak(text, voice, key, region) {
   const xmlEsc = s => s.replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]));
-  const text = 'My flight has a layover in Tokyo before arriving in Hawaii.';
   try {
-    const ssml = `<speak version='1.0' xml:lang='en-US'><voice name='en-US-JennyNeural'>${xmlEsc(text)}</voice></speak>`;
+    const ssml = `<speak version='1.0' xml:lang='en-US'><voice name='${voice}'>${xmlEsc(text)}</voice></speak>`;
     const res = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
       method: 'POST',
       headers: {
@@ -104,10 +142,44 @@ async function testSpeak() {
     audio.onended = () => URL.revokeObjectURL(url);
     audio.play();
   } catch(e) {
-    alert('테스트 실패: ' + e.message);
+    alert('재생 실패: ' + e.message);
   }
 }
 
+function save() {
+  const key = document.getElementById('key').value.trim();
+  const region = document.getElementById('region').value.trim() || 'koreacentral';
+  const result = document.getElementById('result');
+  if (!key && !localStorage.getItem('ec_azure_key')) {
+    result.textContent = '키를 입력해주세요.';
+    result.className = 'result err';
+    result.style.display = 'block';
+    return;
+  }
+  if (key) localStorage.setItem('ec_azure_key', key);
+  localStorage.setItem('ec_azure_region', region);
+  localStorage.setItem('ec_azure_voice', selectedVoice);
+  result.textContent = `저장됐어요! 음성: ${VOICES.find(v=>v.name===selectedVoice)?.label}`;
+  result.className = 'result ok';
+  result.style.display = 'block';
+  document.getElementById('key').value = '';
+  showCurrent();
+}
+
+function showCurrent() {
+  const key = localStorage.getItem('ec_azure_key');
+  const region = localStorage.getItem('ec_azure_region');
+  const voice = localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural';
+  const vLabel = VOICES.find(v => v.name === voice)?.label || voice;
+  const el = document.getElementById('current');
+  if (key) {
+    el.innerHTML = `키: <b>${key.slice(0,8)}…${key.slice(-4)}</b><br>지역: <b>${region||'koreacentral'}</b><br>음성: <b>${vLabel}</b>`;
+  } else {
+    el.innerHTML = '저장된 키 없음';
+  }
+}
+
+buildVoiceGrid();
 showCurrent();
 </script>
 </body>

@@ -1,9 +1,12 @@
 // EngCat — Word Card
 // Full-bleed hero. No scroll — swipe left/right to navigate cards.
 
-// Azure key stored in localStorage — set via browser console:
-// localStorage.setItem('ec_azure_key','YOUR_KEY'); localStorage.setItem('ec_azure_region','koreacentral');
-const EC_AZURE = { key: localStorage.getItem('ec_azure_key') || '', region: localStorage.getItem('ec_azure_region') || 'koreacentral' };
+// Azure key stored in localStorage — set via arschooling.github.io/EngCat/setup.html
+const EC_AZURE = {
+  key:    localStorage.getItem('ec_azure_key')   || '',
+  region: localStorage.getItem('ec_azure_region') || 'koreacentral',
+  voice:  localStorage.getItem('ec_azure_voice')  || 'en-US-JennyNeural',
+};
 
 function ECScreenWordCard() {
   const T = ECTokens;
@@ -75,7 +78,7 @@ function ECScreenWordCard() {
     const xmlEsc = s => s.replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]));
     // Azure Neural TTS
     try {
-      const ssml = `<speak version='1.0' xml:lang='en-US'><voice name='en-US-JennyNeural'>${xmlEsc(plain)}</voice></speak>`;
+      const ssml = `<speak version='1.0' xml:lang='en-US'><voice name='${EC_AZURE.voice}'>${xmlEsc(plain)}</voice></speak>`;
       const res = await fetch(`https://${EC_AZURE.region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
         method: 'POST',
         headers: {
