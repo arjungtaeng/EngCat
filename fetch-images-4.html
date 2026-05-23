@@ -126,10 +126,10 @@ async function fetchImage(keyword, orientation = 'portrait') {
   const photo = data.photos?.[0];
   if (!photo) return null;
   // crop=entropy: 사진에서 가장 핵심적인 부분을 자동으로 찾아서 크롭
-  // 단어 카드: h=1760 (화면 비율 2.2:1) → objectPosition bottom 활성화
+  // 단어 카드: h=2400 (비율 3:1) → 폰(2.17:1)보다 길어서 세로 오버플로우 → objectPosition top 활성화
   const base = photo.src.original.split('?')[0];
   return orientation === 'portrait'
-    ? `${base}?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&h=1760&w=800`
+    ? `${base}?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&h=2400&w=800`
     : `${base}?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&h=627&w=1200`;
 }
 
