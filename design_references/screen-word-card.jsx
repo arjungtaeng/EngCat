@@ -134,7 +134,7 @@ function ECScreenWordCard() {
         style={{
           position: 'absolute',
           top: '44%',
-          bottom: 24,
+          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 82px)',
           left: 0,
           right: 68,
           overflowY: 'auto',
@@ -202,7 +202,7 @@ function ECScreenWordCard() {
 
       {/* ── Progress strip ── */}
       <div style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0, height: 24, zIndex: 12,
+        position: 'absolute', bottom: 'calc(env(safe-area-inset-bottom, 0px) + 58px)', left: 0, right: 0, height: 24, zIndex: 12,
         display: 'flex', gap: 3, padding: '0 16px', alignItems: 'center',
       }}>
         {words.map((w, i) => (

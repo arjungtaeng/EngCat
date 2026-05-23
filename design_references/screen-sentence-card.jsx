@@ -77,7 +77,7 @@ function ECScreenSentenceCard() {
           ref={scrollRef}
           key={animKey}
           className="ec-fade-up"
-          style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}
+          style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 160 }}
         >
           {/* Situation tag */}
           <div style={{ padding: '20px 22px 0' }}>
@@ -192,7 +192,7 @@ function ECScreenSentenceCard() {
 
         {/* Fixed bottom controls */}
         <div style={{
-          position: 'absolute', bottom: 28, left: 0, right: 0, padding: '0 18px',
+          position: 'absolute', bottom: 'calc(env(safe-area-inset-bottom, 0px) + 72px)', left: 0, right: 0, padding: '0 18px',
           display: 'flex', gap: 10, zIndex: 10,
         }}>
           <div style={{
