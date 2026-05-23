@@ -165,7 +165,7 @@ function ECScreenHome() {
               color: T.accent,
             }}>{ECIcon.speaker(T.accent, 18)}</div>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontFamily: T.thin, fontWeight: 200, fontSize: 16, color: T.text, lineHeight: 1.25 }}>{s.en}</div>
+              <div style={{ fontFamily: T.display, fontWeight: 300, fontSize: 16, color: T.text, lineHeight: 1.25 }}>{s.en}</div>
               <div style={{ fontSize: 12.5, color: T.textDim, marginTop: 2 }}>{s.ko}</div>
             </div>
           </div>
