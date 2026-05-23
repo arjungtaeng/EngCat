@@ -99,7 +99,10 @@ function ECScreenSentenceCard() {
               background: T.bg2, border: `1px solid ${T.hair}`,
               position: 'relative', aspectRatio: '4 / 3',
             }}>
-              <ECPlaceholder height="100%" tint={currentBeat.tint} radius={0} label={currentBeat.label}/>
+              {s.img
+                ? <img src={s.img} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={s.en} />
+                : <ECPlaceholder height="100%" tint={currentBeat.tint} radius={0} label={currentBeat.label}/>
+              }
 
               <div style={{
                 position: 'absolute', top: 14, left: 14, right: 14,
