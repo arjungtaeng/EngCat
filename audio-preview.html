@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EngCat — Audio Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400&display=swap"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0D0D11; color: #F4F1EB;
+    font-family: system-ui, sans-serif;
+    padding: 32px 20px 60px;
+    min-height: 100vh;
+  }
+  h1 { font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 22px; color: #E8B26A; margin-bottom: 6px; }
+  .sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(244,241,235,0.4); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 36px; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(244,241,235,0.4);
+    letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; margin-top: 36px;
+  }
+  .card {
+    background: #1A1A22; border: 1px solid rgba(244,241,235,0.08);
+    border-radius: 16px; padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .tts-name { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #E8B26A; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .tts-desc { font-size: 12px; color: rgba(244,241,235,0.45); margin-bottom: 12px; line-height: 1.5; }
+  .example-text {
+    font-family: 'Outfit', sans-serif; font-weight: 300;
+    font-size: 15px; color: #F4F1EB; line-height: 1.5;
+  }
+  .play-btn {
+    flex-shrink: 0;
+    width: 44px; height: 44px; border-radius: 999px;
+    background: rgba(232,178,106,0.12); border: 1px solid rgba(232,178,106,0.3);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background 0.15s;
+    margin-top: 2px;
+  }
+  .play-btn:hover { background: rgba(232,178,106,0.22); }
+  .play-btn.playing { background: #E8B26A; }
+  .play-btn svg { pointer-events: none; }
+  .tag {
+    display: inline-block; margin-top: 10px;
+    padding: 2px 8px; border-radius: 4px; font-size: 10px;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px;
+  }
+  .tag-free { background: rgba(100,200,100,0.12); color: #6dc87a; border: 1px solid rgba(100,200,100,0.2); }
+  .tag-unofficial { background: rgba(232,178,106,0.12); color: #E8B26A; border: 1px solid rgba(232,178,106,0.2); }
+  .tag-best { background: rgba(100,150,255,0.12); color: #88aaff; border: 1px solid rgba(100,150,255,0.2); }
+  .status { font-size: 11px; color: rgba(244,241,235,0.35); margin-top: 8px; min-height: 16px; font-family: 'JetBrains Mono', monospace; }
+  .divider { height: 1px; background: rgba(244,241,235,0.07); margin: 8px 0; }
+  .word-row { display: flex; align-items: center; gap: 14px; padding: 10px 0; }
+  .word-row:not(:last-child) { border-bottom: 1px solid rgba(244,241,235,0.06); }
+  .word-en { font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 20px; color: #F4F1EB; flex: 1; }
+  .word-ko { font-size: 13px; color: #E8B26A; }
+</style>
+</head>
+<body>
+
+<h1>Audio Preview</h1>
+<div class="sub">TTS 음질 비교 — 같은 예문으로</div>
+
+<!-- SENTENCES -->
+<div class="section-label">문장 비교</div>
+
+<div id="sentence-cards"></div>
+
+<!-- WORDS -->
+<div class="section-label">단어 발음 비교</div>
+<div class="card">
+  <div id="word-rows"></div>
+</div>
+
+<script>
+const SENTENCES = [
+  "My flight has a layover in Tokyo before arriving in Hawaii.",
+  "Could you recommend a good restaurant near the hotel?",
+  "I'd like to check in early if that's possible.",
+];
+
+const WORDS = [
+  { en: 'layover',     ko: '경유' },
+  { en: 'itinerary',  ko: '여행 일정' },
+  { en: 'reservation', ko: '예약' },
+  { en: 'departure',  ko: '출발' },
+];
+
+// ── TTS engines ──────────────────────────────────────────
+function speakWebSpeech(text, btn, statusEl) {
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'en-US';
+  utt.rate = 0.9;
+  setPlaying(btn, statusEl, '재생 중...');
+  utt.onend = () => setIdle(btn, statusEl, '완료');
+  utt.onerror = () => setIdle(btn, statusEl, '오류');
+  window.speechSynthesis.speak(utt);
+}
+
+function speakWebSpeechBest(text, btn, statusEl) {
+  window.speechSynthesis.cancel();
+  const voices = window.speechSynthesis.getVoices();
+  const preferred = ['Samantha', 'Google US English', 'Microsoft Aria', 'Karen', 'Moira'];
+  let voice = null;
+  for (const name of preferred) {
+    voice = voices.find(v => v.name.includes(name));
+    if (voice) break;
+  }
+  if (!voice) voice = voices.find(v => v.lang === 'en-US' && !v.localService === false);
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'en-US';
+  utt.rate = 0.9;
+  if (voice) { utt.voice = voice; statusEl.textContent = `음성: ${voice.name}`; }
+  setPlaying(btn, statusEl, voice ? `${voice.name}` : '기본 음성');
+  utt.onend = () => setIdle(btn, statusEl, voice ? `완료 · ${voice.name}` : '완료');
+  utt.onerror = () => setIdle(btn, statusEl, '오류');
+  window.speechSynthesis.speak(utt);
+}
+
+function speakGoogleTranslate(text, btn, statusEl) {
+  const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=en-US&client=tw-ob`;
+  const audio = new Audio(url);
+  setPlaying(btn, statusEl, '로딩 중...');
+  audio.oncanplay = () => { setPlaying(btn, statusEl, '재생 중...'); audio.play(); };
+  audio.onended = () => setIdle(btn, statusEl, '완료');
+  audio.onerror = () => setIdle(btn, statusEl, 'CORS 차단됨 — 이 브라우저에서 불가');
+  audio.load();
+}
+
+function speakDictionaryAPI(word, btn, statusEl) {
+  setPlaying(btn, statusEl, '로딩 중...');
+  fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`)
+    .then(r => r.json())
+    .then(data => {
+      const audioUrl = data[0]?.phonetics?.find(p => p.audio)?.audio;
+      if (!audioUrl) { setIdle(btn, statusEl, '발음 파일 없음'); return; }
+      const audio = new Audio(audioUrl);
+      audio.onended = () => setIdle(btn, statusEl, '완료');
+      audio.onerror = () => setIdle(btn, statusEl, '재생 오류');
+      audio.play();
+      setPlaying(btn, statusEl, '재생 중...');
+    })
+    .catch(() => setIdle(btn, statusEl, '네트워크 오류'));
+}
+
+// ── UI helpers ───────────────────────────────────────────
+function setPlaying(btn, statusEl, msg) {
+  btn.classList.add('playing');
+  if (statusEl) statusEl.textContent = msg;
+}
+function setIdle(btn, statusEl, msg) {
+  btn.classList.remove('playing');
+  if (statusEl) statusEl.textContent = msg;
+}
+
+function iconPlay(color = '#E8B26A') {
+  return `<svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 5l13 7-13 7V5z" fill="${color}"/></svg>`;
+}
+function iconStop(color = '#0D0D11') {
+  return `<svg width="16" height="16" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2" fill="${color}"/></svg>`;
+}
+
+// ── Render sentence cards ─────────────────────────────────
+const ENGINES = [
+  {
+    name: 'Web Speech API — 기본',
+    desc: '브라우저 내장. API 키 없음. 기기마다 음질 다름.',
+    tags: ['free'],
+    fn: speakWebSpeech,
+  },
+  {
+    name: 'Web Speech API — 최적 음성 선택',
+    desc: '사용 가능한 음성 중 Samantha / Google US English 우선 선택.',
+    tags: ['free'],
+    fn: speakWebSpeechBest,
+  },
+  {
+    name: 'Google Translate TTS (비공식)',
+    desc: '구글 번역 내부 엔진 사용. API 키 없음. CORS로 차단될 수 있음.',
+    tags: ['unofficial'],
+    fn: speakGoogleTranslate,
+  },
+];
+
+const sentenceContainer = document.getElementById('sentence-cards');
+
+SENTENCES.forEach((sentence, si) => {
+  const sectionDiv = document.createElement('div');
+  sectionDiv.style.cssText = 'margin-bottom: 28px;';
+
+  const label = document.createElement('div');
+  label.style.cssText = 'font-size:12px; color:rgba(244,241,235,0.4); margin-bottom:10px; font-family:\'JetBrains Mono\',monospace;';
+  label.textContent = `예문 ${si + 1}`;
+  sectionDiv.appendChild(label);
+
+  const sentenceText = document.createElement('div');
+  sentenceText.className = 'example-text';
+  sentenceText.style.cssText = 'margin-bottom:14px; padding:14px 16px; background:rgba(255,255,255,0.04); border-radius:10px; border:1px solid rgba(244,241,235,0.08);';
+  sentenceText.textContent = `"${sentence}"`;
+  sectionDiv.appendChild(sentenceText);
+
+  ENGINES.forEach(engine => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.marginBottom = '8px';
+
+    const btn = document.createElement('div');
+    btn.className = 'play-btn';
+    btn.innerHTML = iconPlay();
+
+    const statusEl = document.createElement('div');
+    statusEl.className = 'status';
+
+    const tagsHtml = engine.tags.map(t => `<span class="tag tag-${t}">${t === 'free' ? '무료' : t === 'unofficial' ? '비공식' : t}</span>`).join(' ');
+
+    card.innerHTML = `
+      <div class="card-top">
+        <div style="flex:1">
+          <div class="tts-name">${engine.name}</div>
+          <div class="tts-desc">${engine.desc}</div>
+          ${tagsHtml}
+        </div>
+      </div>
+    `;
+    card.querySelector('.card-top').appendChild(btn);
+    card.appendChild(statusEl);
+
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.play-btn').forEach(b => b.classList.remove('playing'));
+      window.speechSynthesis?.cancel();
+      engine.fn(sentence, btn, statusEl);
+    });
+
+    sectionDiv.appendChild(card);
+  });
+
+  sentenceContainer.appendChild(sectionDiv);
+});
+
+// ── Render word rows ──────────────────────────────────────
+const wordContainer = document.getElementById('word-rows');
+
+const wordEngines = [
+  { name: 'Web Speech', fn: (w, b, s) => speakWebSpeech(w, b, s) },
+  { name: 'Dictionary API', fn: speakDictionaryAPI },
+];
+
+// Header
+const headerRow = document.createElement('div');
+headerRow.style.cssText = 'display:flex; align-items:center; gap:14px; padding-bottom:10px; border-bottom:1px solid rgba(244,241,235,0.08); margin-bottom:4px;';
+headerRow.innerHTML = `<div style="flex:1; font-family:\'JetBrains Mono\',monospace; font-size:10px; color:rgba(244,241,235,0.35); letter-spacing:1px; text-transform:uppercase;">단어</div>` +
+  wordEngines.map(e => `<div style="width:80px; text-align:center; font-family:\'JetBrains Mono\',monospace; font-size:10px; color:rgba(244,241,235,0.35); letter-spacing:0.5px;">${e.name}</div>`).join('');
+wordContainer.appendChild(headerRow);
+
+WORDS.forEach(word => {
+  const row = document.createElement('div');
+  row.className = 'word-row';
+
+  const nameDiv = document.createElement('div');
+  nameDiv.style.flex = '1';
+  nameDiv.innerHTML = `<div class="word-en">${word.en}</div><div class="word-ko">${word.ko}</div>`;
+  row.appendChild(nameDiv);
+
+  wordEngines.forEach(engine => {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'width:80px; display:flex; justify-content:center;';
+
+    const btn = document.createElement('div');
+    btn.className = 'play-btn';
+    btn.style.cssText = 'width:40px; height:40px;';
+    btn.innerHTML = iconPlay();
+
+    const statusEl = document.createElement('div');
+
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.play-btn').forEach(b => b.classList.remove('playing'));
+      window.speechSynthesis?.cancel();
+      engine.fn(word.en, btn, statusEl);
+    });
+
+    wrap.appendChild(btn);
+    row.appendChild(wrap);
+  });
+
+  wordContainer.appendChild(row);
+});
+
+// Load voices async (Chrome requires this)
+if (window.speechSynthesis) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+}
+</script>
+</body>
+</html>
