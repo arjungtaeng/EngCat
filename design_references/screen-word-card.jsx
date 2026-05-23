@@ -140,7 +140,7 @@ function ECScreenWordCard() {
           overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
           zIndex: 5,
-          padding: '44% 22px 20px',
+          padding: '44dvh 22px 20px',
         }}
       >
         {/* POS chip + IPA */}
