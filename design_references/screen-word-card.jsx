@@ -10,7 +10,8 @@ function ECScreenWordCard() {
   const [animKey, setAnimKey] = React.useState(0);
   const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
   const [swipeX, setSwipeX] = React.useState(0);
-  const [slideOut, setSlideOut] = React.useState(0); // % to slide on exit
+  const [slideOut, setSlideOut] = React.useState(0);
+  const [showExamples, setShowExamples] = React.useState(false);
   const touchStartX = React.useRef(null);
 
   const word = words[idx];
@@ -38,7 +39,7 @@ function ECScreenWordCard() {
   };
 
   const handleTouchStart = (e) => {
-    if (slideOut !== 0) return;
+    if (slideOut !== 0 || showExamples) return;
     touchStartX.current = e.touches[0].clientX;
   };
 
@@ -63,6 +64,16 @@ function ECScreenWordCard() {
     setBookmarked(next);
   };
 
+  const stripMarkers = (text) => text.replace(/\{([^}]+)\}/g, '$1');
+
+  const speak = (text) => {
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(stripMarkers(text));
+    utt.lang = 'en-US';
+    utt.rate = 0.85;
+    window.speechSynthesis.speak(utt);
+  };
+
   function renderEx(ex) {
     const parts = ex.split(/\{([^}]+)\}/);
     return parts.map((part, i) =>
@@ -70,7 +81,6 @@ function ECScreenWordCard() {
     );
   }
 
-  // Content transform: follows finger while dragging, exits on card change
   const contentTransform = slideOut !== 0
     ? `translateX(${slideOut}%)`
     : `translateX(${swipeX}px)`;
@@ -82,6 +92,9 @@ function ECScreenWordCard() {
   const btnLabel = swipingPrev ? '이전 카드' : isLast ? '문장 학습하기' : '다음 카드';
   const btnBg = swipingPrev ? T.bg3 : T.accent;
   const btnColor = swipingPrev ? T.text : T.bg0;
+
+  // Examples array — extendable when DB adds more columns
+  const examples = [word.ex].filter(Boolean);
 
   return (
     <div
@@ -103,17 +116,10 @@ function ECScreenWordCard() {
         }}/>
       </div>
 
-      {/* ── Top chrome (fixed, doesn't swipe) ── */}
+      {/* ── Top chrome ── */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
         <ECStatusBar/>
-        <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div onClick={() => window.ECNav?.go('home')} style={{
-            width: 36, height: 36, borderRadius: 12,
-            background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(20px)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            border: '1px solid rgba(255,255,255,0.12)', cursor: 'pointer',
-          }}>{ECIcon.close('rgba(255,255,255,0.9)', 18)}</div>
-
+        <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{
             padding: '7px 14px', borderRadius: 999,
             background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(20px)',
@@ -121,34 +127,26 @@ function ECScreenWordCard() {
             fontFamily: T.mono, fontSize: 10.5, color: 'rgba(255,255,255,0.85)',
             letterSpacing: 1, textTransform: 'uppercase',
           }}>{idx + 1} / {words.length} · 단어</div>
-
-          <div style={{
-            width: 36, height: 36, borderRadius: 12,
-            background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(20px)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            border: '1px solid rgba(255,255,255,0.12)',
-          }}>{ECIcon.more('rgba(255,255,255,0.9)', 18)}</div>
         </div>
       </div>
 
-      {/* ── Right action rail (fixed, doesn't swipe) ── */}
+      {/* ── Right action rail ── */}
       <div style={{
         position: 'absolute', right: 14, top: '22%', zIndex: 10,
         display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'center',
       }}>
         {[
-          { icon: ECIcon.speaker('rgba(255,255,255,0.9)', 22), label: '듣기',  onClick: null },
-          { icon: ECIcon.mic('rgba(255,255,255,0.9)', 22),     label: '말하기', onClick: null },
+          { icon: ECIcon.speaker('rgba(255,255,255,0.9)', 22), label: '듣기',  onClick: () => speak(word.en) },
           { icon: ECIcon.heart(isBookmarked ? T.accent : 'rgba(255,255,255,0.9)', 22, isBookmarked), label: '저장', onClick: toggleBookmark },
-          { icon: ECIcon.share('rgba(255,255,255,0.9)', 20),   label: '공유',  onClick: null },
+          { icon: ECIcon.notes('rgba(255,255,255,0.9)', 20),   label: '예문',  onClick: () => setShowExamples(true) },
         ].map((a, i) => (
           <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-            <div onClick={a.onClick || undefined} style={{
+            <div onClick={a.onClick} style={{
               width: 48, height: 48, borderRadius: 999,
               background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(20px)',
               border: '1px solid rgba(255,255,255,0.14)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: a.onClick ? 'pointer' : 'default',
+              cursor: 'pointer',
             }}>{a.icon}</div>
             <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.75)', fontWeight: 500 }}>{a.label}</div>
           </div>
@@ -247,6 +245,89 @@ function ECScreenWordCard() {
             transition: 'all 0.2s ease',
           }}/>
         ))}
+      </div>
+
+      {/* ── 예문 더 보기 바텀 시트 ── */}
+      {/* Overlay */}
+      <div
+        onTouchStart={(e) => e.stopPropagation()}
+        onClick={() => setShowExamples(false)}
+        style={{
+          position: 'absolute', inset: 0, zIndex: 30,
+          background: 'rgba(0,0,0,0.55)',
+          opacity: showExamples ? 1 : 0,
+          pointerEvents: showExamples ? 'auto' : 'none',
+          transition: 'opacity 0.25s',
+        }}
+      />
+      {/* Sheet */}
+      <div
+        onTouchStart={(e) => e.stopPropagation()}
+        style={{
+          position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 31,
+          background: T.bg1,
+          borderRadius: '20px 20px 0 0',
+          paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)',
+          transform: showExamples ? 'translateY(0)' : 'translateY(100%)',
+          transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
+        }}
+      >
+        {/* Handle */}
+        <div style={{ display: 'flex', justifyContent: 'center', padding: '12px 0 4px' }}>
+          <div style={{ width: 36, height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.18)' }}/>
+        </div>
+
+        {/* Header */}
+        <div style={{
+          padding: '8px 20px 16px',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          <div>
+            <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 22, color: T.text }}>{word.en}</div>
+            <div style={{ fontSize: 13, color: T.accent, marginTop: 2 }}>{word.ko}</div>
+          </div>
+          <div
+            onClick={() => speak(word.en)}
+            style={{
+              width: 40, height: 40, borderRadius: 999,
+              background: T.bg2, border: `1px solid ${T.hair}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer',
+            }}
+          >{ECIcon.speaker(T.accent, 20)}</div>
+        </div>
+
+        <div style={{ height: 1, background: T.hair, margin: '0 20px' }}/>
+
+        {/* Example list */}
+        <div style={{ padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{
+            fontFamily: T.mono, fontSize: 9.5, color: T.textMute,
+            letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 2,
+          }}>예문</div>
+          {examples.map((ex, i) => (
+            <div key={i} style={{
+              padding: '14px 16px', borderRadius: 14,
+              background: T.bg2, border: `1px solid ${T.hair}`,
+              display: 'flex', alignItems: 'flex-start', gap: 12,
+            }}>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontFamily: T.thin, fontWeight: 200, fontSize: 15, color: T.text, lineHeight: 1.5 }}>
+                  "{renderEx(ex)}"
+                </div>
+              </div>
+              <div
+                onClick={() => speak(ex)}
+                style={{
+                  width: 36, height: 36, borderRadius: 999, flexShrink: 0,
+                  background: T.bg3, border: `1px solid ${T.hair}`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  cursor: 'pointer', marginTop: 2,
+                }}
+              >{ECIcon.speaker(T.accent, 16)}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
     </div>
