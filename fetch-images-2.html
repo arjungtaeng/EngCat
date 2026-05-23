@@ -125,10 +125,11 @@ async function fetchImage(keyword, orientation = 'portrait') {
   const data = await res.json();
   const photo = data.photos?.[0];
   if (!photo) return null;
-  // src.portrait = 실제 세로 사진 (800×1200), src.landscape = 실제 가로 사진 (1200×627)
+  // crop=entropy: 사진에서 가장 핵심적인 부분을 자동으로 찾아서 크롭
+  const base = photo.src.original.split('?')[0];
   return orientation === 'portrait'
-    ? (photo.src.portrait || photo.src.large2x)
-    : (photo.src.landscape || photo.src.large2x);
+    ? `${base}?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&h=1200&w=800`
+    : `${base}?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&h=627&w=1200`;
 }
 
 async function start(mode = 'all') {
