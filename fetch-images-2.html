@@ -125,11 +125,11 @@ async function fetchImage(keyword, orientation = 'portrait') {
   const data = await res.json();
   const photo = data.photos?.[0];
   if (!photo) return null;
-  // 원본 비율 유지 — 강제 크롭 없이 너비만 고정
+  // crop=entropy: 사진에서 가장 핵심적인 부분을 자동으로 찾아서 크롭
   const base = photo.src.original.split('?')[0];
   return orientation === 'portrait'
-    ? `${base}?auto=compress&cs=tinysrgb&w=800`
-    : `${base}?auto=compress&cs=tinysrgb&w=1200`;
+    ? `${base}?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&h=1200&w=800`
+    : `${base}?auto=compress&cs=tinysrgb&fit=crop&crop=entropy&h=627&w=1200`;
 }
 
 async function start(mode = 'all') {
