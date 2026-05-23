@@ -59,10 +59,11 @@ function ECScreenProfile() {
     <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
       {options.map(o => (
         <div key={o.value} onClick={() => onChange(o.value)} style={{
-          padding: '5px 10px', borderRadius: 8, fontSize: 12, fontWeight: 500,
-          background: value === o.value ? T.accent : T.bg3,
-          color: value === o.value ? T.bg0 : T.textDim,
-          cursor: 'pointer', transition: 'background 0.15s, color 0.15s',
+          padding: '5px 10px', borderRadius: 8, fontSize: 12, fontWeight: 600,
+          background: value === o.value ? T.accent : 'transparent',
+          color: value === o.value ? '#fff' : T.textMute,
+          border: `1px solid ${value === o.value ? T.accent : T.hairStr}`,
+          cursor: 'pointer', transition: 'all 0.15s',
         }}>{o.label}</div>
       ))}
     </div>

@@ -126,14 +126,24 @@ function ECScreenWordCard() {
 
   const swipingPrev = swipeX > 30 && !isFirst;
   const btnLabel = swipingPrev ? '이전 카드' : isLast ? '문장 학습하기' : '다음 카드';
+  const isDark = T.text === '#F8F5EF';
   const btnBg = swipingPrev ? T.bg3 : T.accent;
-  const btnColor = swipingPrev ? T.text : T.bg0;
+  const btnColor = swipingPrev ? T.text : '#fff';
+
+  const overlayGrad = isDark
+    ? 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 22%, transparent 40%, rgba(0,0,0,0.88) 58%, rgba(0,0,0,0.98) 72%, #000 85%)'
+    : `linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 20%, transparent 32%, ${T.bg1}D0 52%, ${T.bg1}F5 66%, ${T.bg1} 78%)`;
+  const glassC   = isDark ? 'rgba(255,255,255,' : 'rgba(0,0,0,';
+  const railIcon = isDark ? 'rgba(255,255,255,0.9)' : T.text;
+  const railBg   = isDark ? 'rgba(255,255,255,0.10)' : T.bg2;
+  const railBd   = isDark ? 'rgba(255,255,255,0.14)' : T.hair;
+  const railLbl  = isDark ? 'rgba(255,255,255,0.75)' : T.textDim;
 
   const additionalExamples = word.examples || [];
 
   return (
     <div
-      style={{ flex: 1, minHeight: 0, background: '#000', position: 'relative', overflow: 'hidden' }}
+      style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -145,10 +155,7 @@ function ECScreenWordCard() {
           ? <img src={word.img} style={{ width: '100%', height: 'auto', display: 'block' }} alt={word.en} />
           : <ECPlaceholder height="100%" tint={word.tint} radius={0} label={`hero · ${word.en}`}/>
         }
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 22%, transparent 40%, rgba(0,0,0,0.88) 58%, rgba(0,0,0,0.98) 72%, #000 85%)',
-        }}/>
+        <div style={{ position: 'absolute', inset: 0, background: overlayGrad }}/>
       </div>
 
       {/* ── Top chrome ── */}
@@ -157,9 +164,9 @@ function ECScreenWordCard() {
         <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{
             padding: '7px 14px', borderRadius: 999,
-            background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255,255,255,0.12)',
-            fontFamily: T.mono, fontSize: 10.5, color: 'rgba(255,255,255,0.85)',
+            background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`, backdropFilter: 'blur(20px)',
+            border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
+            fontFamily: T.mono, fontSize: 10.5, color: T.textDim,
             letterSpacing: 1, textTransform: 'uppercase',
           }}>{idx + 1} / {words.length} · 단어</div>
         </div>
@@ -171,19 +178,19 @@ function ECScreenWordCard() {
         display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'center',
       }}>
         {[
-          { icon: ECIcon.speaker('rgba(255,255,255,0.9)', 22), label: '듣기', onClick: speakWordAndExample },
-          { icon: ECIcon.heart(isBookmarked ? T.accent : 'rgba(255,255,255,0.9)', 22, isBookmarked), label: '저장', onClick: toggleBookmark },
-          { icon: ECIcon.notes('rgba(255,255,255,0.9)', 20), label: '예문', onClick: () => setShowExamples(true) },
+          { icon: ECIcon.speaker(railIcon, 22), label: '듣기', onClick: speakWordAndExample },
+          { icon: ECIcon.heart(isBookmarked ? T.accent : railIcon, 22, isBookmarked), label: '저장', onClick: toggleBookmark },
+          { icon: ECIcon.notes(railIcon, 20), label: '예문', onClick: () => setShowExamples(true) },
         ].map((a, i) => (
           <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
             <div onClick={a.onClick} style={{
               width: 48, height: 48, borderRadius: 999,
-              background: 'rgba(255,255,255,0.10)', backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255,255,255,0.14)',
+              background: railBg, backdropFilter: 'blur(20px)',
+              border: `1px solid ${railBd}`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer',
             }}>{a.icon}</div>
-            <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.75)', fontWeight: 500 }}>{a.label}</div>
+            <div style={{ fontSize: 10, color: railLbl, fontWeight: 500 }}>{a.label}</div>
           </div>
         ))}
       </div>
@@ -211,11 +218,11 @@ function ECScreenWordCard() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
           <div style={{
             padding: '3px 9px', borderRadius: 6,
-            background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(20px)',
-            fontFamily: T.mono, fontSize: 10, color: 'rgba(255,255,255,0.9)',
+            background: isDark ? 'rgba(255,255,255,0.12)' : T.bg3,
+            fontFamily: T.mono, fontSize: 10, color: T.textDim,
             letterSpacing: 0.5, textTransform: 'uppercase',
           }}>{word.pos}</div>
-          <div style={{ fontFamily: T.mono, fontSize: 11, color: 'rgba(255,255,255,0.55)' }}>{word.ipa}</div>
+          <div style={{ fontFamily: T.mono, fontSize: 11, color: T.textMute }}>{word.ipa}</div>
         </div>
 
         {/* Word */}
@@ -230,19 +237,19 @@ function ECScreenWordCard() {
         </div>
 
         {/* Definition */}
-        <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.78)', lineHeight: 1.5, marginBottom: 10 }}>
+        <div style={{ fontSize: 13, color: T.textDim, lineHeight: 1.5, marginBottom: 10 }}>
           {word.def}
         </div>
 
         {/* Example sentence */}
         <div style={{
           padding: '10px 14px', borderRadius: 12,
-          background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255,255,255,0.10)',
+          background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
+          border: `1px solid ${T.hair}`,
           marginBottom: 12,
         }}>
           <div style={{
-            fontSize: 9.5, fontFamily: T.mono, color: 'rgba(255,255,255,0.5)',
+            fontSize: 9.5, fontFamily: T.mono, color: T.textMute,
             letterSpacing: 1, marginBottom: 4, textTransform: 'uppercase',
           }}>예문</div>
           <div style={{ fontFamily: T.thin, fontWeight: 200, fontSize: 14.5, color: T.text, lineHeight: 1.35 }}>
@@ -276,7 +283,7 @@ function ECScreenWordCard() {
           <div key={i} style={{
             flex: 1, height: i === idx ? 4 : 2.5, borderRadius: 2,
             background: session.completedWordIds.has(w.id)
-              ? T.accent : i === idx ? T.text : 'rgba(255,255,255,0.22)',
+              ? T.accent : i === idx ? T.text : T.hairStr,
             transition: 'all 0.2s ease',
           }}/>
         ))}
@@ -308,7 +315,7 @@ function ECScreenWordCard() {
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'center', padding: '12px 0 8px', position: 'sticky', top: 0, background: T.bg1, zIndex: 1 }}>
-          <div style={{ width: 36, height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.18)' }}/>
+          <div style={{ width: 36, height: 4, borderRadius: 2, background: T.hairStr }}/>
         </div>
 
         <div style={{ padding: '4px 20px 0' }}>
