@@ -14,33 +14,7 @@ function ECScreenProfile() {
   const [themePref, setThemePref] = React.useState(() => localStorage.getItem('ec_theme') || 'system');
   const changeTheme = (v) => { setThemePref(v); window.ECSetTheme?.(v); };
 
-  const speakPreview = async (voice, rate) => {
-    const text = 'Hello! I am your English learning assistant.';
-    try {
-      const res = await fetch('https://zknqzjrymkswkqotrion.supabase.co/functions/v1/tts', {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer sb_publishable_-PyhiOHtQJsKafpoDZIMLg_q09S3yRJ',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text, voice, rate }),
-      });
-      if (!res.ok) throw new Error(`TTS ${res.status}`);
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const audio = new Audio(url);
-      audio.onended = () => URL.revokeObjectURL(url);
-      audio.play();
-      return;
-    } catch (_) {}
-    window.speechSynthesis.cancel();
-    const utt = new SpeechSynthesisUtterance(text);
-    utt.lang = 'en-US';
-    utt.rate = rate === 'slow' ? 0.7 : rate === 'fast' ? 1.2 : 0.85;
-    window.speechSynthesis.speak(utt);
-  };
-
-  const setVoice = (v) => { setTtsVoice(v); localStorage.setItem('ec_azure_voice', v); speakPreview(v, 'medium'); };
+  const setVoice = (v) => { setTtsVoice(v); localStorage.setItem('ec_azure_voice', v); window.ECSpeak('Hello! I am your English learning assistant.', v); };
 
   const saveNick = () => {
     const trimmed = nickVal.trim();

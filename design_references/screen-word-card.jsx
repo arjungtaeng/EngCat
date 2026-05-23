@@ -72,38 +72,7 @@ function ECScreenWordCard() {
 
   const stripMarkers = (text) => text.replace(/\{([^}]+)\}/g, '$1');
 
-  const speak = async (text) => {
-    const plain = stripMarkers(text);
-    const { voice, rate } = getTTSSettings();
-    try {
-      const res = await fetch(`${EC_SUPABASE_URL}/functions/v1/tts`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${EC_SUPABASE_ANON}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text: plain, voice, rate }),
-      });
-      if (!res.ok) throw new Error(`TTS ${res.status}`);
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      return new Promise((resolve) => {
-        const audio = new Audio(url);
-        audio.onended = () => { URL.revokeObjectURL(url); resolve(); };
-        audio.onerror = () => { URL.revokeObjectURL(url); resolve(); };
-        audio.play();
-      });
-    } catch (_) {}
-    return new Promise((resolve) => {
-      window.speechSynthesis.cancel();
-      const utt = new SpeechSynthesisUtterance(plain);
-      utt.lang = 'en-US';
-      utt.rate = 0.85;
-      utt.onend = resolve;
-      utt.onerror = resolve;
-      window.speechSynthesis.speak(utt);
-    });
-  };
+  const speak = (text) => window.ECSpeak(stripMarkers(text));
 
   const speakWordAndExample = async () => {
     await speak(word.en);
