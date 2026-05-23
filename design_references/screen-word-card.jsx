@@ -213,7 +213,7 @@ function ECScreenWordCard() {
             fontSize: 9.5, fontFamily: T.mono, color: 'rgba(255,255,255,0.5)',
             letterSpacing: 1, marginBottom: 4, textTransform: 'uppercase',
           }}>예문</div>
-          <div style={{ fontFamily: T.display, fontSize: 14.5, color: T.text, fontStyle: 'italic', lineHeight: 1.35 }}>
+          <div style={{ fontFamily: T.display, fontSize: 14.5, color: T.text, lineHeight: 1.35 }}>
             "{renderEx(word.ex)}"
           </div>
         </div>
