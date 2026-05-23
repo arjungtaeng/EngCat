@@ -62,16 +62,16 @@ const ECShared = {
 window.ECTokens = Object.assign({}, ECDark, ECShared);
 
 window.EC_LIGHT_ACCENTS = [
-  { name: '코랄',     value: '#E05030', soft: 'rgba(224,80,48,0.14)',  deep: '#C03818' },
-  { name: '버밀리온', value: '#D03820', soft: 'rgba(208,56,32,0.14)',  deep: '#A82810' },
-  { name: '크림슨',   value: '#C02840', soft: 'rgba(192,40,64,0.14)',  deep: '#A01030' },
-  { name: '로즈우드', value: '#A83050', soft: 'rgba(168,48,80,0.14)',  deep: '#882040' },
-  { name: '앰버',     value: '#B06800', soft: 'rgba(176,104,0,0.14)',  deep: '#8A5000' },
-  { name: '올리브',   value: '#7A7010', soft: 'rgba(122,112,16,0.14)', deep: '#605808' },
-  { name: '틸',       value: '#1A7868', soft: 'rgba(26,120,104,0.14)', deep: '#0E5A50' },
-  { name: '코발트',   value: '#1858A8', soft: 'rgba(24,88,168,0.14)',  deep: '#0C4080' },
-  { name: '인디고',   value: '#4030A0', soft: 'rgba(64,48,160,0.14)',  deep: '#2A1880' },
-  { name: '바이올렛', value: '#7030A0', soft: 'rgba(112,48,160,0.14)', deep: '#521880' },
+  { name: '로즈',     value: '#E8205A', soft: 'rgba(232,32,90,0.14)',   deep: '#C00848' },
+  { name: '마젠타',   value: '#C01880', soft: 'rgba(192,24,128,0.14)',  deep: '#980060' },
+  { name: '라벤더',   value: '#7040D0', soft: 'rgba(112,64,208,0.14)',  deep: '#5428B0' },
+  { name: '오션',     value: '#0870D0', soft: 'rgba(8,112,208,0.14)',   deep: '#0558A8' },
+  { name: '틸',       value: '#0098A0', soft: 'rgba(0,152,160,0.14)',   deep: '#007880' },
+  { name: '에메랄드', value: '#10A060', soft: 'rgba(16,160,96,0.14)',   deep: '#088048' },
+  { name: '세이지',   value: '#508840', soft: 'rgba(80,136,64,0.14)',   deep: '#386828' },
+  { name: '딥코랄',   value: '#E83820', soft: 'rgba(232,56,32,0.14)',   deep: '#C02008' },
+  { name: '버건디',   value: '#A81838', soft: 'rgba(168,24,56,0.14)',   deep: '#880020' },
+  { name: '초콜릿',   value: '#8A4010', soft: 'rgba(138,64,16,0.14)',   deep: '#6A2C08' },
 ];
 
 window.ECApplyTheme = function(mode) {

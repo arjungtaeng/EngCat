@@ -240,20 +240,22 @@ function ECScreenProfile() {
           />
           {/* 라이트 모드 액센트 색상 선택 */}
           <div style={{ padding: '14px 18px', borderBottom: `1px solid ${T.hair}` }}>
-            <div style={{ fontSize: 15, color: T.text, fontWeight: 500, marginBottom: 10 }}>라이트 색상</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            <div style={{ fontSize: 15, color: T.text, fontWeight: 500, marginBottom: 12 }}>라이트 색상</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
               {(window.EC_LIGHT_ACCENTS || []).map(a => {
                 const sel = lightAccent === a.value;
                 return (
                   <div key={a.value} onClick={() => changeLightAccent(a.value)} style={{
-                    display: 'flex', alignItems: 'center', gap: 6,
-                    padding: '5px 10px', borderRadius: 8, cursor: 'pointer',
-                    border: `1.5px solid ${sel ? a.value : T.hair}`,
-                    background: sel ? a.value + '18' : 'transparent',
-                    transition: 'all 0.15s',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+                    cursor: 'pointer',
                   }}>
-                    <div style={{ width: 10, height: 10, borderRadius: '50%', background: a.value, flexShrink: 0 }}/>
-                    <span style={{ fontSize: 12, fontWeight: sel ? 600 : 500, color: sel ? a.value : T.textMute }}>{a.name}</span>
+                    <div style={{
+                      width: 44, height: 44, borderRadius: 14, background: a.value,
+                      border: sel ? `3px solid ${T.text}` : `2px solid transparent`,
+                      boxShadow: sel ? `0 0 0 1px ${T.text}` : 'none',
+                      transition: 'all 0.15s',
+                    }}/>
+                    <span style={{ fontSize: 10, fontFamily: T.mono, color: sel ? T.text : T.textMute, fontWeight: sel ? 600 : 400, textAlign: 'center' }}>{a.name}</span>
                   </div>
                 );
               })}
