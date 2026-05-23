@@ -29,7 +29,7 @@ const ECDark = {
 const ECLight = {
   bg0:    '#EAE5DC',
   bg1:    '#F8F4ED',
-  bg2:    '#FFFDF8',
+  bg2:    '#FFFFFF',
   bg3:    '#F0EBE1',
   bg4:    '#E6DFD4',
   text:   '#1C1610',
