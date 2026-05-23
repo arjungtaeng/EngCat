@@ -136,7 +136,7 @@ function ECScreenSentenceCard() {
                   width: 28, height: 28, borderRadius: 999, background: T.bg1,
                   display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
                 }}>{ECIcon.speaker(T.accent, 14)}</div>
-                <div style={{ flex: 1, fontFamily: T.display, fontSize: 15, fontStyle: 'italic', color: T.bg0, lineHeight: 1.25 }}>
+                <div style={{ flex: 1, fontFamily: T.serif, fontSize: 15, fontStyle: 'italic', color: T.bg0, lineHeight: 1.25 }}>
                   "{renderSentence(s.en, s.highlight)}"
                 </div>
               </div>
@@ -167,7 +167,7 @@ function ECScreenSentenceCard() {
           {/* Sentence + translation */}
           <div style={{ padding: '20px 22px 0' }}>
             <div style={{
-              fontFamily: T.display, fontSize: 26, fontStyle: 'italic', lineHeight: 1.2, color: T.text,
+              fontFamily: T.serif, fontSize: 26, fontStyle: 'italic', lineHeight: 1.2, color: T.text,
               letterSpacing: -0.3,
             }}>
               "{renderSentence(s.en, s.highlight)}"

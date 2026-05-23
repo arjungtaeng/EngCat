@@ -55,7 +55,7 @@ function ECScreenQuiz() {
             position: 'absolute', bottom: 12, left: 12,
             padding: '6px 10px', borderRadius: 6,
             background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(20px)',
-            fontFamily: T.display, fontStyle: 'italic', fontSize: 13.5, color: T.text,
+            fontFamily: T.serif, fontStyle: 'italic', fontSize: 13.5, color: T.text,
           }}>
             "My flight from Seoul stops in Tokyo before Hawaii."
           </div>
@@ -82,7 +82,7 @@ function ECScreenQuiz() {
                 fontFamily: T.mono, fontSize: 12, fontWeight: 600, flexShrink: 0,
               }}>{state === 'correct' ? ECIcon.check(T.bg0, 16) : state === 'wrong' ? ECIcon.close(T.bg0, 16) : c.id}</div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontFamily: T.display, fontStyle: 'italic', fontSize: 16, color: T.text }}>{c.en}</div>
+                <div style={{ fontFamily: T.serif, fontStyle: 'italic', fontSize: 16, color: T.text }}>{c.en}</div>
                 <div style={{ fontSize: 12, color: T.textDim, marginTop: 1 }}>{c.ko}</div>
               </div>
             </div>
