@@ -12,16 +12,7 @@ function ECScreenProfile() {
   const [nickVal, setNickVal] = React.useState(() => localStorage.getItem('engcat_nickname') || '');
   const [ttsVoice, setTtsVoice] = React.useState(() => localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural');
   const [themePref, setThemePref] = React.useState(() => localStorage.getItem('ec_theme') || 'system');
-  const [lightAccent, setLightAccent] = React.useState(() => localStorage.getItem('ec_light_accent') || '');
   const changeTheme = (v) => { setThemePref(v); window.ECSetTheme?.(v); };
-  const changeLightAccent = (v) => {
-    setLightAccent(v);
-    localStorage.setItem('ec_light_accent', v);
-    const resolved = themePref === 'system'
-      ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
-      : themePref;
-    if (resolved === 'light') window.ECSetTheme?.(resolved);
-  };
 
   const speakPreview = async (voice, rate) => {
     const text = 'Hello! I am your English learning assistant.';
@@ -238,29 +229,6 @@ function ECScreenProfile() {
             value={themePref}
             onChange={changeTheme}
           />
-          {/* 라이트 모드 액센트 색상 선택 */}
-          <div style={{ padding: '14px 18px', borderBottom: `1px solid ${T.hair}` }}>
-            <div style={{ fontSize: 15, color: T.text, fontWeight: 500, marginBottom: 12 }}>라이트 색상</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
-              {(window.EC_LIGHT_ACCENTS || []).map(a => {
-                const sel = lightAccent === a.value;
-                return (
-                  <div key={a.value} onClick={() => changeLightAccent(a.value)} style={{
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
-                    cursor: 'pointer',
-                  }}>
-                    <div style={{
-                      width: 44, height: 44, borderRadius: 14, background: a.value,
-                      border: sel ? `3px solid ${T.text}` : `2px solid transparent`,
-                      boxShadow: sel ? `0 0 0 1px ${T.text}` : 'none',
-                      transition: 'all 0.15s',
-                    }}/>
-                    <span style={{ fontSize: 10, fontFamily: T.mono, color: sel ? T.text : T.textMute, fontWeight: sel ? 600 : 400, textAlign: 'center' }}>{a.name}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
           <Row label="저장한 카드"      value="68"/>
           <Row label="친구 / 랭킹"      value=""/>
           <Row label="구독 관리"        value="EngCat Pro"/>

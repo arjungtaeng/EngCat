@@ -63,33 +63,9 @@ const ECShared = {
 
 window.ECTokens = Object.assign({}, ECDark, ECShared);
 
-window.EC_LIGHT_ACCENTS = [
-  { name: '앰버',     value: '#B07820', soft: 'rgba(176,120,32,0.14)',  deep: '#8A5C10' },
-  { name: '허니',     value: '#C07810', soft: 'rgba(192,120,16,0.14)',  deep: '#9A5E08' },
-  { name: '골드',     value: '#B06010', soft: 'rgba(176,96,16,0.14)',   deep: '#8A4808' },
-  { name: '코퍼',     value: '#B05828', soft: 'rgba(176,88,40,0.14)',   deep: '#8A3E18' },
-  { name: '번트앰버', value: '#A85010', soft: 'rgba(168,80,16,0.14)',   deep: '#843808' },
-  { name: '테라코타', value: '#C04820', soft: 'rgba(192,72,32,0.14)',   deep: '#9C3010' },
-  { name: '시에나',   value: '#A04028', soft: 'rgba(160,64,40,0.14)',   deep: '#7C2818' },
-  { name: '러스트',   value: '#A83818', soft: 'rgba(168,56,24,0.14)',   deep: '#842008' },
-  { name: '카라멜',   value: '#985820', soft: 'rgba(152,88,32,0.14)',   deep: '#784010' },
-  { name: '웜틸',     value: '#1A7868', soft: 'rgba(26,120,104,0.14)',  deep: '#0E5A50' },
-  { name: '모스',     value: '#527840', soft: 'rgba(82,120,64,0.14)',   deep: '#3A5C28' },
-];
-
 window.ECApplyTheme = function(mode) {
   const src = mode === 'light' ? ECLight : ECDark;
   Object.assign(window.ECTokens, src);
-  if (mode === 'light') {
-    const stored = localStorage.getItem('ec_light_accent');
-    const found = window.EC_LIGHT_ACCENTS.find(a => a.value === stored);
-    if (found) {
-      window.ECTokens.accent     = found.value;
-      window.ECTokens.accentSoft = found.soft;
-      window.ECTokens.accentDeep = found.deep;
-      window.ECTokens.accentText = found.value === '#E8B26A' ? '#1C1610' : '#fff';
-    }
-  }
   document.body.style.background = window.ECTokens.bg1;
 };
 
