@@ -13,12 +13,22 @@ function ECScreenHome() {
 
   const user = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
   const now = new Date();
-  const month = now.getMonth() + 1;
   const day = now.getDate();
-  const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
-  const dateStr = `${month}월 ${day}일 ${dayNames[now.getDay()]}요일`;
-  const hour = now.getHours();
-  const greetingWord = hour < 12 ? '좋은 아침이에요,' : hour < 18 ? '안녕하세요,' : '좋은 저녁이에요,';
+  const dayNames  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const dateStr = `${dayNames[now.getDay()]}, ${monthNames[now.getMonth()]} ${day}`;
+  const greetings = [
+    'Good to see you,',
+    'Welcome back,',
+    "Let's learn today,",
+    'Ready to level up?',
+    'Time to practice,',
+    'Keep it going,',
+    'Great to have you,',
+    "Let's make progress,",
+  ];
+  const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+  const greetingWord = greetings[dayOfYear % greetings.length];
   const savedNick = localStorage.getItem('engcat_nickname');
   const rawName = user?.name || '학습자';
   const displayName = savedNick
@@ -68,7 +78,7 @@ function ECScreenHome() {
         </div>
         <div style={{ fontFamily: T.serif, fontSize: 30, lineHeight: 1.18, color: T.text, letterSpacing: -0.4 }}>
           {greetingWord}<br/>
-          <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}님.</span>
+          <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}.</span>
         </div>
       </div>
 
