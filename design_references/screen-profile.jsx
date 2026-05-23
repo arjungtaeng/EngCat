@@ -70,7 +70,7 @@ function ECScreenProfile() {
         <div key={o.value} onClick={() => onChange(o.value)} style={{
           padding: '5px 10px', borderRadius: 8, fontSize: 12, fontWeight: 600,
           background: value === o.value ? T.accent : 'transparent',
-          color: value === o.value ? '#fff' : T.textMute,
+          color: value === o.value ? T.accentText : T.textMute,
           border: `1px solid ${value === o.value ? T.accent : T.hairStr}`,
           cursor: 'pointer', transition: 'all 0.15s',
         }}>{o.label}</div>

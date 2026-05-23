@@ -128,7 +128,7 @@ function ECScreenWordCard() {
   const btnLabel = swipingPrev ? '이전 카드' : isLast ? '문장 학습하기' : '다음 카드';
   const isDark = T.text === '#F8F5EF';
   const btnBg = swipingPrev ? T.bg3 : T.accent;
-  const btnColor = swipingPrev ? T.text : '#fff';
+  const btnColor = swipingPrev ? T.text : T.accentText;
 
   const overlayGrad = isDark
     ? 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 22%, transparent 40%, rgba(0,0,0,0.88) 58%, rgba(0,0,0,0.98) 72%, #000 85%)'

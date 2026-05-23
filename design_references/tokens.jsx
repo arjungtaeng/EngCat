@@ -11,9 +11,10 @@ const ECDark = {
   textDim:'rgba(248,245,239,0.70)',
   textMute:'rgba(248,245,239,0.50)',
   textFaint:'rgba(248,245,239,0.22)',
-  accent:    '#E8B26A',
-  accentSoft:'rgba(232,178,106,0.14)',
-  accentDeep:'#C8904A',
+  accent:     '#E8B26A',
+  accentSoft: 'rgba(232,178,106,0.14)',
+  accentDeep: '#C8904A',
+  accentText: '#fff',
   good:      '#8CCBA8',
   goodSoft:  'rgba(140,203,168,0.14)',
   warn:      '#E89A6A',
@@ -35,9 +36,10 @@ const ECLight = {
   textDim:'rgba(28,22,16,0.65)',
   textMute:'rgba(28,22,16,0.45)',
   textFaint:'rgba(28,22,16,0.20)',
-  accent:    '#F05A20',
-  accentSoft:'rgba(240,90,32,0.14)',
-  accentDeep:'#CC4010',
+  accent:     '#E8B26A',
+  accentSoft: 'rgba(232,178,106,0.14)',
+  accentDeep: '#C8904A',
+  accentText: '#1C1610',
   good:      '#28885C',
   goodSoft:  'rgba(40,136,92,0.13)',
   warn:      '#C87830',
@@ -85,6 +87,7 @@ window.ECApplyTheme = function(mode) {
       window.ECTokens.accent     = found.value;
       window.ECTokens.accentSoft = found.soft;
       window.ECTokens.accentDeep = found.deep;
+      window.ECTokens.accentText = found.value === '#E8B26A' ? '#1C1610' : '#fff';
     }
   }
   document.body.style.background = window.ECTokens.bg1;
