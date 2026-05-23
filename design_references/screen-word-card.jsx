@@ -54,9 +54,9 @@ function ECScreenWordCard() {
     <div style={{ flex: 1, minHeight: 0, background: '#000', position: 'relative', overflow: 'hidden' }}>
 
       {/* ── Full-bleed hero + gradient ── */}
-      <div style={{ position: 'absolute', inset: 0 }}>
+      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
         {word.img
-          ? <img src={word.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} alt={word.en} />
+          ? <img src={word.img} style={{ width: '100%', height: 'auto', display: 'block' }} alt={word.en} />
           : <ECPlaceholder height="100%" tint={word.tint} radius={0} label={`hero · ${word.en}`}/>
         }
         <div style={{
