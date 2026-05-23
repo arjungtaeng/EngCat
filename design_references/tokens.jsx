@@ -14,7 +14,7 @@ const ECDark = {
   accent:     '#E8B26A',
   accentSoft: 'rgba(232,178,106,0.14)',
   accentDeep: '#C8904A',
-  accentText: '#fff',
+  accentText: '#2C1A06',
   good:      '#8CCBA8',
   goodSoft:  'rgba(140,203,168,0.14)',
   warn:      '#E89A6A',
