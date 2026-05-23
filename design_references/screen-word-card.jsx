@@ -188,7 +188,7 @@ function ECScreenWordCard() {
 
         {/* Word */}
         <div style={{
-          fontFamily: T.serif, fontSize: 52, lineHeight: 1, color: T.text,
+          fontFamily: T.display, fontSize: 52, lineHeight: 1, color: T.text,
           fontStyle: 'italic', letterSpacing: -1, marginBottom: 4,
         }}>{word.en}</div>
 
@@ -213,7 +213,7 @@ function ECScreenWordCard() {
             fontSize: 9.5, fontFamily: T.mono, color: 'rgba(255,255,255,0.5)',
             letterSpacing: 1, marginBottom: 4, textTransform: 'uppercase',
           }}>예문</div>
-          <div style={{ fontFamily: T.serif, fontSize: 14.5, color: T.text, fontStyle: 'italic', lineHeight: 1.35 }}>
+          <div style={{ fontFamily: T.display, fontSize: 14.5, color: T.text, fontStyle: 'italic', lineHeight: 1.35 }}>
             "{renderEx(word.ex)}"
           </div>
         </div>
