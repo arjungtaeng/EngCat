@@ -36,7 +36,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 128;</script>
+<script>window.EC_VER = 129;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/supabase.jsx"></script>
@@ -56,7 +56,7 @@
   function App() {
     const savedUser = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
     const [screen, setScreen] = React.useState(savedUser ? 'home' : 'login');
-    const [dataReady, setDataReady] = React.useState(false);
+    const [, setDataReady] = React.useState(false);
 
     React.useEffect(() => {
       window.ECNav.go = (s) => {
@@ -65,20 +65,6 @@
       };
       window.ECDataLoaded.then(() => setDataReady(true));
     }, []);
-
-    if (!dataReady) {
-      return (
-        <div style={{
-          height: '100dvh', background: '#0D0D11',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          flexDirection: 'column', gap: 14,
-        }}>
-          <img src="icons/icon-1024.png" style={{ width: 72, height: 72, borderRadius: 18, marginBottom: 4 }} alt="EngCat" />
-          <div style={{ fontFamily: 'Instrument Serif', fontSize: 36, color: '#E8B26A', fontStyle: 'italic' }}>EngCat</div>
-          <div style={{ fontFamily: 'JetBrains Mono', fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: 2 }}>LOADING</div>
-        </div>
-      );
-    }
 
 
     // Lazy map — component functions, not JSX elements.
