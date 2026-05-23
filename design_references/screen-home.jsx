@@ -126,7 +126,7 @@ function ECScreenHome() {
             <div key={i} onClick={() => { window.ECSession && (window.ECSession.wordIndex = i); window.ECNav?.go('word-card'); }} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
               <div style={{ position: 'relative' }}>
                 {c.img
-                  ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'contain', borderRadius: 14, background: '#0D0D11' }} alt={c.en} />
+                  ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'cover', borderRadius: 14 }} alt={c.en} />
                   : <ECPlaceholder height={150} tint={c.tint} radius={14} label={c.en}/>
                 }
                 {done && (

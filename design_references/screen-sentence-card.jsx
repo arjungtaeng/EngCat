@@ -100,7 +100,7 @@ function ECScreenSentenceCard() {
               position: 'relative', aspectRatio: '4 / 3',
             }}>
               {s.img
-                ? <img src={s.img} style={{ width: '100%', height: '100%', objectFit: 'contain' }} alt={s.en} />
+                ? <img src={s.img} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={s.en} />
                 : <ECPlaceholder height="100%" tint={currentBeat.tint} radius={0} label={currentBeat.label}/>
               }
 
