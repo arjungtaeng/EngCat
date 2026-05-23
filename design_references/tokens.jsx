@@ -62,6 +62,7 @@ const ECShared = {
 window.ECTokens = Object.assign({}, ECDark, ECShared);
 
 window.EC_LIGHT_ACCENTS = [
+  { name: '앰버',     value: '#B07820', soft: 'rgba(176,120,32,0.14)',  deep: '#8A5C10' },
   { name: '허니',     value: '#C07810', soft: 'rgba(192,120,16,0.14)',  deep: '#9A5E08' },
   { name: '골드',     value: '#B06010', soft: 'rgba(176,96,16,0.14)',   deep: '#8A4808' },
   { name: '코퍼',     value: '#B05828', soft: 'rgba(176,88,40,0.14)',   deep: '#8A3E18' },
