@@ -13,8 +13,41 @@ function ECScreenProfile() {
   const [ttsVoice, setTtsVoice] = React.useState(() => localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural');
   const [ttsRate, setTtsRate]   = React.useState(() => localStorage.getItem('ec_tts_rate') || 'medium');
 
-  const setVoice = (v) => { setTtsVoice(v); localStorage.setItem('ec_azure_voice', v); };
-  const setRate  = (r) => { setTtsRate(r);  localStorage.setItem('ec_tts_rate', r); };
+  const speakPreview = async (voice, rate) => {
+    const text = 'Hello! I am your English learning assistant.';
+    const key    = localStorage.getItem('ec_azure_key')    || '';
+    const region = localStorage.getItem('ec_azure_region') || 'koreacentral';
+    const xmlEsc = s => s.replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]));
+    if (key) {
+      try {
+        const ssml = `<speak version='1.0' xml:lang='en-US'><voice name='${voice}'><prosody rate='${rate}'>${xmlEsc(text)}</prosody></voice></speak>`;
+        const res = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
+          method: 'POST',
+          headers: {
+            'Ocp-Apim-Subscription-Key': key,
+            'Content-Type': 'application/ssml+xml',
+            'X-Microsoft-OutputFormat': 'audio-16khz-128kbitrate-mono-mp3',
+          },
+          body: ssml,
+        });
+        if (!res.ok) throw new Error(`Azure TTS ${res.status}`);
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const audio = new Audio(url);
+        audio.onended = () => URL.revokeObjectURL(url);
+        audio.play();
+        return;
+      } catch (_) {}
+    }
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'en-US';
+    utt.rate = rate === 'slow' ? 0.7 : rate === 'fast' ? 1.2 : 0.85;
+    window.speechSynthesis.speak(utt);
+  };
+
+  const setVoice = (v) => { setTtsVoice(v); localStorage.setItem('ec_azure_voice', v); speakPreview(v, ttsRate); };
+  const setRate  = (r) => { setTtsRate(r);  localStorage.setItem('ec_tts_rate', r);  speakPreview(ttsVoice, r); };
 
   const saveNick = () => {
     const trimmed = nickVal.trim();
