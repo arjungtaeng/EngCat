@@ -27,8 +27,8 @@ const ECDark = {
 };
 
 const ECLight = {
-  bg0:    '#EAE5DC',
-  bg1:    '#F8F4ED',
+  bg0:    '#F0EBE2',
+  bg1:    '#FAF7F2',
   bg2:    '#FFFFFF',
   bg3:    '#F0EBE1',
   bg4:    '#E6DFD4',
