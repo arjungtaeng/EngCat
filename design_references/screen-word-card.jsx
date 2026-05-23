@@ -78,18 +78,10 @@ function ECScreenWordCard() {
     ? 'transform 0.24s cubic-bezier(0.4,0,0.2,1)'
     : 'none';
 
-  // Button fill animation
-  const swipeThreshold = window.innerWidth * 0.5;
-  const swipingPrev = swipeX > 5 && !isFirst;
-  const swipingNext = swipeX < -5;
-  const fillPercent = swipingPrev
-    ? Math.min(100, (swipeX / swipeThreshold) * 100)
-    : swipingNext
-      ? Math.min(100, (Math.abs(swipeX) / swipeThreshold) * 100)
-      : 0;
-  const isSwiping = swipingPrev || swipingNext;
+  const swipingPrev = swipeX > 30 && !isFirst;
   const btnLabel = swipingPrev ? '이전 카드' : isLast ? '문장 학습하기' : '다음 카드';
-  const textColor = isSwiping ? (fillPercent > 50 ? T.bg0 : T.text) : T.bg0;
+  const btnBg = swipingPrev ? T.bg3 : T.accent;
+  const btnColor = swipingPrev ? T.text : T.bg0;
 
   return (
     <div
@@ -225,34 +217,20 @@ function ECScreenWordCard() {
           </div>
         </div>
 
-        {/* Button — directional fill animation on swipe */}
+        {/* Button */}
         <div
           onClick={() => goTo(swipingPrev ? 'prev' : 'next')}
           style={{
-            position: 'relative', height: 46, borderRadius: 14, overflow: 'hidden',
-            background: isSwiping ? T.bg3 : T.accent,
-            cursor: 'pointer',
+            height: 46, borderRadius: 14,
+            background: btnBg, color: btnColor,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+            fontSize: 14, fontWeight: 600, cursor: 'pointer',
+            transition: 'background 0.15s, color 0.15s',
           }}
         >
-          {isSwiping && (
-            <div style={{
-              position: 'absolute', top: 0, bottom: 0,
-              left: swipingPrev ? 0 : 'auto',
-              right: swipingNext ? 0 : 'auto',
-              width: `${fillPercent}%`,
-              background: T.accent,
-              pointerEvents: 'none',
-            }}/>
-          )}
-          <div style={{
-            position: 'relative', zIndex: 1,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            height: '100%', fontSize: 14, fontWeight: 600, color: textColor,
-          }}>
-            {swipingPrev && ECIcon.chev('left', textColor, 14)}
-            {btnLabel}
-            {!swipingPrev && ECIcon.chev('right', textColor, 14)}
-          </div>
+          {swipingPrev && ECIcon.chev('left', btnColor, 14)}
+          {btnLabel}
+          {!swipingPrev && ECIcon.chev('right', btnColor, 14)}
         </div>
       </div>
 
