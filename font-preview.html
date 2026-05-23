@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EngCat — 폰트 미리보기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600&family=Outfit:wght@400;600&family=Playfair+Display:ital,wght@0,400;1,400&family=Instrument+Serif:ital@0;1&display=swap"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0D0D11;
+    color: #F8F5EF;
+    font-family: system-ui, sans-serif;
+    padding: 32px 20px 60px;
+    min-height: 100vh;
+  }
+  h1 {
+    font-size: 13px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: rgba(248,245,239,0.45);
+    margin-bottom: 32px;
+    font-family: 'DM Sans', system-ui;
+    font-weight: 400;
+  }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 420px;
+  }
+  .card {
+    background: #161619;
+    border: 1px solid rgba(244,241,235,0.08);
+    border-radius: 20px;
+    padding: 22px 22px 18px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: rgba(232,178,106,0.35); }
+  .card.current { border-color: rgba(232,178,106,0.6); background: #1a1a1e; }
+  .label {
+    font-size: 9px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(248,245,239,0.35);
+    margin-bottom: 10px;
+    font-family: 'DM Sans', system-ui;
+  }
+  .label.current-tag { color: #E8B26A; }
+  .word {
+    font-size: 48px;
+    line-height: 1;
+    color: #F8F5EF;
+    letter-spacing: -1px;
+    margin-bottom: 4px;
+  }
+  .ko {
+    font-size: 15px;
+    color: #E8B26A;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    margin-bottom: 12px;
+    font-family: system-ui, sans-serif;
+  }
+  .ex-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .ex-label {
+    font-size: 8.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(248,245,239,0.35);
+    margin-bottom: 4px;
+    font-family: 'DM Sans', system-ui;
+  }
+  .ex {
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: rgba(248,245,239,0.85);
+  }
+  .hl { color: #E8B26A; }
+
+  /* 폰트별 */
+  .f-dmsans     .word { font-family: 'DM Sans', sans-serif; }
+  .f-jakarta    .word { font-family: 'Plus Jakarta Sans', sans-serif; }
+  .f-inter      .word { font-family: 'Inter', sans-serif; }
+  .f-outfit     .word { font-family: 'Outfit', sans-serif; }
+  .f-playfair   .word { font-family: 'Playfair Display', serif; font-style: italic; }
+  .f-instrument .word { font-family: 'Instrument Serif', serif; font-style: italic; }
+
+  /* 예문 폰트 — 모든 카드 동일하게 Playfair italic */
+  .ex { font-family: 'Playfair Display', serif; font-style: italic; }
+</style>
+</head>
+<body>
+<h1>단어 폰트 미리보기 · 탭해서 비교</h1>
+<div class="cards">
+
+  <div class="card f-dmsans current" id="card-dmsans">
+    <div class="label current-tag">DM Sans · 추천</div>
+    <div class="word">itinerary</div>
+    <div class="ko">여행 일정, 여정</div>
+    <div class="ex-box">
+      <div class="ex-label">예문</div>
+      <div class="ex">Our <span class="hl">itinerary</span> includes three days in Kyoto.</div>
+    </div>
+  </div>
+
+  <div class="card f-jakarta" id="card-jakarta">
+    <div class="label">Plus Jakarta Sans</div>
+    <div class="word">itinerary</div>
+    <div class="ko">여행 일정, 여정</div>
+    <div class="ex-box">
+      <div class="ex-label">예문</div>
+      <div class="ex">Our <span class="hl">itinerary</span> includes three days in Kyoto.</div>
+    </div>
+  </div>
+
+  <div class="card f-inter" id="card-inter">
+    <div class="label">Inter</div>
+    <div class="word">itinerary</div>
+    <div class="ko">여행 일정, 여정</div>
+    <div class="ex-box">
+      <div class="ex-label">예문</div>
+      <div class="ex">Our <span class="hl">itinerary</span> includes three days in Kyoto.</div>
+    </div>
+  </div>
+
+  <div class="card f-outfit" id="card-outfit">
+    <div class="label">Outfit</div>
+    <div class="word">itinerary</div>
+    <div class="ko">여행 일정, 여정</div>
+    <div class="ex-box">
+      <div class="ex-label">예문</div>
+      <div class="ex">Our <span class="hl">itinerary</span> includes three days in Kyoto.</div>
+    </div>
+  </div>
+
+  <div class="card f-playfair" id="card-playfair">
+    <div class="label">Playfair Display italic · 현재</div>
+    <div class="word">itinerary</div>
+    <div class="ko">여행 일정, 여정</div>
+    <div class="ex-box">
+      <div class="ex-label">예문</div>
+      <div class="ex">Our <span class="hl">itinerary</span> includes three days in Kyoto.</div>
+    </div>
+  </div>
+
+  <div class="card f-instrument" id="card-instrument">
+    <div class="label">Instrument Serif italic · 원래</div>
+    <div class="word">itinerary</div>
+    <div class="ko">여행 일정, 여정</div>
+    <div class="ex-box">
+      <div class="ex-label">예문</div>
+      <div class="ex">Our <span class="hl">itinerary</span> includes three days in Kyoto.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
