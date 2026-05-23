@@ -1,12 +1,13 @@
 // EngCat — Word Card
 // Full-bleed hero. No scroll — swipe left/right to navigate cards.
 
-// Azure settings from localStorage (set via setup.html or 내 정보 화면)
-const getAzure = () => ({
-  key:    localStorage.getItem('ec_azure_key')   || '',
-  region: localStorage.getItem('ec_azure_region') || 'koreacentral',
-  voice:  localStorage.getItem('ec_azure_voice')  || 'en-US-JennyNeural',
-  rate:   localStorage.getItem('ec_tts_rate')     || 'medium',
+// TTS — 사용자 설정(목소리/속도)만 localStorage에서 읽고, 키는 Edge Function이 보유
+const EC_SUPABASE_URL  = 'https://zknqzjrymkswkqotrion.supabase.co';
+const EC_SUPABASE_ANON = 'sb_publishable_-PyhiOHtQJsKafpoDZIMLg_q09S3yRJ';
+
+const getTTSSettings = () => ({
+  voice: localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural',
+  rate:  localStorage.getItem('ec_tts_rate')    || 'medium',
 });
 
 function ECScreenWordCard() {
@@ -73,31 +74,26 @@ function ECScreenWordCard() {
 
   const speak = async (text) => {
     const plain = stripMarkers(text);
-    const az = getAzure();
-    const xmlEsc = s => s.replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]));
-    if (az.key) {
-      try {
-        const ssml = `<speak version='1.0' xml:lang='en-US'><voice name='${az.voice}'><prosody rate='${az.rate}'>${xmlEsc(plain)}</prosody></voice></speak>`;
-        const res = await fetch(`https://${az.region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
-          method: 'POST',
-          headers: {
-            'Ocp-Apim-Subscription-Key': az.key,
-            'Content-Type': 'application/ssml+xml',
-            'X-Microsoft-OutputFormat': 'audio-16khz-128kbitrate-mono-mp3',
-          },
-          body: ssml,
-        });
-        if (!res.ok) throw new Error(`Azure TTS ${res.status}`);
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
-        return new Promise((resolve) => {
-          const audio = new Audio(url);
-          audio.onended = () => { URL.revokeObjectURL(url); resolve(); };
-          audio.onerror = () => { URL.revokeObjectURL(url); resolve(); };
-          audio.play();
-        });
-      } catch (_) {}
-    }
+    const { voice, rate } = getTTSSettings();
+    try {
+      const res = await fetch(`${EC_SUPABASE_URL}/functions/v1/tts`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${EC_SUPABASE_ANON}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: plain, voice, rate }),
+      });
+      if (!res.ok) throw new Error(`TTS ${res.status}`);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      return new Promise((resolve) => {
+        const audio = new Audio(url);
+        audio.onended = () => { URL.revokeObjectURL(url); resolve(); };
+        audio.onerror = () => { URL.revokeObjectURL(url); resolve(); };
+        audio.play();
+      });
+    } catch (_) {}
     return new Promise((resolve) => {
       window.speechSynthesis.cancel();
       const utt = new SpeechSynthesisUtterance(plain);
