@@ -122,9 +122,12 @@ async function fetchImage(keyword, orientation = 'portrait') {
     { headers: { Authorization: PEXELS_KEY } }
   );
   const data = await res.json();
-  const src = data.photos?.[0]?.src;
-  if (!src) return null;
-  return orientation === 'portrait' ? (src.portrait || src.large2x) : (src.landscape || src.large2x);
+  const photo = data.photos?.[0];
+  if (!photo) return null;
+  const base = photo.src.large.split('?')[0];
+  return orientation === 'portrait'
+    ? `${base}?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800`
+    : `${base}?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200`;
 }
 
 async function start(mode = 'all') {
