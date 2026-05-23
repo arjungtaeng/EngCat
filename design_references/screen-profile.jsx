@@ -11,6 +11,8 @@ function ECScreenProfile() {
   const [editingNick, setEditingNick] = React.useState(false);
   const [nickVal, setNickVal] = React.useState(() => localStorage.getItem('engcat_nickname') || '');
   const [ttsVoice, setTtsVoice] = React.useState(() => localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural');
+  const [themePref, setThemePref] = React.useState(() => localStorage.getItem('ec_theme') || 'system');
+  const changeTheme = (v) => { setThemePref(v); window.ECSetTheme?.(v); };
 
   const speakPreview = async (voice, rate) => {
     const text = 'Hello! I am your English learning assistant.';
@@ -97,13 +99,8 @@ function ECScreenProfile() {
       <ECStatusBar />
 
       {/* Header */}
-      <div style={{ padding: '8px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ padding: '8px 22px 0' }}>
         <div style={{ fontFamily: T.serif, fontSize: 26, color: T.text, letterSpacing: -0.3 }}>내 정보</div>
-        <div style={{
-          width: 36, height: 36, borderRadius: 12, background: T.bg2,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          border: `1px solid ${T.hair}`,
-        }}>{ECIcon.more(T.textDim, 18)}</div>
       </div>
 
       {/* Profile card */}
@@ -123,7 +120,7 @@ function ECScreenProfile() {
                 border: `1px solid ${T.hairStr}`,
               }}>{(user?.name || '?').slice(0, 2)}</div>
           }
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1.1, letterSpacing: -0.3 }}>{user?.name || '사용자'}</div>
             <div style={{ fontSize: 12.5, color: T.textDim, marginTop: 4 }}>{user?.email || ''}</div>
 
@@ -137,14 +134,14 @@ function ECScreenProfile() {
                   placeholder="불리고 싶은 이름"
                   autoFocus
                   style={{
-                    flex: 1, padding: '5px 10px', borderRadius: 8,
+                    flex: 1, minWidth: 0, width: '100%', padding: '5px 10px', borderRadius: 8,
                     background: T.bg3, border: `1px solid ${T.hairStr}`,
-                    color: T.text, fontSize: 13, fontFamily: T.sans, outline: 'none',
+                    color: T.text, fontSize: 13, fontFamily: T.sans, outline: 'none', boxSizing: 'border-box',
                   }}
                 />
                 <span
                   onClick={saveNick}
-                  style={{ fontSize: 12, color: T.accent, fontFamily: T.mono, cursor: 'pointer', whiteSpace: 'nowrap' }}
+                  style={{ fontSize: 12, color: T.accent, fontFamily: T.mono, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}
                 >완료</span>
               </div>
             ) : (
@@ -225,6 +222,12 @@ function ECScreenProfile() {
       </div>
       <div style={{ padding: '0 18px' }}>
         <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}` }}>
+          <SegRow
+            label="테마"
+            options={[{ label: '시스템', value: 'system' }, { label: '다크', value: 'dark' }, { label: '라이트', value: 'light' }]}
+            value={themePref}
+            onChange={changeTheme}
+          />
           <Row label="저장한 카드"      value="68"/>
           <Row label="친구 / 랭킹"      value=""/>
           <Row label="구독 관리"        value="EngCat Pro"/>

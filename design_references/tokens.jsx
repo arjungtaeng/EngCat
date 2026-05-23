@@ -1,122 +1,133 @@
 // EngCat — Design tokens
 // Premium, refined, dark-mode-first aesthetic for B1-B2 English learners.
-// Tone: 공손한 존댓말. No mascot.
 
-const ECTokens = {
-  // ── Palette (oklch-based dark theme) ─────────────────────────
-  // Background scale — warm-cool neutral with very low saturation
-  bg0:    '#08080C',           // deepest (outside cards)
-  bg1:    '#0D0D11',           // app background
-  bg2:    '#161619',           // card surface
-  bg3:    '#1E1E26',           // raised surface
-  bg4:    '#27272F',           // hover / pressed
-
-  // Text
-  text:   '#F8F5EF',           // primary (warm off-white)
+const ECDark = {
+  bg0:    '#08080C',
+  bg1:    '#0D0D11',
+  bg2:    '#161619',
+  bg3:    '#1E1E26',
+  bg4:    '#27272F',
+  text:   '#F8F5EF',
   textDim:'rgba(248,245,239,0.70)',
   textMute:'rgba(248,245,239,0.50)',
   textFaint:'rgba(248,245,239,0.22)',
-
-  // Accent — warm amber (single signature color)
-  accent:    '#E8B26A',        // primary CTA / streak / highlights
+  accent:    '#E8B26A',
   accentSoft:'rgba(232,178,106,0.14)',
   accentDeep:'#C8904A',
-
-  // Semantic
-  good:      '#8CCBA8',         // correct / mastered
+  good:      '#8CCBA8',
   goodSoft:  'rgba(140,203,168,0.14)',
   warn:      '#E89A6A',
   bad:       '#E07A7A',
   badSoft:   'rgba(224,122,122,0.14)',
-
-  // Card art backgrounds — placeholder swatches in muted, premium palette
-  art1: '#2D3548',  // dusky indigo
-  art2: '#3B3344',  // plum
-  art3: '#3A4039',  // moss
-  art4: '#43352A',  // cocoa
-  art5: '#2D3D3F',  // teal-slate
-  art6: '#4A3A48',  // mauve
-
-  // Hairlines
+  art1: '#2D3548', art2: '#3B3344', art3: '#3A4039',
+  art4: '#43352A', art5: '#2D3D3F', art6: '#4A3A48',
   hair:    'rgba(244,241,235,0.08)',
   hairStr: 'rgba(244,241,235,0.16)',
+};
 
-  // ── Typography ───────────────────────────────────────────────
-  // Pretendard for Korean, Playfair Display for English words/sentences, JetBrains Mono for labels
+const ECLight = {
+  bg0:    '#E8E5DF',
+  bg1:    '#F5F2EC',
+  bg2:    '#FFFFFF',
+  bg3:    '#ECEAE4',
+  bg4:    '#E2DFD8',
+  text:   '#1A1714',
+  textDim:'rgba(26,23,20,0.68)',
+  textMute:'rgba(26,23,20,0.48)',
+  textFaint:'rgba(26,23,20,0.22)',
+  accent:    '#B8722A',
+  accentSoft:'rgba(184,114,42,0.12)',
+  accentDeep:'#9A5C18',
+  good:      '#2A7A52',
+  goodSoft:  'rgba(42,122,82,0.12)',
+  warn:      '#C07830',
+  bad:       '#C04040',
+  badSoft:   'rgba(192,64,64,0.12)',
+  art1: '#C8D4E8', art2: '#D8CADE', art3: '#C8D4C8',
+  art4: '#DED0C4', art5: '#C4D4D8', art6: '#D8CAD4',
+  hair:    'rgba(26,23,20,0.10)',
+  hairStr: 'rgba(26,23,20,0.18)',
+};
+
+// Shared (typography / spacing — theme-independent)
+const ECShared = {
   sans:    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", system-ui, sans-serif',
   serif:   '"Instrument Serif", "Iowan Old Style", "Apple Garamond", Georgia, serif',
   display: '"Outfit", system-ui, sans-serif',
   thin:    '"Raleway", system-ui, sans-serif',
   mono:    '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace',
-
-  // ── Spacing & radii ─────────────────────────────────────────
   r:  { sm: 10, md: 14, lg: 20, xl: 28, pill: 999 },
 };
 
-// Tiny utility: render a striped placeholder block where real imagery will go.
-// Looks intentional, not lazy — uses the bg/art palette and a thin mono caption.
+window.ECTokens = Object.assign({}, ECDark, ECShared);
+
+window.ECApplyTheme = function(mode) {
+  const src = mode === 'light' ? ECLight : ECDark;
+  Object.assign(window.ECTokens, src);
+  document.body.style.background = window.ECTokens.bg1;
+};
+
+// ── Shared components ──────────────────────────────────────────────────────
+
 function ECPlaceholder({ label, height = 200, tint = ECTokens.art1, radius = 16, style = {} }) {
+  const isDark = ECTokens.bg0.startsWith('#08') || ECTokens.bg0.startsWith('#0');
   return (
     <div style={{
       height, borderRadius: radius, position: 'relative', overflow: 'hidden',
       background: `linear-gradient(135deg, ${tint} 0%, ${tint}cc 100%)`,
       ...style,
     }}>
-      {/* subtle stripes */}
       <div style={{
         position: 'absolute', inset: 0,
-        backgroundImage: `repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 14px, transparent 14px 28px)`,
+        backgroundImage: `repeating-linear-gradient(135deg, ${isDark ? 'rgba(255,255,255,0.025)' : 'rgba(0,0,0,0.04)'} 0 14px, transparent 14px 28px)`,
       }} />
-      {/* hairline border */}
       <div style={{
         position: 'absolute', inset: 0, borderRadius: radius,
-        boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.05)',
+        boxShadow: `inset 0 0 0 1px ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)'}`,
       }} />
       {label && (
         <div style={{
           position: 'absolute', bottom: 10, left: 12,
           fontFamily: ECTokens.mono, fontSize: 9, letterSpacing: 0.4,
-          color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase',
+          color: isDark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.35)', textTransform: 'uppercase',
         }}>{label}</div>
       )}
     </div>
   );
 }
 
-// Status bar — minimal, white glyphs for dark UI
 function ECStatusBar({ time = '9:41' }) {
-  // 실제 기기: 컨테이너가 paddingTop으로 safe area 처리하므로 null 반환
   if (window.ECRealDevice) return null;
+  const c = ECTokens.text;
   return (
     <div style={{
       height: 54, paddingTop: 18, paddingLeft: 30, paddingRight: 30,
       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-      color: ECTokens.text, fontFamily: '-apple-system, system-ui',
+      color: c, fontFamily: '-apple-system, system-ui',
       fontSize: 16, fontWeight: 600, position: 'relative', zIndex: 5,
     }}>
       <span>{time}</span>
       <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-        <svg width="18" height="11" viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx="0.5" fill={ECTokens.text}/><rect x="4.5" y="5" width="3" height="6" rx="0.5" fill={ECTokens.text}/><rect x="9" y="2.5" width="3" height="8.5" rx="0.5" fill={ECTokens.text}/><rect x="13.5" y="0" width="3" height="11" rx="0.5" fill={ECTokens.text}/></svg>
-        <svg width="16" height="11" viewBox="0 0 16 11"><path d="M8 3C10.2 3 12.2 3.8 13.6 5.2L14.6 4.2C12.9 2.5 10.6 1.4 8 1.4C5.4 1.4 3.1 2.5 1.4 4.2L2.4 5.2C3.8 3.8 5.8 3 8 3Z M8 6.4C9.3 6.4 10.5 6.9 11.4 7.8L12.4 6.8C11.2 5.6 9.7 4.9 8 4.9C6.3 4.9 4.8 5.6 3.6 6.8L4.6 7.8C5.5 6.9 6.7 6.4 8 6.4Z" fill={ECTokens.text}/><circle cx="8" cy="10" r="1.4" fill={ECTokens.text}/></svg>
-        <svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3" stroke={ECTokens.text} strokeOpacity="0.4" fill="none"/><rect x="2" y="2" width="15" height="8" rx="1.5" fill={ECTokens.text}/><path d="M24 4v4c.7-.2 1.3-1 1.3-2s-.6-1.8-1.3-2z" fill={ECTokens.text} fillOpacity="0.5"/></svg>
+        <svg width="18" height="11" viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx="0.5" fill={c}/><rect x="4.5" y="5" width="3" height="6" rx="0.5" fill={c}/><rect x="9" y="2.5" width="3" height="8.5" rx="0.5" fill={c}/><rect x="13.5" y="0" width="3" height="11" rx="0.5" fill={c}/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 11"><path d="M8 3C10.2 3 12.2 3.8 13.6 5.2L14.6 4.2C12.9 2.5 10.6 1.4 8 1.4C5.4 1.4 3.1 2.5 1.4 4.2L2.4 5.2C3.8 3.8 5.8 3 8 3Z M8 6.4C9.3 6.4 10.5 6.9 11.4 7.8L12.4 6.8C11.2 5.6 9.7 4.9 8 4.9C6.3 4.9 4.8 5.6 3.6 6.8L4.6 7.8C5.5 6.9 6.7 6.4 8 6.4Z" fill={c}/><circle cx="8" cy="10" r="1.4" fill={c}/></svg>
+        <svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3" stroke={c} strokeOpacity="0.4" fill="none"/><rect x="2" y="2" width="15" height="8" rx="1.5" fill={c}/><path d="M24 4v4c.7-.2 1.3-1 1.3-2s-.6-1.8-1.3-2z" fill={c} fillOpacity="0.5"/></svg>
       </div>
     </div>
   );
 }
 
-// Home indicator
 function ECHomeIndicator() {
+  const isDark = ECTokens.bg0.startsWith('#08') || ECTokens.bg0.startsWith('#0');
   return (
     <div style={{
       position: 'absolute', bottom: 8, left: 0, right: 0, height: 5,
       display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 100,
     }}>
-      <div style={{ width: 134, height: 5, borderRadius: 100, background: 'rgba(255,255,255,0.55)' }} />
+      <div style={{ width: 134, height: 5, borderRadius: 100, background: isDark ? 'rgba(255,255,255,0.55)' : 'rgba(0,0,0,0.30)' }} />
     </div>
   );
 }
 
-// Dynamic island
 function ECIsland() {
   return (
     <div style={{
@@ -126,7 +137,6 @@ function ECIsland() {
   );
 }
 
-// Phone shell — uses our colors, no iOSDevice frame (we want full control of background)
 function ECPhone({ children, width = 390, height = 844, bg = ECTokens.bg1 }) {
   return (
     <div style={{
@@ -143,7 +153,6 @@ function ECPhone({ children, width = 390, height = 844, bg = ECTokens.bg1 }) {
   );
 }
 
-// 스크롤 다운하면 false, 스크롤 업/상단 근처면 true 반환
 function ECUseHideOnScroll(ref) {
   const [visible, setVisible] = React.useState(true);
   const last = React.useRef(0);
@@ -163,4 +172,4 @@ function ECUseHideOnScroll(ref) {
   return visible;
 }
 
-Object.assign(window, { ECTokens, ECPlaceholder, ECStatusBar, ECHomeIndicator, ECIsland, ECPhone, ECUseHideOnScroll });
+Object.assign(window, { ECTokens, ECDark, ECLight, ECApplyTheme, ECPlaceholder, ECStatusBar, ECHomeIndicator, ECIsland, ECPhone, ECUseHideOnScroll });
