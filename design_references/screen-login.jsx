@@ -135,13 +135,21 @@ function ECScreenLogin() {
     }}>
 
       {/* Logo */}
-      <div style={{ textAlign: 'center', marginBottom: 20 }}>
-        <img
-          src="icons/icon-1024.png"
-          alt="EngCat"
-          style={{ width: 140, height: 140 }}
-        />
-      </div>
+      {(() => {
+        const isDark = T.text === '#F8F5EF';
+        return (
+          <div style={{ textAlign: 'center', marginBottom: 20 }}>
+            <div style={{
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+              width: 140, height: 140, borderRadius: 36,
+              background: isDark ? 'transparent' : T.bg3,
+              boxShadow: isDark ? 'none' : `0 2px 16px rgba(28,22,16,0.10)`,
+            }}>
+              <img src="icons/icon-1024.png" alt="EngCat" style={{ width: 110, height: 110 }} />
+            </div>
+          </div>
+        );
+      })()}
 
       {/* EngCat headline — collapse scramble (fixed-height wrapper prevents layout shift) */}
       <div style={{ height: 52, marginBottom: 14, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
