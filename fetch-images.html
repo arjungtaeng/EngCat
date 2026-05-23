@@ -18,7 +18,8 @@
 <body>
 <h2>EngCat 이미지 URL 생성기</h2>
 <p>Pexels에서 각 단어/문장에 맞는 이미지를 가져와서 SQL을 생성해요.<br>완료 후 SQL을 복사해서 Supabase SQL 에디터에 붙여넣고 Run 하면 돼요.</p>
-<button id="startBtn" onclick="start()">이미지 가져오기 시작</button>
+<button id="startBtn" onclick="start('all')">전체 가져오기 (단어+문장)</button>
+<button id="sentenceBtn" onclick="start('sentences')" style="margin-left:10px; background:#4a9; color:#fff;">문장만 다시 가져오기 (가로)</button>
 <div class="progress" id="progress"></div>
 <div id="log"></div>
 <div id="sql-wrap">
@@ -82,31 +83,31 @@ const items = [
   { table:'words', id:'w_emo_08', keyword:'proud achievement success medal celebration' },
   { table:'words', id:'w_emo_09', keyword:'nervous public speaking stage presentation' },
   { table:'words', id:'w_emo_10', keyword:'upset sad disappointed person alone' },
-  { table:'sentences', id:'s_travel_01', keyword:'airport departure terminal signage direction' },
-  { table:'sentences', id:'s_travel_02', keyword:'airport check in counter luggage conveyor' },
-  { table:'sentences', id:'s_travel_03', keyword:'flight delay airport departure screen board' },
-  { table:'sentences', id:'s_travel_04', keyword:'currency exchange counter airport money' },
-  { table:'sentences', id:'s_travel_05', keyword:'immigration passport control officer travel' },
-  { table:'sentences', id:'s_cafe_01', keyword:'restaurant menu waiter table dining' },
-  { table:'sentences', id:'s_cafe_02', keyword:'pasta dish restaurant ordering food' },
-  { table:'sentences', id:'s_cafe_03', keyword:'restaurant bill check payment table' },
-  { table:'sentences', id:'s_cafe_04', keyword:'vegetarian menu salad recommendation' },
-  { table:'sentences', id:'s_cafe_05', keyword:'flat white coffee latte art cafe' },
-  { table:'sentences', id:'s_daily_01', keyword:'friends coffee shop catching up talking' },
-  { table:'sentences', id:'s_daily_02', keyword:'rainy weather cloudy sky umbrella street' },
-  { table:'sentences', id:'s_daily_03', keyword:'reading book finished accomplishment sofa' },
-  { table:'sentences', id:'s_daily_04', keyword:'friends dinner restaurant gathering evening' },
-  { table:'sentences', id:'s_daily_05', keyword:'tired insomnia night person lying awake' },
-  { table:'sentences', id:'s_work_01', keyword:'email follow up laptop office desk typing' },
-  { table:'sentences', id:'s_work_02', keyword:'calendar meeting rescheduling planning desk' },
-  { table:'sentences', id:'s_work_03', keyword:'team alignment meeting whiteboard discussion' },
-  { table:'sentences', id:'s_work_04', keyword:'office feedback proposal document review' },
-  { table:'sentences', id:'s_work_05', keyword:'teamwork help colleague office collaboration' },
-  { table:'sentences', id:'s_emo_01', keyword:'nervous presenter public speaking audience' },
-  { table:'sentences', id:'s_emo_02', keyword:'relief success good news reaction happy' },
-  { table:'sentences', id:'s_emo_03', keyword:'proud team achievement award celebration' },
-  { table:'sentences', id:'s_emo_04', keyword:'gratitude sincere thank you helping hand' },
-  { table:'sentences', id:'s_emo_05', keyword:'embarrassed laughing awkward funny situation' },
+  { table:'sentences', id:'s_travel_01', keyword:'airport departure terminal signage direction', orientation:'landscape' },
+  { table:'sentences', id:'s_travel_02', keyword:'airport check in counter luggage conveyor', orientation:'landscape' },
+  { table:'sentences', id:'s_travel_03', keyword:'flight delay airport departure screen board', orientation:'landscape' },
+  { table:'sentences', id:'s_travel_04', keyword:'currency exchange counter airport money', orientation:'landscape' },
+  { table:'sentences', id:'s_travel_05', keyword:'immigration passport control officer travel', orientation:'landscape' },
+  { table:'sentences', id:'s_cafe_01', keyword:'restaurant menu waiter table dining', orientation:'landscape' },
+  { table:'sentences', id:'s_cafe_02', keyword:'pasta dish restaurant ordering food', orientation:'landscape' },
+  { table:'sentences', id:'s_cafe_03', keyword:'restaurant bill check payment table', orientation:'landscape' },
+  { table:'sentences', id:'s_cafe_04', keyword:'vegetarian menu salad recommendation', orientation:'landscape' },
+  { table:'sentences', id:'s_cafe_05', keyword:'flat white coffee latte art cafe', orientation:'landscape' },
+  { table:'sentences', id:'s_daily_01', keyword:'friends coffee shop catching up talking', orientation:'landscape' },
+  { table:'sentences', id:'s_daily_02', keyword:'rainy weather cloudy sky umbrella street', orientation:'landscape' },
+  { table:'sentences', id:'s_daily_03', keyword:'reading book finished accomplishment sofa', orientation:'landscape' },
+  { table:'sentences', id:'s_daily_04', keyword:'friends dinner restaurant gathering evening', orientation:'landscape' },
+  { table:'sentences', id:'s_daily_05', keyword:'tired insomnia night person lying awake', orientation:'landscape' },
+  { table:'sentences', id:'s_work_01', keyword:'email follow up laptop office desk typing', orientation:'landscape' },
+  { table:'sentences', id:'s_work_02', keyword:'calendar meeting rescheduling planning desk', orientation:'landscape' },
+  { table:'sentences', id:'s_work_03', keyword:'team alignment meeting whiteboard discussion', orientation:'landscape' },
+  { table:'sentences', id:'s_work_04', keyword:'office feedback proposal document review', orientation:'landscape' },
+  { table:'sentences', id:'s_work_05', keyword:'teamwork help colleague office collaboration', orientation:'landscape' },
+  { table:'sentences', id:'s_emo_01', keyword:'nervous presenter public speaking audience', orientation:'landscape' },
+  { table:'sentences', id:'s_emo_02', keyword:'relief success good news reaction happy', orientation:'landscape' },
+  { table:'sentences', id:'s_emo_03', keyword:'proud team achievement award celebration', orientation:'landscape' },
+  { table:'sentences', id:'s_emo_04', keyword:'gratitude sincere thank you helping hand', orientation:'landscape' },
+  { table:'sentences', id:'s_emo_05', keyword:'embarrassed laughing awkward funny situation', orientation:'landscape' },
 ];
 
 function log(msg) {
@@ -115,26 +116,29 @@ function log(msg) {
   el.scrollTop = el.scrollHeight;
 }
 
-async function fetchImage(keyword) {
+async function fetchImage(keyword, orientation = 'portrait') {
   const res = await fetch(
-    `https://api.pexels.com/v1/search?query=${encodeURIComponent(keyword)}&per_page=1&orientation=portrait`,
+    `https://api.pexels.com/v1/search?query=${encodeURIComponent(keyword)}&per_page=1&orientation=${orientation}`,
     { headers: { Authorization: PEXELS_KEY } }
   );
   const data = await res.json();
   return data.photos?.[0]?.src?.large2x || null;
 }
 
-async function start() {
+async function start(mode = 'all') {
   const btn = document.getElementById('startBtn');
+  const sBtn = document.getElementById('sentenceBtn');
   btn.disabled = true;
+  sBtn.disabled = true;
+  const targetItems = mode === 'sentences' ? items.filter(it => it.table === 'sentences') : items;
   const lines = ['-- Pexels 이미지 URL 업데이트'];
   let ok = 0, fail = 0;
 
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i];
-    document.getElementById('progress').textContent = `진행 중... ${i+1} / ${items.length}`;
+  for (let i = 0; i < targetItems.length; i++) {
+    const item = targetItems[i];
+    document.getElementById('progress').textContent = `진행 중... ${i+1} / ${targetItems.length}`;
     try {
-      const url = await fetchImage(item.keyword);
+      const url = await fetchImage(item.keyword, item.orientation || 'portrait');
       if (url) {
         lines.push(`UPDATE ${item.table} SET image_url = '${url}' WHERE id = '${item.id}';`);
         log(`✅ ${item.id}`);
