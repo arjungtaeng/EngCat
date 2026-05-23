@@ -1,5 +1,4 @@
 // EngCat — Sentence card
-// Original design structure preserved. Content scrolls, bottom buttons stay fixed.
 
 function ECScreenSentenceCard() {
   const T = ECTokens;
@@ -9,13 +8,10 @@ function ECScreenSentenceCard() {
 
   const [idx, setIdx] = React.useState(session.sentenceIndex);
   const [animKey, setAnimKey] = React.useState(0);
-  const [activeBeat, setActiveBeat] = React.useState(0);
   const scrollRef = React.useRef(null);
 
   const s = sentences[idx];
   const isLast = idx === sentences.length - 1;
-
-  React.useEffect(() => { setActiveBeat(0); }, [idx]);
 
   const goNext = () => {
     session.markSentenceDone(s.id);
@@ -41,8 +37,6 @@ function ECScreenSentenceCard() {
       parts.slice(1).join(highlight),
     ];
   }
-
-  const currentBeat = s.beats[activeBeat];
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
@@ -93,7 +87,7 @@ function ECScreenSentenceCard() {
             </div>
           </div>
 
-          {/* Animation viewport */}
+          {/* Image */}
           <div style={{ padding: '14px 18px 0' }}>
             <div style={{
               borderRadius: 22, overflow: 'hidden',
@@ -102,29 +96,8 @@ function ECScreenSentenceCard() {
             }}>
               {s.img
                 ? <img src={s.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} alt={s.en} />
-                : <ECPlaceholder height="100%" tint={currentBeat.tint} radius={0} label={currentBeat.label}/>
+                : <ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.sit}/>
               }
-
-              <div style={{
-                position: 'absolute', top: 14, left: 14, right: 14,
-                display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
-              }}>
-                <div style={{
-                  padding: '5px 10px', borderRadius: 6,
-                  background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)',
-                  fontFamily: T.mono, fontSize: 9.5, color: 'rgba(255,255,255,0.85)', letterSpacing: 0.8,
-                }}>SCENE {String(activeBeat + 1).padStart(2,'0')} / {s.beats.length.toString().padStart(2,'0')}</div>
-
-                <div
-                  onClick={() => setActiveBeat((activeBeat + 1) % s.beats.length)}
-                  style={{
-                    width: 38, height: 38, borderRadius: 999,
-                    background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(20px)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    border: '1px solid rgba(255,255,255,0.18)', cursor: 'pointer',
-                  }}
-                >{ECIcon.play(T.text, 14)}</div>
-              </div>
 
               {/* Speech bubble */}
               <div style={{
@@ -141,27 +114,6 @@ function ECScreenSentenceCard() {
                   "{renderSentence(s.en, s.highlight)}"
                 </div>
               </div>
-            </div>
-
-            {/* Storyboard beat selector */}
-            <div style={{ display: 'flex', gap: 6, marginTop: 12, padding: '0 4px' }}>
-              {s.beats.map((b, i) => (
-                <div key={i} onClick={() => setActiveBeat(i)} style={{ flex: 1, cursor: 'pointer' }}>
-                  <div style={{
-                    height: 28, borderRadius: 6, overflow: 'hidden', position: 'relative',
-                    opacity: i === activeBeat ? 1 : 0.45,
-                    border: i === activeBeat ? `1.5px solid ${T.accent}` : `1px solid ${T.hair}`,
-                    transition: 'opacity 0.2s ease, border-color 0.2s ease',
-                  }}>
-                    <ECPlaceholder height="100%" tint={b.tint} radius={0}/>
-                  </div>
-                  <div style={{
-                    fontFamily: T.mono, fontSize: 8.5,
-                    color: i === activeBeat ? T.accent : T.textMute,
-                    marginTop: 4, letterSpacing: 0.5, transition: 'color 0.2s ease',
-                  }}>{b.time}</div>
-                </div>
-              ))}
             </div>
           </div>
 
@@ -209,11 +161,11 @@ function ECScreenSentenceCard() {
             style={{
               height: 50, padding: '0 22px', borderRadius: 14, background: T.accent,
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              color: T.bg0, fontSize: 14, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
+              color: T.accentText, fontSize: 14, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
             }}
           >
             {isLast ? '퀴즈 시작하기' : '다음'}
-            {ECIcon.chev('right', T.bg0, 16)}
+            {ECIcon.chev('right', T.accentText, 16)}
           </div>
         </div>
 

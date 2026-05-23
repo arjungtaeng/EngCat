@@ -92,22 +92,16 @@ window.ECDataLoaded = (async () => {
       img:  w.image_url || null,
     }));
 
-    window.ECData.sentences = sentencesRes.data.map(s => {
-      const rawBeats = s.beats;
-      const beats = Array.isArray(rawBeats) && rawBeats.length > 0
-        ? rawBeats
-        : [{ label: s.situation || '', tint: TOPIC_TINTS[s.topic_id] || '#1a2a3a', time: '00:01' }];
-      return {
-        id:        s.id,
-        en:        s.en,
-        ko:        s.ko,
-        highlight: s.highlight || '',
-        tip:       s.tip || '',
-        sit:       s.situation || '',
-        img:       s.image_url || null,
-        beats,
-      };
-    });
+    window.ECData.sentences = sentencesRes.data.map(s => ({
+      id:        s.id,
+      en:        s.en,
+      ko:        s.ko,
+      highlight: s.highlight || '',
+      tip:       s.tip || '',
+      sit:       s.situation || '',
+      img:       s.image_url || null,
+      tint:      TOPIC_TINTS[s.topic_id] || '#1a2a3a',
+    }));
   } catch (err) {
     console.error('Supabase 데이터 로딩 실패:', err);
   }
