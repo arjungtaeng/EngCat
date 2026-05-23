@@ -63,7 +63,8 @@ window.ECDataLoaded = (async () => {
       pos:  w.pos || '',
       ko:   w.ko,
       def:  w.definition || '',
-      ex:   w.example_en || '',
+      ex:       w.example_en || '',
+      examples: [w.example_en_2, w.example_en_3, w.example_en_4].filter(Boolean),
       tint: TOPIC_TINTS[w.topic_id] || '#1a2a3a',
       img:  w.image_url || null,
     }));
