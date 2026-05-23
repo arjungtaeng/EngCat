@@ -255,6 +255,11 @@ function ECScreenWordCard() {
           <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 14.5, color: T.text, lineHeight: 1.35 }}>
             "{renderEx(word.ex)}"
           </div>
+          {word.exKo && (
+            <div style={{ fontSize: 12, color: T.textDim, marginTop: 5, lineHeight: 1.4 }}>
+              {word.exKo}
+            </div>
+          )}
         </div>
 
         {/* Button */}
