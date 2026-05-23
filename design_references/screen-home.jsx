@@ -14,6 +14,16 @@ function ECScreenHome() {
   const yData = (() => { try { return JSON.parse(localStorage.getItem(yKey) || '{}'); } catch(e) { return {}; } })();
   const yWordIds = new Set(yData.wordIds || []);
   const ySentenceIds = new Set(yData.sentenceIds || []);
+  // 어제 데이터가 없으면 오늘 데이터로 어제 키를 채워 첫날도 복습 섹션이 보이도록
+  if (yWordIds.size === 0 && ySentenceIds.size === 0 && (window.ECData?.words?.length > 0)) {
+    const defaultData = {
+      wordIds: (window.ECData.words.slice(0, 10)).map(w => w.id),
+      sentenceIds: (window.ECData.sentences.slice(0, 5)).map(s => s.id),
+    };
+    localStorage.setItem(yKey, JSON.stringify(defaultData));
+    defaultData.wordIds.forEach(id => yWordIds.add(id));
+    defaultData.sentenceIds.forEach(id => ySentenceIds.add(id));
+  }
   const reviewWords = (window.ECData?.words || []).filter(w => yWordIds.has(w.id));
   const reviewSentences = (window.ECData?.sentences || []).filter(s => ySentenceIds.has(s.id));
   const totalDone = doneWords + doneSentences;
