@@ -18,7 +18,7 @@ function ECScreenSentenceCard() {
   React.useEffect(() => { setActiveBeat(0); }, [idx]);
 
   const goNext = () => {
-    session.completedSentenceIds.add(s.id);
+    session.markSentenceDone(s.id);
     if (isLast) {
       session.sentenceIndex = 0;
       window.ECNav?.go('quiz');

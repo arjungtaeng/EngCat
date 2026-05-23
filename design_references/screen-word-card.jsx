@@ -30,7 +30,7 @@ function ECScreenWordCard() {
 
   const goTo = (dir) => {
     if (dir === 'next') {
-      session.completedWordIds.add(word.id);
+      session.markWordDone(word.id);
       if (isLast) { session.wordIndex = 0; window.ECNav?.go('sentence-card'); return; }
     }
     if (dir === 'prev' && isFirst) return;
@@ -67,6 +67,7 @@ function ECScreenWordCard() {
     const next = new Set(bookmarked);
     if (next.has(word.id)) { next.delete(word.id); session.bookmarkedIds.delete(word.id); }
     else { next.add(word.id); session.bookmarkedIds.add(word.id); }
+    session.saveBookmarks();
     setBookmarked(next);
   };
 

@@ -7,6 +7,15 @@ function ECScreenHome() {
   const session = window.ECSession || { completedWordIds: new Set(), completedSentenceIds: new Set() };
   const doneWords = session.completedWordIds.size;
   const doneSentences = session.completedSentenceIds.size;
+
+  // 어제 학습 기록
+  const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
+  const yKey = 'ec_learned_' + yesterday.toISOString().slice(0, 10);
+  const yData = (() => { try { return JSON.parse(localStorage.getItem(yKey) || '{}'); } catch(e) { return {}; } })();
+  const yWordIds = new Set(yData.wordIds || []);
+  const ySentenceIds = new Set(yData.sentenceIds || []);
+  const reviewWords = (window.ECData?.words || []).filter(w => yWordIds.has(w.id));
+  const reviewSentences = (window.ECData?.sentences || []).filter(s => ySentenceIds.has(s.id));
   const totalDone = doneWords + doneSentences;
   const totalCards = 15;
   const progressPct = Math.round((totalDone / totalCards) * 100);
@@ -123,64 +132,49 @@ function ECScreenHome() {
         </div>
       </div>
 
-      {/* Section: Daily set */}
-      <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>오늘의 단어</div>
-        <div style={{ fontSize: 12, color: T.textDim }}>10개 중 {doneWords}개 완료</div>
-      </div>
+      {/* Section: Review */}
+      {(reviewWords.length > 0 || reviewSentences.length > 0) && (<>
+        <div style={{ padding: '28px 22px 6px', display: 'flex', alignItems: 'baseline', gap: 8 }}>
+          <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>어제 배운 것 복습</div>
+          <div style={{ fontSize: 11, fontFamily: T.mono, color: T.textMute, letterSpacing: 0.5 }}>REVIEW</div>
+        </div>
 
-      <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto' }}>
-        {(window.ECData ? window.ECData.words.slice(0, 10) : []).map((c, i) => {
-          const done = session.completedWordIds.has(c.id);
-          return (
-            <div key={i} onClick={() => { window.ECSession && (window.ECSession.wordIndex = i); window.ECNav?.go('word-card'); }} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
-              <div style={{ position: 'relative' }}>
+        {reviewWords.length > 0 && (
+          <div style={{ padding: '8px 22px 0', display: 'flex', gap: 10, overflowX: 'auto' }}>
+            {reviewWords.map((c, i) => (
+              <div key={c.id} onClick={() => { const wi = (window.ECData?.words || []).findIndex(w => w.id === c.id); if (wi >= 0) { window.ECSession.wordIndex = wi; window.ECNav?.go('word-card'); }}} style={{ flex: '0 0 110px', cursor: 'pointer' }}>
                 {c.img
-                  ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', borderRadius: 14 }} alt={c.en} />
-                  : <ECPlaceholder height={150} tint={c.tint} radius={14} label={c.en}/>
+                  ? <img src={c.img} style={{ width: '100%', height: 120, objectFit: 'cover', objectPosition: 'center', borderRadius: 12 }} alt={c.en} />
+                  : <ECPlaceholder height={120} tint={c.tint} radius={12} label={c.en}/>
                 }
-                {done && (
-                  <div style={{
-                    position: 'absolute', top: 8, right: 8, width: 22, height: 22, borderRadius: 11,
-                    background: T.good, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                    {ECIcon.check(T.bg0, 14)}
-                  </div>
-                )}
+                <div style={{ marginTop: 6, fontFamily: T.display, fontWeight: 400, fontSize: 15, color: T.text }}>{c.en}</div>
+                <div style={{ fontSize: 11, color: T.textDim, marginTop: 1 }}>{c.ko.split(',')[0]}</div>
               </div>
-              <div style={{ marginTop: 8, fontFamily: T.display, fontWeight: 400, fontSize: 17, color: T.text }}>{c.en}</div>
-              <div style={{ fontSize: 12, color: T.textDim, marginTop: 1 }}>{c.ko.split(',')[0]}</div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Section: Sentence */}
-      <div style={{ padding: '28px 22px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>오늘의 문장</div>
-        <div onClick={() => window.ECNav?.go('sentence-card')} style={{ fontSize: 12, color: T.accent, cursor: 'pointer' }}>전체 보기</div>
-      </div>
-
-      <div style={{ padding: '0 22px 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {(window.ECData ? window.ECData.sentences.slice(0, 5) : []).map((s, i) => (
-          <div key={i} onClick={() => { window.ECSession && (window.ECSession.sentenceIndex = i); window.ECNav?.go('sentence-card'); }} style={{
-            padding: '14px 16px', borderRadius: 14,
-            background: T.bg2, border: `1px solid ${T.hair}`,
-            display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer',
-            opacity: session.completedSentenceIds.has(s.id) ? 0.65 : 1,
-          }}>
-            <div style={{
-              width: 38, height: 38, borderRadius: 10, background: T.bg3,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-              color: T.accent,
-            }}>{ECIcon.speaker(T.accent, 18)}</div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 16, color: T.text, lineHeight: 1.25 }}>{s.en}</div>
-              <div style={{ fontSize: 12.5, color: T.textDim, marginTop: 2 }}>{s.ko}</div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+        )}
+
+        {reviewSentences.length > 0 && (
+          <div style={{ padding: '12px 22px 0', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {reviewSentences.map((s, i) => (
+              <div key={s.id} onClick={() => { const si = (window.ECData?.sentences || []).findIndex(x => x.id === s.id); if (si >= 0) { window.ECSession.sentenceIndex = si; window.ECNav?.go('sentence-card'); }}} style={{
+                padding: '12px 14px', borderRadius: 12,
+                background: T.bg2, border: `1px solid ${T.hair}`,
+                display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer',
+              }}>
+                <div style={{ width: 32, height: 32, borderRadius: 8, background: T.bg3, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  {ECIcon.speaker(T.accent, 15)}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 14.5, color: T.text, lineHeight: 1.25 }}>{s.en}</div>
+                  <div style={{ fontSize: 11.5, color: T.textDim, marginTop: 1 }}>{s.ko}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        <div style={{ height: 24 }} />
+      </>)}
 
       </div>{/* end scrollable */}
     </div>
@@ -191,7 +185,7 @@ function ECTabBar({ active = 'home', visible = true }) {
   const T = ECTokens;
   const items = [
     { id: 'home',   label: '홈',      icon: ECIcon.home,  screen: 'home' },
-    { id: 'cards',  label: '카드',    icon: ECIcon.cards, screen: 'word-card' },
+    { id: 'cards',  label: '저장',    icon: ECIcon.cards, screen: 'saved-cards' },
     { id: 'stats',  label: '진도',    icon: ECIcon.chart, screen: 'stats' },
     { id: 'me',     label: '내 정보', icon: ECIcon.user,  screen: 'profile' },
   ];

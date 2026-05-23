@@ -1,12 +1,34 @@
 // EngCat — Card data + session state (Supabase 연동)
 
 if (!window.ECSession) {
+  const savedBookmarks = (() => { try { return new Set(JSON.parse(localStorage.getItem('ec_bookmarks') || '[]')); } catch(e) { return new Set(); } })();
   window.ECSession = {
     wordIndex: 0,
     sentenceIndex: 0,
     completedWordIds: new Set(),
     completedSentenceIds: new Set(),
-    bookmarkedIds: new Set(),
+    bookmarkedIds: savedBookmarks,
+    saveBookmarks() {
+      localStorage.setItem('ec_bookmarks', JSON.stringify([...this.bookmarkedIds]));
+    },
+    markWordDone(id) {
+      this.completedWordIds.add(id);
+      const key = 'ec_learned_' + new Date().toISOString().slice(0, 10);
+      const stored = (() => { try { return JSON.parse(localStorage.getItem(key) || '{}'); } catch(e) { return {}; } })();
+      const wordIds = new Set(stored.wordIds || []);
+      wordIds.add(id);
+      stored.wordIds = [...wordIds];
+      localStorage.setItem(key, JSON.stringify(stored));
+    },
+    markSentenceDone(id) {
+      this.completedSentenceIds.add(id);
+      const key = 'ec_learned_' + new Date().toISOString().slice(0, 10);
+      const stored = (() => { try { return JSON.parse(localStorage.getItem(key) || '{}'); } catch(e) { return {}; } })();
+      const sentenceIds = new Set(stored.sentenceIds || []);
+      sentenceIds.add(id);
+      stored.sentenceIds = [...sentenceIds];
+      localStorage.setItem(key, JSON.stringify(stored));
+    },
     resetDaily() {
       this.wordIndex = 0;
       this.sentenceIndex = 0;
