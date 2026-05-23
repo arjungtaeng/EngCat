@@ -90,6 +90,35 @@ const WORDS = [
 ];
 
 // ── TTS engines ──────────────────────────────────────────
+const EC_AZURE = { key: localStorage.getItem('ec_azure_key') || '', region: localStorage.getItem('ec_azure_region') || 'koreacentral' };
+
+async function speakAzure(text, btn, statusEl) {
+  const xmlEsc = s => s.replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]));
+  setPlaying(btn, statusEl, '로딩 중...');
+  try {
+    const ssml = `<speak version='1.0' xml:lang='en-US'><voice name='en-US-JennyNeural'>${xmlEsc(text)}</voice></speak>`;
+    const res = await fetch(`https://${EC_AZURE.region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
+      method: 'POST',
+      headers: {
+        'Ocp-Apim-Subscription-Key': EC_AZURE.key,
+        'Content-Type': 'application/ssml+xml',
+        'X-Microsoft-OutputFormat': 'audio-16khz-128kbitrate-mono-mp3',
+      },
+      body: ssml,
+    });
+    if (!res.ok) throw new Error(`${res.status}`);
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const audio = new Audio(url);
+    setPlaying(btn, statusEl, '재생 중...');
+    audio.onended = () => { URL.revokeObjectURL(url); setIdle(btn, statusEl, '완료'); };
+    audio.onerror = () => setIdle(btn, statusEl, '재생 오류');
+    audio.play();
+  } catch (e) {
+    setIdle(btn, statusEl, `오류: ${e.message}`);
+  }
+}
+
 function speakWebSpeech(text, btn, statusEl) {
   window.speechSynthesis.cancel();
   const utt = new SpeechSynthesisUtterance(text);
@@ -167,6 +196,12 @@ function iconStop(color = '#0D0D11') {
 // ── Render sentence cards ─────────────────────────────────
 const ENGINES = [
   {
+    name: 'Azure Neural TTS — JennyNeural',
+    desc: 'Microsoft Azure Neural 음성. 자연스러운 억양과 발음.',
+    tags: ['best'],
+    fn: speakAzure,
+  },
+  {
     name: 'Web Speech API — 기본',
     desc: '브라우저 내장. API 키 없음. 기기마다 음질 다름.',
     tags: ['free'],
@@ -177,12 +212,6 @@ const ENGINES = [
     desc: '사용 가능한 음성 중 Samantha / Google US English 우선 선택.',
     tags: ['free'],
     fn: speakWebSpeechBest,
-  },
-  {
-    name: 'Google Translate TTS (비공식)',
-    desc: '구글 번역 내부 엔진 사용. API 키 없음. CORS로 차단될 수 있음.',
-    tags: ['unofficial'],
-    fn: speakGoogleTranslate,
   },
 ];
 

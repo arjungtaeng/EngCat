@@ -1,6 +1,10 @@
 // EngCat — Word Card
 // Full-bleed hero. No scroll — swipe left/right to navigate cards.
 
+// Azure key stored in localStorage — set via browser console:
+// localStorage.setItem('ec_azure_key','YOUR_KEY'); localStorage.setItem('ec_azure_region','koreacentral');
+const EC_AZURE = { key: localStorage.getItem('ec_azure_key') || '', region: localStorage.getItem('ec_azure_region') || 'koreacentral' };
+
 function ECScreenWordCard() {
   const T = ECTokens;
   const words = ECData.words;
@@ -68,13 +72,28 @@ function ECScreenWordCard() {
 
   const speak = async (text) => {
     const plain = stripMarkers(text);
+    const xmlEsc = s => s.replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]));
+    // Azure Neural TTS
     try {
-      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(plain.trim().split(' ')[0])}`);
-      const data = await res.json();
-      const audioUrl = data[0]?.phonetics?.find(p => p.audio)?.audio;
-      if (audioUrl) { new Audio(audioUrl).play(); return; }
+      const ssml = `<speak version='1.0' xml:lang='en-US'><voice name='en-US-JennyNeural'>${xmlEsc(plain)}</voice></speak>`;
+      const res = await fetch(`https://${EC_AZURE.region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
+        method: 'POST',
+        headers: {
+          'Ocp-Apim-Subscription-Key': EC_AZURE.key,
+          'Content-Type': 'application/ssml+xml',
+          'X-Microsoft-OutputFormat': 'audio-16khz-128kbitrate-mono-mp3',
+        },
+        body: ssml,
+      });
+      if (!res.ok) throw new Error(`Azure TTS ${res.status}`);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      audio.onended = () => URL.revokeObjectURL(url);
+      audio.play();
+      return;
     } catch (_) {}
-    // fallback
+    // fallback: Web Speech
     window.speechSynthesis.cancel();
     const utt = new SpeechSynthesisUtterance(plain);
     utt.lang = 'en-US';
