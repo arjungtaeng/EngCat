@@ -45,7 +45,8 @@ const ECTokens = {
   // Pretendard for Korean, Playfair Display for English words/sentences, JetBrains Mono for labels
   sans:    '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", system-ui, sans-serif',
   serif:   '"Instrument Serif", "Iowan Old Style", "Apple Garamond", Georgia, serif',
-  display: '"Playfair Display", Georgia, serif',
+  display: '"Outfit", system-ui, sans-serif',
+  thin:    '"Raleway", system-ui, sans-serif',
   mono:    '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace',
 
   // ── Spacing & radii ─────────────────────────────────────────
