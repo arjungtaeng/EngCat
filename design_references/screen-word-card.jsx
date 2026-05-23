@@ -66,9 +66,17 @@ function ECScreenWordCard() {
 
   const stripMarkers = (text) => text.replace(/\{([^}]+)\}/g, '$1');
 
-  const speak = (text) => {
+  const speak = async (text) => {
+    const plain = stripMarkers(text);
+    try {
+      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(plain.trim().split(' ')[0])}`);
+      const data = await res.json();
+      const audioUrl = data[0]?.phonetics?.find(p => p.audio)?.audio;
+      if (audioUrl) { new Audio(audioUrl).play(); return; }
+    } catch (_) {}
+    // fallback
     window.speechSynthesis.cancel();
-    const utt = new SpeechSynthesisUtterance(stripMarkers(text));
+    const utt = new SpeechSynthesisUtterance(plain);
     utt.lang = 'en-US';
     utt.rate = 0.85;
     window.speechSynthesis.speak(utt);
@@ -273,34 +281,12 @@ function ECScreenWordCard() {
         }}
       >
         {/* Handle */}
-        <div style={{ display: 'flex', justifyContent: 'center', padding: '12px 0 4px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', padding: '12px 0 8px' }}>
           <div style={{ width: 36, height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.18)' }}/>
         </div>
 
-        {/* Header */}
-        <div style={{
-          padding: '8px 20px 16px',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        }}>
-          <div>
-            <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 22, color: T.text }}>{word.en}</div>
-            <div style={{ fontSize: 13, color: T.accent, marginTop: 2 }}>{word.ko}</div>
-          </div>
-          <div
-            onClick={() => speak(word.en)}
-            style={{
-              width: 40, height: 40, borderRadius: 999,
-              background: T.bg2, border: `1px solid ${T.hair}`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer',
-            }}
-          >{ECIcon.speaker(T.accent, 20)}</div>
-        </div>
-
-        <div style={{ height: 1, background: T.hair, margin: '0 20px' }}/>
-
         {/* Example list */}
-        <div style={{ padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <div style={{ padding: '4px 20px 0', display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{
             fontFamily: T.mono, fontSize: 9.5, color: T.textMute,
             letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 2,
