@@ -7,7 +7,7 @@ const EC_SUPABASE_ANON = 'sb_publishable_-PyhiOHtQJsKafpoDZIMLg_q09S3yRJ';
 
 const getTTSSettings = () => ({
   voice: localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural',
-  rate:  localStorage.getItem('ec_tts_rate')    || 'medium',
+  rate:  'medium',
 });
 
 function ECScreenWordCard() {

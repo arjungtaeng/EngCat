@@ -11,7 +11,6 @@ function ECScreenProfile() {
   const [editingNick, setEditingNick] = React.useState(false);
   const [nickVal, setNickVal] = React.useState(() => localStorage.getItem('engcat_nickname') || '');
   const [ttsVoice, setTtsVoice] = React.useState(() => localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural');
-  const [ttsRate, setTtsRate]   = React.useState(() => localStorage.getItem('ec_tts_rate') || 'medium');
 
   const speakPreview = async (voice, rate) => {
     const text = 'Hello! I am your English learning assistant.';
@@ -39,8 +38,7 @@ function ECScreenProfile() {
     window.speechSynthesis.speak(utt);
   };
 
-  const setVoice = (v) => { setTtsVoice(v); localStorage.setItem('ec_azure_voice', v); speakPreview(v, ttsRate); };
-  const setRate  = (r) => { setTtsRate(r);  localStorage.setItem('ec_tts_rate', r);  speakPreview(ttsVoice, r); };
+  const setVoice = (v) => { setTtsVoice(v); localStorage.setItem('ec_azure_voice', v); speakPreview(v, 'medium'); };
 
   const saveNick = () => {
     const trimmed = nickVal.trim();
@@ -56,10 +54,10 @@ function ECScreenProfile() {
   };
 
   const Seg = ({ options, value, onChange }) => (
-    <div style={{ display: 'flex', gap: 4 }}>
+    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
       {options.map(o => (
         <div key={o.value} onClick={() => onChange(o.value)} style={{
-          padding: '5px 12px', borderRadius: 8, fontSize: 12, fontWeight: 500,
+          padding: '5px 10px', borderRadius: 8, fontSize: 12, fontWeight: 500,
           background: value === o.value ? T.accent : T.bg3,
           color: value === o.value ? T.bg0 : T.textDim,
           cursor: 'pointer', transition: 'background 0.15s, color 0.15s',
@@ -213,15 +211,9 @@ function ECScreenProfile() {
           <Row label="알림"             value="오전 8:00"/>
           <SegRow
             label="음성"
-            options={[{ label: 'Jenny', value: 'en-US-JennyNeural' }, { label: 'Guy', value: 'en-US-GuyNeural' }]}
+            options={[{ label: 'Jenny', value: 'en-US-JennyNeural' }, { label: 'Aria', value: 'en-US-AriaNeural' }, { label: 'Guy', value: 'en-US-GuyNeural' }, { label: 'Davis', value: 'en-US-DavisNeural' }]}
             value={ttsVoice}
             onChange={setVoice}
-          />
-          <SegRow
-            label="속도"
-            options={[{ label: '느리게', value: 'slow' }, { label: '보통', value: 'medium' }, { label: '빠르게', value: 'fast' }]}
-            value={ttsRate}
-            onChange={setRate}
             last
           />
         </div>
