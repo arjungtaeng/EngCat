@@ -88,7 +88,7 @@ function ECScreenProfile() {
         cursor: onPress ? 'pointer' : 'default',
       }}
     >
-      <div style={{ flex: 1, fontSize: 15, color: danger ? T.bad : T.text, fontWeight: 500 }}>{label}</div>
+      <div style={{ flex: 1, fontSize: 15, color: danger ? T.accent : T.text, fontWeight: 500 }}>{label}</div>
       {value && <div style={{ fontSize: 13, color: T.textDim }}>{value}</div>}
       {!danger && <div style={{ color: T.textMute }}>{ECIcon.chev('right', T.textMute, 14)}</div>}
     </div>
