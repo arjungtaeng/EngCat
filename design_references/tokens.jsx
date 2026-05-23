@@ -11,9 +11,9 @@ const ECDark = {
   textDim:'rgba(248,245,239,0.70)',
   textMute:'rgba(248,245,239,0.50)',
   textFaint:'rgba(248,245,239,0.22)',
-  accent:    '#FF6B35',
-  accentSoft:'rgba(255,107,53,0.15)',
-  accentDeep:'#E0501A',
+  accent:    '#E8B26A',
+  accentSoft:'rgba(232,178,106,0.14)',
+  accentDeep:'#C8904A',
   good:      '#8CCBA8',
   goodSoft:  'rgba(140,203,168,0.14)',
   warn:      '#E89A6A',
@@ -61,9 +61,31 @@ const ECShared = {
 
 window.ECTokens = Object.assign({}, ECDark, ECShared);
 
+window.EC_LIGHT_ACCENTS = [
+  { name: '코랄',     value: '#E05030', soft: 'rgba(224,80,48,0.14)',  deep: '#C03818' },
+  { name: '버밀리온', value: '#D03820', soft: 'rgba(208,56,32,0.14)',  deep: '#A82810' },
+  { name: '크림슨',   value: '#C02840', soft: 'rgba(192,40,64,0.14)',  deep: '#A01030' },
+  { name: '로즈우드', value: '#A83050', soft: 'rgba(168,48,80,0.14)',  deep: '#882040' },
+  { name: '앰버',     value: '#B06800', soft: 'rgba(176,104,0,0.14)',  deep: '#8A5000' },
+  { name: '올리브',   value: '#7A7010', soft: 'rgba(122,112,16,0.14)', deep: '#605808' },
+  { name: '틸',       value: '#1A7868', soft: 'rgba(26,120,104,0.14)', deep: '#0E5A50' },
+  { name: '코발트',   value: '#1858A8', soft: 'rgba(24,88,168,0.14)',  deep: '#0C4080' },
+  { name: '인디고',   value: '#4030A0', soft: 'rgba(64,48,160,0.14)',  deep: '#2A1880' },
+  { name: '바이올렛', value: '#7030A0', soft: 'rgba(112,48,160,0.14)', deep: '#521880' },
+];
+
 window.ECApplyTheme = function(mode) {
   const src = mode === 'light' ? ECLight : ECDark;
   Object.assign(window.ECTokens, src);
+  if (mode === 'light') {
+    const stored = localStorage.getItem('ec_light_accent');
+    const found = window.EC_LIGHT_ACCENTS.find(a => a.value === stored);
+    if (found) {
+      window.ECTokens.accent     = found.value;
+      window.ECTokens.accentSoft = found.soft;
+      window.ECTokens.accentDeep = found.deep;
+    }
+  }
   document.body.style.background = window.ECTokens.bg1;
 };
 

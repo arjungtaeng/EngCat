@@ -12,7 +12,16 @@ function ECScreenProfile() {
   const [nickVal, setNickVal] = React.useState(() => localStorage.getItem('engcat_nickname') || '');
   const [ttsVoice, setTtsVoice] = React.useState(() => localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural');
   const [themePref, setThemePref] = React.useState(() => localStorage.getItem('ec_theme') || 'system');
+  const [lightAccent, setLightAccent] = React.useState(() => localStorage.getItem('ec_light_accent') || '');
   const changeTheme = (v) => { setThemePref(v); window.ECSetTheme?.(v); };
+  const changeLightAccent = (v) => {
+    setLightAccent(v);
+    localStorage.setItem('ec_light_accent', v);
+    const resolved = themePref === 'system'
+      ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+      : themePref;
+    if (resolved === 'light') window.ECSetTheme?.(resolved);
+  };
 
   const speakPreview = async (voice, rate) => {
     const text = 'Hello! I am your English learning assistant.';
@@ -229,6 +238,27 @@ function ECScreenProfile() {
             value={themePref}
             onChange={changeTheme}
           />
+          {/* 라이트 모드 액센트 색상 선택 */}
+          <div style={{ padding: '14px 18px', borderBottom: `1px solid ${T.hair}` }}>
+            <div style={{ fontSize: 15, color: T.text, fontWeight: 500, marginBottom: 10 }}>라이트 색상</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {(window.EC_LIGHT_ACCENTS || []).map(a => {
+                const sel = lightAccent === a.value;
+                return (
+                  <div key={a.value} onClick={() => changeLightAccent(a.value)} style={{
+                    display: 'flex', alignItems: 'center', gap: 6,
+                    padding: '5px 10px', borderRadius: 8, cursor: 'pointer',
+                    border: `1.5px solid ${sel ? a.value : T.hair}`,
+                    background: sel ? a.value + '18' : 'transparent',
+                    transition: 'all 0.15s',
+                  }}>
+                    <div style={{ width: 10, height: 10, borderRadius: '50%', background: a.value, flexShrink: 0 }}/>
+                    <span style={{ fontSize: 12, fontWeight: sel ? 600 : 500, color: sel ? a.value : T.textMute }}>{a.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
           <Row label="저장한 카드"      value="68"/>
           <Row label="친구 / 랭킹"      value=""/>
           <Row label="구독 관리"        value="EngCat Pro"/>
