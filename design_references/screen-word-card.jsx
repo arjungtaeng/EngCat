@@ -90,17 +90,28 @@ function ECScreenWordCard() {
         if (!res.ok) throw new Error(`Azure TTS ${res.status}`);
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);
-        const audio = new Audio(url);
-        audio.onended = () => URL.revokeObjectURL(url);
-        audio.play();
-        return;
+        return new Promise((resolve) => {
+          const audio = new Audio(url);
+          audio.onended = () => { URL.revokeObjectURL(url); resolve(); };
+          audio.onerror = () => { URL.revokeObjectURL(url); resolve(); };
+          audio.play();
+        });
       } catch (_) {}
     }
-    window.speechSynthesis.cancel();
-    const utt = new SpeechSynthesisUtterance(plain);
-    utt.lang = 'en-US';
-    utt.rate = 0.85;
-    window.speechSynthesis.speak(utt);
+    return new Promise((resolve) => {
+      window.speechSynthesis.cancel();
+      const utt = new SpeechSynthesisUtterance(plain);
+      utt.lang = 'en-US';
+      utt.rate = 0.85;
+      utt.onend = resolve;
+      utt.onerror = resolve;
+      window.speechSynthesis.speak(utt);
+    });
+  };
+
+  const speakWordAndExample = async () => {
+    await speak(word.en);
+    await speak(word.ex);
   };
 
   function renderEx(ex) {
@@ -160,11 +171,11 @@ function ECScreenWordCard() {
 
       {/* ── Right action rail ── */}
       <div style={{
-        position: 'absolute', right: 14, top: '22%', zIndex: 10,
+        position: 'absolute', right: 14, top: '45%', zIndex: 10,
         display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'center',
       }}>
         {[
-          { icon: ECIcon.speaker('rgba(255,255,255,0.9)', 22), label: '듣기', onClick: () => speak(word.en) },
+          { icon: ECIcon.speaker('rgba(255,255,255,0.9)', 22), label: '듣기', onClick: speakWordAndExample },
           { icon: ECIcon.heart(isBookmarked ? T.accent : 'rgba(255,255,255,0.9)', 22, isBookmarked), label: '저장', onClick: toggleBookmark },
           { icon: ECIcon.notes('rgba(255,255,255,0.9)', 20), label: '예문', onClick: () => setShowExamples(true) },
         ].map((a, i) => (
