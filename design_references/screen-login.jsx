@@ -139,7 +139,7 @@ function ECScreenLogin() {
         <img
           src="icons/icon-1024.png"
           alt="EngCat"
-          style={{ width: 140, height: 140, mixBlendMode: T.text === '#F8F5EF' ? 'lighten' : 'normal' }}
+          style={{ width: 140, height: 140 }}
         />
       </div>
 
