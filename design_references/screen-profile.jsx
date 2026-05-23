@@ -137,7 +137,7 @@ function ECScreenProfile() {
                   style={{
                     flex: 1, minWidth: 0, width: '100%', padding: '5px 10px', borderRadius: 8,
                     background: T.bg3, border: `1px solid ${T.hairStr}`,
-                    color: T.text, fontSize: 13, fontFamily: T.sans, outline: 'none', boxSizing: 'border-box',
+                    color: T.text, fontSize: 16, fontFamily: T.sans, outline: 'none', boxSizing: 'border-box',
                   }}
                 />
                 <span
