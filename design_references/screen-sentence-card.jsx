@@ -204,18 +204,6 @@ function ECScreenSentenceCard() {
         position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 12,
         paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 58px)',
       }}>
-        {/* Progress strip */}
-        <div style={{ display: 'flex', gap: 3, padding: '0 16px 8px', alignItems: 'center', height: 24 }}>
-          {sentences.map((sent, i) => (
-            <div key={i} style={{
-              flex: 1, height: i === idx ? 4 : 2.5, borderRadius: 2,
-              background: session.completedSentenceIds.has(sent.id)
-                ? T.accent : i === idx ? T.text : T.hairStr,
-              transition: 'all 0.2s ease',
-            }}/>
-          ))}
-        </div>
-
         {/* Nav buttons */}
         <div style={{ display: 'flex', gap: 10, padding: '0 18px' }}>
           {!isFirst && (
