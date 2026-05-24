@@ -55,30 +55,13 @@ function ECScreenSentenceCard() {
       {/* Top chrome */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
         <ECStatusBar/>
-        <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div
-            onClick={() => window.ECNav?.go('home')}
-            style={{
-              width: 36, height: 36, borderRadius: 12,
-              background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`, backdropFilter: 'blur(20px)',
-              border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-            }}
-          >{ECIcon.close(T.textDim, 18)}</div>
-
+        <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{
             padding: '7px 14px', borderRadius: 999,
             background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`, backdropFilter: 'blur(20px)',
             border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
             fontFamily: T.mono, fontSize: 10.5, color: T.textDim, letterSpacing: 1, textTransform: 'uppercase',
           }}>{idx + 1} / {sentences.length} · 문장</div>
-
-          <div style={{
-            width: 36, height: 36, borderRadius: 12,
-            background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`, backdropFilter: 'blur(20px)',
-            border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>{ECIcon.more(T.textDim, 18)}</div>
         </div>
       </div>
 
@@ -89,7 +72,7 @@ function ECScreenSentenceCard() {
         style={{
           position: 'absolute',
           top: 0,
-          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 90px)',
+          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 140px)',
           left: 0, right: 0,
           overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
@@ -146,7 +129,7 @@ function ECScreenSentenceCard() {
       {/* Bottom area: progress strip + controls */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 12,
-        paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 8px)',
+        paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 58px)',
       }}>
         {/* Progress strip */}
         <div style={{ display: 'flex', gap: 3, padding: '0 16px 8px', alignItems: 'center', height: 24 }}>
