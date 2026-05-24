@@ -128,8 +128,7 @@ function ECScreenWordCard() {
 
       {/* ── Top chrome ── */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
-        <ECStatusBar/>
-        <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ padding: '6px 18px 0', paddingTop: 'calc(env(safe-area-inset-top, 0px) + 6px)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{
             padding: '7px 14px', borderRadius: 999,
             background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`, backdropFilter: 'blur(20px)',
