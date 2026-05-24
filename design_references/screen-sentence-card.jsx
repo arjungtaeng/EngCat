@@ -138,8 +138,8 @@ function ECScreenSentenceCard() {
 
           {/* Pattern */}
           <div style={{
-            fontFamily: T.display, fontWeight: 400, fontSize: 40, lineHeight: 1.1, color: T.text,
-            letterSpacing: -0.8, marginBottom: 6,
+            fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 36, lineHeight: 1.15, color: T.text,
+            letterSpacing: -0.3, marginBottom: 6,
           }}>{s.en}</div>
 
           {/* Ko explanation */}
