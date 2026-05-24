@@ -107,40 +107,44 @@ function ECScreenSentenceCard() {
       {/* Top chrome */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
         <ECStatusBar/>
-        <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+        <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{
             padding: '7px 14px', borderRadius: 999,
             background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`, backdropFilter: 'blur(20px)',
             border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
             fontFamily: T.mono, fontSize: 10.5, color: T.textDim, letterSpacing: 1, textTransform: 'uppercase',
           }}>{idx + 1} / {sentences.length} · 패턴</div>
-          {/* 듣기 / 저장 아이콘 — 가로 배치 */}
-          <div style={{ position: 'absolute', right: 18, display: 'flex', gap: 2, alignItems: 'center' }}>
-            <div onClick={() => speak(s.en)} style={{
-              width: 38, height: 38, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-            }}>{ECIcon.speaker('rgba(255,255,255,0.75)', 21)}</div>
-            <div onClick={toggleBookmark} style={{
-              width: 38, height: 38, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-            }}>{ECIcon.heart(isBookmarked ? T.accent : 'rgba(255,255,255,0.75)', 21, isBookmarked)}</div>
-          </div>
         </div>
       </div>
 
-      {/* < > Navigation arrows — 이미지 중간, 배경 없이 */}
+      {/* < > Navigation arrows — 이미지 상단부, 배경 없이 */}
       {!isFirst && (
         <div onClick={() => goTo('prev')} style={{
-          position: 'absolute', left: 10, top: '20%', zIndex: 10,
+          position: 'absolute', left: 10, top: '10%', zIndex: 10,
           width: 44, height: 44,
           display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
           opacity: prevArrowOpacity, transition: 'opacity 0.1s',
         }}>{ECIcon.chev('left', '#fff', 28)}</div>
       )}
       <div onClick={() => goTo('next')} style={{
-        position: 'absolute', right: 10, top: '20%', zIndex: 10,
+        position: 'absolute', right: 10, top: '10%', zIndex: 10,
         width: 44, height: 44,
         display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
         opacity: nextArrowOpacity, transition: 'opacity 0.1s',
       }}>{ECIcon.chev('right', '#fff', 28)}</div>
+
+      {/* Right rail — 듣기 / 저장 (세로, 아이콘만) */}
+      <div style={{
+        position: 'absolute', right: 14, top: '30%', zIndex: 10,
+        display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center',
+      }}>
+        <div onClick={() => speak(s.en)} style={{
+          width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+        }}>{ECIcon.speaker('rgba(255,255,255,0.8)', 22)}</div>
+        <div onClick={toggleBookmark} style={{
+          width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+        }}>{ECIcon.heart(isBookmarked ? T.accent : 'rgba(255,255,255,0.8)', 22, isBookmarked)}</div>
+      </div>
 
       {/* Scrollable content */}
       <div
