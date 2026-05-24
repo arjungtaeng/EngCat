@@ -93,14 +93,15 @@ window.ECDataLoaded = (async () => {
     }));
 
     window.ECData.sentences = sentencesRes.data.map(s => ({
-      id:        s.id,
-      en:        s.en,
-      ko:        s.ko,
+      id:       s.id,
+      en:       s.en,
+      ko:       s.ko,
       highlight: s.highlight || '',
-      tip:       s.tip || '',
-      sit:       s.situation || '',
-      img:       s.image_url || null,
-      tint:      TOPIC_TINTS[s.topic_id] || '#1a2a3a',
+      tip:      s.tip || '',
+      sit:      s.situation || '',
+      img:      s.image_url || null,
+      tint:     TOPIC_TINTS[s.topic_id] || '#1a2a3a',
+      examples: [s.ex1, s.ex2, s.ex3, s.ex4].filter(Boolean),
     }));
   } catch (err) {
     console.error('Supabase 데이터 로딩 실패:', err);

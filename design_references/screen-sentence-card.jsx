@@ -1,4 +1,6 @@
-// EngCat — Sentence card (word-card style full-bleed)
+// EngCat — Sentence card (pattern-based)
+// 패턴("I'd like ~")과 그 패턴을 활용한 예문 3~4개를 한 카드에 표시.
+// Supabase sentences 테이블에 ex1~ex4 컬럼 필요.
 
 function ECScreenSentenceCard() {
   const T = ECTokens;
@@ -44,18 +46,7 @@ function ECScreenSentenceCard() {
     setBookmarked(next);
   };
 
-  const speak = () => window.ECSpeak(s.en);
-
-  function renderSentence(en, highlight) {
-    if (!highlight) return en;
-    const parts = en.split(highlight);
-    if (parts.length < 2) return en;
-    return [
-      parts[0],
-      React.createElement('span', { key: 'h', style: { color: T.accent } }, highlight),
-      parts.slice(1).join(highlight),
-    ];
-  }
+  const speak = (text) => window.ECSpeak(text || s.en);
 
   const overlayGrad = isDark
     ? 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 18%, transparent 34%, rgba(0,0,0,0.82) 56%, rgba(0,0,0,0.97) 70%, #000 82%)'
@@ -72,8 +63,8 @@ function ECScreenSentenceCard() {
       {/* Full-bleed landscape image */}
       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
         {s.img
-          ? <img src={s.img} style={{ width: '100%', height: '56%', objectFit: 'cover', objectPosition: 'center' }} alt={s.en} />
-          : <div style={{ width: '100%', height: '56%' }}><ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.sit}/></div>
+          ? <img src={s.img} style={{ width: '100%', height: '50%', objectFit: 'cover', objectPosition: 'center' }} alt={s.en} />
+          : <div style={{ width: '100%', height: '50%' }}><ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.sit}/></div>
         }
         <div style={{ position: 'absolute', inset: 0, background: overlayGrad }}/>
       </div>
@@ -86,7 +77,7 @@ function ECScreenSentenceCard() {
             background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`, backdropFilter: 'blur(20px)',
             border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
             fontFamily: T.mono, fontSize: 10.5, color: T.textDim, letterSpacing: 1, textTransform: 'uppercase',
-          }}>{idx + 1} / {sentences.length} · 문장</div>
+          }}>{idx + 1} / {sentences.length} · 패턴</div>
         </div>
       </div>
 
@@ -96,7 +87,7 @@ function ECScreenSentenceCard() {
         display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'center',
       }}>
         {[
-          { icon: ECIcon.speaker(railIcon, 22), label: '듣기', onClick: speak },
+          { icon: ECIcon.speaker(railIcon, 22), label: '듣기', onClick: () => speak(s.en) },
           { icon: ECIcon.heart(isBookmarked ? T.accent : railIcon, 22, isBookmarked), label: '저장', onClick: toggleBookmark },
         ].map((a, i) => (
           <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
@@ -127,9 +118,10 @@ function ECScreenSentenceCard() {
           flexDirection: 'column',
         }}
       >
-        <div style={{ flex: '0 0 43%', minHeight: 130 }} />
+        <div style={{ flex: '0 0 40%', minHeight: 120 }} />
 
         <div style={{ padding: '0 22px 20px' }}>
+
           {/* Situation tag */}
           <div style={{ marginBottom: 12 }}>
             <div style={{
@@ -143,31 +135,66 @@ function ECScreenSentenceCard() {
             </div>
           </div>
 
-          {/* Sentence */}
+          {/* Pattern */}
           <div style={{
-            fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 27, lineHeight: 1.2, color: T.text,
-            letterSpacing: -0.3, marginBottom: 10,
-          }}>
-            "{renderSentence(s.en, s.highlight)}"
-          </div>
+            fontFamily: T.display, fontWeight: 400, fontSize: 40, lineHeight: 1.1, color: T.text,
+            letterSpacing: -0.8, marginBottom: 6,
+          }}>{s.en}</div>
 
-          {/* Korean translation */}
-          <div style={{ fontSize: 15, color: isDark ? 'rgba(248,245,239,0.55)' : T.textDim, lineHeight: 1.45, marginBottom: 16 }}>
+          {/* Ko explanation */}
+          <div style={{ fontSize: 16, color: T.accent, fontWeight: 500, marginBottom: 14, letterSpacing: -0.2 }}>
             {s.ko}
           </div>
 
           {/* Tip */}
-          <div style={{
-            padding: '12px 14px', borderRadius: 12,
-            background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
-            border: `1px solid ${T.hair}`,
-            display: 'flex', gap: 10, alignItems: 'flex-start',
-          }}>
-            <div style={{ color: T.accent, flexShrink: 0, marginTop: 1 }}>{ECIcon.sparkle(T.accent, 14)}</div>
-            <div style={{ fontSize: 12.5, color: T.textDim, lineHeight: 1.45 }}>
-              <span style={{ color: T.text, fontWeight: 600 }}>표현 팁 · </span>{s.tip}
+          {s.tip ? (
+            <div style={{
+              padding: '11px 14px', borderRadius: 12, marginBottom: 20,
+              background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
+              border: `1px solid ${T.hair}`,
+              display: 'flex', gap: 10, alignItems: 'flex-start',
+            }}>
+              <div style={{ color: T.accent, flexShrink: 0, marginTop: 1 }}>{ECIcon.sparkle(T.accent, 14)}</div>
+              <div style={{ fontSize: 12.5, color: T.textDim, lineHeight: 1.45 }}>
+                <span style={{ color: T.text, fontWeight: 600 }}>패턴 팁 · </span>{s.tip}
+              </div>
             </div>
-          </div>
+          ) : <div style={{ marginBottom: 20 }}/>}
+
+          {/* Pattern examples */}
+          {s.examples.length > 0 ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <div style={{
+                fontFamily: T.mono, fontSize: 9.5, color: T.textMute,
+                letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 4,
+              }}>패턴 예문</div>
+              {s.examples.map((ex, i) => (
+                <div key={i} style={{
+                  padding: '12px 14px', borderRadius: 12,
+                  background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
+                  border: `1px solid ${T.hair}`,
+                  display: 'flex', alignItems: 'center', gap: 12,
+                }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 15, color: T.text, lineHeight: 1.35 }}>
+                      {ex}
+                    </div>
+                  </div>
+                  <div onClick={() => speak(ex)} style={{
+                    width: 32, height: 32, borderRadius: 999, flexShrink: 0,
+                    background: isDark ? 'rgba(255,255,255,0.10)' : T.bg3,
+                    border: `1px solid ${T.hair}`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+                  }}>{ECIcon.speaker(T.accent, 13)}</div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div style={{ padding: '20px 0', textAlign: 'center', fontSize: 13, color: T.textMute, lineHeight: 1.6 }}>
+              패턴 예문이 아직 없어요.<br/>
+              <span style={{ fontSize: 11 }}>Supabase sentences 테이블에 ex1~ex4 컬럼을 추가하면 표시돼요.</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -207,7 +234,7 @@ function ECScreenSentenceCard() {
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
             color: T.accentText, fontSize: 14, fontWeight: 600, cursor: 'pointer',
           }}>
-            <span>{isLast ? '퀴즈 시작하기' : '다음 문장'}</span>
+            <span>{isLast ? '퀴즈 시작하기' : '다음 패턴'}</span>
             {ECIcon.chev('right', T.accentText, 14)}
           </div>
         </div>
