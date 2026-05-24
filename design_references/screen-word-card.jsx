@@ -20,6 +20,7 @@ function ECScreenWordCard() {
   const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
   const [swipeX, setSwipeX] = React.useState(0);
   const [slideOut, setSlideOut] = React.useState(0);
+  const [showExamples, setShowExamples] = React.useState(false);
   const touchStartX = React.useRef(null);
 
   const word = words[idx];
@@ -41,11 +42,12 @@ function ECScreenWordCard() {
       setAnimKey(k => k + 1);
       setSlideOut(0);
       setSwipeX(0);
+      setShowExamples(false);
     }, 240);
   };
 
   const handleTouchStart = (e) => {
-    if (slideOut !== 0) return;
+    if (slideOut !== 0 || showExamples) return;
     touchStartX.current = e.touches[0].clientX;
   };
   const handleTouchMove = (e) => {
@@ -146,6 +148,7 @@ function ECScreenWordCard() {
         {[
           { icon: ECIcon.speaker(railIcon, 22), label: '듣기', onClick: speakWordAndExample },
           { icon: ECIcon.heart(isBookmarked ? T.accent : railIcon, 22, isBookmarked), label: '저장', onClick: toggleBookmark },
+          { icon: ECIcon.notes(railIcon, 20), label: '예문', onClick: () => setShowExamples(true) },
         ].map((a, i) => (
           <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
             <div onClick={a.onClick} style={{
@@ -206,17 +209,17 @@ function ECScreenWordCard() {
           {word.def}
         </div>
 
-        {/* Example sentences */}
+        {/* Example sentence */}
         <div style={{
           padding: '10px 14px', borderRadius: 12,
           background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
           border: `1px solid ${T.hair}`,
-          marginBottom: word.examples.length > 0 ? 8 : 12,
+          marginBottom: 12,
         }}>
           <div style={{
             fontSize: 9.5, fontFamily: T.mono, color: T.textMute,
             letterSpacing: 1, marginBottom: 4, textTransform: 'uppercase',
-          }}>예문 1</div>
+          }}>예문</div>
           <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 14.5, color: T.text, lineHeight: 1.35 }}>
             "{renderEx(word.ex)}"
           </div>
@@ -226,31 +229,6 @@ function ECScreenWordCard() {
             </div>
           )}
         </div>
-        {word.examples.map((ex, i) => (
-          <div key={i} style={{
-            padding: '10px 14px', borderRadius: 12,
-            background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
-            border: `1px solid ${T.hair}`,
-            marginBottom: i < word.examples.length - 1 ? 8 : 12,
-            display: 'flex', alignItems: 'flex-start', gap: 10,
-          }}>
-            <div style={{ flex: 1 }}>
-              <div style={{
-                fontSize: 9.5, fontFamily: T.mono, color: T.textMute,
-                letterSpacing: 1, marginBottom: 4, textTransform: 'uppercase',
-              }}>예문 {i + 2}</div>
-              <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 14.5, color: T.text, lineHeight: 1.35 }}>
-                "{renderEx(ex)}"
-              </div>
-            </div>
-            <div onClick={() => speak(ex)} style={{
-              width: 30, height: 30, borderRadius: 999, flexShrink: 0, marginTop: 16,
-              background: isDark ? 'rgba(255,255,255,0.10)' : T.bg3,
-              border: `1px solid ${T.hair}`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-            }}>{ECIcon.speaker(T.accent, 13)}</div>
-          </div>
-        ))}
 
         {/* Button */}
         <div
@@ -282,6 +260,69 @@ function ECScreenWordCard() {
             transition: 'all 0.2s ease',
           }}/>
         ))}
+      </div>
+
+      {/* ── 추가 예문 바텀시트 ── */}
+      <div
+        onTouchStart={(e) => e.stopPropagation()}
+        onClick={() => setShowExamples(false)}
+        style={{
+          position: 'fixed', inset: 0, zIndex: 2000,
+          background: 'rgba(0,0,0,0.55)',
+          opacity: showExamples ? 1 : 0,
+          pointerEvents: showExamples ? 'auto' : 'none',
+          transition: 'opacity 0.25s',
+        }}
+      />
+      <div
+        onTouchStart={(e) => e.stopPropagation()}
+        style={{
+          position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 2001,
+          background: T.bg1, borderRadius: '20px 20px 0 0',
+          paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 64px)',
+          maxHeight: '70vh', overflowY: 'auto',
+          transform: showExamples ? 'translateY(0)' : 'translateY(100%)',
+          transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'center', padding: '12px 0 8px', position: 'sticky', top: 0, background: T.bg1, zIndex: 1 }}>
+          <div style={{ width: 36, height: 4, borderRadius: 2, background: T.hairStr }}/>
+        </div>
+        <div style={{ padding: '4px 20px 0' }}>
+          <div style={{
+            fontFamily: T.mono, fontSize: 9.5, color: T.textMute,
+            letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 14,
+          }}>추가 예문 · {word.en}</div>
+          {word.examples.length === 0 ? (
+            <div style={{ padding: '24px 0', textAlign: 'center', fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
+              추가 예문이 아직 없어요.<br/>
+              <span style={{ color: T.textMute, fontSize: 12 }}>Supabase에 example_en_2~4 컬럼을 추가하면 표시돼요.</span>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingBottom: 8 }}>
+              {word.examples.map((ex, i) => (
+                <div key={i} style={{
+                  padding: '14px 16px', borderRadius: 14,
+                  background: T.bg2, border: `1px solid ${T.hair}`,
+                  display: 'flex', alignItems: 'flex-start', gap: 12,
+                }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontFamily: T.mono, fontSize: 9.5, color: T.textMute, letterSpacing: 1, marginBottom: 4, textTransform: 'uppercase' }}>예문 {i + 2}</div>
+                    <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 15, color: T.text, lineHeight: 1.5 }}>
+                      "{renderEx(ex)}"
+                    </div>
+                  </div>
+                  <div onClick={() => speak(ex)} style={{
+                    width: 34, height: 34, borderRadius: 999, flexShrink: 0,
+                    background: T.bg3, border: `1px solid ${T.hair}`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    cursor: 'pointer', marginTop: 2,
+                  }}>{ECIcon.speaker(T.accent, 15)}</div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
     </div>
