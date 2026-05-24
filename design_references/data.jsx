@@ -112,7 +112,13 @@ window.ECDataLoaded = (async () => {
       def:      w.definition || '',
       ex:       w.example_en || '',
       exKo:     w.example_ko || '',
-      examples: [w.example_en_2, w.example_en_3, w.example_en_4].filter(Boolean),
+      examples: [
+        w.example_en   ? { en: w.example_en,   ko: w.example_ko   } : null,
+        w.example_en_2 ? { en: w.example_en_2, ko: w.example_ko_2 } : null,
+        w.example_en_3 ? { en: w.example_en_3, ko: w.example_ko_3 } : null,
+        w.example_en_4 ? { en: w.example_en_4, ko: w.example_ko_4 } : null,
+        w.example_en_5 ? { en: w.example_en_5, ko: w.example_ko_5 } : null,
+      ].filter(Boolean),
       cefr:     w.cefr || w.level || 'B1',
       priority: w.priority || 3,
       topicId:  w.topic_id || '',
@@ -134,6 +140,13 @@ window.ECDataLoaded = (async () => {
       topicId:   s.topic_id || '',
       img:       s.image_url || null,
       tint:      TOPIC_TINTS[s.topic_id] || '#1a2a3a',
+      examples: [
+        s.ex1 ? { en: s.ex1, ko: s.ex1_ko } : null,
+        s.ex2 ? { en: s.ex2, ko: s.ex2_ko } : null,
+        s.ex3 ? { en: s.ex3, ko: s.ex3_ko } : null,
+        s.ex4 ? { en: s.ex4, ko: s.ex4_ko } : null,
+        s.ex5 ? { en: s.ex5, ko: s.ex5_ko } : null,
+      ].filter(Boolean),
     }));
 
     if (!collocRes.error && collocRes.data) {
