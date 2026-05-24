@@ -9,7 +9,13 @@ function ECScreenSavedCards() {
   const [bookmarked, setBookmarked] = React.useState(() => new Set(session?.bookmarkedIds || []));
 
   const savedWords = (window.ECData?.words || []).filter(w => bookmarked.has(w.id));
-  const savedSentences = (window.ECData?.sentences || []).filter(s => bookmarked.has(s.id));
+  const allExpressions = [
+    ...(window.ECData?.sentences || []),
+    ...(window.ECData?.collocations || []),
+    ...(window.ECData?.idioms || []),
+    ...(window.ECData?.nuances || []),
+  ];
+  const savedSentences = allExpressions.filter(s => bookmarked.has(s.id));
 
   const remove = (id) => {
     session?.bookmarkedIds?.delete(id);
@@ -119,7 +125,7 @@ function ECScreenSavedCards() {
                   overflow: 'hidden', position: 'relative',
                 }}>
                   <div
-                    onClick={() => { const i = (window.ECData?.sentences || []).findIndex(x => x.id === s.id); if (i >= 0) { window.ECSession.sentenceIndex = i; window.ECNav?.go('sentence-card'); } }}
+                    onClick={() => { const exprs = window.ECData?.expressions || window.ECData?.sentences || []; const i = exprs.findIndex(x => x.id === s.id); if (i >= 0) { window.ECSession.sentenceIndex = i; window.ECNav?.go('sentence-card'); } }}
                     style={{ padding: '14px 14px 14px 16px', cursor: 'pointer', paddingRight: 32 }}
                   >
                     {/* Type badge */}
