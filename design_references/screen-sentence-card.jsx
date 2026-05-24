@@ -52,11 +52,6 @@ function ECScreenSentenceCard() {
     ? 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 18%, transparent 34%, rgba(0,0,0,0.82) 56%, rgba(0,0,0,0.97) 70%, #000 82%)'
     : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 15%, transparent 32%, ${T.bg1}CC 52%, ${T.bg1}F5 66%, ${T.bg1} 78%)`;
 
-  const railIcon = isDark ? 'rgba(255,255,255,0.9)' : T.text;
-  const railBg   = isDark ? 'rgba(255,255,255,0.10)' : T.bg2;
-  const railBd   = isDark ? 'rgba(255,255,255,0.14)' : T.hair;
-  const railLbl  = isDark ? 'rgba(255,255,255,0.75)' : T.textDim;
-
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}>
 
@@ -82,27 +77,6 @@ function ECScreenSentenceCard() {
         </div>
       </div>
 
-      {/* Right action rail */}
-      <div style={{
-        position: 'absolute', right: 14, top: '45%', zIndex: 10,
-        display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'center',
-      }}>
-        {[
-          { icon: ECIcon.speaker(railIcon, 22), label: '듣기', onClick: () => speak(s.en) },
-          { icon: ECIcon.heart(isBookmarked ? T.accent : railIcon, 22, isBookmarked), label: '저장', onClick: toggleBookmark },
-        ].map((a, i) => (
-          <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-            <div onClick={a.onClick} style={{
-              width: 48, height: 48, borderRadius: 999,
-              background: railBg, backdropFilter: 'blur(20px)',
-              border: `1px solid ${railBd}`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-            }}>{a.icon}</div>
-            <div style={{ fontSize: 10, color: railLbl, fontWeight: 500 }}>{a.label}</div>
-          </div>
-        ))}
-      </div>
-
       {/* Scrollable content */}
       <div
         key={animKey}
@@ -111,7 +85,7 @@ function ECScreenSentenceCard() {
           position: 'absolute',
           top: 0,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 140px)',
-          left: 0, right: 68,
+          left: 0, right: 0,
           overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
           zIndex: 5,
@@ -205,19 +179,30 @@ function ECScreenSentenceCard() {
         paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 58px)',
       }}>
         {/* Nav buttons */}
-        <div style={{ display: 'flex', gap: 10, padding: '0 18px' }}>
+        <div style={{ display: 'flex', gap: 8, padding: '0 18px' }}>
           {!isFirst && (
             <div onClick={goPrev} style={{
-              height: 46, padding: '0 18px', borderRadius: 14,
+              height: 46, padding: '0 14px', borderRadius: 14,
               background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
               border: `1px solid ${T.hair}`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-              color: T.text, fontSize: 14, fontWeight: 500, cursor: 'pointer', whiteSpace: 'nowrap',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
+              color: T.text, fontSize: 14, fontWeight: 500, cursor: 'pointer',
             }}>
               {ECIcon.chev('left', T.text, 14)}
-              <span>이전</span>
             </div>
           )}
+          <div onClick={() => speak(s.en)} style={{
+            width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+            background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
+            border: `1px solid ${T.hair}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+          }}>{ECIcon.speaker(T.text, 18)}</div>
+          <div onClick={toggleBookmark} style={{
+            width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+            background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
+            border: `1px solid ${T.hair}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+          }}>{ECIcon.heart(isBookmarked ? T.accent : T.text, 18, isBookmarked)}</div>
           <div onClick={goNext} style={{
             flex: 1, height: 46, borderRadius: 14, background: T.accent,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
