@@ -58,50 +58,168 @@ if (!window.ECSession) {
 })();
 
 const TOPIC_TINTS = {
-  travel:   '#1a3a5c',
-  cafe:     '#3a2a1a',
-  daily:    '#2a3a4a',
-  work:     '#1a2a3a',
-  emotions: '#2a1a3a',
+  // daily
+  greeting:     '#1a3a2c',
+  emotion:      '#2a1a3a',
+  weather:      '#1a2a4a',
+  shopping:     '#3a2a1c',
+  cafe:         '#3a2a1a',
+  transport:    '#1a2a3a',
+  health:       '#1a3a2a',
+  travel:       '#1a3a5c',
+  home:         '#2a2a1a',
+  // social
+  work:         '#1a2a3c',
+  education:    '#1c2a3a',
+  media:        '#2a1a2c',
+  environment:  '#1a3a20',
+  economy:      '#2a2a1a',
+  culture:      '#3a1a2a',
+  sports:       '#1a2c3a',
+  // advanced
+  discussion:   '#2a1c3a',
+  presentation: '#1a2a3c',
+  negotiation:  '#2a1a2a',
+  humanities:   '#3a2a2a',
+  technology:   '#1a2a3c',
+  news:         '#2a2a2a',
+  academic:     '#1c1c3a',
 };
 
-window.ECData = { words: [], sentences: [] };
+window.ECData = { words: [], sentences: [], collocations: [], idioms: [], nuances: [] };
 
 window.ECDataLoaded = (async () => {
   try {
     const db = window.ECSupabaseClient;
-    const [wordsRes, sentencesRes] = await Promise.all([
+    const [wordsRes, sentencesRes, collocRes, idiomsRes, nuancesRes] = await Promise.all([
       db.from('words').select('*').order('topic_id').order('sort_order'),
       db.from('sentences').select('*').order('topic_id').order('sort_order'),
+      db.from('collocations').select('*').order('topic_id').order('sort_order'),
+      db.from('idioms').select('*').order('topic_id').order('sort_order'),
+      db.from('nuances').select('*').order('topic_id').order('sort_order'),
     ]);
 
     if (wordsRes.error) throw wordsRes.error;
     if (sentencesRes.error) throw sentencesRes.error;
 
     window.ECData.words = wordsRes.data.map(w => ({
-      id:   w.id,
-      en:   w.en,
-      ipa:  w.ipa || '',
-      pos:  w.pos || '',
-      ko:   w.ko,
-      def:  w.definition || '',
+      id:       w.id,
+      type:     'word',
+      en:       w.en,
+      ipa:      w.ipa || '',
+      pos:      w.pos || '',
+      ko:       w.ko,
+      def:      w.definition || '',
       ex:       w.example_en || '',
       exKo:     w.example_ko || '',
       examples: [w.example_en_2, w.example_en_3, w.example_en_4].filter(Boolean),
-      tint: TOPIC_TINTS[w.topic_id] || '#1a2a3a',
-      img:  w.image_url || null,
+      cefr:     w.cefr || w.level || 'B1',
+      priority: w.priority || 3,
+      topicId:  w.topic_id || '',
+      tint:     TOPIC_TINTS[w.topic_id] || '#1a2a3a',
+      img:      w.image_url || null,
+      imgKey:   w.image_keyword || '',
     }));
 
     window.ECData.sentences = sentencesRes.data.map(s => ({
       id:        s.id,
+      type:      s.type || 'pattern',
       en:        s.en,
       ko:        s.ko,
       highlight: s.highlight || '',
       tip:       s.tip || '',
       sit:       s.situation || '',
+      cefr:      s.cefr || s.level || 'B1',
+      priority:  s.priority || 3,
+      topicId:   s.topic_id || '',
       img:       s.image_url || null,
       tint:      TOPIC_TINTS[s.topic_id] || '#1a2a3a',
     }));
+
+    if (!collocRes.error && collocRes.data) {
+      window.ECData.collocations = collocRes.data.map(c => ({
+        id:        c.id,
+        type:      'collocation',
+        en:        c.en,
+        ko:        c.ko,
+        verb:      c.verb,
+        noun:      c.noun,
+        wrongVerb: c.wrong_verb || '',
+        tip:       c.tip || '',
+        ex1:       c.ex1 || '',
+        ex1Ko:     c.ex1_ko || '',
+        ex2:       c.ex2 || '',
+        ex2Ko:     c.ex2_ko || '',
+        cefr:      c.cefr || 'B1',
+        priority:  c.priority || 3,
+        topicId:   c.topic_id || '',
+        tint:      TOPIC_TINTS[c.topic_id] || '#1a2a3a',
+        img:       c.image_url || null,
+        imgKey:    c.image_keyword || '',
+      }));
+    }
+
+    if (!idiomsRes.error && idiomsRes.data) {
+      window.ECData.idioms = idiomsRes.data.map(i => ({
+        id:        i.id,
+        type:      'idiom',
+        en:        i.en,
+        ko:        i.ko,
+        literalKo: i.literal_ko || '',
+        tip:       i.tip || '',
+        ex1:       i.ex1 || '',
+        ex1Ko:     i.ex1_ko || '',
+        ex2:       i.ex2 || '',
+        ex2Ko:     i.ex2_ko || '',
+        ex3:       i.ex3 || '',
+        ex3Ko:     i.ex3_ko || '',
+        cefr:      i.cefr || 'B2',
+        priority:  i.priority || 3,
+        topicId:   i.topic_id || '',
+        tint:      TOPIC_TINTS[i.topic_id] || '#1a2a3a',
+        img:       i.image_url || null,
+        imgKey:    i.image_keyword || '',
+      }));
+    }
+
+    if (!nuancesRes.error && nuancesRes.data) {
+      window.ECData.nuances = nuancesRes.data.map(n => ({
+        id:         n.id,
+        type:       'nuance',
+        wordA:      n.word_a,
+        wordB:      n.word_b,
+        wordC:      n.word_c || '',
+        koA:        n.ko_a,
+        koB:        n.ko_b,
+        koC:        n.ko_c || '',
+        comparison: n.comparison,
+        exA:        n.ex_a || '',
+        exB:        n.ex_b || '',
+        exC:        n.ex_c || '',
+        tip:        n.tip || '',
+        cefr:       n.cefr || 'B2',
+        priority:   n.priority || 3,
+        topicId:    n.topic_id || '',
+        tint:       TOPIC_TINTS[n.topic_id] || '#1a2a3a',
+        img:        n.image_url || null,
+        imgKey:     n.image_keyword || '',
+      }));
+    }
+    // Merged expression feed: patterns first, then collocations, idioms, nuances (sorted by priority)
+    const userLevel = localStorage.getItem('ec_user_level') || 'B1';
+    const cefrOrder = { A1:0, A2:1, B1:2, B2:3, C1:4, C2:5 };
+    const userCefrIdx = cefrOrder[userLevel] ?? 2;
+    const inRange = (cefr) => {
+      const idx = cefrOrder[cefr] ?? 2;
+      return idx >= Math.max(0, userCefrIdx - 1) && idx <= Math.min(5, userCefrIdx + 1);
+    };
+
+    window.ECData.expressions = [
+      ...window.ECData.sentences.filter(s => s.type === 'pattern' && inRange(s.cefr)),
+      ...window.ECData.collocations.filter(c => inRange(c.cefr)),
+      ...window.ECData.idioms.filter(i => inRange(i.cefr)),
+      ...window.ECData.nuances.filter(n => inRange(n.cefr)),
+    ];
   } catch (err) {
     console.error('Supabase 데이터 로딩 실패:', err);
   }
