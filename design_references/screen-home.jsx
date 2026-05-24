@@ -5,34 +5,50 @@ function ECScreenHome() {
   const T = ECTokens;
   const scrollRef = React.useRef(null);
   const session = window.ECSession || { completedWordIds: new Set(), completedSentenceIds: new Set() };
+
+  // Level-based card composition
+  const userLevel = localStorage.getItem('ec_user_level') || 'B1';
+  const compositions = {
+    'A1': { 단어: 10, 패턴: 5 },
+    'A2': { 단어: 10, 패턴: 5 },
+    'B1': { 단어: 8, 패턴: 4, 콜로케이션: 3 },
+    'B2': { 단어: 8, 패턴: 4, 콜로케이션: 3 },
+    'C1': { 단어: 6, 패턴: 3, 콜로케이션: 3, 이디엄: 2, 뉘앙스: 1 },
+    'C2': { 단어: 6, 패턴: 3, 콜로케이션: 3, 이디엄: 2, 뉘앙스: 1 },
+  };
+  const comp = compositions[userLevel] || compositions['B1'];
+  const totalCards = Object.values(comp).reduce((a, b) => a + b, 0);
+  const compLabel = Object.entries(comp).map(([k, v]) => `${k} ${v}`).join(' · ');
+
+  const topic = window.ECData?.topic || '여행과 일상 표현';
+
+  // Progress
   const doneWords = session.completedWordIds.size;
   const doneSentences = session.completedSentenceIds.size;
+  const totalDone = doneWords + doneSentences;
+  const progressPct = Math.round((totalDone / totalCards) * 100);
 
-  // 어제 학습 기록
+  // 어제 학습 기록 — 복습할 것
   const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
   const yKey = 'ec_learned_' + yesterday.toISOString().slice(0, 10);
   const yData = (() => { try { return JSON.parse(localStorage.getItem(yKey) || '{}'); } catch(e) { return {}; } })();
   const yWordIds = new Set(yData.wordIds || []);
-  const ySentenceIds = new Set(yData.sentenceIds || []);
-  // 어제 데이터가 없으면 오늘 데이터로 어제 키를 채워 첫날도 섹션이 보이도록
-  const isFirstDay = yWordIds.size === 0 && ySentenceIds.size === 0;
+  // 어제 데이터가 없으면 첫날도 섹션이 보이도록 시드 데이터 채우기
+  const isFirstDay = yWordIds.size === 0;
   if (isFirstDay && (window.ECData?.words?.length > 0)) {
     const defaultData = {
       wordIds: (window.ECData.words.slice(0, 10)).map(w => w.id),
-      sentenceIds: (window.ECData.sentences.slice(0, 5)).map(s => s.id),
       _seeded: true,
     };
     localStorage.setItem(yKey, JSON.stringify(defaultData));
     defaultData.wordIds.forEach(id => yWordIds.add(id));
-    defaultData.sentenceIds.forEach(id => ySentenceIds.add(id));
   }
-  const isPreview = isFirstDay || yData._seeded;
   const reviewWords = (window.ECData?.words || []).filter(w => yWordIds.has(w.id));
-  const reviewSentences = (window.ECData?.sentences || []).filter(s => ySentenceIds.has(s.id));
-  const totalDone = doneWords + doneSentences;
-  const totalCards = 15;
-  const progressPct = Math.round((totalDone / totalCards) * 100);
 
+  // Quiz unlock
+  const quizUnlocked = totalDone >= totalCards;
+
+  // User / date / greeting
   const user = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
   const now = new Date();
   const day = now.getDate();
@@ -56,142 +72,167 @@ function ECScreenHome() {
   const displayName = savedNick
     ? savedNick
     : rawName.includes(' ')
-      ? rawName.split(' ')[0]                                      // 서양식: 첫 토큰 (given name)
+      ? rawName.split(' ')[0]
       : /^[가-힣]+$/.test(rawName) && rawName.length >= 3
-        ? rawName.slice(1)                                         // 한국식: 성(첫 글자) 제외
+        ? rawName.slice(1)
         : rawName;
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
       <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}>
-      <ECStatusBar />
+        <ECStatusBar />
 
-      {/* Top bar */}
-      <div style={{ padding: '6px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-          <div style={{ fontFamily: T.serif, fontSize: 22, letterSpacing: -0.4, color: T.text }}>
-            EngCat
-          </div>
-          <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: 0.5, color: T.textMute }}>{'v' + (window.EC_VER || 1)}</div>
-        </div>
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 5,
-            padding: '6px 11px', borderRadius: 999,
-            background: T.bg2, border: `1px solid ${T.hair}`,
-          }}>
-            <span style={{ color: T.accent }}>{ECIcon.flame(T.accent, 14)}</span>
-            <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>0</span>
-          </div>
-          <div onClick={() => window.ECNav?.go('profile')} style={{
-            width: 36, height: 36, borderRadius: 999, background: T.bg2,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            border: `1px solid ${T.hair}`, color: T.textDim, cursor: 'pointer',
-          }}>
-            {ECIcon.user(T.textDim, 18)}
-          </div>
-        </div>
-      </div>
-
-      {/* Greeting */}
-      <div style={{ padding: '24px 22px 18px' }}>
-        <div style={{ fontSize: 13, color: T.textDim, marginBottom: 6 }}>
-          {dateStr}
-        </div>
-        <div style={{ fontFamily: T.serif, fontSize: 30, lineHeight: 1.18, color: T.text, letterSpacing: -0.4 }}>
-          {greetingWord}<br/>
-          <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}.</span>
-        </div>
-      </div>
-
-      {/* Today's mission card — hero */}
-      <div style={{ padding: '0 18px' }}>
-        <div style={{
-          borderRadius: 24, padding: 18,
-          background: `linear-gradient(155deg, ${T.bg3} 0%, ${T.bg2} 100%)`,
-          border: `1px solid ${T.hair}`, position: 'relative', overflow: 'hidden',
-        }}>
-          <div style={{
-            position: 'absolute', top: -40, right: -40, width: 160, height: 160, borderRadius: '50%',
-            background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
-          }} />
-          <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, color: T.accent, textTransform: 'uppercase' }}>
-            오늘의 학습
-          </div>
-          <div style={{ marginTop: 8, fontFamily: T.serif, fontSize: 26, color: T.text, lineHeight: 1.15 }}>
-            여행과 일상 표현
-          </div>
-          <div style={{ marginTop: 6, fontSize: 13.5, color: T.textDim, lineHeight: 1.45 }}>
-            공항·호텔·길찾기 상황에서 자연스럽게 쓰는 단어 10개와 문장 5개
-          </div>
-
-          {/* progress */}
-          <div style={{ marginTop: 18, display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ flex: 1, height: 6, borderRadius: 3, background: T.hair, overflow: 'hidden' }}>
-              <div style={{ width: progressPct + '%', height: '100%', background: T.accent, borderRadius: 3, transition: 'width 0.4s ease' }} />
+        {/* Top bar */}
+        <div style={{ padding: '6px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+            <div style={{ fontFamily: T.serif, fontSize: 22, letterSpacing: -0.4, color: T.text }}>
+              EngCat
             </div>
-            <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>{totalDone} / {totalCards}</div>
+            <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: 0.5, color: T.textMute }}>{'v' + (window.EC_VER || 1)}</div>
           </div>
-
-          {/* CTA */}
-          <div onClick={() => window.ECNav?.go('word-card')} style={{
-            marginTop: 16, height: 50, borderRadius: 14, background: T.accent,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            color: T.bg0, fontWeight: 600, fontSize: 15, cursor: 'pointer',
-          }}>
-            {ECIcon.play(T.bg0, 16)}
-            <span>{totalDone > 0 ? '이어서 학습하기' : '학습 시작하기'}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Section: Review Words */}
-      {reviewWords.length > 0 && (<>
-        <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 단어' : '복습 단어'}</div>
-          <div style={{ fontSize: 12, color: T.textDim }}>{reviewWords.length}개</div>
-        </div>
-        <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto' }}>
-          {reviewWords.map((c) => (
-            <div key={c.id} onClick={() => { const wi = (window.ECData?.words || []).findIndex(w => w.id === c.id); if (wi >= 0) { window.ECSession.wordIndex = wi; window.ECNav?.go('word-card'); }}} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
-              <div style={{ position: 'relative' }}>
-                {c.img
-                  ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', borderRadius: 14 }} alt={c.en} />
-                  : <ECPlaceholder height={150} tint={c.tint} radius={14} label={c.en}/>
-                }
-              </div>
-              <div style={{ marginTop: 8, fontFamily: T.display, fontWeight: 400, fontSize: 17, color: T.text }}>{c.en}</div>
-              <div style={{ fontSize: 12, color: T.textDim, marginTop: 1 }}>{c.ko.split(',')[0]}</div>
-            </div>
-          ))}
-        </div>
-      </>)}
-
-      {/* Section: Review Sentences */}
-      {reviewSentences.length > 0 && (<>
-        <div style={{ padding: '28px 22px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 문장' : '복습 문장'}</div>
-          <div onClick={() => window.ECNav?.go('sentence-card')} style={{ fontSize: 12, color: T.accent, cursor: 'pointer' }}>전체 보기</div>
-        </div>
-        <div style={{ padding: '0 22px 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-          {reviewSentences.map((s) => (
-            <div key={s.id} onClick={() => { const si = (window.ECData?.sentences || []).findIndex(x => x.id === s.id); if (si >= 0) { window.ECSession.sentenceIndex = si; window.ECNav?.go('sentence-card'); }}} style={{
-              padding: '14px 16px', borderRadius: 14,
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: 5,
+              padding: '6px 11px', borderRadius: 999,
               background: T.bg2, border: `1px solid ${T.hair}`,
-              display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer',
             }}>
-              <div style={{ width: 38, height: 38, borderRadius: 10, background: T.bg3, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                {ECIcon.speaker(T.accent, 18)}
+              <span style={{ color: T.accent }}>{ECIcon.flame(T.accent, 14)}</span>
+              <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>0</span>
+            </div>
+            <div onClick={() => window.ECNav?.go('profile')} style={{
+              width: 36, height: 36, borderRadius: 999, background: T.bg2,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              border: `1px solid ${T.hair}`, color: T.textDim, cursor: 'pointer',
+            }}>
+              {ECIcon.user(T.textDim, 18)}
+            </div>
+          </div>
+        </div>
+
+        {/* Greeting */}
+        <div style={{ padding: '24px 22px 18px' }}>
+          <div style={{ fontSize: 13, color: T.textDim, marginBottom: 6 }}>
+            {dateStr}
+          </div>
+          <div style={{ fontFamily: T.serif, fontSize: 30, lineHeight: 1.18, color: T.text, letterSpacing: -0.4 }}>
+            {greetingWord}<br/>
+            <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}.</span>
+          </div>
+        </div>
+
+        {/* 오늘의 학습 card — hero */}
+        <div style={{ padding: '0 18px' }}>
+          <div style={{
+            borderRadius: 24, padding: 18,
+            background: `linear-gradient(155deg, ${T.bg3} 0%, ${T.bg2} 100%)`,
+            border: `1px solid ${T.hair}`, position: 'relative', overflow: 'hidden',
+          }}>
+            {/* Radial glow accent */}
+            <div style={{
+              position: 'absolute', top: -40, right: -40, width: 160, height: 160, borderRadius: '50%',
+              background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
+            }} />
+            <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, color: T.accent, textTransform: 'uppercase' }}>
+              오늘의 학습
+            </div>
+            <div style={{ marginTop: 8, fontFamily: T.serif, fontSize: 26, color: T.text, lineHeight: 1.15 }}>
+              {topic}
+            </div>
+            {/* Card type breakdown */}
+            <div style={{ marginTop: 5, fontFamily: T.mono, fontSize: 12, color: T.textDim, lineHeight: 1.45 }}>
+              {compLabel}
+            </div>
+
+            {/* Progress bar */}
+            <div style={{ marginTop: 18, display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ flex: 1, height: 6, borderRadius: 3, background: T.hair, overflow: 'hidden' }}>
+                <div style={{ width: progressPct + '%', height: '100%', background: T.accent, borderRadius: 3, transition: 'width 0.4s ease' }} />
               </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 16, color: T.text, lineHeight: 1.25 }}>{s.en}</div>
-                <div style={{ fontSize: 12.5, color: T.textDim, marginTop: 2 }}>{s.ko}</div>
+              <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>{totalDone} / {totalCards}</div>
+            </div>
+
+            {/* CTA */}
+            <div onClick={() => window.ECNav?.go('word-card')} style={{
+              marginTop: 16, height: 50, borderRadius: 14, background: T.accent,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+              color: T.bg0, fontWeight: 600, fontSize: 15, cursor: 'pointer',
+            }}>
+              {ECIcon.play(T.bg0, 16)}
+              <span>{totalDone > 0 ? '이어서 학습하기' : '학습 시작하기'}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 복습할 것 — horizontal scroll */}
+        {reviewWords.length > 0 && (<>
+          <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+            <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>복습할 것</div>
+            <div style={{
+              fontSize: 12, color: T.textDim,
+              padding: '3px 9px', borderRadius: 999,
+              background: T.bg2, border: `1px solid ${T.hair}`,
+            }}>{reviewWords.length}개</div>
+          </div>
+          <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            {reviewWords.map((c) => (
+              <div
+                key={c.id}
+                onClick={() => {
+                  const wi = (window.ECData?.words || []).findIndex(w => w.id === c.id);
+                  if (wi >= 0) { window.ECSession.wordIndex = wi; window.ECNav?.go('word-card'); }
+                }}
+                style={{ flex: '0 0 120px', cursor: 'pointer' }}
+              >
+                {c.img
+                  ? <img src={c.img} style={{ width: '100%', height: 140, objectFit: 'cover', objectPosition: 'center', borderRadius: 12 }} alt={c.en} />
+                  : <ECPlaceholder height={140} tint={c.tint} radius={12} label={c.en} />
+                }
+                <div style={{ marginTop: 8, fontFamily: T.display, fontWeight: 400, fontSize: 16, color: T.text }}>{c.en}</div>
+                <div style={{ fontSize: 11.5, color: T.textDim, marginTop: 1 }}>{c.ko.split(',')[0]}</div>
+              </div>
+            ))}
+          </div>
+        </>)}
+
+        {/* 오늘의 퀴즈 */}
+        <div style={{ padding: '28px 18px 0' }}>
+          <div
+            style={{
+              padding: '16px 18px', borderRadius: 18,
+              background: quizUnlocked ? T.accent : T.bg2,
+              border: `1px solid ${quizUnlocked ? T.accent : T.hair}`,
+              display: 'flex', alignItems: 'center', gap: 14,
+              cursor: quizUnlocked ? 'pointer' : 'default',
+              opacity: quizUnlocked ? 1 : 0.6,
+            }}
+            onClick={() => quizUnlocked && window.ECNav?.go('quiz')}
+          >
+            {/* Icon box */}
+            <div style={{
+              width: 44, height: 44, borderRadius: 12,
+              background: quizUnlocked ? 'rgba(255,255,255,0.2)' : T.bg3,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              {ECIcon.chart(quizUnlocked ? T.bg0 : T.accent, 22)}
+            </div>
+            {/* Text */}
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 15, fontWeight: 600, color: quizUnlocked ? T.bg0 : T.text }}>오늘의 퀴즈</div>
+              <div style={{ fontSize: 12.5, color: quizUnlocked ? 'rgba(255,255,255,0.75)' : T.textDim, marginTop: 2 }}>
+                {quizUnlocked
+                  ? '준비됐어요! 시작해볼까요?'
+                  : `학습을 완료하면 열려요 · ${totalDone}/${totalCards}`}
               </div>
             </div>
-          ))}
+            {/* Trailing icon */}
+            {quizUnlocked
+              ? <div style={{ color: T.bg0 }}>{ECIcon.chev('right', T.bg0, 18)}</div>
+              : <div style={{ fontFamily: T.mono, fontSize: 11, color: T.textFaint, letterSpacing: 0.5 }}>LOCKED</div>
+            }
+          </div>
         </div>
-      </>)}
 
+        <div style={{ height: 24 }} />
       </div>{/* end scrollable */}
     </div>
   );
