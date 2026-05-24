@@ -8,9 +8,12 @@ function ECScreenSentenceCard() {
 
   const [idx, setIdx] = React.useState(session.sentenceIndex);
   const [animKey, setAnimKey] = React.useState(0);
+  const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
 
   const s = sentences[idx];
   const isLast = idx === sentences.length - 1;
+  const isFirst = idx === 0;
+  const isBookmarked = bookmarked.has(s.id);
 
   const goNext = () => {
     session.markSentenceDone(s.id);
@@ -24,6 +27,24 @@ function ECScreenSentenceCard() {
       setAnimKey(k => k + 1);
     }
   };
+
+  const goPrev = () => {
+    if (isFirst) return;
+    const prev = idx - 1;
+    session.sentenceIndex = prev;
+    setIdx(prev);
+    setAnimKey(k => k + 1);
+  };
+
+  const toggleBookmark = () => {
+    const next = new Set(bookmarked);
+    if (next.has(s.id)) { next.delete(s.id); session.bookmarkedIds.delete(s.id); }
+    else { next.add(s.id); session.bookmarkedIds.add(s.id); }
+    session.saveBookmarks();
+    setBookmarked(next);
+  };
+
+  const speak = () => window.ECSpeak(s.en);
 
   function renderSentence(en, highlight) {
     if (!highlight) return en;
@@ -39,6 +60,11 @@ function ECScreenSentenceCard() {
   const overlayGrad = isDark
     ? 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 18%, transparent 34%, rgba(0,0,0,0.82) 56%, rgba(0,0,0,0.97) 70%, #000 82%)'
     : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 15%, transparent 32%, ${T.bg1}CC 52%, ${T.bg1}F5 66%, ${T.bg1} 78%)`;
+
+  const railIcon = isDark ? 'rgba(255,255,255,0.9)' : T.text;
+  const railBg   = isDark ? 'rgba(255,255,255,0.10)' : T.bg2;
+  const railBd   = isDark ? 'rgba(255,255,255,0.14)' : T.hair;
+  const railLbl  = isDark ? 'rgba(255,255,255,0.75)' : T.textDim;
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}>
@@ -65,7 +91,28 @@ function ECScreenSentenceCard() {
         </div>
       </div>
 
-      {/* Scrollable content — starts at ~43% to sit higher than word card */}
+      {/* Right action rail */}
+      <div style={{
+        position: 'absolute', right: 14, top: '45%', zIndex: 10,
+        display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'center',
+      }}>
+        {[
+          { icon: ECIcon.speaker(railIcon, 22), label: '듣기', onClick: speak },
+          { icon: ECIcon.heart(isBookmarked ? T.accent : railIcon, 22, isBookmarked), label: '저장', onClick: toggleBookmark },
+        ].map((a, i) => (
+          <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+            <div onClick={a.onClick} style={{
+              width: 48, height: 48, borderRadius: 999,
+              background: railBg, backdropFilter: 'blur(20px)',
+              border: `1px solid ${railBd}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+            }}>{a.icon}</div>
+            <div style={{ fontSize: 10, color: railLbl, fontWeight: 500 }}>{a.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Scrollable content */}
       <div
         key={animKey}
         className="ec-fade-up"
@@ -73,7 +120,7 @@ function ECScreenSentenceCard() {
           position: 'absolute',
           top: 0,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 140px)',
-          left: 0, right: 0,
+          left: 0, right: 68,
           overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
           zIndex: 5,
@@ -81,7 +128,6 @@ function ECScreenSentenceCard() {
           flexDirection: 'column',
         }}
       >
-        {/* Spacer — reveals landscape image area */}
         <div style={{ flex: '0 0 43%', minHeight: 130 }} />
 
         <div style={{ padding: '0 22px 20px' }}>
@@ -126,7 +172,7 @@ function ECScreenSentenceCard() {
         </div>
       </div>
 
-      {/* Bottom area: progress strip + controls */}
+      {/* Bottom area: progress strip + nav buttons */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 12,
         paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 58px)',
@@ -143,28 +189,27 @@ function ECScreenSentenceCard() {
           ))}
         </div>
 
-        {/* Buttons */}
+        {/* Nav buttons */}
         <div style={{ display: 'flex', gap: 10, padding: '0 18px' }}>
-          <div style={{
-            flex: 1, height: 50, borderRadius: 14,
-            background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
-            border: `1px solid ${T.hair}`,
+          {!isFirst && (
+            <div onClick={goPrev} style={{
+              height: 46, padding: '0 18px', borderRadius: 14,
+              background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
+              border: `1px solid ${T.hair}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+              color: T.text, fontSize: 14, fontWeight: 500, cursor: 'pointer', whiteSpace: 'nowrap',
+            }}>
+              {ECIcon.chev('left', T.text, 14)}
+              <span>이전</span>
+            </div>
+          )}
+          <div onClick={goNext} style={{
+            flex: 1, height: 46, borderRadius: 14, background: T.accent,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            color: T.text, fontSize: 14, fontWeight: 500,
+            color: T.accentText, fontSize: 14, fontWeight: 600, cursor: 'pointer',
           }}>
-            {ECIcon.mic(T.text, 16)}
-            <span>따라 말하기</span>
-          </div>
-          <div
-            onClick={goNext}
-            style={{
-              height: 50, padding: '0 22px', borderRadius: 14, background: T.accent,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              color: T.accentText, fontSize: 14, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
-            }}
-          >
-            {isLast ? '퀴즈 시작하기' : '다음'}
-            {ECIcon.chev('right', T.accentText, 16)}
+            <span>{isLast ? '퀴즈 시작하기' : '다음 문장'}</span>
+            {ECIcon.chev('right', T.accentText, 14)}
           </div>
         </div>
       </div>
