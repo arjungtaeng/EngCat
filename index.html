@@ -36,7 +36,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 198;</script>
+<script>window.EC_VER = 199;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/supabase.jsx"></script>
@@ -114,7 +114,7 @@
     const Screen = screenMap[screen] || screenMap['home'] || (() => null);
 
     const tabScreens = ['home', 'stats', 'profile', 'word-card', 'sentence-card', 'saved-cards'];
-    const tabActive = { 'home': 'home', 'word-card': 'cards', 'sentence-card': 'cards', 'saved-cards': 'cards', 'stats': 'stats', 'profile': 'me' };
+    const tabActive = { 'home': 'home', 'word-card': 'home', 'sentence-card': 'home', 'saved-cards': 'cards', 'stats': 'stats', 'profile': 'me' };
     const showTab = tabScreens.includes(screen);
 
     return (
