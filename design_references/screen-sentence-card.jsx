@@ -11,22 +11,60 @@ function ECScreenSentenceCard() {
   const [idx, setIdx] = React.useState(session.sentenceIndex);
   const [animKey, setAnimKey] = React.useState(0);
   const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
+  const [swipeX, setSwipeX] = React.useState(0);
+  const [slideOut, setSlideOut] = React.useState(0);
+  const touchStartX = React.useRef(null);
+  const touchStartY = React.useRef(null);
+  const swipeDir = React.useRef(null);
 
   const s = sentences[idx];
   const isLast = idx === sentences.length - 1;
+  const isFirst = idx === 0;
   const isBookmarked = bookmarked.has(s.id);
 
-  const goNext = () => {
-    session.markSentenceDone(s.id);
-    if (isLast) {
-      session.sentenceIndex = 0;
-      window.ECNav?.go('quiz');
-    } else {
-      const next = idx + 1;
+  const goTo = (dir) => {
+    if (dir === 'next') {
+      session.markSentenceDone(s.id);
+      if (isLast) { session.sentenceIndex = 0; window.ECNav?.go('quiz'); return; }
+    }
+    if (dir === 'prev' && isFirst) return;
+    const next = idx + (dir === 'next' ? 1 : -1);
+    setSlideOut(dir === 'next' ? -110 : 110);
+    setTimeout(() => {
       session.sentenceIndex = next;
       setIdx(next);
       setAnimKey(k => k + 1);
+      setSlideOut(0);
+      setSwipeX(0);
+    }, 240);
+  };
+
+  const handleTouchStart = (e) => {
+    if (slideOut !== 0) return;
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    swipeDir.current = null;
+  };
+
+  const handleTouchMove = (e) => {
+    if (touchStartX.current === null || slideOut !== 0) return;
+    const dx = e.touches[0].clientX - touchStartX.current;
+    const dy = e.touches[0].clientY - touchStartY.current;
+    if (swipeDir.current === null) {
+      if (Math.abs(dx) > Math.abs(dy) + 8) swipeDir.current = 'h';
+      else if (Math.abs(dy) > Math.abs(dx) + 8) swipeDir.current = 'v';
     }
+    if (swipeDir.current === 'h') setSwipeX(dx * 0.9);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null) return;
+    const threshold = window.innerWidth * 0.5;
+    if (swipeX < -threshold) goTo('next');
+    else if (swipeX > threshold && !isFirst) goTo('prev');
+    else setSwipeX(0);
+    touchStartX.current = null;
+    swipeDir.current = null;
   };
 
   const toggleBookmark = () => {
@@ -39,17 +77,20 @@ function ECScreenSentenceCard() {
 
   const speak = (text) => window.ECSpeak(text || s.en);
 
-  const railIcon = isDark ? 'rgba(255,255,255,0.9)' : T.text;
-  const railBg   = isDark ? 'rgba(255,255,255,0.10)' : T.bg2;
-  const railBd   = isDark ? 'rgba(255,255,255,0.14)' : T.hair;
-  const railLbl  = isDark ? 'rgba(255,255,255,0.75)' : T.textDim;
+  const contentTransform = slideOut !== 0 ? `translateX(${slideOut}%)` : `translateX(${swipeX}px)`;
+  const contentTransition = slideOut !== 0 ? 'transform 0.24s cubic-bezier(0.4,0,0.2,1)' : 'none';
 
   const overlayGrad = isDark
     ? 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 15%, transparent 26%, rgba(0,0,0,0.88) 42%, #000 50%)'
     : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 14%, transparent 26%, ${T.bg1}D0 38%, ${T.bg1} 50%)`;
 
   return (
-    <div style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}>
+    <div
+      style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
 
       {/* Full-bleed landscape image */}
       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
@@ -73,27 +114,6 @@ function ECScreenSentenceCard() {
         </div>
       </div>
 
-      {/* Right action rail — 듣기 / 저장 */}
-      <div style={{
-        position: 'absolute', right: 14, top: '45%', zIndex: 10,
-        display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'center',
-      }}>
-        {[
-          { icon: ECIcon.speaker(railIcon, 22), label: '듣기', onClick: () => speak(s.en) },
-          { icon: ECIcon.heart(isBookmarked ? T.accent : railIcon, 22, isBookmarked), label: '저장', onClick: toggleBookmark },
-        ].map((a, i) => (
-          <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-            <div onClick={a.onClick} style={{
-              width: 48, height: 48, borderRadius: 999,
-              background: railBg, backdropFilter: 'blur(20px)',
-              border: `1px solid ${railBd}`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-            }}>{a.icon}</div>
-            <div style={{ fontSize: 10, color: railLbl, fontWeight: 500 }}>{a.label}</div>
-          </div>
-        ))}
-      </div>
-
       {/* Scrollable content */}
       <div
         key={animKey}
@@ -102,12 +122,14 @@ function ECScreenSentenceCard() {
           position: 'absolute',
           top: 0,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 116px)',
-          left: 0, right: 68,
+          left: 0, right: 0,
           overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
           zIndex: 5,
           display: 'flex',
           flexDirection: 'column',
+          transform: contentTransform,
+          transition: contentTransition,
         }}
       >
         <div style={{ flex: '0 0 40%', minHeight: 120 }} />
@@ -190,20 +212,45 @@ function ECScreenSentenceCard() {
         </div>
       </div>
 
-      {/* Bottom — 다음 버튼 */}
+      {/* Bottom nav */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 12,
         padding: '0 18px',
         paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 66px)',
+        display: 'flex', gap: 8,
       }}>
-        <div onClick={goNext} style={{
-          height: 46, borderRadius: 14, background: T.accent,
+        {!isFirst && (
+          <div onClick={() => goTo('prev')} style={{
+            height: 46, padding: '0 14px', borderRadius: 14, flexShrink: 0,
+            background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
+            border: `1px solid ${T.hair}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
+            color: T.text, fontSize: 14, fontWeight: 500, cursor: 'pointer',
+          }}>
+            {ECIcon.chev('left', T.text, 14)}
+            <span>이전 카드</span>
+          </div>
+        )}
+        <div onClick={() => goTo('next')} style={{
+          flex: 1, height: 46, borderRadius: 14, background: T.accent,
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
           color: T.accentText, fontSize: 14, fontWeight: 600, cursor: 'pointer',
         }}>
-          <span>{isLast ? '퀴즈 시작하기' : '다음 패턴'}</span>
-          {ECIcon.chev('right', T.accentText, 14)}
+          <span>{isLast ? '퀴즈 시작하기' : '다음 카드'}</span>
+          {!isLast && ECIcon.chev('right', T.accentText, 14)}
         </div>
+        <div onClick={() => speak(s.en)} style={{
+          width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+          background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
+          border: `1px solid ${T.hair}`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+        }}>{ECIcon.speaker(T.text, 18)}</div>
+        <div onClick={toggleBookmark} style={{
+          width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+          background: isBookmarked ? T.accent : (isDark ? 'rgba(255,255,255,0.10)' : T.bg2),
+          border: `1px solid ${isBookmarked ? T.accent : T.hair}`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+        }}>{ECIcon.heart(isBookmarked ? T.accentText : T.text, 18, isBookmarked)}</div>
       </div>
 
     </div>
