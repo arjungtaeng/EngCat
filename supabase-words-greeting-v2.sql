@@ -1165,3 +1165,1162 @@ UPDATE words SET
   example_en_5 = 'Being sincere in your greetings sets you apart from the crowd.',
   example_ko_5 = '인사에서 진심을 담으면 다른 사람들과 차별화돼요.'
 WHERE id = 'w_greeting_B1_35';
+
+-- B2 (35개)
+UPDATE words SET
+  example_en_2 = 'She studied cross-cultural etiquette before her overseas assignment.',
+  example_ko_2 = '그녀는 해외 파견 전에 이문화 예절을 공부했어요.',
+  example_en_3 = 'Knowing the local etiquette made him feel more confident at the event.',
+  example_ko_3 = '현지 예절을 아는 것이 행사에서 그를 더 자신감 있게 만들었어요.',
+  example_en_4 = 'Table etiquette differs surprisingly across Asian cultures.',
+  example_ko_4 = '아시아 문화 간에도 식사 예절이 놀랍도록 달라요.',
+  example_en_5 = 'She reminded the team about proper etiquette before meeting the client.',
+  example_ko_5 = '고객 미팅 전 그녀는 팀에게 올바른 예절을 상기시켰어요.'
+WHERE id = 'w_greeting_B2_01';
+
+UPDATE words SET
+  example_en_2 = 'Her composed demeanor during the introduction inspired confidence.',
+  example_ko_2 = '소개 중 그녀의 침착한 태도가 자신감을 불러일으켰어요.',
+  example_en_3 = 'He adjusted his demeanor depending on who he was speaking to.',
+  example_ko_3 = '그는 말하는 상대에 따라 태도를 조정했어요.',
+  example_en_4 = 'A professional demeanor is just as important as what you say.',
+  example_ko_4 = '전문적인 태도는 말하는 내용만큼이나 중요해요.',
+  example_en_5 = 'Her cheerful demeanor put the nervous newcomer at ease immediately.',
+  example_ko_5 = '그녀의 밝은 태도로 긴장한 신입이 즉시 편안해졌어요.'
+WHERE id = 'w_greeting_B2_02';
+
+UPDATE words SET
+  example_en_2 = 'He maintained perfect decorum throughout the board presentation.',
+  example_ko_2 = '그는 이사회 발표 내내 완벽한 예의범절을 유지했어요.',
+  example_en_3 = 'The guests were expected to observe decorum at the state dinner.',
+  example_ko_3 = '손님들은 국빈 만찬에서 예의범절을 지킬 것이 요구됐어요.',
+  example_en_4 = 'She reminded the younger staff about decorum in formal settings.',
+  example_ko_4 = '그녀는 어린 직원들에게 격식 있는 자리에서의 예의범절을 상기시켰어요.',
+  example_en_5 = 'Decorum in greetings reflects the culture of an organization.',
+  example_ko_5 = '인사에서의 예의범절은 조직의 문화를 반영해요.'
+WHERE id = 'w_greeting_B2_03';
+
+UPDATE words SET
+  example_en_2 = 'The letter began with an elegant salutation addressed to the board.',
+  example_ko_2 = '편지는 이사회에 보내는 우아한 인사말로 시작됐어요.',
+  example_en_3 = 'A respectful salutation sets the tone for any formal correspondence.',
+  example_ko_3 = '공손한 인사말은 공식 서신의 분위기를 결정해요.',
+  example_en_4 = 'He responded to her salutation with a deep and respectful bow.',
+  example_ko_4 = '그는 그녀의 인사에 깊고 정중한 절로 화답했어요.',
+  example_en_5 = 'The ambassador''s salutation was broadcast to the entire nation.',
+  example_ko_5 = '대사의 인사말이 전국에 방영됐어요.'
+WHERE id = 'w_greeting_B2_04';
+
+UPDATE words SET
+  example_en_2 = 'She made herself approachable by smiling and making eye contact.',
+  example_ko_2 = '그녀는 미소 짓고 눈을 맞추며 다가가기 쉽게 했어요.',
+  example_en_3 = 'An approachable manager gets better feedback from the team.',
+  example_ko_3 = '다가가기 쉬운 관리자는 팀으로부터 더 나은 피드백을 받아요.',
+  example_en_4 = 'His approachable tone in the introduction invited many follow-up questions.',
+  example_ko_4 = '소개에서 그의 다가가기 쉬운 톤이 많은 후속 질문을 이끌었어요.',
+  example_en_5 = 'Being approachable is a skill that can be developed with practice.',
+  example_ko_5 = '다가가기 쉬운 태도는 연습을 통해 개발할 수 있는 기술이에요.'
+WHERE id = 'w_greeting_B2_05';
+
+UPDATE words SET
+  example_en_2 = 'She was diplomatic when navigating the tricky introductions at the gala.',
+  example_ko_2 = '갈라 행사에서 까다로운 소개를 처리할 때 그녀는 외교적으로 행동했어요.',
+  example_en_3 = 'A diplomatic response to an awkward greeting can save the moment.',
+  example_ko_3 = '어색한 인사에 대한 외교적 대응이 그 순간을 살릴 수 있어요.',
+  example_en_4 = 'He was diplomatic in redirecting the conversation to safer ground.',
+  example_ko_4 = '그는 대화를 더 안전한 주제로 전환하는 데 외교적이었어요.',
+  example_en_5 = 'Diplomatic communication is a core skill in international networking.',
+  example_ko_5 = '외교적 소통은 국제 네트워킹의 핵심 기술이에요.'
+WHERE id = 'w_greeting_B2_06';
+
+UPDATE words SET
+  example_en_2 = 'She was tactful in steering the conversation away from controversy.',
+  example_ko_2 = '그녀는 논란을 피해 대화를 이끌어가는 데 요령 있었어요.',
+  example_en_3 = 'A tactful compliment is specific and genuine, not generic.',
+  example_ko_3 = '요령 있는 칭찬은 구체적이고 진심이에요, 막연하지 않아요.',
+  example_en_4 = 'Being tactful means knowing when to speak and when to listen.',
+  example_ko_4 = '요령 있다는 것은 언제 말하고 언제 들어야 하는지 아는 것을 의미해요.',
+  example_en_5 = 'His tactful introduction eased the tension between the two parties.',
+  example_ko_5 = '그의 요령 있는 소개가 두 당사자 간의 긴장을 완화했어요.'
+WHERE id = 'w_greeting_B2_07';
+
+UPDATE words SET
+  example_en_2 = 'The way she remembered everyone''s names was truly endearing.',
+  example_ko_2 = '그녀가 모든 사람의 이름을 기억하는 방식이 정말 정겨웠어요.',
+  example_en_3 = 'His endearing habit of bowing slightly won over the foreign visitors.',
+  example_ko_3 = '그의 약간 고개를 숙이는 정겨운 습관이 외국 방문객의 마음을 얻었어요.',
+  example_en_4 = 'There was something endearing about the way he fumbled through his intro.',
+  example_ko_4 = '그가 소개를 더듬더듬 하는 방식에는 정겨운 무언가가 있었어요.',
+  example_en_5 = 'An endearing quality in a leader is the ability to greet janitors like CEOs.',
+  example_ko_5 = '리더의 정겨운 자질은 청소부를 CEO처럼 맞이하는 능력이에요.'
+WHERE id = 'w_greeting_B2_08';
+
+UPDATE words SET
+  example_en_2 = 'Her charismatic introduction kept the entire room riveted.',
+  example_ko_2 = '그녀의 카리스마 있는 소개로 방 전체가 집중했어요.',
+  example_en_3 = 'He was charismatic without being over-the-top or showy.',
+  example_ko_3 = '그는 과하거나 과시하지 않으면서도 카리스마가 넘쳤어요.',
+  example_en_4 = 'Charismatic speakers know how to make every person feel heard.',
+  example_ko_4 = '카리스마 있는 연설가는 모든 사람이 들려진다고 느끼게 해요.',
+  example_en_5 = 'His charismatic greeting at the summit was replayed across news channels.',
+  example_ko_5 = '정상회담에서 그의 카리스마 있는 인사가 뉴스 채널에서 반복 방영됐어요.'
+WHERE id = 'w_greeting_B2_09';
+
+UPDATE words SET
+  example_en_2 = 'The congenial host made introductions feel effortless and natural.',
+  example_ko_2 = '마음이 맞는 주최자가 소개를 자연스럽고 수월하게 만들었어요.',
+  example_en_3 = 'They found themselves in congenial company right from the start.',
+  example_ko_3 = '처음부터 마음이 맞는 사람들 속에 있음을 알게 됐어요.',
+  example_en_4 = 'A congenial setting lowers barriers and encourages honest conversation.',
+  example_ko_4 = '마음이 맞는 환경은 장벽을 낮추고 솔직한 대화를 장려해요.',
+  example_en_5 = 'She was congenial to everyone regardless of their background or status.',
+  example_ko_5 = '그녀는 배경이나 지위에 상관없이 모든 사람에게 마음이 맞았어요.'
+WHERE id = 'w_greeting_B2_10';
+
+UPDATE words SET
+  example_en_2 = 'She was articulate in expressing her goals during the introduction.',
+  example_ko_2 = '소개 중 그녀는 목표를 명확하게 표현했어요.',
+  example_en_3 = 'Being articulate helps you leave a strong impression at networking events.',
+  example_ko_3 = '표현이 명확하면 네트워킹 행사에서 강한 인상을 남길 수 있어요.',
+  example_en_4 = 'He became more articulate by practicing his self-introduction regularly.',
+  example_ko_4 = '그는 자기소개를 정기적으로 연습하면서 표현이 더 명확해졌어요.',
+  example_en_5 = 'An articulate opener sets the tone for a confident conversation.',
+  example_ko_5 = '명확한 오프닝은 자신감 있는 대화의 분위기를 만들어요.'
+WHERE id = 'w_greeting_B2_11';
+
+UPDATE words SET
+  example_en_2 = 'He maintained composure when greeted by a very hostile audience.',
+  example_ko_2 = '매우 적대적인 청중에게 인사받을 때도 그는 침착함을 유지했어요.',
+  example_en_3 = 'Her composure during the high-pressure introduction impressed everyone.',
+  example_ko_3 = '압박감이 큰 소개에서 그녀의 침착함이 모두를 감동시켰어요.',
+  example_en_4 = 'Composure comes across in your posture, eye contact, and tone of voice.',
+  example_ko_4 = '침착함은 자세, 눈 맞춤, 목소리 톤에서 드러나요.',
+  example_en_5 = 'Losing your composure during a greeting can undermine your credibility.',
+  example_ko_5 = '인사 중 침착함을 잃으면 신뢰성이 훼손될 수 있어요.'
+WHERE id = 'w_greeting_B2_12';
+
+UPDATE words SET
+  example_en_2 = 'The cultural protocol for greeting seniors differs widely in Asia.',
+  example_ko_2 = '아시아에서 어른을 맞이하는 문화적 의전은 크게 달라요.',
+  example_en_3 = 'She followed the diplomatic protocol precisely when meeting the envoy.',
+  example_ko_3 = '외교 의전을 정확히 따르며 그녀는 사절을 맞이했어요.',
+  example_en_4 = 'He brushed up on the protocol before the high-level meeting.',
+  example_ko_4 = '고위급 회의 전 그는 의전을 다시 익혔어요.',
+  example_en_5 = 'Breaking protocol inadvertently can cause awkwardness in formal settings.',
+  example_ko_5 = '의도치 않게 의전을 어기면 격식 있는 자리에서 어색함이 생길 수 있어요.'
+WHERE id = 'w_greeting_B2_13';
+
+UPDATE words SET
+  example_en_2 = 'She reciprocated the kind words with an equally warm response.',
+  example_ko_2 = '그녀는 친절한 말에 똑같이 따뜻한 응답으로 화답했어요.',
+  example_en_3 = 'He always reciprocates a greeting with genuine enthusiasm.',
+  example_ko_3 = '그는 항상 진심 어린 열정으로 인사에 화답해요.',
+  example_en_4 = 'Reciprocating warmth makes a conversation feel mutual and balanced.',
+  example_ko_4 = '따뜻함에 화답하면 대화가 상호적이고 균형 잡힌 느낌이 들어요.',
+  example_en_5 = 'When she bowed, he immediately reciprocated with a respectful nod.',
+  example_ko_5 = '그녀가 절을 하자 그는 즉시 정중한 고개 끄덕임으로 화답했어요.'
+WHERE id = 'w_greeting_B2_14';
+
+UPDATE words SET
+  example_en_2 = 'He entered the room with the poise of someone used to public attention.',
+  example_ko_2 = '그는 대중의 주목에 익숙한 사람의 품위로 방에 들어왔어요.',
+  example_en_3 = 'Her poise during the live introduction earned great admiration.',
+  example_ko_3 = '생방송 소개 중 그녀의 품위는 큰 감탄을 자아냈어요.',
+  example_en_4 = 'Poise is about being comfortable in your own skin, especially with strangers.',
+  example_ko_4 = '품위는 자기 자신에게 편안한 것이에요, 특히 낯선 사람들과 함께할 때.',
+  example_en_5 = 'She greeted the panel with remarkable poise despite her nerves.',
+  example_ko_5 = '긴장됐음에도 그녀는 놀라운 품위로 패널에게 인사했어요.'
+WHERE id = 'w_greeting_B2_15';
+
+UPDATE words SET
+  example_en_2 = 'She cultivated relationships at every event she attended.',
+  example_ko_2 = '그녀는 참석하는 모든 행사에서 관계를 쌓았어요.',
+  example_en_3 = 'Cultivating professional contacts takes time and genuine effort.',
+  example_ko_3 = '직업적 인맥을 쌓는 것은 시간과 진심 어린 노력이 필요해요.',
+  example_en_4 = 'He cultivated a reputation for being warm and approachable.',
+  example_ko_4 = '그는 따뜻하고 다가가기 쉬운 사람이라는 평판을 쌓았어요.',
+  example_en_5 = 'Cultivating trust begins with the very first greeting you give.',
+  example_ko_5 = '신뢰를 쌓는 것은 처음 건네는 인사에서 시작돼요.'
+WHERE id = 'w_greeting_B2_16';
+
+UPDATE words SET
+  example_en_2 = 'The brevity of her speech was itself a sign of confidence.',
+  example_ko_2 = '그녀 연설의 간결함 자체가 자신감의 표시였어요.',
+  example_en_3 = 'He valued brevity in greetings — a quick hello went a long way.',
+  example_ko_3 = '그는 인사에서 간결함을 소중히 여겼어요 — 짧은 인사 한마디가 큰 효과를 냈어요.',
+  example_en_4 = 'Brevity and warmth together make for the ideal social introduction.',
+  example_ko_4 = '간결함과 따뜻함이 합쳐지면 이상적인 사회적 소개가 돼요.',
+  example_en_5 = 'The keynote speaker was praised for the brevity of his opening remarks.',
+  example_ko_5 = '기조 연설자는 개회사의 간결함으로 칭찬을 받았어요.'
+WHERE id = 'w_greeting_B2_17';
+
+UPDATE words SET
+  example_en_2 = 'The way she carried herself spoke of distinction and quiet authority.',
+  example_ko_2 = '그녀의 태도에서는 품격과 조용한 권위가 느껴졌어요.',
+  example_en_3 = 'He made an introduction with a sense of distinction that turned heads.',
+  example_ko_3 = '그는 고개를 돌리게 만드는 품격 있는 소개를 했어요.',
+  example_en_4 = 'Distinction in social settings comes from genuine warmth, not status.',
+  example_ko_4 = '사회적 자리에서의 품격은 지위가 아니라 진심 어린 따뜻함에서 나와요.',
+  example_en_5 = 'Her distinction was evident from the first handshake and warm smile.',
+  example_ko_5 = '첫 악수와 따뜻한 미소에서 그녀의 품격이 분명히 드러났어요.'
+WHERE id = 'w_greeting_B2_18';
+
+UPDATE words SET
+  example_en_2 = 'She acknowledged the latecomers with a graceful wave.',
+  example_ko_2 = '그녀는 늦게 온 사람들을 우아하게 손을 흔들며 알아봤어요.',
+  example_en_3 = 'He acknowledged the mentor who shaped his communication style.',
+  example_ko_3 = '그는 자신의 소통 방식을 형성해준 멘토를 인정했어요.',
+  example_en_4 = 'Publicly acknowledging someone in a speech is a powerful gesture.',
+  example_ko_4 = '연설에서 공개적으로 누군가를 알아봐주는 것은 강력한 제스처예요.',
+  example_en_5 = 'She acknowledged every attendee by name as they entered the room.',
+  example_ko_5 = '그녀는 참석자들이 방에 들어올 때마다 이름으로 알아봐줬어요.'
+WHERE id = 'w_greeting_B2_19';
+
+UPDATE words SET
+  example_en_2 = 'His personable approach made the formal reception feel more relaxed.',
+  example_ko_2 = '그의 붙임성 있는 접근이 격식 있는 리셉션을 더 편안하게 만들었어요.',
+  example_en_3 = 'She was personable enough to make even the shyest guests open up.',
+  example_ko_3 = '그녀는 가장 수줍은 손님도 마음을 열게 할 만큼 붙임성이 있었어요.',
+  example_en_4 = 'Being personable is not about being loud — it is about being present.',
+  example_ko_4 = '붙임성 있다는 것은 시끄럽다는 것이 아니에요 — 현재에 있는 거예요.',
+  example_en_5 = 'She was known for her personable manner in every introduction she gave.',
+  example_ko_5 = '그녀는 모든 소개에서 붙임성 있는 태도로 알려져 있었어요.'
+WHERE id = 'w_greeting_B2_20';
+
+UPDATE words SET
+  example_en_2 = 'Her body language conveys openness and warmth even before she speaks.',
+  example_ko_2 = '그녀의 몸짓은 말하기 전에도 개방성과 따뜻함을 전달해요.',
+  example_en_3 = 'A firm handshake can convey confidence and trustworthiness.',
+  example_ko_3 = '힘찬 악수는 자신감과 신뢰성을 전달할 수 있어요.',
+  example_en_4 = 'He conveyed deep respect with a slow, deliberate bow.',
+  example_ko_4 = '그는 천천히 신중한 절로 깊은 존경을 전달했어요.',
+  example_en_5 = 'A warm smile conveys more sincerity than any rehearsed speech.',
+  example_ko_5 = '따뜻한 미소는 어떤 연습된 연설보다 더 많은 진심을 전달해요.'
+WHERE id = 'w_greeting_B2_21';
+
+UPDATE words SET
+  example_en_2 = 'She found the formality of the event refreshing and well-organized.',
+  example_ko_2 = '그녀는 행사의 격식이 상쾌하고 잘 정돈됐다고 느꼈어요.',
+  example_en_3 = 'Some formality is expected when meeting a senior executive for the first time.',
+  example_ko_3 = '고위 임원을 처음 만날 때는 어느 정도 격식이 기대돼요.',
+  example_en_4 = 'Excessive formality can make people feel unwelcome and stiff.',
+  example_ko_4 = '과도한 격식은 사람들이 환영받지 못하고 딱딱하게 느끼게 할 수 있어요.',
+  example_en_5 = 'She balanced formality and warmth perfectly in her opening remarks.',
+  example_ko_5 = '그녀는 개회사에서 격식과 따뜻함을 완벽하게 균형 있게 유지했어요.'
+WHERE id = 'w_greeting_B2_22';
+
+UPDATE words SET
+  example_en_2 = 'His engaging introduction kept the entire room interested.',
+  example_ko_2 = '그의 매력적인 소개가 방 전체의 관심을 유지했어요.',
+  example_en_3 = 'She used an engaging anecdote to break the ice at the event.',
+  example_ko_3 = '그녀는 행사에서 분위기를 풀기 위해 매력적인 일화를 사용했어요.',
+  example_en_4 = 'Engaging conversation begins with showing genuine curiosity about others.',
+  example_ko_4 = '매력적인 대화는 다른 사람에 대한 진심 어린 호기심에서 시작해요.',
+  example_en_5 = 'She had an engaging presence that made people want to know her better.',
+  example_ko_5 = '그녀는 사람들이 더 잘 알고 싶어하는 매력적인 존재감을 지녔어요.'
+WHERE id = 'w_greeting_B2_23';
+
+UPDATE words SET
+  example_en_2 = 'The workshop helped demystify complex social etiquette for newcomers.',
+  example_ko_2 = '워크숍은 신입들에게 복잡한 사회 예절을 쉽게 이해하게 해줬어요.',
+  example_en_3 = 'She aimed to demystify formal greetings for her international students.',
+  example_ko_3 = '그녀는 국제 학생들에게 격식 있는 인사를 쉽게 설명하려 했어요.',
+  example_en_4 = 'Understanding cultural cues can demystify seemingly odd greeting customs.',
+  example_ko_4 = '문화적 신호를 이해하면 얼핏 이상해 보이는 인사 관습을 쉽게 이해할 수 있어요.',
+  example_en_5 = 'His book set out to demystify networking for introverts.',
+  example_ko_5 = '그의 책은 내성적인 사람들에게 네트워킹을 쉽게 이해시키려 했어요.'
+WHERE id = 'w_greeting_B2_24';
+
+UPDATE words SET
+  example_en_2 = 'The nuance in his tone made the greeting feel warm, not scripted.',
+  example_ko_2 = '그의 톤에 담긴 뉘앙스가 인사를 대본 같지 않고 따뜻하게 느끼게 했어요.',
+  example_en_3 = 'She appreciated the subtle nuances in the way different cultures bow.',
+  example_ko_3 = '그녀는 다른 문화들이 절하는 방식의 미묘한 뉘앙스를 감사하게 여겼어요.',
+  example_en_4 = 'Understanding nuance helps you read a room before you speak.',
+  example_ko_4 = '뉘앙스를 이해하면 말하기 전에 분위기를 파악할 수 있어요.',
+  example_en_5 = 'There was a nuance of hesitation in his greeting that she noticed.',
+  example_ko_5 = '그녀는 그의 인사에서 미묘한 망설임의 뉘앙스를 알아차렸어요.'
+WHERE id = 'w_greeting_B2_25';
+
+UPDATE words SET
+  example_en_2 = 'She greeted the hesitant newcomer with an amiable smile.',
+  example_ko_2 = '그녀는 망설이는 신입에게 상냥한 미소로 인사했어요.',
+  example_en_3 = 'His amiable manner disarmed even the most skeptical first-timers.',
+  example_ko_3 = '그의 상냥한 태도는 가장 의심스러운 첫 방문자도 무장 해제시켰어요.',
+  example_en_4 = 'She was amiable to everyone at the reception, regardless of their rank.',
+  example_ko_4 = '그녀는 지위에 상관없이 리셉션의 모든 사람에게 상냥했어요.',
+  example_en_5 = 'An amiable greeting makes even formal occasions feel human and warm.',
+  example_ko_5 = '상냥한 인사는 격식 있는 자리도 인간적이고 따뜻하게 느끼게 해요.'
+WHERE id = 'w_greeting_B2_26';
+
+UPDATE words SET
+  example_en_2 = 'Though reserved at first, she gradually opened up over dinner.',
+  example_ko_2 = '처음에는 말이 없었지만 저녁 식사 중 점차 마음을 열었어요.',
+  example_en_3 = 'His reserved nature often gave the wrong impression to strangers.',
+  example_ko_3 = '그의 내성적인 성격이 낯선 사람들에게 잘못된 인상을 주곤 했어요.',
+  example_en_4 = 'She was reserved in large groups but shone in one-on-one settings.',
+  example_ko_4 = '그녀는 큰 그룹에서는 말이 없었지만 일대일 자리에서는 빛났어요.',
+  example_en_5 = 'Even reserved people can greet warmly once they feel comfortable.',
+  example_ko_5 = '내성적인 사람도 편안함을 느끼면 따뜻하게 인사할 수 있어요.'
+WHERE id = 'w_greeting_B2_27';
+
+UPDATE words SET
+  example_en_2 = 'She took the initiative to organize a welcome lunch for the new hire.',
+  example_ko_2 = '그녀는 솔선하여 신입을 위한 환영 점심을 준비했어요.',
+  example_en_3 = 'Taking initiative in introductions shows confidence and social intelligence.',
+  example_ko_3 = '소개에서 솔선하는 것은 자신감과 사회적 지능을 보여줘요.',
+  example_en_4 = 'He showed initiative by greeting the keynote speaker before the event.',
+  example_ko_4 = '그는 행사 전에 기조 연설자에게 먼저 인사함으로써 솔선함을 보였어요.',
+  example_en_5 = 'Taking initiative in networking can set you apart from the crowd.',
+  example_ko_5 = '네트워킹에서 솔선하는 것이 다른 사람들과 차별화될 수 있어요.'
+WHERE id = 'w_greeting_B2_28';
+
+UPDATE words SET
+  example_en_2 = 'She was forthcoming about her professional journey during the introduction.',
+  example_ko_2 = '소개 중 그녀는 자신의 직업 여정에 대해 기꺼이 이야기했어요.',
+  example_en_3 = 'Being forthcoming builds trust faster than a formal bio ever could.',
+  example_ko_3 = '기꺼이 이야기하는 태도는 어떤 공식 약력보다 빠르게 신뢰를 쌓아요.',
+  example_en_4 = 'He was forthcoming with information when people asked where he worked.',
+  example_ko_4 = '사람들이 어디서 일하냐고 물을 때 그는 기꺼이 정보를 공유했어요.',
+  example_en_5 = 'A forthcoming attitude in networking events encourages reciprocal openness.',
+  example_ko_5 = '네트워킹 행사에서 기꺼이 말하는 태도는 상호적인 개방성을 장려해요.'
+WHERE id = 'w_greeting_B2_29';
+
+UPDATE words SET
+  example_en_2 = 'The convivial gathering made introductions feel natural and effortless.',
+  example_ko_2 = '유쾌한 모임이 소개를 자연스럽고 수월하게 느끼게 했어요.',
+  example_en_3 = 'She had a convivial personality that lit up every room she entered.',
+  example_ko_3 = '그녀는 들어가는 모든 방을 밝히는 유쾌한 성격을 가졌어요.',
+  example_en_4 = 'He promoted a convivial office culture that started with morning greetings.',
+  example_ko_4 = '그는 아침 인사에서 시작되는 유쾌한 사무실 문화를 촉진했어요.',
+  example_en_5 = 'A convivial host ensures no guest feels left out or unwelcome.',
+  example_ko_5 = '유쾌한 주최자는 어떤 손님도 소외되거나 환영받지 못한다고 느끼지 않도록 해요.'
+WHERE id = 'w_greeting_B2_30';
+
+UPDATE words SET
+  example_en_2 = 'She made an effort to be inclusive when introducing people in groups.',
+  example_ko_2 = '그룹에서 사람들을 소개할 때 그녀는 포용적이 되려고 노력했어요.',
+  example_en_3 = 'An inclusive greeting acknowledges newcomers as valued members.',
+  example_ko_3 = '포용적인 인사는 새로운 사람을 소중한 구성원으로 인정해요.',
+  example_en_4 = 'He made sure every person in the room received an inclusive welcome.',
+  example_ko_4 = '그는 방의 모든 사람이 포용적인 환영을 받도록 했어요.',
+  example_en_5 = 'Being inclusive in greetings sets a positive tone for any team dynamic.',
+  example_ko_5 = '인사에서 포용적인 태도는 모든 팀 역학에 긍정적인 분위기를 만들어요.'
+WHERE id = 'w_greeting_B2_31';
+
+UPDATE words SET
+  example_en_2 = 'A confident demeanor signals readiness and reliability.',
+  example_ko_2 = '자신감 있는 태도는 준비성과 신뢰성을 나타내요.',
+  example_en_3 = 'She adjusted her demeanor when greeting the visiting professor.',
+  example_ko_3 = '방문 교수를 맞이할 때 그녀는 태도를 조정했어요.',
+  example_en_4 = 'His relaxed demeanor made the entire panel feel at ease.',
+  example_ko_4 = '그의 편안한 태도가 패널 전체를 편안하게 만들었어요.',
+  example_en_5 = 'Matching your demeanor to the occasion is a mark of social intelligence.',
+  example_ko_5 = '상황에 맞게 태도를 맞추는 것은 사회적 지능의 표시예요.'
+WHERE id = 'w_greeting_B2_32';
+
+UPDATE words SET
+  example_en_2 = 'Her captivating smile made her memorable at every networking event.',
+  example_ko_2 = '그녀의 매혹적인 미소는 모든 네트워킹 행사에서 그녀를 기억에 남게 했어요.',
+  example_en_3 = 'His captivating presence meant people flocked to introduce themselves.',
+  example_ko_3 = '그의 매혹적인 존재감 덕분에 사람들이 몰려와 자기소개를 했어요.',
+  example_en_4 = 'She opened with a captivating anecdote that drew everyone in.',
+  example_ko_4 = '그녀는 모두를 끌어들이는 매혹적인 일화로 시작했어요.',
+  example_en_5 = 'A captivating greeting can open doors that a resume never could.',
+  example_ko_5 = '매혹적인 인사는 이력서로는 열 수 없는 문을 열 수 있어요.'
+WHERE id = 'w_greeting_B2_33';
+
+UPDATE words SET
+  example_en_2 = 'The CEO''s welcoming style became the benchmark for the company culture.',
+  example_ko_2 = 'CEO의 환영 방식이 회사 문화의 기준이 됐어요.',
+  example_en_3 = 'Her greeting etiquette was so polished it became a benchmark for others.',
+  example_ko_3 = '그녀의 인사 예절이 너무 완벽해서 다른 사람들의 기준이 됐어요.',
+  example_en_4 = 'Setting a benchmark for warm greetings improves team culture over time.',
+  example_ko_4 = '따뜻한 인사에 대한 기준을 세우면 시간이 지날수록 팀 문화가 개선돼요.',
+  example_en_5 = 'He used the most articulate speakers he met as benchmarks for his own style.',
+  example_ko_5 = '그는 만났던 가장 표현이 뛰어난 연설가들을 자신의 스타일 기준으로 삼았어요.'
+WHERE id = 'w_greeting_B2_34';
+
+UPDATE words SET
+  example_en_2 = 'A warm first greeting helps establish the foundation for trust.',
+  example_ko_2 = '따뜻한 첫 인사는 신뢰의 기반을 세우는 데 도움이 돼요.',
+  example_en_3 = 'She worked hard to establish herself as a welcoming presence in the team.',
+  example_ko_3 = '그녀는 팀에서 환영하는 존재로 자리 잡기 위해 열심히 노력했어요.',
+  example_en_4 = 'Establish clear social rituals like greeting colleagues every morning.',
+  example_ko_4 = '매일 아침 동료에게 인사하는 것 같은 명확한 사회적 의식을 확립해요.',
+  example_en_5 = 'Establishing rapport early makes difficult conversations much easier later.',
+  example_ko_5 = '초기에 유대감을 확립하면 나중에 어려운 대화가 훨씬 쉬워져요.'
+WHERE id = 'w_greeting_B2_35';
+
+-- C1 (35개)
+UPDATE words SET
+  example_en_2 = 'Her eloquent words at the ceremony left the audience deeply moved.',
+  example_ko_2 = '행사에서 그녀의 웅변적인 말이 청중을 깊이 감동시켰어요.',
+  example_en_3 = 'He greeted the delegation with an eloquent and concise opening.',
+  example_ko_3 = '그는 웅변적이고 간결한 오프닝으로 대표단을 맞이했어요.',
+  example_en_4 = 'An eloquent introduction sets a speaker apart from the very first line.',
+  example_ko_4 = '웅변적인 소개는 첫 줄에서부터 연설자를 돋보이게 해요.',
+  example_en_5 = 'She was eloquent without being verbose — every word had purpose.',
+  example_ko_5 = '그녀는 장황하지 않으면서 웅변적이었어요 — 모든 단어에 목적이 있었어요.'
+WHERE id = 'w_greeting_C1_01';
+
+UPDATE words SET
+  example_en_2 = 'The distinguished professor was welcomed with a standing ovation.',
+  example_ko_2 = '저명한 교수님이 기립 박수로 환영받았어요.',
+  example_en_3 = 'She introduced the distinguished speaker with measured admiration.',
+  example_ko_3 = '그녀는 저명한 연설자를 절제된 감탄으로 소개했어요.',
+  example_en_4 = 'His distinguished career in diplomacy was highlighted during the introduction.',
+  example_ko_4 = '소개 중 외교 분야에서의 그의 저명한 경력이 강조됐어요.',
+  example_en_5 = 'Distinguished guests deserve a greeting that matches their stature.',
+  example_ko_5 = '저명한 손님은 그들의 위상에 걸맞은 인사를 받을 자격이 있어요.'
+WHERE id = 'w_greeting_C1_02';
+
+UPDATE words SET
+  example_en_2 = 'She looked poised and ready as she stepped onto the stage.',
+  example_ko_2 = '그녀는 무대에 오르며 침착하고 준비된 모습이었어요.',
+  example_en_3 = 'He remained poised despite the unexpected questions from the audience.',
+  example_ko_3 = '청중의 예상치 못한 질문에도 그는 침착함을 유지했어요.',
+  example_en_4 = 'Poised speakers command attention from the moment they say hello.',
+  example_ko_4 = '침착한 연설가는 인사하는 순간부터 주의를 집중시켜요.',
+  example_en_5 = 'She was so poised that even experienced diplomats took notice.',
+  example_ko_5 = '그녀는 너무 침착해서 경험 많은 외교관들도 주목했어요.'
+WHERE id = 'w_greeting_C1_03';
+
+UPDATE words SET
+  example_en_2 = 'His affable nature made every meeting feel like a reunion.',
+  example_ko_2 = '그의 상냥한 성격 덕분에 모든 만남이 재회처럼 느껴졌어요.',
+  example_en_3 = 'She was affable with strangers — never guarded, always open.',
+  example_ko_3 = '그녀는 낯선 사람들에게도 상냥했어요 — 절대 경계하지 않고 항상 열려 있었어요.',
+  example_en_4 = 'An affable greeting can open more doors than a polished resume.',
+  example_ko_4 = '상냥한 인사는 완벽한 이력서보다 더 많은 문을 열 수 있어요.',
+  example_en_5 = 'He was known for his affable disposition at every professional event.',
+  example_ko_5 = '그는 모든 직업적 행사에서 상냥한 성격으로 알려져 있었어요.'
+WHERE id = 'w_greeting_C1_04';
+
+UPDATE words SET
+  example_en_2 = 'Her gregarious spirit meant she was always the first to say hello.',
+  example_ko_2 = '그녀의 사교적인 기질 덕분에 항상 먼저 인사했어요.',
+  example_en_3 = 'Gregarious individuals tend to draw energy from large social gatherings.',
+  example_ko_3 = '사교적인 사람들은 큰 사교적 모임에서 에너지를 얻는 경향이 있어요.',
+  example_en_4 = 'He became more gregarious after years of public speaking practice.',
+  example_ko_4 = '그는 수년간 공개 연설을 연습한 후 더 사교적이 됐어요.',
+  example_en_5 = 'A gregarious team member helps integrate newcomers faster.',
+  example_ko_5 = '사교적인 팀원은 신입이 더 빠르게 적응하도록 도와요.'
+WHERE id = 'w_greeting_C1_05';
+
+UPDATE words SET
+  example_en_2 = 'He was so personable that people often sought him out at events.',
+  example_ko_2 = '그는 너무 호감 가는 사람이라 사람들이 행사에서 자주 그를 찾았어요.',
+  example_en_3 = 'A personable host ensures every guest feels personally welcomed.',
+  example_ko_3 = '호감 가는 주최자는 모든 손님이 개인적으로 환영받는다고 느끼게 해요.',
+  example_en_4 = 'Personable leaders are often the most effective communicators.',
+  example_ko_4 = '호감 가는 리더들이 종종 가장 효과적인 소통가예요.',
+  example_en_5 = 'Her personable manner made introductions flow naturally and warmly.',
+  example_ko_5 = '그녀의 호감 가는 태도가 소개를 자연스럽고 따뜻하게 흐르게 했어요.'
+WHERE id = 'w_greeting_C1_06';
+
+UPDATE words SET
+  example_en_2 = 'His deferential greeting to the senior professor showed deep respect.',
+  example_ko_2 = '선임 교수에 대한 그의 공손한 인사는 깊은 존경을 보여줬어요.',
+  example_en_3 = 'She was deferential without losing her own voice or confidence.',
+  example_ko_3 = '그녀는 자신의 목소리나 자신감을 잃지 않으면서 공손했어요.',
+  example_en_4 = 'A deferential tone in greetings acknowledges hierarchy without being servile.',
+  example_ko_4 = '인사에서 공손한 톤은 비굴하지 않으면서 위계질서를 인정해요.',
+  example_en_5 = 'Being deferential at the right moment is a form of social intelligence.',
+  example_ko_5 = '적절한 순간에 공손한 것은 사회적 지능의 한 형태예요.'
+WHERE id = 'w_greeting_C1_07';
+
+UPDATE words SET
+  example_en_2 = 'Her amiable tone during the introduction made the room relax instantly.',
+  example_ko_2 = '소개 중 그녀의 친절한 톤이 방 전체를 즉시 편안하게 했어요.',
+  example_en_3 = 'He was amiable even when the conversation took an unexpected turn.',
+  example_ko_3 = '대화가 예상치 못한 방향으로 흘러도 그는 친절했어요.',
+  example_en_4 = 'An amiable disposition is the foundation of lasting professional relationships.',
+  example_ko_4 = '친절한 성격은 지속적인 직업적 관계의 기반이에요.',
+  example_en_5 = 'She was consistently amiable regardless of who she was greeting.',
+  example_ko_5 = '그녀는 누구에게 인사하든 항상 친절했어요.'
+WHERE id = 'w_greeting_C1_08';
+
+UPDATE words SET
+  example_en_2 = 'The two diplomats exchanged cordial greetings before the talks began.',
+  example_ko_2 = '두 외교관은 회담이 시작되기 전에 다정한 인사를 나눴어요.',
+  example_en_3 = 'She maintained a cordial relationship with colleagues across departments.',
+  example_ko_3 = '그녀는 부서 전체 동료들과 다정한 관계를 유지했어요.',
+  example_en_4 = 'A cordial greeting disarms even the most guarded individuals.',
+  example_ko_4 = '다정한 인사는 가장 경계심이 강한 사람도 무장 해제시켜요.',
+  example_en_5 = 'The cordial atmosphere of the meeting made difficult topics more accessible.',
+  example_ko_5 = '회의의 다정한 분위기가 어려운 주제를 더 쉽게 접근하게 했어요.'
+WHERE id = 'w_greeting_C1_09';
+
+UPDATE words SET
+  example_en_2 = 'He handled the awkward introduction with suave ease.',
+  example_ko_2 = '그는 어색한 소개를 세련된 여유로 처리했어요.',
+  example_en_3 = 'Her suave confidence made her an impressive presence at any event.',
+  example_ko_3 = '그녀의 세련된 자신감은 어떤 행사에서도 인상적인 존재감을 만들었어요.',
+  example_en_4 = 'Suave does not mean insincere — it means composed and considerate.',
+  example_ko_4 = '세련됐다는 것이 진실되지 않다는 의미가 아니에요 — 침착하고 배려심 있다는 의미예요.',
+  example_en_5 = 'His suave demeanor made every introduction feel polished and warm.',
+  example_ko_5 = '그의 세련된 태도가 모든 소개를 세련되고 따뜻하게 느끼게 했어요.'
+WHERE id = 'w_greeting_C1_10';
+
+UPDATE words SET
+  example_en_2 = 'Her eloquence in the opening address won universal admiration.',
+  example_ko_2 = '개회사에서 그녀의 표현력이 보편적인 감탄을 얻었어요.',
+  example_en_3 = 'Eloquence in everyday conversation builds confidence over time.',
+  example_ko_3 = '일상 대화에서의 표현력은 시간이 지날수록 자신감을 키워줘요.',
+  example_en_4 = 'She studied great speeches to develop her own eloquence.',
+  example_ko_4 = '그녀는 자신의 표현력을 개발하기 위해 위대한 연설들을 공부했어요.',
+  example_en_5 = 'His eloquence made even routine introductions feel meaningful.',
+  example_ko_5 = '그의 표현력은 평범한 소개도 의미 있게 느끼게 했어요.'
+WHERE id = 'w_greeting_C1_11';
+
+UPDATE words SET
+  example_en_2 = 'Diplomacy in greeting foreign guests requires cultural sensitivity.',
+  example_ko_2 = '외국 손님을 맞이하는 외교에는 문화적 민감성이 필요해요.',
+  example_en_3 = 'She resolved the tense greeting situation through quiet diplomacy.',
+  example_ko_3 = '그녀는 조용한 외교로 긴장된 인사 상황을 해결했어요.',
+  example_en_4 = 'Good diplomacy in introductions prevents misunderstandings before they start.',
+  example_ko_4 = '소개에서의 좋은 외교는 오해가 시작되기 전에 예방해요.',
+  example_en_5 = 'She used her natural diplomacy to bridge cultural gaps at the event.',
+  example_ko_5 = '그녀는 행사에서 문화적 격차를 좁히기 위해 자연스러운 외교력을 발휘했어요.'
+WHERE id = 'w_greeting_C1_12';
+
+UPDATE words SET
+  example_en_2 = 'The speaker''s prestige was evident from the standing ovation at arrival.',
+  example_ko_2 = '도착 시 기립 박수에서 연설자의 명성이 분명히 드러났어요.',
+  example_en_3 = 'She built her prestige by always greeting people with warmth.',
+  example_ko_3 = '그녀는 항상 따뜻하게 인사하며 명성을 쌓았어요.',
+  example_en_4 = 'Prestige alone does not guarantee a warm reception — behavior does.',
+  example_ko_4 = '명성만으로는 따뜻한 환영이 보장되지 않아요 — 행동이 보장해줘요.',
+  example_en_5 = 'His prestige in the field meant every introduction he gave carried weight.',
+  example_ko_5 = '그 분야에서의 그의 명성은 그가 하는 모든 소개에 무게감을 더했어요.'
+WHERE id = 'w_greeting_C1_13';
+
+UPDATE words SET
+  example_en_2 = 'Her cultivated speech patterns impressed the international delegates.',
+  example_ko_2 = '그녀의 교양 있는 말하기 패턴이 국제 대표단을 감동시켰어요.',
+  example_en_3 = 'He had a cultivated ability to put anyone at ease immediately.',
+  example_ko_3 = '그는 누구나 즉시 편안하게 만드는 교양 있는 능력을 지녔어요.',
+  example_en_4 = 'Cultivated manners are developed over time through experience and reflection.',
+  example_ko_4 = '교양 있는 태도는 경험과 성찰을 통해 시간이 지나면서 개발돼요.',
+  example_en_5 = 'Her cultivated approach to introductions reflected years of professional growth.',
+  example_ko_5 = '소개에 대한 그녀의 교양 있는 접근법은 수년간의 직업적 성장을 반영했어요.'
+WHERE id = 'w_greeting_C1_14';
+
+UPDATE words SET
+  example_en_2 = 'She remained composed when the unexpected guest arrived mid-event.',
+  example_ko_2 = '행사 중 예상치 못한 손님이 도착했을 때도 그녀는 침착했어요.',
+  example_en_3 = 'A composed greeting under pressure shows leadership qualities.',
+  example_ko_3 = '압박 속에서도 침착한 인사는 리더십 자질을 보여줘요.',
+  example_en_4 = 'He practiced his introduction until he felt fully composed.',
+  example_ko_4 = '그는 완전히 침착하게 느껴질 때까지 소개를 연습했어요.',
+  example_en_5 = 'She was composed and gracious even when the event did not go as planned.',
+  example_ko_5 = '행사가 계획대로 되지 않아도 그녀는 침착하고 우아했어요.'
+WHERE id = 'w_greeting_C1_15';
+
+UPDATE words SET
+  example_en_2 = 'A confident introduction can facilitate smoother team dynamics.',
+  example_ko_2 = '자신감 있는 소개는 더 원활한 팀 역학을 촉진할 수 있어요.',
+  example_en_3 = 'The host facilitated introductions between guests who shared interests.',
+  example_ko_3 = '주최자는 공통 관심사를 가진 손님들 간의 소개를 촉진했어요.',
+  example_en_4 = 'She facilitated the conversation by asking open-ended questions.',
+  example_ko_4 = '그녀는 열린 질문을 던져 대화를 촉진했어요.',
+  example_en_5 = 'Good etiquette facilitates connection — poor etiquette hinders it.',
+  example_ko_5 = '좋은 예절은 연결을 촉진하고 — 나쁜 예절은 방해해요.'
+WHERE id = 'w_greeting_C1_16';
+
+UPDATE words SET
+  example_en_2 = 'His demeanour during the formal greeting reflected years of experience.',
+  example_ko_2 = '격식 있는 인사 중 그의 행동거지는 수년간의 경험을 반영했어요.',
+  example_en_3 = 'She adjusted her demeanour to match the gravity of the occasion.',
+  example_ko_3 = '그녀는 상황의 중요성에 맞게 행동거지를 조정했어요.',
+  example_en_4 = 'Professional demeanour in greetings signals emotional maturity.',
+  example_ko_4 = '인사에서의 전문적인 행동거지는 감정적 성숙을 나타내요.',
+  example_en_5 = 'His calm demeanour reassured the nervous new staff member.',
+  example_ko_5 = '그의 차분한 행동거지가 긴장한 신입 직원을 안심시켰어요.'
+WHERE id = 'w_greeting_C1_17';
+
+UPDATE words SET
+  example_en_2 = 'In traditional Korean settings, elders are still venerated with deep bows.',
+  example_ko_2 = '전통적인 한국 환경에서는 어른들이 여전히 깊은 절로 공경받아요.',
+  example_en_3 = 'She venerated the scholar whose work had inspired her own research.',
+  example_ko_3 = '그녀는 자신의 연구에 영감을 준 학자를 공경했어요.',
+  example_en_4 = 'Cultures that venerate elders tend to have richer greeting rituals.',
+  example_ko_4 = '어른을 공경하는 문화는 더 풍부한 인사 의식을 갖는 경향이 있어요.',
+  example_en_5 = 'He venerated his mentor with a ceremonious bow at the award ceremony.',
+  example_ko_5 = '시상식에서 그는 멘토를 의례적인 절로 공경했어요.'
+WHERE id = 'w_greeting_C1_18';
+
+UPDATE words SET
+  example_en_2 = 'She was careful not to ingratiate herself too eagerly with the senior staff.',
+  example_ko_2 = '그녀는 선임 직원들에게 너무 열심히 환심을 사려 하지 않으려 조심했어요.',
+  example_en_3 = 'He avoided hollow compliments that might seem like an attempt to ingratiate.',
+  example_ko_3 = '그는 환심을 사려는 것처럼 보일 수 있는 공허한 칭찬을 피했어요.',
+  example_en_4 = 'Genuine warmth is never an attempt to ingratiate — it is simply authentic.',
+  example_ko_4 = '진심 어린 따뜻함은 절대 환심을 사려는 시도가 아니에요 — 그냥 진정성이에요.',
+  example_en_5 = 'She warned against trying to ingratiate yourself too quickly with new contacts.',
+  example_ko_5 = '그녀는 새로운 연락처에 너무 빨리 환심을 사려 하는 것을 경계하라고 했어요.'
+WHERE id = 'w_greeting_C1_19';
+
+UPDATE words SET
+  example_en_2 = 'A magnanimous host makes every guest feel equally valued.',
+  example_ko_2 = '도량이 넓은 주최자는 모든 손님이 똑같이 소중하다고 느끼게 해요.',
+  example_en_3 = 'She was magnanimous in crediting others during her opening remarks.',
+  example_ko_3 = '개회사에서 그녀는 관대하게 다른 사람들의 공을 인정했어요.',
+  example_en_4 = 'His magnanimous spirit meant he never greeted anyone coldly.',
+  example_ko_4 = '그의 관대한 정신 덕분에 그는 아무에게도 냉정하게 인사하지 않았어요.',
+  example_en_5 = 'Being magnanimous in a greeting shows true leadership character.',
+  example_ko_5 = '인사에서 관대함은 진정한 리더십 성격을 보여줘요.'
+WHERE id = 'w_greeting_C1_20';
+
+UPDATE words SET
+  example_en_2 = 'Her effusive greeting made the shy visitor feel instantly at home.',
+  example_ko_2 = '그녀의 넘치는 인사로 수줍은 방문객이 즉시 편안함을 느꼈어요.',
+  example_en_3 = 'He was effusive in his praise for the team during his introduction.',
+  example_ko_3 = '소개 중 그는 팀에 대한 칭찬을 넘치도록 표현했어요.',
+  example_en_4 = 'Effusive greetings can feel overwhelming if not balanced with sincerity.',
+  example_ko_4 = '넘치는 인사는 진심이 균형 잡히지 않으면 부담스럽게 느껴질 수 있어요.',
+  example_en_5 = 'She was known for her effusive warmth at every team welcome event.',
+  example_ko_5 = '그녀는 모든 팀 환영 행사에서 넘치는 따뜻함으로 알려져 있었어요.'
+WHERE id = 'w_greeting_C1_21';
+
+UPDATE words SET
+  example_en_2 = 'His unassuming manner was disarming in the best possible way.',
+  example_ko_2 = '그의 겸손한 태도는 최고의 방식으로 긴장을 풀어줬어요.',
+  example_en_3 = 'She remained unassuming despite her impressive track record.',
+  example_ko_3 = '인상적인 실적에도 불구하고 그녀는 겸손함을 유지했어요.',
+  example_en_4 = 'Unassuming people often make the strongest first impressions.',
+  example_ko_4 = '겸손한 사람들이 종종 가장 강한 첫인상을 남겨요.',
+  example_en_5 = 'His unassuming greeting made people want to know more about him.',
+  example_ko_5 = '그의 겸손한 인사는 사람들이 그에 대해 더 알고 싶게 만들었어요.'
+WHERE id = 'w_greeting_C1_22';
+
+UPDATE words SET
+  example_en_2 = 'Building rapport with new colleagues starts with a genuine greeting.',
+  example_ko_2 = '새 동료들과 신뢰 관계를 쌓는 것은 진심 어린 인사에서 시작돼요.',
+  example_en_3 = 'Their rapport developed so naturally that introductions felt effortless.',
+  example_ko_3 = '그들의 신뢰 관계가 너무 자연스럽게 발전해 소개가 수월하게 느껴졌어요.',
+  example_en_4 = 'He used active listening to build rapport during their first conversation.',
+  example_ko_4 = '그는 첫 대화 중 신뢰 관계를 쌓기 위해 적극적인 경청을 사용했어요.',
+  example_en_5 = 'Rapport built in the first five minutes of a meeting can shape the entire relationship.',
+  example_ko_5 = '미팅 첫 5분에 쌓은 신뢰 관계가 전체 관계를 형성할 수 있어요.'
+WHERE id = 'w_greeting_C1_23';
+
+UPDATE words SET
+  example_en_2 = 'People predisposed to warmth tend to excel in client-facing roles.',
+  example_ko_2 = '따뜻함에 경향이 있는 사람들은 고객 대면 역할에서 뛰어난 경향이 있어요.',
+  example_en_3 = 'She was predisposed to see the best in every new person she met.',
+  example_ko_3 = '그녀는 새로 만나는 모든 사람에게서 최선을 보려는 경향이 있었어요.',
+  example_en_4 = 'Being predisposed to openness makes you a better networker.',
+  example_ko_4 = '개방성에 경향이 있으면 더 나은 네트워킹 사람이 돼요.',
+  example_en_5 = 'Research shows humans are predisposed to trust those who smile on greeting.',
+  example_ko_5 = '연구에 따르면 인간은 인사할 때 미소 짓는 사람을 신뢰하는 경향이 있어요.'
+WHERE id = 'w_greeting_C1_24';
+
+UPDATE words SET
+  example_en_2 = 'She briefed her foreign counterpart on the local greeting customs.',
+  example_ko_2 = '그녀는 외국 상대방에게 현지 인사 관습을 알려줬어요.',
+  example_en_3 = 'He greeted his counterpart with the same formality he expected in return.',
+  example_ko_3 = '그는 상대방에게 기대하는 것과 같은 격식으로 인사했어요.',
+  example_en_4 = 'Cross-cultural greetings require understanding your counterpart''s norms.',
+  example_ko_4 = '이문화 간 인사는 상대방의 규범을 이해하는 것이 필요해요.',
+  example_en_5 = 'She made sure her counterpart felt respected from the very first greeting.',
+  example_ko_5 = '그녀는 상대방이 첫 인사부터 존중받는다고 느끼도록 했어요.'
+WHERE id = 'w_greeting_C1_25';
+
+UPDATE words SET
+  example_en_2 = 'Her friendly email was an overture that led to a long collaboration.',
+  example_ko_2 = '그녀의 친근한 이메일이 긴 협업으로 이어지는 첫 발걸음이었어요.',
+  example_en_3 = 'His casual greeting at the conference was an overture toward partnership.',
+  example_ko_3 = '컨퍼런스에서 그의 가벼운 인사는 파트너십을 향한 첫 발걸음이었어요.',
+  example_en_4 = 'She accepted the overture with warmth and began a meaningful conversation.',
+  example_ko_4 = '그녀는 따뜻하게 첫 발걸음을 받아들이고 의미 있는 대화를 시작했어요.',
+  example_en_5 = 'A well-crafted overture sets the stage for any lasting professional bond.',
+  example_ko_5 = '잘 만들어진 첫 발걸음은 지속적인 직업적 유대의 무대를 마련해요.'
+WHERE id = 'w_greeting_C1_26';
+
+UPDATE words SET
+  example_en_2 = 'Decorum in diplomatic greetings is non-negotiable in formal settings.',
+  example_ko_2 = '외교적 인사에서의 예의범절은 격식 있는 자리에서 협상이 불가능해요.',
+  example_en_3 = 'She upheld decorum even when the other party was being informal.',
+  example_ko_3 = '상대방이 격식을 차리지 않을 때도 그녀는 예의범절을 지켰어요.',
+  example_en_4 = 'He was praised for maintaining decorum throughout the heated reception.',
+  example_ko_4 = '그는 뜨거운 리셉션 내내 예의범절을 유지한 것으로 칭찬받았어요.',
+  example_en_5 = 'Teaching decorum to young professionals improves their long-term social capital.',
+  example_ko_5 = '젊은 전문가들에게 예의범절을 가르치면 장기적인 사회적 자본이 향상돼요.'
+WHERE id = 'w_greeting_C1_27';
+
+UPDATE words SET
+  example_en_2 = 'She insisted on propriety even in informal networking settings.',
+  example_ko_2 = '비공식적인 네트워킹 자리에서도 그녀는 적절함을 고집했어요.',
+  example_en_3 = 'Propriety in addressing elders is central to Korean culture.',
+  example_ko_3 = '어른을 부르는 데 있어서의 적절함은 한국 문화의 중심이에요.',
+  example_en_4 = 'He kept a sense of propriety even during casual Friday events.',
+  example_ko_4 = '그는 캐주얼 프라이데이 행사에서도 적절함의 감각을 유지했어요.',
+  example_en_5 = 'Propriety is not rigidity — it is knowing what is fitting for each moment.',
+  example_ko_5 = '적절함은 경직됨이 아니에요 — 각 순간에 맞는 것이 무엇인지 아는 거예요.'
+WHERE id = 'w_greeting_C1_28';
+
+UPDATE words SET
+  example_en_2 = 'Her disarming honesty made everyone in the room feel safe.',
+  example_ko_2 = '그녀의 긴장을 풀어주는 솔직함이 방의 모든 사람을 안전하게 느끼게 했어요.',
+  example_en_3 = 'He used a disarming self-deprecating joke to break the ice.',
+  example_ko_3 = '그는 분위기를 풀기 위해 긴장을 풀어주는 자기 비하 농담을 사용했어요.',
+  example_en_4 = 'A disarming greeting drops defenses and opens genuine conversation.',
+  example_ko_4 = '긴장을 풀어주는 인사는 방어막을 내리고 진정한 대화를 열어요.',
+  example_en_5 = 'She had a disarming way of greeting people that made them immediately trust her.',
+  example_ko_5 = '그녀는 사람들을 즉시 신뢰하게 만드는 긴장을 풀어주는 인사 방식을 가졌어요.'
+WHERE id = 'w_greeting_C1_29';
+
+UPDATE words SET
+  example_en_2 = 'She advised him to cut the verbiage and get to the point quickly.',
+  example_ko_2 = '그녀는 그에게 장황한 말을 줄이고 빠르게 요점을 말하라고 조언했어요.',
+  example_en_3 = 'His introduction was full of verbiage that diluted the key message.',
+  example_ko_3 = '그의 소개는 핵심 메시지를 희석시키는 장황한 말로 가득했어요.',
+  example_en_4 = 'Avoid verbiage in greetings — simple and sincere always wins.',
+  example_ko_4 = '인사에서 장황한 말을 피하세요 — 단순하고 진심이 항상 이겨요.',
+  example_en_5 = 'Trimming verbiage from his opening remarks made his speech far more effective.',
+  example_ko_5 = '개회사에서 장황한 말을 줄이자 연설이 훨씬 효과적이 됐어요.'
+WHERE id = 'w_greeting_C1_30';
+
+UPDATE words SET
+  example_en_2 = 'The opulent hall set high expectations for the reception that followed.',
+  example_ko_2 = '화려한 홀이 이어지는 리셉션에 대한 높은 기대를 형성했어요.',
+  example_en_3 = 'Despite the opulent surroundings, she greeted each guest humbly.',
+  example_ko_3 = '화려한 주변 환경에도 불구하고 그녀는 각 손님에게 겸손하게 인사했어요.',
+  example_en_4 = 'He felt out of place in the opulent reception but focused on being warm.',
+  example_ko_4 = '화려한 리셉션이 어색하게 느껴졌지만 그는 따뜻하게 행동하는 데 집중했어요.',
+  example_en_5 = 'True hospitality transcends opulent settings — it lives in simple warmth.',
+  example_ko_5 = '진정한 환대는 화려한 환경을 초월해요 — 단순한 따뜻함 속에 살아있어요.'
+WHERE id = 'w_greeting_C1_31';
+
+UPDATE words SET
+  example_en_2 = 'Her inimitable charm made every greeting feel like a personal moment.',
+  example_ko_2 = '그녀의 모방할 수 없는 매력은 모든 인사를 개인적인 순간처럼 느끼게 했어요.',
+  example_en_3 = 'He had an inimitable way of remembering and using people''s names.',
+  example_ko_3 = '그는 사람들의 이름을 기억하고 사용하는 모방할 수 없는 방식을 가졌어요.',
+  example_en_4 = 'Her inimitable style was studied by a generation of public speakers.',
+  example_ko_4 = '그녀의 모방할 수 없는 스타일은 한 세대의 공개 연설가들이 연구했어요.',
+  example_en_5 = 'What made his greetings inimitable was the genuine joy he showed.',
+  example_ko_5 = '그의 인사를 모방할 수 없게 만든 것은 그가 보여준 진정한 기쁨이었어요.'
+WHERE id = 'w_greeting_C1_32';
+
+UPDATE words SET
+  example_en_2 = 'He appreciated the candor with which she acknowledged the awkward silence.',
+  example_ko_2 = '그는 그녀가 어색한 침묵을 인정하는 솔직함에 감사했어요.',
+  example_en_3 = 'Her candor in greeting him by his nickname showed genuine familiarity.',
+  example_ko_3 = '닉네임으로 인사하는 그녀의 솔직함은 진정한 친밀감을 보여줬어요.',
+  example_en_4 = 'Candor and warmth together create the most trustworthy greeting style.',
+  example_ko_4 = '솔직함과 따뜻함이 합쳐지면 가장 신뢰할 수 있는 인사 방식이 돼요.',
+  example_en_5 = 'She greeted him with candor rather than false formality.',
+  example_ko_5 = '그녀는 거짓 격식 대신 솔직함으로 그를 맞이했어요.'
+WHERE id = 'w_greeting_C1_33';
+
+UPDATE words SET
+  example_en_2 = 'The warm greeting at the summit marked the beginning of a diplomatic entente.',
+  example_ko_2 = '정상회담의 따뜻한 인사가 외교적 우호 관계의 시작을 알렸어요.',
+  example_en_3 = 'Building an entente starts with small, consistent acts of goodwill.',
+  example_ko_3 = '우호 관계를 쌓는 것은 작고 일관된 선의의 행동에서 시작돼요.',
+  example_en_4 = 'Their entente was visible in the way they instinctively greeted each other.',
+  example_ko_4 = '그들의 우호 관계는 서로를 본능적으로 맞이하는 방식에서 분명히 드러났어요.',
+  example_en_5 = 'A spirit of entente made the cross-cultural introductions feel natural.',
+  example_ko_5 = '우호 관계의 정신이 이문화 간 소개를 자연스럽게 느끼게 했어요.'
+WHERE id = 'w_greeting_C1_34';
+
+UPDATE words SET
+  example_en_2 = 'A salutary reminder that warmth matters more than perfection in greetings.',
+  example_ko_2 = '인사에서는 완벽함보다 따뜻함이 더 중요하다는 유익한 상기예요.',
+  example_en_3 = 'His salutary habit of greeting staff by name raised morale significantly.',
+  example_ko_3 = '직원들을 이름으로 인사하는 그의 유익한 습관이 사기를 크게 높였어요.',
+  example_en_4 = 'The cross-cultural training had a salutary effect on the team''s interactions.',
+  example_ko_4 = '이문화 교육이 팀의 상호작용에 유익한 효과를 미쳤어요.',
+  example_en_5 = 'She found it salutary to reflect on her greeting habits each quarter.',
+  example_ko_5 = '그녀는 매 분기마다 자신의 인사 습관을 돌아보는 것이 유익하다고 생각했어요.'
+WHERE id = 'w_greeting_C1_35';
+
+-- C2 (35개)
+UPDATE words SET
+  example_en_2 = 'His urbane wit made the formal introduction feel almost conversational.',
+  example_ko_2 = '그의 세련된 재치 덕분에 격식 있는 소개가 거의 대화처럼 느껴졌어요.',
+  example_en_3 = 'She admired his urbane composure when greeting dignitaries.',
+  example_ko_3 = '고위 인사들을 맞이할 때 그의 세련된 침착함에 감탄했어요.',
+  example_en_4 = 'An urbane manner signals education, self-awareness, and cultural fluency.',
+  example_ko_4 = '세련된 태도는 교육, 자아 인식, 문화적 유창함을 나타내요.',
+  example_en_5 = 'Despite the stressful context, he remained urbane and composed throughout.',
+  example_ko_5 = '스트레스가 많은 상황에서도 그는 내내 세련되고 침착했어요.'
+WHERE id = 'w_greeting_C2_01';
+
+UPDATE words SET
+  example_en_2 = 'Her debonair confidence in introducing herself was instantly captivating.',
+  example_ko_2 = '자기소개에서 그녀의 우아한 자신감이 즉시 매혹적이었어요.',
+  example_en_3 = 'He greeted the diplomats with debonair ease and effortless charm.',
+  example_ko_3 = '그는 우아한 여유와 자연스러운 매력으로 외교관들에게 인사했어요.',
+  example_en_4 = 'A debonair demeanor at formal events conveys readiness and sophistication.',
+  example_ko_4 = '공식 행사에서 우아한 태도는 준비성과 세련됨을 전달해요.',
+  example_en_5 = 'He was debonair in a way that felt natural rather than rehearsed.',
+  example_ko_5 = '그는 연습된 것이 아니라 자연스럽게 느껴지는 방식으로 우아했어요.'
+WHERE id = 'w_greeting_C2_02';
+
+UPDATE words SET
+  example_en_2 = 'Her refined delivery made even a brief greeting memorable.',
+  example_ko_2 = '그녀의 품위 있는 전달 방식은 짧은 인사도 기억에 남게 했어요.',
+  example_en_3 = 'Refined social skills take years to develop but are worth the effort.',
+  example_ko_3 = '품위 있는 사회적 기술을 개발하는 데는 수년이 걸리지만 노력할 가치가 있어요.',
+  example_en_4 = 'She brought a refined sense of ceremony to even the simplest gatherings.',
+  example_ko_4 = '그녀는 가장 단순한 모임에도 품위 있는 의식의 감각을 가져왔어요.',
+  example_en_5 = 'His refined manner of greeting elders earned universal admiration.',
+  example_ko_5 = '어른에게 인사하는 그의 품위 있는 방식이 보편적인 감탄을 얻었어요.'
+WHERE id = 'w_greeting_C2_03';
+
+UPDATE words SET
+  example_en_2 = 'She was gracious to the protesters who had gathered outside the venue.',
+  example_ko_2 = '그녀는 장소 밖에 모인 시위대에게도 우아하게 인사했어요.',
+  example_en_3 = 'He greeted his rivals with gracious sportsmanship after the competition.',
+  example_ko_3 = '경쟁 후 그는 품위 있는 스포츠맨십으로 경쟁자들에게 인사했어요.',
+  example_en_4 = 'Gracious hosts make every guest feel cherished from the moment they arrive.',
+  example_ko_4 = '우아한 주최자는 도착하는 순간부터 모든 손님이 소중하다고 느끼게 해요.',
+  example_en_5 = 'Her gracious words at the podium reflected years of leadership and humility.',
+  example_ko_5 = '연단에서 그녀의 우아한 말은 수년간의 리더십과 겸손을 반영했어요.'
+WHERE id = 'w_greeting_C2_04';
+
+UPDATE words SET
+  example_en_2 = 'The ceremonious exchange of gifts accompanied each formal greeting.',
+  example_ko_2 = '각 격식 있는 인사에는 의례적인 선물 교환이 수반됐어요.',
+  example_en_3 = 'He found the ceremonious proceedings both elegant and moving.',
+  example_ko_3 = '그는 의례적인 절차가 우아하면서도 감동적이라고 느꼈어요.',
+  example_en_4 = 'She adapted the ceremonious traditions for a modern international audience.',
+  example_ko_4 = '그녀는 의례적인 전통을 현대 국제 청중에 맞게 조정했어요.',
+  example_en_5 = 'Ceremonious introductions at the gala were handled with impeccable precision.',
+  example_ko_5 = '갈라 행사에서의 의례적인 소개는 흠잡을 데 없는 정확성으로 진행됐어요.'
+WHERE id = 'w_greeting_C2_05';
+
+UPDATE words SET
+  example_en_2 = 'Her magnanimous greeting after the contentious vote restored harmony.',
+  example_ko_2 = '논쟁적인 투표 후 그녀의 관대한 인사가 조화를 회복시켰어요.',
+  example_en_3 = 'He was magnanimous in acknowledging the contributions of all team members.',
+  example_ko_3 = '그는 모든 팀원의 공헌을 인정하는 데 관대했어요.',
+  example_en_4 = 'Magnanimous leaders greet both allies and adversaries with equal dignity.',
+  example_ko_4 = '관대한 리더는 동맹과 적수 모두에게 동등한 품위로 인사해요.',
+  example_en_5 = 'A magnanimous spirit in greetings breaks down barriers others cannot.',
+  example_ko_5 = '인사에서의 관대한 정신은 다른 것들이 무너뜨리지 못하는 장벽을 무너뜨려요.'
+WHERE id = 'w_greeting_C2_06';
+
+UPDATE words SET
+  example_en_2 = 'The venerable diplomat was greeted with full ceremonial honors.',
+  example_ko_2 = '존경받는 외교관이 완전한 의식의 예우로 맞이받았어요.',
+  example_en_3 = 'She listened intently to the venerable scholar''s opening words.',
+  example_ko_3 = '그녀는 존경받는 학자의 개회사에 집중해서 귀를 기울였어요.',
+  example_en_4 = 'Venerable traditions of greeting should be passed on to new generations.',
+  example_ko_4 = '존경받는 인사 전통은 새로운 세대에게 전해져야 해요.',
+  example_en_5 = 'His venerable presence commanded respectful silence as he approached.',
+  example_ko_5 = '그의 존경받는 존재감은 그가 다가오자 경의를 담은 침묵을 이끌었어요.'
+WHERE id = 'w_greeting_C2_07';
+
+UPDATE words SET
+  example_en_2 = 'Even in informal settings, she maintained a sense of decorum.',
+  example_ko_2 = '비공식적인 자리에서도 그녀는 예의범절의 감각을 유지했어요.',
+  example_en_3 = 'He was praised for upholding decorum during a particularly tense reception.',
+  example_ko_3 = '특히 긴장된 리셉션 중 예의범절을 지킨 것으로 그는 칭찬받았어요.',
+  example_en_4 = 'Decorum in state-level events reflects the character of a nation.',
+  example_ko_4 = '국가 수준 행사에서의 예의범절은 나라의 성격을 반영해요.',
+  example_en_5 = 'She reminded her team that decorum extends beyond just saying the right words.',
+  example_ko_5 = '그녀는 팀에게 예의범절은 올바른 말을 하는 것 이상으로 확장된다고 상기시켰어요.'
+WHERE id = 'w_greeting_C2_08';
+
+UPDATE words SET
+  example_en_2 = 'She mastered diplomatic protocol before her first international mission.',
+  example_ko_2 = '첫 국제 임무 전에 그녀는 외교 의전을 완벽하게 숙지했어요.',
+  example_en_3 = 'The protocol governing introductions at the summit was strictly observed.',
+  example_ko_3 = '정상회담에서 소개에 관한 의전이 엄격하게 준수됐어요.',
+  example_en_4 = 'Breaking protocol, even unintentionally, can cause diplomatic incidents.',
+  example_ko_4 = '의도치 않게 의전을 어겨도 외교적 사건이 될 수 있어요.',
+  example_en_5 = 'Understanding protocol helps you navigate formal introductions with confidence.',
+  example_ko_5 = '의전을 이해하면 자신감 있게 격식 있는 소개를 탐색할 수 있어요.'
+WHERE id = 'w_greeting_C2_09';
+
+UPDATE words SET
+  example_en_2 = 'The ambassador''s greeting was broadcast live to both nations.',
+  example_ko_2 = '대사의 인사가 두 나라에 생중계됐어요.',
+  example_en_3 = 'She served as the cultural ambassador, greeting global visitors warmly.',
+  example_ko_3 = '그녀는 문화 대사로서 전 세계 방문객을 따뜻하게 맞이했어요.',
+  example_en_4 = 'The ambassador modeled the greeting customs of the host country.',
+  example_ko_4 = '대사는 주최국의 인사 관습을 모범적으로 따랐어요.',
+  example_en_5 = 'An ambassador''s handshake can carry the weight of an entire diplomatic relationship.',
+  example_ko_5 = '대사의 악수는 전체 외교 관계의 무게를 담을 수 있어요.'
+WHERE id = 'w_greeting_C2_10';
+
+UPDATE words SET
+  example_en_2 = 'The audience rose to felicitate the newly elected president.',
+  example_ko_2 = '청중은 새로 선출된 대통령을 축하하기 위해 자리에서 일어났어요.',
+  example_en_3 = 'She was invited to felicitate the retiring dean at the farewell ceremony.',
+  example_ko_3 = '그녀는 작별 행사에서 은퇴하는 학장을 축하하도록 초대됐어요.',
+  example_en_4 = 'It is customary to felicitate distinguished guests before the banquet begins.',
+  example_ko_4 = '연회가 시작되기 전 저명한 손님들을 축하하는 것이 관례예요.',
+  example_en_5 = 'He stood to felicitate his mentor with heartfelt and eloquent words.',
+  example_ko_5 = '그는 멘토를 진심 어리고 웅변적인 말로 축하하기 위해 자리에서 일어났어요.'
+WHERE id = 'w_greeting_C2_11';
+
+UPDATE words SET
+  example_en_2 = 'The formal salutation in the letter set a tone of deep respect.',
+  example_ko_2 = '편지의 격식 있는 인사말이 깊은 존경의 분위기를 설정했어요.',
+  example_en_3 = 'She practiced the correct salutation for each level of recipient.',
+  example_ko_3 = '그녀는 각 수신자 수준에 맞는 올바른 인사말을 연습했어요.',
+  example_en_4 = 'The opening salutation of a speech establishes immediate connection.',
+  example_ko_4 = '연설의 개회 인사말은 즉각적인 연결을 확립해요.',
+  example_en_5 = 'A misplaced salutation in diplomatic correspondence can cause offense.',
+  example_ko_5 = '외교 서신에서 잘못된 인사말은 기분을 상하게 할 수 있어요.'
+WHERE id = 'w_greeting_C2_12';
+
+UPDATE words SET
+  example_en_2 = 'They performed obeisance before the senior statesman as a mark of respect.',
+  example_ko_2 = '그들은 존경의 표시로 원로 정치인 앞에서 절을 했어요.',
+  example_en_3 = 'She was moved by the deep obeisance shown by the younger students.',
+  example_ko_3 = '어린 학생들이 보여준 깊은 절에 그녀는 감동받았어요.',
+  example_en_4 = 'In ancient courts, obeisance was required even before speaking.',
+  example_ko_4 = '고대 궁정에서는 말하기 전에도 절이 요구됐어요.',
+  example_en_5 = 'The dignitary received obeisance from hundreds of devoted followers.',
+  example_ko_5 = '고위 인사는 수백 명의 헌신적인 추종자들로부터 절을 받았어요.'
+WHERE id = 'w_greeting_C2_13';
+
+UPDATE words SET
+  example_en_2 = 'At the convocation, the president greeted each graduate by name.',
+  example_ko_2 = '졸업식에서 총장은 각 졸업생을 이름으로 맞이했어요.',
+  example_en_3 = 'The convocation brought together scholars from across the world.',
+  example_ko_3 = '졸업식은 전 세계 학자들을 한자리에 모았어요.',
+  example_en_4 = 'She gave an eloquent address at the annual convocation ceremony.',
+  example_ko_4 = '그녀는 연례 졸업식에서 웅변적인 연설을 했어요.',
+  example_en_5 = 'The convocation opened with a ceremonious welcome from the vice-chancellor.',
+  example_ko_5 = '졸업식은 부총장의 의례적인 환영으로 시작됐어요.'
+WHERE id = 'w_greeting_C2_14';
+
+UPDATE words SET
+  example_en_2 = 'Her greeting radiated a deep benevolence that touched everyone present.',
+  example_ko_2 = '그녀의 인사에서 자리에 있는 모든 사람에게 닿는 깊은 선의가 넘쳐났어요.',
+  example_en_3 = 'He was known for his benevolence — no one ever left his presence feeling small.',
+  example_ko_3 = '그는 선의로 알려져 있었어요 — 그의 곁을 떠나며 초라하게 느끼는 사람이 없었어요.',
+  example_en_4 = 'True benevolence in a greeting asks nothing in return.',
+  example_ko_4 = '인사에서의 진정한 선의는 아무것도 되돌려 받기를 기대하지 않아요.',
+  example_en_5 = 'Her legacy was built on decades of benevolence and genuine human connection.',
+  example_ko_5 = '그녀의 유산은 수십 년간의 선의와 진정한 인간적 연결 위에 세워졌어요.'
+WHERE id = 'w_greeting_C2_15';
+
+UPDATE words SET
+  example_en_2 = 'She earned the approbation of the senior staff with her gracious greeting.',
+  example_ko_2 = '우아한 인사로 그녀는 선임 직원들의 승인을 얻었어요.',
+  example_en_3 = 'His opening remarks gained the immediate approbation of the assembly.',
+  example_ko_3 = '그의 개회사가 즉시 총회의 승인을 얻었어요.',
+  example_en_4 = 'Approbation from respected peers signals that your social style is on point.',
+  example_ko_4 = '존경받는 동료들의 승인은 사회적 스타일이 적절하다는 신호예요.',
+  example_en_5 = 'She sought approbation not from flattery but from genuine engagement.',
+  example_ko_5 = '그녀는 아첨이 아닌 진심 어린 참여에서 승인을 구했어요.'
+WHERE id = 'w_greeting_C2_16';
+
+UPDATE words SET
+  example_en_2 = 'His greeting was warm and humble — utterly free of hauteur.',
+  example_ko_2 = '그의 인사는 따뜻하고 겸손했어요 — 거만함이 전혀 없었어요.',
+  example_en_3 = 'She disliked hauteur in any form, especially in social introductions.',
+  example_ko_3 = '그녀는 어떤 형태의 거만함도 싫어했어요, 특히 사회적 소개에서.',
+  example_en_4 = 'Hauteur in a greeting creates distance instead of connection.',
+  example_ko_4 = '인사에서의 거만함은 연결 대신 거리감을 만들어요.',
+  example_en_5 = 'Avoiding hauteur is the first step toward becoming a genuinely warm host.',
+  example_ko_5 = '거만함을 피하는 것이 진정으로 따뜻한 주최자가 되기 위한 첫 번째 단계예요.'
+WHERE id = 'w_greeting_C2_17';
+
+UPDATE words SET
+  example_en_2 = 'Her intercession at the dinner brought two estranged factions together.',
+  example_ko_2 = '만찬에서의 그녀의 중재가 두 소외된 파벌을 하나로 모았어요.',
+  example_en_3 = 'His friendly intercession resolved what could have been an awkward scene.',
+  example_ko_3 = '그의 친근한 중재로 어색한 장면이 될 수 있었던 것이 해결됐어요.',
+  example_en_4 = 'She acted as a gracious intermediary, facilitating warm introductions.',
+  example_ko_4 = '그녀는 우아한 중재자로서 따뜻한 소개를 촉진했어요.',
+  example_en_5 = 'Her intercession was so subtle that no one realized diplomacy was at work.',
+  example_ko_5 = '그녀의 중재가 너무 미묘해서 아무도 외교가 작동하고 있다는 것을 깨닫지 못했어요.'
+WHERE id = 'w_greeting_C2_18';
+
+UPDATE words SET
+  example_en_2 = 'He swept into the room with the panache of a seasoned host.',
+  example_ko_2 = '그는 노련한 주최자의 기개로 방에 들어왔어요.',
+  example_en_3 = 'She greeted every newcomer with a panache that was entirely her own.',
+  example_ko_3 = '그녀는 완전히 자신만의 기개로 모든 신입을 맞이했어요.',
+  example_en_4 = 'Panache is not about showiness — it is about joyful self-expression.',
+  example_ko_4 = '기개는 과시에 관한 것이 아니에요 — 즐거운 자기 표현에 관한 거예요.',
+  example_en_5 = 'His panache in welcoming guests set the tone for the whole gala.',
+  example_ko_5 = '손님을 환영하는 그의 기개가 갈라 전체의 분위기를 결정했어요.'
+WHERE id = 'w_greeting_C2_19';
+
+UPDATE words SET
+  example_en_2 = 'The emissary''s greeting was laden with the weight of historical suzerainty.',
+  example_ko_2 = '사절의 인사는 역사적 종주권의 무게를 담고 있었어요.',
+  example_en_3 = 'Even under suzerainty, the vassal state preserved its own greeting customs.',
+  example_ko_3 = '종주권 아래에서도 속국은 자신만의 인사 관습을 보존했어요.',
+  example_en_4 = 'The concept of suzerainty is reflected in the hierarchical bowing customs of East Asia.',
+  example_ko_4 = '종주권의 개념은 동아시아의 위계적 절 관습에 반영돼 있어요.',
+  example_en_5 = 'She studied historical suzerainty to understand ancient diplomatic greetings.',
+  example_ko_5 = '그녀는 고대 외교적 인사를 이해하기 위해 역사적 종주권을 연구했어요.'
+WHERE id = 'w_greeting_C2_20';
+
+UPDATE words SET
+  example_en_2 = 'Her gravitas was unmistakable even in the briefest of greetings.',
+  example_ko_2 = '가장 짧은 인사에서도 그녀의 무게감은 분명했어요.',
+  example_en_3 = 'He spoke with gravitas about the importance of respectful introductions.',
+  example_ko_3 = '그는 존중하는 소개의 중요성에 대해 무게감 있게 말했어요.',
+  example_en_4 = 'Gravitas comes not from speaking more, but from meaning every word.',
+  example_ko_4 = '무게감은 더 많이 말하는 것이 아니라 모든 단어에 의미를 담는 데서 나와요.',
+  example_en_5 = 'His gravitas in official settings was balanced by warmth in private conversations.',
+  example_ko_5 = '공식적인 자리에서의 그의 무게감은 사적 대화에서의 따뜻함으로 균형을 이뤘어요.'
+WHERE id = 'w_greeting_C2_21';
+
+UPDATE words SET
+  example_en_2 = 'A sagacious leader reads the room before deciding how to greet.',
+  example_ko_2 = '현명한 리더는 어떻게 인사할지 결정하기 전에 분위기를 파악해요.',
+  example_en_3 = 'She was sagacious enough to know when a formal greeting was unnecessary.',
+  example_ko_3 = '그녀는 격식 있는 인사가 불필요할 때를 알 만큼 현명했어요.',
+  example_en_4 = 'His sagacious observations about cultural greetings filled an entire book.',
+  example_ko_4 = '문화적 인사에 대한 그의 현명한 관찰이 책 한 권을 가득 채웠어요.',
+  example_en_5 = 'Sagacious communicators adjust their greetings to match each unique context.',
+  example_ko_5 = '현명한 소통가는 각 고유한 맥락에 맞게 인사를 조정해요.'
+WHERE id = 'w_greeting_C2_22';
+
+UPDATE words SET
+  example_en_2 = 'His felicitous choice of words put a nervous candidate immediately at ease.',
+  example_ko_2 = '그의 적절한 단어 선택이 긴장한 후보를 즉시 편안하게 했어요.',
+  example_en_3 = 'She opened with a felicitous anecdote that tied perfectly to the occasion.',
+  example_ko_3 = '그녀는 행사와 완벽하게 맞아떨어지는 적절한 일화로 시작했어요.',
+  example_en_4 = 'A felicitous greeting suits the moment and feels inevitable in retrospect.',
+  example_ko_4 = '적절한 인사는 순간에 맞고 돌이켜보면 필연적으로 느껴져요.',
+  example_en_5 = 'Her felicitous phrasing turned a difficult introduction into a delightful one.',
+  example_ko_5 = '그녀의 적절한 표현이 어려운 소개를 즐거운 소개로 바꿔놓았어요.'
+WHERE id = 'w_greeting_C2_23';
+
+UPDATE words SET
+  example_en_2 = 'The event planner created a bespoke welcome for each VIP guest.',
+  example_ko_2 = '이벤트 기획자는 각 VIP 손님을 위한 맞춤 환영을 만들었어요.',
+  example_en_3 = 'She sent a bespoke handwritten note with every introduction package.',
+  example_ko_3 = '그녀는 모든 소개 패키지에 맞춤 손편지를 함께 보냈어요.',
+  example_en_4 = 'Bespoke greetings show that you took time to know the person you are welcoming.',
+  example_ko_4 = '맞춤 인사는 환영하는 사람을 알아가는 데 시간을 들였음을 보여줘요.',
+  example_en_5 = 'Guests remember bespoke greetings long after generic ones are forgotten.',
+  example_ko_5 = '손님들은 일반적인 인사가 잊혀진 후에도 맞춤 인사를 오래 기억해요.'
+WHERE id = 'w_greeting_C2_24';
+
+UPDATE words SET
+  example_en_2 = 'He saluted the crowd with a dignified wave as he took the stage.',
+  example_ko_2 = '그는 무대에 오르며 품위 있는 손 흔들기로 군중에게 경례했어요.',
+  example_en_3 = 'She was moved when the entire team saluted her on her last day.',
+  example_ko_3 = '마지막 날 팀 전체가 그녀에게 경례를 표하자 그녀는 감동받았어요.',
+  example_en_4 = 'We salute those who have dedicated their lives to public service.',
+  example_ko_4 = '우리는 공공 서비스에 삶을 바친 분들에게 경례를 표해요.',
+  example_en_5 = 'The veterans were saluted with a ceremony that recognized their sacrifice.',
+  example_ko_5 = '참전용사들은 그들의 희생을 인정하는 의식으로 경례를 받았어요.'
+WHERE id = 'w_greeting_C2_25';
+
+UPDATE words SET
+  example_en_2 = 'The evening concluded with a warm benediction from the senior elder.',
+  example_ko_2 = '저녁은 원로 어른의 따뜻한 축복으로 마무리됐어요.',
+  example_en_3 = 'She offered a brief benediction before the farewell dinner began.',
+  example_ko_3 = '작별 만찬이 시작되기 전 그녀는 짧은 축복의 말을 했어요.',
+  example_en_4 = 'His benediction at the end of the symposium left the audience deeply moved.',
+  example_ko_4 = '심포지엄 말미에 그의 축복이 청중을 깊이 감동시켰어요.',
+  example_en_5 = 'The benediction felt like a warm farewell that honored everyone present.',
+  example_ko_5 = '축복은 참석한 모든 사람을 기리는 따뜻한 작별처럼 느껴졌어요.'
+WHERE id = 'w_greeting_C2_26';
+
+UPDATE words SET
+  example_en_2 = 'She specialized in intercultural communication and greeting research.',
+  example_ko_2 = '그녀는 이문화 소통과 인사 연구를 전문으로 했어요.',
+  example_en_3 = 'Intercultural competence is now considered a core professional skill.',
+  example_ko_3 = '이문화 역량은 이제 핵심 직업적 기술로 여겨져요.',
+  example_en_4 = 'He was invited to speak at an intercultural leadership summit.',
+  example_ko_4 = '그는 이문화 리더십 정상회담에서 연설하도록 초대됐어요.',
+  example_en_5 = 'Intercultural awareness starts with simply learning how others say hello.',
+  example_ko_5 = '이문화 인식은 단순히 다른 사람들이 어떻게 인사하는지 배우는 것에서 시작해요.'
+WHERE id = 'w_greeting_C2_27';
+
+UPDATE words SET
+  example_en_2 = 'His parting words were so gracious they were quoted for years afterward.',
+  example_ko_2 = '그의 작별 인사가 너무 우아해서 이후 수년간 인용됐어요.',
+  example_en_3 = 'She prepared her parting remarks carefully to leave a lasting impression.',
+  example_ko_3 = '그녀는 오래 기억에 남는 인상을 남기기 위해 작별 말씀을 신중하게 준비했어요.',
+  example_en_4 = 'The parting handshake confirmed that the relationship would continue.',
+  example_ko_4 = '작별 악수로 관계가 계속될 것임이 확인됐어요.',
+  example_en_5 = 'He made his parting graceful, ensuring everyone felt honored to have met him.',
+  example_ko_5 = '그는 작별을 우아하게 만들어 만나서 영광이라는 느낌이 들게 했어요.'
+WHERE id = 'w_greeting_C2_28';
+
+UPDATE words SET
+  example_en_2 = 'Her bow at the ceremony was the quintessential expression of Korean respect.',
+  example_ko_2 = '행사에서 그녀의 절은 한국식 존경의 전형적인 표현이었어요.',
+  example_en_3 = 'He was described as the quintessential diplomat — warm, precise, and humble.',
+  example_ko_3 = '그는 전형적인 외교관으로 묘사됐어요 — 따뜻하고 정확하며 겸손했어요.',
+  example_en_4 = 'The event was the quintessential networking occasion for the industry.',
+  example_ko_4 = '그 행사는 업계에서 전형적인 네트워킹 자리였어요.',
+  example_en_5 = 'Her quintessential greeting style inspired an entire generation of hosts.',
+  example_ko_5 = '그녀의 전형적인 인사 방식이 전체 세대의 주최자들에게 영감을 줬어요.'
+WHERE id = 'w_greeting_C2_29';
+
+UPDATE words SET
+  example_en_2 = 'He gravely acknowledged the responsibility of welcoming such distinguished guests.',
+  example_ko_2 = '그는 그런 저명한 손님들을 환영하는 책임을 엄숙하게 인정했어요.',
+  example_en_3 = 'She gravely thanked the outgoing leader for their years of service.',
+  example_ko_3 = '그녀는 수년간의 봉사에 대해 떠나는 리더에게 엄숙하게 감사를 전했어요.',
+  example_en_4 = 'The emissary gravely conveyed the condolences of the entire nation.',
+  example_ko_4 = '사절은 엄숙하게 온 나라의 조의를 전달했어요.',
+  example_en_5 = 'He spoke gravely but warmly, honoring both solemnity and humanity.',
+  example_ko_5 = '그는 엄숙하게 그러나 따뜻하게 말하며 엄숙함과 인간성 모두를 기렸어요.'
+WHERE id = 'w_greeting_C2_30';
+
+UPDATE words SET
+  example_en_2 = 'She coached new staff on how to avoid obsequious greetings.',
+  example_ko_2 = '그녀는 굽신거리는 인사를 피하는 방법을 신입 직원들에게 가르쳤어요.',
+  example_en_3 = 'Obsequious behavior in social settings undermines your credibility quickly.',
+  example_ko_3 = '사회적 자리에서의 굽신거리는 행동은 빠르게 신뢰성을 훼손해요.',
+  example_en_4 = 'He was respectful without being obsequious — a balance worth cultivating.',
+  example_ko_4 = '그는 굽신거리지 않으면서 존중했어요 — 키울 가치가 있는 균형이에요.',
+  example_en_5 = 'True confidence in a greeting is the best antidote to obsequious behavior.',
+  example_ko_5 = '인사에서의 진정한 자신감이 굽신거리는 행동에 대한 최고의 해독제예요.'
+WHERE id = 'w_greeting_C2_31';
+
+UPDATE words SET
+  example_en_2 = 'She remained sanguine about the cross-cultural challenges ahead.',
+  example_ko_2 = '그녀는 앞으로 다가올 이문화적 도전에 대해 낙관적인 태도를 유지했어요.',
+  example_en_3 = 'His sanguine outlook made him a natural at introducing people.',
+  example_ko_3 = '그의 낙관적인 관점이 그를 사람들을 소개하는 데 타고난 사람으로 만들었어요.',
+  example_en_4 = 'She was sanguine even when the formal greeting did not go as planned.',
+  example_ko_4 = '격식 있는 인사가 계획대로 되지 않아도 그녀는 낙관적이었어요.',
+  example_en_5 = 'A sanguine spirit in social situations is contagious and deeply valued.',
+  example_ko_5 = '사회적 상황에서의 낙관적인 정신은 전파되고 깊이 소중히 여겨져요.'
+WHERE id = 'w_greeting_C2_32';
+
+UPDATE words SET
+  example_en_2 = 'The propitious opening of the summit boded well for the negotiations.',
+  example_ko_2 = '정상회담의 상서로운 시작이 협상에 좋은 징조가 됐어요.',
+  example_en_3 = 'She chose a propitious moment to introduce the key stakeholders.',
+  example_ko_3 = '그녀는 주요 이해 관계자들을 소개할 상서로운 순간을 골랐어요.',
+  example_en_4 = 'His propitious greeting set the stage for a fruitful partnership.',
+  example_ko_4 = '그의 상서로운 인사가 풍요로운 파트너십의 무대를 마련했어요.',
+  example_en_5 = 'Timing a greeting well is a propitious habit that opens many doors.',
+  example_ko_5 = '인사의 타이밍을 잘 맞추는 것은 많은 문을 여는 상서로운 습관이에요.'
+WHERE id = 'w_greeting_C2_33';
+
+UPDATE words SET
+  example_en_2 = 'Social discernment tells you when to use first names and when to use titles.',
+  example_ko_2 = '사회적 안목은 이름을 쓸 때와 직함을 쓸 때를 알려줘요.',
+  example_en_3 = 'Her discernment in reading a room before speaking was remarkable.',
+  example_ko_3 = '말하기 전에 분위기를 파악하는 그녀의 안목은 놀라웠어요.',
+  example_en_4 = 'He showed great discernment in knowing exactly how formal to be.',
+  example_ko_4 = '그는 얼마나 격식을 차려야 하는지 정확히 아는 뛰어난 안목을 보여줬어요.',
+  example_en_5 = 'Discernment in social interactions is built through experience and reflection.',
+  example_ko_5 = '사회적 상호작용에서의 안목은 경험과 성찰을 통해 쌓여요.'
+WHERE id = 'w_greeting_C2_34';
+
+UPDATE words SET
+  example_en_2 = 'There was something ineffable in how her greeting united a divided room.',
+  example_ko_2 = '그녀의 인사가 분열된 방을 하나로 만드는 방식에는 말로 표현할 수 없는 무언가가 있었어요.',
+  example_en_3 = 'He described the atmosphere of the reunion as ineffable — beyond any words.',
+  example_ko_3 = '그는 재회의 분위기를 말로 표현할 수 없다고 묘사했어요 — 어떤 말로도 부족했어요.',
+  example_en_4 = 'The ineffable warmth of her presence made people feel they had known her forever.',
+  example_ko_4 = '그녀 존재의 말로 표현할 수 없는 따뜻함이 사람들로 하여금 오래 알던 것처럼 느끼게 했어요.',
+  example_en_5 = 'Great greeters have an ineffable quality that analysis alone cannot fully capture.',
+  example_ko_5 = '훌륭한 인사꾼들에게는 분석만으로는 완전히 포착할 수 없는 말로 표현할 수 없는 자질이 있어요.'
+WHERE id = 'w_greeting_C2_35';
+
