@@ -178,6 +178,16 @@ function ECScreenSentenceCard() {
           {s.ko}
         </div>
         {tipBox('표현 팁', s.tip)}
+        {s.examples && s.examples.length > 0 && (
+          <div style={{ marginTop: 16 }}>
+            <div style={{ fontFamily: T.mono, fontSize: 9.5, color: T.textMute, letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 10 }}>
+              사용 예시
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {s.examples.map((ex, i) => exampleRow(ex.en, ex.ko))}
+            </div>
+          </div>
+        )}
       </div>
     );
   };
