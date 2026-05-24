@@ -11,31 +11,60 @@ function ECScreenSentenceCard() {
   const [idx, setIdx] = React.useState(session.sentenceIndex);
   const [animKey, setAnimKey] = React.useState(0);
   const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
+  const [swipeX, setSwipeX] = React.useState(0);
+  const [slideOut, setSlideOut] = React.useState(0);
+  const touchStartX = React.useRef(null);
+  const touchStartY = React.useRef(null);
+  const swipeDir = React.useRef(null);
 
   const s = sentences[idx];
   const isLast = idx === sentences.length - 1;
   const isFirst = idx === 0;
   const isBookmarked = bookmarked.has(s.id);
 
-  const goNext = () => {
-    session.markSentenceDone(s.id);
-    if (isLast) {
-      session.sentenceIndex = 0;
-      window.ECNav?.go('quiz');
-    } else {
-      const next = idx + 1;
+  const goTo = (dir) => {
+    if (dir === 'next') {
+      session.markSentenceDone(s.id);
+      if (isLast) { session.sentenceIndex = 0; window.ECNav?.go('quiz'); return; }
+    }
+    if (dir === 'prev' && isFirst) return;
+    const next = idx + (dir === 'next' ? 1 : -1);
+    setSlideOut(dir === 'next' ? -110 : 110);
+    setTimeout(() => {
       session.sentenceIndex = next;
       setIdx(next);
       setAnimKey(k => k + 1);
-    }
+      setSlideOut(0);
+      setSwipeX(0);
+    }, 240);
   };
 
-  const goPrev = () => {
-    if (isFirst) return;
-    const prev = idx - 1;
-    session.sentenceIndex = prev;
-    setIdx(prev);
-    setAnimKey(k => k + 1);
+  const handleTouchStart = (e) => {
+    if (slideOut !== 0) return;
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    swipeDir.current = null;
+  };
+
+  const handleTouchMove = (e) => {
+    if (touchStartX.current === null || slideOut !== 0) return;
+    const dx = e.touches[0].clientX - touchStartX.current;
+    const dy = e.touches[0].clientY - touchStartY.current;
+    if (swipeDir.current === null) {
+      if (Math.abs(dx) > Math.abs(dy) + 8) swipeDir.current = 'h';
+      else if (Math.abs(dy) > Math.abs(dx) + 8) swipeDir.current = 'v';
+    }
+    if (swipeDir.current === 'h') setSwipeX(dx * 0.9);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null) return;
+    const threshold = window.innerWidth * 0.5;
+    if (swipeX < -threshold) goTo('next');
+    else if (swipeX > threshold && !isFirst) goTo('prev');
+    else setSwipeX(0);
+    touchStartX.current = null;
+    swipeDir.current = null;
   };
 
   const toggleBookmark = () => {
@@ -48,12 +77,23 @@ function ECScreenSentenceCard() {
 
   const speak = (text) => window.ECSpeak(text || s.en);
 
+  const swipeProgress = Math.min(1, Math.abs(swipeX) / (window.innerWidth * 0.4));
+  const prevArrowOpacity = (swipeX > 10 && !isFirst) ? 0.35 + swipeProgress * 0.65 : 0.35;
+  const nextArrowOpacity = swipeX < -10 ? 0.35 + swipeProgress * 0.65 : 0.35;
+  const contentTransform = slideOut !== 0 ? `translateX(${slideOut}%)` : `translateX(${swipeX}px)`;
+  const contentTransition = slideOut !== 0 ? 'transform 0.24s cubic-bezier(0.4,0,0.2,1)' : 'none';
+
   const overlayGrad = isDark
     ? 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 18%, transparent 34%, rgba(0,0,0,0.82) 56%, rgba(0,0,0,0.97) 70%, #000 82%)'
     : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 15%, transparent 32%, ${T.bg1}CC 52%, ${T.bg1}F5 66%, ${T.bg1} 78%)`;
 
   return (
-    <div style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}>
+    <div
+      style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
 
       {/* Full-bleed landscape image */}
       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
@@ -88,18 +128,18 @@ function ECScreenSentenceCard() {
 
       {/* < > Navigation arrows — 이미지 중간, 배경 없이 */}
       {!isFirst && (
-        <div onClick={goPrev} style={{
+        <div onClick={() => goTo('prev')} style={{
           position: 'absolute', left: 10, top: '20%', zIndex: 10,
           width: 44, height: 44,
           display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-          opacity: 0.6,
+          opacity: prevArrowOpacity, transition: 'opacity 0.1s',
         }}>{ECIcon.chev('left', '#fff', 28)}</div>
       )}
-      <div onClick={goNext} style={{
+      <div onClick={() => goTo('next')} style={{
         position: 'absolute', right: 10, top: '20%', zIndex: 10,
         width: 44, height: 44,
         display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-        opacity: 0.6,
+        opacity: nextArrowOpacity, transition: 'opacity 0.1s',
       }}>{ECIcon.chev('right', '#fff', 28)}</div>
 
       {/* Scrollable content */}
@@ -116,6 +156,8 @@ function ECScreenSentenceCard() {
           zIndex: 5,
           display: 'flex',
           flexDirection: 'column',
+          transform: contentTransform,
+          transition: contentTransition,
         }}
       >
         <div style={{ flex: '0 0 40%', minHeight: 120 }} />
