@@ -77,6 +77,12 @@ function ECScreenSentenceCard() {
 
   const speak = (text) => window.ECSpeak(text || s.en);
 
+  const swipingPrev = swipeX > 30 && !isFirst;
+  const btnLabel = swipingPrev ? '이전 카드' : isLast ? '퀴즈 시작하기' : '다음 카드';
+  const btnBg    = swipingPrev ? (isDark ? 'rgba(255,255,255,0.10)' : T.bg2) : T.accent;
+  const btnColor = swipingPrev ? T.text : T.accentText;
+  const btnBd    = swipingPrev ? T.hair : 'none';
+
   const contentTransform = slideOut !== 0 ? `translateX(${slideOut}%)` : `translateX(${swipeX}px)`;
   const contentTransition = slideOut !== 0 ? 'transform 0.24s cubic-bezier(0.4,0,0.2,1)' : 'none';
 
@@ -219,25 +225,16 @@ function ECScreenSentenceCard() {
         paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 66px)',
         display: 'flex', gap: 8,
       }}>
-        {!isFirst && (
-          <div onClick={() => goTo('prev')} style={{
-            height: 46, padding: '0 14px', borderRadius: 14, flexShrink: 0,
-            background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
-            border: `1px solid ${T.hair}`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
-            color: T.text, fontSize: 14, fontWeight: 500, cursor: 'pointer',
-          }}>
-            {ECIcon.chev('left', T.text, 14)}
-            <span>이전 카드</span>
-          </div>
-        )}
-        <div onClick={() => goTo('next')} style={{
-          flex: 1, height: 46, borderRadius: 14, background: T.accent,
+        <div onClick={() => goTo(swipingPrev ? 'prev' : 'next')} style={{
+          flex: 1, height: 46, borderRadius: 14,
+          background: btnBg, border: `1px solid ${btnBd}`,
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-          color: T.accentText, fontSize: 14, fontWeight: 600, cursor: 'pointer',
+          color: btnColor, fontSize: 14, fontWeight: 600, cursor: 'pointer',
+          transition: 'background 0.15s, color 0.15s',
         }}>
-          <span>{isLast ? '퀴즈 시작하기' : '다음 카드'}</span>
-          {!isLast && ECIcon.chev('right', T.accentText, 14)}
+          {swipingPrev && ECIcon.chev('left', btnColor, 14)}
+          <span>{btnLabel}</span>
+          {!swipingPrev && !isLast && ECIcon.chev('right', btnColor, 14)}
         </div>
         <div onClick={() => speak(s.en)} style={{
           width: 46, height: 46, borderRadius: 14, flexShrink: 0,
