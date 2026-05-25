@@ -180,7 +180,12 @@ export default function WordCardScreen({ navigation }: Props) {
             </View>
 
             {/* Word */}
-            <Text style={[styles.wordEn, { color: T.text, fontFamily: T.serif }]}>{word.en}</Text>
+            <Text
+              style={[styles.wordEn, { color: T.text, fontFamily: T.serif }]}
+              numberOfLines={2}
+              adjustsFontSizeToFit
+              minimumFontScale={0.5}
+            >{word.en}</Text>
 
             {/* Korean meaning */}
             <Text style={[styles.wordKo, { color: T.accent }]}>{word.ko}</Text>
@@ -281,7 +286,7 @@ const styles = StyleSheet.create({
   railItem:    { alignItems: 'center', gap: 4 },
   railBtn:     { width: 48, height: 48, borderRadius: 999, borderWidth: 1, alignItems: 'center', justifyContent: 'center' },
   railLabel:   { fontSize: 10, fontWeight: '500' },
-  contentArea: { position: 'absolute', bottom: 0, left: 0, right: 68, paddingHorizontal: 22, paddingBottom: 8, zIndex: 5 },
+  contentArea: { position: 'absolute', bottom: 0, left: 0, right: 76, paddingHorizontal: 22, paddingBottom: 8, zIndex: 5 },
   chipRow:     { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 8 },
   posChip:     { paddingHorizontal: 9, paddingVertical: 3, borderRadius: 6 },
   posText:     { fontSize: 10, letterSpacing: 0.5, textTransform: 'uppercase' },

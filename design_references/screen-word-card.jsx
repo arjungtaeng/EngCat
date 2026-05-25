@@ -173,7 +173,7 @@ function ECScreenWordCard() {
           top: 0,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 82px)',
           left: 0,
-          right: 68,
+          right: 78,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',
@@ -194,10 +194,13 @@ function ECScreenWordCard() {
           <div style={{ fontFamily: T.mono, fontSize: 11, color: T.textMute }}>{word.ipa}</div>
         </div>
 
-        {/* Word */}
+        {/* Word — auto-shrink long words */}
         <div style={{
-          fontFamily: T.display, fontWeight: 400, fontSize: 52, lineHeight: 1, color: T.text,
+          fontFamily: T.display, fontWeight: 400,
+          fontSize: word.en.length > 14 ? 32 : word.en.length > 10 ? 42 : 52,
+          lineHeight: 1, color: T.text,
           letterSpacing: -1, marginBottom: 4,
+          wordBreak: 'break-word', overflowWrap: 'break-word',
         }}>{word.en}</div>
 
         {/* Korean meaning */}
