@@ -1,9 +1,12 @@
 // EngCat — Supabase 클라이언트 초기화
-const { createClient } = window.supabase;
-window.ECSupabaseClient = createClient(
-  'https://zknqzjrymkswkqotrion.supabase.co',
-  'sb_publishable_-PyhiOHtQJsKafpoDZIMLg_q09S3yRJ'
-);
+if (window.supabase && window.supabase.createClient) {
+  window.ECSupabaseClient = window.supabase.createClient(
+    'https://zknqzjrymkswkqotrion.supabase.co',
+    'sb_publishable_-PyhiOHtQJsKafpoDZIMLg_q09S3yRJ'
+  );
+} else {
+  console.error('Supabase CDN 로드 실패 — window.supabase 없음');
+}
 
 // ── IndexedDB 오디오 캐시 ────────────────────────────────────────────────────
 window.ECTTSCache = {
