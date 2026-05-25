@@ -2,7 +2,6 @@
 
 function ECScreenStats() {
   const T = ECTokens;
-  const scrollRef = React.useRef(null);
 
   // 12 weeks streak grid data — value 0..3 represents activity
   const grid = Array(84).fill(0);
@@ -11,8 +10,8 @@ function ECScreenStats() {
   const weekBars = [0, 0, 0, 0, 0, 0, 0];
 
   return (
-    <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}>
+    <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
       <ECStatusBar />
 
       {/* Header */}
@@ -132,6 +131,7 @@ function ECScreenStats() {
       </div>
 
       </div>{/* end scrollable */}
+      <ECTabBar active="stats" />
     </div>
   );
 }
