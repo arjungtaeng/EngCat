@@ -64,7 +64,19 @@ function shuffleStable<T>(arr: T[], seed: number): T[] {
 export function getTodayTopic(words: WordCard[]): string | null {
   const availableTopics = Array.from(new Set(words.map(w => w.topicId).filter(Boolean)));
   if (availableTopics.length === 0) return null;
-  const ordered = TOPIC_ORDER.filter(t => availableTopics.includes(t));
+
+  // 토픽별 이미지 보유 수 계산
+  const topicScore = new Map<string, number>();
+  for (const w of words) {
+    if (!w.topicId) continue;
+    if (w.img) topicScore.set(w.topicId, (topicScore.get(w.topicId) ?? 0) + 1);
+    else if (!topicScore.has(w.topicId)) topicScore.set(w.topicId, 0);
+  }
+
+  // 이미지 있는 토픽 우선, 없는 토픽 후순위
+  const withImg = TOPIC_ORDER.filter(t => (topicScore.get(t) ?? 0) > 0);
+  const withoutImg = TOPIC_ORDER.filter(t => availableTopics.includes(t) && (topicScore.get(t) ?? 0) === 0);
+  const ordered = [...withImg, ...withoutImg];
   if (ordered.length === 0) return availableTopics[0];
   return ordered[getDayOfYear() % ordered.length];
 }
@@ -100,16 +112,23 @@ export function getTodaySession(
     };
   }
 
-  const todayWords = shuffleStable(
-    words.filter(w => w.topicId === topic),
-    seed,
-  ).slice(0, comp.words);
+  // 토픽 내에서도 이미지 있는 카드 우선 선정
+  const topicWordsAll = words.filter(w => w.topicId === topic);
+  const wordsWithImg    = shuffleStable(topicWordsAll.filter(w => w.img), seed);
+  const wordsWithoutImg = shuffleStable(topicWordsAll.filter(w => !w.img), seed);
+  const todayWords = [...wordsWithImg, ...wordsWithoutImg].slice(0, comp.words);
 
   const topicExp = expressions.filter(e => e.topicId === topic);
-  const patterns     = shuffleStable(topicExp.filter(e => e.type === 'pattern'),     seed).slice(0, comp.patterns);
-  const collocations = shuffleStable(topicExp.filter(e => e.type === 'collocation'), seed).slice(0, comp.collocations);
-  const idioms       = shuffleStable(topicExp.filter(e => e.type === 'idiom'),       seed).slice(0, comp.idioms);
-  const nuances      = shuffleStable(topicExp.filter(e => e.type === 'nuance'),      seed).slice(0, comp.nuances);
+  const pickWithImg = (arr: SentenceCard[], n: number) => {
+    if (n === 0) return [];
+    const withImg = shuffleStable(arr.filter(e => e.img), seed);
+    const noImg   = shuffleStable(arr.filter(e => !e.img), seed);
+    return [...withImg, ...noImg].slice(0, n);
+  };
+  const patterns     = pickWithImg(topicExp.filter(e => e.type === 'pattern'),     comp.patterns);
+  const collocations = pickWithImg(topicExp.filter(e => e.type === 'collocation'), comp.collocations);
+  const idioms       = pickWithImg(topicExp.filter(e => e.type === 'idiom'),       comp.idioms);
+  const nuances      = pickWithImg(topicExp.filter(e => e.type === 'nuance'),      comp.nuances);
   const allExpressions = [...patterns, ...collocations, ...idioms, ...nuances];
 
   return {
