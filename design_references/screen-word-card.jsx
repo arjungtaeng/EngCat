@@ -147,7 +147,7 @@ function ECScreenWordCard() {
 
   const overlayGrad = isDark
     ? 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 28%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.95) 88%, #000 100%)'
-    : `linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 22%, ${T.bg1}D0 52%, ${T.bg1} 78%)`;
+    : `linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 20%, transparent 55%, ${T.bg1}CC 75%, ${T.bg1} 90%)`;
   const glassC   = isDark ? 'rgba(255,255,255,' : 'rgba(0,0,0,';
   const railIcon = isDark ? 'rgba(255,255,255,0.9)' : T.text;
   const railBg   = isDark ? 'rgba(255,255,255,0.10)' : T.bg2;
@@ -181,7 +181,7 @@ function ECScreenWordCard() {
             border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
             fontFamily: T.mono, fontSize: 10.5, color: T.textDim,
             letterSpacing: 1, textTransform: 'uppercase',
-          }}>{idx + 1} / {words.length} · 단어</div>
+          }}>{idx + 1} / {words.length} · 다단어</div>
         </div>
       </div>
 
