@@ -4,88 +4,11 @@ function ECScreenStats() {
   const T = ECTokens;
   const scrollRef = React.useRef(null);
 
-  // ── 1. Streak calculation ──────────────────────────────────────────────────
-  function calcStreak() {
-    let streak = 0;
-    const now = new Date();
-    for (let i = 0; i < 366; i++) {
-      const d = new Date(now);
-      d.setDate(d.getDate() - i);
-      const key = 'ec_learned_' + d.toISOString().slice(0, 10);
-      try {
-        const data = JSON.parse(localStorage.getItem(key) || '{}');
-        const hasActivity = (data.wordIds?.length || 0) + (data.sentenceIds?.length || 0) > 0;
-        if (hasActivity) {
-          streak++;
-        } else if (i > 0) {
-          break; // gap in streak
-        }
-      } catch(e) { if (i > 0) break; }
-    }
-    return streak;
-  }
-
-  // ── 2. Total learned counts ────────────────────────────────────────────────
-  function calcTotals() {
-    const allWordIds = new Set();
-    const allExpressionIds = new Set();
-    for (let i = 0; i < 366; i++) {
-      const d = new Date(); d.setDate(d.getDate() - i);
-      const key = 'ec_learned_' + d.toISOString().slice(0, 10);
-      try {
-        const data = JSON.parse(localStorage.getItem(key) || '{}');
-        (data.wordIds || []).forEach(id => allWordIds.add(id));
-        (data.sentenceIds || []).forEach(id => allExpressionIds.add(id));
-      } catch(e) {}
-    }
-    return { words: allWordIds.size, expressions: allExpressionIds.size };
-  }
-
-  // ── 3. Quiz accuracy ──────────────────────────────────────────────────────
-  const quizStats = (() => {
-    try { return JSON.parse(localStorage.getItem('ec_quiz_stats') || '{}'); } catch(e) { return {}; }
-  })();
-  const totalQ = (quizStats.correct || 0) + (quizStats.wrong || 0);
-  const accuracy = totalQ > 0 ? Math.round(((quizStats.correct || 0) / totalQ) * 100) + '%' : '—';
-
-  // ── 4. Weekly chart data (last 7 days) ────────────────────────────────────
-  const weekBars = Array.from({ length: 7 }, (_, i) => {
-    const date = new Date(); date.setDate(date.getDate() - (6 - i));
-    const key = 'ec_learned_' + date.toISOString().slice(0, 10);
-    try {
-      const data = JSON.parse(localStorage.getItem(key) || '{}');
-      return (data.wordIds?.length || 0) + (data.sentenceIds?.length || 0);
-    } catch(e) { return 0; }
-  });
-  const maxBar = Math.max(...weekBars, 1);
-
-  // ── 5. Total minutes (weekly) ─────────────────────────────────────────────
-  const totalCards = weekBars.reduce((a, b) => a + b, 0);
-  const totalMinutes = Math.round(totalCards * 1.2); // 1.2 min per card
-
-  // ── 6. 12-week heatmap (84 days) ──────────────────────────────────────────
-  const heatmapData = Array.from({ length: 84 }, (_, i) => {
-    const d = new Date(); d.setDate(d.getDate() - (83 - i));
-    const key = 'ec_learned_' + d.toISOString().slice(0, 10);
-    try {
-      const data = JSON.parse(localStorage.getItem(key) || '{}');
-      const count = (data.wordIds?.length || 0) + (data.sentenceIds?.length || 0);
-      if (count === 0) return 0;
-      if (count <= 5) return 1;
-      if (count <= 10) return 2;
-      return 3;
-    } catch(e) { return 0; }
-  });
-
+  // 12 weeks streak grid data — value 0..3 represents activity
+  const grid = Array(84).fill(0);
   const tints = ['rgba(244,241,235,0.06)', 'rgba(232,178,106,0.28)', 'rgba(232,178,106,0.6)', T.accent];
 
-  // ── Derived display values ────────────────────────────────────────────────
-  const streak = calcStreak();
-  const totals = calcTotals();
-
-  const streakLabel = streak > 0
-    ? `${streak}일 연속 학습 중이에요!`
-    : '아직 학습 기록이 없어요. 오늘 시작해 보세요!';
+  const weekBars = [0, 0, 0, 0, 0, 0, 0];
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
@@ -119,11 +42,11 @@ function ECScreenStats() {
                 연속 학습
               </div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 6 }}>
-                <div style={{ fontFamily: T.serif, fontSize: 56, color: T.text, lineHeight: 1, letterSpacing: -1.5 }}>{streak}</div>
+                <div style={{ fontFamily: T.serif, fontSize: 56, color: T.text, lineHeight: 1, letterSpacing: -1.5 }}>0</div>
                 <div style={{ fontSize: 16, color: T.textDim }}>일</div>
               </div>
               <div style={{ marginTop: 8, fontSize: 12.5, color: T.textDim }}>
-                {streakLabel}
+                아직 학습 기록이 없어요. 오늘 시작해 보세요!
               </div>
             </div>
             <div style={{ color: T.accent }}>{ECIcon.flame(T.accent, 48)}</div>
@@ -134,9 +57,9 @@ function ECScreenStats() {
       {/* Three stat tiles */}
       <div style={{ padding: '12px 18px 0', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
         {[
-          { num: String(totals.words), label: '익힌 단어' },
-          { num: String(totals.expressions), label: '표현' },
-          { num: accuracy, label: '정답률' },
+          { num: '0', label: '익힌 단어' },
+          { num: '0', label: '문장' },
+          { num: '—', label: '정답률' },
         ].map((s, i) => (
           <div key={i} style={{
             padding: '14px 14px', borderRadius: 16, background: T.bg2, border: `1px solid ${T.hair}`,
@@ -150,7 +73,7 @@ function ECScreenStats() {
       {/* Weekly chart */}
       <div style={{ padding: '22px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <div style={{ fontSize: 16, fontWeight: 600, color: T.text }}>이번 주 학습 시간</div>
-        <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>총 {totalMinutes}분</div>
+        <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>총 0분</div>
       </div>
 
       <div style={{ padding: '14px 22px 0' }}>
@@ -159,12 +82,11 @@ function ECScreenStats() {
           display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: 160,
         }}>
           {['월','화','수','목','금','토','일'].map((d, i) => {
-            const today = i === 6; // last bar is always today
-            const barHeight = (weekBars[i] / maxBar) * 80; // max 80px
+            const today = i === 3;
             return (
               <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, flex: 1 }}>
                 <div style={{
-                  width: 16, height: barHeight, borderRadius: 6,
+                  width: 16, height: weekBars[i] * 1.0, borderRadius: 6,
                   background: today ? T.accent : T.bg4,
                 }} />
                 <div style={{ fontSize: 11, color: today ? T.accent : T.textDim, fontWeight: today ? 600 : 500 }}>{d}</div>
@@ -188,7 +110,7 @@ function ECScreenStats() {
             {Array.from({ length: 12 }).map((_, col) => (
               <div key={col} style={{ display: 'grid', gridTemplateRows: 'repeat(7, 1fr)', gap: 4 }}>
                 {Array.from({ length: 7 }).map((_, row) => {
-                  const v = heatmapData[col * 7 + row] ?? 0;
+                  const v = grid[col * 7 + row] ?? 0;
                   return (
                     <div key={row} style={{
                       width: '100%', aspectRatio: '1/1', borderRadius: 3,

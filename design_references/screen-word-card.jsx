@@ -293,13 +293,14 @@ function ECScreenWordCard() {
             fontFamily: T.mono, fontSize: 9.5, color: T.textMute,
             letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 14,
           }}>추가 예문 · {word.en}</div>
-          {word.examples.length <= 1 ? (
+          {word.examples.length === 0 ? (
             <div style={{ padding: '24px 0', textAlign: 'center', fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
-              추가 예문이 아직 없어요.
+              추가 예문이 아직 없어요.<br/>
+              <span style={{ color: T.textMute, fontSize: 12 }}>Supabase에 example_en_2~4 컬럼을 추가하면 표시돼요.</span>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingBottom: 8 }}>
-              {word.examples.slice(1).map((ex, i) => (
+              {word.examples.map((ex, i) => (
                 <div key={i} style={{
                   padding: '14px 16px', borderRadius: 14,
                   background: T.bg2, border: `1px solid ${T.hair}`,
@@ -308,15 +309,10 @@ function ECScreenWordCard() {
                   <div style={{ flex: 1 }}>
                     <div style={{ fontFamily: T.mono, fontSize: 9.5, color: T.textMute, letterSpacing: 1, marginBottom: 4, textTransform: 'uppercase' }}>예문 {i + 2}</div>
                     <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 15, color: T.text, lineHeight: 1.5 }}>
-                      "{renderEx(ex.en)}"
+                      "{renderEx(ex)}"
                     </div>
-                    {ex.ko && (
-                      <div style={{ fontSize: 12, color: T.textDim, marginTop: 5, lineHeight: 1.4 }}>
-                        {ex.ko}
-                      </div>
-                    )}
                   </div>
-                  <div onClick={() => speak(ex.en)} style={{
+                  <div onClick={() => speak(ex)} style={{
                     width: 34, height: 34, borderRadius: 999, flexShrink: 0,
                     background: T.bg3, border: `1px solid ${T.hair}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',

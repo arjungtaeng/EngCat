@@ -1,328 +1,167 @@
 // EngCat — Onboarding screen
-// Adaptive 5-question level test → Home
-
-const questionPool = {
-  A1: {
-    scenario: '처음 만난 사람에게 이름을 물어보려 해요.',
-    choices: [
-      { id: 'A', en: "What's your name?",          ok: true  },
-      { id: 'B', en: 'How do I call you?',          ok: false },
-      { id: 'C', en: 'What should I call you?',     ok: false },
-      { id: 'D', en: 'Can you tell me your name?',  ok: false },
-    ],
-  },
-  A2: {
-    scenario: '친구에게 문자로 지금 뭐 하는지 물어보려 해요.',
-    choices: [
-      { id: 'A', en: 'What are you doing now?',         ok: true  },
-      { id: 'B', en: 'What do you do now?',             ok: false },
-      { id: 'C', en: 'Now what are you doing?',         ok: false },
-      { id: 'D', en: 'Are you doing something now?',    ok: false },
-    ],
-  },
-  'A2-B1': {
-    scenario: '어제 본 영화가 너무 좋아서 친구에게 추천하려 해요.',
-    choices: [
-      { id: 'A', en: "I saw a great movie yesterday — you should watch it!", ok: true  },
-      { id: 'B', en: 'I watched great movie yesterday. I recommend you.',    ok: false },
-      { id: 'C', en: "Yesterday's movie was great. You must watch it.",      ok: false },
-      { id: 'D', en: 'I saw a great movie yesterday. I recommend it to you.', ok: false },
-    ],
-  },
-  B1: {
-    scenario: '영어로 회의 중인데 원어민이 너무 빠르게 말해서 다시 말해달라고 하고 싶어요.',
-    choices: [
-      { id: 'A', en: 'Could you say that again more slowly, please?',   ok: true  },
-      { id: 'B', en: "Please speak slowly. Too fast.",                   ok: false },
-      { id: 'C', en: "Can you repeat? I didn't understand.",             ok: false },
-      { id: 'D', en: "Sorry, I didn't catch that. Can you speak again?", ok: false },
-    ],
-  },
-  'B1-B2': {
-    scenario: '회의에서 상사 의견에 부드럽게 반대하고 싶어요.',
-    choices: [
-      { id: 'A', en: "I see your point, but I'd look at it a bit differently.", ok: true  },
-      { id: 'B', en: "I understand, but I don't agree with that.",               ok: false },
-      { id: 'C', en: "That's interesting, but I have a different opinion.",      ok: false },
-      { id: 'D', en: "I respect your view, but I think we should reconsider.",   ok: false },
-    ],
-  },
-  B2: {
-    scenario: '친구가 중요한 발표를 앞두고 많이 긴장해 있어요. 격려하는 말은?',
-    choices: [
-      { id: 'A', en: "You've got this. I know you'll do great.",      ok: true  },
-      { id: 'B', en: "Don't be nervous, you'll be fine.",             ok: false },
-      { id: 'C', en: "Good luck! I hope everything goes well.",       ok: false },
-      { id: 'D', en: "I'm sure you'll be okay. Just relax.",          ok: false },
-    ],
-  },
-  'B2-C1': {
-    scenario: '프레젠테이션 도중 다음 주제로 자연스럽게 넘어가려 해요.',
-    choices: [
-      { id: 'A', en: "Moving on, let's take a look at our next point.",       ok: true  },
-      { id: 'B', en: "Okay, now let's go to the next part.",                  ok: false },
-      { id: 'C', en: "So, the next thing I want to talk about is...",         ok: false },
-      { id: 'D', en: 'Now I will explain the next topic.',                    ok: false },
-    ],
-  },
-  C1: {
-    scenario: '협상에서 상대방 제안이 예산을 넘어서지만 대화는 계속하고 싶어요.',
-    choices: [
-      { id: 'A', en: "I hear you, though that's a stretch for our budget. Is there any flexibility on your end?", ok: true  },
-      { id: 'B', en: "That's over our budget, but we'd like to keep talking.",                                     ok: false },
-      { id: 'C', en: "We appreciate the offer, but that price is too high for us.",                                ok: false },
-      { id: 'D', en: "I understand, but we were hoping for something more affordable.",                            ok: false },
-    ],
-  },
-};
-
-function getQuestionKey(idx, prevAnswers) {
-  const prev = prevAnswers;
-  if (idx === 0) return 'B1';
-  if (idx === 1) return prev[0] ? 'B2' : 'A2';
-  if (idx === 2) {
-    if (prev[0] && prev[1])   return 'B2-C1';
-    if (prev[0] && !prev[1])  return 'B1-B2';
-    if (!prev[0] && prev[1])  return 'A2-B1';
-    return 'A1';
-  }
-  const correct = prev.filter(Boolean).length;
-  if (idx === 3) {
-    if (correct >= 3) return 'C1';
-    if (correct === 2) return 'B2';
-    if (correct === 1) return 'B1-B2';
-    return 'A2-B1';
-  }
-  if (idx === 4) {
-    if (correct >= 3) return 'B2-C1';
-    if (correct === 2) return 'B1-B2';
-    if (correct === 1) return 'A2-B1';
-    return 'A1';
-  }
-}
-
-function getFinalLevel(answers) {
-  const correct = answers.filter(Boolean).length;
-  if (correct >= 5) return 'C1';
-  if (correct === 4) return 'B2';
-  if (correct === 3) return 'B1';
-  if (correct === 2) return 'A2';
-  return 'A1';
-}
+// Level selection step (B1 focus) — minimal, premium, no mascot
 
 function ECScreenOnboarding() {
   const T = ECTokens;
-  const [qIndex, setQIndex]     = React.useState(0);
-  const [answers, setAnswers]   = React.useState([]);
-  const [selected, setSelected] = React.useState(null);
-  const [revealed, setRevealed] = React.useState(false);
+  const [selected, setSelected] = React.useState('B1');
 
-  const currentQuestion = questionPool[getQuestionKey(qIndex, answers)];
-  const correctChoice   = currentQuestion.choices.find(c => c.ok);
-  const isCorrect       = selected === correctChoice?.id;
-
-  function handleReveal() {
-    setRevealed(true);
-  }
-
-  function handleNext() {
-    const newAnswers = [...answers, isCorrect];
-
-    if (qIndex === 4) {
-      const level = getFinalLevel(newAnswers);
-      localStorage.setItem('ec_user_level', level);
-      localStorage.setItem('ec_onboarding_done', '1');
-      window.ECNav?.go('home');
-    } else {
-      setAnswers(newAnswers);
-      setQIndex(qIndex + 1);
-      setSelected(null);
-      setRevealed(false);
-    }
-  }
+  const levels = [
+    { id: 'A1', name: 'A1 · 입문',     hint: '기초 단어와 인사' },
+    { id: 'A2', name: 'A2 · 초급',     hint: '간단한 일상 표현' },
+    { id: 'B1', name: 'B1 · 중급',     hint: '일상 대화와 의견' },
+    { id: 'B2', name: 'B2 · 중상급',   hint: '복잡한 주제 토론' },
+    { id: 'C1', name: 'C1 · 고급',     hint: '유창한 표현' },
+  ];
 
   return (
-    <div style={{
-      flex: 1, minHeight: 0, background: T.bg1,
-      display: 'flex', flexDirection: 'column',
-    }}>
+    <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
       <ECStatusBar />
 
-      {/* ── Progress bar ── */}
+      {/* progress dots */}
       <div style={{ padding: '8px 28px 0', display: 'flex', gap: 6 }}>
-        {[0, 1, 2, 3, 4].map(i => (
+        {[0,1,2,3].map(i => (
           <div key={i} style={{
             flex: 1, height: 3, borderRadius: 2,
-            background: i <= qIndex ? T.accent : T.hairStr,
-            transition: 'background 0.3s',
+            background: i <= 1 ? T.accent : T.hairStr,
           }} />
         ))}
       </div>
 
-      {/* ── Header ── */}
-      <div style={{ padding: '28px 28px 0' }}>
+      {/* header */}
+      <div style={{ padding: '40px 28px 28px' }}>
         <div style={{
           fontFamily: T.mono, fontSize: 10, letterSpacing: 1.6,
-          color: T.textMute, textTransform: 'uppercase', marginBottom: 16,
+          color: T.textMute, textTransform: 'uppercase', marginBottom: 18,
+        }}>STEP 02 — 레벨</div>
+        <div style={{
+          fontFamily: T.serif, fontSize: 38, lineHeight: 1.08,
+          letterSpacing: -0.5, color: T.text, fontWeight: 400,
         }}>
-          {`질문 ${String(qIndex + 1).padStart(2, '0')} / 05`}
+          현재 영어 수준을<br/>
+          <span style={{ fontStyle: 'italic', color: T.accent }}>알려주세요</span>
         </div>
         <div style={{
-          fontFamily: T.serif, fontSize: 30, lineHeight: 1.15,
-          color: T.text, letterSpacing: -0.4, fontWeight: 400,
+          marginTop: 14, fontSize: 14.5, lineHeight: 1.5,
+          color: T.textDim, maxWidth: 280,
         }}>
-          이 상황에서<br />
-          <span style={{ fontStyle: 'italic', color: T.accent }}>어떻게 말할까요?</span>
+          맞춤형 학습 카드를 준비해 드릴게요. 언제든 설정에서 변경하실 수 있습니다.
         </div>
       </div>
 
-      {/* ── Scenario box ── */}
-      <div style={{ padding: '20px 22px 0' }}>
-        <div style={{
-          padding: '16px 18px', borderRadius: 16,
-          background: T.bg2, border: `1px solid ${T.hair}`,
-        }}>
-          <div style={{
-            fontFamily: T.mono, fontSize: 10, color: T.accent,
-            letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 8,
-          }}>SITUATION</div>
-          <div style={{ fontSize: 15, color: T.text, lineHeight: 1.55 }}>
-            {currentQuestion.scenario}
-          </div>
-        </div>
-      </div>
-
-      {/* ── Choices ── */}
-      <div style={{
-        padding: '16px 22px 0',
-        display: 'flex', flexDirection: 'column', gap: 10, flex: 1,
-      }}>
-        {currentQuestion.choices.map(c => {
-          const state = !revealed
-            ? 'idle'
-            : c.ok
-              ? 'correct'
-              : c.id === selected
-                ? 'wrong'
-                : 'idle';
-
+      {/* level list */}
+      <div style={{ padding: '0 20px', flex: 1, display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {levels.map(l => {
+          const active = selected === l.id;
           return (
-            <div
-              key={c.id}
-              onClick={() => !revealed && setSelected(c.id)}
-              style={{
-                padding: '14px 16px', borderRadius: 14,
-                background:
-                  state === 'correct' ? T.goodSoft
-                  : state === 'wrong'   ? T.badSoft
-                  : selected === c.id   ? T.bg3
-                  : T.bg2,
-                border: `1px solid ${
-                  state === 'correct' ? T.good
-                  : state === 'wrong'   ? T.bad
-                  : selected === c.id   ? T.accent
-                  : T.hair
-                }`,
-                display: 'flex', alignItems: 'center', gap: 12,
-                cursor: revealed ? 'default' : 'pointer',
-                transition: 'all 0.15s',
-              }}
-            >
-              {/* badge */}
+            <div key={l.id} onClick={() => setSelected(l.id)} style={{
+              padding: '18px 20px', borderRadius: 18,
+              background: active ? T.accentSoft : T.bg2,
+              border: `1px solid ${active ? T.accent : T.hair}`,
+              display: 'flex', alignItems: 'center', gap: 14, cursor: 'pointer',
+              transition: 'all .15s',
+            }}>
               <div style={{
-                width: 30, height: 30, borderRadius: 8, flexShrink: 0,
-                background:
-                  state === 'correct' ? T.good
-                  : state === 'wrong'   ? T.bad
-                  : selected === c.id   ? T.accent
-                  : T.bg3,
-                color: (state !== 'idle' || selected === c.id) ? T.bg0 : T.textDim,
+                width: 38, height: 38, borderRadius: 10,
+                background: active ? T.accent : T.bg3,
+                color: active ? T.bg1 : T.textDim,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: T.mono, fontSize: 12, fontWeight: 600,
-              }}>
-                {state === 'correct'
-                  ? ECIcon.check(T.bg0, 16)
-                  : state === 'wrong'
-                    ? ECIcon.close(T.bg0, 16)
-                    : c.id}
+                fontFamily: T.serif, fontSize: 18, fontWeight: 500,
+              }}>{l.id}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 16, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{l.name}</div>
+                <div style={{ fontSize: 13, color: T.textDim, marginTop: 2 }}>{l.hint}</div>
               </div>
+              {active && <div style={{ color: T.accent }}>{ECIcon.check(T.accent, 22)}</div>}
+            </div>
+          );
+        })}
+      </div>
 
-              {/* label */}
-              <div style={{ fontSize: 15, color: T.text, lineHeight: 1.4 }}>
-                {c.en}
+      {/* CTA */}
+      <div style={{ padding: '24px 20px 36px' }}>
+        <div onClick={() => window.ECNav?.go('onboarding-goal')} style={{
+          height: 56, borderRadius: 16, background: T.text, color: T.bg0,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: 16, fontWeight: 600, letterSpacing: -0.2, cursor: 'pointer',
+        }}>
+          다음으로
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Goal selection (alt step shown for variety)
+function ECScreenOnboardingGoal() {
+  const T = ECTokens;
+  const [goal, setGoal] = React.useState(15);
+  const opts = [
+    { v: 5,  label: '가볍게',    sub: '5분 / 단어 3개' },
+    { v: 10, label: '꾸준히',    sub: '10분 / 단어 6개' },
+    { v: 15, label: '몰입하기',  sub: '15분 / 단어 10개' },
+    { v: 30, label: '집중 학습', sub: '30분 / 단어 20개' },
+  ];
+
+  return (
+    <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
+      <ECStatusBar />
+
+      <div style={{ padding: '8px 28px 0', display: 'flex', gap: 6 }}>
+        {[0,1,2,3].map(i => (
+          <div key={i} style={{ flex: 1, height: 3, borderRadius: 2, background: i <= 2 ? T.accent : T.hairStr }} />
+        ))}
+      </div>
+
+      <div style={{ padding: '40px 28px 32px' }}>
+        <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: 1.6, color: T.textMute, textTransform: 'uppercase', marginBottom: 18 }}>STEP 03 — 목표</div>
+        <div style={{ fontFamily: T.serif, fontSize: 38, lineHeight: 1.08, letterSpacing: -0.5, color: T.text }}>
+          하루 학습량을<br/>
+          <span style={{ fontStyle: 'italic', color: T.accent }}>정해보세요</span>
+        </div>
+      </div>
+
+      <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
+        {opts.map(o => {
+          const active = goal === o.v;
+          return (
+            <div key={o.v} onClick={() => setGoal(o.v)} style={{
+              padding: '18px 22px', borderRadius: 18,
+              background: active ? T.bg3 : T.bg2,
+              border: `1px solid ${active ? T.accent : T.hair}`,
+              display: 'flex', alignItems: 'baseline', gap: 16, cursor: 'pointer',
+            }}>
+              <div style={{
+                fontFamily: T.serif, fontSize: 32, color: active ? T.accent : T.textDim,
+                lineHeight: 1, width: 56,
+              }}>{o.v}<span style={{ fontSize: 14, marginLeft: 2 }}>분</span></div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 16, fontWeight: 600, color: T.text }}>{o.label}</div>
+                <div style={{ fontSize: 13, color: T.textDim, marginTop: 2 }}>{o.sub}</div>
+              </div>
+              <div style={{
+                width: 22, height: 22, borderRadius: 11,
+                border: `1.5px solid ${active ? T.accent : T.textFaint}`,
+                background: active ? T.accent : 'transparent',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                {active && <div style={{ width: 8, height: 8, borderRadius: 4, background: T.bg1 }} />}
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* ── Confirm button (before reveal) ── */}
-      {selected && !revealed && (
-        <div style={{ padding: '16px 22px 24px' }}>
-          <div
-            onClick={handleReveal}
-            style={{
-              height: 52, borderRadius: 14,
-              background: T.accent, color: T.accentText,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 15, fontWeight: 600, cursor: 'pointer',
-            }}
-          >
-            확인
-          </div>
+      <div style={{ padding: '24px 20px 36px' }}>
+        <div onClick={() => window.ECNav?.go('home')} style={{
+          height: 56, borderRadius: 16, background: T.accent, color: T.bg0,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: 16, fontWeight: 600, letterSpacing: -0.2, cursor: 'pointer',
+        }}>
+          시작하기
         </div>
-      )}
-
-      {/* ── Feedback strip + Next button (after reveal) ── */}
-      {revealed && (
-        <div style={{ padding: '12px 22px 24px' }}>
-          {/* feedback */}
-          <div style={{
-            padding: '14px 16px', borderRadius: 14,
-            background: isCorrect ? T.goodSoft : T.badSoft,
-            border: `1px solid ${isCorrect ? T.good : T.bad}`,
-            display: 'flex', alignItems: 'center', gap: 12,
-            marginBottom: 10,
-          }}>
-            <div style={{
-              width: 32, height: 32, borderRadius: 16,
-              background: isCorrect ? T.good : T.bad,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              flexShrink: 0,
-            }}>
-              {isCorrect ? ECIcon.check(T.bg0, 18) : ECIcon.close(T.bg0, 18)}
-            </div>
-            <div style={{ flex: 1 }}>
-              <div style={{
-                fontSize: 14, fontWeight: 600,
-                color: isCorrect ? T.good : T.bad,
-              }}>
-                {isCorrect ? '맞아요!' : '아쉽네요!'}
-              </div>
-              <div style={{ fontSize: 12, color: T.textDim, marginTop: 1 }}>
-                {isCorrect
-                  ? '정확한 표현이에요.'
-                  : `정답은 "${correctChoice?.en}"이에요.`}
-              </div>
-            </div>
-          </div>
-
-          {/* next / finish */}
-          <div
-            onClick={handleNext}
-            style={{
-              height: 52, borderRadius: 14,
-              background: T.text, color: T.bg0,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 15, fontWeight: 600, cursor: 'pointer',
-            }}
-          >
-            {qIndex === 4 ? '시작하기' : '다음 질문'}
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
 
-Object.assign(window, { ECScreenOnboarding });
+Object.assign(window, { ECScreenOnboarding, ECScreenOnboardingGoal });

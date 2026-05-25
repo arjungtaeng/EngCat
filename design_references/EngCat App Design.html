@@ -88,10 +88,13 @@
         <DCSection
           id="onboarding"
           title="Onboarding"
-          subtitle="첫 실행 — 적응형 5문항 레벨 테스트"
+          subtitle="첫 실행 — 레벨 선택 + 일일 목표 설정"
         >
-          <DCArtboard id="onb-test" label="레벨 테스트" width={PHONE_W + 12} height={PHONE_H + 12}>
-            <Phone label="Onboarding Level Test"><ECScreenOnboarding/></Phone>
+          <DCArtboard id="onb-level" label="A · 레벨 선택"     width={PHONE_W + 12} height={PHONE_H + 12}>
+            <Phone label="A Onboarding Level"><ECScreenOnboarding/></Phone>
+          </DCArtboard>
+          <DCArtboard id="onb-goal"  label="B · 목표 설정"     width={PHONE_W + 12} height={PHONE_H + 12}>
+            <Phone label="B Onboarding Goal"><ECScreenOnboardingGoal/></Phone>
           </DCArtboard>
         </DCSection>
       </DesignCanvas>
