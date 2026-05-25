@@ -14,7 +14,7 @@ function ECScreenOnboarding() {
   ];
 
   return (
-    <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
       <ECStatusBar />
 
       {/* progress dots */}
@@ -103,7 +103,7 @@ function ECScreenOnboardingGoal() {
   ];
 
   return (
-    <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
       <ECStatusBar />
 
       <div style={{ padding: '8px 28px 0', display: 'flex', gap: 6 }}>
