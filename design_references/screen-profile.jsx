@@ -2,6 +2,7 @@
 
 function ECScreenProfile() {
   const T = ECTokens;
+  const scrollRef = React.useRef(null);
 
   const user = (() => {
     try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; }
@@ -9,6 +10,11 @@ function ECScreenProfile() {
 
   const [editingNick, setEditingNick] = React.useState(false);
   const [nickVal, setNickVal] = React.useState(() => localStorage.getItem('engcat_nickname') || '');
+  const [ttsVoice, setTtsVoice] = React.useState(() => localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural');
+  const [themePref, setThemePref] = React.useState(() => localStorage.getItem('ec_theme') || 'system');
+  const changeTheme = (v) => { setThemePref(v); window.ECSetTheme?.(v); };
+
+  const setVoice = (v) => { setTtsVoice(v); localStorage.setItem('ec_azure_voice', v); window.ECSpeak('Hello! I am your English learning assistant.', v); };
 
   const saveNick = () => {
     const trimmed = nickVal.trim();
@@ -23,6 +29,30 @@ function ECScreenProfile() {
     window.ECNav?.go('login');
   };
 
+  const Seg = ({ options, value, onChange }) => (
+    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+      {options.map(o => (
+        <div key={o.value} onClick={() => onChange(o.value)} style={{
+          padding: '5px 10px', borderRadius: 8, fontSize: 12, fontWeight: 600,
+          background: value === o.value ? T.accent : 'transparent',
+          color: value === o.value ? T.accentText : T.textMute,
+          border: `1px solid ${value === o.value ? T.accent : T.hairStr}`,
+          cursor: 'pointer', transition: 'all 0.15s',
+        }}>{o.label}</div>
+      ))}
+    </div>
+  );
+
+  const SegRow = ({ label, options, value, onChange, last }) => (
+    <div style={{
+      padding: '13px 18px', display: 'flex', alignItems: 'center', gap: 12,
+      borderBottom: last ? 'none' : `1px solid ${T.hair}`,
+    }}>
+      <div style={{ flex: 1, fontSize: 15, color: T.text, fontWeight: 500 }}>{label}</div>
+      <Seg options={options} value={value} onChange={onChange} />
+    </div>
+  );
+
   const Row = ({ label, value, last, danger, onPress }) => (
     <div
       onClick={onPress}
@@ -32,25 +62,20 @@ function ECScreenProfile() {
         cursor: onPress ? 'pointer' : 'default',
       }}
     >
-      <div style={{ flex: 1, fontSize: 15, color: danger ? T.bad : T.text, fontWeight: 500 }}>{label}</div>
+      <div style={{ flex: 1, fontSize: 15, color: danger ? T.accent : T.text, fontWeight: 500 }}>{label}</div>
       {value && <div style={{ fontSize: 13, color: T.textDim }}>{value}</div>}
       {!danger && <div style={{ color: T.textMute }}>{ECIcon.chev('right', T.textMute, 14)}</div>}
     </div>
   );
 
   return (
-    <div style={{ height: '100%', background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
+    <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}>
       <ECStatusBar />
 
       {/* Header */}
-      <div style={{ padding: '8px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ padding: '8px 22px 0' }}>
         <div style={{ fontFamily: T.serif, fontSize: 26, color: T.text, letterSpacing: -0.3 }}>내 정보</div>
-        <div style={{
-          width: 36, height: 36, borderRadius: 12, background: T.bg2,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          border: `1px solid ${T.hair}`,
-        }}>{ECIcon.more(T.textDim, 18)}</div>
       </div>
 
       {/* Profile card */}
@@ -70,7 +95,7 @@ function ECScreenProfile() {
                 border: `1px solid ${T.hairStr}`,
               }}>{(user?.name || '?').slice(0, 2)}</div>
           }
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1.1, letterSpacing: -0.3 }}>{user?.name || '사용자'}</div>
             <div style={{ fontSize: 12.5, color: T.textDim, marginTop: 4 }}>{user?.email || ''}</div>
 
@@ -84,14 +109,14 @@ function ECScreenProfile() {
                   placeholder="불리고 싶은 이름"
                   autoFocus
                   style={{
-                    flex: 1, padding: '5px 10px', borderRadius: 8,
+                    flex: 1, minWidth: 0, width: '100%', padding: '5px 10px', borderRadius: 8,
                     background: T.bg3, border: `1px solid ${T.hairStr}`,
-                    color: T.text, fontSize: 13, fontFamily: T.sans, outline: 'none',
+                    color: T.text, fontSize: 16, fontFamily: T.sans, outline: 'none', boxSizing: 'border-box',
                   }}
                 />
                 <span
                   onClick={saveNick}
-                  style={{ fontSize: 12, color: T.accent, fontFamily: T.mono, cursor: 'pointer', whiteSpace: 'nowrap' }}
+                  style={{ fontSize: 12, color: T.accent, fontFamily: T.mono, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}
                 >완료</span>
               </div>
             ) : (
@@ -156,7 +181,13 @@ function ECScreenProfile() {
           <Row label="레벨 · B1 중급"   value="변경"/>
           <Row label="하루 목표"        value="15분"/>
           <Row label="알림"             value="오전 8:00"/>
-          <Row label="음성 속도"        value="보통" last/>
+          <SegRow
+            label="음성"
+            options={[{ label: 'Jenny', value: 'en-US-JennyNeural' }, { label: 'Aria', value: 'en-US-AriaNeural' }, { label: 'Guy', value: 'en-US-GuyNeural' }, { label: 'Davis', value: 'en-US-DavisNeural' }]}
+            value={ttsVoice}
+            onChange={setVoice}
+            last
+          />
         </div>
       </div>
 
@@ -166,6 +197,12 @@ function ECScreenProfile() {
       </div>
       <div style={{ padding: '0 18px' }}>
         <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}` }}>
+          <SegRow
+            label="테마"
+            options={[{ label: '시스템', value: 'system' }, { label: '다크', value: 'dark' }, { label: '라이트', value: 'light' }]}
+            value={themePref}
+            onChange={changeTheme}
+          />
           <Row label="저장한 카드"      value="68"/>
           <Row label="친구 / 랭킹"      value=""/>
           <Row label="구독 관리"        value="EngCat Pro"/>
@@ -192,7 +229,6 @@ function ECScreenProfile() {
       </div>
 
       </div>{/* end scrollable */}
-      <ECTabBar active="me" />
     </div>
   );
 }
