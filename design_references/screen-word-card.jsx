@@ -147,7 +147,7 @@ function ECScreenWordCard() {
 
   const overlayGrad = isDark
     ? 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 28%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.95) 88%, #000 100%)'
-    : `linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 28%, ${T.bg1}80 65%, ${T.bg1} 100%)`;
+    : `linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 22%, ${T.bg1}D0 52%, ${T.bg1} 78%)`;
   const glassC   = isDark ? 'rgba(255,255,255,' : 'rgba(0,0,0,';
   const railIcon = isDark ? 'rgba(255,255,255,0.9)' : T.text;
   const railBg   = isDark ? 'rgba(255,255,255,0.10)' : T.bg2;
@@ -192,7 +192,7 @@ function ECScreenWordCard() {
         style={{
           position: 'absolute',
           top: 0,
-          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 82px)',
+          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)',
           left: 0,
           right: 0,
           display: 'flex',
@@ -238,7 +238,7 @@ function ECScreenWordCard() {
           padding: '10px 14px', borderRadius: 12,
           background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
           border: `1px solid ${T.hair}`,
-          marginBottom: 12,
+          marginBottom: 0,
         }}>
           <div style={{
             fontSize: 9.5, fontFamily: T.mono, color: T.textMute,
@@ -254,7 +254,14 @@ function ECScreenWordCard() {
           )}
         </div>
 
-        {/* Action row: 다음 카드 · 듣기 · 저장 · 예문 */}
+      </div>
+
+      {/* ── 하단 고정 바: 버튼 + 진행바 ── */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 12,
+        padding: '0 18px',
+        paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 66px)',
+      }}>
         <div style={{ display: 'flex', gap: 8 }}>
           <div
             onClick={() => goTo(swipingPrev ? 'prev' : 'next')}
@@ -287,13 +294,11 @@ function ECScreenWordCard() {
             display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
           }}>{ECIcon.notes(railIcon, 17)}</div>
         </div>
-
-        {/* Progress strip — current card position in feed */}
         <div style={{ marginTop: 12, display: 'flex', gap: 3, alignItems: 'center' }}>
           {words.map((_, i) => (
             <div key={i} style={{
               flex: 1, height: 2.5, borderRadius: 2,
-              background: i <= idx ? T.text : (isDark ? 'rgba(255,255,255,0.22)' : T.hairStr),
+              background: i <= idx ? T.accent : (isDark ? 'rgba(255,255,255,0.22)' : T.hairStr),
             }} />
           ))}
         </div>
