@@ -12,7 +12,8 @@ const getTTSSettings = () => ({
 
 function ECScreenWordCard() {
   const T = ECTokens;
-  const words = ECData.words;
+  const todaySession = React.useMemo(() => window.ECGetTodaySession(), []);
+  const words = todaySession.words.length > 0 ? todaySession.words : ECData.words;
   const session = ECSession;
 
   const [idx, setIdx] = React.useState(session.wordIndex);

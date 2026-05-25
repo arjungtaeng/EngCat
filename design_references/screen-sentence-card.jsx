@@ -5,7 +5,9 @@
 function ECScreenSentenceCard() {
   const T = ECTokens;
   const isDark = T.text === '#F8F5EF';
-  const sentences = ECData.sentences;
+  const todaySession = React.useMemo(() => window.ECGetTodaySession(), []);
+  // 오늘 분량의 표현 (패턴 → 콜로 → 이디엄 → 뉘앙스 순서)
+  const sentences = todaySession.expressions.length > 0 ? todaySession.expressions : ECData.sentences;
   const session = ECSession;
 
   const [idx, setIdx] = React.useState(session.sentenceIndex);
