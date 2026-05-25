@@ -50,7 +50,7 @@ const ECIcon = {
   mic: (c = 'currentColor', s = 22) => (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
       <rect x="9" y="3" width="6" height="12" rx="3" stroke={c} strokeWidth="1.6"/>
-      <path d="M5 11a7 7 0 0114 0M12 18v3" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
+      <path d="M5 11a7 7 0 0014 0M12 18v3" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
     </svg>
   ),
   more: (c = 'currentColor', s = 22) => (
