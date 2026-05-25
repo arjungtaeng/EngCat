@@ -157,11 +157,26 @@ function ECScreenSentenceCard() {
             </div>
           </div>
 
-          {/* Pattern */}
-          <div style={{
-            fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 36, lineHeight: 1.15, color: T.text,
-            letterSpacing: -0.3, marginBottom: 6,
-          }}>{s.en}</div>
+          {/* Pattern — C option: {vars} → ___, highlight in accent */}
+          {(() => {
+            const displayEn = (s.en || '').replace(/\{[^}]+\}/g, '___');
+            const hl = s.highlight;
+            const hlIdx = hl ? displayEn.indexOf(hl) : -1;
+            return (
+              <div style={{
+                fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 34, lineHeight: 1.2, color: T.text,
+                letterSpacing: -0.3, marginBottom: 6, wordBreak: 'break-word',
+              }}>
+                {hl && hlIdx >= 0 ? (
+                  <>
+                    {displayEn.slice(0, hlIdx)}
+                    <span style={{ color: T.accent }}>{hl}</span>
+                    {displayEn.slice(hlIdx + hl.length)}
+                  </>
+                ) : displayEn}
+              </div>
+            );
+          })()}
 
           {/* Ko explanation */}
           <div style={{ fontSize: 16, color: T.accent, fontWeight: 500, marginBottom: 14, letterSpacing: -0.2 }}>
@@ -184,26 +199,27 @@ function ECScreenSentenceCard() {
           ) : <div style={{ marginBottom: 20 }}/>}
 
           {/* Pattern examples */}
-          {s.examples.length > 0 ? (
+          {s.examples && s.examples.length > 0 ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <div style={{
                 fontFamily: T.mono, fontSize: 9.5, color: T.textMute,
                 letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 4,
-              }}>패턴 예문</div>
+              }}>사용 예시</div>
               {s.examples.map((ex, i) => (
                 <div key={i} style={{
                   padding: '12px 14px', borderRadius: 12,
                   background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
                   border: `1px solid ${T.hair}`,
-                  display: 'flex', alignItems: 'center', gap: 12,
+                  display: 'flex', alignItems: 'flex-start', gap: 12,
                 }}>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 15, color: T.text, lineHeight: 1.35 }}>
-                      {ex}
+                    <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 15, color: T.text, lineHeight: 1.4 }}>
+                      {ex.en || ex}
                     </div>
+                    {ex.ko && <div style={{ fontSize: 12, color: T.textDim, marginTop: 3, lineHeight: 1.4 }}>{ex.ko}</div>}
                   </div>
-                  <div onClick={() => speak(ex)} style={{
-                    width: 32, height: 32, borderRadius: 999, flexShrink: 0,
+                  <div onClick={() => speak(ex.en || ex)} style={{
+                    width: 32, height: 32, borderRadius: 999, flexShrink: 0, marginTop: 2,
                     background: isDark ? 'rgba(255,255,255,0.10)' : T.bg3,
                     border: `1px solid ${T.hair}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
@@ -213,8 +229,7 @@ function ECScreenSentenceCard() {
             </div>
           ) : (
             <div style={{ padding: '20px 0', textAlign: 'center', fontSize: 13, color: T.textMute, lineHeight: 1.6 }}>
-              패턴 예문이 아직 없어요.<br/>
-              <span style={{ fontSize: 11 }}>Supabase sentences 테이블에 ex1~ex4 컬럼을 추가하면 표시돼요.</span>
+              예시 문장이 아직 없어요.
             </div>
           )}
         </div>

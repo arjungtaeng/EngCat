@@ -169,20 +169,23 @@ export default function SentenceCardScreen({ navigation }: Props) {
       );
     }
 
-    // Default: pattern
-    const parts = s.highlight && s.en ? s.en.split(s.highlight) : null;
+    // Default: pattern (C option: replace {vars} with ___, highlight core phrase in accent)
+    const displayEn = (s.en || '').replace(/\{[^}]+\}/g, '___');
+    const hlParts = s.highlight && displayEn.includes(s.highlight)
+      ? displayEn.split(s.highlight)
+      : null;
     return (
       <View style={styles.contentPad}>
         <TypeChip />
-        {parts && parts.length >= 2 ? (
-          <Text style={[styles.patternEn, { color: T.text, fontFamily: T.thin }]}>
-            "{parts[0]}
-            <Text style={{ color: T.accent }}>{s.highlight}</Text>
-            {parts.slice(1).join(s.highlight!)}"
-          </Text>
-        ) : (
-          <Text style={[styles.patternEn, { color: T.text, fontFamily: T.thin }]}>"{s.en}"</Text>
-        )}
+        <Text style={[styles.patternEn, { color: T.text, fontFamily: T.thin }]}>
+          {hlParts && hlParts.length >= 2 ? (
+            <>
+              {hlParts[0]}
+              <Text style={{ color: T.accent }}>{s.highlight}</Text>
+              {hlParts.slice(1).join(s.highlight!)}
+            </>
+          ) : displayEn}
+        </Text>
         <Text style={[styles.patternKo, { color: T.textDim }]}>{s.ko}</Text>
         <TipBox label="표현 팁" text={s.tip} />
         {s.examples && s.examples.length > 0 && (
