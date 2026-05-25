@@ -34,14 +34,17 @@ function ECScreenWordCard() {
   const word = words[idx] || null;
   if (!word) {
     const isLoading = dataVersion === 0 || retrying;
+    const ec = window.ECData || {};
+    const diag = `v${window.EC_VER} · words:${(ec.words||[]).length} sent:${(ec.sentences||[]).length} coll:${(ec.collocations||[]).length} idiom:${(ec.idioms||[]).length} nuance:${(ec.nuances||[]).length}`;
     return (
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: T.bg0, padding: '0 32px', gap: 16 }}>
         <div style={{ color: T.textDim, fontFamily: T.mono, fontSize: 13, textAlign: 'center' }}>
           {isLoading ? '데이터 불러오는 중...' : '단어를 불러오지 못했어요.'}
         </div>
-        {!isLoading && window.ECDataError && (
-          <div style={{ color: T.textMute, fontFamily: T.mono, fontSize: 10, textAlign: 'center', lineHeight: 1.5 }}>
-            {window.ECDataError}
+        {!isLoading && (
+          <div style={{ color: T.textMute, fontFamily: T.mono, fontSize: 10, textAlign: 'center', lineHeight: 1.5, wordBreak: 'break-all' }}>
+            {diag}
+            {window.ECDataError && <><br/>{window.ECDataError}</>}
           </div>
         )}
         {!isLoading && (
