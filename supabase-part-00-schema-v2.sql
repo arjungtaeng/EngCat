@@ -91,9 +91,15 @@ CREATE TABLE IF NOT EXISTS topics (
   id         TEXT PRIMARY KEY,
   name_ko    TEXT NOT NULL,
   name_en    TEXT NOT NULL,
-  category   TEXT NOT NULL,
+  category   TEXT NOT NULL DEFAULT 'daily',
   sort_order INT  DEFAULT 0
 );
+
+-- topics 테이블이 이미 존재할 경우 누락 컬럼 추가
+ALTER TABLE topics ADD COLUMN IF NOT EXISTS name_ko    TEXT;
+ALTER TABLE topics ADD COLUMN IF NOT EXISTS name_en    TEXT;
+ALTER TABLE topics ADD COLUMN IF NOT EXISTS category   TEXT DEFAULT 'daily';
+ALTER TABLE topics ADD COLUMN IF NOT EXISTS sort_order INT  DEFAULT 0;
 
 INSERT INTO topics (id, name_ko, name_en, category, sort_order) VALUES
 ('greeting','인사·소개','Greeting & Introduction','daily',1),
