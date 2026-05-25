@@ -36,7 +36,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 231;</script>
+<script>window.EC_VER = 232;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/supabase.jsx"></script>
@@ -58,7 +58,6 @@
   function App() {
     const savedUser = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
     const [screen, setScreen] = React.useState(savedUser ? 'home' : 'login');
-    const [, setDataReady] = React.useState(false);
 
     // ── Theme management ──
     const resolveTheme = (pref) => {
@@ -78,7 +77,6 @@
         setScreen(s);
         if (window._swReg) window._swReg.update();
       };
-      window.ECDataLoaded.then(() => setDataReady(true));
 
       window.ECSetTheme = (pref) => {
         localStorage.setItem('ec_theme', pref);

@@ -22,6 +22,14 @@ const CEFR_COMPOSITIONS = {
 function ECScreenHome() {
   const T = ECTokens;
   const scrollRef = React.useRef(null);
+  const [dataVersion, setDataVersion] = React.useState(0);
+
+  React.useEffect(() => {
+    if (window.ECDataLoaded) {
+      window.ECDataLoaded.then(() => setDataVersion(v => v + 1));
+    }
+  }, []);
+
   const session = window.ECSession || { completedWordIds: new Set(), completedSentenceIds: new Set() };
   const doneWords = session.completedWordIds.size;
   const doneSentences = session.completedSentenceIds.size;
