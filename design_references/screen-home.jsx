@@ -198,7 +198,7 @@ function ECScreenHome() {
         </div>
         <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto' }}>
           {reviewWords.map((c) => (
-            <div key={c.id} onClick={() => { const wi = (window.ECData?.words || []).findIndex(w => w.id === c.id); if (wi >= 0) { window.ECSession.wordIndex = wi; window.ECNav?.go('word-card'); }}} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
+            <div key={c.id} onClick={() => { const todayWords = (window.ECGetTodaySession?.()?.words) || []; const tIdx = todayWords.findIndex(w => w.id === c.id); window.ECSession.wordIndex = tIdx >= 0 ? tIdx : 0; window.ECNav?.go('word-card'); }} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
               <div style={{ position: 'relative' }}>
                 {c.img
                   ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', borderRadius: 14 }} alt={c.en} />
@@ -220,7 +220,7 @@ function ECScreenHome() {
         </div>
         <div style={{ padding: '0 22px', display: 'flex', flexDirection: 'column', gap: 10 }}>
           {reviewSentences.map((s) => (
-            <div key={s.id} onClick={() => { const si = (window.ECData?.sentences || []).findIndex(x => x.id === s.id); if (si >= 0) { window.ECSession.sentenceIndex = si; window.ECNav?.go('sentence-card'); }}} style={{
+            <div key={s.id} onClick={() => { const todayExprs = (window.ECGetTodaySession?.()?.expressions) || []; const tIdx = todayExprs.findIndex(x => x.id === s.id); window.ECSession.sentenceIndex = tIdx >= 0 ? tIdx : 0; window.ECNav?.go('sentence-card'); }} style={{
               padding: '14px 16px', borderRadius: 14,
               background: T.bg2, border: `1px solid ${T.hair}`,
               display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer',
