@@ -35,8 +35,6 @@ function ECScreenHome() {
   const yData = (() => { try { return JSON.parse(localStorage.getItem(yKey) || '{}'); } catch(e) { return {}; } })();
   const yWordIds = new Set(yData.wordIds || []);
   const ySentenceIds = new Set(yData.sentenceIds || []);
-  const isFirstDay = yWordIds.size === 0 && ySentenceIds.size === 0;
-  const isPreview = isFirstDay;
 
   // 토픽 사이클: dayOfYear % 사용 가능한 토픽 수
   const _now = new Date();
@@ -46,8 +44,7 @@ function ECScreenHome() {
   const todayTopic = _ordered.length > 0 ? _ordered[_dayOfYear % _ordered.length] : null;
   const todayTopicLabel = todayTopic ? TOPIC_NAMES[todayTopic] : '오늘의 학습';
 
-  // 첫날이면 오늘 토픽의 단어/문장 중 무작위 셔플 (예습)
-  // 평소엔 어제 학습한 카드 (복습)
+  // 어제 학습한 카드 (복습) — 비어 있으면 오늘 토픽에서 무작위로 (예습) fallback
   const _shuffle = (arr) => {
     const seed = _dayOfYear;
     return [...arr]
@@ -55,12 +52,16 @@ function ECScreenHome() {
       .sort((a, b) => a.s - b.s)
       .map(o => o.x);
   };
-  const reviewWords = isPreview
+  const _yWords     = (window.ECData?.words     || []).filter(w => yWordIds.has(w.id));
+  const _ySentences = (window.ECData?.sentences || []).filter(s => ySentenceIds.has(s.id));
+  const isPreviewWords     = _yWords.length === 0;
+  const isPreviewSentences = _ySentences.length === 0;
+  const reviewWords = isPreviewWords
     ? _shuffle((window.ECData?.words || []).filter(w => w.topicId === todayTopic)).slice(0, 7)
-    : (window.ECData?.words || []).filter(w => yWordIds.has(w.id));
-  const reviewSentences = isPreview
+    : _yWords;
+  const reviewSentences = isPreviewSentences
     ? _shuffle((window.ECData?.sentences || []).filter(s => s.topicId === todayTopic)).slice(0, 5)
-    : (window.ECData?.sentences || []).filter(s => ySentenceIds.has(s.id));
+    : _ySentences;
 
   const totalDone = doneWords + doneSentences;
   const totalCards = Object.values(comp).reduce((a, b) => a + (b || 0), 0);
@@ -182,7 +183,7 @@ function ECScreenHome() {
       {/* Section: Review Words */}
       {reviewWords.length > 0 && (<>
         <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 단어' : '복습 단어'}</div>
+          <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreviewWords ? '예습 단어' : '복습 단어'}</div>
           <div style={{ fontSize: 12, color: T.textDim }}>{reviewWords.length}개</div>
         </div>
         <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto' }}>
@@ -204,7 +205,7 @@ function ECScreenHome() {
       {/* Section: Review Sentences */}
       {reviewSentences.length > 0 && (<>
         <div style={{ padding: '28px 22px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 문장' : '복습 문장'}</div>
+          <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreviewSentences ? '예습 패턴' : '복습 패턴'}</div>
           <div onClick={() => window.ECNav?.go('sentence-card')} style={{ fontSize: 12, color: T.accent, cursor: 'pointer' }}>전체 보기</div>
         </div>
         <div style={{ padding: '0 22px', display: 'flex', flexDirection: 'column', gap: 10 }}>
