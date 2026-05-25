@@ -305,7 +305,7 @@ function ECScreenWordCard() {
         </div>
       </div>
 
-      {/* ── 추가 예문 바텀시트 ── */}
+      {/* ── 추가 예문 바툅시트 ── */}
       <div
         onTouchStart={(e) => e.stopPropagation()}
         onClick={() => setShowExamples(false)}
