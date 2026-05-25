@@ -1,12 +1,33 @@
 // EngCat — Home screen (오늘의 학습)
 // Premium dark, B1-B2 learner. Polite formal tone.
 
+const TOPIC_NAMES = {
+  greeting: '인사·소개', emotion: '감정 표현', weather: '날씨', shopping: '쇼핑',
+  cafe: '카페·식당', transport: '교통', health: '건강', travel: '여행', home: '주거·생활',
+  work: '직장·비즈니스', education: '교육', media: '미디어·SNS', environment: '환경',
+  economy: '경제', culture: '문화·예술', sports: '스포츠',
+  discussion: '의견·토론', presentation: '발표·프레젠테이션', negotiation: '협상',
+  humanities: '문학·인문', technology: '과학·기술', news: '시사·뉴스', academic: '학술',
+};
+const TOPIC_ORDER = ['greeting','emotion','weather','shopping','cafe','transport','health','travel','home','work','education','media','environment','economy','culture','sports','discussion','presentation','negotiation','humanities','technology','news','academic'];
+const CEFR_COMPOSITIONS = {
+  A1: { '단어': 10, '패턴': 5 },
+  A2: { '단어': 10, '패턴': 5 },
+  B1: { '단어': 8,  '패턴': 4, '콜로': 3 },
+  B2: { '단어': 8,  '패턴': 4, '콜로': 3 },
+  C1: { '단어': 6,  '패턴': 3, '콜로': 3, '이디엄': 2, '뉘앙스': 1 },
+  C2: { '단어': 6,  '패턴': 3, '콜로': 3, '이디엄': 2, '뉘앙스': 1 },
+};
+
 function ECScreenHome() {
   const T = ECTokens;
   const scrollRef = React.useRef(null);
   const session = window.ECSession || { completedWordIds: new Set(), completedSentenceIds: new Set() };
   const doneWords = session.completedWordIds.size;
   const doneSentences = session.completedSentenceIds.size;
+  const userLevel = localStorage.getItem('ec_user_level') || 'B1';
+  const comp = CEFR_COMPOSITIONS[userLevel] || CEFR_COMPOSITIONS.B1;
+  const compEntries = Object.entries(comp).filter(([, v]) => v > 0);
 
   // 어제 학습 기록
   const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
@@ -30,8 +51,17 @@ function ECScreenHome() {
   const reviewWords = (window.ECData?.words || []).filter(w => yWordIds.has(w.id));
   const reviewSentences = (window.ECData?.sentences || []).filter(s => ySentenceIds.has(s.id));
   const totalDone = doneWords + doneSentences;
-  const totalCards = 15;
+  const totalCards = Object.values(comp).reduce((a, b) => a + (b || 0), 0);
   const progressPct = Math.round((totalDone / totalCards) * 100);
+  const quizUnlocked = totalDone >= totalCards && totalCards > 0;
+
+  // 토픽 사이클: dayOfYear % 사용 가능한 토픽 수
+  const _now = new Date();
+  const _dayOfYear = Math.floor((_now - new Date(_now.getFullYear(), 0, 0)) / 86400000);
+  const _availableTopics = Array.from(new Set((window.ECData?.words || []).map(w => w.topicId).filter(Boolean)));
+  const _ordered = TOPIC_ORDER.filter(t => _availableTopics.includes(t));
+  const todayTopic = _ordered.length > 0 ? _ordered[_dayOfYear % _ordered.length] : null;
+  const todayTopicLabel = todayTopic ? TOPIC_NAMES[todayTopic] : '오늘의 학습';
 
   const user = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
   const now = new Date();
@@ -119,10 +149,10 @@ function ECScreenHome() {
             오늘의 학습
           </div>
           <div style={{ marginTop: 8, fontFamily: T.serif, fontSize: 26, color: T.text, lineHeight: 1.15 }}>
-            여행과 일상 표현
+            {todayTopicLabel}
           </div>
-          <div style={{ marginTop: 6, fontSize: 13.5, color: T.textDim, lineHeight: 1.45 }}>
-            공항·호텔·길찾기 상황에서 자연스럽게 쓰는 단어 10개와 문장 5개
+          <div style={{ marginTop: 6, fontFamily: T.mono, fontSize: 12, color: T.textDim, letterSpacing: 0.3 }}>
+            {compEntries.map(([k, v]) => `${k} ${v}`).join(' · ')}
           </div>
 
           {/* progress */}
@@ -173,7 +203,7 @@ function ECScreenHome() {
           <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 문장' : '복습 문장'}</div>
           <div onClick={() => window.ECNav?.go('sentence-card')} style={{ fontSize: 12, color: T.accent, cursor: 'pointer' }}>전체 보기</div>
         </div>
-        <div style={{ padding: '0 22px 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ padding: '0 22px', display: 'flex', flexDirection: 'column', gap: 10 }}>
           {reviewSentences.map((s) => (
             <div key={s.id} onClick={() => { const si = (window.ECData?.sentences || []).findIndex(x => x.id === s.id); if (si >= 0) { window.ECSession.sentenceIndex = si; window.ECNav?.go('sentence-card'); }}} style={{
               padding: '14px 16px', borderRadius: 14,
@@ -191,6 +221,36 @@ function ECScreenHome() {
           ))}
         </div>
       </>)}
+
+      {/* Section: 오늘의 퀴즈 */}
+      <div style={{ padding: '28px 22px 24px' }}>
+        <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2, marginBottom: 10 }}>
+          오늘의 퀴즈
+        </div>
+        <div
+          onClick={() => quizUnlocked && window.ECNav?.go('quiz')}
+          style={{
+            padding: '16px',
+            borderRadius: 16,
+            background: quizUnlocked ? T.accentSoft : T.bg2,
+            border: `1px solid ${quizUnlocked ? T.accent : T.hair}`,
+            display: 'flex', alignItems: 'center', gap: 12,
+            cursor: quizUnlocked ? 'pointer' : 'default',
+            opacity: quizUnlocked ? 1 : 0.7,
+          }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 15, fontWeight: 600, color: quizUnlocked ? T.accent : T.textDim, marginBottom: 4 }}>
+              {quizUnlocked ? '복습 퀴즈 풀기' : '학습을 완료하면 열려요'}
+            </div>
+            <div style={{ fontFamily: T.mono, fontSize: 11.5, color: T.textMute }}>
+              {quizUnlocked ? '오늘 배운 내용으로 4지선다 10문제' : `${totalDone} / ${totalCards} 완료`}
+            </div>
+          </div>
+          <div style={{ color: quizUnlocked ? T.accent : T.textMute }}>
+            {ECIcon.chev('right', quizUnlocked ? T.accent : T.textMute, 20)}
+          </div>
+        </div>
+      </div>
 
       </div>{/* end scrollable */}
     </div>
