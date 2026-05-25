@@ -89,6 +89,17 @@ const TOPIC_TINTS = {
 window.ECData = { words: [], sentences: [], collocations: [], idioms: [], nuances: [], expressions: [] };
 window.ECDataError = null;
 
+function _formatSupabaseError(err) {
+  if (!err) return '';
+  const parts = [];
+  if (err.message)  parts.push(err.message);
+  if (err.code)     parts.push('code: ' + err.code);
+  if (err.details)  parts.push('details: ' + err.details);
+  if (err.hint)     parts.push('hint: ' + err.hint);
+  if (err.status)   parts.push('status: ' + err.status);
+  return parts.length > 0 ? parts.join(' | ') : String(err);
+}
+
 async function _runECDataLoad() {
   window.ECDataError = null;
   const db = window.ECSupabaseClient;
@@ -237,7 +248,7 @@ async function _runECDataLoad() {
       ...window.ECData.nuances.filter(n => inRange(n.cefr)),
     ];
   } catch (err) {
-    window.ECDataError = err.message || String(err);
+    window.ECDataError = _formatSupabaseError(err);
     console.error('Supabase 데이터 로딩 실패:', err);
     throw err;
   }
@@ -247,7 +258,7 @@ async function _runECDataLoad() {
 window.ECDataLoaded = _runECDataLoad().catch(async (err) => {
   await new Promise(r => setTimeout(r, 5000));
   return _runECDataLoad().catch(e => {
-    window.ECDataError = e.message || String(e);
+    window.ECDataError = _formatSupabaseError(e);
     console.error('Supabase 재시도 실패:', e);
   });
 });
@@ -256,7 +267,7 @@ window.ECDataLoaded = _runECDataLoad().catch(async (err) => {
 window.ECReloadData = function() {
   window.ECData = { words: [], sentences: [], collocations: [], idioms: [], nuances: [], expressions: [] };
   window.ECDataLoaded = _runECDataLoad().catch(e => {
-    window.ECDataError = e.message || String(e);
+    window.ECDataError = _formatSupabaseError(e);
     console.error('Supabase 수동 재시도 실패:', e);
   });
   return window.ECDataLoaded;
