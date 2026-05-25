@@ -53,7 +53,7 @@ function ECScreenWordCard() {
         {!isLoading && (
           <div style={{ color: T.textMute, fontFamily: T.mono, fontSize: 10, textAlign: 'center', lineHeight: 1.5, wordBreak: 'break-all' }}>
             {diag}
-            {window.ECDataError && <><br/>{window.ECDataError}</>}
+            {window.ECDataError && <><br/>{window.ECDataError}</>
           </div>
         )}
         {!isLoading && (
@@ -160,8 +160,8 @@ function ECScreenWordCard() {
       onTouchEnd={handleTouchEnd}
     >
 
-      {/* ── Hero image (상단 상태바까지 + 60%) + gradient ── */}
-      <div style={{ position: 'absolute', top: 'calc(-env(safe-area-inset-top, 0px))', left: 0, right: 0, height: 'calc(60% + env(safe-area-inset-top, 0px))', overflow: 'hidden' }}>
+      {/* ── Hero image (60% + status bar) + gradient ── */}
+      <div style={{ position: 'absolute', top: -44, left: 0, right: 0, height: 'calc(60% + 44px)', overflow: 'hidden' }}>
         {word.img
           ? <img src={word.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={word.en} />
           : <ECPlaceholder height="100%" tint={word.tint} radius={0} label={`hero · ${word.en}`}/>
