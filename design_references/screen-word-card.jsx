@@ -162,8 +162,8 @@ function ECScreenWordCard() {
       onTouchEnd={handleTouchEnd}
     >
 
-      {/* ── Hero image (상단 42%) + gradient ── */}
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '42%', overflow: 'hidden' }}>
+      {/* ── Hero image (상단 55%) + gradient ── */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '55%', overflow: 'hidden' }}>
         {word.img
           ? <img src={word.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={word.en} />
           : <ECPlaceholder height="100%" tint={word.tint} radius={0} label={`hero · ${word.en}`}/>

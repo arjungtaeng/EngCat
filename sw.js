@@ -1,5 +1,5 @@
 // 배포할 때 이 값만 올리면 됩니다
-const CACHE = 'engcat-v241';
+const CACHE = 'engcat-v242';
 
 // index.html과 app 파일들은 항상 네트워크 우선
 const NETWORK_FIRST = ['/', '/index.html', '/design_references/'];
