@@ -1,5 +1,5 @@
 // 배포할 때 이 값만 올리면 됩니다
-const CACHE = 'engcat-fresh-v1';
+const CACHE = 'engcat-v243';
 
 // index.html과 app 파일들은 항상 네트워크 우선
 const NETWORK_FIRST = ['/', '/index.html', '/design_references/'];
@@ -33,10 +33,7 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   if (!e.request.url.startsWith(self.location.origin)) return;
 
-  const url = new URL(e.request.url);
-  let path = url.pathname;
-  if (path.startsWith('/EngCat')) path = path.substring(7);
-
+  const path = new URL(e.request.url).pathname;
   const isNetworkFirst = NETWORK_FIRST.some(p => path === p || path.startsWith(p));
 
   if (isNetworkFirst) {
