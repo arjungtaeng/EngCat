@@ -23,6 +23,15 @@ function ECScreenWordCard() {
   const words = todaySession.words.length > 0 ? todaySession.words : ((window.ECData && window.ECData.words) || []);
 
   const [idx, setIdx] = React.useState(session.wordIndex);
+
+  // wordIndex가 오늘 단어 범위를 벗어나면 0으로 보정 (홈에서 ECData 인덱스로 진입한 경우 대비)
+  React.useEffect(() => {
+    if (words.length > 0 && idx >= words.length) {
+      setIdx(0);
+      session.wordIndex = 0;
+    }
+  }, [words.length]);
+
   const [animKey, setAnimKey] = React.useState(0);
   const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
   const [swipeX, setSwipeX] = React.useState(0);
