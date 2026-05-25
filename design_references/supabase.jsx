@@ -1,14 +1,17 @@
 // EngCat — Supabase 클라이언트 초기화
+const EC_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprbnF6anJ5bWtzd2txb3RyaW9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk0NjU4NTEsImV4cCI6MjA5NTA0MTg1MX0.yyHg9Yck3pRlkzL4xIATdnwDKZcA1ANhflrbynnlVIk';
+window.EC_SUPABASE_ANON_KEY = EC_SUPABASE_ANON_KEY;
+
 if (window.supabase && window.supabase.createClient) {
   window.ECSupabaseClient = window.supabase.createClient(
     'https://zknqzjrymkswkqotrion.supabase.co',
-    'sb_publishable_-PyhiOHtQJsKafpoDZIMLg_q09S3yRJ'
+    EC_SUPABASE_ANON_KEY
   );
 } else {
   console.error('Supabase CDN 로드 실패 — window.supabase 없음');
 }
 
-// ── IndexedDB 오디오 캐시 ────────────────────────────────────────────────────
+// ── IndexedDB 오디오 캐시 ──────────────────────────────────────
 window.ECTTSCache = {
   _db: null,
   async _open() {
@@ -43,7 +46,7 @@ window.ECTTSCache = {
   },
 };
 
-// ── 공유 TTS 함수 ────────────────────────────────────────────────────────────
+// ── 공유 TTS 함수 ──────────────────────────────────────────────
 window.ECSpeak = async function(text, voice) {
   const v = voice || localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural';
   const cacheKey = `${text}::${v}`;
@@ -65,7 +68,7 @@ window.ECSpeak = async function(text, voice) {
     const res = await fetch('https://zknqzjrymkswkqotrion.supabase.co/functions/v1/tts', {
       method: 'POST',
       headers: {
-        'Authorization': 'Bearer sb_publishable_-PyhiOHtQJsKafpoDZIMLg_q09S3yRJ',
+        'Authorization': 'Bearer ' + EC_SUPABASE_ANON_KEY,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ text, voice: v, rate: 'medium' }),
