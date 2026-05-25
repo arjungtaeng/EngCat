@@ -86,11 +86,14 @@ const TOPIC_TINTS = {
   academic:     '#1c1c3a',
 };
 
-window.ECData = { words: [], sentences: [], collocations: [], idioms: [], nuances: [] };
+window.ECData = { words: [], sentences: [], collocations: [], idioms: [], nuances: [], expressions: [] };
+window.ECDataError = null;
 
-window.ECDataLoaded = (async () => {
+async function _runECDataLoad() {
+  window.ECDataError = null;
+  const db = window.ECSupabaseClient;
+  if (!db) throw new Error('Supabase CDN 미로드 — 네트워크를 확인하고 새로고침해 주세요.');
   try {
-    const db = window.ECSupabaseClient;
     const [wordsRes, sentencesRes, collocRes, idiomsRes, nuancesRes] = await Promise.all([
       db.from('words').select('*').order('topic_id').order('sort_order'),
       db.from('sentences').select('*').order('topic_id').order('sort_order'),
@@ -234,8 +237,29 @@ window.ECDataLoaded = (async () => {
       ...window.ECData.nuances.filter(n => inRange(n.cefr)),
     ];
   } catch (err) {
+    window.ECDataError = err.message || String(err);
     console.error('Supabase 데이터 로딩 실패:', err);
+    throw err;
   }
-})();
+}
+
+// 초기 로딩: 실패 시 5초 후 1회 자동 재시도
+window.ECDataLoaded = _runECDataLoad().catch(async (err) => {
+  await new Promise(r => setTimeout(r, 5000));
+  return _runECDataLoad().catch(e => {
+    window.ECDataError = e.message || String(e);
+    console.error('Supabase 재시도 실패:', e);
+  });
+});
+
+// 수동 재시도용 (카드 화면에서 호출)
+window.ECReloadData = function() {
+  window.ECData = { words: [], sentences: [], collocations: [], idioms: [], nuances: [], expressions: [] };
+  window.ECDataLoaded = _runECDataLoad().catch(e => {
+    window.ECDataError = e.message || String(e);
+    console.error('Supabase 수동 재시도 실패:', e);
+  });
+  return window.ECDataLoaded;
+};
 
 Object.assign(window, { ECData, ECSession });

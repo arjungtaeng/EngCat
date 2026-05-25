@@ -28,16 +28,35 @@ function ECScreenWordCard() {
   const [swipeX, setSwipeX] = React.useState(0);
   const [slideOut, setSlideOut] = React.useState(0);
   const [showExamples, setShowExamples] = React.useState(false);
+  const [retrying, setRetrying] = React.useState(false);
   const touchStartX = React.useRef(null);
 
   const word = words[idx] || null;
-  if (!word) return (
-    <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: T.bg0 }}>
-      <div style={{ color: T.textDim, fontFamily: T.mono, fontSize: 13 }}>
-        {dataVersion === 0 ? '데이터 불러오는 중...' : '단어를 불러오지 못했어요.\n인터넷 연결을 확인해 주세요.'}
+  if (!word) {
+    const isLoading = dataVersion === 0 || retrying;
+    return (
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: T.bg0, padding: '0 32px', gap: 16 }}>
+        <div style={{ color: T.textDim, fontFamily: T.mono, fontSize: 13, textAlign: 'center' }}>
+          {isLoading ? '데이터 불러오는 중...' : '단어를 불러오지 못했어요.'}
+        </div>
+        {!isLoading && window.ECDataError && (
+          <div style={{ color: T.textMute, fontFamily: T.mono, fontSize: 10, textAlign: 'center', lineHeight: 1.5 }}>
+            {window.ECDataError}
+          </div>
+        )}
+        {!isLoading && (
+          <div onClick={() => {
+            setRetrying(true);
+            (window.ECReloadData ? window.ECReloadData() : Promise.resolve())
+              .then(() => { setRetrying(false); setDataVersion(v => v + 1); });
+          }} style={{
+            padding: '12px 28px', borderRadius: 12, background: T.accent,
+            color: T.accentText, fontFamily: T.mono, fontSize: 12, fontWeight: 600, cursor: 'pointer',
+          }}>다시 시도</div>
+        )}
       </div>
-    </div>
-  );
+    );
+  }
   const isLast = idx === words.length - 1;
   const isFirst = idx === 0;
   const isBookmarked = bookmarked.has(word.id);
