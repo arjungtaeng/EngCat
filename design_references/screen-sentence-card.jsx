@@ -7,19 +7,24 @@ function ECScreenSentenceCard() {
   const isDark = T.text === '#F8F5EF';
   const todaySession = React.useMemo(() => window.ECGetTodaySession(), []);
   // 오늘 분량의 표현 (패턴 → 콜로 → 이디엄 → 뉘앙스 순서)
-  const sentences = todaySession.expressions.length > 0 ? todaySession.expressions : ECData.sentences;
-  const session = ECSession;
+  const sentences = todaySession.expressions.length > 0 ? todaySession.expressions : (window.ECData && window.ECData.sentences && window.ECData.sentences.length > 0 ? window.ECData.sentences : []);
+  const session = window.ECSession;
 
-  const [idx, setIdx] = React.useState(session.sentenceIndex);
+  const [idx, setIdx] = React.useState((session && session.sentenceIndex) || 0);
   const [animKey, setAnimKey] = React.useState(0);
-  const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
+  const [bookmarked, setBookmarked] = React.useState(() => new Set((session && session.bookmarkedIds) || []));
   const [swipeX, setSwipeX] = React.useState(0);
   const [slideOut, setSlideOut] = React.useState(0);
   const touchStartX = React.useRef(null);
   const touchStartY = React.useRef(null);
   const swipeDir = React.useRef(null);
 
-  const s = sentences[idx];
+  const s = sentences[idx] || null;
+  if (!s) return (
+    <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: T.bg0 }}>
+      <div style={{ color: T.textDim, fontFamily: T.mono, fontSize: 13 }}>데이터 불러오는 중...</div>
+    </div>
+  );
   const isLast = idx === sentences.length - 1;
   const isFirst = idx === 0;
   const isBookmarked = bookmarked.has(s.id);
@@ -78,6 +83,13 @@ function ECScreenSentenceCard() {
   };
 
   const speak = (text) => window.ECSpeak(text || s.en);
+
+  // Pattern display: replace {vars} with ___, highlight core phrase in accent
+  const patternDisplayEn = (s.en || '').replace(/\{[^}]+\}/g, '___');
+  const patternHl = s.highlight || '';
+  const patternHlIdx = patternHl ? patternDisplayEn.indexOf(patternHl) : -1;
+  const patternBefore = patternHl && patternHlIdx >= 0 ? patternDisplayEn.slice(0, patternHlIdx) : null;
+  const patternAfter  = patternHl && patternHlIdx >= 0 ? patternDisplayEn.slice(patternHlIdx + patternHl.length) : null;
 
   const swipingPrev = swipeX > 30 && !isFirst;
   const btnLabel = swipingPrev ? '이전 카드' : isLast ? '퀴즈 시작하기' : '다음 카드';
@@ -157,26 +169,17 @@ function ECScreenSentenceCard() {
             </div>
           </div>
 
-          {/* Pattern — C option: {vars} → ___, highlight in accent */}
-          {(() => {
-            const displayEn = (s.en || '').replace(/\{[^}]+\}/g, '___');
-            const hl = s.highlight;
-            const hlIdx = hl ? displayEn.indexOf(hl) : -1;
-            return (
-              <div style={{
-                fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 34, lineHeight: 1.2, color: T.text,
-                letterSpacing: -0.3, marginBottom: 6, wordBreak: 'break-word',
-              }}>
-                {hl && hlIdx >= 0 ? (
-                  <>
-                    {displayEn.slice(0, hlIdx)}
-                    <span style={{ color: T.accent }}>{hl}</span>
-                    {displayEn.slice(hlIdx + hl.length)}
-                  </>
-                ) : displayEn}
-              </div>
-            );
-          })()}
+          {/* Pattern — C option: {vars} → ___, highlight core phrase in accent */}
+          <div style={{
+            fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 34, lineHeight: 1.2, color: T.text,
+            letterSpacing: -0.3, marginBottom: 6, wordBreak: 'break-word',
+          }}>
+            {patternBefore !== null ? React.createElement(React.Fragment, null,
+              patternBefore,
+              React.createElement('span', { style: { color: T.accent } }, patternHl),
+              patternAfter
+            ) : patternDisplayEn}
+          </div>
 
           {/* Ko explanation */}
           <div style={{ fontSize: 16, color: T.accent, fontWeight: 500, marginBottom: 14, letterSpacing: -0.2 }}>

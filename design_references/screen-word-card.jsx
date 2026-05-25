@@ -13,8 +13,8 @@ const getTTSSettings = () => ({
 function ECScreenWordCard() {
   const T = ECTokens;
   const todaySession = React.useMemo(() => window.ECGetTodaySession(), []);
-  const words = todaySession.words.length > 0 ? todaySession.words : ECData.words;
-  const session = ECSession;
+  const words = todaySession.words.length > 0 ? todaySession.words : ((window.ECData && window.ECData.words) || []);
+  const session = window.ECSession;
 
   const [idx, setIdx] = React.useState(session.wordIndex);
   const [animKey, setAnimKey] = React.useState(0);
@@ -24,7 +24,12 @@ function ECScreenWordCard() {
   const [showExamples, setShowExamples] = React.useState(false);
   const touchStartX = React.useRef(null);
 
-  const word = words[idx];
+  const word = words[idx] || null;
+  if (!word) return (
+    <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: T.bg0 }}>
+      <div style={{ color: T.textDim, fontFamily: T.mono, fontSize: 13 }}>데이터 불러오는 중...</div>
+    </div>
+  );
   const isLast = idx === words.length - 1;
   const isFirst = idx === 0;
   const isBookmarked = bookmarked.has(word.id);
