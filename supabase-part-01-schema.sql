@@ -1,4 +1,4 @@
--- Part 01: Schema
+-- Part 01: Schema (RUN FIRST)
 
 -- ══════════════════════════════════════════════════════════════
 -- EngCat Combined Supabase Migration
