@@ -17,6 +17,15 @@ function ECScreenSentenceCard() {
   const sentences = todaySession.expressions.length > 0 ? todaySession.expressions : (window.ECData && window.ECData.sentences && window.ECData.sentences.length > 0 ? window.ECData.sentences : []);
 
   const [idx, setIdx] = React.useState((session && session.sentenceIndex) || 0);
+
+  // sentenceIndex가 오늘 표현 범위를 벗어나면 0으로 보정
+  React.useEffect(() => {
+    if (sentences.length > 0 && idx >= sentences.length) {
+      setIdx(0);
+      if (session) session.sentenceIndex = 0;
+    }
+  }, [sentences.length]);
+
   const [animKey, setAnimKey] = React.useState(0);
   const [bookmarked, setBookmarked] = React.useState(() => new Set((session && session.bookmarkedIds) || []));
   const [swipeX, setSwipeX] = React.useState(0);
