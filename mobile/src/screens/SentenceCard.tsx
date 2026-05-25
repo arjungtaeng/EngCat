@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTokens } from '../theme/useTokens';
 import { useCardsStore, SentenceCard } from '../store/useCardsStore';
+import { useUserStore } from '../store/useUserStore';
 import { Icon } from '../components/icons';
 import { Placeholder } from '../components/primitives/Placeholder';
+import { getTodaySession } from '../utils/todaySession';
 
 const { height: H } = Dimensions.get('window');
 
@@ -19,7 +21,12 @@ interface Props { navigation: any }
 export default function SentenceCardScreen({ navigation }: Props) {
   const T = useTokens();
   const store = useCardsStore();
-  const expressions = store.expressions.length ? store.expressions : store.sentences;
+  const level = useUserStore(s => s.level);
+  const session = useMemo(
+    () => getTodaySession(store.words, store.expressions, level),
+    [store.words, store.expressions, level],
+  );
+  const expressions = session.expressions.length ? session.expressions : (store.expressions.length ? store.expressions : store.sentences);
 
   const [idx, setIdx] = useState(store.sentenceIndex);
 

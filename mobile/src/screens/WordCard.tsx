@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useMemo } from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity,
   ScrollView, Dimensions, Modal,
@@ -10,8 +10,10 @@ import Animated, {
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useTokens } from '../theme/useTokens';
 import { useCardsStore } from '../store/useCardsStore';
+import { useUserStore } from '../store/useUserStore';
 import { Icon } from '../components/icons';
 import { Placeholder } from '../components/primitives/Placeholder';
+import { getTodaySession } from '../utils/todaySession';
 
 const { width: W, height: H } = Dimensions.get('window');
 
@@ -31,7 +33,12 @@ interface Props { navigation: any }
 export default function WordCardScreen({ navigation }: Props) {
   const T = useTokens();
   const store = useCardsStore();
-  const words = store.words;
+  const level = useUserStore(s => s.level);
+  const session = useMemo(
+    () => getTodaySession(store.words, store.expressions, level),
+    [store.words, store.expressions, level],
+  );
+  const words = session.words;
 
   const [idx, setIdx] = useState(store.wordIndex);
   const [showExamples, setShowExamples] = useState(false);
@@ -52,7 +59,7 @@ export default function WordCardScreen({ navigation }: Props) {
   const doNavigate = useCallback((dir: 'next' | 'prev') => {
     const cur = idxRef.current;
     const storeSnap = useCardsStore.getState();
-    const w = storeSnap.words[cur];
+    const w = words[cur];
     if (!w) { isAnimating.value = false; return; }
 
     if (dir === 'prev' && cur === 0) {
@@ -63,7 +70,7 @@ export default function WordCardScreen({ navigation }: Props) {
 
     if (dir === 'next') {
       storeSnap.markWordDone(w.id);
-      if (cur === storeSnap.words.length - 1) {
+      if (cur === words.length - 1) {
         isAnimating.value = false;
         storeSnap.setWordIndex(0);
         navigation.navigate('SentenceCard');

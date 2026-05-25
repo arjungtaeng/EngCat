@@ -8,46 +8,14 @@ import { useCardsStore } from '../store/useCardsStore';
 import { useUserStore } from '../store/useUserStore';
 import { Icon } from '../components/icons';
 import { Placeholder } from '../components/primitives/Placeholder';
+import { getTodaySession, getDayOfYear } from '../utils/todaySession';
 
-const TOPIC_NAMES: Record<string, string> = {
-  greeting:     '인사·소개',
-  emotion:      '감정 표현',
-  weather:      '날씨',
-  shopping:     '쇼핑',
-  cafe:         '카페·식당',
-  transport:    '교통',
-  health:       '건강',
-  travel:       '여행',
-  home:         '주거·생활',
-  work:         '직장·비즈니스',
-  education:    '교육',
-  media:        '미디어·SNS',
-  environment:  '환경',
-  economy:      '경제',
-  culture:      '문화·예술',
-  sports:       '스포츠',
-  discussion:   '의견·토론',
-  presentation: '발표·프레젠테이션',
-  negotiation:  '협상',
-  humanities:   '문학·인문',
-  technology:   '과학·기술',
-  news:         '시사·뉴스',
-  academic:     '학술',
-};
-
-const TOPIC_ORDER = [
-  'greeting','emotion','weather','shopping','cafe','transport','health','travel','home',
-  'work','education','media','environment','economy','culture','sports',
-  'discussion','presentation','negotiation','humanities','technology','news','academic',
-];
-
-const CEFR_COMPOSITIONS: Record<string, { 단어: number; 패턴: number; 콜로?: number; 이디엄?: number; 뉘앙스?: number }> = {
-  A1: { 단어: 10, 패턴: 5 },
-  A2: { 단어: 10, 패턴: 5 },
-  B1: { 단어: 8,  패턴: 4, 콜로: 3 },
-  B2: { 단어: 8,  패턴: 4, 콜로: 3 },
-  C1: { 단어: 6,  패턴: 3, 콜로: 3, 이디엄: 2, 뉘앙스: 1 },
-  C2: { 단어: 6,  패턴: 3, 콜로: 3, 이디엄: 2, 뉘앙스: 1 },
+const COMP_LABELS: Record<keyof ReturnType<typeof getTodaySession>['composition'], string> = {
+  words:        '단어',
+  patterns:     '패턴',
+  collocations: '콜로',
+  idioms:       '이디엄',
+  nuances:      '뉘앙스',
 };
 
 const GREETINGS = [
@@ -79,49 +47,25 @@ export default function HomeScreen({ navigation }: Props) {
 
   const now    = new Date();
   const dateStr = `${DAY_NAMES[now.getDay()]}, ${MONTH_NAMES[now.getMonth()]} ${now.getDate()}`;
-  const dayOfYear = Math.floor((now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000);
+  const dayOfYear = getDayOfYear(now);
   const greetingWord = GREETINGS[dayOfYear % GREETINGS.length];
 
-  const comp = CEFR_COMPOSITIONS[level] ?? CEFR_COMPOSITIONS.B1;
-  const totalCards = Object.values(comp).reduce((a, b) => a + (b || 0), 0);
-  const totalDone  = completedWordIds.size + completedSentenceIds.size;
-  const progress   = totalCards > 0 ? Math.min(totalDone / totalCards, 1) : 0;
+  const session = useMemo(
+    () => getTodaySession(words, expressions, level),
+    [words, expressions, level],
+  );
+  const { topicLabel: todayTopicLabel, words: sessionWords, composition, totalCards } = session;
 
-  // 토픽 사이클: 매일 다른 토픽으로 순환 (사용자가 학습한 데이터의 토픽 중에서)
-  const todayTopic = useMemo(() => {
-    const availableTopics = Array.from(new Set(words.map(w => w.topicId).filter(Boolean)));
-    if (availableTopics.length === 0) return null;
-    // 데이터에 있는 토픽만 사이클
-    const ordered = TOPIC_ORDER.filter(t => availableTopics.includes(t));
-    const idx = dayOfYear % ordered.length;
-    return ordered[idx] ?? availableTopics[0];
-  }, [words, dayOfYear]);
-
-  const todayTopicLabel = todayTopic ? TOPIC_NAMES[todayTopic] : '오늘의 학습';
-
-  // 첫날 여부: 학습 기록 없으면 예습 모드
+  const totalDone = completedWordIds.size + completedSentenceIds.size;
+  const progress  = totalCards > 0 ? Math.min(totalDone / totalCards, 1) : 0;
   const isFirstDay = totalDone === 0;
-
-  // 첫날엔 무작위 7개 (예습), 이후엔 토픽 단어 처음 7개 (복습)
-  const reviewWords = useMemo(() => {
-    if (words.length === 0) return [];
-    const pool = words.filter(w => w.topicId === todayTopic);
-    if (pool.length === 0) return [];
-    if (isFirstDay) {
-      // 날짜 기반 안정적 셔플 (하루 동안은 같은 순서 유지)
-      const seed = dayOfYear;
-      return [...pool]
-        .map((w, i) => ({ w, s: ((i * 9301 + seed * 49297) % 233280) / 233280 }))
-        .sort((a, b) => a.s - b.s)
-        .map(x => x.w)
-        .slice(0, 7);
-    }
-    return pool.slice(0, 7);
-  }, [words, todayTopic, isFirstDay, dayOfYear]);
-
   const quizUnlocked = totalDone >= totalCards && totalCards > 0;
 
-  const compEntries = Object.entries(comp).filter(([, v]) => (v ?? 0) > 0);
+  const reviewWords = sessionWords; // 오늘 분량의 단어만 표시
+
+  const compEntries = (Object.keys(composition) as (keyof typeof composition)[])
+    .filter(k => composition[k] > 0)
+    .map(k => [COMP_LABELS[k], composition[k]] as const);
 
   const displayName = name
     ? (name.includes(' ')
