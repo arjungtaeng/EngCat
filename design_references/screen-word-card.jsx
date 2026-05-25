@@ -145,9 +145,7 @@ function ECScreenWordCard() {
   const btnBg = swipingPrev ? T.bg3 : T.accent;
   const btnColor = swipingPrev ? T.text : T.accentText;
 
-  const overlayGrad = isDark
-    ? 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 28%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.95) 88%, #000 100%)'
-    : `linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 20%, transparent 55%, ${T.bg0}CC 75%, ${T.bg0} 90%)`;
+  const overlayGrad = `linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 20%, transparent 55%, ${T.bg0}CC 75%, ${T.bg0} 90%)`;
   const glassC   = isDark ? 'rgba(255,255,255,' : 'rgba(0,0,0,';
   const railIcon = isDark ? 'rgba(255,255,255,0.9)' : T.text;
   const railBg   = isDark ? 'rgba(255,255,255,0.10)' : T.bg2;
@@ -162,8 +160,8 @@ function ECScreenWordCard() {
       onTouchEnd={handleTouchEnd}
     >
 
-      {/* ── Hero image (상단 60%) + gradient ── */}
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '60%', overflow: 'hidden' }}>
+      {/* ── Hero image (상단 상태바까지 + 60%) + gradient ── */}
+      <div style={{ position: 'absolute', top: 'calc(-env(safe-area-inset-top, 0px))', left: 0, right: 0, height: 'calc(60% + env(safe-area-inset-top, 0px))', overflow: 'hidden' }}>
         {word.img
           ? <img src={word.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={word.en} />
           : <ECPlaceholder height="100%" tint={word.tint} radius={0} label={`hero · ${word.en}`}/>
