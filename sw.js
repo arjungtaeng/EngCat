@@ -2,7 +2,7 @@
 const CACHE = 'engcat-v243';
 
 // index.html과 app 파일들은 항상 네트워크 우선
-const NETWORK_FIRST = ['/', '/index.html', '/design_references/'];
+const NETWORK_FIRST = ['/', '/index.html', '/design_references/', '/EngCat/'];
 
 const ASSETS = [
   '/manifest.json',
