@@ -141,29 +141,6 @@ function ECScreenWordCard() {
         </div>
       </div>
 
-      {/* ── Right action rail ── */}
-      <div style={{
-        position: 'absolute', right: 14, top: '45%', zIndex: 10,
-        display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'center',
-      }}>
-        {[
-          { icon: ECIcon.speaker(railIcon, 22), label: '듣기', onClick: speakWordAndExample },
-          { icon: ECIcon.heart(isBookmarked ? T.accent : railIcon, 22, isBookmarked), label: '저장', onClick: toggleBookmark },
-          { icon: ECIcon.notes(railIcon, 20), label: '예문', onClick: () => setShowExamples(true) },
-        ].map((a, i) => (
-          <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-            <div onClick={a.onClick} style={{
-              width: 48, height: 48, borderRadius: 999,
-              background: railBg, backdropFilter: 'blur(20px)',
-              border: `1px solid ${railBd}`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer',
-            }}>{a.icon}</div>
-            <div style={{ fontSize: 10, color: railLbl, fontWeight: 500 }}>{a.label}</div>
-          </div>
-        ))}
-      </div>
-
       {/* ── Content (moves with swipe) ── */}
       <div
         key={animKey}
@@ -173,7 +150,7 @@ function ECScreenWordCard() {
           top: 0,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 82px)',
           left: 0,
-          right: 78,
+          right: 0,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',
@@ -194,13 +171,12 @@ function ECScreenWordCard() {
           <div style={{ fontFamily: T.mono, fontSize: 11, color: T.textMute }}>{word.ipa}</div>
         </div>
 
-        {/* Word — auto-shrink long words */}
+        {/* Word — fixed 56px, no shrink */}
         <div style={{
           fontFamily: T.display, fontWeight: 400,
-          fontSize: word.en.length > 14 ? 32 : word.en.length > 10 ? 42 : 52,
-          lineHeight: 1, color: T.text,
+          fontSize: 56, lineHeight: 1, color: T.text,
           letterSpacing: -1, marginBottom: 4,
-          wordBreak: 'break-word', overflowWrap: 'break-word',
+          whiteSpace: 'nowrap', overflow: 'visible',
         }}>{word.en}</div>
 
         {/* Korean meaning */}
@@ -234,20 +210,48 @@ function ECScreenWordCard() {
           )}
         </div>
 
-        {/* Button */}
-        <div
-          onClick={() => goTo(swipingPrev ? 'prev' : 'next')}
-          style={{
-            height: 46, borderRadius: 14,
-            background: btnBg, color: btnColor,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            fontSize: 14, fontWeight: 600, cursor: 'pointer',
-            transition: 'background 0.15s, color 0.15s',
-          }}
-        >
-          {swipingPrev && ECIcon.chev('left', btnColor, 14)}
-          {btnLabel}
-          {!swipingPrev && ECIcon.chev('right', btnColor, 14)}
+        {/* Action row: 다음 카드 · 듣기 · 저장 · 예문 */}
+        <div style={{ display: 'flex', gap: 8 }}>
+          <div
+            onClick={() => goTo(swipingPrev ? 'prev' : 'next')}
+            style={{
+              flex: 1, height: 46, borderRadius: 14,
+              background: btnBg, color: btnColor,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+              fontSize: 14, fontWeight: 600, cursor: 'pointer',
+              transition: 'background 0.15s, color 0.15s',
+            }}
+          >
+            {swipingPrev && ECIcon.chev('left', btnColor, 14)}
+            {btnLabel}
+            {!swipingPrev && ECIcon.chev('right', btnColor, 14)}
+          </div>
+          <div onClick={speakWordAndExample} style={{
+            width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+            background: railBg, border: `1px solid ${railBd}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+          }}>{ECIcon.speaker(railIcon, 18)}</div>
+          <div onClick={toggleBookmark} style={{
+            width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+            background: isBookmarked ? T.accent : railBg,
+            border: `1px solid ${isBookmarked ? T.accent : railBd}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+          }}>{ECIcon.heart(isBookmarked ? T.accentText : railIcon, 18, isBookmarked)}</div>
+          <div onClick={() => setShowExamples(true)} style={{
+            width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+            background: railBg, border: `1px solid ${railBd}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+          }}>{ECIcon.notes(railIcon, 17)}</div>
+        </div>
+
+        {/* Progress strip — current card position in feed */}
+        <div style={{ marginTop: 12, display: 'flex', gap: 3, alignItems: 'center' }}>
+          {words.map((_, i) => (
+            <div key={i} style={{
+              flex: 1, height: 2.5, borderRadius: 2,
+              background: i <= idx ? T.text : (isDark ? 'rgba(255,255,255,0.22)' : T.hairStr),
+            }} />
+          ))}
         </div>
       </div>
 

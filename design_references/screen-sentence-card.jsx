@@ -129,7 +129,7 @@ function ECScreenSentenceCard() {
         style={{
           position: 'absolute',
           top: 0,
-          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 116px)',
+          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)',
           left: 0, right: 0,
           overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
@@ -225,31 +225,42 @@ function ECScreenSentenceCard() {
         position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 12,
         padding: '0 18px',
         paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 66px)',
-        display: 'flex', gap: 8,
       }}>
-        <div onClick={() => goTo(swipingPrev ? 'prev' : 'next')} style={{
-          flex: 1, height: 46, borderRadius: 14,
-          background: btnBg, border: `1px solid ${btnBd}`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-          color: btnColor, fontSize: 14, fontWeight: 600, cursor: 'pointer',
-          transition: 'background 0.15s, color 0.15s',
-        }}>
-          {swipingPrev && ECIcon.chev('left', btnColor, 14)}
-          <span>{btnLabel}</span>
-          {!swipingPrev && !isLast && ECIcon.chev('right', btnColor, 14)}
+        <div style={{ display: 'flex', gap: 8 }}>
+          <div onClick={() => goTo(swipingPrev ? 'prev' : 'next')} style={{
+            flex: 1, height: 46, borderRadius: 14,
+            background: btnBg, border: `1px solid ${btnBd}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+            color: btnColor, fontSize: 14, fontWeight: 600, cursor: 'pointer',
+            transition: 'background 0.15s, color 0.15s',
+          }}>
+            {swipingPrev && ECIcon.chev('left', btnColor, 14)}
+            <span>{btnLabel}</span>
+            {!swipingPrev && !isLast && ECIcon.chev('right', btnColor, 14)}
+          </div>
+          <div onClick={() => speak(s.en)} style={{
+            width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+            background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
+            border: `1px solid ${T.hair}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+          }}>{ECIcon.speaker(T.text, 18)}</div>
+          <div onClick={toggleBookmark} style={{
+            width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+            background: isBookmarked ? T.accent : (isDark ? 'rgba(255,255,255,0.10)' : T.bg2),
+            border: `1px solid ${isBookmarked ? T.accent : T.hair}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+          }}>{ECIcon.heart(isBookmarked ? T.accentText : T.text, 18, isBookmarked)}</div>
         </div>
-        <div onClick={() => speak(s.en)} style={{
-          width: 46, height: 46, borderRadius: 14, flexShrink: 0,
-          background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
-          border: `1px solid ${T.hair}`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-        }}>{ECIcon.speaker(T.text, 18)}</div>
-        <div onClick={toggleBookmark} style={{
-          width: 46, height: 46, borderRadius: 14, flexShrink: 0,
-          background: isBookmarked ? T.accent : (isDark ? 'rgba(255,255,255,0.10)' : T.bg2),
-          border: `1px solid ${isBookmarked ? T.accent : T.hair}`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-        }}>{ECIcon.heart(isBookmarked ? T.accentText : T.text, 18, isBookmarked)}</div>
+
+        {/* Progress strip — current pattern position in feed */}
+        <div style={{ marginTop: 12, display: 'flex', gap: 3, alignItems: 'center' }}>
+          {sentences.map((_, i) => (
+            <div key={i} style={{
+              flex: 1, height: 2.5, borderRadius: 2,
+              background: i <= idx ? T.accent : (isDark ? 'rgba(255,255,255,0.22)' : T.hairStr),
+            }} />
+          ))}
+        </div>
       </div>
 
     </div>
