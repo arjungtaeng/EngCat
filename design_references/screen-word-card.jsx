@@ -147,7 +147,7 @@ function ECScreenWordCard() {
 
   const overlayGrad = isDark
     ? 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 28%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.95) 88%, #000 100%)'
-    : `linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 20%, transparent 55%, ${T.bg1}CC 75%, ${T.bg1} 90%)`;
+    : `linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 20%, transparent 55%, ${T.bg0}CC 75%, ${T.bg0} 90%)`;
   const glassC   = isDark ? 'rgba(255,255,255,' : 'rgba(0,0,0,';
   const railIcon = isDark ? 'rgba(255,255,255,0.9)' : T.text;
   const railBg   = isDark ? 'rgba(255,255,255,0.10)' : T.bg2;
