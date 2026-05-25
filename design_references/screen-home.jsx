@@ -90,11 +90,13 @@ function ECScreenHome() {
   const rawName = user?.name || '학습자';
   const displayName = savedNick
     ? savedNick
-    : rawName.includes(' ')
-      ? rawName.split(' ')[0]                                      // 서양식: 첫 토큰 (given name)
-      : /^[가-힣]+$/.test(rawName) && rawName.length >= 3
-        ? rawName.slice(1)                                         // 한국식: 성(첫 글자) 제외
-        : rawName;
+    : user?.nickname
+      ? user.nickname                                              // 저장된 닉네임 우선
+      : rawName.includes(' ')
+        ? rawName.split(' ')[0]                                    // 서양식: 첫 토큰 (given name)
+        : /^[가-힣]+$/.test(rawName) && rawName.length === 3
+          ? rawName.slice(1)                                       // 한국식 3글자 이름: 성(첫 글자) 제외
+          : rawName;
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>

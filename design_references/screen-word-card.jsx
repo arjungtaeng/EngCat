@@ -33,7 +33,9 @@ function ECScreenWordCard() {
   const word = words[idx] || null;
   if (!word) return (
     <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: T.bg0 }}>
-      <div style={{ color: T.textDim, fontFamily: T.mono, fontSize: 13 }}>데이터 불러오는 중...</div>
+      <div style={{ color: T.textDim, fontFamily: T.mono, fontSize: 13 }}>
+        {dataVersion === 0 ? '데이터 불러오는 중...' : '단어를 불러오지 못했어요.\n인터넷 연결을 확인해 주세요.'}
+      </div>
     </div>
   );
   const isLast = idx === words.length - 1;
