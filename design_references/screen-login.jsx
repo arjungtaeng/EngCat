@@ -127,7 +127,7 @@ function ECScreenLogin() {
 
   return (
     <div style={{
-      height: '100%',
+      flex: 1, minHeight: 0,
       background: T.bg1,
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
@@ -135,13 +135,21 @@ function ECScreenLogin() {
     }}>
 
       {/* Logo */}
-      <div style={{ textAlign: 'center', marginBottom: 20 }}>
-        <img
-          src="icons/icon-1024.png"
-          alt="EngCat"
-          style={{ width: 140, height: 140, mixBlendMode: 'lighten' }}
-        />
-      </div>
+      {(() => {
+        const isDark = T.text === '#F8F5EF';
+        return (
+          <div style={{ textAlign: 'center', marginBottom: 20 }}>
+            <img
+              src="icons/icon-1024.png"
+              alt="EngCat"
+              style={{
+                width: 140, height: 140,
+                filter: isDark ? 'none' : 'drop-shadow(0 2px 12px rgba(28,22,16,0.18))',
+              }}
+            />
+          </div>
+        );
+      })()}
 
       {/* EngCat headline — collapse scramble (fixed-height wrapper prevents layout shift) */}
       <div style={{ height: 52, marginBottom: 14, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

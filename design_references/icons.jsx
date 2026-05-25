@@ -50,7 +50,7 @@ const ECIcon = {
   mic: (c = 'currentColor', s = 22) => (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
       <rect x="9" y="3" width="6" height="12" rx="3" stroke={c} strokeWidth="1.6"/>
-      <path d="M5 11a7 7 0 0114 0M12 18v3" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
+      <path d="M5 11a7 7 0 0014 0M12 18v3" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
     </svg>
   ),
   more: (c = 'currentColor', s = 22) => (
@@ -88,6 +88,12 @@ const ECIcon = {
       <circle cx="18" cy="6" r="2.5" stroke={c} strokeWidth="1.6"/>
       <circle cx="18" cy="18" r="2.5" stroke={c} strokeWidth="1.6"/>
       <path d="M8 11l8-4M8 13l8 4" stroke={c} strokeWidth="1.6"/>
+    </svg>
+  ),
+  notes: (c = 'currentColor', s = 22) => (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/>
+      <path d="M8 9h8M8 12h5" stroke={c} strokeWidth="1.4" strokeLinecap="round"/>
     </svg>
   ),
 };
