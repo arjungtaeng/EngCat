@@ -12,9 +12,15 @@ const getTTSSettings = () => ({
 
 function ECScreenWordCard() {
   const T = ECTokens;
-  const todaySession = React.useMemo(() => window.ECGetTodaySession(), []);
-  const words = todaySession.words.length > 0 ? todaySession.words : ((window.ECData && window.ECData.words) || []);
   const session = window.ECSession;
+  const [dataVersion, setDataVersion] = React.useState(0);
+
+  React.useEffect(() => {
+    window.ECDataLoaded && window.ECDataLoaded.then(() => setDataVersion(v => v + 1));
+  }, []);
+
+  const todaySession = React.useMemo(() => window.ECGetTodaySession(), [dataVersion]);
+  const words = todaySession.words.length > 0 ? todaySession.words : ((window.ECData && window.ECData.words) || []);
 
   const [idx, setIdx] = React.useState(session.wordIndex);
   const [animKey, setAnimKey] = React.useState(0);

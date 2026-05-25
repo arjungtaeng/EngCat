@@ -5,10 +5,16 @@
 function ECScreenSentenceCard() {
   const T = ECTokens;
   const isDark = T.text === '#F8F5EF';
-  const todaySession = React.useMemo(() => window.ECGetTodaySession(), []);
+  const session = window.ECSession;
+  const [dataVersion, setDataVersion] = React.useState(0);
+
+  React.useEffect(() => {
+    window.ECDataLoaded && window.ECDataLoaded.then(() => setDataVersion(v => v + 1));
+  }, []);
+
+  const todaySession = React.useMemo(() => window.ECGetTodaySession(), [dataVersion]);
   // 오늘 분량의 표현 (패턴 → 콜로 → 이디엄 → 뉘앙스 순서)
   const sentences = todaySession.expressions.length > 0 ? todaySession.expressions : (window.ECData && window.ECData.sentences && window.ECData.sentences.length > 0 ? window.ECData.sentences : []);
-  const session = window.ECSession;
 
   const [idx, setIdx] = React.useState((session && session.sentenceIndex) || 0);
   const [animKey, setAnimKey] = React.useState(0);
