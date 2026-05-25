@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "> **B1-B2 한국인 영어 학습자를 위한 프리미엄 다크 모드 학습 앱** > 매일 단어 10개 + 문장 5개를 이미지·짧은 애니메이션과 함께 제공",
   "main": "sw.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "backfill:pexels": "node scripts/backfill-pexels.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
   },
   "repository": {
     "type": "git",
