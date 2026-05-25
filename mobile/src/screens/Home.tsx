@@ -99,11 +99,25 @@ export default function HomeScreen({ navigation }: Props) {
 
   const todayTopicLabel = todayTopic ? TOPIC_NAMES[todayTopic] : '오늘의 학습';
 
-  // 복습 단어: 어제 학습한 단어 + 첫날이면 데이터 미리보기
+  // 첫날 여부: 학습 기록 없으면 예습 모드
+  const isFirstDay = totalDone === 0;
+
+  // 첫날엔 무작위 7개 (예습), 이후엔 토픽 단어 처음 7개 (복습)
   const reviewWords = useMemo(() => {
     if (words.length === 0) return [];
-    return words.filter(w => w.topicId === todayTopic).slice(0, 7);
-  }, [words, todayTopic]);
+    const pool = words.filter(w => w.topicId === todayTopic);
+    if (pool.length === 0) return [];
+    if (isFirstDay) {
+      // 날짜 기반 안정적 셔플 (하루 동안은 같은 순서 유지)
+      const seed = dayOfYear;
+      return [...pool]
+        .map((w, i) => ({ w, s: ((i * 9301 + seed * 49297) % 233280) / 233280 }))
+        .sort((a, b) => a.s - b.s)
+        .map(x => x.w)
+        .slice(0, 7);
+    }
+    return pool.slice(0, 7);
+  }, [words, todayTopic, isFirstDay, dayOfYear]);
 
   const quizUnlocked = totalDone >= totalCards && totalCards > 0;
 
@@ -188,11 +202,13 @@ export default function HomeScreen({ navigation }: Props) {
           </View>
         </View>
 
-        {/* ── 복습할 것 ── */}
+        {/* ── 복습할 것 / 예습하기 ── */}
         {reviewWords.length > 0 && (
           <>
             <View style={styles.sectionHeader}>
-              <Text style={[styles.sectionTitle, { color: T.text }]}>복습할 것</Text>
+              <Text style={[styles.sectionTitle, { color: T.text }]}>
+                {isFirstDay ? '예습하기' : '복습할 것'}
+              </Text>
               <Text style={[styles.sectionCount, { color: T.textDim }]}>{reviewWords.length}개</Text>
             </View>
             <ScrollView

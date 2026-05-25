@@ -35,25 +35,8 @@ function ECScreenHome() {
   const yData = (() => { try { return JSON.parse(localStorage.getItem(yKey) || '{}'); } catch(e) { return {}; } })();
   const yWordIds = new Set(yData.wordIds || []);
   const ySentenceIds = new Set(yData.sentenceIds || []);
-  // 어제 데이터가 없으면 오늘 데이터로 어제 키를 채워 첫날도 섹션이 보이도록
   const isFirstDay = yWordIds.size === 0 && ySentenceIds.size === 0;
-  if (isFirstDay && (window.ECData?.words?.length > 0)) {
-    const defaultData = {
-      wordIds: (window.ECData.words.slice(0, 10)).map(w => w.id),
-      sentenceIds: (window.ECData.sentences.slice(0, 5)).map(s => s.id),
-      _seeded: true,
-    };
-    localStorage.setItem(yKey, JSON.stringify(defaultData));
-    defaultData.wordIds.forEach(id => yWordIds.add(id));
-    defaultData.sentenceIds.forEach(id => ySentenceIds.add(id));
-  }
-  const isPreview = isFirstDay || yData._seeded;
-  const reviewWords = (window.ECData?.words || []).filter(w => yWordIds.has(w.id));
-  const reviewSentences = (window.ECData?.sentences || []).filter(s => ySentenceIds.has(s.id));
-  const totalDone = doneWords + doneSentences;
-  const totalCards = Object.values(comp).reduce((a, b) => a + (b || 0), 0);
-  const progressPct = Math.round((totalDone / totalCards) * 100);
-  const quizUnlocked = totalDone >= totalCards && totalCards > 0;
+  const isPreview = isFirstDay;
 
   // 토픽 사이클: dayOfYear % 사용 가능한 토픽 수
   const _now = new Date();
@@ -62,6 +45,27 @@ function ECScreenHome() {
   const _ordered = TOPIC_ORDER.filter(t => _availableTopics.includes(t));
   const todayTopic = _ordered.length > 0 ? _ordered[_dayOfYear % _ordered.length] : null;
   const todayTopicLabel = todayTopic ? TOPIC_NAMES[todayTopic] : '오늘의 학습';
+
+  // 첫날이면 오늘 토픽의 단어/문장 중 무작위 셔플 (예습)
+  // 평소엔 어제 학습한 카드 (복습)
+  const _shuffle = (arr) => {
+    const seed = _dayOfYear;
+    return [...arr]
+      .map((x, i) => ({ x, s: ((i * 9301 + seed * 49297) % 233280) / 233280 }))
+      .sort((a, b) => a.s - b.s)
+      .map(o => o.x);
+  };
+  const reviewWords = isPreview
+    ? _shuffle((window.ECData?.words || []).filter(w => w.topicId === todayTopic)).slice(0, 7)
+    : (window.ECData?.words || []).filter(w => yWordIds.has(w.id));
+  const reviewSentences = isPreview
+    ? _shuffle((window.ECData?.sentences || []).filter(s => s.topicId === todayTopic)).slice(0, 5)
+    : (window.ECData?.sentences || []).filter(s => ySentenceIds.has(s.id));
+
+  const totalDone = doneWords + doneSentences;
+  const totalCards = Object.values(comp).reduce((a, b) => a + (b || 0), 0);
+  const progressPct = Math.round((totalDone / totalCards) * 100);
+  const quizUnlocked = totalDone >= totalCards && totalCards > 0;
 
   const user = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
   const now = new Date();
