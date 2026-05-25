@@ -218,20 +218,6 @@ export default function WordCardScreen({ navigation }: Props) {
               </Text>
               <Icon.chevRight color={T.accentText} size={18} />
             </TouchableOpacity>
-
-            {/* Progress strip */}
-            <View style={styles.strip}>
-              {words.map((w, i) => (
-                <View
-                  key={w.id}
-                  style={[styles.stripBar, {
-                    height: i === idx ? 4 : 2.5,
-                    backgroundColor: store.completedWordIds.has(w.id)
-                      ? T.accent : i === idx ? T.text : T.hairStr,
-                  }]}
-                />
-              ))}
-            </View>
           </SafeAreaView>
         </Animated.View>
       </GestureDetector>

@@ -251,21 +251,6 @@ function ECScreenWordCard() {
         </div>
       </div>
 
-      {/* ── Progress strip ── */}
-      <div style={{
-        position: 'absolute', bottom: 'calc(env(safe-area-inset-bottom, 0px) + 58px)', left: 0, right: 0, height: 24, zIndex: 12,
-        display: 'flex', gap: 3, padding: '0 16px', alignItems: 'center',
-      }}>
-        {words.map((w, i) => (
-          <div key={i} style={{
-            flex: 1, height: i === idx ? 4 : 2.5, borderRadius: 2,
-            background: session.completedWordIds.has(w.id)
-              ? T.accent : i === idx ? T.text : T.hairStr,
-            transition: 'all 0.2s ease',
-          }}/>
-        ))}
-      </div>
-
       {/* ── 추가 예문 바텀시트 ── */}
       <div
         onTouchStart={(e) => e.stopPropagation()}
