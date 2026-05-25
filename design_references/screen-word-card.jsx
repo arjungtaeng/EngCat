@@ -3,7 +3,7 @@
 
 // TTS — 사용자 설정(목소리/속도)만 localStorage에서 읽고, 키는 Edge Function이 보유
 const EC_SUPABASE_URL  = 'https://zknqzjrymkswkqotrion.supabase.co';
-const EC_SUPABASE_ANON = 'sb_publishable_-PyhiOHtQJsKafpoDZIMLg_q09S3yRJ';
+const EC_SUPABASE_ANON = window.EC_SUPABASE_ANON_KEY || '';
 
 const getTTSSettings = () => ({
   voice: localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural',
