@@ -33,7 +33,10 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   if (!e.request.url.startsWith(self.location.origin)) return;
 
-  const path = new URL(e.request.url).pathname;
+  const url = new URL(e.request.url);
+  let path = url.pathname;
+  if (path.startsWith('/EngCat')) path = path.substring(7);
+
   const isNetworkFirst = NETWORK_FIRST.some(p => path === p || path.startsWith(p));
 
   if (isNetworkFirst) {
