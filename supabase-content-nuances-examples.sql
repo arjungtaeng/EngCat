@@ -190,4 +190,73 @@ UPDATE nuances SET ex4 = 'Modern pedagogy focuses on student-centered learning.'
 UPDATE nuances SET ex4 = 'The school is currently undergoing accreditation review.', ex4_ko = '그 학교는 현재 인증 심사를 받고 있어요.', ex5 = 'She earned certification as a yoga instructor last year.', ex5_ko = '그녀는 작년에 요가 강사 자격증을 취득했어요.' WHERE id = 'nuc_education_12';
 UPDATE nuances SET ex4 = 'Epistemology asks how we can claim to know anything at all.', ex4_ko = '인식론은 우리가 어떻게 무언가를 안다고 주장할 수 있는지 물어요.', ex5 = 'Ontology explores what kinds of things actually exist.', ex5_ko = '존재론은 어떤 종류의 것들이 실제로 존재하는지 탐구해요.' WHERE id = 'nuc_education_13';
 
+-- ══════════════════════════════════════
+-- MEDIA
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'I watched two episodes before bed last night.', ex4_ko = '어젯밤 자기 전에 두 화를 봤어요.', ex5 = 'Did you see that incredible play in the game?', ex5_ko = '경기에서 그 놀라운 플레이 봤어요?' WHERE id = 'nuc_media_01';
+UPDATE nuances SET ex4 = 'I read the news every morning over coffee.', ex4_ko = '저는 매일 아침 커피 마시며 뉴스를 읽어요.', ex5 = 'She wrote a detailed report on the local elections.', ex5_ko = '그녀는 지방 선거에 대한 자세한 보도를 썼어요.' WHERE id = 'nuc_media_02';
+UPDATE nuances SET ex4 = 'I never watch live TV — I just stream channels online.', ex4_ko = '저는 실시간 TV를 보지 않고 — 온라인으로 채널을 스트리밍해요.', ex5 = 'YouTube is the most popular video platform in many countries.', ex5_ko = '유튜브는 많은 나라에서 가장 인기 있는 동영상 플랫폼이에요.' WHERE id = 'nuc_media_03';
+UPDATE nuances SET ex4 = 'Subscribe to the newsletter to get weekly updates.', ex4_ko = '주간 업데이트를 받으려면 뉴스레터를 구독하세요.', ex5 = 'Thousands of people follow her cooking account.', ex5_ko = '수천 명이 그녀의 요리 계정을 팔로우해요.' WHERE id = 'nuc_media_04';
+UPDATE nuances SET ex4 = 'I saw the advertisement on the side of a bus.', ex4_ko = '저는 버스 옆면의 광고를 봤어요.', ex5 = 'A 30-second commercial during the playoffs is expensive.', ex5_ko = '플레이오프 중 30초 광고는 비싸요.' WHERE id = 'nuc_media_05';
+UPDATE nuances SET ex4 = 'The interview was streamed live to millions of viewers.', ex4_ko = '인터뷰는 수백만 명의 시청자에게 생방송으로 스트리밍됐어요.', ex5 = 'The recorded podcast goes out every Tuesday morning.', ex5_ko = '녹화된 팟캐스트는 매주 화요일 아침에 나가요.' WHERE id = 'nuc_media_06';
+UPDATE nuances SET ex4 = 'The dance went viral on multiple platforms in two days.', ex4_ko = '그 춤은 이틀 만에 여러 플랫폼에서 입소문이 났어요.', ex5 = 'That song is trending in five different countries right now.', ex5_ko = '그 노래는 지금 다섯 개 다른 나라에서 트렌딩이에요.' WHERE id = 'nuc_media_07';
+UPDATE nuances SET ex4 = 'Every news source has some kind of bias.', ex4_ko = '모든 뉴스 출처에는 어떤 종류의 편향이 있어요.', ex5 = 'Hearing different perspectives helps you understand the issue.', ex5_ko = '다양한 관점을 듣는 것이 문제를 이해하는 데 도움이 돼요.' WHERE id = 'nuc_media_08';
+UPDATE nuances SET ex4 = 'Censorship of social media is a sensitive topic.', ex4_ko = '소셜 미디어 검열은 민감한 주제예요.', ex5 = 'Better regulation could protect users without limiting speech.', ex5_ko = '더 나은 규제는 발언을 제한하지 않으면서 사용자를 보호할 수 있어요.' WHERE id = 'nuc_media_09';
+UPDATE nuances SET ex4 = 'The late-night show is famous for political satire.', ex4_ko = '그 심야 쇼는 정치 풍자로 유명해요.', ex5 = 'Their parody of the music video got a million views.', ex5_ko = '그들의 뮤직비디오 패러디가 백만 뷰를 기록했어요.' WHERE id = 'nuc_media_10';
+UPDATE nuances SET ex4 = 'The film follows a clear three-act narrative.', ex4_ko = '그 영화는 명확한 3막 서사를 따라가요.', ex5 = 'Public discourse on AI is growing more nuanced.', ex5_ko = 'AI에 대한 공개 담론이 점점 더 섬세해지고 있어요.' WHERE id = 'nuc_media_11';
+UPDATE nuances SET ex4 = 'Wartime propaganda often relies on simple visual symbols.', ex4_ko = '전시 선전은 종종 단순한 시각 상징에 의존해요.', ex5 = 'Disinformation can spread faster than the truth on social media.', ex5_ko = '허위 정보는 소셜 미디어에서 진실보다 빠르게 퍼질 수 있어요.' WHERE id = 'nuc_media_12';
+UPDATE nuances SET ex4 = 'Semiotics helps us understand why certain symbols feel powerful.', ex4_ko = '기호학은 특정 상징이 왜 강력하게 느껴지는지 이해하는 데 도움이 돼요.', ex5 = 'Religious iconography shapes much of Western art history.', ex5_ko = '종교 도상학이 서양 미술사의 많은 부분을 형성해요.' WHERE id = 'nuc_media_13';
+
+-- ══════════════════════════════════════
+-- ENVIRONMENT
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'Sort plastics carefully before you recycle.', ex4_ko = '재활용하기 전에 플라스틱을 신중히 분류하세요.', ex5 = 'Try to reuse jars and containers when you can.', ex5_ko = '가능할 때 병과 용기를 재사용해 보세요.' WHERE id = 'nuc_environment_01';
+UPDATE nuances SET ex4 = 'Climate change is already affecting daily life around the world.', ex4_ko = '기후 변화는 이미 전 세계 일상에 영향을 미치고 있어요.', ex5 = 'The weather has been unusually warm this winter.', ex5_ko = '이번 겨울 날씨가 이례적으로 따뜻해요.' WHERE id = 'nuc_environment_02';
+UPDATE nuances SET ex4 = 'Air pollution levels are highest near busy roads.', ex4_ko = '대기 오염 수준은 번잡한 도로 근처에서 가장 높아요.', ex5 = 'The water supply was contaminated by industrial runoff.', ex5_ko = '수돗물이 산업 폐수로 오염됐어요.' WHERE id = 'nuc_environment_03';
+UPDATE nuances SET ex4 = 'Many countries are investing heavily in renewable energy.', ex4_ko = '많은 나라들이 재생에너지에 대규모로 투자하고 있어요.', ex5 = 'Sustainable practices benefit both businesses and the planet.', ex5_ko = '지속 가능한 관행은 기업과 지구 모두에게 이로워요.' WHERE id = 'nuc_environment_04';
+UPDATE nuances SET ex4 = 'Wildlife conservation depends on community involvement.', ex4_ko = '야생동물 보전은 지역사회 참여에 달려 있어요.', ex5 = 'Historic preservation has saved many beautiful buildings.', ex5_ko = '역사 보존은 많은 아름다운 건물을 살려왔어요.' WHERE id = 'nuc_environment_05';
+UPDATE nuances SET ex4 = 'Reducing carbon emissions is a global priority.', ex4_ko = '탄소 배출량 감소는 세계적 우선과제예요.', ex5 = 'The factory was fined for discharging waste into the river.', ex5_ko = '공장은 강에 폐기물을 방류한 혐의로 벌금을 받았어요.' WHERE id = 'nuc_environment_06';
+UPDATE nuances SET ex4 = 'Deforestation contributes significantly to climate change.', ex4_ko = '삼림 벌채는 기후 변화에 크게 기여해요.', ex5 = 'Desertification is making farming impossible in some regions.', ex5_ko = '사막화로 일부 지역에서는 농사가 불가능해지고 있어요.' WHERE id = 'nuc_environment_07';
+UPDATE nuances SET ex4 = 'Flying often increases your carbon footprint the most.', ex4_ko = '비행이 종종 탄소 발자국을 가장 많이 늘려요.', ex5 = 'Our ecological footprint per person is unsustainable.', ex5_ko = '1인당 생태 발자국이 지속 불가능해요.' WHERE id = 'nuc_environment_08';
+UPDATE nuances SET ex4 = 'Biodiversity is essential for healthy food systems.', ex4_ko = '생물 다양성은 건강한 식량 시스템에 필수적이에요.', ex5 = 'The coral reef ecosystem supports an incredible variety of life.', ex5_ko = '산호초 생태계는 놀라운 다양한 생명을 지지해요.' WHERE id = 'nuc_environment_09';
+UPDATE nuances SET ex4 = 'Mitigation strategies focus on reducing future emissions.', ex4_ko = '완화 전략은 미래 배출량을 줄이는 데 집중해요.', ex5 = 'Climate adaptation includes building flood defenses.', ex5_ko = '기후 적응은 홍수 방지 시설 건설을 포함해요.' WHERE id = 'nuc_environment_10';
+UPDATE nuances SET ex4 = 'Critics accused the company of greenwashing its packaging claims.', ex4_ko = '비평가들은 회사가 포장 주장으로 그린워싱을 한다고 비난했어요.', ex5 = 'We try to buy eco-friendly products whenever possible.', ex5_ko = '가능할 때마다 친환경 제품을 사려고 노력해요.' WHERE id = 'nuc_environment_11';
+UPDATE nuances SET ex4 = 'Anthropogenic factors account for most recent warming.', ex4_ko = '인위적 요인들이 최근 온난화의 대부분을 차지해요.', ex5 = 'Natural climate variability also plays a smaller role.', ex5_ko = '자연 기후 변동성도 작은 역할을 해요.' WHERE id = 'nuc_environment_12';
+UPDATE nuances SET ex4 = 'Cities are building resilience against extreme weather.', ex4_ko = '도시들은 극한 날씨에 대한 회복력을 쌓고 있어요.', ex5 = 'Poor communities often have the highest vulnerability to disasters.', ex5_ko = '가난한 지역사회들이 재난에 대한 취약성이 가장 높은 경우가 많아요.' WHERE id = 'nuc_environment_13';
+
+-- ══════════════════════════════════════
+-- ECONOMY
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'The price of fuel has fluctuated wildly this year.', ex4_ko = '연료 가격이 올해 크게 요동쳤어요.', ex5 = 'There''s a small service charge for online bookings.', ex5_ko = '온라인 예약에는 작은 서비스 요금이 있어요.' WHERE id = 'nuc_economy_01';
+UPDATE nuances SET ex4 = 'Household income has barely kept up with inflation.', ex4_ko = '가계 소득이 인플레이션을 거의 따라가지 못했어요.', ex5 = 'The company''s revenue grew 20% last quarter.', ex5_ko = '회사의 매출이 지난 분기에 20% 성장했어요.' WHERE id = 'nuc_economy_02';
+UPDATE nuances SET ex4 = 'I invested a small amount in an index fund.', ex4_ko = '저는 인덱스 펀드에 적은 금액을 투자했어요.', ex5 = 'They spent too much on the wedding and regret it now.', ex5_ko = '그들은 결혼식에 너무 많이 써서 지금 후회해요.' WHERE id = 'nuc_economy_03';
+UPDATE nuances SET ex4 = 'Inflation has made everyday groceries noticeably more expensive.', ex4_ko = '인플레이션으로 일상 식료품이 눈에 띄게 더 비싸졌어요.', ex5 = 'Long deflation can be just as harmful as inflation.', ex5_ko = '장기 디플레이션은 인플레이션만큼이나 해로울 수 있어요.' WHERE id = 'nuc_economy_04';
+UPDATE nuances SET ex4 = 'The bakery made a small profit in its first year.', ex4_ko = '그 빵집은 첫해에 작은 이익을 냈어요.', ex5 = 'Working remotely has many benefits, including more family time.', ex5_ko = '재택근무는 더 많은 가족 시간을 포함해 많은 혜택이 있어요.' WHERE id = 'nuc_economy_05';
+UPDATE nuances SET ex4 = 'We''re sticking to a strict budget this year.', ex4_ko = '우리는 올해 엄격한 예산을 따르고 있어요.', ex5 = 'The forecast for next quarter is cautiously optimistic.', ex5_ko = '다음 분기 예측은 조심스럽게 낙관적이에요.' WHERE id = 'nuc_economy_06';
+UPDATE nuances SET ex4 = 'Korea exports electronics and cars to many countries.', ex4_ko = '한국은 전자제품과 자동차를 많은 나라에 수출해요.', ex5 = 'The country imports most of its raw materials.', ex5_ko = '그 나라는 대부분의 원자재를 수입해요.' WHERE id = 'nuc_economy_07';
+UPDATE nuances SET ex4 = 'Property taxes vary widely between regions.', ex4_ko = '재산세는 지역마다 크게 달라요.', ex5 = 'New tariffs raised the cost of imported electronics.', ex5_ko = '새 관세가 수입 전자제품 비용을 올렸어요.' WHERE id = 'nuc_economy_08';
+UPDATE nuances SET ex4 = 'Many countries entered a recession after the global crisis.', ex4_ko = '많은 나라들이 글로벌 위기 후 경기 침체에 진입했어요.', ex5 = 'The Great Depression reshaped how governments approach the economy.', ex5_ko = '대공황은 정부가 경제에 접근하는 방식을 재형성했어요.' WHERE id = 'nuc_economy_09';
+UPDATE nuances SET ex4 = 'The government announced new fiscal stimulus measures.', ex4_ko = '정부가 새 재정 부양책을 발표했어요.', ex5 = 'Monetary policy is the central bank''s main tool.', ex5_ko = '통화 정책은 중앙은행의 주요 도구예요.' WHERE id = 'nuc_economy_10';
+UPDATE nuances SET ex4 = 'During the crisis, many banks faced a liquidity shortage.', ex4_ko = '위기 동안 많은 은행이 유동성 부족에 직면했어요.', ex5 = 'The firm remains solvent despite the recent losses.', ex5_ko = '회사는 최근 손실에도 불구하고 지급 능력을 유지하고 있어요.' WHERE id = 'nuc_economy_11';
+UPDATE nuances SET ex4 = 'Austerity measures often hurt the most vulnerable people.', ex4_ko = '긴축 조치는 종종 가장 취약한 사람들에게 타격을 줘요.', ex5 = 'The stimulus package helped revive struggling small businesses.', ex5_ko = '경기 부양책이 어려움을 겪던 소상공인들을 회복시키는 데 도움이 됐어요.' WHERE id = 'nuc_economy_12';
+UPDATE nuances SET ex4 = 'A few firms hold a near monopoly on cloud services.', ex4_ko = '소수 기업이 클라우드 서비스에서 거의 독점을 차지하고 있어요.', ex5 = 'The mobile market is essentially an oligopoly of three brands.', ex5_ko = '모바일 시장은 본질적으로 세 브랜드의 과점이에요.' WHERE id = 'nuc_economy_13';
+
+-- ══════════════════════════════════════
+-- CULTURE
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'Removing your shoes is a custom in many Asian homes.', ex4_ko = '신발을 벗는 것은 많은 아시아 가정의 관습이에요.', ex5 = 'Lunar New Year is a tradition that has lasted thousands of years.', ex5_ko = '음력 설은 수천 년 동안 이어진 전통이에요.' WHERE id = 'nuc_culture_01';
+UPDATE nuances SET ex4 = 'It''s polite to thank the chef after a special meal.', ex4_ko = '특별한 식사 후 셰프에게 감사를 표하는 것은 예의예요.', ex5 = 'She was respectful of every elder in the village.', ex5_ko = '그녀는 마을의 모든 어르신을 존중했어요.' WHERE id = 'nuc_culture_02';
+UPDATE nuances SET ex4 = 'The summer festival lit up the entire town.', ex4_ko = '여름 축제가 마을 전체를 밝혔어요.', ex5 = 'The opening ceremony was elegant and well-organized.', ex5_ko = '개회식은 우아하고 잘 진행됐어요.' WHERE id = 'nuc_culture_03';
+UPDATE nuances SET ex4 = 'They wanted to share their cultural heritage with their kids.', ex4_ko = '그들은 자녀들과 문화유산을 나누고 싶어 했어요.', ex5 = 'Her legacy as a teacher continues through her former students.', ex5_ko = '그녀의 교사로서의 유산은 옛 학생들을 통해 계속돼요.' WHERE id = 'nuc_culture_04';
+UPDATE nuances SET ex4 = 'New York is a deeply multicultural city.', ex4_ko = '뉴욕은 깊이 다문화적인 도시예요.', ex5 = 'The team became stronger with more diverse perspectives.', ex5_ko = '팀은 더 다양한 관점으로 더 강해졌어요.' WHERE id = 'nuc_culture_05';
+UPDATE nuances SET ex4 = 'Some societies expect newcomers to fully assimilate.', ex4_ko = '어떤 사회들은 새로 온 사람들이 완전히 동화하기를 기대해요.', ex5 = 'Helping immigrants integrate enriches everyone.', ex5_ko = '이민자들의 통합을 돕는 것이 모두를 풍요롭게 해요.' WHERE id = 'nuc_culture_06';
+UPDATE nuances SET ex4 = 'Movies often rely on stereotypes for quick characterization.', ex4_ko = '영화는 빠른 캐릭터 묘사를 위해 종종 고정관념에 의존해요.', ex5 = 'Prejudice can be reduced through meaningful contact.', ex5_ko = '편견은 의미 있는 접촉을 통해 줄어들 수 있어요.' WHERE id = 'nuc_culture_07';
+UPDATE nuances SET ex4 = 'In some cultures, discussing personal income is a taboo.', ex4_ko = '어떤 문화에서는 개인 소득을 논하는 것이 금기예요.', ex5 = 'Business etiquette varies a lot across cultures.', ex5_ko = '비즈니스 예절은 문화마다 많이 달라요.' WHERE id = 'nuc_culture_08';
+UPDATE nuances SET ex4 = 'Indigenous knowledge is helping researchers understand local ecosystems.', ex4_ko = '원주민 지식이 연구자들이 지역 생태계를 이해하는 데 도움을 주고 있어요.', ex5 = 'She''s a native speaker of three languages.', ex5_ko = '그녀는 세 가지 언어의 모국어 화자예요.' WHERE id = 'nuc_culture_09';
+UPDATE nuances SET ex4 = 'Acculturation can lead to interesting blends of food and music.', ex4_ko = '문화 변용은 흥미로운 음식과 음악의 융합으로 이어질 수 있어요.', ex5 = 'Globalization has connected economies and cultures in new ways.', ex5_ko = '세계화는 경제와 문화를 새로운 방식으로 연결했어요.' WHERE id = 'nuc_culture_10';
+UPDATE nuances SET ex4 = 'Cosmopolitan cities tend to attract people from many countries.', ex4_ko = '세계적인 도시들은 많은 나라 사람들을 끌어들이는 경향이 있어요.', ex5 = 'A parochial worldview can limit personal growth.', ex5_ko = '협소한 세계관은 개인 성장을 제한할 수 있어요.' WHERE id = 'nuc_culture_11';
+UPDATE nuances SET ex4 = 'Ethnocentrism makes it hard to appreciate other ways of life.', ex4_ko = '자문화 중심주의는 다른 삶의 방식을 감상하기 어렵게 만들어요.', ex5 = 'Cultural relativism encourages us to suspend judgment.', ex5_ko = '문화 상대주의는 우리가 판단을 유보하도록 격려해요.' WHERE id = 'nuc_culture_12';
+UPDATE nuances SET ex4 = 'Each generation captures its own zeitgeist in music.', ex4_ko = '각 세대는 음악으로 자기 시대정신을 포착해요.', ex5 = 'The rise of AI represents a new paradigm in work.', ex5_ko = 'AI의 부상은 일에서의 새로운 패러다임을 나타내요.' WHERE id = 'nuc_culture_13';
+
+
 
