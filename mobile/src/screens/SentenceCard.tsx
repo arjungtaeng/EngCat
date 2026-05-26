@@ -213,7 +213,7 @@ export default function SentenceCardScreen({ navigation }: Props) {
   return (
     <View style={[styles.safe, { backgroundColor: T.bg0 }]}>
       {/* Background */}
-      <Placeholder height={H * 0.56} tint={s.tint} radius={0} style={styles.heroBg} />
+      <Placeholder height={H * 0.60} tint={s.tint} radius={0} style={styles.heroBg} />
       <View style={[StyleSheet.absoluteFill, styles.overlayBottom]} />
 
       {/* Top chrome */}
@@ -238,7 +238,7 @@ export default function SentenceCardScreen({ navigation }: Props) {
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
       >
-        <View style={{ height: H * 0.40 }} />
+        <View style={{ height: H * 0.60 }} />
         {renderContent()}
         <View style={{ height: 120 }} />
       </ScrollView>

@@ -16,8 +16,8 @@ import { Placeholder } from '../components/primitives/Placeholder';
 import { getTodaySession } from '../utils/todaySession';
 
 const { width: W, height: H } = Dimensions.get('window');
-const HERO_HEIGHT = H * 0.56;
-const SPACER_HEIGHT = H * 0.40;
+const HERO_HEIGHT = H * 0.60;
+const SPACER_HEIGHT = H * 0.60;
 
 function HighlightText({ text, accent, style }: { text: string; accent: string; style?: any }) {
   const parts = text.split(/\{([^}]+)\}/);
