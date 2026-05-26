@@ -33,7 +33,7 @@ interface Props { navigation: any }
 export default function WordCardScreen({ navigation }: Props) {
   const T = useTokens();
   const store = useCardsStore();
-  const level = useUserStore(s => s.level);
+  const { level, id: userId } = useUserStore();
   const session = useMemo(
     () => getTodaySession(store.words, store.expressions, level),
     [store.words, store.expressions, level],
@@ -69,7 +69,7 @@ export default function WordCardScreen({ navigation }: Props) {
     }
 
     if (dir === 'next') {
-      storeSnap.markWordDone(w.id);
+      storeSnap.markWordDone(userId, w.id);
       if (cur === words.length - 1) {
         isAnimating.value = false;
         storeSnap.setWordIndex(0);

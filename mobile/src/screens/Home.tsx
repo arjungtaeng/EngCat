@@ -41,7 +41,7 @@ interface Props {
 
 export default function HomeScreen({ navigation }: Props) {
   const T = useTokens();
-  const { name, level, streakDays } = useUserStore();
+  const { id: userId, name, level, streakDays } = useUserStore();
   const {
     words, expressions,
     completedWordIds, completedSentenceIds,
@@ -67,9 +67,9 @@ export default function HomeScreen({ navigation }: Props) {
   useFocusEffect(
     React.useCallback(() => {
       let cancelled = false;
-      loadRecord(yesterdayKey()).then(r => { if (!cancelled) setYesterday(r); });
+      loadRecord(yesterdayKey(userId)).then(r => { if (!cancelled) setYesterday(r); });
       return () => { cancelled = true; };
-    }, []),
+    }, [userId]),
   );
 
   const review = useMemo(

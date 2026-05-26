@@ -7,21 +7,21 @@ export interface LearningRecord {
 
 const empty = (): LearningRecord => ({ wordIds: [], sentenceIds: [] });
 
-function dateKey(d: Date): string {
+function dateKey(userId: string, d: Date): string {
   const y   = d.getFullYear();
   const m   = String(d.getMonth() + 1).padStart(2, '0');
   const day = String(d.getDate()).padStart(2, '0');
-  return `ec_learned_${y}-${m}-${day}`;
+  return `ec_learned_${userId}_${y}-${m}-${day}`;
 }
 
-export function todayKey(now: Date = new Date()): string {
-  return dateKey(now);
+export function todayKey(userId: string, now: Date = new Date()): string {
+  return dateKey(userId, now);
 }
 
-export function yesterdayKey(now: Date = new Date()): string {
+export function yesterdayKey(userId: string, now: Date = new Date()): string {
   const d = new Date(now);
   d.setDate(d.getDate() - 1);
-  return dateKey(d);
+  return dateKey(userId, d);
 }
 
 export async function loadRecord(key: string): Promise<LearningRecord> {
@@ -47,9 +47,9 @@ function enqueue<T>(fn: () => Promise<T>): Promise<T> {
   return next;
 }
 
-export function addWordToToday(id: string): Promise<void> {
+export function addWordToToday(userId: string, id: string): Promise<void> {
   return enqueue(async () => {
-    const key = todayKey();
+    const key = todayKey(userId);
     const r = await loadRecord(key);
     if (!r.wordIds.includes(id)) {
       r.wordIds.push(id);
@@ -58,9 +58,9 @@ export function addWordToToday(id: string): Promise<void> {
   });
 }
 
-export function addSentenceToToday(id: string): Promise<void> {
+export function addSentenceToToday(userId: string, id: string): Promise<void> {
   return enqueue(async () => {
-    const key = todayKey();
+    const key = todayKey(userId);
     const r = await loadRecord(key);
     if (!r.sentenceIds.includes(id)) {
       r.sentenceIds.push(id);
