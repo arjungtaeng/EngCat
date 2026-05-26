@@ -62,8 +62,8 @@ interface CardsStore {
   setExpressions: (expressions: SentenceCard[]) => void;
   setWordIndex: (i: number) => void;
   setSentenceIndex: (i: number) => void;
-  markWordDone: (userId: string, id: string) => void;
-  markSentenceDone: (userId: string, id: string) => void;
+  markWordDone: (id: string) => void;
+  markSentenceDone: (id: string) => void;
   toggleBookmark: (id: string) => void;
   resetDaily: () => void;
 }
@@ -82,21 +82,21 @@ export const useCardsStore = create<CardsStore>((set) => ({
   setExpressions: (expressions) => set({ expressions }),
   setWordIndex:       (wordIndex)       => set({ wordIndex }),
   setSentenceIndex:   (sentenceIndex)   => set({ sentenceIndex }),
-  markWordDone: (userId, id) => {
+  markWordDone: (id) => {
     set((s) => {
       const next = new Set(s.completedWordIds);
       next.add(id);
       return { completedWordIds: next };
     });
-    addWordToToday(userId, id);
+    addWordToToday(id);
   },
-  markSentenceDone: (userId, id) => {
+  markSentenceDone: (id) => {
     set((s) => {
       const next = new Set(s.completedSentenceIds);
       next.add(id);
       return { completedSentenceIds: next };
     });
-    addSentenceToToday(userId, id);
+    addSentenceToToday(id);
   },
   toggleBookmark: (id) => set((s) => {
     const next = new Set(s.bookmarkedIds);
