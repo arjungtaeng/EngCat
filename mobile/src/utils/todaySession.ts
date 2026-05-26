@@ -1,4 +1,5 @@
 import type { WordCard, SentenceCard } from '../store/useCardsStore';
+import type { LearningRecord } from './learningRecord';
 
 export const TOPIC_NAMES: Record<string, string> = {
   greeting:     '인사·소개',
@@ -54,7 +55,7 @@ export function getDayOfYear(now: Date = new Date()): number {
   return Math.floor((now.getTime() - start.getTime()) / 86400000);
 }
 
-function shuffleStable<T>(arr: T[], seed: number): T[] {
+export function shuffleStable<T>(arr: T[], seed: number): T[] {
   return [...arr]
     .map((x, i) => ({ x, s: ((i * 9301 + seed * 49297) % 233280) / 233280 }))
     .sort((a, b) => a.s - b.s)
@@ -138,5 +139,63 @@ export function getTodaySession(
     expressions: allExpressions,
     composition: comp,
     totalCards: todayWords.length + allExpressions.length,
+  };
+}
+
+export interface ReviewSession {
+  isPreview:  boolean;
+  topic:      string | null;
+  topicLabel: string | null;
+  words:      WordCard[];
+  patterns:   SentenceCard[];
+}
+
+// 어제 학습한 기록이 있으면 복습 세션, 없으면 (첫날) 무작위 예습 세션
+export function getReviewSession(
+  yesterday:      LearningRecord,
+  allWords:       WordCard[],
+  allExpressions: SentenceCard[],
+  level:          string,
+): ReviewSession {
+  const yWordIds     = new Set(yesterday.wordIds);
+  const ySentenceIds = new Set(yesterday.sentenceIds);
+
+  if (yWordIds.size > 0 || ySentenceIds.size > 0) {
+    const reviewWords    = allWords.filter(w => yWordIds.has(w.id));
+    const reviewPatterns = allExpressions.filter(
+      e => e.type === 'pattern' && ySentenceIds.has(e.id),
+    );
+
+    let topic: string | null = null;
+    if (reviewWords.length > 0 && reviewWords[0].topicId) {
+      topic = reviewWords[0].topicId;
+    } else if (reviewPatterns.length > 0 && reviewPatterns[0].topicId) {
+      topic = reviewPatterns[0].topicId;
+    }
+
+    return {
+      isPreview:  false,
+      topic,
+      topicLabel: topic ? (TOPIC_NAMES[topic] ?? topic) : null,
+      words:      reviewWords,
+      patterns:   reviewPatterns,
+    };
+  }
+
+  // 첫날: 레벨에 맞는 단어/패턴 무작위 예습
+  const seed = getDayOfYear();
+  const wordsForLevel    = allWords.filter(w => !w.cefr || w.cefr === level);
+  const patternsForLevel = allExpressions.filter(
+    e => e.type === 'pattern' && (!e.cefr || e.cefr === level),
+  );
+  const previewWords    = shuffleStable(wordsForLevel,    seed).slice(0, 4);
+  const previewPatterns = shuffleStable(patternsForLevel, seed).slice(0, 4);
+
+  return {
+    isPreview:  true,
+    topic:      null,
+    topicLabel: null,
+    words:      previewWords,
+    patterns:   previewPatterns,
   };
 }
