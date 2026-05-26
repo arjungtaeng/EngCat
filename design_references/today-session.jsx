@@ -152,16 +152,21 @@ window.ECGetTodaySession = function() {
   };
 };
 
-// 복습 세션: 어제 학습한 단어/패턴
-// 첫날 (어제 학습 없음): 무작위 예습 단어/패턴
+// 복습 세션: 어제 학습한 단어/표현 (패턴+콜로+이디엄+뉘앙스)
+// 첫날 (어제 학습 없음): 무작위 예습 단어/표현
 window.ECGetReviewSession = function() {
   const level = localStorage.getItem('ec_user_level') || 'B1';
   const comp = window.EC_CEFR_COMPOSITIONS[level] || window.EC_CEFR_COMPOSITIONS.B1;
-  const data = window.ECData || { words: [], patterns: [] };
-  const allWords = data.words || [];
-  const allPatterns = data.patterns || [];
+  const data = window.ECData || { words: [], patterns: [], collocations: [], idioms: [], nuances: [] };
+  const allWords    = data.words        || [];
+  const allPatterns = data.patterns     || [];
+  const allColloc   = data.collocations || [];
+  const allIdioms   = data.idioms       || [];
+  const allNuances  = data.nuances      || [];
 
-  // 어제 학습한 ID들 조회
+  const tagType = (arr, type) => arr.map(x => Object.assign({}, x, { _type: x._type || type }));
+
+  // 어제 학습한 ID들 조회 (sentenceIds 는 패턴/콜로/이디엄/뉘앙스 모두 포함될 수 있음)
   const yesterday = _loadLearned(_yesterdayKey());
   const yesterdayWordIds = new Set(yesterday.wordIds || []);
   const yesterdaySentenceIds = new Set(yesterday.sentenceIds || []);
@@ -177,27 +182,45 @@ window.ECGetReviewSession = function() {
   if (!reviewTopic && yesterdaySentenceIds.size > 0) {
     const yp = allPatterns.find(p => yesterdaySentenceIds.has(p.id));
     if (yp) reviewTopic = yp.topic;
+    else {
+      const ye = [...allColloc, ...allIdioms, ...allNuances].find(e => yesterdaySentenceIds.has(e.id));
+      if (ye) reviewTopic = ye.topicId;
+    }
   }
 
   // 어제 학습 데이터가 있으면 복습으로 사용
   if (yesterdayWordIds.size > 0 || yesterdaySentenceIds.size > 0) {
-    const reviewWords = allWords.filter(w => yesterdayWordIds.has(w.id));
-    const reviewPatterns = allPatterns.filter(p => yesterdaySentenceIds.has(p.id));
+    const reviewWords    = allWords.filter(w => yesterdayWordIds.has(w.id));
+    const reviewPatterns = tagType(allPatterns.filter(p => yesterdaySentenceIds.has(p.id)), 'pattern');
+    const reviewColloc   = tagType(allColloc.filter(c => yesterdaySentenceIds.has(c.id)), 'collocation');
+    const reviewIdioms   = tagType(allIdioms.filter(i => yesterdaySentenceIds.has(i.id)), 'idiom');
+    const reviewNuances  = tagType(allNuances.filter(n => yesterdaySentenceIds.has(n.id)), 'nuance');
     return {
       isPreview: false,
       topic: reviewTopic,
       topicLabel: reviewTopic ? (window.EC_TOPIC_NAMES[reviewTopic] || reviewTopic) : null,
       words: reviewWords,
       patterns: reviewPatterns,
+      collocations: reviewColloc,
+      idioms: reviewIdioms,
+      nuances: reviewNuances,
+      expressions: [...reviewPatterns, ...reviewColloc, ...reviewIdioms, ...reviewNuances],
     };
   }
 
   // 첫날: 예습 (레벨 composition에 따라)
   const seed = window.ECGetDayOfYear();
-  const wordsForLevel = allWords.filter(w => !w.cefr || w.cefr === level);
+  const wordsForLevel    = allWords.filter(w => !w.cefr || w.cefr === level);
   const patternsForLevel = allPatterns.filter(p => p.level === level);
-  const previewWords = _shuffleStable(wordsForLevel, seed).slice(0, comp.words);
-  const previewPatterns = _shuffleStable(patternsForLevel, seed).slice(0, comp.patterns);
+  const collForLevel     = allColloc.filter(c => !c.cefr || c.cefr === level);
+  const idiomForLevel    = allIdioms.filter(i => !i.cefr || i.cefr === level);
+  const nuanceForLevel   = allNuances.filter(n => !n.cefr || n.cefr === level);
+
+  const previewWords    = _shuffleStable(wordsForLevel,    seed).slice(0, comp.words);
+  const previewPatterns = tagType(_shuffleStable(patternsForLevel, seed).slice(0, comp.patterns),       'pattern');
+  const previewColloc   = tagType(_shuffleStable(collForLevel,     seed).slice(0, comp.collocations || 0), 'collocation');
+  const previewIdioms   = tagType(_shuffleStable(idiomForLevel,    seed).slice(0, comp.idioms       || 0), 'idiom');
+  const previewNuances  = tagType(_shuffleStable(nuanceForLevel,   seed).slice(0, comp.nuances      || 0), 'nuance');
 
   return {
     isPreview: true,
@@ -205,5 +228,9 @@ window.ECGetReviewSession = function() {
     topicLabel: null,
     words: previewWords,
     patterns: previewPatterns,
+    collocations: previewColloc,
+    idioms: previewIdioms,
+    nuances: previewNuances,
+    expressions: [...previewPatterns, ...previewColloc, ...previewIdioms, ...previewNuances],
   };
 };
