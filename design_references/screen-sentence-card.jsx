@@ -202,7 +202,7 @@ function ECScreenSentenceCard() {
       >
         {/* Hero — fixed background at top (z:1). Bottom gradient fades into body bg. */}
         <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, height: 260,
+          position: 'absolute', top: 0, left: 0, right: 0, height: '60%',
           zIndex: 1, overflow: 'hidden',
         }}>
           {heroImg
@@ -229,7 +229,7 @@ function ECScreenSentenceCard() {
           }}
         >
           {/* Peek-through spacer matching hero height — text starts just below hero */}
-          <div style={{ height: 260, flexShrink: 0, pointerEvents: 'none' }} />
+          <div style={{ height: '60%', flexShrink: 0, pointerEvents: 'none' }} />
           <div style={{ padding: '4px 22px 24px' }}>
 
 
