@@ -48,6 +48,11 @@ function ECScreenSentenceCard() {
 
   const [animKey, setAnimKey] = React.useState(0);
   const [bookmarked, setBookmarked] = React.useState(() => new Set((session && session.bookmarkedIds) || []));
+  const [swipeX, setSwipeX] = React.useState(0);
+  const [slideOut, setSlideOut] = React.useState(0);
+  const touchStartX = React.useRef(null);
+  const touchStartY = React.useRef(null);
+  const swipeDir = React.useRef(null);
 
   const p = patterns[idx] || null;
   if (!p) {
@@ -66,15 +71,52 @@ function ECScreenSentenceCard() {
   }
 
   const isLast = idx === patterns.length - 1;
+  const isFirst = idx === 0;
   const isBookmarked = bookmarked.has(p.id);
 
-  const goNext = () => {
-    session.markSentenceDone(p.id);
-    if (isLast) { session.sentenceIndex = 0; window.ECNav?.go('home'); return; }
-    const next = idx + 1;
-    session.sentenceIndex = next;
-    setIdx(next);
-    setAnimKey(k => k + 1);
+  const goTo = (dir) => {
+    if (dir === 'next') {
+      session.markSentenceDone(p.id);
+      if (isLast) { session.sentenceIndex = 0; window.ECNav?.go('home'); return; }
+    }
+    if (dir === 'prev' && isFirst) return;
+    const next = idx + (dir === 'next' ? 1 : -1);
+    setSlideOut(dir === 'next' ? -110 : 110);
+    setTimeout(() => {
+      session.sentenceIndex = next;
+      setIdx(next);
+      setAnimKey(k => k + 1);
+      setSlideOut(0);
+      setSwipeX(0);
+    }, 240);
+  };
+
+  const handleTouchStart = (e) => {
+    if (slideOut !== 0) return;
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    swipeDir.current = null;
+  };
+
+  const handleTouchMove = (e) => {
+    if (touchStartX.current === null || slideOut !== 0) return;
+    const dx = e.touches[0].clientX - touchStartX.current;
+    const dy = e.touches[0].clientY - touchStartY.current;
+    if (swipeDir.current === null) {
+      if (Math.abs(dx) > Math.abs(dy) + 8) swipeDir.current = 'h';
+      else if (Math.abs(dy) > Math.abs(dx) + 8) swipeDir.current = 'v';
+    }
+    if (swipeDir.current === 'h') setSwipeX(dx * 0.9);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null) return;
+    const threshold = window.innerWidth * 0.5;
+    if (swipeX < -threshold) goTo('next');
+    else if (swipeX > threshold && !isFirst) goTo('prev');
+    else setSwipeX(0);
+    touchStartX.current = null;
+    swipeDir.current = null;
   };
 
   const toggleBookmark = () => {
@@ -136,10 +178,22 @@ function ECScreenSentenceCard() {
     return (match && match.tint) || '#1a2a3a';
   }, [p.id, p.tint, topicLabel, dataVersion]);
 
-  const btnLabel = isLast ? '홈으로' : `다음 ${typeLabel}`;
+  const swipingPrev = swipeX > 30 && !isFirst;
+  const btnLabel = swipingPrev ? `이전 ${typeLabel}` : isLast ? '홈으로' : `다음 ${typeLabel}`;
+  const btnBg    = swipingPrev ? (isDark ? 'rgba(255,255,255,0.10)' : T.bg2) : T.accent;
+  const btnColor = swipingPrev ? T.text : T.accentText;
+  const btnBd    = swipingPrev ? T.hair : 'none';
+
+  const contentTransform = slideOut !== 0 ? `translateX(${slideOut}%)` : `translateX(${swipeX}px)`;
+  const contentTransition = slideOut !== 0 ? 'transform 0.24s cubic-bezier(0.4,0,0.2,1)' : 'none';
 
   return (
-    <div style={{ flex: 1, minHeight: 0, background: T.bg1, position: 'relative', overflow: 'hidden' }}>
+    <div
+      style={{ flex: 1, minHeight: 0, background: T.bg1, position: 'relative', overflow: 'hidden' }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
 
       {/* Top chrome */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
@@ -163,22 +217,7 @@ function ECScreenSentenceCard() {
         </div>
       </div>
 
-      {/* Hero — stationary background; text scrolls over it */}
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 260, zIndex: 1, overflow: 'hidden' }}>
-        {heroImg
-          ? <img src={heroImg} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={title} />
-          : <ECPlaceholder height="100%" tint={heroTint} radius={0} label={`hero · ${topicLabel}`}/>
-        }
-        {/* Top darkening — chrome contrast */}
-        <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, height: 120,
-          background: isDark
-            ? 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)'
-            : 'linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, transparent 100%)',
-        }}/>
-      </div>
-
-      {/* Scrollable text — slides over the stationary hero */}
+      {/* Scrollable content */}
       <div
         key={animKey}
         className="ec-fade-up"
@@ -190,25 +229,27 @@ function ECScreenSentenceCard() {
           overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
           zIndex: 5,
+          display: 'flex',
+          flexDirection: 'column',
+          transform: contentTransform,
+          transition: contentTransition,
         }}
       >
-        {/* Peek-through — keeps hero visible at rest */}
-        <div style={{ height: 210, pointerEvents: 'none' }} />
+        {/* Hero image */}
+        <div style={{ position: 'relative', width: '100%', height: 260, flexShrink: 0, overflow: 'hidden' }}>
+          {heroImg
+            ? <img src={heroImg} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={title} />
+            : <ECPlaceholder height="100%" tint={heroTint} radius={0} label={`hero · ${topicLabel}`}/>
+          }
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: isDark
+              ? `linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, ${T.bg1} 100%)`
+              : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 25%, transparent 55%, ${T.bg1} 100%)`,
+          }}/>
+        </div>
 
-        {/* Soft transparent→bg fade strip just above the sheet */}
-        <div style={{
-          position: 'sticky', top: 0,
-          height: 60, marginBottom: -60, pointerEvents: 'none',
-          background: `linear-gradient(to bottom, transparent 0%, ${T.bg1} 100%)`,
-          zIndex: 1,
-        }}/>
-
-        {/* Solid content sheet — covers hero as user scrolls up */}
-        <div style={{
-          background: T.bg1,
-          padding: '60px 22px 24px',
-          minHeight: 'calc(100% + 60px)',
-        }}>
+        <div style={{ padding: '4px 22px 20px' }}>
 
 
           {/* Type + Level + Topic chips */}
@@ -339,14 +380,16 @@ function ECScreenSentenceCard() {
         paddingTop: 16,
       }}>
         <div style={{ display: 'flex', gap: 8 }}>
-          <div onClick={goNext} style={{
+          <div onClick={() => goTo(swipingPrev ? 'prev' : 'next')} style={{
             flex: 1, height: 46, borderRadius: 14,
-            background: T.accent,
+            background: btnBg, border: `1px solid ${btnBd}`,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            color: T.accentText, fontSize: 14, fontWeight: 600, cursor: 'pointer',
+            color: btnColor, fontSize: 14, fontWeight: 600, cursor: 'pointer',
+            transition: 'background 0.15s, color 0.15s',
           }}>
+            {swipingPrev && ECIcon.chev('left', btnColor, 14)}
             <span>{btnLabel}</span>
-            {!isLast && ECIcon.chev('right', T.accentText, 14)}
+            {!swipingPrev && !isLast && ECIcon.chev('right', btnColor, 14)}
           </div>
           <div onClick={toggleBookmark} style={{
             width: 46, height: 46, borderRadius: 14, flexShrink: 0,
