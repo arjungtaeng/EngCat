@@ -37,39 +37,21 @@ function ECScreenHome() {
   const comp = CEFR_COMPOSITIONS[userLevel] || CEFR_COMPOSITIONS.B1;
   const compEntries = Object.entries(comp).filter(([, v]) => v > 0);
 
-  // 어제 학습 기록
-  const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
-  const yKey = 'ec_learned_' + yesterday.toISOString().slice(0, 10);
-  const yData = (() => { try { return JSON.parse(localStorage.getItem(yKey) || '{}'); } catch(e) { return {}; } })();
-  const yWordIds = new Set(yData.wordIds || []);
-  const ySentenceIds = new Set(yData.sentenceIds || []);
+  // 복습 세션 (어제 학습 / 첫날엔 예습 랜덤)
+  const reviewSession = (window.ECGetReviewSession && window.ECGetReviewSession()) || {
+    isPreview: true, topic: null, topicLabel: null, words: [], patterns: [],
+  };
+  const reviewWords = reviewSession.words;
+  const reviewPatterns = reviewSession.patterns;
+  const isPreview = reviewSession.isPreview;
+  const reviewTopicLabel = reviewSession.topicLabel;
 
-  // 토픽 사이클: dayOfYear % 사용 가능한 토픽 수
+  // 토픽 사이클: 주 단위 (today-session.jsx와 동기)
   const _now = new Date();
   const _dayOfYear = Math.floor((_now - new Date(_now.getFullYear(), 0, 0)) / 86400000);
-  const _availableTopics = Array.from(new Set((window.ECData?.words || []).map(w => w.topicId).filter(Boolean)));
-  const _ordered = TOPIC_ORDER.filter(t => _availableTopics.includes(t));
-  const todayTopic = _ordered.length > 0 ? _ordered[_dayOfYear % _ordered.length] : null;
-  const todayTopicLabel = todayTopic ? TOPIC_NAMES[todayTopic] : '오늘의 학습';
-
-  // 어제 학습한 카드 (복습) — 비어 있으면 오늘 토픽에서 무작위로 (예습) fallback
-  const _shuffle = (arr) => {
-    const seed = _dayOfYear;
-    return [...arr]
-      .map((x, i) => ({ x, s: ((i * 9301 + seed * 49297) % 233280) / 233280 }))
-      .sort((a, b) => a.s - b.s)
-      .map(o => o.x);
-  };
-  const _yWords     = (window.ECData?.words     || []).filter(w => yWordIds.has(w.id));
-  const _ySentences = (window.ECData?.sentences || []).filter(s => ySentenceIds.has(s.id));
-  const isPreviewWords     = _yWords.length === 0;
-  const isPreviewSentences = _ySentences.length === 0;
-  const reviewWords = isPreviewWords
-    ? _shuffle((window.ECData?.words || []).filter(w => w.topicId === todayTopic)).slice(0, 7)
-    : _yWords;
-  const reviewSentences = isPreviewSentences
-    ? _shuffle((window.ECData?.sentences || []).filter(s => s.topicId === todayTopic)).slice(0, 5)
-    : _ySentences;
+  const todaySession = (window.ECGetTodaySession && window.ECGetTodaySession()) || { topic: null, topicLabel: '오늘의 학습' };
+  const todayTopic = todaySession.topic;
+  const todayTopicLabel = todaySession.topicLabel;
 
   const totalDone = doneWords + doneSentences;
   const totalCards = Object.values(comp).reduce((a, b) => a + (b || 0), 0);
@@ -190,10 +172,17 @@ function ECScreenHome() {
         </div>
       </div>
 
-      {/* Section: Review Words */}
+      {/* Section: 복습 단어 (or 예습 단어) */}
       {reviewWords.length > 0 && (<>
         <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreviewWords ? '예습 단어' : '복습 단어'}</div>
+          <div>
+            <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 단어' : '복습 단어'}</div>
+            {!isPreview && reviewTopicLabel && (
+              <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.2, textTransform: 'uppercase', marginTop: 4, fontWeight: 600 }}>
+                복습 토픽 · {reviewTopicLabel}
+              </div>
+            )}
+          </div>
           <div style={{ fontSize: 12, color: T.textDim }}>{reviewWords.length}개</div>
         </div>
         <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto' }}>
@@ -206,82 +195,53 @@ function ECScreenHome() {
                 }
               </div>
               <div style={{ marginTop: 8, fontFamily: T.display, fontWeight: 400, fontSize: 17, color: T.text }}>{c.en}</div>
-              <div style={{ fontSize: 12, color: T.textDim, marginTop: 1 }}>{c.ko.split(',')[0]}</div>
+              <div style={{ fontSize: 12, color: T.textDim, marginTop: 1 }}>{(c.ko || '').split(',')[0]}</div>
             </div>
           ))}
         </div>
       </>)}
 
-      {/* Section: Patterns (level + topic 분류) */}
-      {(() => {
-        const userLevel = (() => {
-          try { return JSON.parse(localStorage.getItem('engcat_user'))?.level || 'B1'; }
-          catch(e) { return 'B1'; }
-        })();
-        const allPatterns = (window.ECData && window.ECData.patterns) || [];
-        const levelPatterns = allPatterns.filter(p => p.level === userLevel);
-        if (levelPatterns.length === 0) return null;
-
-        // 토픽별로 그룹화
-        const byTopic = {};
-        levelPatterns.forEach(p => {
-          if (!byTopic[p.topic]) byTopic[p.topic] = [];
-          byTopic[p.topic].push(p);
-        });
-
-        const topicLabel = {
-          travel: '여행', cafe: '카페', greeting: '인사', work: '일',
-          environment: '환경', emotion: '감정', weather: '날씨', shopping: '쇼핑',
-          health: '건강', transport: '교통', education: '교육', media: '미디어',
-        };
-
-        return (<>
-          <div style={{ padding: '28px 22px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>
-              {userLevel} 패턴
-            </div>
-            <div onClick={() => { window.ECSession.sentenceIndex = 0; window.ECNav?.go('sentence-card'); }} style={{ fontSize: 12, color: T.accent, cursor: 'pointer' }}>전체 보기</div>
-          </div>
-          {Object.keys(byTopic).map(topic => (
-            <div key={topic} style={{ padding: '8px 22px 0' }}>
-              <div style={{
-                fontFamily: T.mono, fontSize: 10, color: T.textMute,
-                letterSpacing: 1.4, textTransform: 'uppercase', marginBottom: 8, fontWeight: 600,
-              }}>
-                {topicLabel[topic] || topic}
+      {/* Section: 복습 패턴 (or 예습 패턴) */}
+      {reviewPatterns.length > 0 && (<>
+        <div style={{ padding: '28px 22px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+          <div>
+            <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 패턴' : '복습 패턴'}</div>
+            {!isPreview && reviewTopicLabel && (
+              <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.2, textTransform: 'uppercase', marginTop: 4, fontWeight: 600 }}>
+                복습 토픽 · {reviewTopicLabel}
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
-                {byTopic[topic].map(p => {
-                  const patternIdx = levelPatterns.findIndex(x => x.id === p.id);
-                  return (
-                    <div key={p.id} onClick={() => {
-                      window.ECSession.sentenceIndex = patternIdx >= 0 ? patternIdx : 0;
-                      window.ECNav?.go('sentence-card');
-                    }} style={{
-                      padding: '14px 16px', borderRadius: 14,
-                      background: T.bg2, border: `1px solid ${T.hair}`,
-                      display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer',
-                    }}>
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{
-                          fontFamily: T.serif, fontStyle: 'italic', fontWeight: 400,
-                          fontSize: 19, color: T.text, lineHeight: 1.2, letterSpacing: -0.3,
-                        }}>{p.pattern}</div>
-                        <div style={{ fontSize: 12, color: T.textDim, marginTop: 4, lineHeight: 1.4 }}>
-                          {p.explanation.length > 40 ? p.explanation.substring(0, 40) + '...' : p.explanation}
-                        </div>
-                      </div>
-                      <div style={{ color: T.textMute, flexShrink: 0 }}>
-                        {ECIcon.chev('right', T.textMute, 16)}
-                      </div>
-                    </div>
-                  );
-                })}
+            )}
+          </div>
+          <div onClick={() => { window.ECSession.sentenceIndex = 0; window.ECNav?.go('sentence-card'); }} style={{ fontSize: 12, color: T.accent, cursor: 'pointer' }}>전체 보기</div>
+        </div>
+        <div style={{ padding: '0 22px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {reviewPatterns.map((p, i) => (
+            <div key={p.id} onClick={() => {
+              window.ECSession.sentenceIndex = i;
+              window.ECNav?.go('sentence-card');
+            }} style={{
+              padding: '14px 16px', borderRadius: 14,
+              background: T.bg2, border: `1px solid ${T.hair}`,
+              display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer',
+            }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{
+                  fontFamily: T.serif, fontStyle: 'italic', fontWeight: 400,
+                  fontSize: 19, color: T.text, lineHeight: 1.2, letterSpacing: -0.3,
+                }}>{p.pattern || p.en}</div>
+                {p.explanation && (
+                  <div style={{ fontSize: 12, color: T.textDim, marginTop: 4, lineHeight: 1.4 }}>
+                    {p.explanation.length > 40 ? p.explanation.substring(0, 40) + '...' : p.explanation}
+                  </div>
+                )}
+              </div>
+              <div style={{ color: T.textMute, flexShrink: 0 }}>
+                {ECIcon.chev('right', T.textMute, 16)}
               </div>
             </div>
           ))}
-        </>);
-      })()}
+        </div>
+      </>)}
 
       {/* Section: 오늘의 퀴즈 */}
       <div style={{ padding: '28px 22px 24px' }}>

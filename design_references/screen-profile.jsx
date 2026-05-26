@@ -12,7 +12,22 @@ function ECScreenProfile() {
   const [nickVal, setNickVal] = React.useState(() => localStorage.getItem('engcat_nickname') || '');
   const [ttsVoice, setTtsVoice] = React.useState(() => localStorage.getItem('ec_azure_voice') || 'en-US-JennyNeural');
   const [themePref, setThemePref] = React.useState(() => localStorage.getItem('ec_theme') || 'system');
+  const [userLevel, setUserLevel] = React.useState(() => localStorage.getItem('ec_user_level') || 'B1');
+  const [userTopic, setUserTopic] = React.useState(() => localStorage.getItem('ec_user_topic') || '');
+  const [showTopicPicker, setShowTopicPicker] = React.useState(false);
+
   const changeTheme = (v) => { setThemePref(v); window.ECSetTheme?.(v); };
+  const changeLevel = (v) => { setUserLevel(v); localStorage.setItem('ec_user_level', v); };
+  const changeTopic = (v) => {
+    setUserTopic(v);
+    if (v) localStorage.setItem('ec_user_topic', v);
+    else localStorage.removeItem('ec_user_topic');
+    setShowTopicPicker(false);
+  };
+
+  const topicNames = window.EC_TOPIC_NAMES || {};
+  const topicOrder = window.EC_TOPIC_ORDER || [];
+  const currentTopicLabel = userTopic ? (topicNames[userTopic] || userTopic) : '자동 (주간 순환)';
 
   const setVoice = (v) => { setTtsVoice(v); localStorage.setItem('ec_azure_voice', v); window.ECSpeak('Hello! I am your English learning assistant.', v); };
 
@@ -178,7 +193,41 @@ function ECScreenProfile() {
       </div>
       <div style={{ padding: '0 18px' }}>
         <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}` }}>
-          <Row label="레벨 · B1 중급"   value="변경"/>
+          <SegRow
+            label="레벨"
+            options={[
+              { label: 'A1', value: 'A1' }, { label: 'A2', value: 'A2' },
+              { label: 'B1', value: 'B1' }, { label: 'B2', value: 'B2' },
+              { label: 'C1', value: 'C1' },
+            ]}
+            value={userLevel}
+            onChange={changeLevel}
+          />
+          <Row
+            label="토픽"
+            value={currentTopicLabel}
+            onPress={() => setShowTopicPicker(s => !s)}
+          />
+          {showTopicPicker && (
+            <div style={{ padding: '8px 18px 14px', borderBottom: `1px solid ${T.hair}` }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <div onClick={() => changeTopic('')} style={{
+                  padding: '6px 11px', borderRadius: 8, fontSize: 12, fontWeight: 600,
+                  background: !userTopic ? T.accent : 'transparent',
+                  color: !userTopic ? T.accentText : T.textDim,
+                  border: `1px solid ${!userTopic ? T.accent : T.hairStr}`, cursor: 'pointer',
+                }}>자동</div>
+                {topicOrder.map(t => (
+                  <div key={t} onClick={() => changeTopic(t)} style={{
+                    padding: '6px 11px', borderRadius: 8, fontSize: 12, fontWeight: 500,
+                    background: userTopic === t ? T.accent : 'transparent',
+                    color: userTopic === t ? T.accentText : T.textDim,
+                    border: `1px solid ${userTopic === t ? T.accent : T.hairStr}`, cursor: 'pointer',
+                  }}>{topicNames[t] || t}</div>
+                ))}
+              </div>
+            </div>
+          )}
           <Row label="하루 목표"        value="15분"/>
           <Row label="알림"             value="오전 8:00"/>
           <SegRow
