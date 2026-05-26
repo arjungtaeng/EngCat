@@ -45,10 +45,7 @@ function ECScreenWordCard() {
 
   const [animKey, setAnimKey] = React.useState(0);
   const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
-  const [swipeX, setSwipeX] = React.useState(0);
-  const [slideOut, setSlideOut] = React.useState(0);
   const [retrying, setRetrying] = React.useState(false);
-  const touchStartX = React.useRef(null);
 
   const word = words[idx] || null;
   if (!word) {
@@ -80,41 +77,15 @@ function ECScreenWordCard() {
     );
   }
   const isLast = idx === words.length - 1;
-  const isFirst = idx === 0;
   const isBookmarked = bookmarked.has(word.id);
 
-  const goTo = (dir) => {
-    if (dir === 'next') {
-      session.markWordDone(word.id);
-      if (isLast) { session.wordIndex = 0; window.ECNav?.go('sentence-card'); return; }
-    }
-    if (dir === 'prev' && isFirst) return;
-    const next = idx + (dir === 'next' ? 1 : -1);
-    setSlideOut(dir === 'next' ? -110 : 110);
-    setTimeout(() => {
-      session.wordIndex = next;
-      setIdx(next);
-      setAnimKey(k => k + 1);
-      setSlideOut(0);
-      setSwipeX(0);
-    }, 240);
-  };
-
-  const handleTouchStart = (e) => {
-    if (slideOut !== 0) return;
-    touchStartX.current = e.touches[0].clientX;
-  };
-  const handleTouchMove = (e) => {
-    if (touchStartX.current === null || slideOut !== 0) return;
-    setSwipeX((e.touches[0].clientX - touchStartX.current) * 0.9);
-  };
-  const handleTouchEnd = () => {
-    if (touchStartX.current === null) return;
-    const threshold = window.innerWidth * 0.5;
-    if (swipeX < -threshold) goTo('next');
-    else if (swipeX > threshold && !isFirst) goTo('prev');
-    else setSwipeX(0);
-    touchStartX.current = null;
+  const goNext = () => {
+    session.markWordDone(word.id);
+    if (isLast) { session.wordIndex = 0; window.ECNav?.go('sentence-card'); return; }
+    const next = idx + 1;
+    session.wordIndex = next;
+    setIdx(next);
+    setAnimKey(k => k + 1);
   };
 
   const toggleBookmark = () => {
@@ -136,30 +107,15 @@ function ECScreenWordCard() {
     );
   }
 
-  const contentTransform = slideOut !== 0
-    ? `translateX(${slideOut}%)`
-    : `translateX(${swipeX}px)`;
-  const contentTransition = slideOut !== 0
-    ? 'transform 0.24s cubic-bezier(0.4,0,0.2,1)'
-    : 'none';
-
-  const swipingPrev = swipeX > 30 && !isFirst;
-  const btnLabel = swipingPrev ? '이전 카드' : isLast ? '문장 학습하기' : '다음 카드';
+  const btnLabel = isLast ? '문장 학습하기' : '다음 카드';
   const isDark = T.text === '#F8F5EF';
-  const btnBg = swipingPrev ? T.bg3 : T.accent;
-  const btnColor = swipingPrev ? T.text : T.accentText;
 
   const railIcon = isDark ? 'rgba(255,255,255,0.9)' : T.text;
   const railBg   = isDark ? 'rgba(255,255,255,0.10)' : T.bg2;
   const railBd   = isDark ? 'rgba(255,255,255,0.14)' : T.hair;
 
   return (
-    <div
-      style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
+    <div style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}>
 
       {/* ── Top chrome ── */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
@@ -175,53 +131,53 @@ function ECScreenWordCard() {
         </div>
       </div>
 
-      {/* ── Swipe layer: flex column = hero (fixed) + scroll area below ── */}
+      {/* ── Hero — stationary background; text scrolls over it ── */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 320, zIndex: 1, overflow: 'hidden' }}>
+        {word.img
+          ? <img src={word.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={word.en} />
+          : <ECPlaceholder height="100%" tint={word.tint} radius={0} label={`hero · ${word.en}`}/>
+        }
+        {/* Top darkening — chrome contrast */}
+        <div style={{
+          position: 'absolute', top: 0, left: 0, right: 0, height: 120,
+          background: isDark
+            ? 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)'
+            : 'linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, transparent 100%)',
+        }}/>
+      </div>
+
+      {/* ── Scrollable text — slides over the stationary hero ── */}
       <div
+        key={animKey}
+        className="ec-fade-up"
         style={{
           position: 'absolute',
           top: 0,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)',
           left: 0,
           right: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          transform: contentTransform,
-          transition: contentTransition,
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          zIndex: 5,
         }}
       >
-        {/* Hero — fixed at top of card, does NOT move when text scrolls */}
-        <div style={{ position: 'relative', width: '100%', height: 320, flexShrink: 0, overflow: 'hidden' }}>
-          {word.img
-            ? <img src={word.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={word.en} />
-            : <ECPlaceholder height="100%" tint={word.tint} radius={0} label={`hero · ${word.en}`}/>
-          }
-          {/* Top darkening — chrome contrast */}
-          <div style={{
-            position: 'absolute', top: 0, left: 0, right: 0, height: 120,
-            background: isDark
-              ? 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)'
-              : 'linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, transparent 100%)',
-          }}/>
-          {/* Bottom fade into body bg */}
-          <div style={{
-            position: 'absolute', left: 0, right: 0, bottom: 0, height: 80,
-            background: `linear-gradient(to bottom, transparent 0%, ${T.bg0} 100%)`,
-          }}/>
-        </div>
+        {/* Peek-through — keeps hero visible at rest, scrolls up with content */}
+        <div style={{ height: 260, pointerEvents: 'none' }} />
 
-        {/* Scrollable text — only this area scrolls, hero stays */}
-        <div
-          key={animKey}
-          className="ec-fade-up"
-          style={{
-            flex: 1,
-            minHeight: 0,
-            overflowY: 'auto',
-            WebkitOverflowScrolling: 'touch',
-            background: T.bg0,
-          }}
-        >
-          <div style={{ padding: '4px 22px 24px' }}>
+        {/* Soft transparent→bg0 fade strip just above the sheet */}
+        <div style={{
+          position: 'sticky', top: 0,
+          height: 60, marginBottom: -60, pointerEvents: 'none',
+          background: `linear-gradient(to bottom, transparent 0%, ${T.bg0} 100%)`,
+          zIndex: 1,
+        }}/>
+
+        {/* Solid content sheet — covers hero as user scrolls up */}
+        <div style={{
+          background: T.bg0,
+          padding: '60px 22px 24px',
+          minHeight: 'calc(100% + 60px)',
+        }}>
           {/* POS chip + IPA */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
             <div style={{
@@ -300,7 +256,6 @@ function ECScreenWordCard() {
               예문이 아직 없어요.
             </div>
           )}
-          </div>
         </div>
       </div>
 
@@ -312,18 +267,16 @@ function ECScreenWordCard() {
       }}>
         <div style={{ display: 'flex', gap: 8 }}>
           <div
-            onClick={() => goTo(swipingPrev ? 'prev' : 'next')}
+            onClick={goNext}
             style={{
               flex: 1, height: 46, borderRadius: 14,
-              background: btnBg, color: btnColor,
+              background: T.accent, color: T.accentText,
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
               fontSize: 14, fontWeight: 600, cursor: 'pointer',
-              transition: 'background 0.15s, color 0.15s',
             }}
           >
-            {swipingPrev && ECIcon.chev('left', btnColor, 14)}
             {btnLabel}
-            {!swipingPrev && ECIcon.chev('right', btnColor, 14)}
+            {ECIcon.chev('right', T.accentText, 14)}
           </div>
           <div onClick={toggleBookmark} style={{
             width: 46, height: 46, borderRadius: 14, flexShrink: 0,
