@@ -135,11 +135,15 @@ function ECScreenSentenceCard() {
         p.exA ? { en: p.exA, ko: `${p.wordA}${p.koA ? ` · ${p.koA}` : ''}` } : null,
         p.exB ? { en: p.exB, ko: `${p.wordB}${p.koB ? ` · ${p.koB}` : ''}` } : null,
         p.exC ? { en: p.exC, ko: `${p.wordC}${p.koC ? ` · ${p.koC}` : ''}` } : null,
+        p.ex4 ? { en: p.ex4, ko: p.ex4Ko || '' } : null,
+        p.ex5 ? { en: p.ex5, ko: p.ex5Ko || '' } : null,
       ].filter(Boolean)
     : [
         p.ex1 ? { en: p.ex1, ko: p.ex1Ko || '' } : null,
         p.ex2 ? { en: p.ex2, ko: p.ex2Ko || '' } : null,
-        (type === 'idiom' && p.ex3) ? { en: p.ex3, ko: p.ex3Ko || '' } : null,
+        p.ex3 ? { en: p.ex3, ko: p.ex3Ko || '' } : null,
+        p.ex4 ? { en: p.ex4, ko: p.ex4Ko || '' } : null,
+        p.ex5 ? { en: p.ex5, ko: p.ex5Ko || '' } : null,
       ].filter(Boolean);
 
   const levelLabel = p.level || p.cefr || '';
