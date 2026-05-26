@@ -10,14 +10,8 @@ const TOPIC_NAMES = {
   humanities: '문학·인문', technology: '과학·기술', news: '시사·뉴스', academic: '학술',
 };
 const TOPIC_ORDER = ['greeting','emotion','weather','shopping','cafe','transport','health','travel','home','work','education','media','environment','economy','culture','sports','discussion','presentation','negotiation','humanities','technology','news','academic'];
-const CEFR_COMPOSITIONS = {
-  A1: { '단어': 10, '패턴': 5 },
-  A2: { '단어': 10, '패턴': 5 },
-  B1: { '단어': 8,  '패턴': 4, '콜로': 3 },
-  B2: { '단어': 8,  '패턴': 4, '콜로': 3 },
-  C1: { '단어': 6,  '패턴': 3, '콜로': 3, '이디엄': 2, '뉘앙스': 1 },
-  C2: { '단어': 6,  '패턴': 3, '콜로': 3, '이디엄': 2, '뉘앙스': 1 },
-};
+const COMP_LABELS = { words: '단어', patterns: '패턴', collocations: '콜로', idioms: '이디엄', nuances: '뉘앙스' };
+const EXPR_TYPE_LABELS = { pattern: '패턴', collocation: '콜로', idiom: '이디엄', nuance: '뉘앙스' };
 
 function ECScreenHome() {
   const T = ECTokens;
@@ -34,15 +28,16 @@ function ECScreenHome() {
   const doneWords = session.completedWordIds.size;
   const doneSentences = session.completedSentenceIds.size;
   const userLevel = localStorage.getItem('ec_user_level') || 'B1';
-  const comp = CEFR_COMPOSITIONS[userLevel] || CEFR_COMPOSITIONS.B1;
+  const COMPS = window.EC_CEFR_COMPOSITIONS || { B1: { words: 10, patterns: 4, collocations: 3, idioms: 0, nuances: 0 } };
+  const comp = COMPS[userLevel] || COMPS.B1;
   const compEntries = Object.entries(comp).filter(([, v]) => v > 0);
 
   // 복습 세션 (어제 학습 / 첫날엔 예습 랜덤)
   const reviewSession = (window.ECGetReviewSession && window.ECGetReviewSession()) || {
-    isPreview: true, topic: null, topicLabel: null, words: [], patterns: [],
+    isPreview: true, topic: null, topicLabel: null, words: [], patterns: [], expressions: [],
   };
   const reviewWords = reviewSession.words;
-  const reviewPatterns = reviewSession.patterns;
+  const reviewExpressions = reviewSession.expressions || reviewSession.patterns || [];
   const isPreview = reviewSession.isPreview;
   const reviewTopicLabel = reviewSession.topicLabel;
 
@@ -89,11 +84,11 @@ function ECScreenHome() {
           : rawName;
 
   return (
-    <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
+    <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <ECStatusBar />
 
       {/* Top bar — fixed (not scrollable) */}
-      <div style={{ padding: '6px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0, background: T.bg1, zIndex: 5 }}>
+      <div style={{ padding: '6px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0, background: T.bg1, zIndex: 5 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
           <div style={{ fontFamily: T.serif, fontSize: 22, letterSpacing: -0.4, color: T.text }}>
             EngCat
@@ -110,7 +105,7 @@ function ECScreenHome() {
         </div>
       </div>
 
-      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}>
+      <div ref={scrollRef} style={{ flex: 1, minHeight: 0, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}>
 
       {/* Greeting */}
       <div style={{ padding: '24px 22px 18px' }}>
@@ -141,7 +136,7 @@ function ECScreenHome() {
             {todayTopicLabel}
           </div>
           <div style={{ marginTop: 6, fontFamily: T.mono, fontSize: 12, color: T.textDim, letterSpacing: 0.3 }}>
-            {compEntries.map(([k, v]) => `${k} ${v}`).join(' · ')}
+            {compEntries.map(([k, v]) => `${COMP_LABELS[k] || k} ${v}`).join(' · ')}
           </div>
 
           {/* progress */}
@@ -197,11 +192,11 @@ function ECScreenHome() {
         </div>
       </>)}
 
-      {/* Section: 복습 패턴 (or 예습 패턴) */}
-      {reviewPatterns.length > 0 && (<>
+      {/* Section: 복습 표현 (or 예습 표현) — 패턴 + 콜로 + 이디엄 + 뉘앙스 */}
+      {reviewExpressions.length > 0 && (<>
         <div style={{ padding: '28px 22px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
           <div>
-            <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 패턴' : '복습 패턴'}</div>
+            <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 표현' : '복습 표현'}</div>
             {!isPreview && reviewTopicLabel && (
               <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.2, textTransform: 'uppercase', marginTop: 4, fontWeight: 600 }}>
                 복습 토픽 · {reviewTopicLabel}
@@ -211,31 +206,49 @@ function ECScreenHome() {
           <div onClick={() => { window.ECSession.sentenceIndex = 0; window.ECNav?.go('sentence-card'); }} style={{ fontSize: 12, color: T.accent, cursor: 'pointer' }}>전체 보기</div>
         </div>
         <div style={{ padding: '0 22px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {reviewPatterns.map((p, i) => (
-            <div key={p.id} onClick={() => {
-              window.ECSession.sentenceIndex = i;
-              window.ECNav?.go('sentence-card');
-            }} style={{
-              padding: '14px 16px', borderRadius: 14,
-              background: T.bg2, border: `1px solid ${T.hair}`,
-              display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer',
-            }}>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{
-                  fontFamily: T.display, fontWeight: 400,
-                  fontSize: 18, color: T.text, lineHeight: 1.2, letterSpacing: -0.2,
-                }}>{p.pattern || p.en}</div>
-                {p.explanation && (
-                  <div style={{ fontSize: 12, color: T.textDim, marginTop: 4, lineHeight: 1.4 }}>
-                    {p.explanation.length > 40 ? p.explanation.substring(0, 40) + '...' : p.explanation}
+          {reviewExpressions.map((e, i) => {
+            const type = e._type || (e.pattern ? 'pattern' : (e.verb || e.noun) ? 'collocation' : e.literalKo ? 'idiom' : (e.wordA || e.wordB) ? 'nuance' : 'pattern');
+            const typeLabel = EXPR_TYPE_LABELS[type] || '패턴';
+            const title = e.pattern || e.en || (e.wordA && e.wordB ? `${e.wordA} vs ${e.wordB}` : '');
+            const desc  = e.explanation || e.ko || e.comparison || '';
+            return (
+              <div key={e.id || i} onClick={() => {
+                if (type === 'pattern') {
+                  window.ECSession.sentenceIndex = i;
+                  window.ECNav?.go('sentence-card');
+                }
+              }} style={{
+                padding: '14px 16px', borderRadius: 14,
+                background: T.bg2, border: `1px solid ${T.hair}`,
+                display: 'flex', alignItems: 'center', gap: 12,
+                cursor: type === 'pattern' ? 'pointer' : 'default',
+              }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                    <div style={{
+                      padding: '2px 7px', borderRadius: 5,
+                      background: T.accentSoft, color: T.accent,
+                      fontFamily: T.mono, fontSize: 9, letterSpacing: 1, textTransform: 'uppercase', fontWeight: 600,
+                    }}>{typeLabel}</div>
+                  </div>
+                  <div style={{
+                    fontFamily: T.display, fontWeight: 400,
+                    fontSize: 18, color: T.text, lineHeight: 1.2, letterSpacing: -0.2,
+                  }}>{title}</div>
+                  {desc && (
+                    <div style={{ fontSize: 12, color: T.textDim, marginTop: 4, lineHeight: 1.4 }}>
+                      {desc.length > 40 ? desc.substring(0, 40) + '...' : desc}
+                    </div>
+                  )}
+                </div>
+                {type === 'pattern' && (
+                  <div style={{ color: T.textMute, flexShrink: 0 }}>
+                    {ECIcon.chev('right', T.textMute, 16)}
                   </div>
                 )}
               </div>
-              <div style={{ color: T.textMute, flexShrink: 0 }}>
-                {ECIcon.chev('right', T.textMute, 16)}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </>)}
 
