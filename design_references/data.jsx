@@ -1,5 +1,16 @@
 // EngCat — Card data + session state (Supabase 연동)
 
+function _ecGetUserId() {
+  try {
+    const u = JSON.parse(localStorage.getItem('engcat_user') || '{}');
+    return u.email || 'guest';
+  } catch(e) { return 'guest'; }
+}
+
+function _ecTodayKey() {
+  return 'ec_learned_' + _ecGetUserId() + '_' + new Date().toISOString().slice(0, 10);
+}
+
 if (!window.ECSession) {
   const savedBookmarks = (() => { try { return new Set(JSON.parse(localStorage.getItem('ec_bookmarks') || '[]')); } catch(e) { return new Set(); } })();
   window.ECSession = {
@@ -13,7 +24,7 @@ if (!window.ECSession) {
     },
     markWordDone(id) {
       this.completedWordIds.add(id);
-      const key = 'ec_learned_' + new Date().toISOString().slice(0, 10);
+      const key = _ecTodayKey();
       const stored = (() => { try { return JSON.parse(localStorage.getItem(key) || '{}'); } catch(e) { return {}; } })();
       const wordIds = new Set(stored.wordIds || []);
       wordIds.add(id);
@@ -22,7 +33,7 @@ if (!window.ECSession) {
     },
     markSentenceDone(id) {
       this.completedSentenceIds.add(id);
-      const key = 'ec_learned_' + new Date().toISOString().slice(0, 10);
+      const key = _ecTodayKey();
       const stored = (() => { try { return JSON.parse(localStorage.getItem(key) || '{}'); } catch(e) { return {}; } })();
       const sentenceIds = new Set(stored.sentenceIds || []);
       sentenceIds.add(id);
