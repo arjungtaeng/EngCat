@@ -45,10 +45,9 @@ function ECScreenWordCard() {
 
   const [animKey, setAnimKey] = React.useState(0);
   const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
-  const [swipeX, setSwipeX] = React.useState(0);
-  const [slideOut, setSlideOut] = React.useState(0);
   const [retrying, setRetrying] = React.useState(false);
   const touchStartX = React.useRef(null);
+  const touchStartY = React.useRef(null);
 
   const word = words[idx] || null;
   if (!word) {
@@ -90,31 +89,27 @@ function ECScreenWordCard() {
     }
     if (dir === 'prev' && isFirst) return;
     const next = idx + (dir === 'next' ? 1 : -1);
-    setSlideOut(dir === 'next' ? -110 : 110);
-    setTimeout(() => {
-      session.wordIndex = next;
-      setIdx(next);
-      setAnimKey(k => k + 1);
-      setSlideOut(0);
-      setSwipeX(0);
-    }, 240);
+    session.wordIndex = next;
+    setIdx(next);
+    setAnimKey(k => k + 1);
   };
 
   const handleTouchStart = (e) => {
-    if (slideOut !== 0) return;
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
   };
-  const handleTouchMove = (e) => {
-    if (touchStartX.current === null || slideOut !== 0) return;
-    setSwipeX((e.touches[0].clientX - touchStartX.current) * 0.9);
-  };
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e) => {
     if (touchStartX.current === null) return;
-    const threshold = window.innerWidth * 0.5;
-    if (swipeX < -threshold) goTo('next');
-    else if (swipeX > threshold && !isFirst) goTo('prev');
-    else setSwipeX(0);
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX.current;
+    const dy = t.clientY - touchStartY.current;
     touchStartX.current = null;
+    touchStartY.current = null;
+    // Only treat as horizontal swipe if mostly horizontal and beyond threshold
+    if (Math.abs(dx) < window.innerWidth * 0.25) return;
+    if (Math.abs(dy) > Math.abs(dx)) return;
+    if (dx < 0) goTo('next');
+    else if (dx > 0 && !isFirst) goTo('prev');
   };
 
   const toggleBookmark = () => {
@@ -136,18 +131,8 @@ function ECScreenWordCard() {
     );
   }
 
-  const contentTransform = slideOut !== 0
-    ? `translateX(${slideOut}%)`
-    : `translateX(${swipeX}px)`;
-  const contentTransition = slideOut !== 0
-    ? 'transform 0.24s cubic-bezier(0.4,0,0.2,1)'
-    : 'none';
-
-  const swipingPrev = swipeX > 30 && !isFirst;
-  const btnLabel = swipingPrev ? '이전 카드' : isLast ? '문장 학습하기' : '다음 카드';
+  const btnLabel = isLast ? '문장 학습하기' : '다음 카드';
   const isDark = T.text === '#F8F5EF';
-  const btnBg = swipingPrev ? T.bg3 : T.accent;
-  const btnColor = swipingPrev ? T.text : T.accentText;
 
   const railIcon = isDark ? 'rgba(255,255,255,0.9)' : T.text;
   const railBg   = isDark ? 'rgba(255,255,255,0.10)' : T.bg2;
@@ -157,7 +142,6 @@ function ECScreenWordCard() {
     <div
       style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}
       onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
 
@@ -175,7 +159,7 @@ function ECScreenWordCard() {
         </div>
       </div>
 
-      {/* ── Swipe layer ── */}
+      {/* ── Card content layers (no horizontal transform — swipe navigates but doesn't move) ── */}
       <div
         style={{
           position: 'absolute',
@@ -183,8 +167,6 @@ function ECScreenWordCard() {
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)',
           left: 0,
           right: 0,
-          transform: contentTransform,
-          transition: contentTransition,
         }}
       >
         {/* Hero — fixed background at top (z:1). Bottom gradient fades into body bg. */}
@@ -308,18 +290,16 @@ function ECScreenWordCard() {
       }}>
         <div style={{ display: 'flex', gap: 8 }}>
           <div
-            onClick={() => goTo(swipingPrev ? 'prev' : 'next')}
+            onClick={() => goTo('next')}
             style={{
               flex: 1, height: 46, borderRadius: 14,
-              background: btnBg, color: btnColor,
+              background: T.accent, color: T.accentText,
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
               fontSize: 14, fontWeight: 600, cursor: 'pointer',
-              transition: 'background 0.15s, color 0.15s',
             }}
           >
-            {swipingPrev && ECIcon.chev('left', btnColor, 14)}
             {btnLabel}
-            {!swipingPrev && ECIcon.chev('right', btnColor, 14)}
+            {ECIcon.chev('right', T.accentText, 14)}
           </div>
           <div onClick={toggleBookmark} style={{
             width: 46, height: 46, borderRadius: 14, flexShrink: 0,
