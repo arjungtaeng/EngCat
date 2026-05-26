@@ -122,3 +122,72 @@ UPDATE nuances SET ex4 = 'A clear diagnosis can take several tests.', ex4_ko = '
 UPDATE nuances SET ex4 = 'The placebo effect can be surprisingly strong in pain studies.', ex4_ko = '위약 효과는 통증 연구에서 놀랍게 강력할 수 있어요.', ex5 = 'The nocebo effect explains how negative expectations cause real symptoms.', ex5_ko = '노시보 효과는 부정적 기대가 실제 증상을 일으키는 방식을 설명해요.' WHERE id = 'nuc_health_12';
 UPDATE nuances SET ex4 = 'Her rehabilitation included daily physical therapy.', ex4_ko = '그녀의 재활은 매일 물리치료를 포함했어요.', ex5 = 'His recovery surprised even his doctors.', ex5_ko = '그의 회복은 의사들조차 놀라게 했어요.' WHERE id = 'nuc_health_13';
 
+-- ══════════════════════════════════════
+-- TRAVEL
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'We''re taking a short trip to the countryside this weekend.', ex4_ko = '이번 주말 시골로 짧은 여행을 가요.', ex5 = 'The long journey home felt even longer in traffic.', ex5_ko = '집에 가는 긴 여정은 교통 체증 속에서 더 길게 느껴졌어요.' WHERE id = 'nuc_travel_01';
+UPDATE nuances SET ex4 = 'My luggage was too heavy to lift onto the train.', ex4_ko = '제 짐이 너무 무거워서 기차에 올리기 힘들었어요.', ex5 = 'We''ll collect our baggage at carousel three.', ex5_ko = '저희는 3번 컨베이어에서 짐을 찾을 거예요.' WHERE id = 'nuc_travel_02';
+UPDATE nuances SET ex4 = 'Don''t forget to check your passport expiration date.', ex4_ko = '여권 만료일 확인을 잊지 마세요.', ex5 = 'Some countries grant visas on arrival.', ex5_ko = '일부 나라들은 도착 시 비자를 발급해 줘요.' WHERE id = 'nuc_travel_03';
+UPDATE nuances SET ex4 = 'We chose a small boutique hotel near the river.', ex4_ko = '강 근처 작은 부티크 호텔을 골랐어요.', ex5 = 'Hostels are great places to meet other travelers.', ex5_ko = '호스텔은 다른 여행자들을 만나기 좋은 곳이에요.' WHERE id = 'nuc_travel_04';
+UPDATE nuances SET ex4 = 'I''d like to make a reservation for two at 7 p.m.', ex4_ko = '저녁 7시에 2인 예약하고 싶어요.', ex5 = 'You can confirm your booking by email.', ex5_ko = '이메일로 예약을 확인할 수 있어요.' WHERE id = 'nuc_travel_05';
+UPDATE nuances SET ex4 = 'We spent the morning sightseeing in the old town.', ex4_ko = '오전에 구시가지에서 관광했어요.', ex5 = 'Tourism is a major industry for this small country.', ex5_ko = '관광은 이 작은 나라의 주요 산업이에요.' WHERE id = 'nuc_travel_06';
+UPDATE nuances SET ex4 = 'She brought back a small souvenir from each city.', ex4_ko = '그녀는 각 도시에서 작은 기념품을 가져왔어요.', ex5 = 'I keep this seashell as a memento of our beach trip.', ex5_ko = '저는 이 조개껍데기를 우리 해변 여행의 추억으로 간직해요.' WHERE id = 'nuc_travel_07';
+UPDATE nuances SET ex4 = 'The itinerary lists three museums for tomorrow.', ex4_ko = '여행 일정표에는 내일 세 박물관이 적혀 있어요.', ex5 = 'We took the coastal route to enjoy the views.', ex5_ko = '경치를 즐기기 위해 해안 경로로 갔어요.' WHERE id = 'nuc_travel_08';
+UPDATE nuances SET ex4 = 'Some countries don''t use their own currency anymore.', ex4_ko = '어떤 나라들은 더 이상 자국 통화를 쓰지 않아요.', ex5 = 'The exchange rate is best at official kiosks.', ex5_ko = '환율은 공식 키오스크가 가장 좋아요.' WHERE id = 'nuc_travel_09';
+UPDATE nuances SET ex4 = 'Jet lag hit me hard after the trip to New York.', ex4_ko = '뉴욕 여행 후 시차 피로가 심하게 왔어요.', ex5 = 'Travel fatigue can build up over many short trips.', ex5_ko = '여행 피로는 여러 짧은 여행에 걸쳐 쌓일 수 있어요.' WHERE id = 'nuc_travel_10';
+UPDATE nuances SET ex4 = 'Many expats settle in Seoul for the food and culture.', ex4_ko = '많은 주재원들이 음식과 문화 때문에 서울에 정착해요.', ex5 = 'Immigrants bring rich cultural diversity to their new countries.', ex5_ko = '이민자들은 새 나라에 풍부한 문화적 다양성을 가져와요.' WHERE id = 'nuc_travel_11';
+UPDATE nuances SET ex4 = 'She lives a nomadic life working from cafes around the world.', ex4_ko = '그녀는 세계 곳곳의 카페에서 일하며 유목적인 삶을 살아요.', ex5 = 'A transient crowd fills the train station every weekend.', ex5_ko = '주말마다 일시적인 인파가 기차역을 가득 채워요.' WHERE id = 'nuc_travel_12';
+UPDATE nuances SET ex4 = 'They traversed the desert in just over a week.', ex4_ko = '그들은 일주일 조금 넘게 사막을 횡단했어요.', ex5 = 'I had to navigate through unfamiliar streets late at night.', ex5_ko = '저는 늦은 밤 낯선 거리를 찾아가야 했어요.' WHERE id = 'nuc_travel_13';
+
+-- ══════════════════════════════════════
+-- HOME
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'They bought a beautiful old house by the lake.', ex4_ko = '그들은 호숫가의 아름다운 오래된 집을 샀어요.', ex5 = 'No matter where I go, I always feel best at home.', ex5_ko = '어디를 가든 저는 항상 집에서 가장 편안하게 느껴져요.' WHERE id = 'nuc_home_01';
+UPDATE nuances SET ex4 = 'They picked out cozy furniture for the new flat.', ex4_ko = '그들은 새 아파트를 위해 아늑한 가구를 골랐어요.', ex5 = 'Modern appliances make daily chores much easier.', ex5_ko = '현대 가전제품이 일상 잡일을 훨씬 쉽게 만들어줘요.' WHERE id = 'nuc_home_02';
+UPDATE nuances SET ex4 = 'She rents a small apartment downtown.', ex4_ko = '그녀는 시내에 작은 아파트를 임대해요.', ex5 = 'They signed a two-year lease last week.', ex5_ko = '그들은 지난주 2년 임대 계약을 체결했어요.' WHERE id = 'nuc_home_03';
+UPDATE nuances SET ex4 = 'My daughter''s room is always tidy and welcoming.', ex4_ko = '제 딸의 방은 항상 정돈되어 있고 따뜻해요.', ex5 = 'The kitchen needs a deep clean after the party.', ex5_ko = '파티 후 주방은 대청소가 필요해요.' WHERE id = 'nuc_home_04';
+UPDATE nuances SET ex4 = 'We need to repair the leaky faucet this weekend.', ex4_ko = '이번 주말 새는 수도꼭지를 수리해야 해요.', ex5 = 'They renovated the entire basement into a guest suite.', ex5_ko = '그들은 지하실 전체를 게스트 스위트룸으로 리모델링했어요.' WHERE id = 'nuc_home_05';
+UPDATE nuances SET ex4 = 'My neighbor brought over freshly baked cookies.', ex4_ko = '제 이웃이 갓 구운 쿠키를 가져다 줬어요.', ex5 = 'Our neighborhood has changed a lot in the last decade.', ex5_ko = '저희 동네는 지난 10년간 많이 변했어요.' WHERE id = 'nuc_home_06';
+UPDATE nuances SET ex4 = 'They''re still paying off the mortgage on their first house.', ex4_ko = '그들은 첫 집의 주택 담보 대출을 아직 갚고 있어요.', ex5 = 'She took out a small loan for her home renovation.', ex5_ko = '그녀는 집 리노베이션을 위해 작은 대출을 받았어요.' WHERE id = 'nuc_home_07';
+UPDATE nuances SET ex4 = 'It''s a cozy studio with great natural light.', ex4_ko = '자연 채광이 좋은 아늑한 스튜디오예요.', ex5 = 'The apartment felt cramped with all the furniture.', ex5_ko = '모든 가구가 들어가니 아파트가 비좁게 느껴졌어요.' WHERE id = 'nuc_home_08';
+UPDATE nuances SET ex4 = 'My landlord responded quickly to the repair request.', ex4_ko = '저희 집주인은 수리 요청에 빠르게 응답했어요.', ex5 = 'The tenant signed the lease and moved in the next day.', ex5_ko = '그 세입자는 계약서에 서명하고 다음 날 이사 들어왔어요.' WHERE id = 'nuc_home_09';
+UPDATE nuances SET ex4 = 'The interior is decorated in warm earth tones.', ex4_ko = '내부는 따뜻한 어스 톤으로 꾸며져 있어요.', ex5 = 'The exterior could use a fresh coat of paint.', ex5_ko = '외부는 페인트 새로 칠하면 좋겠어요.' WHERE id = 'nuc_home_10';
+UPDATE nuances SET ex4 = 'Utilities and internet are included in the rent.', ex4_ko = '공과금과 인터넷은 임대료에 포함돼 있어요.', ex5 = 'The building''s amenities include a small gym.', ex5_ko = '건물 편의시설로는 작은 헬스장이 있어요.' WHERE id = 'nuc_home_11';
+UPDATE nuances SET ex4 = 'The third-floor flat has been vacant since spring.', ex4_ko = '3층 아파트는 봄부터 비어 있어요.', ex5 = 'Is that two-bedroom unit still available for rent?', ex5_ko = '그 침실 두 개짜리 집은 아직 임대 가능한가요?' WHERE id = 'nuc_home_12';
+UPDATE nuances SET ex4 = 'The new dwellings meet stricter safety standards.', ex4_ko = '새 거처들은 더 엄격한 안전 기준을 충족해요.', ex5 = '"Welcome to my humble abode," she said with a smile.', ex5_ko = '"제 누추한 거처에 오신 것을 환영해요," 그녀는 미소 지으며 말했어요.' WHERE id = 'nuc_home_13';
+
+-- ══════════════════════════════════════
+-- WORK
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'I started a new job last month at a small studio.', ex4_ko = '저는 지난달 작은 스튜디오에서 새 직장을 시작했어요.', ex5 = 'Her career in journalism has spanned three decades.', ex5_ko = '그녀의 저널리즘 경력은 30년에 걸쳐요.' WHERE id = 'nuc_work_01';
+UPDATE nuances SET ex4 = 'My boss is very supportive of my growth.', ex4_ko = '제 상사는 제 성장을 매우 지지해 주세요.', ex5 = 'The product manager scheduled a kickoff meeting.', ex5_ko = '제품 매니저가 킥오프 회의를 잡았어요.' WHERE id = 'nuc_work_02';
+UPDATE nuances SET ex4 = 'Her salary doubled after the promotion.', ex4_ko = '승진 후 그녀의 월급이 두 배가 됐어요.', ex5 = 'Many part-time workers earn an hourly wage.', ex5_ko = '많은 시간제 근로자들이 시급을 받아요.' WHERE id = 'nuc_work_03';
+UPDATE nuances SET ex4 = 'Please complete this task before lunch.', ex4_ko = '점심 전에 이 업무를 완료해 주세요.', ex5 = 'The project ran for nine months and involved five teams.', ex5_ko = '그 프로젝트는 9개월간 진행됐고 다섯 팀이 참여했어요.' WHERE id = 'nuc_work_04';
+UPDATE nuances SET ex4 = 'I have lunch with my colleagues every Wednesday.', ex4_ko = '저는 매주 수요일 동료들과 점심을 먹어요.', ex5 = 'My coworker brought homemade cookies for everyone.', ex5_ko = '제 동료가 모두를 위해 수제 쿠키를 가져왔어요.' WHERE id = 'nuc_work_05';
+UPDATE nuances SET ex4 = 'He plans to resign after finding a better offer.', ex4_ko = '그는 더 나은 제안을 찾은 후 사직할 계획이에요.', ex5 = 'She''s planning to retire and travel the world.', ex5_ko = '그녀는 은퇴하고 세계를 여행할 계획이에요.' WHERE id = 'nuc_work_06';
+UPDATE nuances SET ex4 = 'The deadline is tomorrow at 5 p.m. — no extensions.', ex4_ko = '마감은 내일 오후 5시예요 — 연장 없어요.', ex5 = 'Your library book has a due date of June 10.', ex5_ko = '도서관 책의 반납 기한은 6월 10일이에요.' WHERE id = 'nuc_work_07';
+UPDATE nuances SET ex4 = 'Working remotely lets me see my kids more often.', ex4_ko = '재택근무 덕분에 아이들을 더 자주 볼 수 있어요.', ex5 = 'Our hybrid model has worked well for the past year.', ex5_ko = '저희 혼합 근무 모델은 작년에 잘 작동했어요.' WHERE id = 'nuc_work_08';
+UPDATE nuances SET ex4 = 'Mornings are my most productive time of day.', ex4_ko = '아침이 제 하루 중 가장 생산적인 시간이에요.', ex5 = 'A more efficient process saved the team weeks of work.', ex5_ko = '더 효율적인 프로세스가 팀의 몇 주 작업을 절약해 줬어요.' WHERE id = 'nuc_work_09';
+UPDATE nuances SET ex4 = 'A good leader knows how to delegate effectively.', ex4_ko = '좋은 리더는 효과적으로 위임하는 법을 알아요.', ex5 = 'The professor assigned a 10-page paper for next month.', ex5_ko = '교수님은 다음 달까지 10페이지 논문을 배정했어요.' WHERE id = 'nuc_work_10';
+UPDATE nuances SET ex4 = 'Her annual appraisal showed strong results.', ex4_ko = '그녀의 연간 인사 고과는 좋은 결과를 보였어요.', ex5 = 'The team conducted a thorough evaluation of the new software.', ex5_ko = '팀은 새 소프트웨어에 대한 철저한 평가를 진행했어요.' WHERE id = 'nuc_work_11';
+UPDATE nuances SET ex4 = 'After the merger, several roles faced redundancy.', ex4_ko = '합병 후 여러 직무가 정리 해고에 직면했어요.', ex5 = 'Mass layoffs hit the industry hard last spring.', ex5_ko = '대규모 정리 해고가 지난 봄 그 산업에 큰 타격을 줬어요.' WHERE id = 'nuc_work_12';
+UPDATE nuances SET ex4 = 'The remuneration includes a generous bonus structure.', ex4_ko = '보수에는 넉넉한 보너스 구조가 포함돼요.', ex5 = 'Workers received fair compensation for the overtime.', ex5_ko = '근로자들은 초과 근무에 대한 공정한 보상을 받았어요.' WHERE id = 'nuc_work_13';
+
+-- ══════════════════════════════════════
+-- EDUCATION
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'I studied late into the night for the final exam.', ex4_ko = '저는 기말 시험을 위해 밤늦게까지 공부했어요.', ex5 = 'You can learn so much just by traveling.', ex5_ko = '여행만으로도 정말 많은 것을 배울 수 있어요.' WHERE id = 'nuc_education_01';
+UPDATE nuances SET ex4 = 'My first English teacher made me love languages.', ex4_ko = '제 첫 영어 선생님이 저에게 언어를 사랑하게 만들어 주셨어요.', ex5 = 'The professor''s lectures attract students from many countries.', ex5_ko = '그 교수님의 강의는 여러 나라의 학생들을 끌어들여요.' WHERE id = 'nuc_education_02';
+UPDATE nuances SET ex4 = 'A quick quiz at the start of class keeps everyone alert.', ex4_ko = '수업 시작에 짧은 퀴즈가 모두를 집중하게 해요.', ex5 = 'The final exam covers everything from the semester.', ex5_ko = '기말 시험은 학기 전체를 다뤄요.' WHERE id = 'nuc_education_03';
+UPDATE nuances SET ex4 = 'I do my homework at the library after school.', ex4_ko = '저는 방과 후 도서관에서 숙제를 해요.', ex5 = 'The assignment is due next Friday at midnight.', ex5_ko = '과제는 다음 주 금요일 자정까지예요.' WHERE id = 'nuc_education_04';
+UPDATE nuances SET ex4 = 'My grade on the project surprised me.', ex4_ko = '그 프로젝트에서 받은 성적이 저를 놀라게 했어요.', ex5 = 'His score on the math test was perfect.', ex5_ko = '수학 시험에서 그의 점수는 만점이었어요.' WHERE id = 'nuc_education_05';
+UPDATE nuances SET ex4 = 'She won a full scholarship to an Ivy League school.', ex4_ko = '그녀는 아이비리그 학교의 전액 장학금을 받았어요.', ex5 = 'The lab applied for a research grant from the government.', ex5_ko = '그 실험실은 정부 연구 보조금을 신청했어요.' WHERE id = 'nuc_education_06';
+UPDATE nuances SET ex4 = 'The curriculum was updated to include digital literacy.', ex4_ko = '교육과정이 디지털 리터러시를 포함하도록 업데이트됐어요.', ex5 = 'Always read the syllabus carefully on the first day.', ex5_ko = '첫날 강의계획서를 항상 신중히 읽으세요.' WHERE id = 'nuc_education_07';
+UPDATE nuances SET ex4 = 'My math tutor helped me improve in just a month.', ex4_ko = '제 수학 튜터가 단 한 달 만에 제가 향상되도록 도와줬어요.', ex5 = 'A good mentor can shape your entire career.', ex5_ko = '좋은 멘토가 당신의 전체 경력을 형성할 수 있어요.' WHERE id = 'nuc_education_08';
+UPDATE nuances SET ex4 = 'Rote learning has limits when ideas get complex.', ex4_ko = '암기식 학습은 아이디어가 복잡해질 때 한계가 있어요.', ex5 = 'Critical thinking is the most important skill for university.', ex5_ko = '비판적 사고는 대학에서 가장 중요한 기술이에요.' WHERE id = 'nuc_education_09';
+UPDATE nuances SET ex4 = 'She''s a fourth-year undergraduate student in biology.', ex4_ko = '그녀는 생물학 4학년 학부생이에요.', ex5 = 'He''s a graduate student researching marine ecosystems.', ex5_ko = '그는 해양 생태계를 연구하는 대학원생이에요.' WHERE id = 'nuc_education_10';
+UPDATE nuances SET ex4 = 'Modern pedagogy focuses on student-centered learning.', ex4_ko = '현대 교육학은 학생 중심 학습에 집중해요.', ex5 = 'Didactics studies how to best teach specific subjects.', ex5_ko = '교수법은 특정 과목을 가장 잘 가르치는 방법을 연구해요.' WHERE id = 'nuc_education_11';
+UPDATE nuances SET ex4 = 'The school is currently undergoing accreditation review.', ex4_ko = '그 학교는 현재 인증 심사를 받고 있어요.', ex5 = 'She earned certification as a yoga instructor last year.', ex5_ko = '그녀는 작년에 요가 강사 자격증을 취득했어요.' WHERE id = 'nuc_education_12';
+UPDATE nuances SET ex4 = 'Epistemology asks how we can claim to know anything at all.', ex4_ko = '인식론은 우리가 어떻게 무언가를 안다고 주장할 수 있는지 물어요.', ex5 = 'Ontology explores what kinds of things actually exist.', ex5_ko = '존재론은 어떤 종류의 것들이 실제로 존재하는지 탐구해요.' WHERE id = 'nuc_education_13';
+
+
