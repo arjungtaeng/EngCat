@@ -175,7 +175,7 @@ function ECScreenWordCard() {
         </div>
       </div>
 
-      {/* ── Scrollable content (hero + word info + examples) ── */}
+      {/* ── Swipe layer: hero (fixed) + scroll text area below ── */}
       <div
         key={animKey}
         className="ec-fade-up"
@@ -185,8 +185,6 @@ function ECScreenWordCard() {
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)',
           left: 0,
           right: 0,
-          overflowY: 'auto',
-          WebkitOverflowScrolling: 'touch',
           zIndex: 5,
           display: 'flex',
           flexDirection: 'column',
@@ -194,7 +192,7 @@ function ECScreenWordCard() {
           transition: contentTransition,
         }}
       >
-        {/* Hero image */}
+        {/* Hero — fixed at top, never scrolls and never gets covered */}
         <div style={{ position: 'relative', width: '100%', height: 320, flexShrink: 0, overflow: 'hidden' }}>
           {word.img
             ? <img src={word.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={word.en} />
@@ -208,7 +206,14 @@ function ECScreenWordCard() {
           }}/>
         </div>
 
-        <div style={{ padding: '4px 22px 20px' }}>
+        {/* Text-only scroll area — moves up/down without covering the hero */}
+        <div style={{
+          flex: 1,
+          minHeight: 0,
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
+        }}>
+        <div style={{ padding: '4px 22px 24px' }}>
           {/* POS chip + IPA */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
             <div style={{
@@ -287,6 +292,7 @@ function ECScreenWordCard() {
               예문이 아직 없어요.
             </div>
           )}
+        </div>
         </div>
       </div>
 
