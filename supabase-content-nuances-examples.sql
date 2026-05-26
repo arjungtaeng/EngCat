@@ -258,5 +258,74 @@ UPDATE nuances SET ex4 = 'Cosmopolitan cities tend to attract people from many c
 UPDATE nuances SET ex4 = 'Ethnocentrism makes it hard to appreciate other ways of life.', ex4_ko = '자문화 중심주의는 다른 삶의 방식을 감상하기 어렵게 만들어요.', ex5 = 'Cultural relativism encourages us to suspend judgment.', ex5_ko = '문화 상대주의는 우리가 판단을 유보하도록 격려해요.' WHERE id = 'nuc_culture_12';
 UPDATE nuances SET ex4 = 'Each generation captures its own zeitgeist in music.', ex4_ko = '각 세대는 음악으로 자기 시대정신을 포착해요.', ex5 = 'The rise of AI represents a new paradigm in work.', ex5_ko = 'AI의 부상은 일에서의 새로운 패러다임을 나타내요.' WHERE id = 'nuc_culture_13';
 
+-- ══════════════════════════════════════
+-- SPORTS
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'The boxing match went all twelve rounds.', ex4_ko = '권투 경기는 12라운드 끝까지 갔어요.', ex5 = 'Tonight''s baseball game starts at seven.', ex5_ko = '오늘 밤 야구 경기는 7시에 시작해요.' WHERE id = 'nuc_sports_01';
+UPDATE nuances SET ex4 = 'We won the local league for the first time.', ex4_ko = '저희가 지역 리그에서 처음으로 우승했어요.', ex5 = 'She beat the defending champion in straight sets.', ex5_ko = '그녀는 디펜딩 챔피언을 스트레이트 세트로 이겼어요.' WHERE id = 'nuc_sports_02';
+UPDATE nuances SET ex4 = 'I practice the piano for an hour every day.', ex4_ko = '저는 매일 한 시간씩 피아노를 연습해요.', ex5 = 'He trains hard during the off-season to stay in shape.', ex5_ko = '그는 비시즌에 컨디션 유지를 위해 열심히 훈련해요.' WHERE id = 'nuc_sports_03';
+UPDATE nuances SET ex4 = 'She scored the winning goal in the last minute.', ex4_ko = '그녀는 마지막 1분에 결승 골을 넣었어요.', ex5 = 'A perfect game in bowling is 300 points.', ex5_ko = '볼링에서 퍼펙트 게임은 300점이에요.' WHERE id = 'nuc_sports_04';
+UPDATE nuances SET ex4 = 'The referee called a foul on the goalkeeper.', ex4_ko = '심판이 골키퍼에게 반칙을 선언했어요.', ex5 = 'They were given a penalty after the late tackle.', ex5_ko = '늦은 태클 후 그들은 페널티를 받았어요.' WHERE id = 'nuc_sports_05';
+UPDATE nuances SET ex4 = 'The coach motivated the players with a powerful speech.', ex4_ko = '코치는 강력한 연설로 선수들에게 동기를 부여했어요.', ex5 = 'Her personal trainer designed a recovery program after the injury.', ex5_ko = '그녀의 개인 트레이너가 부상 후 회복 프로그램을 짜줬어요.' WHERE id = 'nuc_sports_06';
+UPDATE nuances SET ex4 = 'He started boxing as an amateur in his teens.', ex4_ko = '그는 십대 때 아마추어로 권투를 시작했어요.', ex5 = 'She turned professional after winning the national title.', ex5_ko = '그녀는 전국 타이틀을 따낸 후 프로로 전향했어요.' WHERE id = 'nuc_sports_07';
+UPDATE nuances SET ex4 = 'Long-distance runners build stamina over many months.', ex4_ko = '장거리 주자들은 몇 달에 걸쳐 체력을 쌓아요.', ex5 = 'Endurance training helps her finish strong races.', ex5_ko = '지구력 훈련이 그녀가 어려운 경주를 끝까지 마치는 데 도움이 돼요.' WHERE id = 'nuc_sports_08';
+UPDATE nuances SET ex4 = 'He is the reigning world champion in chess.', ex4_ko = '그는 체스의 현 세계 챔피언이에요.', ex5 = 'The winner of the local race got a small trophy.', ex5_ko = '지역 경주의 승자는 작은 트로피를 받았어요.' WHERE id = 'nuc_sports_09';
+UPDATE nuances SET ex4 = 'Thousands of spectators cheered from the stands.', ex4_ko = '수천 명의 관중이 관중석에서 응원했어요.', ex5 = 'She''s been a loyal fan since she was a child.', ex5_ko = '그녀는 어렸을 때부터 충성스러운 팬이었어요.' WHERE id = 'nuc_sports_10';
+UPDATE nuances SET ex4 = 'Real sportsmanship means winning and losing with grace.', ex4_ko = '진정한 스포츠맨십은 우아하게 이기고 지는 것을 의미해요.', ex5 = 'Some athletes use gamesmanship to gain a psychological edge.', ex5_ko = '어떤 선수들은 심리적 우위를 얻기 위해 게임즈맨십을 사용해요.' WHERE id = 'nuc_sports_11';
+UPDATE nuances SET ex4 = 'The runner was banned after testing positive for doping.', ex4_ko = '그 주자는 도핑 양성 판정 후 출전 정지를 받았어요.', ex5 = 'Good nutrition is a key form of performance enhancement.', ex5_ko = '좋은 영양 섭취는 경기력 향상의 핵심 방법이에요.' WHERE id = 'nuc_sports_12';
+UPDATE nuances SET ex4 = 'Dancers develop kinesthesia through years of training.', ex4_ko = '무용수들은 몇 년의 훈련을 통해 운동 감각을 개발해요.', ex5 = 'Good proprioception helps athletes stay balanced.', ex5_ko = '좋은 고유 감각은 운동선수들이 균형을 유지하는 데 도움이 돼요.' WHERE id = 'nuc_sports_13';
+
+-- ══════════════════════════════════════
+-- DISCUSSION
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'Let''s discuss the next steps over coffee.', ex4_ko = '커피 마시며 다음 단계를 논의해요.', ex5 = 'They argued for hours but couldn''t agree.', ex5_ko = '그들은 몇 시간 동안 언쟁했지만 동의할 수 없었어요.' WHERE id = 'nuc_discussion_01';
+UPDATE nuances SET ex4 = 'I''d love to hear your opinion on the new policy.', ex4_ko = '새 정책에 대한 당신의 의견을 듣고 싶어요.', ex5 = 'From a parent''s point of view, the school is excellent.', ex5_ko = '부모의 관점에서 그 학교는 훌륭해요.' WHERE id = 'nuc_discussion_02';
+UPDATE nuances SET ex4 = 'I agree with most of what she said.', ex4_ko = '그녀가 말한 대부분에 동의해요.', ex5 = 'Patients must give consent before any procedure.', ex5_ko = '환자들은 어떤 시술 전에도 동의를 해야 해요.' WHERE id = 'nuc_discussion_03';
+UPDATE nuances SET ex4 = 'The class debated whether AI should be regulated.', ex4_ko = '수업에서는 AI가 규제되어야 하는지 토론했어요.', ex5 = 'The committee deliberated late into the night.', ex5_ko = '위원회는 밤늦게까지 심의했어요.' WHERE id = 'nuc_discussion_04';
+UPDATE nuances SET ex4 = 'I''ll concede that you''re right about that detail.', ex4_ko = '그 세부 사항에 대해서는 당신이 옳다는 걸 인정할게요.', ex5 = 'They reached a fair compromise on the price.', ex5_ko = '그들은 가격에서 공정한 타협을 이뤘어요.' WHERE id = 'nuc_discussion_05';
+UPDATE nuances SET ex4 = 'She asserted her position confidently in the meeting.', ex4_ko = '그녀는 회의에서 자신 있게 자기 입장을 주장했어요.', ex5 = 'He claimed to have data, but never showed any.', ex5_ko = '그는 데이터가 있다고 주장했지만 보여주지 않았어요.' WHERE id = 'nuc_discussion_06';
+UPDATE nuances SET ex4 = 'The research convinced me to change my approach.', ex4_ko = '그 연구가 제가 접근 방식을 바꾸도록 납득시켰어요.', ex5 = 'She persuaded her parents to let her study abroad.', ex5_ko = '그녀는 부모님이 해외 유학을 허락하시도록 설득했어요.' WHERE id = 'nuc_discussion_07';
+UPDATE nuances SET ex4 = 'His later statement contradicted what he said earlier.', ex4_ko = '그의 나중 발언은 앞서 한 말과 모순됐어요.', ex5 = 'She countered his argument with three solid examples.', ex5_ko = '그녀는 세 가지 탄탄한 예시로 그의 주장에 반론했어요.' WHERE id = 'nuc_discussion_08';
+UPDATE nuances SET ex4 = 'The implication of her tone was disappointment.', ex4_ko = '그녀 어조의 함의는 실망이었어요.', ex5 = 'From the data, we can make a reasonable inference.', ex5_ko = '데이터에서 우리는 합리적인 추론을 할 수 있어요.' WHERE id = 'nuc_discussion_09';
+UPDATE nuances SET ex4 = 'That argument contains a classic logical fallacy.', ex4_ko = '그 주장은 고전적인 논리적 오류를 담고 있어요.', ex5 = 'Everyone has some unconscious bias to work on.', ex5_ko = '모든 사람은 다뤄야 할 어느 정도의 무의식적 편향이 있어요.' WHERE id = 'nuc_discussion_10';
+UPDATE nuances SET ex4 = 'Political speeches often rely on hollow rhetoric.', ex4_ko = '정치 연설은 종종 공허한 수사학에 의존해요.', ex5 = 'Her eloquence held the audience for the full hour.', ex5_ko = '그녀의 웅변이 청중을 한 시간 내내 사로잡았어요.' WHERE id = 'nuc_discussion_11';
+UPDATE nuances SET ex4 = 'His speech was sophistry wrapped in fancy words.', ex4_ko = '그의 연설은 화려한 말로 포장된 궤변이었어요.', ex5 = 'Hegelian dialectic moves through thesis, antithesis, and synthesis.', ex5_ko = '헤겔의 변증법은 정-반-합을 거쳐 진행돼요.' WHERE id = 'nuc_discussion_12';
+UPDATE nuances SET ex4 = 'Some statements are accepted as axioms in mathematics.', ex4_ko = '수학에서 어떤 진술들은 공리로 받아들여져요.', ex5 = 'A postulate forms the starting point of a theory.', ex5_ko = '공준은 이론의 출발점을 형성해요.' WHERE id = 'nuc_discussion_13';
+
+-- ══════════════════════════════════════
+-- PRESENTATION
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'She presented her findings clearly and persuasively.', ex4_ko = '그녀는 자기 연구 결과를 명확하고 설득력 있게 발표했어요.', ex5 = 'He reported the team''s progress to the executives.', ex5_ko = '그는 임원진에게 팀의 진행 상황을 보고했어요.' WHERE id = 'nuc_presentation_01';
+UPDATE nuances SET ex4 = 'Let me give you a quick outline of the agenda.', ex4_ko = '안건의 빠른 개요를 알려드릴게요.', ex5 = 'Here is a one-page summary of the main findings.', ex5_ko = '주요 결과의 한 페이지 요약이 여기 있어요.' WHERE id = 'nuc_presentation_02';
+UPDATE nuances SET ex4 = 'Can we go back to the second slide for a moment?', ex4_ko = '잠시 두 번째 슬라이드로 돌아갈 수 있어요?', ex5 = 'Please take a handout from the table on your way in.', ex5_ko = '들어오는 길에 테이블에서 유인물 한 부 가져가세요.' WHERE id = 'nuc_presentation_03';
+UPDATE nuances SET ex4 = 'Let me introduce today''s key questions briefly.', ex4_ko = '오늘의 핵심 질문들을 간단히 도입할게요.', ex5 = 'To conclude, we recommend a three-step approach.', ex5_ko = '결론적으로 우리는 3단계 접근법을 권장해요.' WHERE id = 'nuc_presentation_04';
+UPDATE nuances SET ex4 = 'She engaged the audience by asking thoughtful questions.', ex4_ko = '그녀는 사려 깊은 질문으로 청중을 참여시켰어요.', ex5 = 'Workshops let participants interact in small groups.', ex5_ko = '워크숍은 참가자들이 소그룹으로 상호작용하게 해줘요.' WHERE id = 'nuc_presentation_05';
+UPDATE nuances SET ex4 = 'I''d like to emphasize that this is just the first phase.', ex4_ko = '이건 첫 단계일 뿐이라는 점을 강조하고 싶어요.', ex5 = 'The graph highlights the biggest changes from last year.', ex5_ko = '그래프는 작년 대비 가장 큰 변화를 부각시켜요.' WHERE id = 'nuc_presentation_06';
+UPDATE nuances SET ex4 = 'Could you clarify what you mean by "user-first"?', ex4_ko = '"사용자 우선"이 무슨 의미인지 명확히 해주실 수 있어요?', ex5 = 'Could you elaborate on the budget assumptions?', ex5_ko = '예산 가정에 대해 자세히 설명해 주실 수 있어요?' WHERE id = 'nuc_presentation_07';
+UPDATE nuances SET ex4 = 'A coherent argument is easier for the audience to follow.', ex4_ko = '논리적으로 일관된 주장이 청중이 따라가기 더 쉬워요.', ex5 = 'The slides were beautifully cohesive in style.', ex5_ko = '슬라이드는 스타일이 아름답게 유기적으로 연결돼 있었어요.' WHERE id = 'nuc_presentation_08';
+UPDATE nuances SET ex4 = 'The pitch was persuasive enough to win the contract.', ex4_ko = '그 피치는 계약을 따낼 만큼 설득력이 있었어요.', ex5 = 'The training session was informative and well-paced.', ex5_ko = '교육 세션은 정보가 풍부하고 진행 속도가 좋았어요.' WHERE id = 'nuc_presentation_09';
+UPDATE nuances SET ex4 = 'She opened with a moving anecdote about her grandmother.', ex4_ko = '그녀는 할머니에 관한 감동적인 일화로 시작했어요.', ex5 = 'A single striking statistic can change the room.', ex5_ko = '단 하나의 강력한 통계가 회장 분위기를 바꿀 수 있어요.' WHERE id = 'nuc_presentation_10';
+UPDATE nuances SET ex4 = 'Good posture sends a message of confidence.', ex4_ko = '좋은 자세는 자신감의 메시지를 전달해요.', ex5 = 'His hand gestures helped emphasize each key point.', ex5_ko = '그의 손짓이 각 핵심 요점을 강조하는 데 도움이 됐어요.' WHERE id = 'nuc_presentation_11';
+UPDATE nuances SET ex4 = 'Her ethos as a researcher made the audience trust the data.', ex4_ko = '연구자로서의 그녀의 신뢰성이 청중이 데이터를 신뢰하게 만들었어요.', ex5 = 'The film''s pathos moved many viewers to tears.', ex5_ko = '영화의 감성 호소가 많은 시청자를 눈물 짓게 했어요.' WHERE id = 'nuc_presentation_12';
+UPDATE nuances SET ex4 = 'Good prosody can turn a flat speech into an engaging one.', ex4_ko = '좋은 운율은 평이한 연설을 매력적인 연설로 만들 수 있어요.', ex5 = 'Rising intonation at the end signals a question.', ex5_ko = '끝의 상승 억양은 질문을 나타내요.' WHERE id = 'nuc_presentation_13';
+
+-- ══════════════════════════════════════
+-- NEGOTIATION
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'They offered a generous discount to close the deal.', ex4_ko = '그들은 거래를 성사시키기 위해 넉넉한 할인을 제안했어요.', ex5 = 'I propose we meet again next Tuesday to finalize the terms.', ex5_ko = '조건을 마무리하기 위해 다음 주 화요일에 다시 만날 것을 제안해요.' WHERE id = 'nuc_negotiation_01';
+UPDATE nuances SET ex4 = 'She accepted the offer after a day of thought.', ex4_ko = '그녀는 하루의 고민 끝에 제안을 수락했어요.', ex5 = 'We finally agreed on a delivery timeline.', ex5_ko = '우리는 마침내 배송 일정에 합의했어요.' WHERE id = 'nuc_negotiation_02';
+UPDATE nuances SET ex4 = 'They demanded a clear explanation for the delay.', ex4_ko = '그들은 지연에 대한 명확한 설명을 요구했어요.', ex5 = 'She politely requested a copy of the contract.', ex5_ko = '그녀는 정중하게 계약서 사본을 요청했어요.' WHERE id = 'nuc_negotiation_03';
+UPDATE nuances SET ex4 = 'The deadline for offers is this Friday.', ex4_ko = '제안 마감은 이번 금요일이에요.', ex5 = 'Let''s map out the project timeline together.', ex5_ko = '함께 프로젝트 일정을 그려봐요.' WHERE id = 'nuc_negotiation_04';
+UPDATE nuances SET ex4 = 'They made small concessions to keep the deal alive.', ex4_ko = '그들은 거래를 살리기 위해 작은 양보를 했어요.', ex5 = 'There''s always a trade-off between cost and quality.', ex5_ko = '비용과 품질 사이에는 항상 절충이 있어요.' WHERE id = 'nuc_negotiation_05';
+UPDATE nuances SET ex4 = 'Having competing offers gave her real leverage.', ex4_ko = '경쟁 제안들이 그녀에게 진정한 협상 우위를 줬어요.', ex5 = 'Workers gain bargaining power when they unite.', ex5_ko = '근로자들은 단결할 때 협상력을 얻어요.' WHERE id = 'nuc_negotiation_06';
+UPDATE nuances SET ex4 = 'They signed the contract after months of negotiation.', ex4_ko = '몇 달의 협상 끝에 그들은 계약서에 서명했어요.', ex5 = 'We reached a verbal agreement that still needs to be put in writing.', ex5_ko = '우리는 구두 합의에 이르렀지만 서면화가 필요해요.' WHERE id = 'nuc_negotiation_07';
+UPDATE nuances SET ex4 = 'A trained mediator helped them find common ground.', ex4_ko = '훈련된 중재자가 그들이 공통점을 찾도록 도왔어요.', ex5 = 'Disputes that can''t be resolved often go to arbitration.', ex5_ko = '해결되지 않는 분쟁은 종종 중재로 가게 돼요.' WHERE id = 'nuc_negotiation_08';
+UPDATE nuances SET ex4 = 'Be clear about your bottom line before walking into the room.', ex4_ko = '회의실에 들어가기 전에 최저 수용 조건을 명확히 하세요.', ex5 = 'Knowing your walkaway point keeps you from settling for less.', ex5_ko = '협상 철수 한계선을 알면 못한 조건에 만족하지 않게 돼요.' WHERE id = 'nuc_negotiation_09';
+UPDATE nuances SET ex4 = 'A strong BATNA gives you confidence at the table.', ex4_ko = '강한 BATNA는 협상 자리에서 자신감을 줘요.', ex5 = 'If the ZOPA is too narrow, you won''t reach a deal.', ex5_ko = '합의 가능 영역이 너무 좁으면 거래에 이르지 못해요.' WHERE id = 'nuc_negotiation_10';
+UPDATE nuances SET ex4 = 'Principled negotiation focuses on interests, not positions.', ex4_ko = '원칙 기반 협상은 입장이 아닌 이해관계에 집중해요.', ex5 = 'Positional bargaining can turn quickly into a deadlock.', ex5_ko = '입장 기반 협상은 빠르게 교착 상태로 변할 수 있어요.' WHERE id = 'nuc_negotiation_11';
+UPDATE nuances SET ex4 = 'The agreement was ratified at the next meeting.', ex4_ko = '그 합의는 다음 회의에서 비준됐어요.', ex5 = 'The mayor publicly endorsed the new community plan.', ex5_ko = '시장은 새 지역사회 계획을 공개적으로 지지했어요.' WHERE id = 'nuc_negotiation_12';
+UPDATE nuances SET ex4 = 'Talks reached an impasse over the issue of overtime pay.', ex4_ko = '협상이 초과 근무 수당 문제로 교착 상태에 빠졌어요.', ex5 = 'The complete deadlock surprised everyone in the room.', ex5_ko = '완전한 데드락이 회장 모두를 놀라게 했어요.' WHERE id = 'nuc_negotiation_13';
+
+
 
 
