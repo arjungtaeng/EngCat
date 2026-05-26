@@ -1,0 +1,28 @@
+name: Backfill Pexels images
+
+on:
+  schedule:
+    # 매시간 정각 (UTC). Pexels 무료 티어 200 req/hr 안에서 ~180 req 사용.
+    - cron: '0 * * * *'
+  workflow_dispatch:
+    # 수동 트리거 허용 (Actions 탭에서 Run workflow)
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci --omit=dev || npm install --omit=dev
+
+      - name: Run backfill
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/backfill-pexels.mjs
