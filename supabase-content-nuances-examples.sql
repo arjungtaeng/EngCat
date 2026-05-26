@@ -326,6 +326,75 @@ UPDATE nuances SET ex4 = 'Principled negotiation focuses on interests, not posit
 UPDATE nuances SET ex4 = 'The agreement was ratified at the next meeting.', ex4_ko = '그 합의는 다음 회의에서 비준됐어요.', ex5 = 'The mayor publicly endorsed the new community plan.', ex5_ko = '시장은 새 지역사회 계획을 공개적으로 지지했어요.' WHERE id = 'nuc_negotiation_12';
 UPDATE nuances SET ex4 = 'Talks reached an impasse over the issue of overtime pay.', ex4_ko = '협상이 초과 근무 수당 문제로 교착 상태에 빠졌어요.', ex5 = 'The complete deadlock surprised everyone in the room.', ex5_ko = '완전한 데드락이 회장 모두를 놀라게 했어요.' WHERE id = 'nuc_negotiation_13';
 
+-- ══════════════════════════════════════
+-- HUMANITIES
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'European history has shaped modern political thought.', ex4_ko = '유럽 역사는 현대 정치 사상을 형성해 왔어요.', ex5 = 'She wrote a beautiful short story about her hometown.', ex5_ko = '그녀는 고향에 관한 아름다운 단편 소설을 썼어요.' WHERE id = 'nuc_humanities_01';
+UPDATE nuances SET ex4 = 'Norse myths influenced many modern fantasy stories.', ex4_ko = '북유럽 신화는 많은 현대 판타지 이야기에 영향을 줬어요.', ex5 = 'The legend of King Arthur is told in many forms.', ex5_ko = '아서왕 전설은 여러 형태로 전해져요.' WHERE id = 'nuc_humanities_02';
+UPDATE nuances SET ex4 = 'Modern art often challenges what we consider beautiful.', ex4_ko = '현대 미술은 종종 우리가 아름답다고 여기는 것에 도전해요.', ex5 = 'Pottery is an ancient craft with regional variations.', ex5_ko = '도자기는 지역적 변형이 있는 고대 공예예요.' WHERE id = 'nuc_humanities_03';
+UPDATE nuances SET ex4 = 'Eastern philosophy emphasizes harmony with nature.', ex4_ko = '동양 철학은 자연과의 조화를 강조해요.', ex5 = 'A clear ideology drives the party''s policies.', ex5_ko = '명확한 이데올로기가 그 정당의 정책을 이끌어요.' WHERE id = 'nuc_humanities_04';
+UPDATE nuances SET ex4 = 'Business ethics is a required course in most MBA programs.', ex4_ko = '경영 윤리는 대부분의 MBA 프로그램에서 필수 과목이에요.', ex5 = 'Our sense of morality is partly shaped by family values.', ex5_ko = '우리의 도덕 감각은 부분적으로 가족 가치관으로 형성돼요.' WHERE id = 'nuc_humanities_05';
+UPDATE nuances SET ex4 = 'Critics interpret the same novel in very different ways.', ex4_ko = '비평가들은 같은 소설을 매우 다른 방식으로 해석해요.', ex5 = 'Students analyze the poem''s structure and imagery.', ex5_ko = '학생들은 시의 구조와 이미지를 분석해요.' WHERE id = 'nuc_humanities_06';
+UPDATE nuances SET ex4 = 'Knowing the historical context changes how we read the speech.', ex4_ko = '역사적 맥락을 아는 것이 우리가 그 연설을 읽는 방식을 바꿔요.', ex5 = 'The subtext of the conversation revealed deep tension.', ex5_ko = '대화의 함의가 깊은 긴장을 드러냈어요.' WHERE id = 'nuc_humanities_07';
+UPDATE nuances SET ex4 = '"The Lord of the Rings" can be read as an allegory of war.', ex4_ko = '"반지의 제왕"은 전쟁의 알레고리로 읽힐 수 있어요.', ex5 = '"Time is a river" is a beautiful metaphor.', ex5_ko = '"시간은 강이다"는 아름다운 은유예요.' WHERE id = 'nuc_humanities_08';
+UPDATE nuances SET ex4 = 'Empiricism shaped much of modern scientific thinking.', ex4_ko = '경험론은 현대 과학적 사고의 많은 부분을 형성했어요.', ex5 = 'Rationalism argues that reason alone can lead to truth.', ex5_ko = '이성론은 이성만으로 진리에 이를 수 있다고 주장해요.' WHERE id = 'nuc_humanities_09';
+UPDATE nuances SET ex4 = 'My review of the book is necessarily subjective.', ex4_ko = '제 책 리뷰는 필연적으로 주관적이에요.', ex5 = 'Scientific research aims for an objective view of nature.', ex5_ko = '과학 연구는 자연에 대한 객관적인 시각을 목표로 해요.' WHERE id = 'nuc_humanities_10';
+UPDATE nuances SET ex4 = 'Modern art broke from realistic representation.', ex4_ko = '모더니즘 미술은 사실적 표현에서 벗어났어요.', ex5 = 'Postmodern literature often plays with traditional storytelling.', ex5_ko = '포스트모던 문학은 종종 전통적인 스토리텔링을 가지고 놀아요.' WHERE id = 'nuc_humanities_11';
+UPDATE nuances SET ex4 = 'Hermeneutics gives us tools to interpret ancient texts carefully.', ex4_ko = '해석학은 우리에게 고대 텍스트를 신중하게 해석할 도구를 줘요.', ex5 = 'Semiotics is useful for analyzing advertising and design.', ex5_ko = '기호학은 광고와 디자인을 분석하는 데 유용해요.' WHERE id = 'nuc_humanities_12';
+UPDATE nuances SET ex4 = 'Phenomenology asks us to focus on lived experience.', ex4_ko = '현상학은 우리에게 살아 있는 경험에 집중하라고 해요.', ex5 = 'Existentialism teaches that we create our own meaning.', ex5_ko = '실존주의는 우리가 스스로 의미를 만든다고 가르쳐요.' WHERE id = 'nuc_humanities_13';
+
+-- ══════════════════════════════════════
+-- TECHNOLOGY
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'New hardware was needed to run the simulation.', ex4_ko = '시뮬레이션 실행에 새 하드웨어가 필요했어요.', ex5 = 'The software runs smoothly on most devices.', ex5_ko = '그 소프트웨어는 대부분의 기기에서 부드럽게 작동해요.' WHERE id = 'nuc_technology_01';
+UPDATE nuances SET ex4 = 'Upload your file before the deadline at midnight.', ex4_ko = '자정 마감 전에 파일을 업로드하세요.', ex5 = 'I''ll download the report and read it offline.', ex5_ko = '저는 보고서를 다운로드해서 오프라인에서 읽을게요.' WHERE id = 'nuc_technology_02';
+UPDATE nuances SET ex4 = 'I update my password every six months.', ex4_ko = '저는 6개월마다 비밀번호를 업데이트해요.', ex5 = 'It''s time to upgrade my laptop — this one is too slow.', ex5_ko = '이제 노트북을 업그레이드할 때예요 — 이건 너무 느려요.' WHERE id = 'nuc_technology_03';
+UPDATE nuances SET ex4 = 'Connect your headphones via Bluetooth.', ex4_ko = '블루투스로 헤드폰을 연결하세요.', ex5 = 'My calendar syncs automatically across all devices.', ex5_ko = '제 캘린더는 모든 기기에서 자동으로 동기화돼요.' WHERE id = 'nuc_technology_04';
+UPDATE nuances SET ex4 = 'Privacy concerns are growing as more devices collect data.', ex4_ko = '더 많은 기기가 데이터를 수집하면서 개인 정보 보호 우려가 커지고 있어요.', ex5 = 'Strong security keeps user accounts safe from hackers.', ex5_ko = '강력한 보안이 사용자 계정을 해커로부터 안전하게 지켜요.' WHERE id = 'nuc_technology_05';
+UPDATE nuances SET ex4 = 'The algorithm decides what posts you see on social media.', ex4_ko = '알고리즘이 당신이 소셜 미디어에서 어떤 게시물을 볼지 결정해요.', ex5 = 'She learned to write code in just three months.', ex5_ko = '그녀는 단 3개월 만에 코드를 작성하는 법을 배웠어요.' WHERE id = 'nuc_technology_06';
+UPDATE nuances SET ex4 = 'Developers fixed a major bug in the latest patch.', ex4_ko = '개발자들이 최신 패치에서 주요 버그를 수정했어요.', ex5 = 'The system had a small glitch during the live stream.', ex5_ko = '시스템이 라이브 스트리밍 중에 작은 글리치가 있었어요.' WHERE id = 'nuc_technology_07';
+UPDATE nuances SET ex4 = 'Artificial intelligence is now part of everyday apps.', ex4_ko = '인공지능은 이제 일상 앱의 일부예요.', ex5 = 'Machine learning helps doctors detect early signs of disease.', ex5_ko = '머신러닝은 의사들이 질병의 초기 징후를 발견하는 데 도움이 돼요.' WHERE id = 'nuc_technology_08';
+UPDATE nuances SET ex4 = 'Most messaging apps now encrypt messages by default.', ex4_ko = '대부분의 메시지 앱이 이제 기본적으로 메시지를 암호화해요.', ex5 = 'You can compress a folder before sharing it by email.', ex5_ko = '이메일로 공유하기 전에 폴더를 압축할 수 있어요.' WHERE id = 'nuc_technology_09';
+UPDATE nuances SET ex4 = 'The new server can handle thousands of users at once.', ex4_ko = '새 서버는 한 번에 수천 명의 사용자를 처리할 수 있어요.', ex5 = 'Storing files in the cloud lets you access them anywhere.', ex5_ko = '클라우드에 파일을 저장하면 어디서나 접근할 수 있어요.' WHERE id = 'nuc_technology_10';
+UPDATE nuances SET ex4 = 'Low latency is essential for fast-paced online games.', ex4_ko = '빠른 온라인 게임에는 낮은 지연 시간이 필수예요.', ex5 = 'You need enough bandwidth to stream 4K video smoothly.', ex5_ko = '4K 영상을 부드럽게 스트리밍하려면 충분한 대역폭이 필요해요.' WHERE id = 'nuc_technology_11';
+UPDATE nuances SET ex4 = 'Many developers contribute to open source projects.', ex4_ko = '많은 개발자들이 오픈소스 프로젝트에 기여해요.', ex5 = 'Proprietary software often comes with strict licensing.', ex5_ko = '독점 소프트웨어는 종종 엄격한 라이선스가 붙어요.' WHERE id = 'nuc_technology_12';
+UPDATE nuances SET ex4 = 'Interoperability between systems saves users a lot of time.', ex4_ko = '시스템 간 상호운용성은 사용자에게 많은 시간을 절약해 줘요.', ex5 = 'Scalability matters when your user base grows quickly.', ex5_ko = '사용자가 빠르게 늘면 확장성이 중요해져요.' WHERE id = 'nuc_technology_13';
+
+-- ══════════════════════════════════════
+-- NEWS
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'The morning headline was about the new government policy.', ex4_ko = '아침 헤드라인은 새 정부 정책에 관한 것이었어요.', ex5 = 'The book''s title gives away the central mystery.', ex5_ko = '그 책의 제목이 중심 미스터리를 미리 알려줘요.' WHERE id = 'nuc_news_01';
+UPDATE nuances SET ex4 = 'She''s an award-winning journalist who covers human rights.', ex4_ko = '그녀는 인권을 취재하는 수상 경력의 저널리스트예요.', ex5 = 'The reporter was sent overseas to cover the conflict.', ex5_ko = '기자는 분쟁을 취재하기 위해 해외로 파견됐어요.' WHERE id = 'nuc_news_02';
+UPDATE nuances SET ex4 = 'Always check the source before sharing a "fact" online.', ex4_ko = '온라인에서 "사실"을 공유하기 전에 항상 출처를 확인하세요.', ex5 = 'That''s just my personal opinion, not professional advice.', ex5_ko = '그건 전문가 조언이 아닌 그저 제 개인적 의견이에요.' WHERE id = 'nuc_news_03';
+UPDATE nuances SET ex4 = 'Breaking news interrupted the regular broadcast.', ex4_ko = '속보가 정규 방송을 중단시켰어요.', ex5 = 'This is a developing story — details may change quickly.', ex5_ko = '이것은 진행 중인 뉴스예요 — 세부 사항이 빠르게 바뀔 수 있어요.' WHERE id = 'nuc_news_04';
+UPDATE nuances SET ex4 = 'Reliable sources are critical to good journalism.', ex4_ko = '신뢰할 만한 출처는 좋은 저널리즘에 결정적이에요.', ex5 = 'List your references at the end of the report.', ex5_ko = '보고서 끝에 참고자료를 나열하세요.' WHERE id = 'nuc_news_05';
+UPDATE nuances SET ex4 = 'The editorial argued for stronger environmental laws.', ex4_ko = '사설은 더 강력한 환경법을 주장했어요.', ex5 = 'The article won an award for investigative reporting.', ex5_ko = '그 기사는 탐사 보도 상을 받았어요.' WHERE id = 'nuc_news_06';
+UPDATE nuances SET ex4 = 'The tip came from an anonymous caller.', ex4_ko = '제보는 익명 전화에서 왔어요.', ex5 = 'Please keep this conversation confidential.', ex5_ko = '이 대화를 기밀로 유지해 주세요.' WHERE id = 'nuc_news_07';
+UPDATE nuances SET ex4 = 'The allegations are serious but still need investigation.', ex4_ko = '그 혐의는 심각하지만 아직 조사가 필요해요.', ex5 = 'She filed an accusation of harassment with HR.', ex5_ko = '그녀는 인사팀에 괴롭힘 고발을 접수했어요.' WHERE id = 'nuc_news_08';
+UPDATE nuances SET ex4 = 'The newspaper''s circulation has dropped as readers move online.', ex4_ko = '독자들이 온라인으로 이동하면서 신문 발행 부수가 줄었어요.', ex5 = 'Their digital readership doubled in just two years.', ex5_ko = '그들의 디지털 독자 수가 단 2년 만에 두 배가 됐어요.' WHERE id = 'nuc_news_09';
+UPDATE nuances SET ex4 = 'Investigative journalism shines light on issues others ignore.', ex4_ko = '탐사 저널리즘은 다른 사람들이 무시하는 문제에 빛을 비춰요.', ex5 = 'An analytical piece can help readers make sense of complex events.', ex5_ko = '분석 기사는 독자들이 복잡한 사건을 이해하는 데 도움이 될 수 있어요.' WHERE id = 'nuc_news_10';
+UPDATE nuances SET ex4 = 'The publication apologized after the libel was proven.', ex4_ko = '문서 명예훼손이 입증된 후 그 출판물은 사과했어요.', ex5 = 'Spoken slander is harder to prove than written libel.', ex5_ko = '구두 명예훼손은 문서 명예훼손보다 입증하기 어려워요.' WHERE id = 'nuc_news_11';
+UPDATE nuances SET ex4 = 'True objectivity in reporting is hard but worth aiming for.', ex4_ko = '보도의 진정한 객관성은 어렵지만 추구할 가치가 있어요.', ex5 = 'Public broadcasters are expected to maintain impartiality.', ex5_ko = '공영 방송은 공정성을 유지해야 해요.' WHERE id = 'nuc_news_12';
+UPDATE nuances SET ex4 = 'How a story is framed shapes how readers feel about it.', ex4_ko = '기사가 어떻게 프레이밍되는지가 독자들이 어떻게 느끼는지를 형성해요.', ex5 = 'Repeated coverage primes the public to focus on certain issues.', ex5_ko = '반복적인 보도는 대중이 특정 문제에 집중하도록 유도해요.' WHERE id = 'nuc_news_13';
+
+-- ══════════════════════════════════════
+-- ACADEMIC
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'Quoting a famous line still requires a citation.', ex4_ko = '유명한 구절을 인용해도 출처 표기가 필요해요.', ex5 = 'Paraphrase in your own words but credit the source.', ex5_ko = '자기 말로 바꿔 쓰되 출처를 밝히세요.' WHERE id = 'nuc_academic_01';
+UPDATE nuances SET ex4 = 'Her thesis is being reviewed by three professors.', ex4_ko = '그녀의 논문은 세 교수님이 심사 중이에요.', ex5 = 'The hypothesis was supported by the experimental data.', ex5_ko = '가설이 실험 데이터로 뒷받침됐어요.' WHERE id = 'nuc_academic_02';
+UPDATE nuances SET ex4 = 'The abstract should give a complete picture of the study.', ex4_ko = '초록은 연구의 전체 그림을 담아야 해요.', ex5 = 'A strong introduction guides the reader into the topic.', ex5_ko = '좋은 서론은 독자를 주제로 이끌어요.' WHERE id = 'nuc_academic_03';
+UPDATE nuances SET ex4 = 'Cite every source you used, even online articles.', ex4_ko = '온라인 기사를 포함해 사용한 모든 출처를 인용하세요.', ex5 = 'A complete reference list belongs at the end of the paper.', ex5_ko = '완전한 참고문헌 목록은 논문 끝에 있어요.' WHERE id = 'nuc_academic_04';
+UPDATE nuances SET ex4 = 'Build your argument step by step, point by point.', ex4_ko = '단계적으로 한 가지씩 자기 주장을 쌓아가세요.', ex5 = 'Strong evidence makes any claim more believable.', ex5_ko = '강한 근거는 어떤 주장이든 더 신뢰할 만하게 만들어요.' WHERE id = 'nuc_academic_05';
+UPDATE nuances SET ex4 = 'Qualitative interviews captured students'' personal experiences.', ex4_ko = '질적 인터뷰가 학생들의 개인적 경험을 포착했어요.', ex5 = 'Quantitative surveys measured changes over the semester.', ex5_ko = '양적 설문조사가 한 학기 동안의 변화를 측정했어요.' WHERE id = 'nuc_academic_06';
+UPDATE nuances SET ex4 = 'Peer review helps ensure research quality.', ex4_ko = '동료 심사는 연구 품질을 확보하는 데 도움이 돼요.', ex5 = 'Editorial review focuses on style and fit for the journal.', ex5_ko = '편집 심사는 스타일과 저널 적합성에 집중해요.' WHERE id = 'nuc_academic_07';
+UPDATE nuances SET ex4 = 'A strong correlation does not prove causation.', ex4_ko = '강한 상관관계가 인과관계를 증명하지는 않아요.', ex5 = 'Establishing causation requires careful experimentation.', ex5_ko = '인과관계를 입증하려면 신중한 실험이 필요해요.' WHERE id = 'nuc_academic_08';
+UPDATE nuances SET ex4 = 'The methodology section explains the research design.', ex4_ko = '방법론 부분은 연구 설계를 설명해요.', ex5 = 'They used interviews as the main method.', ex5_ko = '그들은 인터뷰를 주요 방법으로 사용했어요.' WHERE id = 'nuc_academic_09';
+UPDATE nuances SET ex4 = 'Construct validity is essential when measuring abstract concepts.', ex4_ko = '추상적 개념을 측정할 때 구성 타당도가 필수예요.', ex5 = 'High reliability means the test gives consistent results.', ex5_ko = '높은 신뢰도는 시험이 일관된 결과를 낸다는 뜻이에요.' WHERE id = 'nuc_academic_10';
+UPDATE nuances SET ex4 = 'Plagiarism can have severe academic consequences.', ex4_ko = '표절은 심각한 학문적 결과를 초래할 수 있어요.', ex5 = 'Good paraphrasing still requires citing the original source.', ex5_ko = '좋은 바꿔 쓰기도 여전히 원본 출처를 인용해야 해요.' WHERE id = 'nuc_academic_11';
+UPDATE nuances SET ex4 = 'The paper raises epistemological questions about scientific knowledge.', ex4_ko = '그 논문은 과학 지식에 관한 인식론적 질문을 제기해요.', ex5 = 'Ontological positions affect how we define reality.', ex5_ko = '존재론적 입장은 우리가 현실을 어떻게 정의하는지에 영향을 줘요.' WHERE id = 'nuc_academic_12';
+UPDATE nuances SET ex4 = 'Cultural hegemony shapes which voices get heard.', ex4_ko = '문화적 패권은 어떤 목소리가 들리는지를 형성해요.', ex5 = 'Sovereignty allows a country to set its own laws.', ex5_ko = '주권은 국가가 자국 법을 정할 수 있게 해줘요.' WHERE id = 'nuc_academic_13';
+
+
 
 
 
