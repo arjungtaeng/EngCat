@@ -178,8 +178,12 @@ function ECScreenHome() {
           <div style={{ fontSize: 12, color: T.textDim }}>{reviewWords.length}개</div>
         </div>
         <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto' }}>
-          {reviewWords.map((c) => (
-            <div key={c.id} onClick={() => { const todayWords = (window.ECGetTodaySession?.()?.words) || []; const tIdx = todayWords.findIndex(w => w.id === c.id); window.ECSession.wordIndex = tIdx >= 0 ? tIdx : 0; window.ECNav?.go('word-card'); }} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
+          {reviewWords.map((c, i) => (
+            <div key={c.id} onClick={() => {
+              window.ECCardSource = { mode: isPreview ? 'preview' : 'review', words: reviewWords, startIndex: i };
+              window.ECSession.wordIndex = i;
+              window.ECNav?.go('word-card');
+            }} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
               <div style={{ position: 'relative' }}>
                 {c.img
                   ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', borderRadius: 14 }} alt={c.en} />

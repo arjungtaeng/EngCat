@@ -200,6 +200,7 @@ function ECScreenSentenceCard() {
 
         <div style={{ padding: '4px 22px 20px' }}>
 
+
           {/* Level + Topic chips */}
           <div style={{ display: 'flex', gap: 8, marginBottom: 18 }}>
             <div style={{
@@ -220,9 +221,9 @@ function ECScreenSentenceCard() {
             </div>
           </div>
 
-          {/* Pattern title — "I want to ~" */}
+          {/* Pattern title — "I want to ~" (단어 카드 예문과 같은 T.thin 폰트) */}
           <div style={{
-            fontFamily: T.serif, fontStyle: 'italic', fontWeight: 400, fontSize: 42, lineHeight: 1.15,
+            fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 38, lineHeight: 1.15,
             color: T.text, letterSpacing: -0.5, marginBottom: 14, wordBreak: 'break-word',
           }}>
             {p.pattern}
@@ -251,7 +252,7 @@ function ECScreenSentenceCard() {
                 }}>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{
-                      fontFamily: T.serif, fontStyle: 'italic', fontWeight: 400,
+                      fontFamily: T.thin, fontWeight: isDark ? 200 : 300,
                       fontSize: 17, color: T.text, lineHeight: 1.4, letterSpacing: -0.2,
                     }}>
                       {ex.en}

@@ -19,10 +19,21 @@ function ECScreenWordCard() {
     window.ECDataLoaded && window.ECDataLoaded.then(() => setDataVersion(v => v + 1));
   }, []);
 
-  const todaySession = React.useMemo(() => window.ECGetTodaySession(), [dataVersion]);
-  const words = todaySession.words.length > 0 ? todaySession.words : ((window.ECData && window.ECData.words) || []);
+  // 진입 소스: 홈에서 복습/예습 단어로 들어온 경우 그 목록을 사용
+  const cardSource = React.useRef(window.ECCardSource || null);
+  React.useEffect(() => { window.ECCardSource = null; }, []);
 
-  const [idx, setIdx] = React.useState(session.wordIndex);
+  const todaySession = React.useMemo(() => window.ECGetTodaySession(), [dataVersion]);
+  const reviewWords = (cardSource.current && cardSource.current.words) || null;
+  const words = reviewWords && reviewWords.length > 0
+    ? reviewWords
+    : (todaySession.words.length > 0 ? todaySession.words : ((window.ECData && window.ECData.words) || []));
+
+  const [idx, setIdx] = React.useState(
+    (cardSource.current && typeof cardSource.current.startIndex === 'number')
+      ? cardSource.current.startIndex
+      : session.wordIndex
+  );
 
   // wordIndex가 오늘 단어 범위를 벗어나면 0으로 보정 (홈에서 ECData 인덱스로 진입한 경우 대비)
   React.useEffect(() => {
