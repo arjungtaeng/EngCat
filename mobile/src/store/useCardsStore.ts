@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { addWordToToday, addSentenceToToday } from '../utils/learningRecord';
 
 export interface WordCard {
   id: string;
@@ -81,16 +82,22 @@ export const useCardsStore = create<CardsStore>((set) => ({
   setExpressions: (expressions) => set({ expressions }),
   setWordIndex:       (wordIndex)       => set({ wordIndex }),
   setSentenceIndex:   (sentenceIndex)   => set({ sentenceIndex }),
-  markWordDone: (id) => set((s) => {
-    const next = new Set(s.completedWordIds);
-    next.add(id);
-    return { completedWordIds: next };
-  }),
-  markSentenceDone: (id) => set((s) => {
-    const next = new Set(s.completedSentenceIds);
-    next.add(id);
-    return { completedSentenceIds: next };
-  }),
+  markWordDone: (id) => {
+    set((s) => {
+      const next = new Set(s.completedWordIds);
+      next.add(id);
+      return { completedWordIds: next };
+    });
+    addWordToToday(id);
+  },
+  markSentenceDone: (id) => {
+    set((s) => {
+      const next = new Set(s.completedSentenceIds);
+      next.add(id);
+      return { completedSentenceIds: next };
+    });
+    addSentenceToToday(id);
+  },
   toggleBookmark: (id) => set((s) => {
     const next = new Set(s.bookmarkedIds);
     if (next.has(id)) next.delete(id); else next.add(id);
