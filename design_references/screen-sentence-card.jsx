@@ -48,11 +48,8 @@ function ECScreenSentenceCard() {
 
   const [animKey, setAnimKey] = React.useState(0);
   const [bookmarked, setBookmarked] = React.useState(() => new Set((session && session.bookmarkedIds) || []));
-  const [swipeX, setSwipeX] = React.useState(0);
-  const [slideOut, setSlideOut] = React.useState(0);
   const touchStartX = React.useRef(null);
   const touchStartY = React.useRef(null);
-  const swipeDir = React.useRef(null);
 
   const p = patterns[idx] || null;
   if (!p) {
@@ -81,42 +78,27 @@ function ECScreenSentenceCard() {
     }
     if (dir === 'prev' && isFirst) return;
     const next = idx + (dir === 'next' ? 1 : -1);
-    setSlideOut(dir === 'next' ? -110 : 110);
-    setTimeout(() => {
-      session.sentenceIndex = next;
-      setIdx(next);
-      setAnimKey(k => k + 1);
-      setSlideOut(0);
-      setSwipeX(0);
-    }, 240);
+    session.sentenceIndex = next;
+    setIdx(next);
+    setAnimKey(k => k + 1);
   };
 
   const handleTouchStart = (e) => {
-    if (slideOut !== 0) return;
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
-    swipeDir.current = null;
   };
 
-  const handleTouchMove = (e) => {
-    if (touchStartX.current === null || slideOut !== 0) return;
-    const dx = e.touches[0].clientX - touchStartX.current;
-    const dy = e.touches[0].clientY - touchStartY.current;
-    if (swipeDir.current === null) {
-      if (Math.abs(dx) > Math.abs(dy) + 8) swipeDir.current = 'h';
-      else if (Math.abs(dy) > Math.abs(dx) + 8) swipeDir.current = 'v';
-    }
-    if (swipeDir.current === 'h') setSwipeX(dx * 0.9);
-  };
-
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e) => {
     if (touchStartX.current === null) return;
-    const threshold = window.innerWidth * 0.5;
-    if (swipeX < -threshold) goTo('next');
-    else if (swipeX > threshold && !isFirst) goTo('prev');
-    else setSwipeX(0);
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX.current;
+    const dy = t.clientY - touchStartY.current;
     touchStartX.current = null;
-    swipeDir.current = null;
+    touchStartY.current = null;
+    if (Math.abs(dx) < window.innerWidth * 0.25) return;
+    if (Math.abs(dy) > Math.abs(dx)) return;
+    if (dx < 0) goTo('next');
+    else if (dx > 0 && !isFirst) goTo('prev');
   };
 
   const toggleBookmark = () => {
@@ -178,20 +160,12 @@ function ECScreenSentenceCard() {
     return (match && match.tint) || '#1a2a3a';
   }, [p.id, p.tint, topicLabel, dataVersion]);
 
-  const swipingPrev = swipeX > 30 && !isFirst;
-  const btnLabel = swipingPrev ? `이전 ${typeLabel}` : isLast ? '홈으로' : `다음 ${typeLabel}`;
-  const btnBg    = swipingPrev ? (isDark ? 'rgba(255,255,255,0.10)' : T.bg2) : T.accent;
-  const btnColor = swipingPrev ? T.text : T.accentText;
-  const btnBd    = swipingPrev ? T.hair : 'none';
-
-  const contentTransform = slideOut !== 0 ? `translateX(${slideOut}%)` : `translateX(${swipeX}px)`;
-  const contentTransition = slideOut !== 0 ? 'transform 0.24s cubic-bezier(0.4,0,0.2,1)' : 'none';
+  const btnLabel = isLast ? '홈으로' : `다음 ${typeLabel}`;
 
   return (
     <div
       style={{ flex: 1, minHeight: 0, background: T.bg1, position: 'relative', overflow: 'hidden' }}
       onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
 
@@ -217,15 +191,13 @@ function ECScreenSentenceCard() {
         </div>
       </div>
 
-      {/* Swipe layer */}
+      {/* Card content layers (no horizontal transform — swipe navigates but doesn't move) */}
       <div
         style={{
           position: 'absolute',
           top: 0,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)',
           left: 0, right: 0,
-          transform: contentTransform,
-          transition: contentTransition,
         }}
       >
         {/* Hero — fixed background at top (z:1). Bottom gradient fades into body bg. */}
@@ -390,16 +362,14 @@ function ECScreenSentenceCard() {
         paddingTop: 16,
       }}>
         <div style={{ display: 'flex', gap: 8 }}>
-          <div onClick={() => goTo(swipingPrev ? 'prev' : 'next')} style={{
+          <div onClick={() => goTo('next')} style={{
             flex: 1, height: 46, borderRadius: 14,
-            background: btnBg, border: `1px solid ${btnBd}`,
+            background: T.accent,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            color: btnColor, fontSize: 14, fontWeight: 600, cursor: 'pointer',
-            transition: 'background 0.15s, color 0.15s',
+            color: T.accentText, fontSize: 14, fontWeight: 600, cursor: 'pointer',
           }}>
-            {swipingPrev && ECIcon.chev('left', btnColor, 14)}
             <span>{btnLabel}</span>
-            {!swipingPrev && !isLast && ECIcon.chev('right', btnColor, 14)}
+            {!isLast && ECIcon.chev('right', T.accentText, 14)}
           </div>
           <div onClick={toggleBookmark} style={{
             width: 46, height: 46, borderRadius: 14, flexShrink: 0,
