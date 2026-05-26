@@ -1,6 +1,6 @@
-// EngCat — Sentence card (pattern-based)
-// 패턴("I'd like ~")과 그 패턴을 활용한 예문 3~4개를 한 카드에 표시.
-// Supabase sentences 테이블에 ex1~ex4 컬럼 필요.
+// EngCat — Pattern card
+// 패턴("I want to ~") + 한글 설명 + 예문 리스트 (영문 + 번역 + 듣기 버튼)
+// 데이터 소스: window.ECData.patterns (레벨/토픽별로 분류)
 
 function ECScreenSentenceCard() {
   const T = ECTokens;
@@ -12,63 +12,58 @@ function ECScreenSentenceCard() {
     window.ECDataLoaded && window.ECDataLoaded.then(() => setDataVersion(v => v + 1));
   }, []);
 
-  const todaySession = React.useMemo(() => window.ECGetTodaySession(), [dataVersion]);
-  // 오늘 분량의 표현 (패턴 → 콜로 → 이디엄 → 뉘앙스 순서)
-  const sentences = todaySession.expressions.length > 0 ? todaySession.expressions : (window.ECData && window.ECData.sentences && window.ECData.sentences.length > 0 ? window.ECData.sentences : []);
+  // 사용자 레벨 가져오기
+  const userLevel = (() => {
+    try { return JSON.parse(localStorage.getItem('engcat_user'))?.level || 'B1'; }
+    catch(e) { return 'B1'; }
+  })();
+
+  // 사용자 레벨에 맞는 패턴들만 필터링
+  const allPatterns = (window.ECData && window.ECData.patterns) || [];
+  const patterns = allPatterns.filter(p => p.level === userLevel);
 
   const [idx, setIdx] = React.useState((session && session.sentenceIndex) || 0);
 
-  // sentenceIndex가 오늘 표현 범위를 벗어나면 0으로 보정
+  // sentenceIndex가 범위를 벗어나면 0으로 보정
   React.useEffect(() => {
-    if (sentences.length > 0 && idx >= sentences.length) {
+    if (patterns.length > 0 && idx >= patterns.length) {
       setIdx(0);
       if (session) session.sentenceIndex = 0;
     }
-  }, [sentences.length]);
+  }, [patterns.length]);
 
   const [animKey, setAnimKey] = React.useState(0);
   const [bookmarked, setBookmarked] = React.useState(() => new Set((session && session.bookmarkedIds) || []));
   const [swipeX, setSwipeX] = React.useState(0);
   const [slideOut, setSlideOut] = React.useState(0);
-  const [retrying, setRetrying] = React.useState(false);
   const touchStartX = React.useRef(null);
   const touchStartY = React.useRef(null);
   const swipeDir = React.useRef(null);
 
-  const s = sentences[idx] || null;
-  if (!s) {
-    const isLoading = dataVersion === 0 || retrying;
+  const p = patterns[idx] || null;
+  if (!p) {
+    const isLoading = dataVersion === 0;
     return (
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: T.bg0, padding: '0 32px', gap: 16 }}>
         <div style={{ color: T.textDim, fontFamily: T.mono, fontSize: 13, textAlign: 'center' }}>
-          {isLoading ? '데이터 불러오는 중...' : '패턴을 불러오지 못했어요.'}
+          {isLoading ? '데이터 불러오는 중...' : `${userLevel} 레벨의 패턴이 아직 없어요.`}
         </div>
-        {!isLoading && window.ECDataError && (
-          <div style={{ color: T.textMute, fontFamily: T.mono, fontSize: 10, textAlign: 'center', lineHeight: 1.5 }}>
-            {window.ECDataError}
-          </div>
-        )}
-        {!isLoading && (
-          <div onClick={() => {
-            setRetrying(true);
-            (window.ECReloadData ? window.ECReloadData() : Promise.resolve())
-              .then(() => { setRetrying(false); setDataVersion(v => v + 1); });
-          }} style={{
-            padding: '12px 28px', borderRadius: 12, background: T.accent,
-            color: T.accentText, fontFamily: T.mono, fontSize: 12, fontWeight: 600, cursor: 'pointer',
-          }}>다시 시도</div>
-        )}
+        <div onClick={() => window.ECNav?.go('home')} style={{
+          padding: '12px 28px', borderRadius: 12, background: T.accent,
+          color: T.accentText, fontFamily: T.mono, fontSize: 12, fontWeight: 600, cursor: 'pointer',
+        }}>홈으로</div>
       </div>
     );
   }
-  const isLast = idx === sentences.length - 1;
+
+  const isLast = idx === patterns.length - 1;
   const isFirst = idx === 0;
-  const isBookmarked = bookmarked.has(s.id);
+  const isBookmarked = bookmarked.has(p.id);
 
   const goTo = (dir) => {
     if (dir === 'next') {
-      session.markSentenceDone(s.id);
-      if (isLast) { session.sentenceIndex = 0; window.ECNav?.go('quiz'); return; }
+      session.markSentenceDone(p.id);
+      if (isLast) { session.sentenceIndex = 0; window.ECNav?.go('home'); return; }
     }
     if (dir === 'prev' && isFirst) return;
     const next = idx + (dir === 'next' ? 1 : -1);
@@ -112,23 +107,16 @@ function ECScreenSentenceCard() {
 
   const toggleBookmark = () => {
     const next = new Set(bookmarked);
-    if (next.has(s.id)) { next.delete(s.id); session.bookmarkedIds.delete(s.id); }
-    else { next.add(s.id); session.bookmarkedIds.add(s.id); }
+    if (next.has(p.id)) { next.delete(p.id); session.bookmarkedIds.delete(p.id); }
+    else { next.add(p.id); session.bookmarkedIds.add(p.id); }
     session.saveBookmarks();
     setBookmarked(next);
   };
 
-  const speak = (text) => window.ECSpeak(text || s.en);
-
-  // Pattern display: replace {vars} with ___, highlight core phrase in accent
-  const patternDisplayEn = (s.en || '').replace(/\{[^}]+\}/g, '___');
-  const patternHl = s.highlight || '';
-  const patternHlIdx = patternHl ? patternDisplayEn.indexOf(patternHl) : -1;
-  const patternBefore = patternHl && patternHlIdx >= 0 ? patternDisplayEn.slice(0, patternHlIdx) : null;
-  const patternAfter  = patternHl && patternHlIdx >= 0 ? patternDisplayEn.slice(patternHlIdx + patternHl.length) : null;
+  const speak = (text) => window.ECSpeak && window.ECSpeak(text);
 
   const swipingPrev = swipeX > 30 && !isFirst;
-  const btnLabel = swipingPrev ? '이전 카드' : isLast ? '퀴즈 시작하기' : '다음 카드';
+  const btnLabel = swipingPrev ? '이전 패턴' : isLast ? '홈으로' : '다음 패턴';
   const btnBg    = swipingPrev ? (isDark ? 'rgba(255,255,255,0.10)' : T.bg2) : T.accent;
   const btnColor = swipingPrev ? T.text : T.accentText;
   const btnBd    = swipingPrev ? T.hair : 'none';
@@ -136,37 +124,30 @@ function ECScreenSentenceCard() {
   const contentTransform = slideOut !== 0 ? `translateX(${slideOut}%)` : `translateX(${swipeX}px)`;
   const contentTransition = slideOut !== 0 ? 'transform 0.24s cubic-bezier(0.4,0,0.2,1)' : 'none';
 
-  const overlayGrad = isDark
-    ? 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 15%, transparent 26%, rgba(0,0,0,0.88) 42%, #000 50%)'
-    : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 14%, transparent 26%, ${T.bg1}D0 38%, ${T.bg1} 50%)`;
-
   return (
     <div
-      style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}
+      style={{ flex: 1, minHeight: 0, background: T.bg1, position: 'relative', overflow: 'hidden' }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
 
-      {/* Full-bleed landscape image */}
-      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
-        {s.img
-          ? <img src={s.img} style={{ width: '100%', height: '50%', objectFit: 'cover', objectPosition: 'center' }} alt={s.en} />
-          : <div style={{ width: '100%', height: '50%' }}><ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.sit}/></div>
-        }
-        <div style={{ position: 'absolute', inset: 0, background: overlayGrad }}/>
-      </div>
-
       {/* Top chrome */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
         <ECStatusBar/>
-        <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ padding: '6px 18px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div onClick={() => window.ECNav?.go('home')} style={{
+            width: 36, height: 36, borderRadius: 999,
+            background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
+            border: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+          }}>{ECIcon.chev('left', T.text, 18)}</div>
           <div style={{
             padding: '7px 14px', borderRadius: 999,
-            background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`, backdropFilter: 'blur(20px)',
-            border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
+            background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
+            border: `1px solid ${T.hair}`,
             fontFamily: T.mono, fontSize: 10.5, color: T.textDim, letterSpacing: 1, textTransform: 'uppercase',
-          }}>{idx + 1} / {sentences.length} · 패턴</div>
+          }}>{idx + 1} / {patterns.length} · 패턴</div>
+          <div style={{ width: 36 }}/>
         </div>
       </div>
 
@@ -176,7 +157,7 @@ function ECScreenSentenceCard() {
         className="ec-fade-up"
         style={{
           position: 'absolute',
-          top: 0,
+          top: 'calc(env(safe-area-inset-top, 0px) + 70px)',
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)',
           left: 0, right: 0,
           overflowY: 'auto',
@@ -188,87 +169,80 @@ function ECScreenSentenceCard() {
           transition: contentTransition,
         }}
       >
-        <div style={{ flex: '0 0 40%', minHeight: 120 }} />
+        <div style={{ padding: '12px 22px 20px' }}>
 
-        <div style={{ padding: '0 22px 20px' }}>
-
-          {/* Situation tag */}
-          <div style={{ marginBottom: 12 }}>
+          {/* Level + Topic chips */}
+          <div style={{ display: 'flex', gap: 8, marginBottom: 18 }}>
             <div style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: '5px 10px', borderRadius: 6,
               background: T.accentSoft, color: T.accent,
+              fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase', fontWeight: 600,
+            }}>
+              {p.level}
+            </div>
+            <div style={{
+              display: 'inline-flex', alignItems: 'center',
+              padding: '5px 10px', borderRadius: 6,
+              background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2, color: T.textDim,
               fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase',
             }}>
-              <span style={{ width: 5, height: 5, borderRadius: 3, background: T.accent }}/>
-              {s.sit}
+              {p.topic}
             </div>
           </div>
 
-          {/* Pattern — C option: {vars} → ___, highlight core phrase in accent */}
+          {/* Pattern title — "I want to ~" */}
           <div style={{
-            fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 34, lineHeight: 1.2, color: T.text,
-            letterSpacing: -0.3, marginBottom: 6, wordBreak: 'break-word',
+            fontFamily: T.serif, fontStyle: 'italic', fontWeight: 400, fontSize: 42, lineHeight: 1.15,
+            color: T.text, letterSpacing: -0.5, marginBottom: 14, wordBreak: 'break-word',
           }}>
-            {patternBefore !== null ? React.createElement(React.Fragment, null,
-              patternBefore,
-              React.createElement('span', { style: { color: T.accent } }, patternHl),
-              patternAfter
-            ) : patternDisplayEn}
+            {p.pattern}
           </div>
 
-          {/* Ko explanation */}
-          <div style={{ fontSize: 16, color: T.accent, fontWeight: 500, marginBottom: 14, letterSpacing: -0.2 }}>
-            {s.ko}
+          {/* Korean explanation */}
+          <div style={{
+            fontSize: 14.5, color: T.textDim, lineHeight: 1.55, marginBottom: 28, letterSpacing: -0.1,
+          }}>
+            {p.explanation}
           </div>
 
-          {/* Tip */}
-          {s.tip ? (
-            <div style={{
-              padding: '11px 14px', borderRadius: 12, marginBottom: 20,
-              background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
-              border: `1px solid ${T.hair}`,
-              display: 'flex', gap: 10, alignItems: 'flex-start',
-            }}>
-              <div style={{ color: T.accent, flexShrink: 0, marginTop: 1 }}>{ECIcon.sparkle(T.accent, 14)}</div>
-              <div style={{ fontSize: 12.5, color: T.textDim, lineHeight: 1.45 }}>
-                <span style={{ color: T.text, fontWeight: 600 }}>패턴 팁 · </span>{s.tip}
-              </div>
-            </div>
-          ) : <div style={{ marginBottom: 20 }}/>}
-
-          {/* Pattern examples */}
-          {s.examples && s.examples.length > 0 ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {/* Examples section */}
+          {p.examples && p.examples.length > 0 ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{
                 fontFamily: T.mono, fontSize: 9.5, color: T.textMute,
                 letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 4,
-              }}>사용 예시</div>
-              {s.examples.map((ex, i) => (
+              }}>예문</div>
+              {p.examples.map((ex, i) => (
                 <div key={i} style={{
-                  padding: '12px 14px', borderRadius: 12,
-                  background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
+                  padding: '14px 16px', borderRadius: 14,
+                  background: isDark ? 'rgba(255,255,255,0.05)' : T.bg2,
                   border: `1px solid ${T.hair}`,
                   display: 'flex', alignItems: 'flex-start', gap: 12,
                 }}>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 15, color: T.text, lineHeight: 1.4 }}>
-                      {ex.en || ex}
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{
+                      fontFamily: T.serif, fontStyle: 'italic', fontWeight: 400,
+                      fontSize: 17, color: T.text, lineHeight: 1.4, letterSpacing: -0.2,
+                    }}>
+                      {ex.en}
                     </div>
-                    {ex.ko && <div style={{ fontSize: 12, color: T.textDim, marginTop: 3, lineHeight: 1.4 }}>{ex.ko}</div>}
+                    <div style={{ fontSize: 13, color: T.textDim, marginTop: 4, lineHeight: 1.5 }}>
+                      {ex.ko}
+                    </div>
                   </div>
-                  <div onClick={() => speak(ex.en || ex)} style={{
-                    width: 32, height: 32, borderRadius: 999, flexShrink: 0, marginTop: 2,
-                    background: isDark ? 'rgba(255,255,255,0.10)' : T.bg3,
-                    border: `1px solid ${T.hair}`,
+                  <div onClick={() => speak(ex.en)} style={{
+                    width: 36, height: 36, borderRadius: 999, flexShrink: 0, marginTop: 2,
+                    background: T.accentSoft,
+                    border: `1px solid ${T.accentSoft}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-                  }}>{ECIcon.speaker(T.accent, 13)}</div>
+                  }}>{ECIcon.speaker(T.accent, 15)}</div>
                 </div>
               ))}
             </div>
           ) : (
             <div style={{ padding: '20px 0', textAlign: 'center', fontSize: 13, color: T.textMute, lineHeight: 1.6 }}>
-              예시 문장이 아직 없어요.
+              예문이 아직 없어요.
             </div>
           )}
         </div>
@@ -279,6 +253,8 @@ function ECScreenSentenceCard() {
         position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 12,
         padding: '0 18px',
         paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 66px)',
+        background: `linear-gradient(to top, ${T.bg1} 70%, ${T.bg1}00 100%)`,
+        paddingTop: 16,
       }}>
         <div style={{ display: 'flex', gap: 8 }}>
           <div onClick={() => goTo(swipingPrev ? 'prev' : 'next')} style={{
@@ -292,12 +268,6 @@ function ECScreenSentenceCard() {
             <span>{btnLabel}</span>
             {!swipingPrev && !isLast && ECIcon.chev('right', btnColor, 14)}
           </div>
-          <div onClick={() => speak(s.en)} style={{
-            width: 46, height: 46, borderRadius: 14, flexShrink: 0,
-            background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
-            border: `1px solid ${T.hair}`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-          }}>{ECIcon.speaker(T.text, 18)}</div>
           <div onClick={toggleBookmark} style={{
             width: 46, height: 46, borderRadius: 14, flexShrink: 0,
             background: isBookmarked ? T.accent : (isDark ? 'rgba(255,255,255,0.10)' : T.bg2),
@@ -306,9 +276,9 @@ function ECScreenSentenceCard() {
           }}>{ECIcon.heart(isBookmarked ? T.accentText : T.text, 18, isBookmarked)}</div>
         </div>
 
-        {/* Progress strip — current pattern position in feed */}
+        {/* Progress strip */}
         <div style={{ marginTop: 12, display: 'flex', gap: 3, alignItems: 'center' }}>
-          {sentences.map((_, i) => (
+          {patterns.map((_, i) => (
             <div key={i} style={{
               flex: 1, height: 2.5, borderRadius: 2,
               background: i <= idx ? T.accent : (isDark ? 'rgba(255,255,255,0.22)' : T.hairStr),

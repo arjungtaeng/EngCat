@@ -86,7 +86,7 @@ const TOPIC_TINTS = {
   academic:     '#1c1c3a',
 };
 
-window.ECData = { words: [], sentences: [], collocations: [], idioms: [], nuances: [], expressions: [] };
+window.ECData = { words: [], sentences: [], collocations: [], idioms: [], nuances: [], expressions: [], patterns: [] };
 window.ECDataError = null;
 
 function _formatSupabaseError(err) {
@@ -265,7 +265,7 @@ window.ECDataLoaded = _runECDataLoad().catch(async (err) => {
 
 // 수동 재시도용 (카드 화면에서 호출)
 window.ECReloadData = function() {
-  window.ECData = { words: [], sentences: [], collocations: [], idioms: [], nuances: [], expressions: [] };
+  window.ECData = { words: [], sentences: [], collocations: [], idioms: [], nuances: [], expressions: [], patterns: [] };
   window.ECDataLoaded = _runECDataLoad().catch(e => {
     window.ECDataError = _formatSupabaseError(e);
     console.error('Supabase 수동 재시도 실패:', e);
@@ -273,4 +273,108 @@ window.ECReloadData = function() {
   return window.ECDataLoaded;
 };
 
-Object.assign(window, { ECData, ECSession });
+// Pattern templates by level & topic
+window.ECData.patterns = [
+  // ─── A1 LEVEL ───────────────────────────────────────────────────────────────
+  // A1 - Travel
+  { id: 'p_A1_travel_001', pattern: 'I want to ~', explanation: '~하고 싶다는 의사를 나타낼 때 쓰는 패턴입니다. 동사의 원형을 사용합니다.', level: 'A1', topic: 'travel', examples: [
+    { en: 'I want to go to the airport.', ko: '나는 공항에 가고 싶어요.' },
+    { en: 'I want to visit Paris next year.', ko: '나는 내년에 파리를 방문하고 싶어요.' },
+    { en: 'I want to stay in a nice hotel.', ko: '나는 좋은 호텔에 묵고 싶어요.' },
+    { en: 'I want to take a flight tomorrow.', ko: '나는 내일 비행기를 타고 싶어요.' },
+    { en: 'I want to book a room.', ko: '나는 방을 예약하고 싶어요.' },
+  ]},
+  { id: 'p_A1_travel_002', pattern: 'Where is ~?', explanation: '장소를 묻는 기본 패턴입니다.', level: 'A1', topic: 'travel', examples: [
+    { en: 'Where is the airport?', ko: '공항은 어디에 있어요?' },
+    { en: 'Where is the hotel?', ko: '호텔은 어디에 있어요?' },
+    { en: 'Where is the bathroom?', ko: '화장실은 어디에 있어요?' },
+    { en: 'Where is the train station?', ko: '기차역은 어디에 있어요?' },
+    { en: 'Where is the restaurant?', ko: '레스토랑은 어디에 있어요?' },
+  ]},
+  // A1 - Cafe
+  { id: 'p_A1_cafe_001', pattern: 'I\'d like ~', explanation: '~을 원한다는 정중한 표현입니다.', level: 'A1', topic: 'cafe', examples: [
+    { en: 'I\'d like a coffee, please.', ko: '커피 한 잔 주세요.' },
+    { en: 'I\'d like a tea with sugar.', ko: '설탕을 넣은 차를 주세요.' },
+    { en: 'I\'d like a sandwich.', ko: '샌드위치를 주세요.' },
+    { en: 'I\'d like some water.', ko: '물을 주세요.' },
+    { en: 'I\'d like a piece of cake.', ko: '케이크 한 조각을 주세요.' },
+  ]},
+  { id: 'p_A1_cafe_002', pattern: 'Can I have ~?', explanation: '뭔가를 달라고 요청하는 패턴입니다.', level: 'A1', topic: 'cafe', examples: [
+    { en: 'Can I have a menu?', ko: '메뉴를 주시겠어요?' },
+    { en: 'Can I have the bill?', ko: '계산서를 주시겠어요?' },
+    { en: 'Can I have cream and sugar?', ko: '크림과 설탕을 주시겠어요?' },
+    { en: 'Can I have a fork?', ko: '포크를 주시겠어요?' },
+    { en: 'Can I have some ice cream?', ko: '아이스크림을 좀 주시겠어요?' },
+  ]},
+  // A1 - Greeting
+  { id: 'p_A1_greeting_001', pattern: 'Nice to meet ~', explanation: '처음 만날 때 인사하는 표현입니다.', level: 'A1', topic: 'greeting', examples: [
+    { en: 'Nice to meet you.', ko: '만나서 반가워요.' },
+    { en: 'Nice to meet you too.', ko: '저도 만나서 반가워요.' },
+    { en: 'It\'s nice to meet you.', ko: '당신을 만나니 좋아요.' },
+  ]},
+  { id: 'p_A1_greeting_002', pattern: 'How are ~?', explanation: '상대의 상태를 묻는 표현입니다.', level: 'A1', topic: 'greeting', examples: [
+    { en: 'How are you?', ko: '어떻게 지내세요?' },
+    { en: 'How are things?', ko: '요즘 어때요?' },
+    { en: 'How are you doing?', ko: '잘 지내고 있어요?' },
+  ]},
+
+  // ─── B1 LEVEL ───────────────────────────────────────────────────────────────
+  // B1 - Travel
+  { id: 'p_B1_travel_001', pattern: 'Could you please ~?', explanation: '정중하게 도움을 요청하는 패턴입니다.', level: 'B1', topic: 'travel', examples: [
+    { en: 'Could you please recommend a good hotel?', ko: '좋은 호텔을 추천해 주시겠어요?' },
+    { en: 'Could you please check my reservation?', ko: '제 예약을 확인해 주시겠어요?' },
+    { en: 'Could you please call a taxi for me?', ko: '저를 위해 택시를 불러 주시겠어요?' },
+    { en: 'Could you please give me directions?', ko: '길을 알려 주시겠어요?' },
+    { en: 'Could you please help me with my luggage?', ko: '제 수하물을 도와주시겠어요?' },
+  ]},
+  { id: 'p_B1_travel_002', pattern: 'I\'m looking forward to ~', explanation: '앞으로 있을 일을 기대한다는 표현입니다.', level: 'B1', topic: 'travel', examples: [
+    { en: 'I\'m looking forward to visiting Paris.', ko: '나는 파리 방문을 기대하고 있어요.' },
+    { en: 'I\'m looking forward to the trip.', ko: '나는 여행을 기대하고 있어요.' },
+    { en: 'I\'m looking forward to seeing you.', ko: '나는 당신을 만나는 것을 기대하고 있어요.' },
+    { en: 'I\'m looking forward to relaxing at the beach.', ko: '나는 해변에서 쉬는 것을 기대하고 있어요.' },
+  ]},
+  // B1 - Work
+  { id: 'p_B1_work_001', pattern: 'I\'m afraid ~ is not ~', explanation: '안타깝게도 무언가가 불가능함을 말할 때 쓰는 패턴입니다.', level: 'B1', topic: 'work', examples: [
+    { en: 'I\'m afraid that\'s not possible.', ko: '안타깝게도 그것은 불가능해요.' },
+    { en: 'I\'m afraid I don\'t have the information.', ko: '안타깝게도 그 정보를 가지고 있지 않아요.' },
+    { en: 'I\'m afraid he\'s not available.', ko: '안타깝게도 그는 이용할 수 없어요.' },
+    { en: 'I\'m afraid the meeting is cancelled.', ko: '안타깝게도 회의는 취소되었어요.' },
+  ]},
+  { id: 'p_B1_work_002', pattern: 'Could I ~?', explanation: '상대에게 무언가를 할 수 있는지 물어보는 정중한 표현입니다.', level: 'B1', topic: 'work', examples: [
+    { en: 'Could I have a few minutes to think about this?', ko: '이것에 대해 생각할 시간을 가져도 될까요?' },
+    { en: 'Could I ask you a question?', ko: '당신에게 질문을 물어봐도 될까요?' },
+    { en: 'Could I send you the document?', ko: '당신에게 문서를 보내도 될까요?' },
+    { en: 'Could I schedule a meeting with you?', ko: '당신과 회의 일정을 짜도 될까요?' },
+  ]},
+  // B1 - Environment
+  { id: 'p_B1_environment_001', pattern: 'It looks like ~', explanation: '보이는 모습이나 상황을 설명하는 패턴입니다.', level: 'B1', topic: 'environment', examples: [
+    { en: 'It looks like it\'s going to rain.', ko: '비가 올 것 같아요.' },
+    { en: 'It looks like you\'re busy.', ko: '당신이 바쁜 것 같아요.' },
+    { en: 'It looks like the weather is getting worse.', ko: '날씨가 악화되는 것 같아요.' },
+    { en: 'It looks like everyone is here.', ko: '모두가 여기 있는 것 같아요.' },
+  ]},
+
+  // ─── C1 LEVEL ───────────────────────────────────────────────────────────────
+  // C1 - Travel
+  { id: 'p_C1_travel_001', pattern: 'It would be more convenient if ~', explanation: '조건을 제시하면서 더 편할 것 같다고 말하는 패턴입니다.', level: 'C1', topic: 'travel', examples: [
+    { en: 'It would be more convenient if we left earlier.', ko: '우리가 더 일찍 떠나면 더 편할 것 같아요.' },
+    { en: 'It would be more convenient if you confirmed the time.', ko: '당신이 시간을 확인하면 더 편할 것 같아요.' },
+    { en: 'It would be more convenient if the hotel provided transport.', ko: '호텔이 교통편을 제공하면 더 편할 것 같아요.' },
+  ]},
+  { id: 'p_C1_travel_002', pattern: 'Provided that ~', explanation: '특정 조건을 가정하는 패턴입니다.', level: 'C1', topic: 'travel', examples: [
+    { en: 'Provided that the weather is good, we\'ll go hiking.', ko: '날씨가 좋다면 우리는 등산을 갈 거예요.' },
+    { en: 'Provided that you have time, let\'s meet tomorrow.', ko: '시간이 있다면 내일 만나요.' },
+    { en: 'Provided that everything is arranged, the trip will be smooth.', ko: '모든 것이 준비되면 여행이 순탄할 거예요.' },
+  ]},
+  // C1 - Work
+  { id: 'p_C1_work_001', pattern: 'Rather than ~, I would prefer ~', explanation: '두 가지 옵션 중 하나를 더 선호한다는 표현입니다.', level: 'C1', topic: 'work', examples: [
+    { en: 'Rather than email, I would prefer to call.', ko: '이메일보다는 전화하는 것이 더 좋아요.' },
+    { en: 'Rather than wait, I would prefer to take action now.', ko: '기다리기보다는 지금 조치를 취하는 것이 더 좋아요.' },
+    { en: 'Rather than postpone, I would prefer to discuss it today.', ko: '미루기보다는 오늘 그것을 논의하는 것이 더 좋아요.' },
+  ]},
+  { id: 'p_C1_work_002', pattern: 'It is imperative that ~', explanation: '무언가가 매우 중요하다는 표현입니다.', level: 'C1', topic: 'work', examples: [
+    { en: 'It is imperative that we complete this project on time.', ko: '우리가 이 프로젝트를 제때 완료하는 것이 매우 중요해요.' },
+    { en: 'It is imperative that you understand the requirements.', ko: '당신이 요구사항을 이해하는 것이 매우 중요해요.' },
+    { en: 'It is imperative that the data be accurate.', ko: '데이터가 정확해야 하는 것이 매우 중요해요.' },
+  ]},
+];
