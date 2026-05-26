@@ -87,8 +87,15 @@ function ECScreenHome() {
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <ECStatusBar />
 
-      {/* Top bar — fixed (not scrollable) */}
-      <div style={{ padding: '6px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0, background: T.bg1, zIndex: 5 }}>
+      <div ref={scrollRef} style={{ flex: 1, minHeight: 0, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}>
+
+      {/* Top bar — sticky pinned to top of scroll container */}
+      <div style={{
+        position: 'sticky', top: 0, zIndex: 50,
+        padding: '6px 22px 10px',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        background: T.bg1,
+      }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
           <div style={{ fontFamily: T.serif, fontSize: 22, letterSpacing: -0.4, color: T.text }}>
             EngCat
@@ -104,8 +111,6 @@ function ECScreenHome() {
           <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>0</span>
         </div>
       </div>
-
-      <div ref={scrollRef} style={{ flex: 1, minHeight: 0, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}>
 
       {/* Greeting */}
       <div style={{ padding: '24px 22px 18px' }}>
