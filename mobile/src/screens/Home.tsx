@@ -1,14 +1,16 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   View, Text, ScrollView, StyleSheet, TouchableOpacity, Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import { useTokens } from '../theme/useTokens';
 import { useCardsStore } from '../store/useCardsStore';
 import { useUserStore } from '../store/useUserStore';
 import { Icon } from '../components/icons';
 import { Placeholder } from '../components/primitives/Placeholder';
-import { getTodaySession, getDayOfYear } from '../utils/todaySession';
+import { getTodaySession, getReviewSession, getDayOfYear } from '../utils/todaySession';
+import { loadRecord, yesterdayKey, LearningRecord } from '../utils/learningRecord';
 
 const COMP_LABELS: Record<keyof ReturnType<typeof getTodaySession>['composition'], string> = {
   words:        '단어',
@@ -54,14 +56,29 @@ export default function HomeScreen({ navigation }: Props) {
     () => getTodaySession(words, expressions, level),
     [words, expressions, level],
   );
-  const { topicLabel: todayTopicLabel, words: sessionWords, composition, totalCards } = session;
+  const { topicLabel: todayTopicLabel, composition, totalCards } = session;
 
   const totalDone = completedWordIds.size + completedSentenceIds.size;
   const progress  = totalCards > 0 ? Math.min(totalDone / totalCards, 1) : 0;
-  const isFirstDay = totalDone === 0;
   const quizUnlocked = totalDone >= totalCards && totalCards > 0;
 
-  const reviewWords = sessionWords; // 오늘 분량의 단어만 표시
+  // 어제 학습 기록 (있으면 복습, 없으면 예습)
+  const [yesterday, setYesterday] = useState<LearningRecord>({ wordIds: [], sentenceIds: [] });
+  useFocusEffect(
+    React.useCallback(() => {
+      let cancelled = false;
+      loadRecord(yesterdayKey()).then(r => { if (!cancelled) setYesterday(r); });
+      return () => { cancelled = true; };
+    }, []),
+  );
+
+  const review = useMemo(
+    () => getReviewSession(yesterday, words, expressions, level),
+    [yesterday, words, expressions, level],
+  );
+  const reviewWords    = review.words;
+  const reviewPatterns = review.patterns;
+  const reviewCount    = reviewWords.length + reviewPatterns.length;
 
   const compEntries = (Object.keys(composition) as (keyof typeof composition)[])
     .filter(k => composition[k] > 0)
@@ -147,13 +164,13 @@ export default function HomeScreen({ navigation }: Props) {
         </View>
 
         {/* ── 복습할 것 / 예습하기 ── */}
-        {reviewWords.length > 0 && (
+        {reviewCount > 0 && (
           <>
             <View style={styles.sectionHeader}>
               <Text style={[styles.sectionTitle, { color: T.text }]}>
-                {isFirstDay ? '예습하기' : '복습할 것'}
+                {review.isPreview ? '예습하기' : '복습할 것'}
               </Text>
-              <Text style={[styles.sectionCount, { color: T.textDim }]}>{reviewWords.length}개</Text>
+              <Text style={[styles.sectionCount, { color: T.textDim }]}>{reviewCount}개</Text>
             </View>
             <ScrollView
               horizontal
@@ -163,7 +180,7 @@ export default function HomeScreen({ navigation }: Props) {
             >
               {reviewWords.map(w => (
                 <TouchableOpacity
-                  key={w.id}
+                  key={`w-${w.id}`}
                   onPress={() => {
                     const idx = words.findIndex(x => x.id === w.id);
                     if (idx >= 0) {
@@ -178,6 +195,31 @@ export default function HomeScreen({ navigation }: Props) {
                     : <Placeholder height={150} tint={w.tint} radius={14} label={w.en} />}
                   <Text style={[styles.reviewEn, { color: T.text, fontFamily: T.display }]}>{w.en}</Text>
                   <Text style={[styles.reviewKo, { color: T.textDim }]}>{w.ko.split(',')[0]}</Text>
+                </TouchableOpacity>
+              ))}
+              {reviewPatterns.map(p => (
+                <TouchableOpacity
+                  key={`p-${p.id}`}
+                  onPress={() => {
+                    const idx = expressions.findIndex(x => x.id === p.id);
+                    if (idx >= 0) {
+                      useCardsStore.getState().setSentenceIndex(idx);
+                      navigation.navigate('SentenceCard');
+                    }
+                  }}
+                  style={{ width: 130 }}
+                >
+                  {p.img
+                    ? <Image source={{ uri: p.img }} style={{ width: '100%', height: 150, borderRadius: 14 }} />
+                    : <Placeholder height={150} tint={p.tint} radius={14} label={p.en} />}
+                  <Text
+                    style={[styles.reviewEn, { color: T.text, fontFamily: T.display }]}
+                    numberOfLines={2}
+                  >{p.en}</Text>
+                  <Text
+                    style={[styles.reviewKo, { color: T.textDim }]}
+                    numberOfLines={1}
+                  >{p.ko}</Text>
                 </TouchableOpacity>
               ))}
             </ScrollView>
