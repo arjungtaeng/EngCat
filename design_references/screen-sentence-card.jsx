@@ -168,13 +168,13 @@ function ECScreenSentenceCard() {
 
   return (
     <div
-      style={{ flex: 1, minHeight: 0, background: T.bg1, position: 'relative', overflow: 'hidden' }}
+      style={{ flex: 1, minHeight: 0, background: T.bg1, position: 'relative', overflow: 'hidden', marginTop: 'calc(-1 * env(safe-area-inset-top, 0px))' }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
 
       {/* Top chrome */}
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10, paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         <ECStatusBar/>
         <div style={{ padding: '6px 18px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div onClick={() => window.ECNav?.go('home')} style={{

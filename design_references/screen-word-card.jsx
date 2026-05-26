@@ -140,13 +140,13 @@ function ECScreenWordCard() {
 
   return (
     <div
-      style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}
+      style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden', marginTop: 'calc(-1 * env(safe-area-inset-top, 0px))' }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
 
       {/* ── Top chrome ── */}
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10, paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         <ECStatusBar/>
         <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{
