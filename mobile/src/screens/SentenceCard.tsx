@@ -193,7 +193,17 @@ export default function SentenceCardScreen({ navigation }: Props) {
             <Text style={[styles.examplesLabel, { color: T.textMute, fontFamily: T.mono }]}>
               사용 예시
             </Text>
-            {s.examples.map((ex, i) => <ExRow key={i} en={ex.en} ko={ex.ko} />)}
+            {s.examples.map((ex, i) => (
+              <View key={i} style={[styles.exBox, { backgroundColor: 'rgba(255,255,255,0.06)', borderColor: T.hair }]}>
+                <View style={{ flex: 1 }}>
+                  <Text style={[styles.exBoxEn, { color: T.text, fontFamily: T.thin }]}>{ex.en}</Text>
+                  {ex.ko ? <Text style={[styles.exBoxKo, { color: T.textDim }]}>{ex.ko}</Text> : null}
+                </View>
+                <TouchableOpacity style={[styles.speakerBtn, { backgroundColor: T.accentSoft, borderColor: T.accentSoft }]}>
+                  <Icon.speaker color={T.accent} size={15} />
+                </TouchableOpacity>
+              </View>
+            ))}
           </View>
         )}
       </View>
@@ -309,6 +319,10 @@ const styles = StyleSheet.create({
   patternKo:      { fontSize: 15, lineHeight: 22, marginBottom: 16 },
   examplesSection: { marginTop: 16 },
   examplesLabel:  { fontSize: 9.5, letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 10 },
+  exBox:          { borderRadius: 14, padding: 14, borderWidth: 1, flexDirection: 'row', alignItems: 'flex-start', gap: 12, marginBottom: 10 },
+  exBoxEn:        { fontSize: 15, lineHeight: 22 },
+  exBoxKo:        { fontSize: 12, marginTop: 4, lineHeight: 18 },
+  speakerBtn:     { width: 34, height: 34, borderRadius: 999, borderWidth: 1, alignItems: 'center', justifyContent: 'center', marginTop: 2 },
   // Bottom
   bottomBar:      { position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 12, paddingHorizontal: 18 },
   stripRow:       { flexDirection: 'row', gap: 3, paddingBottom: 8, height: 24, alignItems: 'center' },
