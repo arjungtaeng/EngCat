@@ -36,7 +36,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 272;</script>
+<script>window.EC_VER = 273;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/supabase.jsx"></script>
@@ -156,7 +156,7 @@
     navigator.serviceWorker.addEventListener('controllerchange', () => {
       if (!refreshing) { refreshing = true; location.reload(true); }
     });
-    navigator.serviceWorker.register('/sw.js').then(reg => {
+    navigator.serviceWorker.register('/EngCat/sw.js').then(reg => {
       window._swReg = reg;
       reg.update();
     });
