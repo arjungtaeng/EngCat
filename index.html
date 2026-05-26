@@ -76,6 +76,7 @@
       window.ECNav.go = (s) => {
         setScreen(s);
         if (window._swReg) window._swReg.update();
+        if (window.checkVersion) window.checkVersion();
       };
 
       window.ECSetTheme = (pref) => {
@@ -135,16 +136,20 @@
 </script>
 
 <script>
-  function checkVersion() {
+  window.checkVersion = function() {
     fetch('/EngCat/version.json?t=' + Date.now(), { cache: 'no-store' })
       .then(r => r.json())
       .then(data => { if (data.v > window.EC_VER) location.reload(true); })
       .catch(() => {});
-  }
-  checkVersion();
+  };
+  window.checkVersion();
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') checkVersion();
+    if (document.visibilityState === 'visible') window.checkVersion();
   });
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) window.checkVersion();
+  });
+  window.addEventListener('focus', () => window.checkVersion());
 
   if ('serviceWorker' in navigator) {
     let refreshing = false;
