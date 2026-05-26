@@ -21,10 +21,10 @@ window.EC_TOPIC_ORDER = [
 window.EC_CEFR_COMPOSITIONS = {
   A1: { words: 10, patterns: 5, collocations: 0, idioms: 0, nuances: 0 },
   A2: { words: 10, patterns: 5, collocations: 0, idioms: 0, nuances: 0 },
-  B1: { words: 8,  patterns: 4, collocations: 3, idioms: 0, nuances: 0 },
-  B2: { words: 8,  patterns: 4, collocations: 3, idioms: 0, nuances: 0 },
-  C1: { words: 6,  patterns: 3, collocations: 3, idioms: 2, nuances: 1 },
-  C2: { words: 6,  patterns: 3, collocations: 3, idioms: 2, nuances: 1 },
+  B1: { words: 10, patterns: 4, collocations: 3, idioms: 0, nuances: 0 },
+  B2: { words: 10, patterns: 4, collocations: 3, idioms: 0, nuances: 0 },
+  C1: { words: 10, patterns: 3, collocations: 3, idioms: 2, nuances: 1 },
+  C2: { words: 10, patterns: 3, collocations: 3, idioms: 2, nuances: 1 },
 };
 
 window.ECGetDayOfYear = function(now) {
@@ -44,14 +44,21 @@ function _shuffleStable(arr, seed) {
     .map(o => o.x);
 }
 
+function _getUserId() {
+  try {
+    const u = JSON.parse(localStorage.getItem('engcat_user') || '{}');
+    return u.email || 'guest';
+  } catch(e) { return 'guest'; }
+}
+
 function _todayKey() {
-  return 'ec_learned_' + new Date().toISOString().slice(0, 10);
+  return 'ec_learned_' + _getUserId() + '_' + new Date().toISOString().slice(0, 10);
 }
 
 function _yesterdayKey() {
   const d = new Date();
   d.setDate(d.getDate() - 1);
-  return 'ec_learned_' + d.toISOString().slice(0, 10);
+  return 'ec_learned_' + _getUserId() + '_' + d.toISOString().slice(0, 10);
 }
 
 function _loadLearned(key) {
@@ -149,6 +156,7 @@ window.ECGetTodaySession = function() {
 // 첫날 (어제 학습 없음): 무작위 예습 단어/패턴
 window.ECGetReviewSession = function() {
   const level = localStorage.getItem('ec_user_level') || 'B1';
+  const comp = window.EC_CEFR_COMPOSITIONS[level] || window.EC_CEFR_COMPOSITIONS.B1;
   const data = window.ECData || { words: [], patterns: [] };
   const allWords = data.words || [];
   const allPatterns = data.patterns || [];
@@ -184,12 +192,12 @@ window.ECGetReviewSession = function() {
     };
   }
 
-  // 첫날: 예습 (랜덤 선택, 레벨 매칭)
+  // 첫날: 예습 (레벨 composition에 따라)
   const seed = window.ECGetDayOfYear();
   const wordsForLevel = allWords.filter(w => !w.cefr || w.cefr === level);
   const patternsForLevel = allPatterns.filter(p => p.level === level);
-  const previewWords = _shuffleStable(wordsForLevel, seed).slice(0, 4);
-  const previewPatterns = _shuffleStable(patternsForLevel, seed).slice(0, 4);
+  const previewWords = _shuffleStable(wordsForLevel, seed).slice(0, comp.words);
+  const previewPatterns = _shuffleStable(patternsForLevel, seed).slice(0, comp.patterns);
 
   return {
     isPreview: true,
