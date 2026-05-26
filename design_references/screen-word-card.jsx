@@ -171,7 +171,7 @@ function ECScreenWordCard() {
       >
         {/* Hero — fixed background at top (z:1). Bottom gradient fades into body bg. */}
         <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, height: '65%',
+          position: 'absolute', top: 0, left: 0, right: 0, height: '70%',
           zIndex: 1, overflow: 'hidden',
         }}>
           {word.img
