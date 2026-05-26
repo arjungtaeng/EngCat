@@ -212,21 +212,24 @@ function ECScreenHome() {
         </div>
         <div style={{ padding: '0 22px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {reviewExpressions.map((e, i) => {
-            const type = e._type || (e.pattern ? 'pattern' : (e.verb || e.noun) ? 'collocation' : e.literalKo ? 'idiom' : (e.wordA || e.wordB) ? 'nuance' : 'pattern');
+            const type = e._type || e.type || (e.pattern ? 'pattern' : (e.verb || e.noun) ? 'collocation' : e.literalKo ? 'idiom' : (e.wordA || e.wordB) ? 'nuance' : 'pattern');
             const typeLabel = EXPR_TYPE_LABELS[type] || '패턴';
             const title = e.pattern || e.en || (e.wordA && e.wordB ? `${e.wordA} vs ${e.wordB}` : '');
             const desc  = e.explanation || e.ko || e.comparison || '';
             return (
               <div key={e.id || i} onClick={() => {
-                if (type === 'pattern') {
-                  window.ECSession.sentenceIndex = i;
-                  window.ECNav?.go('sentence-card');
-                }
+                window.ECCardSource = {
+                  mode: isPreview ? 'preview' : 'review',
+                  expressions: reviewExpressions,
+                  startIndex: i,
+                };
+                window.ECSession.sentenceIndex = i;
+                window.ECNav?.go('sentence-card');
               }} style={{
                 padding: '14px 16px', borderRadius: 14,
                 background: T.bg2, border: `1px solid ${T.hair}`,
                 display: 'flex', alignItems: 'center', gap: 12,
-                cursor: type === 'pattern' ? 'pointer' : 'default',
+                cursor: 'pointer',
               }}>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
@@ -246,11 +249,9 @@ function ECScreenHome() {
                     </div>
                   )}
                 </div>
-                {type === 'pattern' && (
-                  <div style={{ color: T.textMute, flexShrink: 0 }}>
-                    {ECIcon.chev('right', T.textMute, 16)}
-                  </div>
-                )}
+                <div style={{ color: T.textMute, flexShrink: 0 }}>
+                  {ECIcon.chev('right', T.textMute, 16)}
+                </div>
               </div>
             );
           })}
