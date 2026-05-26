@@ -175,25 +175,23 @@ function ECScreenWordCard() {
         </div>
       </div>
 
-      {/* ── Swipe layer: hero (fixed) + scroll text area below ── */}
+      {/* ── Swipe layer ── */}
       <div
-        key={animKey}
-        className="ec-fade-up"
         style={{
           position: 'absolute',
           top: 0,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)',
           left: 0,
           right: 0,
-          zIndex: 5,
-          display: 'flex',
-          flexDirection: 'column',
           transform: contentTransform,
           transition: contentTransition,
         }}
       >
-        {/* Hero — fixed at top, never scrolls and never gets covered */}
-        <div style={{ position: 'relative', width: '100%', height: 320, flexShrink: 0, overflow: 'hidden' }}>
+        {/* Hero — fixed background at top (z:1). Bottom gradient fades into body bg. */}
+        <div style={{
+          position: 'absolute', top: 0, left: 0, right: 0, height: 320,
+          zIndex: 1, overflow: 'hidden',
+        }}>
           {word.img
             ? <img src={word.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={word.en} />
             : <ECPlaceholder height="100%" tint={word.tint} radius={0} label={`hero · ${word.en}`}/>
@@ -206,14 +204,20 @@ function ECScreenWordCard() {
           }}/>
         </div>
 
-        {/* Text-only scroll area — moves up/down without covering the hero */}
-        <div style={{
-          flex: 1,
-          minHeight: 0,
-          overflowY: 'auto',
-          WebkitOverflowScrolling: 'touch',
-        }}>
-        <div style={{ padding: '4px 22px 24px' }}>
+        {/* Text scroll layer (z:5) — flows over the hero as the user scrolls up */}
+        <div
+          key={animKey}
+          className="ec-fade-up"
+          style={{
+            position: 'absolute', inset: 0,
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            zIndex: 5,
+          }}
+        >
+          {/* Peek-through spacer matching hero height — text starts just below hero */}
+          <div style={{ height: 320, flexShrink: 0, pointerEvents: 'none' }} />
+          <div style={{ padding: '4px 22px 24px' }}>
           {/* POS chip + IPA */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
             <div style={{
