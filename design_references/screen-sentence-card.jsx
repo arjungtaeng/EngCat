@@ -1,6 +1,9 @@
-// EngCat — Pattern card
-// 패턴("I want to ~") + 한글 설명 + 예문 리스트 (영문 + 번역 + 듣기 버튼)
-// 데이터 소스: window.ECData.patterns (레벨/토픽별로 분류)
+// EngCat — Expression card (패턴 · 콜로 · 이디엄 · 뉘앙스)
+// 단일 카드 화면에서 4가지 표현 타입을 모두 처리합니다.
+// 진입 소스(window.ECCardSource.expressions)가 있으면 그 리스트를 사용,
+// 없으면 사용자 레벨에 맞는 ECData.patterns만 보여줍니다.
+
+const EC_TYPE_LABELS = { pattern: '패턴', collocation: '콜로', idiom: '이디엄', nuance: '뉘앙스' };
 
 function ECScreenSentenceCard() {
   const T = ECTokens;
@@ -18,11 +21,22 @@ function ECScreenSentenceCard() {
     catch(e) { return 'B1'; }
   })();
 
-  // 사용자 레벨에 맞는 패턴들만 필터링
-  const allPatterns = (window.ECData && window.ECData.patterns) || [];
-  const patterns = allPatterns.filter(p => p.level === userLevel);
+  // 진입 소스: 홈에서 표현 리스트로 들어온 경우 그 목록을 사용
+  const cardSource = React.useRef(window.ECCardSource || null);
+  React.useEffect(() => { window.ECCardSource = null; }, []);
 
-  const [idx, setIdx] = React.useState((session && session.sentenceIndex) || 0);
+  // 데이터 소스: 외부 source가 있으면 그걸, 아니면 사용자 레벨의 패턴들
+  const allPatterns = (window.ECData && window.ECData.patterns) || [];
+  const externalList = cardSource.current && cardSource.current.expressions;
+  const patterns = (externalList && externalList.length > 0)
+    ? externalList
+    : allPatterns.filter(p => p.level === userLevel);
+
+  const [idx, setIdx] = React.useState(
+    (cardSource.current && typeof cardSource.current.startIndex === 'number')
+      ? cardSource.current.startIndex
+      : (session && session.sentenceIndex) || 0
+  );
 
   // sentenceIndex가 범위를 벗어나면 0으로 보정
   React.useEffect(() => {
@@ -115,20 +129,57 @@ function ECScreenSentenceCard() {
 
   const speak = (text) => window.ECSpeak && window.ECSpeak(text);
 
-  // Resolve a topic-relevant hero image from words sharing the same topic
+  // ───── Type-based field derivation ─────────────────────────────────────────
+  const type = p.type
+    || (p.pattern ? 'pattern'
+      : (p.verb || p.noun) ? 'collocation'
+      : p.literalKo ? 'idiom'
+      : (p.wordA || p.wordB) ? 'nuance'
+      : 'pattern');
+
+  const title = type === 'pattern' ? p.pattern
+    : type === 'nuance' ? `${p.wordA || ''} vs ${p.wordB || ''}${p.wordC ? ` vs ${p.wordC}` : ''}`
+    : (p.en || '');
+
+  const desc = type === 'pattern' ? p.explanation
+    : type === 'nuance' ? p.comparison
+    : p.ko;
+
+  const literal = type === 'idiom' ? (p.literalKo || '') : '';
+  const tip = (type !== 'pattern') ? (p.tip || '') : '';
+
+  const examples = type === 'pattern' ? (p.examples || [])
+    : type === 'nuance' ? [
+        p.exA ? { en: p.exA, ko: `${p.wordA}${p.koA ? ` · ${p.koA}` : ''}` } : null,
+        p.exB ? { en: p.exB, ko: `${p.wordB}${p.koB ? ` · ${p.koB}` : ''}` } : null,
+        p.exC ? { en: p.exC, ko: `${p.wordC}${p.koC ? ` · ${p.koC}` : ''}` } : null,
+      ].filter(Boolean)
+    : [
+        p.ex1 ? { en: p.ex1, ko: p.ex1Ko || '' } : null,
+        p.ex2 ? { en: p.ex2, ko: p.ex2Ko || '' } : null,
+        (type === 'idiom' && p.ex3) ? { en: p.ex3, ko: p.ex3Ko || '' } : null,
+      ].filter(Boolean);
+
+  const levelLabel = p.level || p.cefr || '';
+  const topicLabel = p.topic || p.topicId || '';
+  const typeLabel = EC_TYPE_LABELS[type] || '표현';
+
+  // Resolve hero image — prefer own image, fallback to a word sharing the topic
   const heroImg = React.useMemo(() => {
+    if (p.img) return p.img;
     const words = (window.ECData && window.ECData.words) || [];
-    const match = words.find(w => w.topicId === p.topic && w.img);
+    const match = words.find(w => w.topicId === topicLabel && w.img);
     return match ? match.img : null;
-  }, [p.topic, dataVersion]);
+  }, [p.id, p.img, topicLabel, dataVersion]);
   const heroTint = React.useMemo(() => {
+    if (p.tint) return p.tint;
     const words = (window.ECData && window.ECData.words) || [];
-    const match = words.find(w => w.topicId === p.topic);
+    const match = words.find(w => w.topicId === topicLabel);
     return (match && match.tint) || '#1a2a3a';
-  }, [p.topic, dataVersion]);
+  }, [p.id, p.tint, topicLabel, dataVersion]);
 
   const swipingPrev = swipeX > 30 && !isFirst;
-  const btnLabel = swipingPrev ? '이전 패턴' : isLast ? '홈으로' : '다음 패턴';
+  const btnLabel = swipingPrev ? `이전 ${typeLabel}` : isLast ? '홈으로' : `다음 ${typeLabel}`;
   const btnBg    = swipingPrev ? (isDark ? 'rgba(255,255,255,0.10)' : T.bg2) : T.accent;
   const btnColor = swipingPrev ? T.text : T.accentText;
   const btnBd    = swipingPrev ? T.hair : 'none';
@@ -161,7 +212,7 @@ function ECScreenSentenceCard() {
             backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
             border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
             fontFamily: T.mono, fontSize: 10.5, color: T.textDim, letterSpacing: 1, textTransform: 'uppercase',
-          }}>{idx + 1} / {patterns.length} · 패턴</div>
+          }}>{idx + 1} / {patterns.length} · {typeLabel}</div>
           <div style={{ width: 36 }}/>
         </div>
       </div>
@@ -187,8 +238,8 @@ function ECScreenSentenceCard() {
         {/* Hero image */}
         <div style={{ position: 'relative', width: '100%', height: 260, flexShrink: 0, overflow: 'hidden' }}>
           {heroImg
-            ? <img src={heroImg} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={p.pattern} />
-            : <ECPlaceholder height="100%" tint={heroTint} radius={0} label={`hero · ${p.topic}`}/>
+            ? <img src={heroImg} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={title} />
+            : <ECPlaceholder height="100%" tint={heroTint} radius={0} label={`hero · ${topicLabel}`}/>
           }
           <div style={{
             position: 'absolute', inset: 0,
@@ -201,49 +252,91 @@ function ECScreenSentenceCard() {
         <div style={{ padding: '4px 22px 20px' }}>
 
 
-          {/* Level + Topic chips */}
-          <div style={{ display: 'flex', gap: 8, marginBottom: 18 }}>
+          {/* Type + Level + Topic chips */}
+          <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
             <div style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: '5px 10px', borderRadius: 6,
               background: T.accentSoft, color: T.accent,
               fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase', fontWeight: 600,
             }}>
-              {p.level}
+              {typeLabel}
             </div>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center',
-              padding: '5px 10px', borderRadius: 6,
-              background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2, color: T.textDim,
-              fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase',
-            }}>
-              {p.topic}
-            </div>
+            {levelLabel && (
+              <div style={{
+                display: 'inline-flex', alignItems: 'center',
+                padding: '5px 10px', borderRadius: 6,
+                background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2, color: T.textDim,
+                fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase', fontWeight: 600,
+              }}>
+                {levelLabel}
+              </div>
+            )}
+            {topicLabel && (
+              <div style={{
+                display: 'inline-flex', alignItems: 'center',
+                padding: '5px 10px', borderRadius: 6,
+                background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2, color: T.textDim,
+                fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase',
+              }}>
+                {topicLabel}
+              </div>
+            )}
           </div>
 
-          {/* Pattern title — "I want to ~" (단어 카드 예문과 같은 T.thin 폰트) */}
+          {/* Title — pattern/en/comparison head (단어 카드와 같은 T.thin 폰트) */}
           <div style={{
             fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 38, lineHeight: 1.15,
             color: T.text, letterSpacing: -0.5, marginBottom: 14, wordBreak: 'break-word',
           }}>
-            {p.pattern}
+            {title}
           </div>
 
           {/* Korean explanation */}
-          <div style={{
-            fontSize: 14.5, color: T.textDim, lineHeight: 1.55, marginBottom: 28, letterSpacing: -0.1,
-          }}>
-            {p.explanation}
-          </div>
+          {desc && (
+            <div style={{
+              fontSize: 14.5, color: T.textDim, lineHeight: 1.55, marginBottom: literal || tip ? 14 : 28, letterSpacing: -0.1,
+            }}>
+              {desc}
+            </div>
+          )}
+
+          {/* Literal (idiom only) */}
+          {literal && (
+            <div style={{
+              fontFamily: T.mono, fontSize: 12, color: T.textMute, lineHeight: 1.5,
+              padding: '10px 14px', borderRadius: 10,
+              background: isDark ? 'rgba(255,255,255,0.04)' : T.bg2,
+              border: `1px dashed ${T.hair}`,
+              marginBottom: tip ? 14 : 28,
+            }}>
+              <span style={{ color: T.accent, letterSpacing: 1.2, textTransform: 'uppercase', fontWeight: 600, fontSize: 9.5 }}>직역 </span>
+              <span style={{ marginLeft: 6 }}>{literal}</span>
+            </div>
+          )}
+
+          {/* Tip (collocation / idiom / nuance) */}
+          {tip && (
+            <div style={{
+              fontSize: 13, color: T.text, lineHeight: 1.5,
+              padding: '12px 14px', borderRadius: 12,
+              background: T.accentSoft,
+              border: `1px solid ${T.accent}22`,
+              marginBottom: 28,
+            }}>
+              <div style={{ fontFamily: T.mono, fontSize: 9.5, color: T.accent, letterSpacing: 1.2, textTransform: 'uppercase', fontWeight: 600, marginBottom: 4 }}>Tip</div>
+              {tip}
+            </div>
+          )}
 
           {/* Examples section */}
-          {p.examples && p.examples.length > 0 ? (
+          {examples && examples.length > 0 ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{
                 fontFamily: T.mono, fontSize: 9.5, color: T.textMute,
                 letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 4,
               }}>예문</div>
-              {p.examples.map((ex, i) => (
+              {examples.map((ex, i) => (
                 <div key={i} style={{
                   padding: '14px 16px', borderRadius: 14,
                   background: isDark ? 'rgba(255,255,255,0.05)' : T.bg2,
