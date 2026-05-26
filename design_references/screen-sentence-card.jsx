@@ -217,39 +217,54 @@ function ECScreenSentenceCard() {
         </div>
       </div>
 
-      {/* Scrollable content */}
+      {/* Swipe layer (carries hero + scroll layer horizontally between cards) */}
       <div
-        key={animKey}
-        className="ec-fade-up"
         style={{
           position: 'absolute',
           top: 0,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)',
           left: 0, right: 0,
-          overflowY: 'auto',
-          WebkitOverflowScrolling: 'touch',
-          zIndex: 5,
-          display: 'flex',
-          flexDirection: 'column',
           transform: contentTransform,
           transition: contentTransition,
         }}
       >
-        {/* Hero image */}
-        <div style={{ position: 'relative', width: '100%', height: 260, flexShrink: 0, overflow: 'hidden' }}>
+        {/* Hero — stationary background; vertical scroll does NOT move it */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 260, zIndex: 1, overflow: 'hidden' }}>
           {heroImg
             ? <img src={heroImg} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={title} />
             : <ECPlaceholder height="100%" tint={heroTint} radius={0} label={`hero · ${topicLabel}`}/>
           }
+          {/* Subtle top darkening so the progress chip reads cleanly */}
           <div style={{
-            position: 'absolute', inset: 0,
+            position: 'absolute', top: 0, left: 0, right: 0, height: 120,
             background: isDark
-              ? `linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, ${T.bg1} 100%)`
-              : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 25%, transparent 55%, ${T.bg1} 100%)`,
+              ? 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)'
+              : 'linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, transparent 100%)',
           }}/>
         </div>
 
-        <div style={{ padding: '4px 22px 20px' }}>
+        {/* Scrollable text layer — scrolls over the stationary hero */}
+        <div
+          key={animKey}
+          className="ec-fade-up"
+          style={{
+            position: 'absolute', inset: 0,
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            zIndex: 5,
+          }}
+        >
+          {/* Peek-through spacer — keeps hero visible at top until user scrolls */}
+          <div style={{ height: 210, pointerEvents: 'none' }} />
+
+          {/* Solid content sheet — slides up over the hero as user scrolls */}
+          <div style={{
+            background: T.bg1,
+            borderRadius: '20px 20px 0 0',
+            padding: '20px 22px 24px',
+            minHeight: 'calc(100% - 50px)',
+            boxShadow: isDark ? '0 -8px 24px rgba(0,0,0,0.35)' : '0 -4px 16px rgba(0,0,0,0.08)',
+          }}>
 
 
           {/* Type + Level + Topic chips */}
@@ -368,6 +383,7 @@ function ECScreenSentenceCard() {
               예문이 아직 없어요.
             </div>
           )}
+          </div>
         </div>
       </div>
 
