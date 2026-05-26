@@ -41,7 +41,7 @@ interface Props {
 
 export default function HomeScreen({ navigation }: Props) {
   const T = useTokens();
-  const { name, level, streakDays } = useUserStore();
+  const { id: userId, name, level, streakDays } = useUserStore();
   const {
     words, expressions,
     completedWordIds, completedSentenceIds,
@@ -67,18 +67,18 @@ export default function HomeScreen({ navigation }: Props) {
   useFocusEffect(
     React.useCallback(() => {
       let cancelled = false;
-      loadRecord(yesterdayKey()).then(r => { if (!cancelled) setYesterday(r); });
+      loadRecord(yesterdayKey(userId)).then(r => { if (!cancelled) setYesterday(r); });
       return () => { cancelled = true; };
-    }, []),
+    }, [userId]),
   );
 
   const review = useMemo(
     () => getReviewSession(yesterday, words, expressions, level),
     [yesterday, words, expressions, level],
   );
-  const reviewWords    = review.words;
-  const reviewPatterns = review.patterns;
-  const reviewCount    = reviewWords.length + reviewPatterns.length;
+  const reviewWords       = review.words;
+  const reviewExpressions = review.expressions;
+  const reviewCount       = reviewWords.length + reviewExpressions.length;
 
   const compEntries = (Object.keys(composition) as (keyof typeof composition)[])
     .filter(k => composition[k] > 0)
@@ -197,11 +197,11 @@ export default function HomeScreen({ navigation }: Props) {
                   <Text style={[styles.reviewKo, { color: T.textDim }]}>{w.ko.split(',')[0]}</Text>
                 </TouchableOpacity>
               ))}
-              {reviewPatterns.map(p => (
+              {reviewExpressions.map(e => (
                 <TouchableOpacity
-                  key={`p-${p.id}`}
+                  key={`e-${e.id}`}
                   onPress={() => {
-                    const idx = expressions.findIndex(x => x.id === p.id);
+                    const idx = expressions.findIndex(x => x.id === e.id);
                     if (idx >= 0) {
                       useCardsStore.getState().setSentenceIndex(idx);
                       navigation.navigate('SentenceCard');
@@ -209,17 +209,17 @@ export default function HomeScreen({ navigation }: Props) {
                   }}
                   style={{ width: 130 }}
                 >
-                  {p.img
-                    ? <Image source={{ uri: p.img }} style={{ width: '100%', height: 150, borderRadius: 14 }} />
-                    : <Placeholder height={150} tint={p.tint} radius={14} label={p.en} />}
+                  {e.img
+                    ? <Image source={{ uri: e.img }} style={{ width: '100%', height: 150, borderRadius: 14 }} />
+                    : <Placeholder height={150} tint={e.tint} radius={14} label={e.en} />}
                   <Text
                     style={[styles.reviewEn, { color: T.text, fontFamily: T.display }]}
                     numberOfLines={2}
-                  >{p.en}</Text>
+                  >{e.en}</Text>
                   <Text
                     style={[styles.reviewKo, { color: T.textDim }]}
                     numberOfLines={1}
-                  >{p.ko}</Text>
+                  >{e.ko}</Text>
                 </TouchableOpacity>
               ))}
             </ScrollView>

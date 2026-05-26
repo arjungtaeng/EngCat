@@ -44,10 +44,10 @@ interface Composition {
 export const CEFR_COMPOSITIONS: Record<string, Composition> = {
   A1: { words: 10, patterns: 5, collocations: 0, idioms: 0, nuances: 0 },
   A2: { words: 10, patterns: 5, collocations: 0, idioms: 0, nuances: 0 },
-  B1: { words: 8,  patterns: 4, collocations: 3, idioms: 0, nuances: 0 },
-  B2: { words: 8,  patterns: 4, collocations: 3, idioms: 0, nuances: 0 },
-  C1: { words: 6,  patterns: 3, collocations: 3, idioms: 2, nuances: 1 },
-  C2: { words: 6,  patterns: 3, collocations: 3, idioms: 2, nuances: 1 },
+  B1: { words: 10, patterns: 4, collocations: 3, idioms: 0, nuances: 0 },
+  B2: { words: 10, patterns: 4, collocations: 3, idioms: 0, nuances: 0 },
+  C1: { words: 10, patterns: 3, collocations: 3, idioms: 2, nuances: 1 },
+  C2: { words: 10, patterns: 3, collocations: 3, idioms: 2, nuances: 1 },
 };
 
 export function getDayOfYear(now: Date = new Date()): number {
@@ -143,11 +143,11 @@ export function getTodaySession(
 }
 
 export interface ReviewSession {
-  isPreview:  boolean;
-  topic:      string | null;
-  topicLabel: string | null;
-  words:      WordCard[];
-  patterns:   SentenceCard[];
+  isPreview:   boolean;
+  topic:       string | null;
+  topicLabel:  string | null;
+  words:       WordCard[];
+  expressions: SentenceCard[];
 }
 
 // 어제 학습한 기록이 있으면 복습 세션, 없으면 (첫날) 무작위 예습 세션
@@ -157,45 +157,54 @@ export function getReviewSession(
   allExpressions: SentenceCard[],
   level:          string,
 ): ReviewSession {
+  const comp = CEFR_COMPOSITIONS[level] ?? CEFR_COMPOSITIONS.B1;
   const yWordIds     = new Set(yesterday.wordIds);
   const ySentenceIds = new Set(yesterday.sentenceIds);
 
   if (yWordIds.size > 0 || ySentenceIds.size > 0) {
-    const reviewWords    = allWords.filter(w => yWordIds.has(w.id));
-    const reviewPatterns = allExpressions.filter(
-      e => e.type === 'pattern' && ySentenceIds.has(e.id),
-    );
+    const reviewWords       = allWords.filter(w => yWordIds.has(w.id));
+    const reviewExpressions = allExpressions.filter(e => ySentenceIds.has(e.id));
 
     let topic: string | null = null;
     if (reviewWords.length > 0 && reviewWords[0].topicId) {
       topic = reviewWords[0].topicId;
-    } else if (reviewPatterns.length > 0 && reviewPatterns[0].topicId) {
-      topic = reviewPatterns[0].topicId;
+    } else if (reviewExpressions.length > 0 && reviewExpressions[0].topicId) {
+      topic = reviewExpressions[0].topicId;
     }
 
     return {
-      isPreview:  false,
+      isPreview:   false,
       topic,
-      topicLabel: topic ? (TOPIC_NAMES[topic] ?? topic) : null,
-      words:      reviewWords,
-      patterns:   reviewPatterns,
+      topicLabel:  topic ? (TOPIC_NAMES[topic] ?? topic) : null,
+      words:       reviewWords,
+      expressions: reviewExpressions,
     };
   }
 
-  // 첫날: 레벨에 맞는 단어/패턴 무작위 예습
+  // 첫날: 레벨 composition에 맞는 단어/표현 무작위 예습
   const seed = getDayOfYear();
-  const wordsForLevel    = allWords.filter(w => !w.cefr || w.cefr === level);
-  const patternsForLevel = allExpressions.filter(
-    e => e.type === 'pattern' && (!e.cefr || e.cefr === level),
-  );
-  const previewWords    = shuffleStable(wordsForLevel,    seed).slice(0, 4);
-  const previewPatterns = shuffleStable(patternsForLevel, seed).slice(0, 4);
+  const matchesLevel = <T extends { cefr?: string }>(arr: T[]): T[] =>
+    arr.filter(x => !x.cefr || x.cefr === level);
+
+  const previewWords = shuffleStable(matchesLevel(allWords), seed).slice(0, comp.words);
+
+  const pickByType = (type: SentenceCard['type'], n: number) => {
+    if (n === 0) return [];
+    const pool = matchesLevel(allExpressions.filter(e => e.type === type));
+    return shuffleStable(pool, seed).slice(0, n);
+  };
+  const previewExpressions = [
+    ...pickByType('pattern',     comp.patterns),
+    ...pickByType('collocation', comp.collocations),
+    ...pickByType('idiom',       comp.idioms),
+    ...pickByType('nuance',      comp.nuances),
+  ];
 
   return {
-    isPreview:  true,
-    topic:      null,
-    topicLabel: null,
-    words:      previewWords,
-    patterns:   previewPatterns,
+    isPreview:   true,
+    topic:       null,
+    topicLabel:  null,
+    words:       previewWords,
+    expressions: previewExpressions,
   };
 }
