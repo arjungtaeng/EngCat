@@ -168,7 +168,7 @@ function ECScreenSentenceCard() {
 
   return (
     <div
-      style={{ flex: 1, minHeight: 0, background: T.bg1, position: 'relative', overflow: 'hidden', marginTop: 'calc(-1 * env(safe-area-inset-top, 0px))' }}
+      style={{ flex: 1, minHeight: 0, background: T.bg1, position: 'relative', overflow: 'hidden' }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
