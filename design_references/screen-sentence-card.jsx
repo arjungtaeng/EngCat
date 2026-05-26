@@ -115,6 +115,18 @@ function ECScreenSentenceCard() {
 
   const speak = (text) => window.ECSpeak && window.ECSpeak(text);
 
+  // Resolve a topic-relevant hero image from words sharing the same topic
+  const heroImg = React.useMemo(() => {
+    const words = (window.ECData && window.ECData.words) || [];
+    const match = words.find(w => w.topicId === p.topic && w.img);
+    return match ? match.img : null;
+  }, [p.topic, dataVersion]);
+  const heroTint = React.useMemo(() => {
+    const words = (window.ECData && window.ECData.words) || [];
+    const match = words.find(w => w.topicId === p.topic);
+    return (match && match.tint) || '#1a2a3a';
+  }, [p.topic, dataVersion]);
+
   const swipingPrev = swipeX > 30 && !isFirst;
   const btnLabel = swipingPrev ? '이전 패턴' : isLast ? '홈으로' : '다음 패턴';
   const btnBg    = swipingPrev ? (isDark ? 'rgba(255,255,255,0.10)' : T.bg2) : T.accent;
@@ -138,13 +150,16 @@ function ECScreenSentenceCard() {
         <div style={{ padding: '6px 18px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div onClick={() => window.ECNav?.go('home')} style={{
             width: 36, height: 36, borderRadius: 999,
-            background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
-            border: `1px solid ${T.hair}`, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+            background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`,
+            backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+            border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
           }}>{ECIcon.chev('left', T.text, 18)}</div>
           <div style={{
             padding: '7px 14px', borderRadius: 999,
-            background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
-            border: `1px solid ${T.hair}`,
+            background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`,
+            backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+            border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
             fontFamily: T.mono, fontSize: 10.5, color: T.textDim, letterSpacing: 1, textTransform: 'uppercase',
           }}>{idx + 1} / {patterns.length} · 패턴</div>
           <div style={{ width: 36 }}/>
@@ -157,7 +172,7 @@ function ECScreenSentenceCard() {
         className="ec-fade-up"
         style={{
           position: 'absolute',
-          top: 'calc(env(safe-area-inset-top, 0px) + 70px)',
+          top: 0,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)',
           left: 0, right: 0,
           overflowY: 'auto',
@@ -169,10 +184,22 @@ function ECScreenSentenceCard() {
           transition: contentTransition,
         }}
       >
-        {/* Hero image (단어 카드와 동일 패턴: placeholder) */}
-        <ECPlaceholder height={220} tint="#1a2a3a" radius={0} label={`hero · ${p.pattern}`} />
+        {/* Hero image */}
+        <div style={{ position: 'relative', width: '100%', height: 260, flexShrink: 0, overflow: 'hidden' }}>
+          {heroImg
+            ? <img src={heroImg} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={p.pattern} />
+            : <ECPlaceholder height="100%" tint={heroTint} radius={0} label={`hero · ${p.topic}`}/>
+          }
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: isDark
+              ? `linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, ${T.bg1} 100%)`
+              : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 25%, transparent 55%, ${T.bg1} 100%)`,
+          }}/>
+        </div>
 
-        <div style={{ padding: '20px 22px 20px' }}>
+        <div style={{ padding: '4px 22px 20px' }}>
+
 
           {/* Level + Topic chips */}
           <div style={{ display: 'flex', gap: 8, marginBottom: 18 }}>
