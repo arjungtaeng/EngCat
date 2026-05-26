@@ -90,35 +90,27 @@ function ECScreenHome() {
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
-      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}>
       <ECStatusBar />
 
-      {/* Top bar */}
-      <div style={{ padding: '6px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      {/* Top bar — fixed (not scrollable) */}
+      <div style={{ padding: '6px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0, background: T.bg1, zIndex: 5 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
           <div style={{ fontFamily: T.serif, fontSize: 22, letterSpacing: -0.4, color: T.text }}>
             EngCat
           </div>
           <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: 0.5, color: T.textMute }}>{'v' + (window.EC_VER || 1)}</div>
         </div>
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 5,
-            padding: '6px 11px', borderRadius: 999,
-            background: T.bg2, border: `1px solid ${T.hair}`,
-          }}>
-            <span style={{ color: T.accent }}>{ECIcon.flame(T.accent, 14)}</span>
-            <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>0</span>
-          </div>
-          <div onClick={() => window.ECNav?.go('profile')} style={{
-            width: 36, height: 36, borderRadius: 999, background: T.bg2,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            border: `1px solid ${T.hair}`, color: T.textDim, cursor: 'pointer',
-          }}>
-            {ECIcon.user(T.textDim, 18)}
-          </div>
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 5,
+          padding: '6px 11px', borderRadius: 999,
+          background: T.bg2, border: `1px solid ${T.hair}`,
+        }}>
+          <span style={{ color: T.accent }}>{ECIcon.flame(T.accent, 14)}</span>
+          <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>0</span>
         </div>
       </div>
+
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}>
 
       {/* Greeting */}
       <div style={{ padding: '24px 22px 18px' }}>
@@ -226,8 +218,8 @@ function ECScreenHome() {
             }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{
-                  fontFamily: T.serif, fontStyle: 'italic', fontWeight: 400,
-                  fontSize: 19, color: T.text, lineHeight: 1.2, letterSpacing: -0.3,
+                  fontFamily: T.display, fontWeight: 400,
+                  fontSize: 18, color: T.text, lineHeight: 1.2, letterSpacing: -0.2,
                 }}>{p.pattern || p.en}</div>
                 {p.explanation && (
                   <div style={{ fontSize: 12, color: T.textDim, marginTop: 4, lineHeight: 1.4 }}>
