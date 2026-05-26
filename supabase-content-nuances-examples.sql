@@ -70,3 +70,55 @@ UPDATE nuances SET ex4 = 'Authorities seized large amounts of counterfeit goods 
 UPDATE nuances SET ex4 = 'She made an impulse purchase she later regretted.', ex4_ko = '그녀는 나중에 후회한 충동 구매를 했어요.', ex5 = 'It was a spontaneous decision to fly somewhere warm.', ex5_ko = '따뜻한 곳으로 비행기를 타기로 한 즉흥적인 결정이었어요.' WHERE id = 'nuc_shopping_11';
 UPDATE nuances SET ex4 = 'She lives a frugal life and saves most of her salary.', ex4_ko = '그녀는 검소한 삶을 살며 월급의 대부분을 저축해요.', ex5 = 'He''s known for being stingy with tips at restaurants.', ex5_ko = '그는 식당 팁에 인색한 것으로 알려져 있어요.' WHERE id = 'nuc_shopping_12';
 UPDATE nuances SET ex4 = 'Consumers expect transparency about product ingredients.', ex4_ko = '소비자들은 제품 성분에 대한 투명성을 기대해요.', ex5 = 'The customer asked for a recommendation from the staff.', ex5_ko = '그 고객은 직원에게 추천을 부탁했어요.' WHERE id = 'nuc_shopping_13';
+
+-- ══════════════════════════════════════
+-- CAFE
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'What kind of drink would you like with your meal?', ex4_ko = '식사와 함께 어떤 음료를 드시겠어요?', ex5 = 'They serve a wide selection of beverages all day.', ex5_ko = '그들은 종일 다양한 음료를 제공해요.' WHERE id = 'nuc_cafe_01';
+UPDATE nuances SET ex4 = 'I asked for a strong coffee with no sugar.', ex4_ko = '저는 설탕 없는 진한 커피를 부탁했어요.', ex5 = 'This dark roast has a bold, smoky finish.', ex5_ko = '이 다크 로스트는 풍부하고 스모키한 풍미가 있어요.' WHERE id = 'nuc_cafe_02';
+UPDATE nuances SET ex4 = 'I''d like to order two croissants and a flat white.', ex4_ko = '크루아상 두 개와 플랫 화이트 하나 주문할게요.', ex5 = 'Could I ask for a second napkin, please?', ex5_ko = '냅킨 한 장 더 부탁드려도 될까요?' WHERE id = 'nuc_cafe_03';
+UPDATE nuances SET ex4 = 'A latte, please — takeaway.', ex4_ko = '라테 하나요 — 포장이요.', ex5 = 'Is that for here or to go?', ex5_ko = '드시고 가실 건가요, 포장이세요?' WHERE id = 'nuc_cafe_04';
+UPDATE nuances SET ex4 = 'A hot chocolate sounds wonderful right now.', ex4_ko = '뜨거운 초콜릿이 지금 딱이겠어요.', ex5 = 'I''ll have an iced americano with two extra shots.', ex5_ko = '아이스 아메리카노에 샷 두 번 추가로 주세요.' WHERE id = 'nuc_cafe_05';
+UPDATE nuances SET ex4 = 'This dark chocolate is quite bitter.', ex4_ko = '이 다크 초콜릿은 꽤 써요.', ex5 = 'The yogurt tastes a little sour, but I like it.', ex5_ko = '요거트가 약간 시지만 저는 좋아요.' WHERE id = 'nuc_cafe_06';
+UPDATE nuances SET ex4 = 'I''ll have a decaf latte before bed.', ex4_ko = '저는 자기 전에 디카페인 라테 마실게요.', ex5 = 'Most herbal teas are caffeine-free.', ex5_ko = '대부분의 허브차는 무카페인이에요.' WHERE id = 'nuc_cafe_07';
+UPDATE nuances SET ex4 = 'A double espresso, please — I''m exhausted.', ex4_ko = '더블 에스프레소 부탁해요 — 너무 피곤해요.', ex5 = 'I usually have an Americano with breakfast.', ex5_ko = '저는 보통 아침 식사와 함께 아메리카노를 마셔요.' WHERE id = 'nuc_cafe_08';
+UPDATE nuances SET ex4 = 'The aroma of cinnamon filled the entire cafe.', ex4_ko = '시나몬 향이 카페 전체를 가득 채웠어요.', ex5 = 'This blend has a chocolatey, nutty flavor.', ex5_ko = '이 블렌드는 초콜릿 향과 견과류 풍미가 있어요.' WHERE id = 'nuc_cafe_09';
+UPDATE nuances SET ex4 = 'This little cafe is so cozy on rainy days.', ex4_ko = '비 오는 날 이 작은 카페는 정말 아늑해요.', ex5 = 'These chairs are surprisingly comfortable for long study sessions.', ex5_ko = '이 의자들은 긴 공부 시간에 놀랍게 편안해요.' WHERE id = 'nuc_cafe_06b';
+UPDATE nuances SET ex4 = 'They sell artisan bread baked fresh every morning.', ex4_ko = '그들은 매일 아침 신선하게 구운 장인 빵을 팔아요.', ex5 = 'This specialty coffee comes from a single farm in Ethiopia.', ex5_ko = '이 스페셜티 커피는 에티오피아의 한 농장에서 와요.' WHERE id = 'nuc_cafe_11';
+UPDATE nuances SET ex4 = 'The ambient music made the studying easier.', ex4_ko = '배경 음악이 공부를 더 쉽게 만들었어요.', ex5 = 'The atmosphere in that bookshop is calm and inviting.', ex5_ko = '그 서점의 분위기는 차분하고 따뜻해요.' WHERE id = 'nuc_cafe_12';
+UPDATE nuances SET ex4 = 'A coffee connoisseur can tell beans apart by aroma alone.', ex4_ko = '커피 전문 감식가는 향만으로도 원두를 구별할 수 있어요.', ex5 = 'He''s a coffee enthusiast who visits a new cafe each weekend.', ex5_ko = '그는 매 주말 새 카페를 방문하는 커피 애호가예요.' WHERE id = 'nuc_cafe_13';
+
+-- ══════════════════════════════════════
+-- TRANSPORT
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'I ride my bike to school every day.', ex4_ko = '저는 매일 자전거를 타고 학교에 가요.', ex5 = 'She drives a small electric car for her commute.', ex5_ko = '그녀는 작은 전기차로 출퇴근해요.' WHERE id = 'nuc_transport_01';
+UPDATE nuances SET ex4 = 'The bus is rarely on time during rush hour.', ex4_ko = '버스는 출퇴근 시간에 거의 정시에 오지 않아요.', ex5 = 'I made it in time for the last train home.', ex5_ko = '저는 마지막 귀가 기차를 놓치지 않게 도착했어요.' WHERE id = 'nuc_transport_02';
+UPDATE nuances SET ex4 = 'I lost my ticket somewhere on the platform.', ex4_ko = '저는 플랫폼 어디선가 표를 잃어버렸어요.', ex5 = 'A monthly pass saves a lot of money if you ride daily.', ex5_ko = '매일 타신다면 월 정기권이 돈을 많이 절약해 줘요.' WHERE id = 'nuc_transport_03';
+UPDATE nuances SET ex4 = 'Our flight was delayed by an hour due to weather.', ex4_ko = '저희 비행기가 날씨로 한 시간 지연됐어요.', ex5 = 'They had to cancel the trip because of the typhoon.', ex5_ko = '태풍 때문에 그들은 여행을 취소해야 했어요.' WHERE id = 'nuc_transport_04';
+UPDATE nuances SET ex4 = 'The bus fare has gone up by 20% this year.', ex4_ko = '버스 요금이 올해 20% 올랐어요.', ex5 = 'There''s a toll booth just before the bridge.', ex5_ko = '다리 직전에 통행료 부스가 있어요.' WHERE id = 'nuc_transport_05';
+UPDATE nuances SET ex4 = 'You can transfer to the green line at the next stop.', ex4_ko = '다음 정류장에서 녹색 노선으로 환승할 수 있어요.', ex5 = 'We''re in transit and our luggage is on the next plane.', ex5_ko = '저희는 경유 중이고 짐은 다음 비행기에 있어요.' WHERE id = 'nuc_transport_06';
+UPDATE nuances SET ex4 = 'Passengers will begin to board in five minutes.', ex4_ko = '승객들은 5분 안에 탑승을 시작합니다.', ex5 = 'The crew prepared to embark on the long voyage.', ex5_ko = '승무원들은 긴 항해를 떠날 준비를 했어요.' WHERE id = 'nuc_transport_07';
+UPDATE nuances SET ex4 = 'There''s always heavy traffic in the city centre after five.', ex4_ko = '시내 중심부에는 5시 이후 항상 교통량이 많아요.', ex5 = 'Congestion charges are common in many large cities now.', ex5_ko = '많은 대도시에서 이제 혼잡 통행료가 흔해요.' WHERE id = 'nuc_transport_08';
+UPDATE nuances SET ex4 = 'Her daily commute takes about an hour each way.', ex4_ko = '그녀의 매일 통근은 편도 약 한 시간이 걸려요.', ex5 = 'They travel to a different city every weekend.', ex5_ko = '그들은 매 주말 다른 도시로 여행해요.' WHERE id = 'nuc_transport_09';
+UPDATE nuances SET ex4 = 'We had to take a long detour because of the closure.', ex4_ko = '폐쇄로 우리는 긴 우회로를 가야 했어요.', ex5 = 'She always takes a shortcut through the back streets.', ex5_ko = '그녀는 항상 뒷길로 지름길을 가요.' WHERE id = 'nuc_transport_10';
+UPDATE nuances SET ex4 = 'Our travel agent sent us a beautifully detailed itinerary.', ex4_ko = '여행사가 아름답게 자세한 일정표를 보내줬어요.', ex5 = 'The bus schedule is posted at every stop.', ex5_ko = '버스 시간표가 모든 정류장에 게시되어 있어요.' WHERE id = 'nuc_transport_11';
+UPDATE nuances SET ex4 = 'It took twenty minutes to hail a taxi during the storm.', ex4_ko = '폭풍 동안 택시를 잡는 데 20분이 걸렸어요.', ex5 = 'He flagged down a bus that wasn''t on his usual line.', ex5_ko = '그는 평소 노선이 아닌 버스를 손짓으로 세웠어요.' WHERE id = 'nuc_transport_12';
+UPDATE nuances SET ex4 = 'The city is upgrading its transport infrastructure.', ex4_ko = '도시가 교통 인프라를 업그레이드하고 있어요.', ex5 = 'Strong logistics make next-day delivery possible.', ex5_ko = '강력한 물류 시스템 덕분에 익일 배송이 가능해요.' WHERE id = 'nuc_transport_13';
+
+-- ══════════════════════════════════════
+-- HEALTH
+-- ══════════════════════════════════════
+UPDATE nuances SET ex4 = 'She''s been sick with the flu for three days.', ex4_ko = '그녀는 3일째 독감으로 아파요.', ex5 = 'He was too ill to attend the meeting.', ex5_ko = '그는 회의에 참석하기 너무 아팠어요.' WHERE id = 'nuc_health_01';
+UPDATE nuances SET ex4 = 'A sudden pain in my knee made me sit down.', ex4_ko = '무릎에 갑작스러운 통증이 와서 저는 앉았어요.', ex5 = 'I''ve had a dull ache in my shoulder all day.', ex5_ko = '하루 종일 어깨에 은은한 통증이 있어요.' WHERE id = 'nuc_health_02';
+UPDATE nuances SET ex4 = 'List your symptoms so the doctor can help.', ex4_ko = '의사가 도울 수 있도록 증상을 나열해 주세요.', ex5 = 'A high fever can be a sign of infection.', ex5_ko = '고열은 감염의 징후일 수 있어요.' WHERE id = 'nuc_health_03';
+UPDATE nuances SET ex4 = 'Scientists are searching for a cure for the disease.', ex4_ko = '과학자들은 그 질병의 치료법을 찾고 있어요.', ex5 = 'The clinic treats patients of all ages.', ex5_ko = '그 병원은 모든 연령의 환자를 치료해요.' WHERE id = 'nuc_health_04';
+UPDATE nuances SET ex4 = 'Please consult a physician about long-term medication.', ex4_ko = '장기 약물 복용에 대해서는 의사와 상의하세요.', ex5 = 'My doctor recommended more exercise and better sleep.', ex5_ko = '의사가 더 많은 운동과 더 나은 수면을 권장했어요.' WHERE id = 'nuc_health_05';
+UPDATE nuances SET ex4 = 'A balanced diet is more sustainable than extreme rules.', ex4_ko = '균형 잡힌 식단이 극단적인 규칙보다 지속 가능해요.', ex5 = 'Good nutrition supports immune health.', ex5_ko = '좋은 영양 섭취가 면역 건강을 뒷받침해요.' WHERE id = 'nuc_health_06';
+UPDATE nuances SET ex4 = 'She has a severe peanut allergy and carries an EpiPen.', ex4_ko = '그녀는 심한 땅콩 알레르기가 있어 에피펜을 가지고 다녀요.', ex5 = 'Many people have lactose intolerance without knowing it.', ex5_ko = '많은 사람들이 자기도 모르게 유당 불내성이 있어요.' WHERE id = 'nuc_health_07';
+UPDATE nuances SET ex4 = 'The pharmacy is open 24 hours near the hospital.', ex4_ko = '병원 근처 약국은 24시간 영업해요.', ex5 = 'I picked up shampoo and ibuprofen at the drugstore.', ex5_ko = '저는 드럭스토어에서 샴푸와 이부프로펜을 샀어요.' WHERE id = 'nuc_health_08';
+UPDATE nuances SET ex4 = 'He''s lived with chronic pain for years.', ex4_ko = '그는 수년간 만성 통증과 함께 살아왔어요.', ex5 = 'Acute stress can affect your sleep quickly.', ex5_ko = '급성 스트레스는 수면에 빠르게 영향을 줄 수 있어요.' WHERE id = 'nuc_health_09';
+UPDATE nuances SET ex4 = 'The flu epidemic peaked in mid-January.', ex4_ko = '독감 유행이 1월 중순에 정점을 찍었어요.', ex5 = 'The pandemic changed how the whole world worked.', ex5_ko = '팬데믹은 전 세계가 일하는 방식을 바꿨어요.' WHERE id = 'nuc_health_10';
+UPDATE nuances SET ex4 = 'A clear diagnosis can take several tests.', ex4_ko = '명확한 진단을 받으려면 여러 검사가 필요할 수 있어요.', ex5 = 'The prognosis improved after the new treatment.', ex5_ko = '새 치료 후 예후가 개선됐어요.' WHERE id = 'nuc_health_11';
+UPDATE nuances SET ex4 = 'The placebo effect can be surprisingly strong in pain studies.', ex4_ko = '위약 효과는 통증 연구에서 놀랍게 강력할 수 있어요.', ex5 = 'The nocebo effect explains how negative expectations cause real symptoms.', ex5_ko = '노시보 효과는 부정적 기대가 실제 증상을 일으키는 방식을 설명해요.' WHERE id = 'nuc_health_12';
+UPDATE nuances SET ex4 = 'Her rehabilitation included daily physical therapy.', ex4_ko = '그녀의 재활은 매일 물리치료를 포함했어요.', ex5 = 'His recovery surprised even his doctors.', ex5_ko = '그의 회복은 의사들조차 놀라게 했어요.' WHERE id = 'nuc_health_13';
+
