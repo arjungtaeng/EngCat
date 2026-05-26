@@ -6,11 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "backfill:pexels": "node scripts/backfill-pexels.mjs",
-    "backfill:examples": "node scripts/backfill-examples.mjs"
+    "backfill:pexels": "node scripts/backfill-pexels.mjs"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.30.0",
     "@supabase/supabase-js": "^2.45.0"
   },
   "repository": {
