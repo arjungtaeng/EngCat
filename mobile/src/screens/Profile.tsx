@@ -193,7 +193,7 @@ export default function ProfileScreen() {
 
         {/* Credits */}
         <Text style={[styles.credits, { color: T.textFaint, fontFamily: T.mono }]}>
-          EngCat v276
+          EngCat v277
         </Text>
       </ScrollView>
     </SafeAreaView>
