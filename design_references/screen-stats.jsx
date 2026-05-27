@@ -186,33 +186,18 @@ function ECScreenStats() {
     );
   };
 
-  // ── 캐러셀 상태 ──────────────────────────────────────────────
-  const [carouselIdx, setCarouselIdx] = React.useState(flameStage);
-  const [dragDx, setDragDx] = React.useState(0);
-  const dragging = React.useRef(false);
-  const startX = React.useRef(0);
-  const lastDx = React.useRef(0);
+  // ── 불꽃 정보 팝업 ──────────────────────────────────────────────
+  const [showFlameInfo, setShowFlameInfo] = React.useState(false);
 
-  const ITEM_W = 46;           // 아이템 간 간격(px) — 콤팩트
-  const CENTER_SIZE = 44;      // 가운데 불꽃 크기
-  const SIDE_SCALE = 26 / 44; // 양쪽 불꽃 스케일 비율 (26px 상당)
-
-  const carouselStart = (x) => { dragging.current = true; startX.current = x; };
-  const carouselMove  = (x) => {
-    if (!dragging.current) return;
-    const dx = x - startX.current;
-    lastDx.current = dx;
-    setDragDx(dx);
-  };
-  const carouselEnd = () => {
-    if (!dragging.current) return;
-    dragging.current = false;
-    const dx = lastDx.current;
-    lastDx.current = 0;
-    setDragDx(0);
-    if      (dx >  ITEM_W * 0.25) setCarouselIdx(i => Math.max(0, i - 1));
-    else if (dx < -ITEM_W * 0.25) setCarouselIdx(i => Math.min(6, i + 1));
-  };
+  const flameStageInfo = [
+    { name: '차가운 재',      req: '학습 전' },
+    { name: '첫 불꽃',        req: '1일 연속' },
+    { name: '작은 불꽃',      req: '2일 연속' },
+    { name: '타오르는 불꽃',  req: '3일 연속' },
+    { name: '활활 타는 불꽃', req: '4일 연속' },
+    { name: '강한 불꽃',      req: '5일 연속' },
+    { name: '전설의 불꽃',    req: '6일 이상' },
+  ];
 
   const tints = ['rgba(244,241,235,0.06)', 'rgba(232,178,106,0.28)', 'rgba(232,178,106,0.6)', T.accent];
 
@@ -243,55 +228,16 @@ function ECScreenStats() {
             background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
           }} />
 
-          {/* 불꽃 캐러셀 — 우측 상단 고정 (top:18 right:18 = 원래 자리) */}
+          {/* 불꽃 아이콘 — 우측 상단 (원래 자리), 클릭 시 단계 팝업 */}
           <div
-            style={{
-              position: 'absolute',
-              top: 18,
-              right: 18,
-              width: 118,
-              height: 62,
-              overflow: 'hidden',
-              cursor: 'grab',
-              touchAction: 'none',
-              userSelect: 'none',
-            }}
-            onTouchStart={e => carouselStart(e.touches[0].clientX)}
-            onTouchMove={e => { e.preventDefault(); carouselMove(e.touches[0].clientX); }}
-            onTouchEnd={carouselEnd}
-            onMouseDown={e => carouselStart(e.clientX)}
-            onMouseMove={e => dragging.current && carouselMove(e.clientX)}
-            onMouseUp={carouselEnd}
-            onMouseLeave={carouselEnd}
+            onClick={() => setShowFlameInfo(v => !v)}
+            style={{ position: 'absolute', top: 18, right: 18, cursor: 'pointer', zIndex: 1 }}
           >
-            {[0,1,2,3,4,5,6].map(s => {
-              const off = (s - carouselIdx) * ITEM_W + dragDx;
-              if (Math.abs(off) > ITEM_W * 1.6) return null;
-              const t = Math.max(0, 1 - Math.abs(off) / ITEM_W);
-              const scale = SIDE_SCALE + (1 - SIDE_SCALE) * t;
-              const isColor = s === flameStage;
-              return (
-                <div
-                  key={s}
-                  style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: '50%',
-                    transform: `translate(calc(-50% + ${off}px), -50%) scale(${scale.toFixed(3)})`,
-                    transition: dragging.current ? 'none' : 'transform 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                    filter: isColor ? 'none' : 'grayscale(100%)',
-                    opacity: isColor ? 1 : Math.max(0.35, 0.35 + 0.5 * t),
-                    pointerEvents: 'none',
-                  }}
-                >
-                  <FlameIcon stage={s} size={CENTER_SIZE} />
-                </div>
-              );
-            })}
+            <FlameIcon stage={flameStage} size={36} />
           </div>
 
-          {/* 스트릭 텍스트 — 우측 캐러셀 공간 확보 */}
-          <div style={{ paddingRight: 140 }}>
+          {/* 스트릭 텍스트 */}
+          <div style={{ paddingRight: 56 }}>
             <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.4, textTransform: 'uppercase' }}>
               연속 학습
             </div>
@@ -386,7 +332,78 @@ function ECScreenStats() {
       </div>
 
       </div>
-    </div>
+
+    {/* 불꽃 단계 팝업 */}
+    {showFlameInfo && (
+      <div
+        onClick={() => setShowFlameInfo(false)}
+        style={{
+          position: 'fixed', inset: 0, zIndex: 200,
+          background: 'rgba(0,0,0,0.45)',
+        }}
+      >
+        <div
+          onClick={e => e.stopPropagation()}
+          ref={el => {
+            if (el) {
+              el.style.opacity = '0';
+              el.style.transform = 'translateY(-10px)';
+              requestAnimationFrame(() => {
+                el.style.transition = 'opacity 0.18s ease-out, transform 0.18s ease-out';
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+              });
+            }
+          }}
+          style={{
+            position: 'absolute',
+            top: 170,
+            right: 18,
+            width: 224,
+            background: T.bg2,
+            borderRadius: 18,
+            border: `1px solid ${T.hair}`,
+            overflow: 'hidden',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.55)',
+          }}
+        >
+          <div style={{
+            padding: '14px 16px 10px',
+            fontFamily: T.mono, fontSize: 10, color: T.textDim,
+            letterSpacing: 1.3, textTransform: 'uppercase',
+            borderBottom: `1px solid ${T.hair}`,
+          }}>
+            불꽃 단계
+          </div>
+          {flameStageInfo.map((info, s) => {
+            const isCurrent = s === flameStage;
+            return (
+              <div key={s} style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                padding: '9px 16px',
+                background: isCurrent ? 'rgba(232,178,106,0.07)' : 'transparent',
+              }}>
+                <div style={{ flexShrink: 0, filter: isCurrent ? 'none' : 'grayscale(80%)', opacity: isCurrent ? 1 : 0.55 }}>
+                  <FlameIcon stage={s} size={28} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 12.5, color: isCurrent ? T.accent : T.text, fontWeight: isCurrent ? 600 : 400 }}>
+                    {info.name}
+                  </div>
+                  <div style={{ fontSize: 11, color: T.textDim, marginTop: 1 }}>
+                    {info.req}
+                  </div>
+                </div>
+                {isCurrent && (
+                  <div style={{ width: 6, height: 6, borderRadius: 3, background: T.accent, flexShrink: 0 }} />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    )}
+  </div>
   );
 }
 
