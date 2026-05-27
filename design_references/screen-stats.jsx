@@ -15,7 +15,7 @@ function ECScreenStats() {
     const prefix = 'ec_learned_' + userId + '_';
     const totalWords = new Set();
     const totalSentences = new Set();
-    const dailyCounts = {}; // { 'YYYY-MM-DD': cardCount }
+    const dailyCounts = {};
 
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
@@ -32,7 +32,6 @@ function ECScreenStats() {
       }
     }
 
-    // 연속 학습 계산: 오늘 학습했으면 오늘부터, 아니면 어제부터 거슬러 올라감
     const today = new Date();
     const todayStr = today.toISOString().slice(0, 10);
     const startOffset = (dailyCounts[todayStr] || 0) > 0 ? 0 : 1;
@@ -62,8 +61,8 @@ function ECScreenStats() {
   // 이번 주 요일별 카드 수 (월~일)
   const { weekBars, todayIdx, weekTotal } = React.useMemo(() => {
     const today = new Date();
-    const dow = today.getDay(); // 0=일, 1=월 ...
-    const mondayOffset = dow === 0 ? 6 : dow - 1; // 월요일까지 며칠 전인지
+    const dow = today.getDay();
+    const mondayOffset = dow === 0 ? 6 : dow - 1;
     const bars = Array(7).fill(0);
     let total = 0;
     for (let i = 0; i < 7; i++) {
@@ -83,7 +82,7 @@ function ECScreenStats() {
     const today = new Date();
     for (let i = 0; i < 84; i++) {
       const d = new Date(today);
-      d.setDate(today.getDate() - (83 - i)); // i=0: 83일 전, i=83: 오늘
+      d.setDate(today.getDate() - (83 - i));
       const ds = d.toISOString().slice(0, 10);
       const count = learningStats.dailyCounts[ds] || 0;
       g[i] = count === 0 ? 0 : count < 6 ? 1 : count < 15 ? 2 : 3;
@@ -104,7 +103,8 @@ function ECScreenStats() {
     { label: '30일+', desc: `${learningStats.streak}일 연속! 불꽃이 활활 타고 있어요!` },
   ][flameLevel];
 
-  // streak 기반 SVG 불꽃 (동그라미 → 방울 → 불꽃 → 글로우 불꽃)
+  // streak 기반 SVG 불꽃 (동그라미 → 작은 불꽃 → 중간 불꽃 → 글로우 불꽃)
+  const FLAME_PATH = "M12 2c1.5 3 4.5 5 4.5 9a4.5 4.5 0 11-9 0c0-1.5.5-2.5 1-3 .5 1 1.5 1.5 2 1.5 0-2 .5-5.5 1.5-7.5z";
   const FlameIcon = ({ level, size }) => {
     if (level === 0) return (
       // 동그라미 — 아직 시작 전
@@ -113,23 +113,22 @@ function ECScreenStats() {
       </svg>
     );
     if (level === 1) return (
-      // 물방울 — 불꽃이 피어나기 직전
+      // 작은 불꽃 — 1~6일: 동일 path를 55% 크기로 축소
       <svg width={size} height={size} viewBox="0 0 24 24" fill={T.accent} style={{ opacity: 0.65 }}>
-        <path d="M12 4C12 4 19 11 19 15.5C19 19.6 15.9 22 12 22C8.1 22 5 19.6 5 15.5C5 11 12 4 12 4Z" />
+        <path d={FLAME_PATH} transform="translate(12,12) scale(0.55) translate(-12,-12)" />
       </svg>
     );
     if (level === 2) return (
-      // 불꽃 모양 — 연속 7~29일
-      <svg width={size} height={size} viewBox="0 0 24 24">
-        <path d="M12 2C13.5 5.5 17.5 9 17.5 13.5C17.5 17.8 15.1 21 12 22C8.9 21 6.5 17.8 6.5 13.5C6.5 9 10.5 5.5 12 2Z" fill={T.accent} />
-        <path d="M12 10C11.5 12 10.8 14 11.5 16.5C11.8 17.5 12.2 17.5 12.5 16.5C13.2 14 12.5 12 12 10Z" fill={T.bg2} opacity="0.45"/>
+      // 중간(원래) 불꽃 — 7~29일
+      <svg width={size} height={size} viewBox="0 0 24 24" fill={T.accent}>
+        <path d={FLAME_PATH} />
       </svg>
     );
-    // level === 3: 글로우 불꽃 — 연속 30일+
+    // level === 3: 글로우 불꽃 — 30일+
     return (
       <svg width={size} height={size} viewBox="0 0 24 24" fill={T.accent}
         style={{ filter: `drop-shadow(0 0 6px ${T.accent}) drop-shadow(0 0 12px ${T.accent}80)` }}>
-        <path d="M12 2c1.5 3 4.5 5 4.5 9a4.5 4.5 0 11-9 0c0-1.5.5-2.5 1-3 .5 1 1.5 1.5 2 1.5 0-2 .5-5.5 1.5-7.5z"/>
+        <path d={FLAME_PATH} />
       </svg>
     );
   };
