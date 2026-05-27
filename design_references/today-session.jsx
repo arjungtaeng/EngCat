@@ -80,15 +80,7 @@ window.ECGetTodayTopic = function(words) {
     return patternTopics[window.ECGetWeekOfYear() % patternTopics.length];
   }
 
-  const score = new Map();
-  for (const w of words) {
-    if (!w.topicId) continue;
-    if (w.img) score.set(w.topicId, (score.get(w.topicId) || 0) + 1);
-    else if (!score.has(w.topicId)) score.set(w.topicId, 0);
-  }
-  const withImg = window.EC_TOPIC_ORDER.filter(t => (score.get(t) || 0) > 0);
-  const withoutImg = window.EC_TOPIC_ORDER.filter(t => available.includes(t) && (score.get(t) || 0) === 0);
-  const ordered = [...withImg, ...withoutImg];
+  const ordered = window.EC_TOPIC_ORDER.filter(t => available.includes(t));
   if (ordered.length === 0) return available[0];
   // 주 단위 변경: ECGetWeekOfYear 사용
   return ordered[window.ECGetWeekOfYear() % ordered.length];
@@ -119,18 +111,13 @@ window.ECGetTodaySession = function() {
     };
   }
 
-  const pickWithImg = (arr, n) => {
-    if (n <= 0) return [];
-    const withImg = _shuffleStable(arr.filter(x => x.img), seed);
-    const noImg   = _shuffleStable(arr.filter(x => !x.img), seed);
-    return [...withImg, ...noImg].slice(0, n);
-  };
+  const pick = (arr, n) => n <= 0 ? [] : _shuffleStable(arr, seed).slice(0, n);
 
   // 오늘의 단어: 토픽 + 레벨에 맞는 단어 (단어는 cefr 필드)
   const wordsForTopic = (data.words || []).filter(w => w.topicId === topic && (!w.cefr || w.cefr === level));
-  const todayWords = pickWithImg(wordsForTopic.length > 0 ? wordsForTopic : (data.words || []).filter(w => w.topicId === topic), comp.words);
+  const todayWords = pick(wordsForTopic.length > 0 ? wordsForTopic : (data.words || []).filter(w => w.topicId === topic), comp.words);
 
-  // 오늘의 패턴: 새 patterns 데이터에서 토픽 + 레벨 매칭
+  // 오늘의 패턴: 새 patterns 데이터에서 토픽 + 레벨 매캄5
   const newPatterns = ((window.ECData && window.ECData.patterns) || []).filter(p => p.topic === topic && p.level === level);
   // 기존 sentences도 지원 (B1+의 collocations 등을 위해)
   const sentences = data.sentences || [];
@@ -140,13 +127,13 @@ window.ECGetTodaySession = function() {
   const patterns = _shuffleStable(patternPool, seed).slice(0, comp.patterns);
 
   const collPool = (data.collocations || []).filter(c => c.topicId === topic);
-  const collocations = pickWithImg(collPool, comp.collocations);
+  const collocations = pick(collPool, comp.collocations);
 
   const idiomPool = (data.idioms || []).filter(i => i.topicId === topic);
-  const idioms = pickWithImg(idiomPool, comp.idioms);
+  const idioms = pick(idiomPool, comp.idioms);
 
   const nuancePool = (data.nuances || []).filter(n => n.topicId === topic);
-  const nuances = pickWithImg(nuancePool, comp.nuances);
+  const nuances = pick(nuancePool, comp.nuances);
 
   const expressions = [...patterns, ...collocations, ...idioms, ...nuances];
 
@@ -160,7 +147,7 @@ window.ECGetTodaySession = function() {
   };
 };
 
-// 복습 세션: 어제 학습한 단어/표현 (패턴+콜로+이디엄+뉘앙스)
+// 복습 세션: 어제 학습한 단어/표현 (패턴+콜로+이디엄+뢜앙스)
 // 첫날 (어제 학습 없음): 무작위 예습 단어/표현
 window.ECGetReviewSession = function() {
   const level = _getLevel();
@@ -174,7 +161,7 @@ window.ECGetReviewSession = function() {
 
   const tagType = (arr, type) => arr.map(x => Object.assign({}, x, { _type: x._type || type }));
 
-  // 어제 학습한 ID들 조회 (sentenceIds 는 패턴/콜로/이디엄/뉘앙스 모두 포함될 수 있음)
+  // 어제 학습한 ID들 조회 (sentenceIds 는 패턴/콜로/이디엄/뢜앙스 모두 포함될 수 있음)
   const yesterday = _loadLearned(_yesterdayKey());
   const yesterdayWordIds = new Set(yesterday.wordIds || []);
   const yesterdaySentenceIds = new Set(yesterday.sentenceIds || []);
