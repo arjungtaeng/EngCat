@@ -111,18 +111,39 @@ function _formatSupabaseError(err) {
   return parts.length > 0 ? parts.join(' | ') : String(err);
 }
 
+// Supabase 기본 1000행 제한 우회: range()로 페이지네이션
+async function _fetchAllRows(db, tableName, orderCols) {
+  const BATCH = 1000;
+  let all = [];
+  let from = 0;
+  while (true) {
+    let q = db.from(tableName).select('*');
+    for (const col of orderCols) q = q.order(col);
+    q = q.range(from, from + BATCH - 1);
+    const { data, error } = await q;
+    if (error) throw error;
+    if (!data || data.length === 0) break;
+    all = all.concat(data);
+    if (data.length < BATCH) break;  // 마지막 페이지
+    from += BATCH;
+  }
+  return all;
+}
+
 async function _runECDataLoad() {
   window.ECDataError = null;
   const db = window.ECSupabaseClient;
   if (!db) throw new Error('Supabase CDN 미로드 — 네트워크를 확인하고 새로고침해 주세요.');
   try {
-    const [wordsRes, sentencesRes, collocRes, idiomsRes, nuancesRes] = await Promise.all([
-      db.from('words').select('*').order('topic_id').order('sort_order'),
-      db.from('sentences').select('*').order('topic_id').order('sort_order'),
-      db.from('collocations').select('*').order('topic_id').order('sort_order'),
-      db.from('idioms').select('*').order('topic_id').order('sort_order'),
-      db.from('nuances').select('*').order('topic_id').order('sort_order'),
+    // words는 4800+행이므로 페이지네이션, 나머지는 단순 조회
+    const [wordsData, sentencesRes, collocRes, idiomsRes, nuancesRes] = await Promise.all([
+      _fetchAllRows(db, 'words', ['topic_id', 'sort_order']),
+      db.from('sentences').select('*').order('topic_id').order('sort_order').limit(2000),
+      db.from('collocations').select('*').order('topic_id').order('sort_order').limit(2000),
+      db.from('idioms').select('*').order('topic_id').order('sort_order').limit(2000),
+      db.from('nuances').select('*').order('topic_id').order('sort_order').limit(2000),
     ]);
+    const wordsRes = { data: wordsData, error: null };
 
     if (wordsRes.error) throw wordsRes.error;
     if (sentencesRes.error) throw sentencesRes.error;
