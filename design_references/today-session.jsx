@@ -55,12 +55,6 @@ function _todayKey() {
   return 'ec_learned_' + _getUserId() + '_' + new Date().toISOString().slice(0, 10);
 }
 
-function _yesterdayKey() {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return 'ec_learned_' + _getUserId() + '_' + d.toISOString().slice(0, 10);
-}
-
 function _loadLearned(key) {
   try { return JSON.parse(localStorage.getItem(key) || '{}'); }
   catch(e) { return {}; }
@@ -73,7 +67,6 @@ window.ECGetTodayTopic = function(words) {
 
   const available = Array.from(new Set((words || []).map(w => w.topicId).filter(Boolean)));
   if (available.length === 0) {
-    // words 데이터가 없으면 patterns에서 토픽 추출
     const patterns = (window.ECData && window.ECData.patterns) || [];
     const patternTopics = Array.from(new Set(patterns.map(p => p.topic).filter(Boolean)));
     if (patternTopics.length === 0) return null;
@@ -82,11 +75,10 @@ window.ECGetTodayTopic = function(words) {
 
   const ordered = window.EC_TOPIC_ORDER.filter(t => available.includes(t));
   if (ordered.length === 0) return available[0];
-  // 주 단위 변경: ECGetWeekOfYear 사용
   return ordered[window.ECGetWeekOfYear() % ordered.length];
 };
 
-// 레벨 읽기: ec_user_level 우선, 없으면 engcat_user.level (온보딩 저장) 사용
+// 레벨 읽기: ec_user_level 우선, 없으면 engcat_user.level 사용
 function _getLevel() {
   const v = localStorage.getItem('ec_user_level');
   if (v) return v;
@@ -113,16 +105,12 @@ window.ECGetTodaySession = function() {
 
   const pick = (arr, n) => n <= 0 ? [] : _shuffleStable(arr, seed).slice(0, n);
 
-  // 오늘의 단어: 토픽 + 레벨에 맞는 단어 (단어는 cefr 필드)
   const wordsForTopic = (data.words || []).filter(w => w.topicId === topic && (!w.cefr || w.cefr === level));
   const todayWords = pick(wordsForTopic.length > 0 ? wordsForTopic : (data.words || []).filter(w => w.topicId === topic), comp.words);
 
-  // 오늘의 패턴: 새 patterns 데이터에서 토픽 + 레벨 매캄5
   const newPatterns = ((window.ECData && window.ECData.patterns) || []).filter(p => p.topic === topic && p.level === level);
-  // 기존 sentences도 지원 (B1+의 collocations 등을 위해)
   const sentences = data.sentences || [];
   const sentencePool = sentences.filter(s => s.topicId === topic && (s.type === 'pattern' || !s.type));
-
   const patternPool = newPatterns.length > 0 ? newPatterns : sentencePool;
   const patterns = _shuffleStable(patternPool, seed).slice(0, comp.patterns);
 
@@ -147,8 +135,61 @@ window.ECGetTodaySession = function() {
   };
 };
 
-// 복습 세션: 어제 학습한 단어/표현 (패턴+콜로+이디엄+뢜앙스)
-// 첫날 (어제 학습 없음): 무작위 예습 단어/표현
+// ── 복습용 헬퍼 ────────────────────────────────────────────────
+
+// 퀴즈 통계 로드: { wordId: { c: 정답수, w: 오답수 } }
+function _loadQuizStats() {
+  try { return JSON.parse(localStorage.getItem('ec_quiz_stats_' + _getUserId()) || '{}'); }
+  catch(e) { return {}; }
+}
+
+// 가중치 계산: 퀴즈 결과 기반
+// weight = clamp(0.2 ~ 3.0, (오답+1)/(정답+1))
+// - 데이터 없음 → 1.0 (균등)
+// - 정답 5회, 오답 0 → 0.17 → 하한 0.2
+// - 오답 3회, 정답 0 → 4.0 → 상한 3.0
+function _getItemWeight(id, quizStats) {
+  const s = quizStats[id] || { c: 0, w: 0 };
+  return Math.max(0.2, Math.min(3.0, (s.w + 1) / (s.c + 1)));
+}
+
+// 가중치 기반 무작위 비복원 샘플링
+function _weightedSample(items, weightFn, n) {
+  if (!items.length || n <= 0) return [];
+  const pool = items.map(item => ({ item, w: weightFn(item) }));
+  const result = [];
+  for (let i = 0; i < Math.min(n, pool.length); i++) {
+    const total = pool.reduce((s, x) => s + x.w, 0);
+    let r = Math.random() * total;
+    let idx = 0;
+    for (; idx < pool.length - 1; idx++) { r -= pool[idx].w; if (r <= 0) break; }
+    result.push(pool[idx].item);
+    pool.splice(idx, 1);
+  }
+  return result;
+}
+
+// 지금까지 학습한 모든 단어/표현 ID 수집 (날짜 무관)
+function _getAllLearnedIds() {
+  const prefix = 'ec_learned_' + _getUserId() + '_';
+  const wordIds = new Set(), sentenceIds = new Set();
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith(prefix)) {
+      try {
+        const d = JSON.parse(localStorage.getItem(key) || '{}');
+        (d.wordIds || []).forEach(id => wordIds.add(id));
+        (d.sentenceIds || []).forEach(id => sentenceIds.add(id));
+      } catch(e) {}
+    }
+  }
+  return { wordIds, sentenceIds };
+}
+
+// 복습 세션: 전체 학습 이력에서 가중치 기반 무작위 복습
+// - 퀴즈에서 많이 틀린 카드 → weight↑ (더 자주)
+// - 퀴즈에서 많이 맞은 카드 → weight↓ (덜 자주, 하한 0.2)
+// - 학습 이력 없으면 isPreview: true (예습)
 window.ECGetReviewSession = function() {
   const level = _getLevel();
   const comp = window.EC_CEFR_COMPOSITIONS[level] || window.EC_CEFR_COMPOSITIONS.B1;
@@ -161,39 +202,29 @@ window.ECGetReviewSession = function() {
 
   const tagType = (arr, type) => arr.map(x => Object.assign({}, x, { _type: x._type || type }));
 
-  // 어제 학습한 ID들 조회 (sentenceIds 는 패턴/콜로/이디엄/뢜앙스 모두 포함될 수 있음)
-  const yesterday = _loadLearned(_yesterdayKey());
-  const yesterdayWordIds = new Set(yesterday.wordIds || []);
-  const yesterdaySentenceIds = new Set(yesterday.sentenceIds || []);
+  const { wordIds: learnedWordIds, sentenceIds: learnedSentenceIds } = _getAllLearnedIds();
 
-  // 어제의 토픽 알아내기 (어제 단어들의 topicId)
-  let reviewTopic = null;
-  if (yesterdayWordIds.size > 0) {
-    const yesterdayWords = allWords.filter(w => yesterdayWordIds.has(w.id));
-    if (yesterdayWords.length > 0 && yesterdayWords[0].topicId) {
-      reviewTopic = yesterdayWords[0].topicId;
-    }
-  }
-  if (!reviewTopic && yesterdaySentenceIds.size > 0) {
-    const yp = allPatterns.find(p => yesterdaySentenceIds.has(p.id));
-    if (yp) reviewTopic = yp.topic;
-    else {
-      const ye = [...allColloc, ...allIdioms, ...allNuances].find(e => yesterdaySentenceIds.has(e.id));
-      if (ye) reviewTopic = ye.topicId;
-    }
-  }
+  // 학습 이력이 있으면 가중치 기반 무작위 복습
+  if (learnedWordIds.size > 0 || learnedSentenceIds.size > 0) {
+    const quizStats = _loadQuizStats();
+    const getW = item => _getItemWeight(item.id, quizStats);
 
-  // 어제 학습 데이터가 있으면 복습으로 사용 (현재 레벨 구성 개수로 제한)
-  if (yesterdayWordIds.size > 0 || yesterdaySentenceIds.size > 0) {
-    const reviewWords    = allWords.filter(w => yesterdayWordIds.has(w.id)).slice(0, comp.words);
-    const reviewPatterns = tagType(allPatterns.filter(p => yesterdaySentenceIds.has(p.id)), 'pattern').slice(0, comp.patterns);
-    const reviewColloc   = tagType(allColloc.filter(c => yesterdaySentenceIds.has(c.id)), 'collocation').slice(0, comp.collocations || 0);
-    const reviewIdioms   = tagType(allIdioms.filter(i => yesterdaySentenceIds.has(i.id)), 'idiom').slice(0, comp.idioms || 0);
-    const reviewNuances  = tagType(allNuances.filter(n => yesterdaySentenceIds.has(n.id)), 'nuance').slice(0, comp.nuances || 0);
+    const learnedWords    = allWords.filter(w => learnedWordIds.has(w.id));
+    const learnedPatterns = allPatterns.filter(p => learnedSentenceIds.has(p.id));
+    const learnedColloc   = allColloc.filter(c => learnedSentenceIds.has(c.id));
+    const learnedIdioms   = allIdioms.filter(i => learnedSentenceIds.has(i.id));
+    const learnedNuances  = allNuances.filter(n => learnedSentenceIds.has(n.id));
+
+    const reviewWords    = _weightedSample(learnedWords,    getW, comp.words);
+    const reviewPatterns = tagType(_weightedSample(learnedPatterns, getW, comp.patterns),           'pattern');
+    const reviewColloc   = tagType(_weightedSample(learnedColloc,   getW, comp.collocations || 0),  'collocation');
+    const reviewIdioms   = tagType(_weightedSample(learnedIdioms,   getW, comp.idioms       || 0),  'idiom');
+    const reviewNuances  = tagType(_weightedSample(learnedNuances,  getW, comp.nuances      || 0),  'nuance');
+
     return {
       isPreview: false,
-      topic: reviewTopic,
-      topicLabel: reviewTopic ? (window.EC_TOPIC_NAMES[reviewTopic] || reviewTopic) : null,
+      topic: null,
+      topicLabel: null,
       words: reviewWords,
       patterns: reviewPatterns,
       collocations: reviewColloc,
@@ -203,7 +234,7 @@ window.ECGetReviewSession = function() {
     };
   }
 
-  // 첫날: 예습 (레벨 composition에 따라)
+  // 첫날 (학습 이력 없음): 예습
   const seed = window.ECGetDayOfYear();
   const wordsForLevel    = allWords.filter(w => !w.cefr || w.cefr === level);
   const patternsForLevel = allPatterns.filter(p => p.level === level);
@@ -212,7 +243,7 @@ window.ECGetReviewSession = function() {
   const nuanceForLevel   = allNuances.filter(n => !n.cefr || n.cefr === level);
 
   const previewWords    = _shuffleStable(wordsForLevel,    seed).slice(0, comp.words);
-  const previewPatterns = tagType(_shuffleStable(patternsForLevel, seed).slice(0, comp.patterns),       'pattern');
+  const previewPatterns = tagType(_shuffleStable(patternsForLevel, seed).slice(0, comp.patterns),          'pattern');
   const previewColloc   = tagType(_shuffleStable(collForLevel,     seed).slice(0, comp.collocations || 0), 'collocation');
   const previewIdioms   = tagType(_shuffleStable(idiomForLevel,    seed).slice(0, comp.idioms       || 0), 'idiom');
   const previewNuances  = tagType(_shuffleStable(nuanceForLevel,   seed).slice(0, comp.nuances      || 0), 'nuance');
