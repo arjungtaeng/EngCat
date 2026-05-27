@@ -193,9 +193,9 @@ function ECScreenStats() {
   const startX = React.useRef(0);
   const lastDx = React.useRef(0);
 
-  const ITEM_W = 96;           // 아이템 간 간격(px)
-  const CENTER_SIZE = 64;      // 가운데 불꽃 크기
-  const SIDE_SCALE = 36 / 64; // 양쪽 불꽃 스케일 비율 (36px 상당)
+  const ITEM_W = 46;           // 아이템 간 간격(px) — 콤팩트
+  const CENTER_SIZE = 44;      // 가운데 불꽃 크기
+  const SIDE_SCALE = 26 / 44; // 양쪽 불꽃 스케일 비율 (26px 상당)
 
   const carouselStart = (x) => { dragging.current = true; startX.current = x; };
   const carouselMove  = (x) => {
@@ -243,28 +243,14 @@ function ECScreenStats() {
             background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
           }} />
 
-          {/* 스트릭 텍스트 */}
-          <div>
-            <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.4, textTransform: 'uppercase' }}>
-              연속 학습
-            </div>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 6 }}>
-              <div style={{ fontFamily: T.serif, fontSize: 56, color: T.text, lineHeight: 1, letterSpacing: -1.5 }}>{learningStats.streak}</div>
-              <div style={{ fontSize: 16, color: T.textDim }}>일</div>
-            </div>
-            <div style={{ marginTop: 8, fontSize: 12.5, color: T.textDim }}>
-              {flameMeta.desc}
-            </div>
-          </div>
-
-          {/* 불꽃 캐러셀 — 좌우 스와이프로 0~6단계 탐색 */}
+          {/* 불꽃 캐러셀 — 우측 상단 고정 */}
           <div
             style={{
-              position: 'relative',
-              height: 80,
-              marginTop: 18,
-              marginLeft: -18,
-              marginRight: -18,
+              position: 'absolute',
+              top: 12,
+              right: 0,
+              width: 118,
+              height: 62,
               overflow: 'hidden',
               cursor: 'grab',
               touchAction: 'none',
@@ -302,6 +288,20 @@ function ECScreenStats() {
                 </div>
               );
             })}
+          </div>
+
+          {/* 스트릭 텍스트 — 우측 캐러셀 공간 확보 */}
+          <div style={{ paddingRight: 120 }}>
+            <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.4, textTransform: 'uppercase' }}>
+              연속 학습
+            </div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 6 }}>
+              <div style={{ fontFamily: T.serif, fontSize: 56, color: T.text, lineHeight: 1, letterSpacing: -1.5 }}>{learningStats.streak}</div>
+              <div style={{ fontSize: 16, color: T.textDim }}>일</div>
+            </div>
+            <div style={{ marginTop: 8, fontSize: 12.5, color: T.textDim }}>
+              {flameMeta.desc}
+            </div>
           </div>
         </div>
       </div>
