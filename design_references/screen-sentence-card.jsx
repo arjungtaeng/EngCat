@@ -157,7 +157,7 @@ function ECScreenSentenceCard() {
     );
   }
 
-  // ───── Type-based field derivation ─────────────────────────────────────────
+  // ───── Type-based field derivation ──────────────────────────────────────────
   const type = p.type
     || (p.pattern ? 'pattern'
       : (p.verb || p.noun) ? 'collocation'
@@ -176,7 +176,7 @@ function ECScreenSentenceCard() {
   const literal = type === 'idiom' ? (p.literalKo || '') : '';
   const tip = (type !== 'pattern') ? (p.tip || '') : '';
 
-  // pattern 타입: [placeholder][suffix] 또는 ~ 기준으로 쪼개 고정 파트 배열 생성
+  // pattern 타입: [placeholder][suffix] 또는 ~ 기준으로 쪽개 고정 파트 배열 생성
   // 예: "I've been [verb]-ing for [duration]" → ["I've been", "for"]
   // 예: "I want to ~" → ["I want to"]
   const patternParts = type === 'pattern'
@@ -208,12 +208,16 @@ function ECScreenSentenceCard() {
   const topicLabel = p.topic || p.topicId || '';
   const typeLabel = EC_TYPE_LABELS[type] || '표현';
 
-  // Resolve hero image — prefer own image, fallback to a word sharing the topic
+  // Resolve hero image — prefer own image, fallback to a word sharing the topic.
+  // Use pattern id hash to spread across the image pool (avoid consecutive duplicates).
   const heroImg = React.useMemo(() => {
     if (p.img) return p.img;
     const words = (window.ECData && window.ECData.words) || [];
-    const match = words.find(w => w.topicId === topicLabel && w.img);
-    return match ? match.img : null;
+    const pool = words.filter(w => w.topicId === topicLabel && w.img);
+    if (!pool.length) return null;
+    let hash = 0;
+    for (let i = 0; i < p.id.length; i++) hash = (hash * 31 + p.id.charCodeAt(i)) >>> 0;
+    return pool[hash % pool.length].img;
   }, [p.id, p.img, topicLabel, dataVersion]);
   const heroTint = React.useMemo(() => {
     if (p.tint) return p.tint;
@@ -277,7 +281,7 @@ function ECScreenSentenceCard() {
               ? `linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, ${T.bg1} 100%)`
               : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 25%, transparent 55%, ${T.bg1} 100%)`,
           }}/>
-          {/* 스크롤 딤 오버레이 — 다크: 어둡게, 라이트: bg1 그라데이션 색으로 밝게 */}
+          {/* 스크롤 딥 오버레이 — 다크: 어둥게, 라이트: bg1 그라데이션 색으로 밝게 */}
           <div style={{ position: 'absolute', inset: 0, background: isDark ? '#000' : T.bg1, opacity: heroDim, pointerEvents: 'none' }}/>
         </div>
 
@@ -458,5 +462,3 @@ function ECScreenSentenceCard() {
     </div>
   );
 }
-
-Object.assign(window, { ECScreenSentenceCard });
