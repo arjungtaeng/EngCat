@@ -141,9 +141,13 @@ function ECScreenSentenceCard() {
       pattern = terms.join('|');
     } else {
       // 단어/표현: 유효 단어별 prefix 매칭으로 동사 변형 커버
-      const words = highlight.toLowerCase().replace(/[^a-z\s'-]/g, ' ').split(/\s+/).filter(w => w.length >= 4 && !STOP.has(w));
+      const words = highlight.toLowerCase().replace(/[^a-z\s'-]/g, ' ').split(/\s+/).filter(w => w.length >= 2 && !STOP.has(w));
       if (!words.length) return ex;
-      pattern = words.map(w => `\\b${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\w*`).join('|');
+      // 4자 이상: \w* 접미어 매칭(변형형 커버), 3자 이하: 정확히 단어 경계만 매칭(오탐 방지)
+      pattern = words.map(w => {
+        const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return w.length >= 4 ? `\\b${esc}\\w*` : `\\b${esc}\\b`;
+      }).join('|');
     }
 
     const parts = ex.split(new RegExp(`(${pattern})`, 'gi'));
@@ -172,13 +176,15 @@ function ECScreenSentenceCard() {
   const literal = type === 'idiom' ? (p.literalKo || '') : '';
   const tip = (type !== 'pattern') ? (p.tip || '') : '';
 
-  // pattern 타입: [placeholder][suffix] 기준으로 쪼개 고정 파트 배열 생성
+  // pattern 타입: [placeholder][suffix] 또는 ~ 기준으로 쪼개 고정 파트 배열 생성
   // 예: "I've been [verb]-ing for [duration]" → ["I've been", "for"]
+  // 예: "I want to ~" → ["I want to"]
   const patternParts = type === 'pattern'
     ? (p.pattern || '')
-        .replace(/\[[^\]]+\][a-z'-]*/gi, '\x00')
+        .replace(/\[[^\]]+\][a-z'-]*/gi, '\x00')  // [bracket] 플레이스홀더
+        .replace(/~/g, '\x00')                      // ~ 플레이스홀더
         .split('\x00')
-        .map(s => s.trim())
+        .map(s => s.replace(/[?!.,]$/, '').trim())
         .filter(s => s.length >= 2)
     : null;
 
