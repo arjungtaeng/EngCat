@@ -37,7 +37,7 @@ function ECScreenStats() {
             background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
           }} />
           {/* 불꽃 아이콘 — absolute로 빼서 텍스트 위치에 영향 없도록 */}
-          <div style={{ position: 'absolute', bottom: 18, right: 18, color: T.accent }}>
+          <div style={{ position: 'absolute', top: 18, right: 18, color: T.accent }}>
             {ECIcon.flame(T.accent, 48)}
           </div>
           <div>
