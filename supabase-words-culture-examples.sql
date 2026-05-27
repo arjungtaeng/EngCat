@@ -1,0 +1,3 @@
+-- EngCat: Culture Topic — example_en_2~5 + example_ko_2~5
+-- 210 words × 4 extra sentences each
+-- Generated: 2026-05-27
