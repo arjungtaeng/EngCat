@@ -83,6 +83,35 @@ function ECScreenHome() {
           ? rawName.slice(1)                                       // 한국식 3글자 이름: 성(첫 글자) 제외
           : rawName;
 
+  // 연속 학습일 (진도 화면과 동일한 localStorage 기반 계산)
+  const streak = React.useMemo(() => {
+    const userId = (user && user.email) || 'guest';
+    const prefix = 'ec_learned_' + userId + '_';
+    const dailyCounts = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith(prefix)) {
+        const date = key.slice(prefix.length);
+        try {
+          const d = JSON.parse(localStorage.getItem(key) || '{}');
+          dailyCounts[date] = (dailyCounts[date] || 0) + (d.wordIds || []).length + (d.sentenceIds || []).length;
+        } catch(e) {}
+      }
+    }
+    const t = new Date();
+    const todayStr = t.toISOString().slice(0, 10);
+    const startOffset = (dailyCounts[todayStr] || 0) > 0 ? 0 : 1;
+    let s = 0;
+    for (let i = startOffset; i < 365; i++) {
+      const dd = new Date(t);
+      dd.setDate(t.getDate() - i);
+      const ds = dd.toISOString().slice(0, 10);
+      if ((dailyCounts[ds] || 0) > 0) s++;
+      else break;
+    }
+    return s;
+  }, [dataVersion]);
+
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <ECStatusBar />
@@ -102,13 +131,23 @@ function ECScreenHome() {
           </div>
           <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: 0.5, color: T.textMute }}>{'v' + (window.EC_VER || 1)}</div>
         </div>
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: 5,
-          padding: '6px 11px', borderRadius: 999,
-          background: T.bg2, border: `1px solid ${T.hair}`,
-        }}>
-          <span style={{ color: T.accent }}>{ECIcon.flame(T.accent, 14)}</span>
-          <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>0</span>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 5,
+            padding: '6px 11px', borderRadius: 999,
+            background: T.bg2, border: `1px solid ${T.hair}`,
+          }}>
+            <span style={{ color: T.accent }}>{ECIcon.flame(T.accent, 14)}</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>{streak}</span>
+          </div>
+          <img
+            src="icons/icon-1024.png"
+            alt="EngCat"
+            style={{
+              width: 30, height: 30,
+              filter: T.text === '#F8F5EF' ? 'none' : 'drop-shadow(0 2px 8px rgba(28,22,16,0.18))',
+            }}
+          />
         </div>
       </div>
 
