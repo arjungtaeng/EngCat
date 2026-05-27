@@ -36,20 +36,21 @@ function ECScreenStats() {
             position: 'absolute', top: -30, right: -30, width: 140, height: 140, borderRadius: '50%',
             background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
           }} />
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
-            <div>
-              <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.4, textTransform: 'uppercase' }}>
-                연속 학습
-              </div>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 6 }}>
-                <div style={{ fontFamily: T.serif, fontSize: 56, color: T.text, lineHeight: 1, letterSpacing: -1.5 }}>0</div>
-                <div style={{ fontSize: 16, color: T.textDim }}>일</div>
-              </div>
-              <div style={{ marginTop: 8, fontSize: 12.5, color: T.textDim }}>
-                아직 학습 기록이 없어요. 오늘 시작해 보세요!
-              </div>
+          {/* 불꽃 아이콘 — absolute로 빼서 텍스트 위치에 영향 없도록 */}
+          <div style={{ position: 'absolute', bottom: 18, right: 18, color: T.accent }}>
+            {ECIcon.flame(T.accent, 48)}
+          </div>
+          <div>
+            <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.4, textTransform: 'uppercase' }}>
+              연속 학습
             </div>
-            <div style={{ color: T.accent }}>{ECIcon.flame(T.accent, 48)}</div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginTop: 6 }}>
+              <div style={{ fontFamily: T.serif, fontSize: 56, color: T.text, lineHeight: 1, letterSpacing: -1.5 }}>0</div>
+              <div style={{ fontSize: 16, color: T.textDim }}>일</div>
+            </div>
+            <div style={{ marginTop: 8, fontSize: 12.5, color: T.textDim }}>
+              아직 학습 기록이 없어요. 오늘 시작해 보세요!
+            </div>
           </div>
         </div>
       </div>
@@ -73,7 +74,7 @@ function ECScreenStats() {
       {/* Weekly chart */}
       <div style={{ padding: '22px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <div style={{ fontSize: 16, fontWeight: 600, color: T.text }}>이번 주 학습 시간</div>
-        <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>완 0분</div>
+        <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>총 0분</div>
       </div>
 
       <div style={{ padding: '14px 22px 0' }}>
