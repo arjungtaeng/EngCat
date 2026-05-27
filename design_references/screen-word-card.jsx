@@ -133,11 +133,25 @@ function ECScreenWordCard() {
 
   const speak = (text) => window.ECSpeak(stripMarkers(text));
 
-  function renderEx(ex) {
-    const parts = ex.split(/\{([^}]+)\}/);
-    return parts.map((part, i) =>
-      i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
-    );
+  function renderEx(ex, highlight) {
+    // 1. {마커} 있으면 우선 사용
+    if (ex.includes('{')) {
+      const parts = ex.split(/\{([^}]+)\}/);
+      return parts.map((part, i) =>
+        i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
+      );
+    }
+    // 2. 마커 없으면 highlight 단어 자동 강조
+    if (highlight) {
+      const escaped = highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const parts = ex.split(new RegExp(`(${escaped})`, 'gi'));
+      if (parts.length > 1) {
+        return parts.map((part, i) =>
+          i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
+        );
+      }
+    }
+    return ex;
   }
 
   const btnLabel = isLast ? '문장 학습하기' : '다음 카드';
@@ -268,7 +282,7 @@ function ECScreenWordCard() {
                       fontFamily: T.thin, fontWeight: isDark ? 200 : 300,
                       fontSize: 17, color: T.text, lineHeight: 1.4, letterSpacing: -0.2,
                     }}>
-                      {renderEx(ex.en)}
+                      {renderEx(ex.en, word.en)}
                     </div>
                     {ex.ko && (
                       <div style={{ fontSize: 13, color: T.textDim, marginTop: 4, lineHeight: 1.5 }}>

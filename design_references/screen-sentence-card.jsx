@@ -120,6 +120,27 @@ function ECScreenSentenceCard() {
 
   const speak = (text) => window.ECSpeak && window.ECSpeak(text);
 
+  function renderEx(ex, highlight) {
+    // 1. {마커} 있으면 우선 사용
+    if (ex && ex.includes('{')) {
+      const parts = ex.split(/\{([^}]+)\}/);
+      return parts.map((part, i) =>
+        i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
+      );
+    }
+    // 2. 마커 없으면 highlight 자동 강조
+    if (highlight && ex) {
+      const escaped = highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const parts = ex.split(new RegExp(`(${escaped})`, 'gi'));
+      if (parts.length > 1) {
+        return parts.map((part, i) =>
+          i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
+        );
+      }
+    }
+    return ex;
+  }
+
   // ───── Type-based field derivation ─────────────────────────────────────────
   const type = p.type
     || (p.pattern ? 'pattern'
@@ -139,20 +160,25 @@ function ECScreenSentenceCard() {
   const literal = type === 'idiom' ? (p.literalKo || '') : '';
   const tip = (type !== 'pattern') ? (p.tip || '') : '';
 
-  const examples = type === 'pattern' ? (p.examples || [])
+  // pattern 타입: highlight = 패턴의 고정 부분([...] 플레이스홀더 제외)
+  const patternHighlight = type === 'pattern'
+    ? (p.pattern || '').replace(/\[[^\]]+\]/g, '').replace(/\s+/g, ' ').trim()
+    : null;
+
+  const examples = type === 'pattern' ? (p.examples || []).map(ex => ({ ...ex, highlight: patternHighlight }))
     : type === 'nuance' ? [
-        p.exA ? { en: p.exA, ko: `${p.wordA}${p.koA ? ` · ${p.koA}` : ''}` } : null,
-        p.exB ? { en: p.exB, ko: `${p.wordB}${p.koB ? ` · ${p.koB}` : ''}` } : null,
-        p.exC ? { en: p.exC, ko: `${p.wordC}${p.koC ? ` · ${p.koC}` : ''}` } : null,
-        p.ex4 ? { en: p.ex4, ko: p.ex4Ko || '' } : null,
-        p.ex5 ? { en: p.ex5, ko: p.ex5Ko || '' } : null,
+        p.exA ? { en: p.exA, ko: `${p.wordA}${p.koA ? ` · ${p.koA}` : ''}`, highlight: p.wordA } : null,
+        p.exB ? { en: p.exB, ko: `${p.wordB}${p.koB ? ` · ${p.koB}` : ''}`, highlight: p.wordB } : null,
+        p.exC ? { en: p.exC, ko: `${p.wordC}${p.koC ? ` · ${p.koC}` : ''}`, highlight: p.wordC } : null,
+        p.ex4 ? { en: p.ex4, ko: p.ex4Ko || '', highlight: p.wordA } : null,
+        p.ex5 ? { en: p.ex5, ko: p.ex5Ko || '', highlight: p.wordA } : null,
       ].filter(Boolean)
     : [
-        p.ex1 ? { en: p.ex1, ko: p.ex1Ko || '' } : null,
-        p.ex2 ? { en: p.ex2, ko: p.ex2Ko || '' } : null,
-        p.ex3 ? { en: p.ex3, ko: p.ex3Ko || '' } : null,
-        p.ex4 ? { en: p.ex4, ko: p.ex4Ko || '' } : null,
-        p.ex5 ? { en: p.ex5, ko: p.ex5Ko || '' } : null,
+        p.ex1 ? { en: p.ex1, ko: p.ex1Ko || '', highlight: p.en } : null,
+        p.ex2 ? { en: p.ex2, ko: p.ex2Ko || '', highlight: p.en } : null,
+        p.ex3 ? { en: p.ex3, ko: p.ex3Ko || '', highlight: p.en } : null,
+        p.ex4 ? { en: p.ex4, ko: p.ex4Ko || '', highlight: p.en } : null,
+        p.ex5 ? { en: p.ex5, ko: p.ex5Ko || '', highlight: p.en } : null,
       ].filter(Boolean);
 
   const levelLabel = p.level || p.cefr || '';
@@ -345,7 +371,7 @@ function ECScreenSentenceCard() {
                       fontFamily: T.thin, fontWeight: isDark ? 200 : 300,
                       fontSize: 17, color: T.text, lineHeight: 1.4, letterSpacing: -0.2,
                     }}>
-                      {ex.en}
+                      {renderEx(ex.en, ex.highlight)}
                     </div>
                     <div style={{ fontSize: 13, color: T.textDim, marginTop: 4, lineHeight: 1.5 }}>
                       {ex.ko}
