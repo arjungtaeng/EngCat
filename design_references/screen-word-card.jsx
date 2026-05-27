@@ -100,6 +100,7 @@ function ECScreenWordCard() {
     session.wordIndex = next;
     setIdx(next);
     setAnimKey(k => k + 1);
+    setHeroDim(0);
   };
 
   const handleTouchStart = (e) => {

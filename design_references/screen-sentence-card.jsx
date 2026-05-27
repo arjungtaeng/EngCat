@@ -89,6 +89,7 @@ function ECScreenSentenceCard() {
     session.sentenceIndex = next;
     setIdx(next);
     setAnimKey(k => k + 1);
+    setHeroDim(0);
   };
 
   const handleTouchStart = (e) => {
