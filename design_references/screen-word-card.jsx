@@ -207,7 +207,7 @@ function ECScreenWordCard() {
             position: 'absolute', inset: 0,
             background: isDark
               ? `linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, ${T.bg0} 100%)`
-              : `linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, transparent 20%, transparent 70%, ${T.bg0} 100%)`,
+              : `linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, transparent 20%, transparent 80%, ${T.bg0}BB 100%)`,
           }}/>
           {/* 스크롤 딤 오버레이 — 다크: 어둡게, 라이트: bg0 그라데이션 색으로 밝게 */}
           <div style={{ position: 'absolute', inset: 0, background: isDark ? '#000' : T.bg0, opacity: heroDim, pointerEvents: 'none' }}/>
