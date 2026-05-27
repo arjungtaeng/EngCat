@@ -18,7 +18,7 @@ function ECScreenLogin() {
   const [taglineVisible, setTaglineVisible] = React.useState(false);
   const [buttonsVisible, setButtonsVisible] = React.useState(false);
 
-  // ── Collapse-scramble effect ─────────────────────────────────────
+  // ── Collapse-scramble effect ────────────────────────────────
   const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   const TARGET = 'ENGCAT';
   const START_COUNT = 14;
@@ -66,7 +66,7 @@ function ECScreenLogin() {
     }, 30);
     return () => clearInterval(id);
   }, []);
-  // ────────────────────────────────────────────────────────────────
+  // ───────────────────────────────────────────────
 
   const tokenClientRef = React.useRef(null);
 
@@ -139,14 +139,7 @@ function ECScreenLogin() {
         const isDark = T.text === '#F8F5EF';
         return (
           <div style={{ textAlign: 'center', marginBottom: 20 }}>
-            <img
-              src="icons/icon-1024.png"
-              alt="EngCat"
-              style={{
-                width: 140, height: 140,
-                filter: isDark ? 'none' : 'drop-shadow(0 2px 12px rgba(28,22,16,0.18))',
-              }}
-            />
+            <span style={{ display: 'inline-flex' }}>{ECIcon.mascot(isDark, 140)}</span>
           </div>
         );
       })()}

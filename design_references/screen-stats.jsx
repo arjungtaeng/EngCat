@@ -32,7 +32,6 @@ function ECScreenStats() {
       }
     }
 
-    // 연속 학습 계산: 오늘 학습했으면 오늘부터, 아니면 어제부터 거슬러 올라감
     const today = new Date();
     const todayStr = today.toISOString().slice(0, 10);
     const startOffset = (dailyCounts[todayStr] || 0) > 0 ? 0 : 1;
@@ -48,7 +47,6 @@ function ECScreenStats() {
     return { totalWords: totalWords.size, totalSentences: totalSentences.size, streak, dailyCounts };
   }, [userId]);
 
-  // 퀴즈 정답률
   const quizRate = React.useMemo(() => {
     try {
       const qs = JSON.parse(localStorage.getItem('ec_quiz_stats_' + userId) || '{}');
@@ -59,7 +57,6 @@ function ECScreenStats() {
     } catch(e) { return '—'; }
   }, [userId]);
 
-  // 이번 주 요일별 카드 수 (월~일)
   const { weekBars, todayIdx, weekTotal } = React.useMemo(() => {
     const today = new Date();
     const dow = today.getDay();
@@ -77,7 +74,6 @@ function ECScreenStats() {
   }, [learningStats]);
   const maxBar = Math.max(...weekBars, 1);
 
-  // 12주(84일) 활동 그리드
   const grid = React.useMemo(() => {
     const g = Array(84).fill(0);
     const today = new Date();
@@ -91,7 +87,6 @@ function ECScreenStats() {
     return g;
   }, [learningStats]);
 
-  // 연속 학습 일수에 따른 불꽃 단계 (0~6) — 6일이면 최고 단계
   const flameStage = learningStats.streak === 0 ? 0
     : learningStats.streak < 2 ? 1
     : learningStats.streak < 3 ? 2
@@ -110,81 +105,8 @@ function ECScreenStats() {
     { desc: `${learningStats.streak}일 연속! 전설의 불꽃이 활활 타고 있어요!` },
   ][flameStage];
 
-  // 커스텀 7단계 불꽃 SVG — 0: 차가운 재 → 6: 전설의 불꽃
-  const FlameIcon = ({ stage, size }) => {
-    const s = size || 24;
-    if (stage === 0) return (
-      <svg xmlns="http://www.w3.org/2000/svg" width={s} height={s} viewBox="0 0 24 24" fill="none">
-        <path d="M 7 18 Q 12 16.5 17 18 L 16 20 L 8 20 Z" fill="#5a5560" opacity="0.7"/>
-        <circle cx="12" cy="17.5" r="0.6" fill="#5a5560" opacity="0.9"/>
-        <path d="M 11.5 15 Q 11 13.5 12 12 Q 13 10.5 12.3 9" stroke="#5a5560" strokeWidth="0.6" strokeLinecap="round" fill="none" opacity="0.35"/>
-      </svg>
-    );
-    if (stage === 1) return (
-      <svg xmlns="http://www.w3.org/2000/svg" width={s} height={s} viewBox="0 0 24 24" fill="none">
-        <ellipse cx="12" cy="20" rx="3" ry="0.8" fill="#8a6a52" opacity="0.5"/>
-        <path d="M 12 20 Q 9.6 17.5 10.8 14 Q 11.5 12.3 12.4 13 Q 13.3 15 12.9 17 Q 14 16.3 13.3 20 Z" fill="#E8B26A"/>
-        <ellipse cx="12.3" cy="18" rx="0.7" ry="1.5" fill="#FFE4B0"/>
-      </svg>
-    );
-    if (stage === 2) return (
-      <svg xmlns="http://www.w3.org/2000/svg" width={s} height={s} viewBox="0 0 24 24" fill="none">
-        <path d="M 12 20 Q 8.5 17 10 13 Q 11 11 12 11.5 Q 12.5 13 12.2 14.5 Q 13.8 13.5 14 11.5 Q 15.5 14 15 17 Q 14 19.5 12 20 Z" fill="#E8B26A"/>
-        <path d="M 12 19 Q 10.5 17 11.5 15 Q 12 14 12.3 14.5 Q 13 16 12.7 17 Q 13.5 16.5 13 18.5 Z" fill="#F0C878"/>
-        <ellipse cx="12.3" cy="17" rx="0.6" ry="1.2" fill="#FFE4B0"/>
-      </svg>
-    );
-    if (stage === 3) return (
-      <svg xmlns="http://www.w3.org/2000/svg" width={s} height={s} viewBox="0 0 24 24" fill="none">
-        <path d="M 12 21 Q 7 18 8.5 13 Q 9.5 10 11.5 9.5 Q 11.8 11 12 12.5 Q 13.5 11 14.5 8.5 Q 16.5 12 16 16 Q 15 20 12 21 Z" fill="#E89A6A"/>
-        <path d="M 12 20 Q 9 17.5 10 14 Q 11 12 12 12.5 Q 12.3 14 12.5 15 Q 13.5 14 14 12 Q 15 14.5 14.5 17 Q 14 19 12 20 Z" fill="#E8B26A"/>
-        <path d="M 12 19 Q 10.5 17 11.5 15 Q 12 14 12.3 14.5 Q 13 16 12.7 17 Q 13.5 17 13 18.5 Z" fill="#FFE4B0"/>
-      </svg>
-    );
-    if (stage === 4) return (
-      <svg xmlns="http://www.w3.org/2000/svg" width={s} height={s} viewBox="0 0 24 24" fill="none">
-        <path d="M 12 21.5 Q 6 18 7.5 12.5 Q 9 8.5 11 8 Q 11.5 10 12 12 Q 13.5 9 15 6 Q 17.5 11 17 16 Q 16 21 12 21.5 Z" fill="#E89A6A"/>
-        <path d="M 12 20.5 Q 8 17.5 9 13 Q 10 10 11.5 10.5 Q 12 12.5 12.3 14 Q 13.5 12 14.5 9.5 Q 16 13 15.5 16.5 Q 14.5 19.5 12 20.5 Z" fill="#E8B26A"/>
-        <path d="M 12 19.5 Q 9.5 17 10.5 14 Q 11.5 12 12.3 12.5 Q 12.5 14 13 15 Q 14 13.5 14.3 12 Q 14.8 15 14.5 17 Q 13.5 19 12 19.5 Z" fill="#F0C878"/>
-        <ellipse cx="12.5" cy="17" rx="0.7" ry="1.4" fill="#FFE4B0"/>
-        <circle cx="17" cy="9" r="0.5" fill="#FFD27A"/>
-        <circle cx="6.5" cy="11" r="0.4" fill="#FFD27A"/>
-      </svg>
-    );
-    if (stage === 5) return (
-      <svg xmlns="http://www.w3.org/2000/svg" width={s} height={s} viewBox="0 0 24 24" fill="none">
-        <ellipse cx="12" cy="14" rx="6" ry="8" fill="rgba(232,178,106,0.4)"/>
-        <path d="M 12 22 Q 5 18 6 11.5 Q 7.5 7 9.5 6 Q 10 9 11 11 Q 12.5 7 13 4 Q 14 7 13.8 10 Q 15.5 7.5 16.5 5 Q 18.5 10 18 16 Q 17 21.5 12 22 Z" fill="#E89A6A"/>
-        <path d="M 12 21 Q 7 18 8 13 Q 9 9.5 10.5 9 Q 11 11 11.8 12 Q 13 9 13.5 7 Q 15 11 14.5 13 Q 16 11 16 9 Q 17 13 16.5 17 Q 15.5 20 12 21 Z" fill="#E8B26A"/>
-        <path d="M 12 20 Q 9 18 10 14 Q 11 12 12 12 Q 12.3 14 12.8 15 Q 14 13 14.3 11 Q 15 14 14.5 17 Q 13.5 19.5 12 20 Z" fill="#F0C878"/>
-        <path d="M 12 19 Q 11 17 12 14.5 Q 12.7 13.5 13 14.5 Q 13.5 16 13.2 17 Q 13.5 18 12.7 19 Z" fill="#FFE4B0"/>
-        <circle cx="18" cy="8" r="0.5" fill="#FFD27A"/>
-        <circle cx="5" cy="10" r="0.45" fill="#FFD27A"/>
-        <circle cx="16" cy="4" r="0.35" fill="#FFD27A" opacity="0.7"/>
-        <circle cx="7" cy="6" r="0.3" fill="#FFD27A" opacity="0.6"/>
-      </svg>
-    );
-    // stage === 6: 전설의 불꽃 — 6일+
-    return (
-      <svg xmlns="http://www.w3.org/2000/svg" width={s} height={s} viewBox="0 0 24 24" fill="none"
-        style={{ filter: 'drop-shadow(0 0 4px rgba(232,178,106,0.7)) drop-shadow(0 0 10px rgba(232,178,106,0.4))' }}>
-        <ellipse cx="12" cy="13" rx="8" ry="10" fill="rgba(232,178,106,0.4)"/>
-        <ellipse cx="12" cy="14" rx="6" ry="8" fill="rgba(232,178,106,0.4)" opacity="0.6"/>
-        <path d="M 12 22.5 Q 3.5 19 4.5 11 Q 6 5 8.5 4 Q 9 8 10 10.5 Q 11.5 5 12 1.5 Q 13 5.5 13 10 Q 14.5 4.5 15.5 2.5 Q 16.5 7 16 10 Q 18 7 19.5 4.5 Q 21 11 20.5 17 Q 19 22 12 22.5 Z" fill="#E89A6A"/>
-        <path d="M 12 22 Q 5 19 6 12 Q 7.5 7 9.5 7 Q 10 10 11 12 Q 12.5 6 13 3.5 Q 14 7 13.8 10.5 Q 15.5 6.5 16.5 4.5 Q 18 9 17.5 14 Q 17 19 12 22 Z" fill="#E8B26A"/>
-        <path d="M 12 21 Q 7 18.5 8 13 Q 9.5 9 11 9 Q 11.5 11 12 12.5 Q 13 8.5 13.5 6.5 Q 14.5 10 14.3 13 Q 16 10 16 8.5 Q 17 13 16 17 Q 15 20 12 21 Z" fill="#F0C878"/>
-        <path d="M 12 20 Q 9.5 18 10.5 14 Q 11.5 12 12 12.5 Q 12.5 14 13 15 Q 14 12.5 14.3 11 Q 15 14 14.5 17 Q 13.5 19 12 20 Z" fill="#FFE4B0"/>
-        <path d="M 12 19 Q 11 17 12 14.5 Q 12.7 13.5 13 14.5 Q 13.5 16 13.2 17 Q 13.5 18 12.7 19 Z" fill="#FFF1D0"/>
-        <circle cx="20" cy="6" r="0.6" fill="#FFD27A"/>
-        <circle cx="4" cy="8" r="0.55" fill="#FFD27A"/>
-        <circle cx="18" cy="2" r="0.4" fill="#FFD27A" opacity="0.8"/>
-        <circle cx="6" cy="3" r="0.4" fill="#FFD27A" opacity="0.7"/>
-        <circle cx="22" cy="11" r="0.35" fill="#FFD27A" opacity="0.6"/>
-        <circle cx="2.5" cy="13" r="0.35" fill="#FFD27A" opacity="0.5"/>
-        <circle cx="15" cy="0.5" r="0.3" fill="#FFD27A" opacity="0.5"/>
-      </svg>
-    );
-  };
+  // 7단계 불꽃은 공용 아이콘 사용 (icons.jsx의 ECIcon.flameStage)
+  const FlameIcon = ({ stage, size }) => ECIcon.flameStage(stage, size || 24);
 
   // ── 캐러셀 상태 ────────────────────────────────────────────────
   const [carouselIdx, setCarouselIdx] = React.useState(flameStage);
@@ -208,7 +130,6 @@ function ECScreenStats() {
   const carouselEnd = () => {
     if (!dragging.current) return;
     dragging.current = false;
-    // 복귀 속도를 일정하게: 이동 거리에 비례해 시간 조정 (옆 불꽃이든 먼 불꽃이든 같은 속도감)
     const dist = Math.abs(lastDx.current);
     setReturnDur(Math.min(1.8, Math.max(0.45, (dist / ITEM_W) * 0.6)));
     lastDx.current = 0;
@@ -267,11 +188,14 @@ function ECScreenStats() {
             onMouseLeave={carouselEnd}
           >
             {[0,1,2,3,4,5,6].map(s => {
-              // 7개를 항상 렌더링 → 손을 떼면 전체가 다이얼처럼 균일하게 미끄러져 복귀
+              // 7개를 항상 렌더링(부드러운 복귀)하되, 중앙±1만 보이게 페이드 → 화면엔 3개만
               const off = (s - carouselIdx) * ITEM_W + dragDx;
               const t = Math.max(0, 1 - Math.abs(off) / ITEM_W);
               const scale = SIDE_SCALE + (1 - SIDE_SCALE) * t;
               const isColor = s === flameStage;
+              const edge = Math.abs(off) / ITEM_W;
+              const vis = edge >= 1.5 ? 0 : edge <= 1 ? 1 : (1.5 - edge) / 0.5;
+              const baseOp = isColor ? 1 : Math.max(0.35, 0.35 + 0.5 * t);
               const ease = dragging.current ? 'none' : `transform ${returnDur}s cubic-bezier(0.22, 1, 0.36, 1), opacity ${returnDur}s cubic-bezier(0.22, 1, 0.36, 1)`;
               return (
                 <div
@@ -283,7 +207,7 @@ function ECScreenStats() {
                     transform: `translate(calc(-50% + ${off}px), -50%) scale(${scale.toFixed(3)})`,
                     transition: ease,
                     filter: isColor ? 'none' : 'grayscale(100%)',
-                    opacity: isColor ? 1 : Math.max(0.35, 0.35 + 0.5 * t),
+                    opacity: baseOp * vis,
                     pointerEvents: 'none',
                   }}
                 >
