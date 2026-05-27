@@ -243,12 +243,12 @@ function ECScreenStats() {
             background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
           }} />
 
-          {/* 불꽃 캐러셀 — 우측 상단 고정 */}
+          {/* 불꽃 캐러셀 — 우측 상단 고정 (top:18 right:18 = 원래 자리) */}
           <div
             style={{
               position: 'absolute',
-              top: 12,
-              right: 0,
+              top: 18,
+              right: 18,
               width: 118,
               height: 62,
               overflow: 'hidden',
@@ -291,7 +291,7 @@ function ECScreenStats() {
           </div>
 
           {/* 스트릭 텍스트 — 우측 캐러셀 공간 확보 */}
-          <div style={{ paddingRight: 120 }}>
+          <div style={{ paddingRight: 140 }}>
             <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.4, textTransform: 'uppercase' }}>
               연속 학습
             </div>
