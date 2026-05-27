@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="EngCat"/>
+<meta name="theme-color" content="#0D0D11"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="icon" type="image/png" href="icons/icon-1024.png"/>
+<link rel="apple-touch-icon" href="icons/icon-180.png"/>
+<link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png"/>
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png"/>
+<!-- App icon: "Cat" by Icojam, SVG Repo (https://www.svgrepo.com) · CC BY 4.0 -->
+<title>EngCat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@400;700&family=DM+Serif+Display&family=Outfit:wght@300;400&family=Raleway:ital,wght@0,200;0,300;1,200;1,300&display=swap"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"/>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<style>
+  html { margin: 0; padding: 0; height: 100dvh; background: #0D0D11; overscroll-behavior: none; }
+  body { margin: 0; padding: 0; height: 100dvh; background: #0D0D11; font-family: 'Pretendard Variable', system-ui, sans-serif; overscroll-behavior: none; }
+  * { box-sizing: border-box; }
+  #root { height: 100dvh; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="vendor/react.development.js"></script>
+<script src="vendor/react-dom.development.js"></script>
+<script src="vendor/babel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+<script>window.ECRealDevice = true;</script>
+
+<script>window.EC_VER = 316;</script>
+<script type="text/babel" src="design_references/tokens.jsx"></script>
+<script type="text/babel" src="design_references/icons.jsx"></script>
+<script type="text/babel" src="design_references/supabase.jsx"></script>
+<script type="text/babel" src="design_references/data.jsx"></script>
+<script type="text/babel" src="design_references/today-session.jsx"></script>
+<script type="text/babel" src="design_references/screen-login.jsx"></script>
+<script type="text/babel" src="design_references/screen-onboarding.jsx"></script>
+<script type="text/babel" src="design_references/screen-home.jsx"></script>
+<script type="text/babel" src="design_references/screen-word-card.jsx"></script>
+<script type="text/babel" src="design_references/screen-sentence-card.jsx"></script>
+<script type="text/babel" src="design_references/screen-saved-cards.jsx"></script>
+<script type="text/babel" src="design_references/screen-quiz.jsx"></script>
+<script type="text/babel" src="design_references/screen-stats.jsx"></script>
+<script type="text/babel" src="design_references/screen-profile.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+  window.ECNav = { go: () => {} };
+
+  function App() {
+    const savedUser = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
+    const [screen, setScreen] = React.useState(savedUser ? 'home' : 'login');
+
+    const resolveTheme = (pref) => {
+      if (pref === 'light') return 'light';
+      if (pref === 'dark')  return 'dark';
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    };
+    const [theme, setTheme] = React.useState(() => {
+      const pref = localStorage.getItem('ec_theme') || 'system';
+      const resolved = resolveTheme(pref);
+      window.ECApplyTheme(resolved);
+      return resolved;
+    });
+
+    React.useEffect(() => {
+      window.ECNav.go = (s) => {
+        setScreen(s);
+        if (window._swReg) window._swReg.update();
+        if (window.checkVersion) window.checkVersion();
+      };
+
+      window.ECSetTheme = (pref) => {
+        localStorage.setItem('ec_theme', pref);
+        const resolved = resolveTheme(pref);
+        window.ECApplyTheme(resolved);
+        setTheme(resolved);
+      };
+
+      const mq = window.matchMedia('(prefers-color-scheme: light)');
+      const onSysChange = () => {
+        if ((localStorage.getItem('ec_theme') || 'system') === 'system') {
+          const resolved = mq.matches ? 'light' : 'dark';
+          window.ECApplyTheme(resolved);
+          setTheme(resolved);
+        }
+      };
+      mq.addEventListener('change', onSysChange);
+      return () => mq.removeEventListener('change', onSysChange);
+    }, []);
+
+    const screenMap = {
+      'login':           ECScreenLogin,
+      'onboarding':      ECScreenOnboarding,
+      'onboarding-goal': ECScreenOnboardingGoal,
+      'home':            ECScreenHome,
+      'word-card':       ECScreenWordCard,
+      'sentence-card':   ECScreenSentenceCard,
+      'saved-cards':     ECScreenSavedCards,
+      'quiz':            ECScreenQuiz,
+      'stats':           ECScreenStats,
+      'profile':         ECScreenProfile,
+    };
+
+    const Screen = screenMap[screen] || screenMap['home'] || (() => null);
+
+    const tabScreens = ['home', 'stats', 'profile', 'word-card', 'sentence-card', 'saved-cards'];
+    const tabActive = { 'home': 'home', 'word-card': 'home', 'sentence-card': 'home', 'saved-cards': 'cards', 'stats': 'stats', 'profile': 'me' };
+    const showTab = tabScreens.includes(screen);
+    const isImmersive = screen === 'word-card' || screen === 'sentence-card';
+
+    return (
+      <div style={{
+        minHeight: '100vh',
+        background: ECTokens.bg1,
+        display: 'flex', flexDirection: 'column',
+        paddingTop: isImmersive ? 0 : 'env(safe-area-inset-top, 0px)',
+      }}>
+        <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', overflowX: 'hidden' }}>
+          <Screen />
+        </div>
+        <ECTabBar active={tabActive[screen]} visible={showTab} />
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+<script>
+  window.checkVersion = function() {
+    fetch('/EngCat/version.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(r => r.json())
+      .then(data => { if (data.v > window.EC_VER) location.reload(true); })
+      .catch(() => {});
+  };
+  window.checkVersion();
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') window.checkVersion();
+  });
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) window.checkVersion();
+  });
+  window.addEventListener('focus', () => window.checkVersion());
+
+  if ('serviceWorker' in navigator) {
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) { refreshing = true; location.reload(true); }
+    });
+    navigator.serviceWorker.register('/EngCat/sw.js').then(reg => {
+      window._swReg = reg;
+      reg.update();
+    });
+  }
+</script>
+</body>
+</html>
