@@ -104,24 +104,16 @@ const ECIcon = {
       </svg>
     );
   },
-  // EngCat 마스코트 로고 (dark=true: 다크모드용 크림 고양이 / false: 라이트모드용 다크 고양이)
-  mascot: (dark = true, s = 64) => {
-    const body = dark ? '#F4ECDD' : '#1A1A21';
-    const eye = dark ? '#1A1A21' : '#F4ECDD';
-    return (
-      <svg xmlns="http://www.w3.org/2000/svg" width={s} height={s} viewBox="0 0 24 24" fill="none">
-        <rect x="19.2" y="1.5" width="2.6" height="9.5" rx="1.3" fill={body}/>
-        <rect x="17.5" y="9.5" width="4.5" height="11.5" rx="2.25" fill={body}/>
-        <rect x="4" y="9.5" width="17" height="6" rx="2.6" fill={body}/>
-        <rect x="3" y="13" width="4" height="8" rx="2" fill={body}/>
-        <rect x="3" y="3.5" width="9.5" height="6.5" rx="1.6" fill={body}/>
-        <path d="M 11.5 4.5 L 11.5 1.5 L 8.3 4.5 Z" fill="#E8B26A"/>
-        <path d="M 4 4.5 L 4 1.5 L 7.2 4.5 Z" fill="#E8B26A"/>
-        <circle cx="8.8" cy="6.7" r="0.85" fill={eye}/>
-        <circle cx="5" cy="6.7" r="0.85" fill={eye}/>
-      </svg>
-    );
-  },
+  // EngCat 마스코트 로고 (dark=true: 다크모드용 크림 고양이 / false: 라이트모드용 검정 고양이)
+  mascot: (dark = true, s = 64) => (
+    <img
+      src={dark ? 'icons/engcat-dark.png' : 'icons/engcat-light.png'}
+      alt="EngCat"
+      width={s}
+      height={s}
+      style={{ display: 'block' }}
+    />
+  ),
   bookmark: (c = 'currentColor', s = 20, filled = false) => (
     <svg width={s} height={s} viewBox="0 0 24 24" fill={filled ? c : 'none'}>
       <path d="M6 4h12v17l-6-4-6 4V4z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/>
