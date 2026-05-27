@@ -15,7 +15,7 @@ function ECScreenStats() {
     const prefix = 'ec_learned_' + userId + '_';
     const totalWords = new Set();
     const totalSentences = new Set();
-    const dailyCounts = {};
+    const dailyCounts = {}; // { 'YYYY-MM-DD': cardCount }
 
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
@@ -32,6 +32,7 @@ function ECScreenStats() {
       }
     }
 
+    // 연속 학습 계산
     const today = new Date();
     const todayStr = today.toISOString().slice(0, 10);
     const startOffset = (dailyCounts[todayStr] || 0) > 0 ? 0 : 1;
@@ -97,34 +98,33 @@ function ECScreenStats() {
     : 3;
 
   const flameMeta = [
-    { label: '',       desc: '아직 학습 기록이 없어요. 오늘 시작해 보세요!' },
-    { label: '1~6일', desc: `${learningStats.streak}일 연속 학습 중이에요!` },
-    { label: '7~29일',desc: `${learningStats.streak}일 연속! 열정이 타오르고 있어요.` },
-    { label: '30일+', desc: `${learningStats.streak}일 연속! 불꽃이 활활 타고 있어요!` },
+    { desc: '아직 학습 기록이 없어요. 오늘 시작해 보세요!' },
+    { desc: `${learningStats.streak}일 연속 학습 중이에요!` },
+    { desc: `${learningStats.streak}일 연속! 열정이 타오르고 있어요.` },
+    { desc: `${learningStats.streak}일 연속! 불꽃이 활활 타고 있어요!` },
   ][flameLevel];
 
   // streak 기반 SVG 불꽃 (동그라미 → 작은 불꽃 → 중간 불꽃 → 글로우 불꽃)
   const FLAME_PATH = "M12 2c1.5 3 4.5 5 4.5 9a4.5 4.5 0 11-9 0c0-1.5.5-2.5 1-3 .5 1 1.5 1.5 2 1.5 0-2 .5-5.5 1.5-7.5z";
   const FlameIcon = ({ level, size }) => {
     if (level === 0) return (
-      // 동그라미 — 아직 시작 전
       <svg width={size} height={size} viewBox="0 0 24 24" fill={T.textMute}>
         <circle cx="12" cy="13" r="7" />
       </svg>
     );
     if (level === 1) return (
-      // 작은 불꽃 — 1~6일: 동일 path를 55% 크기로 축소
+      // 작은 불꽃 — 동일 path 55% 축소
       <svg width={size} height={size} viewBox="0 0 24 24" fill={T.accent} style={{ opacity: 0.65 }}>
         <path d={FLAME_PATH} transform="translate(12,12) scale(0.55) translate(-12,-12)" />
       </svg>
     );
     if (level === 2) return (
-      // 중간(원래) 불꽃 — 7~29일
+      // 중간(원래) 불꽃
       <svg width={size} height={size} viewBox="0 0 24 24" fill={T.accent}>
         <path d={FLAME_PATH} />
       </svg>
     );
-    // level === 3: 글로우 불꽃 — 30일+
+    // 글로우 불꽃 — 30일+
     return (
       <svg width={size} height={size} viewBox="0 0 24 24" fill={T.accent}
         style={{ filter: `drop-shadow(0 0 6px ${T.accent}) drop-shadow(0 0 12px ${T.accent}80)` }}>
@@ -162,15 +162,9 @@ function ECScreenStats() {
             background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
           }} />
 
-          {/* 불꽃 아이콘 + 레벨 레이블 */}
-          <div style={{ position: 'absolute', top: 14, right: 14, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
+          {/* 불꽃 아이콘 */}
+          <div style={{ position: 'absolute', top: 14, right: 14 }}>
             <FlameIcon level={flameLevel} size={48} />
-            {flameMeta.label ? (
-              <div style={{
-                fontFamily: T.mono, fontSize: 9, color: T.accent, letterSpacing: 0.8,
-                background: `${T.accent}1A`, borderRadius: 4, padding: '2px 6px',
-              }}>{flameMeta.label}</div>
-            ) : null}
           </div>
 
           <div>
@@ -267,7 +261,7 @@ function ECScreenStats() {
         </div>
       </div>
 
-      </div>{/* end scrollable */}
+      </div>
     </div>
   );
 }
