@@ -112,6 +112,9 @@ function ECScreenHome() {
     return s;
   }, [dataVersion]);
 
+  // 연속일 → 불꽃 단계 (진도 화면과 동일 매핑)
+  const homeFlameStage = streak === 0 ? 0 : streak < 2 ? 1 : streak < 3 ? 2 : streak < 4 ? 3 : streak < 5 ? 4 : streak < 6 ? 5 : 6;
+
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <ECStatusBar />
@@ -136,7 +139,7 @@ function ECScreenHome() {
           padding: '6px 11px', borderRadius: 999,
           background: T.bg2, border: `1px solid ${T.hair}`,
         }}>
-          <span style={{ color: T.accent }}>{ECIcon.flame(T.accent, 14)}</span>
+          <span style={{ display: 'flex' }}>{ECIcon.flameStage(homeFlameStage, 20)}</span>
           <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>{streak}</span>
         </div>
       </div>
@@ -152,14 +155,7 @@ function ECScreenHome() {
             <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}.</span>
           </div>
         </div>
-        <img
-          src="icons/icon-1024.png"
-          alt="EngCat"
-          style={{
-            width: 64, height: 64, flexShrink: 0,
-            filter: T.text === '#F8F5EF' ? 'none' : 'drop-shadow(0 2px 10px rgba(28,22,16,0.18))',
-          }}
-        />
+        <span style={{ flexShrink: 0, display: 'flex' }}>{ECIcon.mascot(T.text === '#F8F5EF', 64)}</span>
       </div>
 
       {/* Today's mission card — hero */}
