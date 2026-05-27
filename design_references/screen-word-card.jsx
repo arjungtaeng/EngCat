@@ -192,8 +192,8 @@ function ECScreenWordCard() {
               ? `linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, ${T.bg0} 100%)`
               : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 25%, transparent 55%, ${T.bg0} 100%)`,
           }}/>
-          {/* 스크롤 딤 오버레이 */}
-          <div style={{ position: 'absolute', inset: 0, background: '#000', opacity: heroDim, pointerEvents: 'none' }}/>
+          {/* 스크롤 딤 오버레이 — 다크: 어둡게, 라이트: 밝게 */}
+          <div style={{ position: 'absolute', inset: 0, background: isDark ? '#000' : '#fff', opacity: heroDim, pointerEvents: 'none' }}/>
         </div>
 
         {/* Text scroll layer (z:5) — flows over the hero as the user scrolls up */}
