@@ -34,10 +34,10 @@ if (!PEXELS_KEY) {
 const db = createClient(SUPABASE_URL, SERVICE_KEY, { auth: { persistSession: false } });
 
 const TABLES = [
-  { name: 'words',        idCol: 'id' },
-  { name: 'sentences',    idCol: 'id' },
-  { name: 'collocations', idCol: 'id' },
-  { name: 'idioms',       idCol: 'id' },
+  { name: 'words',        idCol: 'id', topicCol: 'topic_id' },
+  { name: 'sentences',    idCol: 'id', topicCol: 'topic_id' },
+  { name: 'collocations', idCol: 'id', topicCol: 'topic_id' },
+  { name: 'idioms',       idCol: 'id', topicCol: 'topic_id' },
 ];
 
 const HOURLY_LIMIT = 180;
@@ -55,14 +55,36 @@ async function searchPexels(keyword) {
   return data.photos?.[0]?.src?.large ?? null;
 }
 
+// 토픽별로 순환(round-robin)하여 모든 토픽에 골고루 이미지를 채웁니다.
+// 이렇게 하면 첫 1회 실행만으로 모든 토픽에 최소 1개씩 이미지가 채워집니다.
+function roundRobinByTopic(rows, topicCol) {
+  const byTopic = new Map();
+  for (const row of rows) {
+    const t = row[topicCol] || '__none__';
+    if (!byTopic.has(t)) byTopic.set(t, []);
+    byTopic.get(t).push(row);
+  }
+  const result = [];
+  const queues = [...byTopic.values()];
+  let maxLen = Math.max(...queues.map(q => q.length));
+  for (let i = 0; i < maxLen; i++) {
+    for (const q of queues) {
+      if (i < q.length) result.push(q[i]);
+    }
+  }
+  return result;
+}
+
 async function backfillTable(table) {
   console.log(`\n=== ${table.name} ===`);
   const { data: rows, error } = await db
     .from(table.name)
-    .select(`${table.idCol}, image_keyword`)
+    .select(`${table.idCol}, ${table.topicCol}, image_keyword`)
     .not('image_keyword', 'is', null)
     .is('image_url', null)
-    .limit(2000);
+    .order(table.topicCol)
+    .order('priority')
+    .limit(5000);
 
   if (error) {
     console.error(`  fetch error: ${error.message}`);
@@ -72,10 +94,11 @@ async function backfillTable(table) {
     console.log('  nothing to backfill');
     return;
   }
-  console.log(`  ${rows.length} rows to process`);
+  console.log(`  ${rows.length} rows to process (round-robin by topic)`);
 
+  const ordered = roundRobinByTopic(rows, table.topicCol);
   let ok = 0, fail = 0, skip = 0;
-  for (const row of rows) {
+  for (const row of ordered) {
     if (calls >= HOURLY_LIMIT) {
       console.log(`  reached hourly limit (${HOURLY_LIMIT}), stopping`);
       break;
