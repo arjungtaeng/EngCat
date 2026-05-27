@@ -1,8 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions,
+  View, Text, StyleSheet, TouchableOpacity, Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Animated, {
+  useSharedValue, useAnimatedStyle, useAnimatedScrollHandler,
+  interpolate, Extrapolation,
+} from 'react-native-reanimated';
 import { useTokens } from '../theme/useTokens';
 import { useCardsStore, SentenceCard } from '../store/useCardsStore';
 import { useUserStore } from '../store/useUserStore';
@@ -29,6 +33,14 @@ export default function SentenceCardScreen({ navigation }: Props) {
   const expressions = session.expressions.length ? session.expressions : (store.expressions.length ? store.expressions : store.sentences);
 
   const [idx, setIdx] = useState(store.sentenceIndex);
+
+  const scrollY = useSharedValue(0);
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (e) => { scrollY.value = e.contentOffset.y; },
+  });
+  const heroDimStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(scrollY.value, [0, H * 0.60 * 0.55], [0, 0.62], Extrapolation.CLAMP),
+  }));
 
   const s = expressions[idx];
   const isLast = idx === expressions.length - 1;
@@ -214,6 +226,7 @@ export default function SentenceCardScreen({ navigation }: Props) {
     <View style={[styles.safe, { backgroundColor: T.bg0 }]}>
       {/* Background */}
       <Placeholder height={H * 0.60} tint={s.tint} radius={0} style={styles.heroBg} />
+      <Animated.View style={[styles.heroBg, { height: H * 0.60, backgroundColor: '#000' }, heroDimStyle]} />
       <View style={[StyleSheet.absoluteFill, styles.overlayBottom]} />
 
       {/* Top chrome */}
@@ -233,15 +246,17 @@ export default function SentenceCardScreen({ navigation }: Props) {
       </SafeAreaView>
 
       {/* Scrollable content */}
-      <ScrollView
+      <Animated.ScrollView
         style={styles.scrollArea}
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
       >
         <View style={{ height: H * 0.60 }} />
         {renderContent()}
         <View style={{ height: 120 }} />
-      </ScrollView>
+      </Animated.ScrollView>
 
       {/* Bottom bar */}
       <SafeAreaView edges={['bottom']} style={styles.bottomBar}>

@@ -6,6 +6,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, {
   useSharedValue, useAnimatedStyle, withTiming, withSpring, runOnJS,
+  useAnimatedScrollHandler, interpolate, Extrapolation,
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useTokens } from '../theme/useTokens';
@@ -49,6 +50,15 @@ export default function WordCardScreen({ navigation }: Props) {
 
   const translateX = useSharedValue(0);
   const isAnimating = useSharedValue(false);
+  const scrollY = useSharedValue(0);
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (e) => { scrollY.value = e.contentOffset.y; },
+  });
+
+  const heroDimStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(scrollY.value, [0, HERO_HEIGHT * 0.55], [0, 0.62], Extrapolation.CLAMP),
+  }));
 
   const word = words[idx];
   const isBookmarked = word ? store.bookmarkedIds.has(word.id) : false;
@@ -136,6 +146,7 @@ export default function WordCardScreen({ navigation }: Props) {
           <View style={[styles.heroWrap, { height: HERO_HEIGHT }]}>
             <Placeholder height={HERO_HEIGHT} tint={word.tint} radius={0} style={StyleSheet.absoluteFill} />
             <View style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.25)' }]} />
+            <Animated.View style={[StyleSheet.absoluteFill, styles.heroDim, heroDimStyle]} />
           </View>
           <View style={[StyleSheet.absoluteFill, styles.overlayBottom]} />
 
@@ -171,10 +182,12 @@ export default function WordCardScreen({ navigation }: Props) {
           </View>
 
           {/* Scrollable content */}
-          <ScrollView
+          <Animated.ScrollView
             style={styles.scrollArea}
             contentContainerStyle={{ flexGrow: 1 }}
             showsVerticalScrollIndicator={false}
+            onScroll={scrollHandler}
+            scrollEventThrottle={16}
           >
             <View style={{ height: SPACER_HEIGHT }} />
             <View style={styles.contentPad}>
@@ -229,7 +242,7 @@ export default function WordCardScreen({ navigation }: Props) {
               )}
             </View>
             <View style={{ height: 140 }} />
-          </ScrollView>
+          </Animated.ScrollView>
 
           {/* Bottom bar */}
           <SafeAreaView edges={['bottom']} style={styles.bottomBar}>
@@ -264,6 +277,7 @@ const styles = StyleSheet.create({
   safe:           { flex: 1 },
   empty:          { flex: 1, alignItems: 'center', justifyContent: 'center' },
   heroWrap:       { position: 'absolute', top: 0, left: 0, right: 0, zIndex: 1, overflow: 'hidden' },
+  heroDim:        { backgroundColor: '#000' },
   overlayBottom:  { backgroundColor: 'transparent' },
   topChrome:      { position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10, alignItems: 'center', paddingTop: 6 },
   pill:           { paddingHorizontal: 14, paddingVertical: 7, borderRadius: 999, borderWidth: 1 },
