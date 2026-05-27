@@ -134,6 +134,7 @@ function ECScreenWordCard() {
   const speak = (text) => window.ECSpeak(stripMarkers(text));
 
   function renderEx(ex, highlight) {
+    if (!ex) return ex;
     // 1. {마커} 있으면 우선 사용
     if (ex.includes('{')) {
       const parts = ex.split(/\{([^}]+)\}/);
@@ -141,17 +142,18 @@ function ECScreenWordCard() {
         i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
       );
     }
-    // 2. 마커 없으면 highlight 단어 자동 강조
-    if (highlight) {
-      const escaped = highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const parts = ex.split(new RegExp(`(${escaped})`, 'gi'));
-      if (parts.length > 1) {
-        return parts.map((part, i) =>
-          i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
-        );
-      }
-    }
-    return ex;
+    if (!highlight) return ex;
+    // 2. highlight 단어를 prefix 매칭으로 자동 강조 (동사 변형 커버)
+    //    예: "restrict" → \brestrict\w* → restriction, restrictions, restricted 모두 매칭
+    const STOP = new Set(['a','an','the','is','are','was','were','be','been','to','of','in','for','on','with','at','by','i','you','he','she','we','they','and','or','but','that','this','it','its','my','your','his','her','our','their']);
+    const words = highlight.toLowerCase().replace(/[^a-z\s'-]/g, ' ').split(/\s+/).filter(w => w.length >= 4 && !STOP.has(w));
+    if (!words.length) return ex;
+    const pattern = words.map(w => `\\b${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\w*`).join('|');
+    const parts = ex.split(new RegExp(`(${pattern})`, 'gi'));
+    if (parts.length <= 1) return ex;
+    return parts.map((part, i) =>
+      i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
+    );
   }
 
   const btnLabel = isLast ? '문장 학습하기' : '다음 카드';

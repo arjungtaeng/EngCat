@@ -120,25 +120,37 @@ function ECScreenSentenceCard() {
 
   const speak = (text) => window.ECSpeak && window.ECSpeak(text);
 
+  const STOP = new Set(['a','an','the','is','are','was','were','be','been','to','of','in','for','on','with','at','by','i','you','he','she','we','they','and','or','but','that','this','it','its','my','your','his','her','our','their']);
+
   function renderEx(ex, highlight) {
+    if (!ex) return ex;
     // 1. {마커} 있으면 우선 사용
-    if (ex && ex.includes('{')) {
+    if (ex.includes('{')) {
       const parts = ex.split(/\{([^}]+)\}/);
       return parts.map((part, i) =>
         i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
       );
     }
-    // 2. 마커 없으면 highlight 자동 강조
-    if (highlight && ex) {
-      const escaped = highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const parts = ex.split(new RegExp(`(${escaped})`, 'gi'));
-      if (parts.length > 1) {
-        return parts.map((part, i) =>
-          i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
-        );
-      }
+    if (!highlight) return ex;
+
+    let pattern;
+    if (Array.isArray(highlight)) {
+      // 패턴 고정 파트: 각 부분을 exact 매칭 (2글자 이상)
+      const terms = highlight.filter(t => t.length >= 2).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      if (!terms.length) return ex;
+      pattern = terms.join('|');
+    } else {
+      // 단어/표현: 유효 단어별 prefix 매칭으로 동사 변형 커버
+      const words = highlight.toLowerCase().replace(/[^a-z\s'-]/g, ' ').split(/\s+/).filter(w => w.length >= 4 && !STOP.has(w));
+      if (!words.length) return ex;
+      pattern = words.map(w => `\\b${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\w*`).join('|');
     }
-    return ex;
+
+    const parts = ex.split(new RegExp(`(${pattern})`, 'gi'));
+    if (parts.length <= 1) return ex;
+    return parts.map((part, i) =>
+      i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
+    );
   }
 
   // ───── Type-based field derivation ─────────────────────────────────────────
@@ -160,12 +172,17 @@ function ECScreenSentenceCard() {
   const literal = type === 'idiom' ? (p.literalKo || '') : '';
   const tip = (type !== 'pattern') ? (p.tip || '') : '';
 
-  // pattern 타입: highlight = 패턴의 고정 부분([...] 플레이스홀더 제외)
-  const patternHighlight = type === 'pattern'
-    ? (p.pattern || '').replace(/\[[^\]]+\]/g, '').replace(/\s+/g, ' ').trim()
+  // pattern 타입: [placeholder][suffix] 기준으로 쪼개 고정 파트 배열 생성
+  // 예: "I've been [verb]-ing for [duration]" → ["I've been", "for"]
+  const patternParts = type === 'pattern'
+    ? (p.pattern || '')
+        .replace(/\[[^\]]+\][a-z'-]*/gi, '\x00')
+        .split('\x00')
+        .map(s => s.trim())
+        .filter(s => s.length >= 2)
     : null;
 
-  const examples = type === 'pattern' ? (p.examples || []).map(ex => ({ ...ex, highlight: patternHighlight }))
+  const examples = type === 'pattern' ? (p.examples || []).map(ex => ({ ...ex, highlight: patternParts }))
     : type === 'nuance' ? [
         p.exA ? { en: p.exA, ko: `${p.wordA}${p.koA ? ` · ${p.koA}` : ''}`, highlight: p.wordA } : null,
         p.exB ? { en: p.exB, ko: `${p.wordB}${p.koB ? ` · ${p.koB}` : ''}`, highlight: p.wordB } : null,
