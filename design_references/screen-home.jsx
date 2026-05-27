@@ -131,35 +131,35 @@ function ECScreenHome() {
           </div>
           <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: 0.5, color: T.textMute }}>{'v' + (window.EC_VER || 1)}</div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 5,
-            padding: '6px 11px', borderRadius: 999,
-            background: T.bg2, border: `1px solid ${T.hair}`,
-          }}>
-            <span style={{ color: T.accent }}>{ECIcon.flame(T.accent, 14)}</span>
-            <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>{streak}</span>
-          </div>
-          <img
-            src="icons/icon-1024.png"
-            alt="EngCat"
-            style={{
-              width: 30, height: 30,
-              filter: T.text === '#F8F5EF' ? 'none' : 'drop-shadow(0 2px 8px rgba(28,22,16,0.18))',
-            }}
-          />
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 5,
+          padding: '6px 11px', borderRadius: 999,
+          background: T.bg2, border: `1px solid ${T.hair}`,
+        }}>
+          <span style={{ color: T.accent }}>{ECIcon.flame(T.accent, 14)}</span>
+          <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>{streak}</span>
         </div>
       </div>
 
       {/* Greeting */}
-      <div style={{ padding: '24px 22px 18px' }}>
-        <div style={{ fontSize: 13, color: T.textDim, marginBottom: 6 }}>
-          {dateStr}
+      <div style={{ padding: '24px 22px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 13, color: T.textDim, marginBottom: 6 }}>
+            {dateStr}
+          </div>
+          <div style={{ fontFamily: T.serif, fontSize: 30, lineHeight: 1.18, color: T.text, letterSpacing: -0.4 }}>
+            {greetingWord}<br/>
+            <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}.</span>
+          </div>
         </div>
-        <div style={{ fontFamily: T.serif, fontSize: 30, lineHeight: 1.18, color: T.text, letterSpacing: -0.4 }}>
-          {greetingWord}<br/>
-          <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}.</span>
-        </div>
+        <img
+          src="icons/icon-1024.png"
+          alt="EngCat"
+          style={{
+            width: 64, height: 64, flexShrink: 0,
+            filter: T.text === '#F8F5EF' ? 'none' : 'drop-shadow(0 2px 10px rgba(28,22,16,0.18))',
+          }}
+        />
       </div>
 
       {/* Today's mission card — hero */}
