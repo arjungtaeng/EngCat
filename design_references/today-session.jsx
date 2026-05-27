@@ -94,8 +94,16 @@ window.ECGetTodayTopic = function(words) {
   return ordered[window.ECGetWeekOfYear() % ordered.length];
 };
 
+// 레벨 읽기: ec_user_level 우선, 없으면 engcat_user.level (온보딩 저장) 사용
+function _getLevel() {
+  const v = localStorage.getItem('ec_user_level');
+  if (v) return v;
+  try { return JSON.parse(localStorage.getItem('engcat_user') || '{}').level || 'B1'; }
+  catch(e) { return 'B1'; }
+}
+
 window.ECGetTodaySession = function() {
-  const level = localStorage.getItem('ec_user_level') || 'B1';
+  const level = _getLevel();
   const comp = window.EC_CEFR_COMPOSITIONS[level] || window.EC_CEFR_COMPOSITIONS.B1;
   const seed = window.ECGetDayOfYear();
   const data = window.ECData || { words: [], sentences: [], collocations: [], idioms: [], nuances: [], patterns: [] };
@@ -155,7 +163,7 @@ window.ECGetTodaySession = function() {
 // 복습 세션: 어제 학습한 단어/표현 (패턴+콜로+이디엄+뉘앙스)
 // 첫날 (어제 학습 없음): 무작위 예습 단어/표현
 window.ECGetReviewSession = function() {
-  const level = localStorage.getItem('ec_user_level') || 'B1';
+  const level = _getLevel();
   const comp = window.EC_CEFR_COMPOSITIONS[level] || window.EC_CEFR_COMPOSITIONS.B1;
   const data = window.ECData || { words: [], patterns: [], collocations: [], idioms: [], nuances: [] };
   const allWords    = data.words        || [];
@@ -188,13 +196,13 @@ window.ECGetReviewSession = function() {
     }
   }
 
-  // 어제 학습 데이터가 있으면 복습으로 사용
+  // 어제 학습 데이터가 있으면 복습으로 사용 (현재 레벨 구성 개수로 제한)
   if (yesterdayWordIds.size > 0 || yesterdaySentenceIds.size > 0) {
-    const reviewWords    = allWords.filter(w => yesterdayWordIds.has(w.id));
-    const reviewPatterns = tagType(allPatterns.filter(p => yesterdaySentenceIds.has(p.id)), 'pattern');
-    const reviewColloc   = tagType(allColloc.filter(c => yesterdaySentenceIds.has(c.id)), 'collocation');
-    const reviewIdioms   = tagType(allIdioms.filter(i => yesterdaySentenceIds.has(i.id)), 'idiom');
-    const reviewNuances  = tagType(allNuances.filter(n => yesterdaySentenceIds.has(n.id)), 'nuance');
+    const reviewWords    = allWords.filter(w => yesterdayWordIds.has(w.id)).slice(0, comp.words);
+    const reviewPatterns = tagType(allPatterns.filter(p => yesterdaySentenceIds.has(p.id)), 'pattern').slice(0, comp.patterns);
+    const reviewColloc   = tagType(allColloc.filter(c => yesterdaySentenceIds.has(c.id)), 'collocation').slice(0, comp.collocations || 0);
+    const reviewIdioms   = tagType(allIdioms.filter(i => yesterdaySentenceIds.has(i.id)), 'idiom').slice(0, comp.idioms || 0);
+    const reviewNuances  = tagType(allNuances.filter(n => yesterdaySentenceIds.has(n.id)), 'nuance').slice(0, comp.nuances || 0);
     return {
       isPreview: false,
       topic: reviewTopic,
