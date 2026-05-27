@@ -1,6 +1,7 @@
 // 배포할 때 이 값만 올리면 됩니다
-const CACHE = 'engcat-v311';
+const CACHE = 'engcat-v312';
 
+// index.html과 app 파일들은 항상 네트워크 우선
 const NETWORK_FIRST = ['/', '/index.html', '/design_references/', '/EngCat/'];
 
 const ASSETS = [
@@ -36,6 +37,7 @@ self.addEventListener('fetch', e => {
   const isNetworkFirst = NETWORK_FIRST.some(p => path === p || path.startsWith(p));
 
   if (isNetworkFirst) {
+    // 항상 네트워크에서 최신 버전 가져오기, 실패 시 캐시 폴백
     e.respondWith(
       fetch(e.request).then(res => {
         const clone = res.clone();
@@ -44,6 +46,7 @@ self.addEventListener('fetch', e => {
       }).catch(() => caches.match(e.request))
     );
   } else {
+    // 벤더 파일 등은 캐시 우선
     e.respondWith(
       caches.match(e.request).then(cached => cached || fetch(e.request).then(res => {
         const clone = res.clone();
