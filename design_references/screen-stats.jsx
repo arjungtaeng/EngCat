@@ -276,7 +276,7 @@ function ECScreenStats() {
                     left: '50%',
                     top: '50%',
                     transform: `translate(calc(-50% + ${off}px), -50%) scale(${scale.toFixed(3)})`,
-                    transition: dragging.current ? 'none' : 'transform 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transition: dragging.current ? 'none' : 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
                     filter: isColor ? 'none' : 'grayscale(100%)',
                     opacity: isColor ? 1 : Math.max(0.35, 0.35 + 0.5 * t),
                     pointerEvents: 'none',
