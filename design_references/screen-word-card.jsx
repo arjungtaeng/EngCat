@@ -46,8 +46,16 @@ function ECScreenWordCard() {
   const [animKey, setAnimKey] = React.useState(0);
   const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
   const [retrying, setRetrying] = React.useState(false);
+  const [heroDim, setHeroDim] = React.useState(0);
   const touchStartX = React.useRef(null);
   const touchStartY = React.useRef(null);
+
+  const handleScrollDim = React.useCallback((e) => {
+    const st = e.currentTarget.scrollTop;
+    const triggerEnd = window.innerHeight * 0.30;
+    const opacity = Math.min(st / triggerEnd, 1) * 0.65;
+    setHeroDim(opacity);
+  }, []);
 
   const word = words[idx] || null;
   if (!word) {
@@ -184,6 +192,8 @@ function ECScreenWordCard() {
               ? `linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, ${T.bg0} 100%)`
               : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 25%, transparent 55%, ${T.bg0} 100%)`,
           }}/>
+          {/* 스크롤 딤 오버레이 */}
+          <div style={{ position: 'absolute', inset: 0, background: '#000', opacity: heroDim, pointerEvents: 'none' }}/>
         </div>
 
         {/* Text scroll layer (z:5) — flows over the hero as the user scrolls up */}
@@ -196,6 +206,7 @@ function ECScreenWordCard() {
             WebkitOverflowScrolling: 'touch',
             zIndex: 5,
           }}
+          onScroll={handleScrollDim}
         >
           {/* Peek-through spacer matching hero height — text starts just below hero */}
           <div style={{ height: '52%', flexShrink: 0, pointerEvents: 'none' }} />
