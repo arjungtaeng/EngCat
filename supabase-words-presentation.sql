@@ -40,7 +40,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_presentation_A1_32','give','/ɡɪv/','verb','드리다, 주다','To provide or offer something to someone.','I will {give} you a brief overview.','간략한 개요를 말씀드리겠습니다.','give','A1','presentation',1,'giving overview presenting briefing speaker'),
 ('w_presentation_A1_33','cover','/ˈkʌvər/','verb','다루다','To deal with a subject or include it in a talk.','Today I will {cover} three main topics.','오늘 세 가지 주요 주제를 다루겠습니다.','cover','A1','presentation',1,'outline agenda topics cover presentation plan'),
 ('w_presentation_A1_34','picture','/ˈpɪktʃər/','noun','그림, 사진','A visual representation or image.','This {picture} explains the concept well.','이 그림이 개념을 잘 설명해 줍니다.','picture','A1','presentation',1,'image infographic visual concept diagram'),
-('w_presentation_A1_35','about','/əˈbaʊt/','preposition','~에 대하여','On the subject of something.','Today I will talk {about} teamwork.','오늘은 팀워크에 대해 이야기하겠습니다.','about','A1','presentation',1,'topic subject presentation teamwork discussion');
+('w_presentation_A1_35','about','/əˈbaʊt/','preposition','~에 대하여','On the subject of something.','Today I will talk {about} teamwork.','오늘은 팀워크에 대해 이야기하겠습니다.','about','A1','presentation',1,'topic subject presentation teamwork discussion')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════════
 -- WORDS — A2 (35개)
@@ -80,7 +81,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_presentation_A2_32','brief','/briːf/','adjective','간략한','Short in duration or using few words.','I will give a {brief} overview before we begin.','시작하기 전에 간략한 개요를 드리겠습니다.','brief','A2','presentation',2,'brief short summary overview concise'),
 ('w_presentation_A2_33','background','/ˈbækɡraʊnd/','noun','배경','Information about the context of something.','Let me give you some {background} information.','배경 정보를 조금 말씀드리겠습니다.','background','A2','presentation',2,'background context history information overview'),
 ('w_presentation_A2_34','focus','/ˈfoʊkəs/','verb','집중하다','To pay particular attention to a specific subject.','Today we will {focus} on customer retention.','오늘은 고객 유지에 집중하겠습니다.','focus','A2','presentation',1,'focus spotlight lens target goal presentation'),
-('w_presentation_A2_35','share','/ʃeər/','verb','공유하다','To tell others about something or give them access to it.','I would like to {share} some key insights.','주요 인사이트를 공유하고 싶습니다.','share','A2','presentation',1,'sharing information insights knowledge team');
+('w_presentation_A2_35','share','/ʃeər/','verb','공유하다','To tell others about something or give them access to it.','I would like to {share} some key insights.','주요 인사이트를 공유하고 싶습니다.','share','A2','presentation',1,'sharing information insights knowledge team')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════════
 -- WORDS — B1 (35개)
@@ -120,7 +122,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_presentation_B1_32','methodology','/ˌmeθəˈdɒlədʒi/','noun','방법론','A system of methods used in a particular area of study.','Our {methodology} is based on user interviews.','우리 방법론은 사용자 인터뷰를 기반으로 합니다.','methodology','B1','presentation',2,'methodology research method process approach'),
 ('w_presentation_B1_33','timeline','/ˈtaɪmˌlaɪn/','noun','일정표, 타임라인','A display of events or actions in chronological order.','Here is our project {timeline}.','여기 프로젝트 타임라인이 있습니다.','timeline','B1','presentation',1,'timeline project schedule Gantt chart milestones'),
 ('w_presentation_B1_34','insight','/ˈɪnsaɪt/','noun','인사이트, 통찰력','A deep and accurate understanding of something.','This data gives us a key {insight}.','이 데이터는 핵심 인사이트를 제공합니다.','insight','B1','presentation',1,'insight discovery understanding data analysis'),
-('w_presentation_B1_35','initiative','/ɪˈnɪʃɪətɪv/','noun','이니셔티브, 계획','A new plan or action intended to solve a problem.','This {initiative} will launch in Q3.','이 이니셔티브는 3분기에 시작됩니다.','initiative','B1','presentation',2,'initiative launch project plan start program');
+('w_presentation_B1_35','initiative','/ɪˈnɪʃɪətɪv/','noun','이니셔티브, 계획','A new plan or action intended to solve a problem.','This {initiative} will launch in Q3.','이 이니셔티브는 3분기에 시작됩니다.','initiative','B1','presentation',2,'initiative launch project plan start program')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════════
 -- WORDS — B2 (35개)
@@ -160,7 +163,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_presentation_B2_32','actionable','/ˈækʃənəbəl/','adjective','바로 실행 가능한','Able to be acted on; providing clear steps to take.','These insights are {actionable} immediately.','이 인사이트들은 즉시 실행 가능합니다.','actionable','B2','presentation',1,'actionable steps concrete plan action immediate'),
 ('w_presentation_B2_33','iteration','/ˌɪtəˈreɪʃən/','noun','반복, 이터레이션','A new version of a process or design, based on review.','The third {iteration} showed the best results.','세 번째 이터레이션에서 최고의 결과가 나왔습니다.','iteration','B2','presentation',2,'iteration cycle improve version agile development'),
 ('w_presentation_B2_34','alignment','/əˈlaɪnmənt/','noun','정렬, 일치','Agreement or cooperation among people or groups.','We need strategic {alignment} before moving forward.','앞으로 나아가기 전에 전략적 정렬이 필요합니다.','alignment','B2','presentation',1,'alignment agreement team strategy unified direction'),
-('w_presentation_B2_35','projection','/prəˈdʒekʃən/','noun','전망, 예측치','An estimate of future outcomes based on current data.','Our five-year {projection} looks very promising.','5년 전망이 매우 유망하게 보입니다.','projection','B2','presentation',1,'projection forecast future estimate graph financial');
+('w_presentation_B2_35','projection','/prəˈdʒekʃən/','noun','전망, 예측치','An estimate of future outcomes based on current data.','Our five-year {projection} looks very promising.','5년 전망이 매우 유망하게 보입니다.','projection','B2','presentation',1,'projection forecast future estimate graph financial')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════════
 -- WORDS — C1 (35개)
@@ -200,7 +204,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_presentation_C1_32','substantive','/ˈsʌbstəntɪv/','adjective','실질적인, 핵심적인','Having a firm basis in reality and being important or meaningful.','We need {substantive} change, not cosmetic fixes.','표면적 수정이 아닌 실질적인 변화가 필요합니다.','substantive','C1','presentation',2,'substantive real meaningful significant change impact'),
 ('w_presentation_C1_33','granularity','/ˌɡrænjʊˈlærɪti/','noun','세분화, 세부 수준','The level of detail or precision in data or analysis.','The {granularity} of this dataset is exceptional.','이 데이터셋의 세분화 수준은 탁월합니다.','granularity','C1','presentation',2,'granularity detail precision data level analysis'),
 ('w_presentation_C1_34','axiom','/ˈæksiəm/','noun','공리, 자명한 이치','A statement accepted as true as the basis for argument.','The first {axiom} of our model is user rationality.','우리 모델의 첫 번째 공리는 사용자 합리성입니다.','axiom','C1','presentation',2,'axiom truth principle foundation logic mathematics'),
-('w_presentation_C1_35','reframe','/ˌriːˈfreɪm/','verb','재구성하다','To frame something in a different way to change how it is perceived.','Let us {reframe} this challenge as an opportunity.','이 도전을 기회로 재구성해 봅시다.','reframe','C1','presentation',1,'reframe perspective shift mindset opportunity challenge');
+('w_presentation_C1_35','reframe','/ˌriːˈfreɪm/','verb','재구성하다','To frame something in a different way to change how it is perceived.','Let us {reframe} this challenge as an opportunity.','이 도전을 기회로 재구성해 봅시다.','reframe','C1','presentation',1,'reframe perspective shift mindset opportunity challenge')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════════
 -- WORDS — C2 (35개)
@@ -240,7 +245,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_presentation_C2_32','apophenia','/ˌæpəˈfiːniə/','noun','패턴 착각 현상','The tendency to perceive meaningful connections between unrelated things.','Analysts must guard against {apophenia} in data.','분석가는 데이터의 패턴 착각을 경계해야 합니다.','apophenia','C2','presentation',2,'apophenia false pattern bias data analysis error'),
 ('w_presentation_C2_33','episteme','/ˈepɪˌstiːm/','noun','에피스테메','The body of ideas that define the knowledge of a particular era.','The dominant {episteme} shapes how data is framed.','지배적인 에피스테메가 데이터가 구성되는 방식을 형성합니다.','episteme','C2','presentation',2,'episteme knowledge era framework Foucault paradigm'),
 ('w_presentation_C2_34','isomorphism','/ˈaɪsəˌmɔːrfɪzəm/','noun','동형성','A correspondence or similarity in form or structure between two models.','There is an {isomorphism} between the two models.','두 모델 사이에 동형성이 있습니다.','isomorphism','C2','presentation',2,'isomorphism same structure parallel model comparison'),
-('w_presentation_C2_35','polysemy','/pɒˈlɪsɪmi/','noun','다의성','The capacity of a word or phrase to have multiple meanings.','{Polysemy} in technical terms can confuse audiences.','기술 용어의 다의성은 청중을 혼란스럽게 할 수 있습니다.','polysemy','C2','presentation',2,'polysemy multiple meanings ambiguity language precision');
+('w_presentation_C2_35','polysemy','/pɒˈlɪsɪmi/','noun','다의성','The capacity of a word or phrase to have multiple meanings.','{Polysemy} in technical terms can confuse audiences.','기술 용어의 다의성은 청중을 혼란스럽게 할 수 있습니다.','polysemy','C2','presentation',2,'polysemy multiple meanings ambiguity language precision')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════════
 -- PATTERNS (sentences) — A1 (7개) : 발표 시작
@@ -252,7 +258,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_presentation_A1_04','Please look at this slide.','이 슬라이드를 봐주세요.','Please look at','청중의 시선을 슬라이드로 유도할 때 자연스럽게 쓸 수 있어요.','슬라이드 안내','A1','presentation','pattern',NULL,4),
 ('s_presentation_A1_05','First, I will show you the main idea.','먼저 주요 아이디어를 보여드리겠습니다.','First, I will show','순서를 안내하는 가장 단순한 패턴이에요. First / Next / Last로 이어가세요.','발표 구조 안내','A1','presentation','pattern',NULL,5),
 ('s_presentation_A1_06','Are there any questions?','질문이 있으신가요?','Are there any questions','발표 중간 또는 마지막에 청중의 참여를 유도하는 표현이에요.','Q&A','A1','presentation','pattern',NULL,6),
-('s_presentation_A1_07','That is the end of my talk. Thank you.','발표를 마치겠습니다. 감사합니다.','That is the end','발표를 깔끔하게 마무리할 때 쓰는 가장 간결한 클로징 표현이에요.','발표 마무리','A1','presentation','pattern',NULL,7);
+('s_presentation_A1_07','That is the end of my talk. Thank you.','발표를 마치겠습니다. 감사합니다.','That is the end','발표를 깔끔하게 마무리할 때 쓰는 가장 간결한 클로징 표현이에요.','발표 마무리','A1','presentation','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════════
 -- PATTERNS — A2 (7개) : 개요 설명
@@ -264,7 +271,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_presentation_A2_04','Let me give you a brief overview before we begin.','시작하기 전에 간략한 개요를 말씀드리겠습니다.','brief overview','본격적인 내용에 앞서 전체 그림을 제시하는 전환 표현이에요.','개요 설명','A2','presentation','pattern',NULL,11),
 ('s_presentation_A2_05','The main topic of today''s presentation is customer satisfaction.','오늘 발표의 주요 주제는 고객 만족입니다.','The main topic of','주제를 명확하게 한 문장으로 정의하는 표현이에요.','주제 소개','A2','presentation','pattern',NULL,12),
 ('s_presentation_A2_06','By the end of this presentation, you will understand the key steps.','이 발표가 끝날 때쯤이면 핵심 단계를 이해하게 될 것입니다.','By the end of this presentation','청중에게 기대치를 미리 설정해주는 강력한 오프닝 기법이에요.','목표 제시','A2','presentation','pattern',NULL,13),
-('s_presentation_A2_07','In conclusion, the data shows a clear trend.','결론적으로, 데이터는 명확한 추세를 보여줍니다.','In conclusion','발표 마지막에 전체 내용을 하나의 문장으로 요약할 때 쓰는 표현이에요.','결론','A2','presentation','pattern',NULL,14);
+('s_presentation_A2_07','In conclusion, the data shows a clear trend.','결론적으로, 데이터는 명확한 추세를 보여줍니다.','In conclusion','발표 마지막에 전체 내용을 하나의 문장으로 요약할 때 쓰는 표현이에요.','결론','A2','presentation','pattern',NULL,14)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════════
 -- PATTERNS — B1 (7개) : 전환 표현
@@ -276,7 +284,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_presentation_B1_04','This brings me to my second point.','이것이 저를 두 번째 요점으로 이끕니다.','This brings me to','앞 내용에서 다음 내용으로 자연스럽게 흐르는 전환 표현이에요.','전환','B1','presentation','pattern',NULL,18),
 ('s_presentation_B1_05','To illustrate this point, let me give you a concrete example.','이 요점을 설명하기 위해 구체적인 예를 들어드리겠습니다.','To illustrate this point','예시를 제시하기 전에 쓰는 정중한 안내 표현이에요.','예시 제시','B1','presentation','pattern',NULL,19),
 ('s_presentation_B1_06','As I mentioned earlier, the key challenge is timing.','앞서 언급했듯이, 핵심 과제는 타이밍입니다.','As I mentioned earlier','이전 내용을 상기시키며 논리를 강화하는 표현이에요.','참조','B1','presentation','pattern',NULL,20),
-('s_presentation_B1_07','Before I move on, are there any questions so far?','계속 진행하기 전에, 지금까지 질문 있으신가요?','Before I move on','중간에 청중 참여를 유도하며 템포를 조절하는 표현이에요.','Q&A 중간 확인','B1','presentation','pattern',NULL,21);
+('s_presentation_B1_07','Before I move on, are there any questions so far?','계속 진행하기 전에, 지금까지 질문 있으신가요?','Before I move on','중간에 청중 참여를 유도하며 템포를 조절하는 표현이에요.','Q&A 중간 확인','B1','presentation','pattern',NULL,21)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════════
 -- PATTERNS — B2 (7개) : 강조 & 마무리
@@ -288,7 +297,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_presentation_B2_04','To summarize the key takeaways from today''s presentation...','오늘 발표의 핵심 시사점을 요약하자면...','key takeaways','"takeaway"는 청중이 발표에서 가져가야 할 교훈이나 인사이트를 뜻해요.','마무리','B2','presentation','pattern',NULL,25),
 ('s_presentation_B2_05','I would like to leave you with one final thought.','마지막으로 한 가지 생각을 남기고 싶습니다.','leave you with one final thought','발표를 임팩트 있게 마무리하는 클래식한 표현이에요. 기억에 남는 한 마디를 남길 때 써요.','마무리','B2','presentation','pattern',NULL,26),
 ('s_presentation_B2_06','In light of this evidence, I strongly recommend proceeding with option B.','이 증거에 비추어 볼 때, 저는 옵션 B를 강력히 권장합니다.','In light of this evidence','"In light of ~"는 증거를 근거로 결론을 제시할 때 쓰는 격식 있는 표현이에요.','권장 사항','B2','presentation','pattern',NULL,27),
-('s_presentation_B2_07','Should you have any further questions, please do not hesitate to reach out.','추가 질문이 있으시면 언제든지 연락 주시기 바랍니다.','please do not hesitate to reach out','발표 후 후속 소통을 열어두는 정중한 클로징 표현이에요.','발표 마무리','B2','presentation','pattern',NULL,28);
+('s_presentation_B2_07','Should you have any further questions, please do not hesitate to reach out.','추가 질문이 있으시면 언제든지 연락 주시기 바랍니다.','please do not hesitate to reach out','발표 후 후속 소통을 열어두는 정중한 클로징 표현이에요.','발표 마무리','B2','presentation','pattern',NULL,28)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════════
 -- PATTERNS — C1 (7개) : 설득 & 논리 구성
@@ -300,7 +310,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_presentation_C1_04','The implications of this paradigm shift extend far beyond our immediate industry.','이 패러다임 전환의 함의는 우리의 직접적인 산업을 훨씬 넘어섭니다.','implications ... extend far beyond','넓은 시야를 강조하며 중요성을 부각하는 고급 표현이에요.','설득','C1','presentation','pattern',NULL,32),
 ('s_presentation_C1_05','While the quantitative data is compelling, the qualitative insights reveal a more nuanced picture.','정량적 데이터는 설득력 있지만, 정성적 인사이트는 더 세밀한 그림을 드러냅니다.','While ... more nuanced picture','양면을 인정하면서도 더 깊은 통찰을 제시하는 균형 잡힌 논리 전개 방식이에요.','균형 잡힌 분석','C1','presentation','pattern',NULL,33),
 ('s_presentation_C1_06','I would posit that the root cause lies not in the symptom but in the underlying system.','근본 원인은 증상이 아니라 기저 시스템에 있다고 주장하고자 합니다.','I would posit that','"posit"은 "주장하다, 가정하다"의 뜻으로 학술·전문 발표에서 의견을 조심스럽게 제시할 때 써요.','주장 제시','C1','presentation','pattern',NULL,34),
-('s_presentation_C1_07','To conclude, the convergence of these three factors creates an unprecedented opportunity.','결론적으로, 이 세 가지 요소의 수렴은 전례 없는 기회를 만들어냅니다.','convergence ... unprecedented opportunity','수렴과 기회를 연결하는 강력한 클로징 문장이에요. 발표를 희망적이고 명확하게 마무리해요.','결론','C1','presentation','pattern',NULL,35);
+('s_presentation_C1_07','To conclude, the convergence of these three factors creates an unprecedented opportunity.','결론적으로, 이 세 가지 요소의 수렴은 전례 없는 기회를 만들어냅니다.','convergence ... unprecedented opportunity','수렴과 기회를 연결하는 강력한 클로징 문장이에요. 발표를 희망적이고 명확하게 마무리해요.','결론','C1','presentation','pattern',NULL,35)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════════
 -- PATTERNS — C2 (7개) : 수사학 & 고급 설득
@@ -312,4 +323,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_presentation_C2_04','The epistemological question we must first address is: how do we know what we think we know?','우리가 먼저 다루어야 할 인식론적 질문은 이것입니다: 우리가 안다고 생각하는 것을 우리는 어떻게 알까요?','epistemological question','수사 의문문을 사용해 청중을 사고 실험으로 끌어들이는 고급 발표 기법이에요.','인식론적 접근','C2','presentation','pattern',NULL,39),
 ('s_presentation_C2_05','Through a process of triangulation across qualitative, quantitative, and ethnographic sources, we arrive at a remarkably consistent picture.','정성적, 정량적, 민족지적 출처에 걸친 삼각검증 과정을 통해 우리는 놀랍도록 일관된 그림에 도달합니다.','triangulation across ... remarkably consistent','다중 출처 검증을 강조하며 연구의 견고함을 드러내는 학술 발표의 핵심 표현이에요.','연구 방법론 설명','C2','presentation','pattern',NULL,40),
 ('s_presentation_C2_06','Far from being a peripheral concern, reflexivity is central to the integrity of this entire analysis.','성찰성은 주변적 관심사가 아니라 이 분석 전체의 무결성의 핵심입니다.','Far from being ... central to','"Far from being A, B is C" 구조는 기대를 뒤집으며 핵심을 부각하는 강력한 수사 기법이에요.','수사학','C2','presentation','pattern',NULL,41),
-('s_presentation_C2_07','I leave you with a provocation: if our praxis does not challenge existing structures, what exactly are we here to present?','하나의 도발을 남깁니다: 우리의 실천이 기존 구조에 도전하지 않는다면, 우리는 정확히 무엇을 발표하러 여기 있는 것입니까?','I leave you with a provocation','발표를 열린 질문으로 마무리하며 청중의 사고를 자극하는 최고 수준의 수사적 클로징이에요.','수사학적 마무리','C2','presentation','pattern',NULL,42);
+('s_presentation_C2_07','I leave you with a provocation: if our praxis does not challenge existing structures, what exactly are we here to present?','하나의 도발을 남깁니다: 우리의 실천이 기존 구조에 도전하지 않는다면, 우리는 정확히 무엇을 발표하러 여기 있는 것입니까?','I leave you with a provocation','발표를 열린 질문으로 마무리하며 청중의 사고를 자극하는 최고 수준의 수사적 클로징이에요.','수사학적 마무리','C2','presentation','pattern',NULL,42)
+ON CONFLICT (id) DO NOTHING;

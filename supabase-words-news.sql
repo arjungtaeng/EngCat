@@ -40,7 +40,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_news_A1_32','winner','/ˈwɪnər/','noun','승자, 당선자','A person or group that wins an election or competition.','The {winner} of the election was announced this morning.','선거 당선자가 오늘 아침 발표됐어요.','winner','A1','news',2,'election result vote celebrate'),
 ('w_news_A1_33','dead','/ded/','adjective','사망한','No longer living.','The official said ten people are {dead}.','관리는 열 명이 사망했다고 말했어요.','dead','A1','news',2,'memorial funeral tragedy loss'),
 ('w_news_A1_34','safe','/seɪf/','adjective','안전한','Protected from danger or risk.','Rescue teams confirmed all passengers are {safe}.','구조대는 모든 승객이 안전하다고 확인했어요.','safe','A1','news',2,'rescue safety relief team'),
-('w_news_A1_35','map','/mæp/','noun','지도','A diagram representing the geographic features of an area.','The news showed a {map} of the affected regions.','뉴스에서 피해 지역의 지도를 보여줬어요.','map','A1','news',2,'geography region area borders');
+('w_news_A1_35','map','/mæp/','noun','지도','A diagram representing the geographic features of an area.','The news showed a {map} of the affected regions.','뉴스에서 피해 지역의 지도를 보여줬어요.','map','A1','news',2,'geography region area borders')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2
@@ -80,7 +81,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_news_A2_32','army','/ˈɑːrmi/','noun','군대','The land-based armed forces of a country.','The {army} was deployed to control the situation.','군대가 상황을 통제하기 위해 배치됐어요.','army','A2','news',2,'military soldiers uniform patrol'),
 ('w_news_A2_33','protest','/prəˈtest/','verb','항의하다','To express strong objection to something publicly.','Students {protested} outside the parliament building.','학생들이 의회 건물 밖에서 항의했어요.','protested','A2','news',2,'rally sign banner street'),
 ('w_news_A2_34','prime','/praɪm/','adjective','주요한, 최고의','Of first importance; most excellent.','The {prime} minister addressed the nation on television.','총리가 텔레비전으로 국민에게 연설했어요.','prime','A2','news',1,'parliament speech podium flag'),
-('w_news_A2_35','budget','/ˈbʌdʒɪt/','noun','예산','An estimate of income and expenditure for a set period.','The government presented its annual {budget} today.','정부가 오늘 연간 예산을 발표했어요.','budget','A2','news',1,'finance money chart government');
+('w_news_A2_35','budget','/ˈbʌdʒɪt/','noun','예산','An estimate of income and expenditure for a set period.','The government presented its annual {budget} today.','정부가 오늘 연간 예산을 발표했어요.','budget','A2','news',1,'finance money chart government')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1
@@ -120,7 +122,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_news_B1_32','evidence','/ˈevɪdəns/','noun','증거','Facts or information showing whether something is true.','The court examined new {evidence} in the case.','법원이 사건에서 새로운 증거를 검토했어요.','evidence','B1','news',2,'courtroom document investigation files'),
 ('w_news_B1_33','democracy','/dɪˈmɒkrəsi/','noun','민주주의','A system of government in which people vote for their leaders.','Protecting {democracy} requires active citizen participation.','민주주의를 보호하려면 시민의 적극적인 참여가 필요해요.','democracy','B1','news',1,'ballot box flag parliament constitution'),
 ('w_news_B1_34','refugee','/ˌrefjʊˈdʒiː/','noun','난민','A person forced to flee their country due to conflict or disaster.','The crisis has created over a million {refugees}.','위기로 인해 백만 명 이상의 난민이 생겼어요.','refugees','B1','news',2,'camp tent border UNHCR'),
-('w_news_B1_35','deadline','/ˈdedlaɪn/','noun','시한, 기한','A point in time by which something must be done.','The government missed the {deadline} for submitting the budget.','정부가 예산 제출 시한을 놓쳤어요.','deadline','B1','news',2,'clock calendar urgent time');
+('w_news_B1_35','deadline','/ˈdedlaɪn/','noun','시한, 기한','A point in time by which something must be done.','The government missed the {deadline} for submitting the budget.','정부가 예산 제출 시한을 놓쳤어요.','deadline','B1','news',2,'clock calendar urgent time')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2
@@ -160,7 +163,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_news_B2_32','faction','/ˈfækʃən/','noun','파벌','A small, dissenting group within a larger political party.','A rebel {faction} within the party opposed the leader''s plans.','당 내 반대 파벌이 지도자의 계획에 반대했어요.','faction','B2','news',3,'politics party divide group'),
 ('w_news_B2_33','cease','/siːs/','verb','중단하다','To come to an end or bring something to an end.','Fighting must {cease} immediately, the UN demanded.','유엔은 전투가 즉각 중단되어야 한다고 요구했어요.','cease','B2','news',2,'stop end peacekeeping soldiers'),
 ('w_news_B2_34','denounce','/dɪˈnaʊns/','verb','규탄하다','To publicly declare something to be wrong or evil.','The opposition {denounced} the new law as unconstitutional.','야당은 새 법을 위헌이라고 규탄했어요.','denounced','B2','news',2,'protest speech condemnation press'),
-('w_news_B2_35','coalition','/ˌkəʊəˈlɪʃən/','noun','연합, 연립','A temporary alliance of distinct political parties or groups.','A {coalition} of opposition parties challenged the government.','야당 연합이 정부에 도전했어요.','coalition','B2','news',2,'alliance partnership politics flag');
+('w_news_B2_35','coalition','/ˌkəʊəˈlɪʃən/','noun','연합, 연립','A temporary alliance of distinct political parties or groups.','A {coalition} of opposition parties challenged the government.','야당 연합이 정부에 도전했어요.','coalition','B2','news',2,'alliance partnership politics flag')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1
@@ -200,7 +204,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_news_C1_32','asymmetric','/ˌeɪsɪˈmetrɪk/','adjective','비대칭적인','Having unequal distribution of power or strategy between parties.','The conflict has become an {asymmetric} guerrilla war.','분쟁이 비대칭적인 게릴라 전쟁이 됐어요.','asymmetric','C1','news',3,'war strategy power difference'),
 ('w_news_C1_33','incendiary','/ɪnˈsendiəri/','adjective','선동적인, 도발적인','Tending to stir up conflict or strong reactions.','The senator''s {incendiary} remarks caused national outrage.','상원 의원의 선동적인 발언이 국가적 분노를 일으켰어요.','incendiary','C1','news',3,'speech protest fire rhetoric'),
 ('w_news_C1_34','sequestration','/ˌsiːkwɪˈstreɪʃən/','noun','자산 동결, 강제 삭감','The seizure or holding of assets, or automatic budget cuts by authority.','Budget {sequestration} resulted in automatic spending cuts.','예산 강제 삭감으로 자동적인 지출 삭감이 발생했어요.','sequestration','C1','news',3,'budget finance government cut'),
-('w_news_C1_35','peremptory','/pəˈremptəri/','adjective','강압적이고 단호한','Insisting on immediate compliance without allowing debate.','The court issued a {peremptory} demand for documents.','법원이 서류에 대한 강압적인 요구를 내렸어요.','peremptory','C1','news',3,'court order authority legal command');
+('w_news_C1_35','peremptory','/pəˈremptəri/','adjective','강압적이고 단호한','Insisting on immediate compliance without allowing debate.','The court issued a {peremptory} demand for documents.','법원이 서류에 대한 강압적인 요구를 내렸어요.','peremptory','C1','news',3,'court order authority legal command')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2
@@ -240,7 +245,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_news_C2_32','deterritorialization','/diːˌterɪtɔːriəlaɪˈzeɪʃən/','noun','탈영토화','The loosening of the connection between culture and geographic territory.','Globalization has accelerated the {deterritorialization} of political identity.','세계화가 정치적 정체성의 탈영토화를 가속화했어요.','deterritorialization','C2','news',3,'globalization identity border culture'),
 ('w_news_C2_33','dialectic','/ˌdaɪəˈlektɪk/','noun','변증법','A method of examining opposing ideas to reach the truth.','The editorial used a {dialectic} of freedom versus security.','그 사설은 자유 대 안보의 변증법을 사용했어요.','dialectic','C2','news',3,'logic argument theory analysis'),
 ('w_news_C2_34','disarticulation','/dɪsɑːˌtɪkjʊˈleɪʃən/','noun','연결 해체','The unraveling of coherent political or social structures.','The crisis led to the {disarticulation} of the ruling coalition.','위기는 집권 연합의 연결 해체로 이어졌어요.','disarticulation','C2','news',3,'collapse breakdown coalition fragmentation'),
-('w_news_C2_35','epistemocracy','/ɪˌpiːstɪˈmɒkrəsi/','noun','지식 기반 정치 체제','A form of government where political power rests on epistemic competence.','Advocates argue that {epistemocracy} can improve policy quality.','지지자들은 지식 기반 정치 체제가 정책 품질을 높일 수 있다고 주장해요.','epistemocracy','C2','news',3,'expertise knowledge governance theory');
+('w_news_C2_35','epistemocracy','/ɪˌpiːstɪˈmɒkrəsi/','noun','지식 기반 정치 체제','A form of government where political power rests on epistemic competence.','Advocates argue that {epistemocracy} can improve policy quality.','지지자들은 지식 기반 정치 체제가 정책 품질을 높일 수 있다고 주장해요.','epistemocracy','C2','news',3,'expertise knowledge governance theory')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A1 (뉴스 공유)
@@ -252,7 +258,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_news_A1_04','Is it true that...?','...가 사실이에요?','Is it true that','들은 이야기가 사실인지 확인할 때 써요. "Is it true that the president resigned?" 처럼 that절을 이어요.','사실 확인','A1','news','pattern',NULL,4),
 ('s_news_A1_05','They said on the news that...','뉴스에서 ...라고 했어요.','They said on the news','불특정 뉴스 출처를 인용할 때 "They said"를 써요. 구어체에서 아주 자주 쓰이는 표현이에요.','뉴스 인용','A1','news','pattern',NULL,5),
 ('s_news_A1_06','A lot of people were hurt.','많은 사람들이 다쳤어요.','A lot of people were hurt','사고나 재난 보도에서 자주 나오는 문장 구조예요. "were hurt"는 수동태로 피해를 표현해요.','피해 상황','A1','news','pattern',NULL,6),
-('s_news_A1_07','The government said...','정부가 ...라고 했어요.','The government said','공식 발표나 성명을 인용할 때 가장 기본적인 구조예요. 뒤에 직접 또는 간접 인용을 붙여요.','공식 발표 인용','A1','news','pattern',NULL,7);
+('s_news_A1_07','The government said...','정부가 ...라고 했어요.','The government said','공식 발표나 성명을 인용할 때 가장 기본적인 구조예요. 뒤에 직접 또는 간접 인용을 붙여요.','공식 발표 인용','A1','news','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A2 (사건 설명)
@@ -264,7 +271,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_news_A2_04','Protests broke out in...','...에서 시위가 발생했어요.','broke out','갑작스럽게 시작된 시위나 사건을 설명할 때 "break out"을 써요. 폭동, 화재, 전쟁 등에도 써요.','시위·사건 발생','A2','news','pattern',NULL,4),
 ('s_news_A2_05','The government has announced that...','정부는 ...라고 발표했어요.','has announced','현재완료형으로 방금 또는 최근에 이루어진 공식 발표를 자연스럽게 표현해요.','공식 발표','A2','news','pattern',NULL,5),
 ('s_news_A2_06','Thousands of people took to the streets.','수천 명이 거리로 나왔어요.','took to the streets','많은 사람들이 시위를 위해 나온 것을 표현할 때 "take to the streets"를 써요. 뉴스에서 자주 보이는 관용 표현이에요.','시위 묘사','A2','news','pattern',NULL,6),
-('s_news_A2_07','A ceasefire has been agreed.','휴전이 합의됐어요.','has been agreed','수동태로 협상 결과를 간결하게 전달하는 뉴스 문체 표현이에요. 주어가 누구인지 모르거나 중요하지 않을 때 써요.','협상 결과','A2','news','pattern',NULL,7);
+('s_news_A2_07','A ceasefire has been agreed.','휴전이 합의됐어요.','has been agreed','수동태로 협상 결과를 간결하게 전달하는 뉴스 문체 표현이에요. 주어가 누구인지 모르거나 중요하지 않을 때 써요.','협상 결과','A2','news','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B1 (정치·경제 논의)
@@ -276,7 +284,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_news_B1_04','Unemployment figures rose to... percent.','실업률이 ...%로 올랐어요.','rose to','경제 지표를 보도할 때 쓰는 패턴이에요. "rose to", "fell to", "hit a record high/low"와 함께 외워두세요.','경제 지표','B1','news','pattern',NULL,4),
 ('s_news_B1_05','The legislation was passed by a majority of...','법안이 ...의 다수결로 통과됐어요.','was passed by a majority','의회에서 법안이 통과됐을 때 쓰는 수동태 표현이에요. "slim majority(근소한 다수)" 등의 수식어를 붙여요.','입법 보도','B1','news','pattern',NULL,5),
 ('s_news_B1_06','The minister resigned amid allegations of...','장관이 ...혐의 속에 사임했어요.','resigned amid allegations of','스캔들로 인한 사임 보도에서 자주 나오는 구조예요. "amid"는 "~속에/~가운데"라는 뜻이에요.','스캔들 보도','B1','news','pattern',NULL,6),
-('s_news_B1_07','Inflation has reached its highest level in... years.','인플레이션이 ...년 만에 최고치에 달했어요.','has reached its highest level','경제 기사에서 최고점을 강조할 때 쓰는 현재완료 표현이에요. "lowest level", "highest point" 등을 바꿔 써요.','경제 보도','B1','news','pattern',NULL,7);
+('s_news_B1_07','Inflation has reached its highest level in... years.','인플레이션이 ...년 만에 최고치에 달했어요.','has reached its highest level','경제 기사에서 최고점을 강조할 때 쓰는 현재완료 표현이에요. "lowest level", "highest point" 등을 바꿔 써요.','경제 보도','B1','news','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B2 (국제 정세)
@@ -288,7 +297,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_news_B2_04','The international community has condemned the attack.','국제 사회가 공격을 규탄했어요.','has condemned','규탄 성명에서 항상 나오는 표현이에요. "condemn"은 "강하게 비난하다"는 뜻이에요.','국제 규탄','B2','news','pattern',NULL,4),
 ('s_news_B2_05','A multilateral agreement was reached at the summit.','정상 회담에서 다자간 합의가 이루어졌어요.','multilateral agreement was reached','다자 외교의 결과를 보도할 때 쓰는 표현이에요. "bilateral"(양자), "multilateral"(다자)을 구분해서 써요.','정상 회담','B2','news','pattern',NULL,5),
 ('s_news_B2_06','The regime faces growing pressure from the international community.','그 정권은 국제 사회로부터 점점 커지는 압박에 직면해 있어요.','faces growing pressure','정권이 국내외 압박을 받는 상황을 설명할 때 써요. "growing"은 압박이 점점 강해지고 있음을 나타내요.','국제 압박','B2','news','pattern',NULL,6),
-('s_news_B2_07','The referendum resulted in a vote for independence.','국민 투표 결과 독립 찬성으로 나왔어요.','referendum resulted in','국민 투표 결과를 보도할 때 쓰는 표현이에요. "result in"은 특정 결과로 이어짐을 나타내요.','국민 투표','B2','news','pattern',NULL,7);
+('s_news_B2_07','The referendum resulted in a vote for independence.','국민 투표 결과 독립 찬성으로 나왔어요.','referendum resulted in','국민 투표 결과를 보도할 때 쓰는 표현이에요. "result in"은 특정 결과로 이어짐을 나타내요.','국민 투표','B2','news','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C1 (외교·정책 분석)
@@ -300,7 +310,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_news_C1_04','There are growing concerns about the erosion of democratic norms.','민주주의 규범 침식에 대한 우려가 커지고 있어요.','growing concerns about the erosion of','추상적인 제도나 가치의 약화를 표현할 때 써요. "erosion of"는 서서히 무너지는 것을 나타내요.','민주주의 분석','C1','news','pattern',NULL,4),
 ('s_news_C1_05','The court''s ruling may have far-reaching implications for...','법원의 판결은 ...에 광범위한 영향을 미칠 수 있어요.','may have far-reaching implications for','법적 판결이 더 넓은 영역에 미치는 파급 효과를 분석할 때 써요. "far-reaching"은 "광범위한"이라는 뜻이에요.','사법 분석','C1','news','pattern',NULL,5),
 ('s_news_C1_06','The government invoked emergency powers to suppress dissent.','정부가 반대 의견을 억압하기 위해 비상 권한을 발동했어요.','invoked emergency powers to suppress','강압적 통치를 보도하거나 분석할 때 쓰는 표현이에요. "invoke"는 법이나 권한을 공식 발동하는 뜻이에요.','권위주의 분석','C1','news','pattern',NULL,6),
-('s_news_C1_07','Analysts warn of the risk of further escalation in the region.','분석가들은 지역 내 추가 확전 위험을 경고해요.','warn of the risk of further escalation','분쟁 지역 상황 분석에서 자주 쓰이는 표현이에요. "escalation"은 갈등 심화를, "further"는 추가적임을 나타내요.','분쟁 분석','C1','news','pattern',NULL,7);
+('s_news_C1_07','Analysts warn of the risk of further escalation in the region.','분석가들은 지역 내 추가 확전 위험을 경고해요.','warn of the risk of further escalation','분쟁 지역 상황 분석에서 자주 쓰이는 표현이에요. "escalation"은 갈등 심화를, "further"는 추가적임을 나타내요.','분쟁 분석','C1','news','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C2 (외교·정책 심층 분석)
@@ -312,4 +323,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_news_C2_04','The normative framework underpinning the international order is being contested.','국제 질서를 뒷받침하는 규범적 틀이 도전받고 있어요.','normative framework underpinning the international order is being contested','국제 규범의 위기를 설명하는 학술적 표현이에요. "underpin"은 "뒷받침하다", "contest"는 "이의를 제기하다"는 뜻이에요.','규범 분석','C2','news','pattern',NULL,4),
 ('s_news_C2_05','The crisis exposes the epistemic limits of mainstream IR theory.','위기는 주류 국제 관계 이론의 인식론적 한계를 드러내요.','exposes the epistemic limits of','국제 관계(IR) 학문에서 이론의 설명력 한계를 비판할 때 써요. "epistemic"은 지식·인식에 관련된 형용사예요.','IR 이론 비판','C2','news','pattern',NULL,5),
 ('s_news_C2_06','Subaltern voices remain systematically excluded from diplomatic discourse.','하위 주체의 목소리는 외교 담론에서 체계적으로 배제돼요.','Subaltern voices remain systematically excluded','탈식민 이론과 비판 IR에서 쓰이는 표현이에요. "subaltern"은 권력 구조에서 소외된 주체를 뜻해요.','탈식민 비판','C2','news','pattern',NULL,6),
-('s_news_C2_07','The state''s ontological security imperative drove its foreign policy choices.','국가의 존재론적 안보 요구가 외교 정책 선택을 이끌었어요.','ontological security imperative drove its foreign policy choices','미어샤이머나 스틸(Steele) 등의 이론에서 나온 분석 틀이에요. "ontological security"는 국가의 정체성 안정감을 뜻해요.','존재론적 안보','C2','news','pattern',NULL,7);
+('s_news_C2_07','The state''s ontological security imperative drove its foreign policy choices.','국가의 존재론적 안보 요구가 외교 정책 선택을 이끌었어요.','ontological security imperative drove its foreign policy choices','미어샤이머나 스틸(Steele) 등의 이론에서 나온 분석 틀이에요. "ontological security"는 국가의 정체성 안정감을 뜻해요.','존재론적 안보','C2','news','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

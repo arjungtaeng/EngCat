@@ -40,7 +40,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_culture_A1_32','character','/ˈkærɪktər/','noun','등장인물','A person in a book, film, or play.','My favourite {character} is in the story.','제가 가장 좋아하는 등장인물이 이야기에 나와요.','character','A1','culture',2,'story character book illustration'),
 ('w_culture_A1_33','colour','/ˈkʌlər/','noun','색채 (영국식)','Visual quality seen in paintings and art.','The painting uses many bright {colour}s.','그 그림은 밝은 색채를 많이 사용해요.','colour','A1','culture',2,'colorful bright painting abstract'),
 ('w_culture_A1_34','happy','/ˈhæpi/','adjective','행복한, 기쁜','Feeling or showing pleasure or contentment.','Music makes me feel {happy}.','음악을 들으면 기분이 행복해져요.','happy','A1','culture',3,'happy joyful concert music smiling'),
-('w_culture_A1_35','new','/njuː/','adjective','새로운','Not existing before; recently made or introduced.','There is a {new} exhibition downtown.','시내에 새로운 전시회가 있어요.','new','A1','culture',3,'new exhibition gallery opening art');
+('w_culture_A1_35','new','/njuː/','adjective','새로운','Not existing before; recently made or introduced.','There is a {new} exhibition downtown.','시내에 새로운 전시회가 있어요.','new','A1','culture',3,'new exhibition gallery opening art')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- A2 — 공연·전시 관련 단어 (35개)
@@ -80,7 +81,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_culture_A2_32','costume design','/ˈkɒstjuːm dɪˈzaɪn/','noun','의상 디자인','The art of creating costumes for theatre or film.','She studied {costume design} in college.','그녀는 대학에서 의상 디자인을 공부했어요.','costume design','A2','culture',3,'costume design fashion sewing theater'),
 ('w_culture_A2_33','narrator','/ˈnærɪtər/','noun','나레이터, 해설자','A person who narrates a story or gives a commentary.','The {narrator} had a wonderful voice.','나레이터는 훌륭한 목소리를 갖고 있었어요.','narrator','A2','culture',2,'narrator reading microphone storytelling'),
 ('w_culture_A2_34','interval','/ˈɪntərvəl/','noun','인터미션, 막간','A pause or break in a performance.','We had drinks during the {interval}.','인터미션 동안 음료를 마셨어요.','interval','A2','culture',3,'theater lobby intermission drinks people'),
-('w_culture_A2_35','programme','/ˈproʊɡræm/','noun','프로그램 (공연)','A booklet with information about a performance or event.','I kept the {programme} as a souvenir.','기념으로 공연 프로그램을 간직했어요.','programme','A2','culture',2,'concert program booklet theater event');
+('w_culture_A2_35','programme','/ˈproʊɡræm/','noun','프로그램 (공연)','A booklet with information about a performance or event.','I kept the {programme} as a souvenir.','기념으로 공연 프로그램을 간직했어요.','programme','A2','culture',2,'concert program booklet theater event')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- B1 — 예술 감상·장르 단어 (35개)
@@ -120,7 +122,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_culture_B1_32','improvise','/ˈɪmprəvaɪz/','verb','즉흥 연주하다, 즉흥으로 하다','To create and perform spontaneously.','Jazz musicians often {improvise} during a performance.','재즈 음악가들은 공연 중에 자주 즉흥 연주를 해요.','improvise','B1','culture',2,'jazz improvise saxophone musician night'),
 ('w_culture_B1_33','gallery opening','/ˈɡæləri ˈoʊpənɪŋ/','noun','갤러리 오프닝','A special event to launch a new art exhibition.','I was invited to the {gallery opening} last Friday.','지난 금요일 갤러리 오프닝에 초대받았어요.','gallery opening','B1','culture',2,'gallery opening art event people socializing'),
 ('w_culture_B1_34','solo','/ˈsoʊloʊ/','noun','독주, 솔로','A performance done by one person alone.','He played a beautiful piano {solo}.','그는 아름다운 피아노 독주를 연주했어요.','solo','B1','culture',1,'solo performance musician stage spotlight'),
-('w_culture_B1_35','atmosphere','/ˈætməsfɪər/','noun','분위기','The mood or feeling of a place or artistic work.','The concert hall had a magical {atmosphere}.','콘서트홀은 마법 같은 분위기가 있었어요.','atmosphere','B1','culture',1,'concert hall atmosphere warm lighting audience');
+('w_culture_B1_35','atmosphere','/ˈætməsfɪər/','noun','분위기','The mood or feeling of a place or artistic work.','The concert hall had a magical {atmosphere}.','콘서트홀은 마법 같은 분위기가 있었어요.','atmosphere','B1','culture',1,'concert hall atmosphere warm lighting audience')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- B2 — 문화 비교·비평 단어 (35개)
@@ -160,7 +163,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_culture_B2_32','canon','/ˈkænən/','noun','정전, 기준 작품 목록','The accepted body of work considered most important in a field.','Shakespeare is central to the literary {canon}.','셰익스피어는 문학 정전의 핵심이에요.','canon','B2','culture',2,'literary canon books classic literature shelf'),
 ('w_culture_B2_33','motif','/moʊˈtiːf/','noun','모티프, 반복되는 주제','A recurring element or theme in a creative work.','Water is a key {motif} in Impressionist painting.','물은 인상주의 회화의 핵심 모티프예요.','motif','B2','culture',2,'monet water lilies impressionist motif art'),
 ('w_culture_B2_34','medium','/ˈmiːdiəm/','noun','매체, 재료 (예술)','The material or form used by an artist to create their work.','Oil paint is her chosen {medium}.','유화 물감은 그녀가 선택한 매체예요.','medium','B2','culture',1,'oil paint medium canvas art studio brushes'),
-('w_culture_B2_35','allusion','/əˈluːʒən/','noun','암시, 인유','An indirect reference to another work or event.','The poem contains an {allusion} to Greek mythology.','그 시는 그리스 신화에 대한 암시를 담고 있어요.','allusion','B2','culture',3,'poetry myth reference classical literature');
+('w_culture_B2_35','allusion','/əˈluːʒən/','noun','암시, 인유','An indirect reference to another work or event.','The poem contains an {allusion} to Greek mythology.','그 시는 그리스 신화에 대한 암시를 담고 있어요.','allusion','B2','culture',3,'poetry myth reference classical literature')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- C1 — 예술 비평·이론 단어 (35개)
@@ -200,7 +204,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_culture_C1_32','reflexivity','/ˌriːflekˈsɪvɪti/','noun','반성성, 자기 인식','The quality of examining one''s own assumptions.','Documentary filmmaking requires a degree of {reflexivity}.','다큐멘터리 제작은 어느 정도의 반성성을 요구해요.','reflexivity','C1','culture',3,'reflexivity documentary filmmaker camera self'),
 ('w_culture_C1_33','transmedial','/trænsˈmiːdiəl/','adjective','트랜스미디어의','Relating to a narrative that extends across multiple media.','The franchise is a {transmedial} storytelling project.','그 프랜차이즈는 트랜스미디어 스토리텔링 프로젝트예요.','transmedial','C1','culture',3,'transmedia storytelling franchise media narrative'),
 ('w_culture_C1_34','diegesis','/ˌdaɪˈdʒiːsɪs/','noun','디에게시스, 이야기 세계','The world of the story as opposed to the real world.','The narrator exists outside the {diegesis} of the film.','나레이터는 영화의 이야기 세계 밖에 존재해요.','diegesis','C1','culture',3,'film narrator story world theory'),
-('w_culture_C1_35','bricoleur','/ˌbrɪkəˈlɜːr/','noun','브리콜뢰르 (창의적 조합가)','Someone who creates something from diverse materials at hand.','The artist sees herself as a cultural {bricoleur}.','그 예술가는 자신을 문화적 브리콜뢰르로 봐요.','bricoleur','C1','culture',3,'bricolage artist found objects creative assemblage');
+('w_culture_C1_35','bricoleur','/ˌbrɪkəˈlɜːr/','noun','브리콜뢰르 (창의적 조합가)','Someone who creates something from diverse materials at hand.','The artist sees herself as a cultural {bricoleur}.','그 예술가는 자신을 문화적 브리콜뢰르로 봐요.','bricoleur','C1','culture',3,'bricolage artist found objects creative assemblage')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- C2 — 예술철학·포스트구조주의 단어 (35개)
@@ -240,7 +245,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_culture_C2_32','hybridity','/haɪˈbrɪdɪti/','noun','혼종성 (호미 바바)','Homi Bhabha''s concept of identity formed between cultures.','Postcolonial art celebrates {hybridity} as creative strength.','포스트식민주의 예술은 혼종성을 창조적 강점으로 기념해요.','hybridity','C2','culture',3,'bhabha hybridity postcolonial culture identity'),
 ('w_culture_C2_33','enunciation','/ɪˌnʌnsiˈeɪʃən/','noun','발화, 언표 행위','The act of stating or articulating something; in semiotics, the act of producing a sign.','The film''s mode of {enunciation} implicates the viewer.','그 영화의 발화 방식은 관람객을 연루시켜요.','enunciation','C2','culture',3,'semiotics film enunciation viewer speech act'),
 ('w_culture_C2_34','apophenia','/ˌæpəˈfiːniə/','noun','아포페니아, 임의 연결 지각','The tendency to perceive meaningful connections between unrelated things.','Conspiracy theories exploit our tendency toward {apophenia}.','음모론은 아포페니아를 향한 우리의 경향을 이용해요.','apophenia','C2','culture',3,'pattern recognition connection conspiracy theory mind'),
-('w_culture_C2_35','thanatopolitics','/ˌθænətəˈpɒlɪtɪks/','noun','죽음 정치학 (아감벤)','Agamben''s concept of power exercised through the management of death.','{Thanatopolitics} shapes whose lives and deaths are mourned in culture.','죽음 정치학은 문화에서 누구의 삶과 죽음이 애도되는지를 형성해요.','thanatopolitics','C2','culture',3,'agamben politics death power culture mourning');
+('w_culture_C2_35','thanatopolitics','/ˌθænətəˈpɒlɪtɪks/','noun','죽음 정치학 (아감벤)','Agamben''s concept of power exercised through the management of death.','{Thanatopolitics} shapes whose lives and deaths are mourned in culture.','죽음 정치학은 문화에서 누구의 삶과 죽음이 애도되는지를 형성해요.','thanatopolitics','C2','culture',3,'agamben politics death power culture mourning')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- A1 — 패턴 (취향 묻기) 7개
@@ -252,7 +258,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_culture_A1_04','I love listening to music.','저는 음악 듣는 걸 좋아해요.','I love listening to','"I love -ing"는 자신이 좋아하는 활동을 말할 때 쓰는 패턴이에요.','취향 말하기','A1','culture','pattern',NULL,4),
 ('s_culture_A1_05','Can you dance?','춤출 수 있어요?','Can you','Can you...?는 상대방의 능력을 물어볼 때 가장 기본적인 패턴이에요.','능력 묻기','A1','culture','pattern',NULL,5),
 ('s_culture_A1_06','Do you play any instruments?','악기를 연주할 수 있어요?','Do you play','Do you play any...?는 취미나 특기를 물어볼 때 유용한 패턴이에요.','취미 묻기','A1','culture','pattern',NULL,6),
-('s_culture_A1_07','I enjoy watching shows at the theatre.','저는 극장에서 공연 보는 것을 즐겨요.','I enjoy watching','"I enjoy -ing"는 자신의 즐거운 활동을 부드럽게 표현하는 패턴이에요.','취미 표현','A1','culture','pattern',NULL,7);
+('s_culture_A1_07','I enjoy watching shows at the theatre.','저는 극장에서 공연 보는 것을 즐겨요.','I enjoy watching','"I enjoy -ing"는 자신의 즐거운 활동을 부드럽게 표현하는 패턴이에요.','취미 표현','A1','culture','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- A2 — 패턴 (공연·전시) 7개
@@ -264,7 +271,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_culture_A2_04','I''d like two tickets for the evening show, please.','저녁 공연 티켓 두 장 주세요.','I''d like','I''d like...는 무언가를 정중하게 요청할 때 쓰는 가장 흔한 패턴이에요.','티켓 구매','A2','culture','pattern',NULL,4),
 ('s_culture_A2_05','The exhibition was really impressive.','전시회가 정말 인상적이었어요.','was really impressive','was/were really impressive는 무언가에 강한 긍정 반응을 나타낼 때 쓰는 패턴이에요.','공연 후기','A2','culture','pattern',NULL,5),
 ('s_culture_A2_06','Can I take photos inside the gallery?','갤러리 안에서 사진을 찍어도 될까요?','Can I take photos','Can I...?는 허락을 구할 때 쓰는 가장 기본적인 패턴이에요.','허락 구하기','A2','culture','pattern',NULL,6),
-('s_culture_A2_07','How long does the performance last?','공연이 얼마나 걸려요?','How long does','How long does...?는 어떤 일이 얼마나 오래 걸리는지 물을 때 쓰는 패턴이에요.','시간 묻기','A2','culture','pattern',NULL,7);
+('s_culture_A2_07','How long does the performance last?','공연이 얼마나 걸려요?','How long does','How long does...?는 어떤 일이 얼마나 오래 걸리는지 물을 때 쓰는 패턴이에요.','시간 묻기','A2','culture','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- B1 — 패턴 (예술 감상) 7개
@@ -276,7 +284,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_culture_B1_04','There''s something deeply moving about the way the story unfolds.','이야기가 전개되는 방식에는 깊이 감동적인 무언가가 있어요.','There''s something ... about','"There''s something ... about"는 추상적이고 감동적인 인상을 표현할 때 쓰는 고급 패턴이에요.','작품 인상 표현','B1','culture','pattern',NULL,4),
 ('s_culture_B1_05','Have you had a chance to see the new exhibition at the gallery?','갤러리에서 새로운 전시회를 볼 기회가 있으셨어요?','Have you had a chance to','"Have you had a chance to...?"는 상대방의 경험을 자연스럽게 물어보는 패턴이에요.','경험 묻기 (공손)','B1','culture','pattern',NULL,5),
 ('s_culture_B1_06','The atmosphere in the concert hall was absolutely electric.','콘서트홀의 분위기가 완전히 전율적이었어요.','absolutely electric','absolutely + 강한 형용사는 감동적인 순간을 생생하게 전달하는 B1 표현 패턴이에요.','공연 분위기 표현','B1','culture','pattern',NULL,6),
-('s_culture_B1_07','I''d strongly recommend this exhibition to anyone interested in modern art.','현대 미술에 관심 있는 분이라면 이 전시회를 강력히 추천해요.','I''d strongly recommend ... to anyone','"I''d strongly recommend ... to anyone interested in..."은 적극적인 추천을 표현하는 패턴이에요.','추천 표현','B1','culture','pattern',NULL,7);
+('s_culture_B1_07','I''d strongly recommend this exhibition to anyone interested in modern art.','현대 미술에 관심 있는 분이라면 이 전시회를 강력히 추천해요.','I''d strongly recommend ... to anyone','"I''d strongly recommend ... to anyone interested in..."은 적극적인 추천을 표현하는 패턴이에요.','추천 표현','B1','culture','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- B2 — 패턴 (문화 비교) 7개
@@ -288,7 +297,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_culture_B2_04','Cross-cultural exchange has always been central to artistic innovation.','문화 간 교류는 항상 예술적 혁신의 핵심이었어요.','Cross-cultural exchange has always been','Cross-cultural ... has always been...는 역사적 패턴을 논의할 때 쓰는 학문적 표현이에요.','문화 교류 논의','B2','culture','pattern',NULL,4),
 ('s_culture_B2_05','What sets this work apart is its willingness to challenge conventional expectations.','이 작품을 돋보이게 하는 것은 기존의 기대에 도전하려는 의지예요.','What sets this work apart','"What sets ... apart is..."는 무언가를 차별화하는 특징을 강조하는 세련된 패턴이에요.','작품 차별점 표현','B2','culture','pattern',NULL,5),
 ('s_culture_B2_06','It''s worth noting that the artist''s background heavily shaped the work''s cultural references.','예술가의 배경이 작품의 문화적 참조에 크게 영향을 미쳤다는 점은 주목할 만해요.','It''s worth noting that','"It''s worth noting that..."는 중요한 사실을 강조하며 논의에 도입할 때 쓰는 학술적 패턴이에요.','분석적 논의','B2','culture','pattern',NULL,6),
-('s_culture_B2_07','The debate over cultural appropriation raises uncomfortable but necessary questions.','문화 전용에 관한 논쟁은 불편하지만 필요한 질문들을 제기해요.','raises uncomfortable but necessary questions','"raises ... questions"는 논쟁적 주제를 신중하게 도입할 때 쓰는 표현이에요.','문화 논쟁 표현','B2','culture','pattern',NULL,7);
+('s_culture_B2_07','The debate over cultural appropriation raises uncomfortable but necessary questions.','문화 전용에 관한 논쟁은 불편하지만 필요한 질문들을 제기해요.','raises uncomfortable but necessary questions','"raises ... questions"는 논쟁적 주제를 신중하게 도입할 때 쓰는 표현이에요.','문화 논쟁 표현','B2','culture','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- C1 — 패턴 (예술 비평 심화) 7개
@@ -300,7 +310,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_culture_C1_04','Rather than offering answers, the exhibition poses a series of provocative questions about identity.','답을 제시하기보다는 전시회가 정체성에 대한 일련의 도발적인 질문을 제기해요.','Rather than ... poses a series of provocative questions','"Rather than A, B poses questions about..."는 반전 구조로 작품의 의도를 설명하는 패턴이에요.','전시 분석','C1','culture','pattern',NULL,4),
 ('s_culture_C1_05','What distinguishes this director''s work is the interplay between the personal and the political.','이 감독의 작품을 구별하는 것은 개인적인 것과 정치적인 것 사이의 상호작용이에요.','What distinguishes ... is the interplay between','"What distinguishes ... is the interplay between A and B"는 비평적 특징 분석의 정교한 패턴이에요.','감독 분석','C1','culture','pattern',NULL,5),
 ('s_culture_C1_06','The film operates on multiple registers simultaneously — aesthetic, political, and psychological.','그 영화는 미학적, 정치적, 심리적으로 여러 차원에서 동시에 작동해요.','operates on multiple registers simultaneously','"operates on multiple registers"는 복잡한 예술 작품의 다층적 의미를 표현하는 C1 비평 표현이에요.','영화 비평','C1','culture','pattern',NULL,6),
-('s_culture_C1_07','By foregrounding the constructedness of its own narrative, the novel invites us to question the nature of storytelling itself.','자신의 서사가 구성물임을 전면에 내세움으로써, 그 소설은 우리가 스토리텔링의 본질 자체를 의문시하도록 유도해요.','By foregrounding the constructedness of','"By foregrounding the constructedness of..."는 메타픽션적 기법을 분석하는 고급 비평 패턴이에요.','소설 비평','C1','culture','pattern',NULL,7);
+('s_culture_C1_07','By foregrounding the constructedness of its own narrative, the novel invites us to question the nature of storytelling itself.','자신의 서사가 구성물임을 전면에 내세움으로써, 그 소설은 우리가 스토리텔링의 본질 자체를 의문시하도록 유도해요.','By foregrounding the constructedness of','"By foregrounding the constructedness of..."는 메타픽션적 기법을 분석하는 고급 비평 패턴이에요.','소설 비평','C1','culture','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- C2 — 패턴 (예술 철학·담론) 7개
@@ -312,4 +323,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_culture_C2_04','Any attempt to stabilise the work''s meaning is already a political act.','작품의 의미를 안정화하려는 모든 시도는 이미 정치적 행위예요.','Any attempt to ... is already a political act','"Any attempt to... is already..."는 학술 비평에서 강한 주장을 펼칠 때 쓰는 C2 표현이에요.','정치적 비평','C2','culture','pattern',NULL,4),
 ('s_culture_C2_05','What the archive reveals is not just what was recorded but what was systematically excluded.','아카이브가 드러내는 것은 기록된 것뿐만 아니라 체계적으로 배제된 것이에요.','What the archive reveals is not just ... but what was systematically excluded','"What ... reveals is not just A but what was systematically excluded"는 권력과 기억을 분석하는 C2 패턴이에요.','아카이브 비평','C2','culture','pattern',NULL,5),
 ('s_culture_C2_06','The sublime, far from being a natural category, is a cultural construction that serves specific ideological ends.','숭고함은 자연적 범주이기는커녕 특정 이데올로기적 목적에 기여하는 문화적 구성물이에요.','far from being a natural category, is a cultural construction','far from being A, is a cultural construction that serves...는 개념을 역사화하는 고급 비평 패턴이에요.','숭고 이론 비평','C2','culture','pattern',NULL,6),
-('s_culture_C2_07','In displacing the centre, the work opens up a rhizomatic field of possible meanings that resist hierarchical ordering.','중심을 이동시킴으로써, 그 작품은 위계적 정렬에 저항하는 의미의 리좀적 장을 열어요.','In displacing the centre ... opens up a rhizomatic field','"In displacing the centre, ... opens up a rhizomatic field"는 들뢰즈적 분석을 수행하는 최고 수준의 비평 패턴이에요.','리좀 비평','C2','culture','pattern',NULL,7);
+('s_culture_C2_07','In displacing the centre, the work opens up a rhizomatic field of possible meanings that resist hierarchical ordering.','중심을 이동시킴으로써, 그 작품은 위계적 정렬에 저항하는 의미의 리좀적 장을 열어요.','In displacing the centre ... opens up a rhizomatic field','"In displacing the centre, ... opens up a rhizomatic field"는 들뢰즈적 분석을 수행하는 최고 수준의 비평 패턴이에요.','리좀 비평','C2','culture','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

@@ -40,7 +40,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_sports_A1_32','bike','/baɪk/','noun','자전거','A two-wheeled vehicle you ride by pedalling.','I ride my {bike} to the park every weekend.','저는 매주 주말마다 자전거를 타고 공원에 가요.','bike','A1','sports',2,'cyclist riding bike park path outdoor'),
 ('w_sports_A1_33','move','/muːv/','verb','움직이다','To change position; to be physically active.','{Move} your body every day to stay healthy.','건강을 유지하려면 매일 몸을 움직이세요.','Move','A1','sports',2,'person stretching moving body exercise'),
 ('w_sports_A1_34','practice','/ˈpræktɪs/','noun','연습','Repeated exercise to improve skill.','We have {practice} every Tuesday evening.','매주 화요일 저녁에 연습이 있어요.','practice','A1','sports',1,'team practice training field players coach'),
-('w_sports_A1_35','cool','/kuːl/','adjective','멋진, 훌륭한','Impressively good; also used for temperature.','That was a really {cool} move!','그것은 정말 멋진 동작이었어요!','cool','A1','sports',3,'impressive sports move dunk skateboard');
+('w_sports_A1_35','cool','/kuːl/','adjective','멋진, 훌륭한','Impressively good; also used for temperature.','That was a really {cool} move!','그것은 정말 멋진 동작이었어요!','cool','A1','sports',3,'impressive sports move dunk skateboard')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2 (35개)
@@ -80,7 +81,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_sports_A2_32','cheer','/tʃɪər/','verb','응원하다','To shout encouragement to support a team.','The crowd began to {cheer} loudly.','군중이 크게 응원하기 시작했어요.','cheer','A2','sports',2,'crowd cheering stadium noise celebration'),
 ('w_sports_A2_33','result','/rɪˈzʌlt/','noun','결과','The score or outcome of a game or competition.','What was the {result} of last night''s game?','어젯밤 경기 결과가 어떻게 됐어요?','result','A2','sports',1,'sports result scoreboard final standings'),
 ('w_sports_A2_34','sprint','/sprɪnt/','verb','전력 질주하다','To run very fast for a short distance.','She {sprinted} to the finish line.','그녀가 결승선까지 전력 질주했어요.','sprinted','A2','sports',2,'sprinter finish line fast track athlete'),
-('w_sports_A2_35','medal','/ˈmedəl/','noun','메달','A metal disc awarded to winners of a competition.','She won a gold {medal} at the Olympics.','그녀는 올림픽에서 금메달을 땄어요.','medal','A2','sports',1,'gold medal olympics podium winner sport');
+('w_sports_A2_35','medal','/ˈmedəl/','noun','메달','A metal disc awarded to winners of a competition.','She won a gold {medal} at the Olympics.','그녀는 올림픽에서 금메달을 땄어요.','medal','A2','sports',1,'gold medal olympics podium winner sport')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1 (35개)
@@ -120,7 +122,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_sports_B1_32','outperform','/ˌaʊtpəˈfɔːrm/','verb','더 뛰어난 성과를 내다','To do better than another person or team.','She consistently {outperforms} her rivals.','그녀는 꾸준히 라이벌들보다 뛰어난 성과를 내요.','outperforms','B1','sports',2,'athlete outperforming rival race podium'),
 ('w_sports_B1_33','qualify','/ˈkwɒlɪfaɪ/','verb','예선을 통과하다','To reach a required standard to enter a competition.','She {qualified} for the Olympic trials.','그녀가 올림픽 선발전 예선을 통과했어요.','qualified','B1','sports',1,'athlete qualifying race finish celebration'),
 ('w_sports_B1_34','halftime','/ˈhɑːftaɪm/','noun','하프타임','The break in the middle of a game.','At {halftime}, the score was 2–0.','하프타임에 점수는 2대 0이었어요.','halftime','B1','sports',2,'football halftime break tunnel locker room'),
-('w_sports_B1_35','spectacle','/ˈspektəkəl/','noun','장관, 볼거리','An impressive display or event.','The opening ceremony was a stunning {spectacle}.','개막식은 놀라운 장관이었어요.','spectacle','B1','sports',2,'sports opening ceremony fireworks stadium spectacular');
+('w_sports_B1_35','spectacle','/ˈspektəkəl/','noun','장관, 볼거리','An impressive display or event.','The opening ceremony was a stunning {spectacle}.','개막식은 놀라운 장관이었어요.','spectacle','B1','sports',2,'sports opening ceremony fireworks stadium spectacular')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2 (35개)
@@ -160,7 +163,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_sports_B2_32','transition','/trænˈzɪʃən/','noun','전환 (공격·수비)','A change from one state to another in sport.','Quick {transition}s from defence to attack are vital.','수비에서 공격으로의 빠른 전환이 중요해요.','transitions','B2','sports',2,'football attack defence transition counter fast'),
 ('w_sports_B2_33','simulate','/ˈsɪmjʊleɪt/','verb','시뮬레이션하다','To create conditions similar to a real situation for training.','They {simulated} match conditions during training.','그들은 훈련 중 경기 상황을 시뮬레이션했어요.','simulated','B2','sports',2,'sports simulation training virtual match conditions'),
 ('w_sports_B2_34','underperform','/ˌʌndəpəˈfɔːrm/','verb','기대 이하의 성과를 내다','To perform less well than expected.','The team {underperformed} despite the talent in the squad.','팀은 스쿼드의 재능에도 불구하고 기대 이하였어요.','underperformed','B2','sports',2,'disappointed team losing sports let down'),
-('w_sports_B2_35','output','/ˈaʊtpʊt/','noun','출력, 퍼포먼스 수치','The amount of work or energy produced.','Wattage is the key {output} measure for cyclists.','와트는 자전거 선수의 핵심 출력 측정 단위예요.','output','B2','sports',2,'cyclist power output watt meter data screen');
+('w_sports_B2_35','output','/ˈaʊtpʊt/','noun','출력, 퍼포먼스 수치','The amount of work or energy produced.','Wattage is the key {output} measure for cyclists.','와트는 자전거 선수의 핵심 출력 측정 단위예요.','output','B2','sports',2,'cyclist power output watt meter data screen')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1 (35개)
@@ -200,7 +204,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_sports_C1_32','ergodynamics','/ˌɜːrɡoʊdaɪˈnæmɪks/','noun','에르고다이나믹스 (운동 효율 역학)','The study of efficient energy use during physical activity.','{Ergodynamics} research helps coaches reduce unnecessary energy expenditure.','에르고다이나믹스 연구는 코치들이 불필요한 에너지 소비를 줄이는 데 도움을 줘요.','Ergodynamics','C1','sports',2,'sports energy efficiency lab research biomechanics'),
 ('w_sports_C1_33','anthropometry','/ˌænθrəˈpɒmɪtri/','noun','인체 측정학','The measurement of body dimensions for performance analysis.','{Anthropometry} data is used to optimise equipment sizing.','인체 측정 데이터는 장비 크기를 최적화하는 데 사용돼요.','Anthropometry','C1','sports',2,'athlete body measurement tape sports science lab'),
 ('w_sports_C1_34','decompression','/ˌdiːkəmˈpreʃən/','noun','감압 (회복 기법)','The process of relieving pressure on muscles and joints.','{Decompression} therapy is used for spinal recovery in athletes.','감압 치료는 선수들의 척추 회복에 사용돼요.','Decompression','C1','sports',3,'decompression therapy spine athlete recovery clinic'),
-('w_sports_C1_35','psychomotor','/ˌsaɪkoʊˈmoʊtər/','adjective','정신운동의 (입문)','Relating to the interaction between mental activity and physical movement.','Decision-making speed is a key {psychomotor} skill.','의사결정 속도는 핵심적인 정신운동 기술이에요.','psychomotor','C1','sports',2,'psychomotor reaction sport decision making drill');
+('w_sports_C1_35','psychomotor','/ˌsaɪkoʊˈmoʊtər/','adjective','정신운동의 (입문)','Relating to the interaction between mental activity and physical movement.','Decision-making speed is a key {psychomotor} skill.','의사결정 속도는 핵심적인 정신운동 기술이에요.','psychomotor','C1','sports',2,'psychomotor reaction sport decision making drill')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2 (35개)
@@ -240,7 +245,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_sports_C2_32','polyphasic','/ˌpɒliˈfeɪzɪk/','adjective','다단계성의 (수면·훈련)','Occurring in several phases or cycles.','Some athletes experiment with {polyphasic} sleep schedules.','일부 선수들은 다단계성 수면 일정을 실험해요.','polyphasic','C2','sports',3,'polyphasic sleep schedule sport athlete rest recovery'),
 ('w_sports_C2_33','tensiometry','/ˌtensiˈɒmɪtri/','noun','장력 측정법','The measurement of tension in muscles or tendons.','{Tensiometry} is used to quantify hamstring tightness.','장력 측정법은 햄스트링 긴장을 정량화하는 데 사용돼요.','Tensiometry','C2','sports',3,'tensiometry hamstring tension measurement sport science'),
 ('w_sports_C2_34','hemoglobin','/ˈhiːməɡloʊbɪn/','noun','헤모글로빈','The protein in red blood cells that carries oxygen.','Altitude training increases {hemoglobin} concentration in the blood.','고지 훈련은 혈액 내 헤모글로빈 농도를 높여요.','hemoglobin','C2','sports',2,'altitude training hemoglobin blood oxygen sport science'),
-('w_sports_C2_35','neuroplasticity','/ˌnjʊəroʊplæˈstɪsɪti/','noun','신경가소성','The brain''s ability to reorganise itself by forming new connections.','Skill acquisition relies on {neuroplasticity} in the motor cortex.','기술 습득은 운동 피질의 신경가소성에 의존해요.','neuroplasticity','C2','sports',2,'brain neuroplasticity learning skill sport motor cortex');
+('w_sports_C2_35','neuroplasticity','/ˌnjʊəroʊplæˈstɪsɪti/','noun','신경가소성','The brain''s ability to reorganise itself by forming new connections.','Skill acquisition relies on {neuroplasticity} in the motor cortex.','기술 습득은 운동 피질의 신경가소성에 의존해요.','neuroplasticity','C2','sports',2,'brain neuroplasticity learning skill sport motor cortex')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A1 (7개) — 운동 관심
@@ -252,7 +258,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_sports_A1_04','What is your favourite sport?','제일 좋아하는 스포츠가 뭐예요?','What is your favourite','favourite 대신 favorite으로도 써요 (미국식). 좋아하는 것을 물을 때 꼭 외워두세요.','선호 묻기','A1','sports','pattern',NULL,4),
 ('s_sports_A1_05','Let''s play together after school!','방과 후에 같이 운동해요!','Let''s play together','Let''s + 동사원형은 상대방을 함께 하도록 초대할 때 써요.','함께하기 제안','A1','sports','pattern',NULL,5),
 ('s_sports_A1_06','Our team won the game!','우리 팀이 경기에서 이겼어요!','Our team won','과거형 won은 win의 불규칙 과거예요. 경기 결과를 말할 때 자주 써요.','결과 말하기','A1','sports','pattern',NULL,6),
-('s_sports_A1_07','I go to the gym every week.','저는 매주 헬스장에 가요.','I go to the gym','주기를 말할 때 every day / every week / every weekend처럼 뒤에 붙여요.','운동 습관','A1','sports','pattern',NULL,7);
+('s_sports_A1_07','I go to the gym every week.','저는 매주 헬스장에 가요.','I go to the gym','주기를 말할 때 every day / every week / every weekend처럼 뒤에 붙여요.','운동 습관','A1','sports','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A2 (7개) — 경기 결과
@@ -264,7 +271,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_sports_A2_04','I can''t believe they lost again.','또 졌다니 믿을 수가 없어요.','I can''t believe','I can''t believe + (that) 절 패턴은 놀람을 표현할 때 자주 써요.','감탄·놀람','A2','sports','pattern',NULL,4),
 ('s_sports_A2_05','The game ended in a draw.','경기가 무승부로 끝났어요.','ended in a draw','end in a draw는 "무승부로 끝나다"를 뜻하는 고정 표현이에요. ended in a tie도 같은 의미예요.','경기 결과','A2','sports','pattern',NULL,5),
 ('s_sports_A2_06','Who do you think will win the final?','결승에서 누가 이길 것 같아요?','Who do you think will','Who do you think will + 동사?는 예측을 물을 때 쓰는 자연스러운 표현이에요.','예측 묻기','A2','sports','pattern',NULL,6),
-('s_sports_A2_07','He broke the record by two seconds.','그는 기록을 2초 차이로 깼어요.','broke the record','break a record는 "기록을 깨다"는 뜻의 관용 표현이에요. broke는 break의 불규칙 과거형이에요.','기록 표현','A2','sports','pattern',NULL,7);
+('s_sports_A2_07','He broke the record by two seconds.','그는 기록을 2초 차이로 깼어요.','broke the record','break a record는 "기록을 깨다"는 뜻의 관용 표현이에요. broke는 break의 불규칙 과거형이에요.','기록 표현','A2','sports','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B1 (7개) — 팀 전략
@@ -276,7 +284,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_sports_B1_04','The team focused on maintaining possession throughout the game.','팀은 경기 내내 볼 점유율 유지에 집중했어요.','focused on maintaining','focus on + 동명사 패턴으로 집중한 대상을 표현해요.','전술 묘사','B1','sports','pattern',NULL,4),
 ('s_sports_B1_05','The referee should have given a penalty in that situation.','심판은 그 상황에서 패널티를 줬어야 했어요.','should have given','should have + 과거분사는 과거에 하지 않은 일에 대한 아쉬움이나 비판을 나타내요.','판정 논평','B1','sports','pattern',NULL,5),
 ('s_sports_B1_06','I''m not sure why they didn''t substitute the tired striker earlier.','왜 지친 스트라이커를 더 일찍 교체하지 않았는지 모르겠어요.','I''m not sure why','I''m not sure why + 절은 의문과 불만을 부드럽게 표현해요.','전술 의문','B1','sports','pattern',NULL,6),
-('s_sports_B1_07','Sportsmanship matters more than winning at all costs.','스포츠맨십은 어떤 대가를 치르더라도 이기는 것보다 더 중요해요.','matters more than','A matters more than B 패턴은 비교 우선순위를 말할 때 써요.','스포츠 가치관','B1','sports','pattern',NULL,7);
+('s_sports_B1_07','Sportsmanship matters more than winning at all costs.','스포츠맨십은 어떤 대가를 치르더라도 이기는 것보다 더 중요해요.','matters more than','A matters more than B 패턴은 비교 우선순위를 말할 때 써요.','스포츠 가치관','B1','sports','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B2 (7개) — 스포츠 분석
@@ -288,7 +297,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_sports_B2_04','Her tactical awareness sets her apart from other players in the league.','그녀의 전술적 감각이 리그의 다른 선수들과 그녀를 구별해줘요.','sets her apart from','set apart from은 "~에서 구별되다, 뛰어나다"는 관용 표현이에요.','비교 강조','B2','sports','pattern',NULL,4),
 ('s_sports_B2_05','The coaching staff is reviewing biomechanics footage to correct his running form.','코칭 스태프가 달리기 자세를 교정하기 위해 생체역학 영상을 검토 중이에요.','is reviewing','현재진행형(is + -ing)은 현재 진행 중인 지속적 행동을 나타내요.','훈련 분석','B2','sports','pattern',NULL,5),
 ('s_sports_B2_06','Despite the injury setback, she managed to qualify for the finals.','부상이라는 역경에도 불구하고, 그녀는 결승 진출에 성공했어요.','Despite the','Despite + 명사(구)는 "~에도 불구하고"를 뜻하고, Although + 절과 구별해서 써요.','역경 극복','B2','sports','pattern',NULL,6),
-('s_sports_B2_07','It''s worth noting that doping undermines the integrity of the sport.','도핑이 스포츠의 무결성을 훼손한다는 점은 주목할 만해요.','It''s worth noting that','It''s worth noting that은 중요한 사실을 강조할 때 쓰는 격식 표현이에요.','이슈 제기','B2','sports','pattern',NULL,7);
+('s_sports_B2_07','It''s worth noting that doping undermines the integrity of the sport.','도핑이 스포츠의 무결성을 훼손한다는 점은 주목할 만해요.','It''s worth noting that','It''s worth noting that은 중요한 사실을 강조할 때 쓰는 격식 표현이에요.','이슈 제기','B2','sports','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C1 (7개) — 스포츠 과학
@@ -300,7 +310,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_sports_C1_04','Governance failures within sporting bodies have eroded public trust significantly.','스포츠 단체 내의 거버넌스 실패가 대중의 신뢰를 크게 잠식했어요.','have eroded','erode는 "점진적으로 침식하다, 잠식하다"는 뜻이에요. 추상적 개념(신뢰·가치)에 자주 써요.','스포츠 거버넌스','C1','sports','pattern',NULL,4),
 ('s_sports_C1_05','Without adequate recovery, neuromuscular fatigue accumulates and performance deteriorates.','충분한 회복 없이는 신경근 피로가 쌓이고 경기력이 저하돼요.','accumulates and deteriorates','두 동사를 and로 연결해 결과의 연쇄를 표현해요. deteriorate(저하되다)는 기억해두세요.','과훈련 경고','C1','sports','pattern',NULL,5),
 ('s_sports_C1_06','Periodization frameworks must account for individual variation in recovery capacity.','주기화 프레임워크는 회복 능력의 개인 차이를 반드시 고려해야 해요.','must account for','must account for는 "반드시 고려해야 한다"는 의무를 나타내는 격식 표현이에요.','훈련 설계','C1','sports','pattern',NULL,6),
-('s_sports_C1_07','Ethical considerations in elite sport extend well beyond the arena itself.','엘리트 스포츠의 윤리적 고려 사항은 경기장 자체를 훨씬 넘어서요.','extend well beyond','extend well beyond는 "훨씬 넘어서 확장된다"는 강조 표현이에요. well은 강조 부사예요.','스포츠 윤리','C1','sports','pattern',NULL,7);
+('s_sports_C1_07','Ethical considerations in elite sport extend well beyond the arena itself.','엘리트 스포츠의 윤리적 고려 사항은 경기장 자체를 훨씬 넘어서요.','extend well beyond','extend well beyond는 "훨씬 넘어서 확장된다"는 강조 표현이에요. well은 강조 부사예요.','스포츠 윤리','C1','sports','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C2 (7개) — 스포츠 과학 (심화)
@@ -312,4 +323,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_sports_C2_04','Neuromotor adaptations to resistance training are mediated by both central and peripheral mechanisms.','저항 훈련에 대한 신경운동 적응은 중추 및 말초 메커니즘 모두에 의해 매개돼요.','are mediated by','be mediated by는 "~에 의해 매개되다"로 복잡한 인과관계를 학술적으로 설명할 때 써요.','신경과학 설명','C2','sports','pattern',NULL,4),
 ('s_sports_C2_05','Allometric scaling must be applied when comparing strength outputs across athletes of differing body masses.','서로 다른 체중을 가진 선수들의 근력 출력을 비교할 때 이형성장 척도를 적용해야 해요.','must be applied when comparing','must be applied는 수동 의무 구조예요. when + 동명사(-ing)와 함께 조건을 표현해요.','데이터 비교','C2','sports','pattern',NULL,5),
 ('s_sports_C2_06','The psychomotor demands of elite competition necessitate a training environment that replicates high-pressure decision-making.','엘리트 경쟁의 정신운동적 요구는 고압적 의사결정을 재현하는 훈련 환경을 필요로 해요.','necessitate a training environment that','necessitate는 "필요로 하다"는 뜻의 고급 타동사예요. demand나 require보다 강한 어조예요.','훈련 설계','C2','sports','pattern',NULL,6),
-('s_sports_C2_07','Myofascial dysfunction, if left unaddressed, may perpetuate compensatory movement patterns and predispose athletes to recurrent injury.','근막 기능 장애가 방치될 경우 보상 운동 패턴을 지속시키고 선수들을 재발성 부상에 취약하게 할 수 있어요.','if left unaddressed','if left unaddressed는 "방치될 경우"라는 뜻의 분사구문 조건절이에요. predispose A to B는 "A를 B에 취약하게 만들다"예요.','부상 예방','C2','sports','pattern',NULL,7);
+('s_sports_C2_07','Myofascial dysfunction, if left unaddressed, may perpetuate compensatory movement patterns and predispose athletes to recurrent injury.','근막 기능 장애가 방치될 경우 보상 운동 패턴을 지속시키고 선수들을 재발성 부상에 취약하게 할 수 있어요.','if left unaddressed','if left unaddressed는 "방치될 경우"라는 뜻의 분사구문 조건절이에요. predispose A to B는 "A를 B에 취약하게 만들다"예요.','부상 예방','C2','sports','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

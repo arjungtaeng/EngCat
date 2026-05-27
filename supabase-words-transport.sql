@@ -42,7 +42,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_transport_A1_32','help','/hɛlp/','verb','돕다','To make it easier for someone to do something.','Could you {help} me find the station?','역 찾는 것을 도와주실 수 있나요?','help','A1','transport',2,'help assist person direction'),
 ('w_transport_A1_33','line','/laɪn/','noun','노선, 줄','A route for a bus or train service.','Take the blue {line} to Central Station.','중앙역까지 파란 노선을 타세요.','line','A1','transport',2,'subway line metro map'),
 ('w_transport_A1_34','number','/ˈnʌmbər/','noun','번호','A numerical label identifying a bus or train route.','Which {number} bus goes to the market?','시장에는 몇 번 버스가 가나요?','number','A1','transport',2,'bus number route sign'),
-('w_transport_A1_35','here','/hɪr/','adverb','여기','In, at, or to this place.','Stop {here}, please.','여기서 세워 주세요.','here','A1','transport',2,'here location map spot');
+('w_transport_A1_35','here','/hɪr/','adverb','여기','In, at, or to this place.','Stop {here}, please.','여기서 세워 주세요.','here','A1','transport',2,'here location map spot')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2 (35개)
@@ -84,7 +85,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_transport_A2_32','carriage','/ˈkærɪdʒ/','noun','객차','One of the separate sections of a train.','Our reserved seats are in {carriage} four.','예약 좌석은 4번 객차에 있어요.','carriage','A2','transport',2,'carriage train seat window'),
 ('w_transport_A2_33','vehicle','/ˈviːɪkəl/','noun','차량','Any object used for transporting people or goods.','Only authorized {vehicles} are permitted.','허가된 차량만 진입할 수 있어요.','vehicles','A2','transport',2,'vehicle car van road'),
 ('w_transport_A2_34','arrive','/əˈraɪv/','verb','도착하다','To reach a destination.','What time does the train {arrive}?','기차는 몇 시에 도착하나요?','arrive','A2','transport',2,'arrive station platform train'),
-('w_transport_A2_35','depart','/dɪˈpɑːrt/','verb','출발하다','To leave a place, especially at the start of a journey.','The ferry will {depart} in fifteen minutes.','페리는 15분 후에 출발해요.','depart','A2','transport',2,'depart ferry boat dock');
+('w_transport_A2_35','depart','/dɪˈpɑːrt/','verb','출발하다','To leave a place, especially at the start of a journey.','The ferry will {depart} in fifteen minutes.','페리는 15분 후에 출발해요.','depart','A2','transport',2,'depart ferry boat dock')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1 (35개)
@@ -126,7 +128,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_transport_B1_32','seatbelt','/ˈsiːtbɛlt/','noun','안전벨트','A belt worn to keep you safely in your seat in a vehicle.','Please fasten your {seatbelt} before take-off.','이륙 전에 안전벨트를 매주세요.','seatbelt','B1','transport',1,'seatbelt safety car airplane'),
 ('w_transport_B1_33','harbour','/ˈhɑːrbər/','noun','항구','A place on the coast where ships shelter or load and unload.','The cruise ship docked at the main {harbour}.','크루즈 선박이 주요 항구에 정박했어요.','harbour','B1','transport',2,'harbour port ships dock'),
 ('w_transport_B1_34','motorway','/ˈmoʊtərweɪ/','noun','고속도로','A wide road designed for fast travel over long distances.','Take the {motorway} for a faster journey.','더 빠른 이동을 위해 고속도로를 이용하세요.','motorway','B1','transport',1,'motorway highway fast cars'),
-('w_transport_B1_35','overhead bridge','/ˌoʊvərˈhɛd brɪdʒ/','noun','육교','A bridge built above a road for pedestrians.','Use the {overhead bridge} to cross safely.','안전하게 건너려면 육교를 이용하세요.','overhead bridge','B1','transport',2,'footbridge overpass pedestrian road');
+('w_transport_B1_35','overhead bridge','/ˌoʊvərˈhɛd brɪdʒ/','noun','육교','A bridge built above a road for pedestrians.','Use the {overhead bridge} to cross safely.','안전하게 건너려면 육교를 이용하세요.','overhead bridge','B1','transport',2,'footbridge overpass pedestrian road')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2 (35개)
@@ -168,7 +171,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_transport_B2_32','emission','/ɪˈmɪʃən/','noun','배기가스, 배출','The production and discharge of gas from a vehicle or engine.','Stricter {emission} standards apply to all new vehicles.','더 엄격한 배출 기준이 모든 신형 차량에 적용돼요.','emission','B2','transport',2,'emission exhaust car environment'),
 ('w_transport_B2_33','fleet','/fliːt/','noun','차량 군, 운송 차량단','A number of vehicles owned or operated by an organization.','The company is replacing its entire delivery {fleet} with electric vehicles.','그 회사는 배달 차량단 전체를 전기차로 교체하고 있어요.','fleet','B2','transport',2,'fleet trucks company delivery'),
 ('w_transport_B2_34','on-demand','/ˌɒn dɪˈmɑːnd/','adjective','수요 응답형의','Available whenever required, not on a fixed schedule.','The city introduced an {on-demand} bus service in rural areas.','그 도시는 농촌 지역에 수요 응답형 버스 서비스를 도입했어요.','on-demand','B2','transport',2,'on demand bus rural flexible'),
-('w_transport_B2_35','manifest','/ˈmænɪfɛst/','noun','탑승자 명단, 적하 목록','A list of passengers or cargo on a vehicle.','The airline submitted the passenger {manifest} before takeoff.','항공사는 이륙 전에 탑승자 명단을 제출했어요.','manifest','B2','transport',3,'manifest airline document passengers');
+('w_transport_B2_35','manifest','/ˈmænɪfɛst/','noun','탑승자 명단, 적하 목록','A list of passengers or cargo on a vehicle.','The airline submitted the passenger {manifest} before takeoff.','항공사는 이륙 전에 탑승자 명단을 제출했어요.','manifest','B2','transport',3,'manifest airline document passengers')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1 (35개)
@@ -210,7 +214,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_transport_C1_32','overshoot','/ˌoʊvərˈʃuːt/','verb','초과하다 (정원, 시간 등)','To go beyond a planned stop or time.','The tram {overshot} the platform by several metres.','전차가 플랫폼을 몇 미터 지나쳤어요.','overshot','C1','transport',3,'overshoot platform tram precision'),
 ('w_transport_C1_33','interline agreement','/ˈɪntəlaɪn əˈɡriːmənt/','noun','항공사 간 연계 협정','An agreement between airlines to accept each other''s tickets.','Thanks to the {interline agreement}, you can check your bag to the final destination.','항공사 간 연계 협정 덕분에 최종 목적지까지 수하물을 위탁할 수 있어요.','interline agreement','C1','transport',3,'interline airline ticket agreement'),
 ('w_transport_C1_34','signalling system','/ˈsɪɡnəlɪŋ ˌsɪstəm/','noun','신호 시스템','The electronic system that controls the safe movement of trains.','An upgraded {signalling system} will double capacity on the line.','업그레이드된 신호 시스템이 노선 용량을 두 배로 늘릴 거예요.','signalling system','C1','transport',2,'signalling system railway control room'),
-('w_transport_C1_35','curbside management','/ˈkɜːrbsaɪd ˈmænɪdʒmənt/','noun','도로변 관리','The regulation of loading, unloading, and passenger pick-up zones.','Effective {curbside management} reduces double-parking downtown.','효과적인 도로변 관리는 도심의 이중 주차를 줄여요.','curbside management','C1','transport',3,'curbside curb pickup zone parking');
+('w_transport_C1_35','curbside management','/ˈkɜːrbsaɪd ˈmænɪdʒmənt/','noun','도로변 관리','The regulation of loading, unloading, and passenger pick-up zones.','Effective {curbside management} reduces double-parking downtown.','효과적인 도로변 관리는 도심의 이중 주차를 줄여요.','curbside management','C1','transport',3,'curbside curb pickup zone parking')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2 (35개)
@@ -252,7 +257,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_transport_C2_32','modal integration','/ˈmoʊdəl ˌɪntɪˈɡreɪʃən/','noun','교통 수단 통합','The seamless connection between different transport modes for passengers.','The station redesign achieved full {modal integration} between rail and bus.','역 재설계로 철도와 버스 간의 완전한 교통 수단 통합을 이뤘어요.','modal integration','C2','transport',2,'modal integration station bus train'),
 ('w_transport_C2_33','transport poverty','/ˈtrænsport ˈpɒvərti/','noun','교통 빈곤','The inability to access transport due to cost, availability, or physical barriers.','Rural communities suffer most from {transport poverty}.','농촌 지역 사회가 교통 빈곤으로 가장 많은 어려움을 겪어요.','transport poverty','C2','transport',2,'transport poverty rural isolation'),
 ('w_transport_C2_34','waypoint','/ˈweɪpɔɪnt/','noun','경유 지점','An intermediate stop or location on a planned route.','The drone delivery system uses GPS {waypoints} to navigate.','드론 배송 시스템은 GPS 경유 지점을 사용해 항법 운행해요.','waypoints','C2','transport',2,'waypoint GPS route navigation drone'),
-('w_transport_C2_35','service resilience','/ˈsɜːrvɪs rɪˈzɪliəns/','noun','서비스 회복 탄력성','The capability of a transport service to recover quickly from disruptions.','Investing in redundancy improves {service resilience} during extreme weather.','중복 시스템에 투자하면 극한 날씨 중 서비스 회복 탄력성이 향상돼요.','service resilience','C2','transport',3,'resilience transport weather disruption');
+('w_transport_C2_35','service resilience','/ˈsɜːrvɪs rɪˈzɪliəns/','noun','서비스 회복 탄력성','The capability of a transport service to recover quickly from disruptions.','Investing in redundancy improves {service resilience} during extreme weather.','중복 시스템에 투자하면 극한 날씨 중 서비스 회복 탄력성이 향상돼요.','service resilience','C2','transport',3,'resilience transport weather disruption')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A1 (7개) : 위치 묻기
@@ -265,7 +271,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_transport_A1_04','Which bus goes to the city centre?','시내 중심까지 몇 번 버스가 가나요?','Which bus goes to','"Which bus goes to...?"는 올바른 버스 노선을 찾을 때 쓰는 표현이에요.','버스 노선 확인','A1','transport','pattern',NULL,4),
 ('s_transport_A1_05','Turn left at the traffic light.','신호등에서 왼쪽으로 도세요.','Turn left at','"Turn left/right at..."는 방향을 안내할 때 가장 기본적인 표현이에요.','길 안내','A1','transport','pattern',NULL,5),
 ('s_transport_A1_06','Go straight and then turn right.','직진 후에 오른쪽으로 도세요.','Go straight and then','두 단계 방향을 "and then"으로 자연스럽게 연결할 수 있어요.','길 안내','A1','transport','pattern',NULL,6),
-('s_transport_A1_07','Excuse me, can you show me the way to the subway?','실례합니다, 지하철 가는 길을 알려주실 수 있나요?','can you show me the way','"Can you show me the way to...?"는 정중하게 길을 물어볼 때 쓰는 표현이에요.','도움 요청','A1','transport','pattern',NULL,7);
+('s_transport_A1_07','Excuse me, can you show me the way to the subway?','실례합니다, 지하철 가는 길을 알려주실 수 있나요?','can you show me the way','"Can you show me the way to...?"는 정중하게 길을 물어볼 때 쓰는 표현이에요.','도움 요청','A1','transport','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A2 (7개) : 티켓 구매, 환승
@@ -278,7 +285,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_transport_A2_04','Where do I transfer for the red line?','빨간 노선으로 환승하려면 어디서 갈아타나요?','Where do I transfer for','"Where do I transfer for...?"는 환승 위치를 물을 때 쓰는 표현이에요.','환승 위치','A2','transport','pattern',NULL,4),
 ('s_transport_A2_05','Is there a discount for students?','학생 할인이 있나요?','Is there a discount for','"Is there a discount for...?"는 할인 여부를 물어보는 자연스러운 표현이에요.','할인 문의','A2','transport','pattern',NULL,5),
 ('s_transport_A2_06','What time is the next train to Seoul?','다음 서울행 기차는 몇 시예요?','What time is the next train','"What time is the next...?"는 다음 교통편 시간을 물을 때 필수 표현이에요.','출발 시간 확인','A2','transport','pattern',NULL,6),
-('s_transport_A2_07','Can I use this card to pay for the bus?','이 카드로 버스 요금을 낼 수 있나요?','Can I use this card to pay','"Can I use... to pay?"는 결제 수단을 확인할 때 쓰는 실용적인 표현이에요.','결제 방법','A2','transport','pattern',NULL,7);
+('s_transport_A2_07','Can I use this card to pay for the bus?','이 카드로 버스 요금을 낼 수 있나요?','Can I use this card to pay','"Can I use... to pay?"는 결제 수단을 확인할 때 쓰는 실용적인 표현이에요.','결제 방법','A2','transport','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B1 (7개) : 길 안내, 늦음
@@ -291,7 +299,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_transport_B1_04','I usually carpool with two colleagues to save on fuel costs.','연료비를 아끼려고 동료 두 명과 카풀을 해요.','carpool with... to save on','"carpool with... to save on..."은 카풀 이유를 설명하는 자연스러운 패턴이에요.','카풀 설명','B1','transport','pattern',NULL,4),
 ('s_transport_B1_05','There are roadworks on the bridge, so we had to take a detour through the town.','다리에 도로 공사가 있어서 마을을 통해 우회해야 했어요.','take a detour through','"take a detour through..."는 우회 경로를 설명할 때 쓰는 표현이에요.','경로 변경 설명','B1','transport','pattern',NULL,5),
 ('s_transport_B1_06','Is there a more direct route, or do we have to go through the tunnel?','더 직접적인 경로가 있나요, 아니면 터널을 통해야 하나요?','a more direct route','"a more direct route"는 더 효율적인 경로를 물어볼 때 쓰는 표현이에요.','경로 문의','B1','transport','pattern',NULL,6),
-('s_transport_B1_07','Watch out — there''s a speed camera just after the junction ahead.','주의하세요 — 바로 앞 교차로 지나서 과속 카메라가 있어요.','Watch out','"Watch out"은 즉각적인 경고를 전달할 때 쓰는 자연스러운 표현이에요.','도로 경고','B1','transport','pattern',NULL,7);
+('s_transport_B1_07','Watch out — there''s a speed camera just after the junction ahead.','주의하세요 — 바로 앞 교차로 지나서 과속 카메라가 있어요.','Watch out','"Watch out"은 즉각적인 경고를 전달할 때 쓰는 자연스러운 표현이에요.','도로 경고','B1','transport','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B2 (7개) : 교통 상황
@@ -304,7 +313,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_transport_B2_04','The introduction of congestion charges has significantly reduced traffic in the city centre.','혼잡 통행료 도입이 도심의 교통량을 크게 줄였어요.','significantly reduced traffic','"significantly reduced"는 데이터나 결과를 제시할 때 쓰는 격식체 표현이에요.','정책 효과','B2','transport','pattern',NULL,4),
 ('s_transport_B2_05','I missed my connecting flight because the first leg arrived over an hour behind schedule.','첫 번째 구간이 예정보다 한 시간 이상 늦게 도착해서 연결 비행편을 놓쳤어요.','behind schedule','"behind schedule"은 지연을 나타내는 격식 있는 표현이에요.','항공 지연','B2','transport','pattern',NULL,5),
 ('s_transport_B2_06','The infrastructure upgrade will require significant capital investment spread over five years.','기반 시설 업그레이드는 5년에 걸친 상당한 자본 투자가 필요해요.','significant capital investment spread over','"spread over"는 투자나 비용이 기간 전체에 분산됨을 설명해요.','인프라 투자','B2','transport','pattern',NULL,6),
-('s_transport_B2_07','Passengers are advised to allow extra travel time due to planned engineering works this weekend.','이번 주말 예정된 공사로 인해 승객들은 여유 있는 이동 시간을 감안하시기 바랍니다.','are advised to allow extra travel time','"are advised to"는 공식 안내문에서 권고 사항을 전달하는 표현이에요.','공식 안내','B2','transport','pattern',NULL,7);
+('s_transport_B2_07','Passengers are advised to allow extra travel time due to planned engineering works this weekend.','이번 주말 예정된 공사로 인해 승객들은 여유 있는 이동 시간을 감안하시기 바랍니다.','are advised to allow extra travel time','"are advised to"는 공식 안내문에서 권고 사항을 전달하는 표현이에요.','공식 안내','B2','transport','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C1 (7개) : 교통 정책, 도시 계획
@@ -317,7 +327,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_transport_C1_04','Electrification of the rail network is central to the government''s strategy for decarbonizing the transport sector.','철도 네트워크 전기화는 교통 부문 탈탄소화를 위한 정부 전략의 핵심이에요.','central to the government''s strategy for','"central to"는 어떤 것이 전략의 핵심임을 나타내는 격식체 표현이에요.','탈탄소 정책','C1','transport','pattern',NULL,4),
 ('s_transport_C1_05','Autonomous vehicles hold considerable promise, but regulatory frameworks have yet to keep pace with technological development.','자율 주행 차량은 상당한 가능성을 지니고 있지만, 규제 프레임워크는 아직 기술 발전을 따라가지 못하고 있어요.','have yet to keep pace with','"have yet to keep pace with"는 기술과 규제의 간극을 설명하는 고급 표현이에요.','정책 논의','C1','transport','pattern',NULL,5),
 ('s_transport_C1_06','Improving last-mile connectivity is critical if public transport is to compete effectively with the private car.','라스트 마일 연결성 향상은 대중교통이 자가용과 효과적으로 경쟁하려면 필수적이에요.','is critical if... is to compete effectively','"is to + 동사원형"은 조건부 미래 의무를 나타내는 격식체 구조예요.','경쟁력 분석','C1','transport','pattern',NULL,6),
-('s_transport_C1_07','Ridesharing platforms have disrupted traditional taxi markets, compelling regulators to revisit licensing frameworks.','승차 공유 플랫폼이 기존 택시 시장을 혼란에 빠뜨려 규제 당국이 면허 프레임워크를 재검토하도록 압박했어요.','compelling regulators to revisit','"compelling... to"는 어떤 결과가 다른 행위를 강제했음을 나타내는 분사 구문이에요.','플랫폼 규제','C1','transport','pattern',NULL,7);
+('s_transport_C1_07','Ridesharing platforms have disrupted traditional taxi markets, compelling regulators to revisit licensing frameworks.','승차 공유 플랫폼이 기존 택시 시장을 혼란에 빠뜨려 규제 당국이 면허 프레임워크를 재검토하도록 압박했어요.','compelling regulators to revisit','"compelling... to"는 어떤 결과가 다른 행위를 강제했음을 나타내는 분사 구문이에요.','플랫폼 규제','C1','transport','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C2 (7개) : 교통 정책, 도시 계획 (심화)
@@ -330,4 +341,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_transport_C2_04','Realizing the potential of hyperloop technology hinges on resolving both the engineering and the regulatory challenges that currently impede deployment.','하이퍼루프 기술의 잠재력을 실현하는 것은 현재 도입을 방해하는 공학적 과제와 규제적 과제 모두를 해결하는 데 달려 있어요.','hinges on resolving both... and','"hinges on"은 성공이 특정 조건에 달려 있음을 강조하는 격식체 표현이에요.','첨단 교통','C2','transport','pattern',NULL,4),
 ('s_transport_C2_05','Telematics data, when coupled with geospatial analysis, enables transport authorities to allocate resources with unprecedented precision.','텔레매틱스 데이터는 지리 공간 분석과 결합될 때 교통 당국이 전례 없는 정밀도로 자원을 배분할 수 있게 해요.','when coupled with... enables... to allocate','"when coupled with"는 두 기술이나 방법의 시너지를 설명하는 고급 표현이에요.','데이터 활용','C2','transport','pattern',NULL,5),
 ('s_transport_C2_06','Transport poverty, often overlooked in urban policy discourse, disproportionately affects peripheral communities with limited access to employment and services.','교통 빈곤은 도시 정책 담론에서 종종 간과되지만, 취업과 서비스 접근이 제한된 주변 지역 사회에 불균형적인 영향을 미쳐요.','disproportionately affects peripheral communities','"disproportionately affects"는 불균형한 영향을 지적할 때 쓰는 학술적 표현이에요.','사회적 형평성','C2','transport','pattern',NULL,6),
-('s_transport_C2_07','A comprehensive Mobility as a Service ecosystem presupposes interoperability across competing platforms, a condition that market forces alone are unlikely to deliver without regulatory mandates.','포괄적인 서비스형 모빌리티 생태계는 경쟁 플랫폼 간의 상호 운용성을 전제로 하며, 이는 규제 의무 없이는 시장의 힘만으로 실현되기 어려운 조건이에요.','presupposes interoperability... a condition that market forces alone are unlikely to deliver','"presupposes"와 동격 명사절을 활용한 고도의 학술 논증 문체예요.','MaaS 정책','C2','transport','pattern',NULL,7);
+('s_transport_C2_07','A comprehensive Mobility as a Service ecosystem presupposes interoperability across competing platforms, a condition that market forces alone are unlikely to deliver without regulatory mandates.','포괄적인 서비스형 모빌리티 생태계는 경쟁 플랫폼 간의 상호 운용성을 전제로 하며, 이는 규제 의무 없이는 시장의 힘만으로 실현되기 어려운 조건이에요.','presupposes interoperability... a condition that market forces alone are unlikely to deliver','"presupposes"와 동격 명사절을 활용한 고도의 학술 논증 문체예요.','MaaS 정책','C2','transport','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

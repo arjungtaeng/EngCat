@@ -240,7 +240,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_health_C2_32','neoplasm','/ˈniː.ə.plæz.əm/','noun','신생물(종양)','An abnormal growth of tissue, either benign or malignant.','The biopsy revealed a malignant {neoplasm}.','생검 결과 악성 신생물이 발견됐어요.','neoplasm','C2','health',3,'neoplasm tumor biopsy malignant'),
 ('w_health_C2_33','coagulopathy','/koʊˌæɡ.jʊˈlɒp.ə.θi/','noun','응고 장애','A condition in which the blood''s ability to clot is impaired.','Liver failure often causes {coagulopathy}.','간부전은 종종 응고 장애를 일으켜요.','coagulopathy','C2','health',3,'coagulopathy blood clotting disorder liver'),
 ('w_health_C2_34','stenosis','/stɪˈnoʊ.sɪs/','noun','협착증','The abnormal narrowing of a blood vessel or other passage.','Aortic {stenosis} reduces blood flow from the heart.','대동맥 협착증은 심장에서의 혈류를 감소시켜요.','stenosis','C2','health',3,'stenosis aortic narrowing heart valve'),
-('w_health_C2_35','encephalopathy','/ɪnˌsef.ə.ˈlɒp.ə.θi/','noun','뇌병증','A disease or disorder affecting the brain''s function.','Hepatic {encephalopathy} causes confusion.','간성 뇌병증은 혼란을 유발해요.','encephalopathy','C2','health',3,'encephalopathy brain hepatic confusion');
+('w_health_C2_35','encephalopathy','/ɪnˌsef.ə.ˈlɒp.ə.θi/','noun','뇌병증','A disease or disorder affecting the brain''s function.','Hepatic {encephalopathy} causes confusion.','간성 뇌병증은 혼란을 유발해요.','encephalopathy','C2','health',3,'encephalopathy brain hepatic confusion')
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- SENTENCE PATTERNS
@@ -312,4 +313,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_health_C2_04','The sequelae of the cerebrovascular event require ongoing neurological monitoring.','뇌혈관 사건의 후유증은 지속적인 신경학적 모니터링이 필요해요.','sequelae of the cerebrovascular event','복잡한 의학 상황을 서술할 때 쓰는 수준 높은 전문 표현이에요.','신경과 회진','C2','health','pattern',NULL,39),
 ('s_health_C2_05','Iatrogenic complications were documented in three percent of cases.','의원성 합병증이 사례의 3퍼센트에서 기록됐어요.','Iatrogenic complications were documented','수동태 "were documented"는 의학 문헌에서 사실을 객관적으로 서술할 때 써요.','의학 연구 발표','C2','health','pattern',NULL,40),
 ('s_health_C2_06','Teratogenic effects were observed in preclinical studies, warranting caution in pregnant patients.','전임상 연구에서 기형 유발 효과가 관찰됐으며, 임산부 환자에서는 주의가 필요해요.','Teratogenic effects were observed','"warranting caution"은 주의를 정당화하는 의학적 표현이에요.','임상 시험 보고','C2','health','pattern',NULL,41),
-('s_health_C2_07','The anaphylactic response was attributed to cross-reactivity between structurally similar antigens.','과민성 쇼크 반응은 구조적으로 유사한 항원 간의 교차 반응성에 기인했어요.','anaphylactic response was attributed to','인과 관계를 설명할 때 "was attributed to"로 원인을 밝혀요.','면역학 세미나','C2','health','pattern',NULL,42);
+('s_health_C2_07','The anaphylactic response was attributed to cross-reactivity between structurally similar antigens.','과민성 쇼크 반응은 구조적으로 유사한 항원 간의 교차 반응성에 기인했어요.','anaphylactic response was attributed to','인과 관계를 설명할 때 "was attributed to"로 원인을 밝혀요.','면역학 세미나','C2','health','pattern',NULL,42)
+ON CONFLICT (id) DO NOTHING;
