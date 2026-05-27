@@ -260,7 +260,7 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_shopping_A1_04','Can I pay by card?','카드로 지불해도 될까요?','Can I pay by card','"Can I pay by card?"는 신용카드·체크카드 모두에 쓸 수 있는 표현이에요.','계산','A1','shopping','pattern',NULL,4),
 ('s_shopping_A1_05','Do you have this in a bigger size?','이거 더 큰 사이즈 있나요?','bigger size','사이즈를 물을 때 "bigger/smaller/different size"를 함께 기억하면 유용해요.','사이즈 문의','A1','shopping','pattern',NULL,5),
 ('s_shopping_A1_06','Can I have a bag, please?','봉투 주실 수 있어요?','Can I have a bag','영국식 영어에서는 "carrier bag", 미국식에서는 "shopping bag"이라고도 해요.','쇼핑백 요청','A1','shopping','pattern',NULL,6),
-('s_shopping_A1_07','Where is the checkout?','계산대가 어디예요?','Where is the checkout',"checkout"은 대형마트의 계산대, "cash register"는 소규모 매장에서도 쓰여요.','위치 문의','A1','shopping','pattern',NULL,7),
+('s_shopping_A1_07','Where is the checkout?','계산대가 어디예요?','Where is the checkout','"checkout"은 대형마트의 계산대, "cash register"는 소규모 매장에서도 쓰여요.','위치 문의','A1','shopping','pattern',NULL,7),
 
 -- ────────────────────────────────────────────────────────────
 -- A2 — 사이즈·색상 / 환불 (7 patterns)

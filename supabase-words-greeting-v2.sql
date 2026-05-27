@@ -186,7 +186,7 @@ UPDATE words SET
 WHERE id = 'w_greeting_A1_16';
 
 UPDATE words SET
-  example_en_2 = '"I''m fine, thanks — just a little tired," she replied.',
+  example_en_2 = '"I''m fine, thanks — just a little tired,'" she replied.',
   example_ko_2 = '"잘 지내요, 감사해요 — 그냥 좀 피곤해요"라고 그녀가 대답했어요.',
   example_en_3 = 'Everything is fine — no need to worry at all.',
   example_ko_3 = '모두 괜찮아요 — 전혀 걱정하지 않아도 돼요.',
@@ -355,7 +355,7 @@ UPDATE words SET
   example_ko_2 = '물론이죠, 지금 바로 팀장님께 소개해 드릴 수 있어요.',
   example_en_3 = 'Sure, take your time — there is no rush at all.',
   example_ko_3 = '물론이죠, 천천히 하세요 — 전혀 서두를 필요 없어요.',
-  example_en_4 = '"Sure, I would love to join you for lunch," she said cheerfully.',
+  example_en_4 = '"Sure, I would love to join you for lunch,'" she said cheerfully.',
   example_ko_4 = '"물론이죠, 점심 함께하면 좋겠어요"라고 그녀가 기분 좋게 말했어요.',
   example_en_5 = 'He said sure and extended his hand for a handshake.',
   example_ko_5 = '그는 물론이죠라고 하며 악수를 위해 손을 내밀었어요.'
@@ -364,7 +364,7 @@ WHERE id = 'w_greeting_A1_32';
 UPDATE words SET
   example_en_2 = 'Okay, let me write down your contact information.',
   example_ko_2 = '알겠어요, 연락처를 적어 둘게요.',
-  example_en_3 = '"Okay, I will be there in five minutes," he texted back.',
+  example_en_3 = '"Okay, I will be there in five minutes,'" he texted back.',
   example_ko_3 = '"알겠어요, 5분 안에 거기 갈게요"라고 그가 문자를 보냈어요.',
   example_en_4 = 'Okay, it was really nice talking — let''s keep in touch!',
   example_ko_4 = '알겠어요, 이야기 나눠서 정말 좋았어요 — 계속 연락해요!',
@@ -572,7 +572,7 @@ UPDATE words SET
 WHERE id = 'w_greeting_A2_16';
 
 UPDATE words SET
-  example_en_2 = '"Take care of yourself — it was wonderful seeing you," she said.',
+  example_en_2 = '"Take care of yourself — it was wonderful seeing you,'" she said.',
   example_ko_2 = '"몸 조심하세요 — 만나서 너무 좋았어요"라고 그녀가 말했어요.',
   example_en_3 = 'He patted his friend on the shoulder and said take care.',
   example_ko_3 = '그는 친구의 어깨를 두드리며 잘 지내라고 했어요.',
@@ -717,7 +717,7 @@ WHERE id = 'w_greeting_A2_29';
 UPDATE words SET
   example_en_2 = 'She prefers to be called by her nickname rather than her full name.',
   example_ko_2 = '그녀는 풀네임보다 닉네임으로 불리는 것을 선호해요.',
-  example_en_3 = '"You can call me Jay — it is much easier," he said.',
+  example_en_3 = '"You can call me Jay — it is much easier,'" he said.',
   example_ko_3 = '"제이라고 불러 주세요 — 훨씬 편해요"라고 그가 말했어요.',
   example_en_4 = 'Please call me if you need any help settling in.',
   example_ko_4 = '적응하는 데 도움이 필요하면 언제든지 연락 주세요.',
