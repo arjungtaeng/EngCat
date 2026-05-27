@@ -186,14 +186,14 @@ function ECScreenStats() {
     );
   };
 
-  // ── 캐러셀 상태 ───────────────────────────────────────────────
+  // ── 캐러셀 상태 ────────────────────────────────────────────────
   const [carouselIdx, setCarouselIdx] = React.useState(flameStage);
   const [dragDx, setDragDx] = React.useState(0);
   const dragging = React.useRef(false);
   const startX = React.useRef(0);
   const lastDx = React.useRef(0);
 
-  const ITEM_W = 70;           // 아이템 간 간격(px)
+  const ITEM_W = 54;           // 아이템 간 간격(px) — 좁게
   const CENTER_SIZE = 70;      // 가운데 불꽃 크기
   const SIDE_SCALE = 42 / 70; // 양쪽 불꽃 스케일 비율 (42px 상당)
 
@@ -239,7 +239,7 @@ function ECScreenStats() {
           border: `1px solid ${T.hair}`, position: 'relative', overflow: 'hidden',
         }}>
           <div style={{
-            position: 'absolute', top: -30, right: -30, width: 140, height: 140, borderRadius: '50%',
+            position: 'absolute', top: -18, right: 20, width: 140, height: 140, borderRadius: '50%',
             background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
           }} />
 
@@ -247,8 +247,8 @@ function ECScreenStats() {
           <div
             style={{
               position: 'absolute',
-              top: 12,
-              right: 12,
+              top: 4,
+              right: 2,
               width: 176,
               height: 96,
               overflow: 'hidden',
