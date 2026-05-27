@@ -26,7 +26,7 @@ function ECScreenStats() {
       </div>
 
       {/* Streak hero */}
-      <div style={{ padding: '20px 18px 0' }}>
+      <div style={{ padding: '10px 18px 0' }}>
         <div style={{
           padding: 18, borderRadius: 22,
           background: `linear-gradient(150deg, ${T.bg3} 0%, ${T.bg2} 100%)`,
@@ -73,7 +73,7 @@ function ECScreenStats() {
       {/* Weekly chart */}
       <div style={{ padding: '22px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <div style={{ fontSize: 16, fontWeight: 600, color: T.text }}>이번 주 학습 시간</div>
-        <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>총 0분</div>
+        <div style={{ fontSize: 12, color: T.textDim, fontFamily: T.mono }}>완 0분</div>
       </div>
 
       <div style={{ padding: '14px 22px 0' }}>
