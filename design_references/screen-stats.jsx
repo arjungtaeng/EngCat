@@ -62,8 +62,8 @@ function ECScreenStats() {
   // 이번 주 요일별 카드 수 (월~일)
   const { weekBars, todayIdx, weekTotal } = React.useMemo(() => {
     const today = new Date();
-    const dow = today.getDay(); // 0=일, 1=월 ...
-    const mondayOffset = dow === 0 ? 6 : dow - 1; // 월요일까지 며칠 전인지
+    const dow = today.getDay();
+    const mondayOffset = dow === 0 ? 6 : dow - 1;
     const bars = Array(7).fill(0);
     let total = 0;
     for (let i = 0; i < 7; i++) {
@@ -83,7 +83,7 @@ function ECScreenStats() {
     const today = new Date();
     for (let i = 0; i < 84; i++) {
       const d = new Date(today);
-      d.setDate(today.getDate() - (83 - i)); // i=0: 83일 전, i=83: 오늘
+      d.setDate(today.getDate() - (83 - i));
       const ds = d.toISOString().slice(0, 10);
       const count = learningStats.dailyCounts[ds] || 0;
       g[i] = count === 0 ? 0 : count < 6 ? 1 : count < 15 ? 2 : 3;
@@ -91,23 +91,23 @@ function ECScreenStats() {
     return g;
   }, [learningStats]);
 
-  // 연속 학습 일수에 따른 불꽃 단계 (0~6) — 7일이면 최고 단계
+  // 연속 학습 일수에 따른 불꽃 단계 (0~6) — 6일이면 최고 단계
   const flameStage = learningStats.streak === 0 ? 0
-    : learningStats.streak < 2 ? 1   // 1일
-    : learningStats.streak < 3 ? 2   // 2일
-    : learningStats.streak < 4 ? 3   // 3일
-    : learningStats.streak < 5 ? 4   // 4일
-    : learningStats.streak < 6 ? 5   // 5일
-    : 6;                              // 6일+
+    : learningStats.streak < 2 ? 1
+    : learningStats.streak < 3 ? 2
+    : learningStats.streak < 4 ? 3
+    : learningStats.streak < 5 ? 4
+    : learningStats.streak < 6 ? 5
+    : 6;
 
   const flameMeta = [
-    { label: '',       desc: '아직 학습 기록이 없어요. 오늘 시작해 보세요!' },
-    { label: '1일',    desc: '첫 번째 불꽃이 켜졌어요! 내일도 이어가 보세요.' },
-    { label: '2일',    desc: `${learningStats.streak}일 연속 학습 중이에요!` },
-    { label: '3일',    desc: `${learningStats.streak}일 연속! 불꽃이 자라나고 있어요.` },
-    { label: '4일',    desc: `${learningStats.streak}일 연속! 꾸준히 타오르고 있어요.` },
-    { label: '5일',    desc: `${learningStats.streak}일 연속! 불꽃이 강해지고 있어요!` },
-    { label: '6일+',   desc: `${learningStats.streak}일 연속! 전설의 불꽃이 활활 타고 있어요! 🔥` },
+    { desc: '아직 학습 기록이 없어요. 오늘 시작해 보세요!' },
+    { desc: '첫 번째 불꽃이 켜졌어요! 내일도 이어가 보세요.' },
+    { desc: `${learningStats.streak}일 연속 학습 중이에요!` },
+    { desc: `${learningStats.streak}일 연속! 불꽃이 자라나고 있어요.` },
+    { desc: `${learningStats.streak}일 연속! 꾸준히 타오르고 있어요.` },
+    { desc: `${learningStats.streak}일 연속! 불꽃이 강해지고 있어요!` },
+    { desc: `${learningStats.streak}일 연속! 전설의 불꽃이 활활 타고 있어요!` },
   ][flameStage];
 
   // 커스텀 7단계 불꽃 SVG — 0: 차가운 재 → 6: 전설의 불꽃
@@ -215,15 +215,9 @@ function ECScreenStats() {
             background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
           }} />
 
-          {/* 불꽃 아이콘 + 레벨 레이블 */}
-          <div style={{ position: 'absolute', top: 14, right: 14, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
+          {/* 불꽃 아이콘 */}
+          <div style={{ position: 'absolute', top: 14, right: 14 }}>
             <FlameIcon stage={flameStage} size={48} />
-            {flameMeta.label ? (
-              <div style={{
-                fontFamily: T.mono, fontSize: 9, color: T.accent, letterSpacing: 0.8,
-                background: `${T.accent}1A`, borderRadius: 4, padding: '2px 6px',
-              }}>{flameMeta.label}</div>
-            ) : null}
           </div>
 
           <div>
@@ -320,7 +314,7 @@ function ECScreenStats() {
         </div>
       </div>
 
-      </div>{/* end scrollable */}
+      </div>
     </div>
   );
 }

@@ -357,11 +357,15 @@ window.ECData.patterns = [
     { en: 'Nice to meet you.', ko: '만나서 반가워요.' },
     { en: 'Nice to meet you too.', ko: '저도 만나서 반가워요.' },
     { en: 'It\'s nice to meet you.', ko: '당신을 만나니 좋아요.' },
+    { en: 'It was nice to meet everyone today.', ko: '오늘 여러분을 만나서 좋았어요.' },
+    { en: 'It\'s really nice to meet you in person.', ko: '직접 만나게 되어서 정말 반가워요.' },
   ]},
   { id: 'p_A1_greeting_002', pattern: 'How are ~?', explanation: '상대의 상태를 묻는 표현입니다.', level: 'A1', topic: 'greeting', examples: [
     { en: 'How are you?', ko: '어떻게 지내세요?' },
     { en: 'How are things?', ko: '요즘 어때요?' },
     { en: 'How are you doing?', ko: '잘 지내고 있어요?' },
+    { en: 'How are you feeling today?', ko: '오늘 기분이 어떠세요?' },
+    { en: 'How are your parents?', ko: '부모님은 잘 지내세요?' },
   ]},
 
   // ─── B1 LEVEL ───────────────────────────────────────────────────────────────
@@ -378,6 +382,7 @@ window.ECData.patterns = [
     { en: 'I\'m looking forward to the trip.', ko: '나는 여행을 기대하고 있어요.' },
     { en: 'I\'m looking forward to seeing you.', ko: '나는 당신을 만나는 것을 기대하고 있어요.' },
     { en: 'I\'m looking forward to relaxing at the beach.', ko: '나는 해변에서 쉬는 것을 기대하고 있어요.' },
+    { en: 'I\'m looking forward to trying local food.', ko: '나는 현지 음식을 먹어보는 것을 기대하고 있어요.' },
   ]},
   // B1 - Work
   { id: 'p_B1_work_001', pattern: 'I\'m afraid ~ is not ~', explanation: '안타깝게도 무언가가 불가능함을 말할 때 쓰는 패턴입니다.', level: 'B1', topic: 'work', examples: [
@@ -385,12 +390,14 @@ window.ECData.patterns = [
     { en: 'I\'m afraid I don\'t have the information.', ko: '안타깝게도 그 정보를 가지고 있지 않아요.' },
     { en: 'I\'m afraid he\'s not available.', ko: '안타깝게도 그는 이용할 수 없어요.' },
     { en: 'I\'m afraid the meeting is cancelled.', ko: '안타깝게도 회의는 취소되었어요.' },
+    { en: 'I\'m afraid that deadline is not flexible.', ko: '안타깝게도 그 마감일은 조정이 불가능해요.' },
   ]},
   { id: 'p_B1_work_002', pattern: 'Could I ~?', explanation: '상대에게 무언가를 할 수 있는지 물어보는 정중한 표현입니다.', level: 'B1', topic: 'work', examples: [
     { en: 'Could I have a few minutes to think about this?', ko: '이것에 대해 생각할 시간을 가져도 될까요?' },
     { en: 'Could I ask you a question?', ko: '당신에게 질문을 물어봐도 될까요?' },
     { en: 'Could I send you the document?', ko: '당신에게 문서를 보내도 될까요?' },
     { en: 'Could I schedule a meeting with you?', ko: '당신과 회의 일정을 짜도 될까요?' },
+    { en: 'Could I get your feedback on this report?', ko: '이 보고서에 대한 의견을 들을 수 있을까요?' },
   ]},
   // B1 - Environment
   { id: 'p_B1_environment_001', pattern: 'It looks like ~', explanation: '보이는 모습이나 상황을 설명하는 패턴입니다.', level: 'B1', topic: 'environment', examples: [
@@ -398,6 +405,7 @@ window.ECData.patterns = [
     { en: 'It looks like you\'re busy.', ko: '당신이 바쁜 것 같아요.' },
     { en: 'It looks like the weather is getting worse.', ko: '날씨가 악화되는 것 같아요.' },
     { en: 'It looks like everyone is here.', ko: '모두가 여기 있는 것 같아요.' },
+    { en: 'It looks like the air quality is improving.', ko: '공기 질이 나아지고 있는 것 같아요.' },
   ]},
 
   // ─── C1 LEVEL ───────────────────────────────────────────────────────────────
@@ -406,21 +414,29 @@ window.ECData.patterns = [
     { en: 'It would be more convenient if we left earlier.', ko: '우리가 더 일찍 떠나면 더 편할 것 같아요.' },
     { en: 'It would be more convenient if you confirmed the time.', ko: '당신이 시간을 확인하면 더 편할 것 같아요.' },
     { en: 'It would be more convenient if the hotel provided transport.', ko: '호텔이 교통편을 제공하면 더 편할 것 같아요.' },
+    { en: 'It would be more convenient if we booked in advance.', ko: '미리 예약하면 더 편할 것 같아요.' },
+    { en: 'It would be more convenient if the check-in were online.', ko: '체크인이 온라인으로 되면 더 편할 것 같아요.' },
   ]},
   { id: 'p_C1_travel_002', pattern: 'Provided that ~', explanation: '특정 조건을 가정하는 패턴입니다.', level: 'C1', topic: 'travel', examples: [
     { en: 'Provided that the weather is good, we\'ll go hiking.', ko: '날씨가 좋다면 우리는 등산을 갈 거예요.' },
     { en: 'Provided that you have time, let\'s meet tomorrow.', ko: '시간이 있다면 내일 만나요.' },
     { en: 'Provided that everything is arranged, the trip will be smooth.', ko: '모든 것이 준비되면 여행이 순탄할 거예요.' },
+    { en: 'Provided that the visa is approved, we can depart next week.', ko: '비자가 승인된다면 다음 주에 출발할 수 있어요.' },
+    { en: 'Provided that there are no delays, we\'ll arrive on time.', ko: '지연이 없다면 제때 도착할 거예요.' },
   ]},
   // C1 - Work
   { id: 'p_C1_work_001', pattern: 'Rather than ~, I would prefer ~', explanation: '두 가지 옵션 중 하나를 더 선호한다는 표현입니다.', level: 'C1', topic: 'work', examples: [
     { en: 'Rather than email, I would prefer to call.', ko: '이메일보다는 전화하는 것이 더 좋아요.' },
     { en: 'Rather than wait, I would prefer to take action now.', ko: '기다리기보다는 지금 조치를 취하는 것이 더 좋아요.' },
     { en: 'Rather than postpone, I would prefer to discuss it today.', ko: '미루기보다는 오늘 그것을 논의하는 것이 더 좋아요.' },
+    { en: 'Rather than argue, I would prefer to find a compromise.', ko: '논쟁하기보다는 타협점을 찾는 것이 더 좋아요.' },
+    { en: 'Rather than guess, I would prefer to verify the data first.', ko: '추측하기보다는 먼저 데이터를 확인하는 것이 더 좋아요.' },
   ]},
   { id: 'p_C1_work_002', pattern: 'It is imperative that ~', explanation: '무언가가 매우 중요하다는 표현입니다.', level: 'C1', topic: 'work', examples: [
     { en: 'It is imperative that we complete this project on time.', ko: '우리가 이 프로젝트를 제때 완료하는 것이 매우 중요해요.' },
     { en: 'It is imperative that you understand the requirements.', ko: '당신이 요구사항을 이해하는 것이 매우 중요해요.' },
     { en: 'It is imperative that the data be accurate.', ko: '데이터가 정확해야 하는 것이 매우 중요해요.' },
+    { en: 'It is imperative that all team members attend the briefing.', ko: '모든 팀원이 브리핑에 참석하는 것이 매우 중요해요.' },
+    { en: 'It is imperative that we maintain client confidentiality.', ko: '고객 기밀을 유지하는 것이 매우 중요해요.' },
   ]},
 ];

@@ -36,7 +36,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 313;</script>
+<script>window.EC_VER = 315;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/supabase.jsx"></script>
@@ -59,7 +59,6 @@
     const savedUser = (() => { try { return JSON.parse(localStorage.getItem('engcat_user')); } catch(e) { return null; } })();
     const [screen, setScreen] = React.useState(savedUser ? 'home' : 'login');
 
-    // ── Theme management ──
     const resolveTheme = (pref) => {
       if (pref === 'light') return 'light';
       if (pref === 'dark')  return 'dark';

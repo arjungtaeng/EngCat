@@ -1,5 +1,18 @@
 // EngCat — Quiz / Spaced repetition review
 
+// 퀴즈 결과 저장: ec_quiz_stats_{userId} = { wordId: { c: 정답수, w: 오답수 } }
+function _saveQuizStat(wordId, correct) {
+  if (!wordId) return;
+  try {
+    const u = JSON.parse(localStorage.getItem('engcat_user') || '{}');
+    const key = 'ec_quiz_stats_' + (u.email || 'guest');
+    const stats = JSON.parse(localStorage.getItem(key) || '{}');
+    if (!stats[wordId]) stats[wordId] = { c: 0, w: 0 };
+    if (correct) stats[wordId].c++; else stats[wordId].w++;
+    localStorage.setItem(key, JSON.stringify(stats));
+  } catch(e) {}
+}
+
 function buildWordQuizQuestions(words, count = 10) {
   if (!words || words.length < 4) return [];
   const pool = [...words].sort(() => Math.random() - 0.5).slice(0, Math.min(words.length, 40));
@@ -57,6 +70,7 @@ function ECScreenQuiz() {
     if (answered) return;
     setSelected(id);
     const ok = q.choices.find(c => c.id === id)?.ok;
+    _saveQuizStat(q.word.id, ok);   // 복습 가중치용 퀴즈 결과 저장
     if (ok) setScore(s => s + 1);
     else setLives(l => l - 1);
   };
@@ -82,7 +96,7 @@ function ECScreenQuiz() {
               {pct >= 80 ? '🎯' : pct >= 50 ? '👍' : '💪'}
             </div>
             <div style={{ fontSize: 22, fontFamily: T.serif, color: T.text, marginBottom: 4 }}>
-              {pct >= 80 ? '훌륭해요!' : pct >= 50 ? '잘 하셨어요!' : '다시 도전해 보세요!'}
+              {pct >= 80 ? '후륭해요!' : pct >= 50 ? '잘 하셨어요!' : '다시 도전해 보세요!'}
             </div>
             <div style={{ fontSize: 14, color: T.textDim }}>{questions.length}문제 중 {score}개 정답</div>
           </div>
@@ -117,7 +131,7 @@ function ECScreenQuiz() {
               flex: 1, height: 48, borderRadius: 14, background: T.accent,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 14, fontWeight: 600, color: T.accentText, cursor: 'pointer',
-            }}>다시 풀기</div>
+            }}>다시 풋기</div>
           </div>
         </div>
       </div>
@@ -217,7 +231,7 @@ function ECScreenQuiz() {
               }}>{isCorrect ? ECIcon.check(T.bg0, 18) : ECIcon.close(T.bg0, 18)}</div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 14, fontWeight: 600, color: isCorrect ? T.good : T.bad }}>
-                  {isCorrect ? '정답이에요!' : '아쉬울네요...'}
+                  {isCorrect ? '정답이에요!' : '아쉼울네요...'}
                 </div>
                 <div style={{ fontSize: 12, color: T.textDim, marginTop: 1 }}>
                   {isCorrect
