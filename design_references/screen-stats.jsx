@@ -91,6 +91,49 @@ function ECScreenStats() {
     return g;
   }, [learningStats]);
 
+  // 연속 학습 일수에 따른 불꽃 레벨 (0~3)
+  const flameLevel = learningStats.streak === 0 ? 0
+    : learningStats.streak < 7 ? 1
+    : learningStats.streak < 30 ? 2
+    : 3;
+
+  const flameMeta = [
+    { label: '',       desc: '아직 학습 기록이 없어요. 오늘 시작해 보세요!' },
+    { label: '1~6일', desc: `${learningStats.streak}일 연속 학습 중이에요!` },
+    { label: '7~29일',desc: `${learningStats.streak}일 연속! 열정이 타오르고 있어요.` },
+    { label: '30일+', desc: `${learningStats.streak}일 연속! 불꽃이 활활 타고 있어요!` },
+  ][flameLevel];
+
+  // streak 기반 SVG 불꽃 (동그라미 → 방울 → 불꽃 → 글로우 불꽃)
+  const FlameIcon = ({ level, size }) => {
+    if (level === 0) return (
+      // 동그라미 — 아직 시작 전
+      <svg width={size} height={size} viewBox="0 0 24 24" fill={T.textMute}>
+        <circle cx="12" cy="13" r="7" />
+      </svg>
+    );
+    if (level === 1) return (
+      // 물방울 — 불꽃이 피어나기 직전
+      <svg width={size} height={size} viewBox="0 0 24 24" fill={T.accent} style={{ opacity: 0.65 }}>
+        <path d="M12 4C12 4 19 11 19 15.5C19 19.6 15.9 22 12 22C8.1 22 5 19.6 5 15.5C5 11 12 4 12 4Z" />
+      </svg>
+    );
+    if (level === 2) return (
+      // 불꽃 모양 — 연속 7~29일
+      <svg width={size} height={size} viewBox="0 0 24 24">
+        <path d="M12 2C13.5 5.5 17.5 9 17.5 13.5C17.5 17.8 15.1 21 12 22C8.9 21 6.5 17.8 6.5 13.5C6.5 9 10.5 5.5 12 2Z" fill={T.accent} />
+        <path d="M12 10C11.5 12 10.8 14 11.5 16.5C11.8 17.5 12.2 17.5 12.5 16.5C13.2 14 12.5 12 12 10Z" fill={T.bg2} opacity="0.45"/>
+      </svg>
+    );
+    // level === 3: 글로우 불꽃 — 연속 30일+
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill={T.accent}
+        style={{ filter: `drop-shadow(0 0 6px ${T.accent}) drop-shadow(0 0 12px ${T.accent}80)` }}>
+        <path d="M12 2c1.5 3 4.5 5 4.5 9a4.5 4.5 0 11-9 0c0-1.5.5-2.5 1-3 .5 1 1.5 1.5 2 1.5 0-2 .5-5.5 1.5-7.5z"/>
+      </svg>
+    );
+  };
+
   const tints = ['rgba(244,241,235,0.06)', 'rgba(232,178,106,0.28)', 'rgba(232,178,106,0.6)', T.accent];
 
   return (
@@ -119,10 +162,18 @@ function ECScreenStats() {
             position: 'absolute', top: -30, right: -30, width: 140, height: 140, borderRadius: '50%',
             background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
           }} />
-          {/* 불꽃 아이콘 — absolute로 빼서 텍스트 위치에 영향 없도록 */}
-          <div style={{ position: 'absolute', top: 18, right: 18, color: T.accent }}>
-            {ECIcon.flame(T.accent, 48)}
+
+          {/* 불꽃 아이콘 + 레벨 레이블 */}
+          <div style={{ position: 'absolute', top: 14, right: 14, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }}>
+            <FlameIcon level={flameLevel} size={48} />
+            {flameMeta.label ? (
+              <div style={{
+                fontFamily: T.mono, fontSize: 9, color: T.accent, letterSpacing: 0.8,
+                background: `${T.accent}1A`, borderRadius: 4, padding: '2px 6px',
+              }}>{flameMeta.label}</div>
+            ) : null}
           </div>
+
           <div>
             <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.4, textTransform: 'uppercase' }}>
               연속 학습
@@ -132,9 +183,7 @@ function ECScreenStats() {
               <div style={{ fontSize: 16, color: T.textDim }}>일</div>
             </div>
             <div style={{ marginTop: 8, fontSize: 12.5, color: T.textDim }}>
-              {learningStats.streak === 0
-                ? '아직 학습 기록이 없어요. 오늘 시작해 보세요!'
-                : `${learningStats.streak}일 연속 학습 중이에요!`}
+              {flameMeta.desc}
             </div>
           </div>
         </div>
