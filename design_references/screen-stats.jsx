@@ -267,11 +267,12 @@ function ECScreenStats() {
             onMouseLeave={carouselEnd}
           >
             {[0,1,2,3,4,5,6].map(s => {
+              // 7개를 항상 렌더링 → 손을 떼면 전체가 다이얼처럼 균일하게 미끄러져 복귀
               const off = (s - carouselIdx) * ITEM_W + dragDx;
-              if (Math.abs(off) > ITEM_W * 1.6) return null;
               const t = Math.max(0, 1 - Math.abs(off) / ITEM_W);
               const scale = SIDE_SCALE + (1 - SIDE_SCALE) * t;
               const isColor = s === flameStage;
+              const ease = dragging.current ? 'none' : `transform ${returnDur}s cubic-bezier(0.22, 1, 0.36, 1), opacity ${returnDur}s cubic-bezier(0.22, 1, 0.36, 1)`;
               return (
                 <div
                   key={s}
@@ -280,7 +281,7 @@ function ECScreenStats() {
                     left: '50%',
                     top: '50%',
                     transform: `translate(calc(-50% + ${off}px), -50%) scale(${scale.toFixed(3)})`,
-                    transition: dragging.current ? 'none' : `transform ${returnDur}s cubic-bezier(0.22, 1, 0.36, 1)`,
+                    transition: ease,
                     filter: isColor ? 'none' : 'grayscale(100%)',
                     opacity: isColor ? 1 : Math.max(0.35, 0.35 + 0.5 * t),
                     pointerEvents: 'none',
