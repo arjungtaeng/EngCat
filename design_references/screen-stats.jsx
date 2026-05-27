@@ -186,6 +186,34 @@ function ECScreenStats() {
     );
   };
 
+  // ── 캐러셀 상태 ──────────────────────────────────────────────
+  const [carouselIdx, setCarouselIdx] = React.useState(flameStage);
+  const [dragDx, setDragDx] = React.useState(0);
+  const dragging = React.useRef(false);
+  const startX = React.useRef(0);
+  const lastDx = React.useRef(0);
+
+  const ITEM_W = 96;           // 아이템 간 간격(px)
+  const CENTER_SIZE = 64;      // 가운데 불꽃 크기
+  const SIDE_SCALE = 36 / 64; // 양쪽 불꽃 스케일 비율 (36px 상당)
+
+  const carouselStart = (x) => { dragging.current = true; startX.current = x; };
+  const carouselMove  = (x) => {
+    if (!dragging.current) return;
+    const dx = x - startX.current;
+    lastDx.current = dx;
+    setDragDx(dx);
+  };
+  const carouselEnd = () => {
+    if (!dragging.current) return;
+    dragging.current = false;
+    const dx = lastDx.current;
+    lastDx.current = 0;
+    setDragDx(0);
+    if      (dx >  ITEM_W * 0.25) setCarouselIdx(i => Math.max(0, i - 1));
+    else if (dx < -ITEM_W * 0.25) setCarouselIdx(i => Math.min(6, i + 1));
+  };
+
   const tints = ['rgba(244,241,235,0.06)', 'rgba(232,178,106,0.28)', 'rgba(232,178,106,0.6)', T.accent];
 
   return (
@@ -215,11 +243,7 @@ function ECScreenStats() {
             background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
           }} />
 
-          {/* 불꽃 아이콘 */}
-          <div style={{ position: 'absolute', top: 14, right: 14 }}>
-            <FlameIcon stage={flameStage} size={48} />
-          </div>
-
+          {/* 스트릭 텍스트 */}
           <div>
             <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.4, textTransform: 'uppercase' }}>
               연속 학습
@@ -231,6 +255,53 @@ function ECScreenStats() {
             <div style={{ marginTop: 8, fontSize: 12.5, color: T.textDim }}>
               {flameMeta.desc}
             </div>
+          </div>
+
+          {/* 불꽃 캐러셀 — 좌우 스와이프로 0~6단계 탐색 */}
+          <div
+            style={{
+              position: 'relative',
+              height: 80,
+              marginTop: 18,
+              marginLeft: -18,
+              marginRight: -18,
+              overflow: 'hidden',
+              cursor: 'grab',
+              touchAction: 'none',
+              userSelect: 'none',
+            }}
+            onTouchStart={e => carouselStart(e.touches[0].clientX)}
+            onTouchMove={e => { e.preventDefault(); carouselMove(e.touches[0].clientX); }}
+            onTouchEnd={carouselEnd}
+            onMouseDown={e => carouselStart(e.clientX)}
+            onMouseMove={e => dragging.current && carouselMove(e.clientX)}
+            onMouseUp={carouselEnd}
+            onMouseLeave={carouselEnd}
+          >
+            {[0,1,2,3,4,5,6].map(s => {
+              const off = (s - carouselIdx) * ITEM_W + dragDx;
+              if (Math.abs(off) > ITEM_W * 1.6) return null;
+              const t = Math.max(0, 1 - Math.abs(off) / ITEM_W);
+              const scale = SIDE_SCALE + (1 - SIDE_SCALE) * t;
+              const isColor = s === flameStage;
+              return (
+                <div
+                  key={s}
+                  style={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    transform: `translate(calc(-50% + ${off}px), -50%) scale(${scale.toFixed(3)})`,
+                    transition: dragging.current ? 'none' : 'transform 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    filter: isColor ? 'none' : 'grayscale(100%)',
+                    opacity: isColor ? 1 : Math.max(0.35, 0.35 + 0.5 * t),
+                    pointerEvents: 'none',
+                  }}
+                >
+                  <FlameIcon stage={s} size={CENTER_SIZE} />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
