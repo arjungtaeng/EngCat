@@ -1,3 +1,3 @@
--- EngCat: Discussion Topic — example_en_2~5 + example_ko_2~5
--- 210 words × 4 extra sentences each
+-- EngCat — Discussion (의견·토론) 단어 예문 2~5
+-- 210 words × 4 examples = 840 sentences
 -- Generated: 2026-05-27

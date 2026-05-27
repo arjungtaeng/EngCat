@@ -1,3 +1,3 @@
--- EngCat: Economy Topic — example_en_2~5 + example_ko_2~5
--- 210 words × 4 extra sentences each
+-- EngCat — Economy (경제) 단어 추가 예문 데이터
+-- example_en_2~5 + example_ko_2~5 for all 210 words
 -- Generated: 2026-05-27

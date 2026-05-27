@@ -1,3 +1,3 @@
--- EngCat: Culture Topic — example_en_2~5 + example_ko_2~5
--- 210 words × 4 extra sentences each
--- Generated: 2026-05-27
+-- EngCat — culture 단어 예문 (example_en_2~5 / example_ko_2~5)
+-- 210단어 × 4예문 = 840 UPDATE 문
+-- generated 2026-05-27

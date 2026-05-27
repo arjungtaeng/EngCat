@@ -1,3 +1,3 @@
--- EngCat: Home Topic — example_en_2~5 + example_ko_2~5
--- 210 words × 4 extra sentences each
+-- EngCat — Home topic word examples backfill
+-- example_en_2 ~ example_en_5 추가
 -- Generated: 2026-05-27
