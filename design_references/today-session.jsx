@@ -78,7 +78,7 @@ window.ECGetTodayTopic = function(words) {
   return ordered[window.ECGetWeekOfYear() % ordered.length];
 };
 
-// 레벨 읽기: ec_user_level 우선, 없으면 engcat_user.level 사용
+// 레벨 읽기: ec_user_level 우선, 없으면 engcat_user.level (온보딩 저장) 사용
 function _getLevel() {
   const v = localStorage.getItem('ec_user_level');
   if (v) return v;
@@ -220,6 +220,7 @@ window.ECGetReviewSession = function() {
     const reviewColloc   = tagType(_weightedSample(learnedColloc,   getW, comp.collocations || 0),  'collocation');
     const reviewIdioms   = tagType(_weightedSample(learnedIdioms,   getW, comp.idioms       || 0),  'idiom');
     const reviewNuances  = tagType(_weightedSample(learnedNuances,  getW, comp.nuances      || 0),  'nuance');
+
 
     return {
       isPreview: false,
