@@ -114,6 +114,9 @@ function ECScreenHome() {
 
   // 연속일 → 불꽃 단계 (진도 화면과 동일 매핑)
   const homeFlameStage = streak === 0 ? 0 : streak < 2 ? 1 : streak < 3 ? 2 : streak < 4 ? 3 : streak < 5 ? 4 : streak < 6 ? 5 : 6;
+  // 단계별로 불꽃이 viewBox에서 차지하는 세로 비율 → 어느 단계든 같은 크기로 보이게 정규화
+  const FLAME_FILL = [0.26, 0.26, 0.38, 0.52, 0.66, 0.76, 0.94];
+  const flameScale = 0.62 / FLAME_FILL[homeFlameStage];
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
@@ -139,7 +142,11 @@ function ECScreenHome() {
           padding: '6px 11px', borderRadius: 999,
           background: T.bg2, border: `1px solid ${T.hair}`,
         }}>
-          <span style={{ display: 'flex' }}>{ECIcon.flameStage(homeFlameStage, 20)}</span>
+          <span style={{ width: 24, height: 24, display: 'inline-flex', alignItems: 'flex-end', justifyContent: 'center', overflow: 'visible' }}>
+            <span style={{ display: 'flex', transform: `scale(${flameScale.toFixed(2)})`, transformOrigin: 'center bottom' }}>
+              {ECIcon.flameStage(homeFlameStage, 24)}
+            </span>
+          </span>
           <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>{streak}</span>
         </div>
       </div>
