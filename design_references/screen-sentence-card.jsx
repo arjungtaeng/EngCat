@@ -335,7 +335,7 @@ function ECScreenSentenceCard() {
               {examples.map((ex, i) => (
                 <div key={i} style={{
                   padding: '14px 16px', borderRadius: 14,
-                  background: isDark ? 'rgba(255,255,255,0.50)' : 'rgba(0,0,0,0.50)',
+                  background: isDark ? 'rgba(0,0,0,0.50)' : 'rgba(255,255,255,0.50)',
                   border: `1px solid ${T.hair}`,
                   display: 'flex', alignItems: 'flex-start', gap: 12,
                 }}>
