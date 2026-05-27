@@ -186,16 +186,16 @@ function ECScreenStats() {
     );
   };
 
-  // ── 캐러셀 상태 ──────────────────────────────────────────────
+  // ── 캐러셀 상태 ───────────────────────────────────────────────
   const [carouselIdx, setCarouselIdx] = React.useState(flameStage);
   const [dragDx, setDragDx] = React.useState(0);
   const dragging = React.useRef(false);
   const startX = React.useRef(0);
   const lastDx = React.useRef(0);
 
-  const ITEM_W = 46;           // 아이템 간 간격(px) — 콤팩트
-  const CENTER_SIZE = 44;      // 가운데 불꽃 크기
-  const SIDE_SCALE = 26 / 44; // 양쪽 불꽃 스케일 비율 (26px 상당)
+  const ITEM_W = 70;           // 아이템 간 간격(px)
+  const CENTER_SIZE = 70;      // 가운데 불꽃 크기
+  const SIDE_SCALE = 42 / 70; // 양쪽 불꽃 스케일 비율 (42px 상당)
 
   const carouselStart = (x) => { dragging.current = true; startX.current = x; };
   const carouselMove  = (x) => {
@@ -243,14 +243,14 @@ function ECScreenStats() {
             background: `radial-gradient(circle, ${T.accentSoft} 0%, transparent 70%)`,
           }} />
 
-          {/* 불꽃 캐러셀 — 우측 상단 고정 (top:18 right:18 = 원래 자리) */}
+          {/* 불꽃 캐러셀 — 우측 상단 고정 */}
           <div
             style={{
               position: 'absolute',
-              top: 18,
-              right: 18,
-              width: 118,
-              height: 62,
+              top: 12,
+              right: 12,
+              width: 176,
+              height: 96,
               overflow: 'hidden',
               cursor: 'grab',
               touchAction: 'none',
@@ -291,7 +291,7 @@ function ECScreenStats() {
           </div>
 
           {/* 스트릭 텍스트 — 우측 캐러셀 공간 확보 */}
-          <div style={{ paddingRight: 140 }}>
+          <div style={{ paddingRight: 178 }}>
             <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.4, textTransform: 'uppercase' }}>
               연속 학습
             </div>
