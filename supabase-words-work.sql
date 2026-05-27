@@ -40,7 +40,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_work_A1_32','sign','/saɪn/','verb','서명하다','To write your name on a document.','Please {sign} here.','여기에 서명해주세요.','sign','A1','work',1,'signature contract sign document'),
 ('w_work_A1_33','copy','/ˈkɒpi/','verb','복사하다','To reproduce text or a document.','Please {copy} this for me.','이것을 복사해주세요.','copy','A1','work',1,'copy machine document duplicate'),
 ('w_work_A1_34','room','/ruːm/','noun','방·공간','An enclosed space within a building.','The meeting {room} is booked.','회의실이 예약되어 있어요.','room','A1','work',1,'meeting room conference table'),
-('w_work_A1_35','open','/ˈoʊpən/','verb','열다','To make accessible or available.','Can you {open} the file?','파일을 열어주실 수 있어요?','open','A1','work',1,'open door office welcome');
+('w_work_A1_35','open','/ˈoʊpən/','verb','열다','To make accessible or available.','Can you {open} the file?','파일을 열어주실 수 있어요?','open','A1','work',1,'open door office welcome')
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- WORDS — A2 (35개)
@@ -80,7 +81,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_work_A2_32','goal','/ɡoʊl/','noun','목표','The object of a person''s ambition or effort.','Set clear {goals} for your team.','팀을 위해 명확한 목표를 설정하세요.','goals','A2','work',2,'goal target success achievement'),
 ('w_work_A2_33','skill','/skɪl/','noun','기술·능력','The ability to do something well.','Communication is a key {skill}.','의사소통은 핵심 기술이에요.','skill','A2','work',2,'skill learning ability professional'),
 ('w_work_A2_34','review','/rɪˈvjuː/','noun','검토','A formal assessment of something.','The manager did a {review}.','매니저가 검토를 했어요.','review','A2','work',2,'review assessment feedback document'),
-('w_work_A2_35','promote','/prəˈmoʊt/','verb','홍보하다','To publicize a product or service.','We need to {promote} our brand.','우리 브랜드를 홍보해야 해요.','promote','A2','work',2,'promote marketing brand advertising');
+('w_work_A2_35','promote','/prəˈmoʊt/','verb','홍보하다','To publicize a product or service.','We need to {promote} our brand.','우리 브랜드를 홍보해야 해요.','promote','A2','work',2,'promote marketing brand advertising')
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- WORDS — B1 (35개)
@@ -121,7 +123,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_work_B1_32','timeline','/ˈtaɪmlaɪn/','noun','일정표','A schedule showing the order of events.','Share the project {timeline}.','프로젝트 일정표를 공유하세요.','timeline','B1','work',2,'timeline schedule project gantt'),
 ('w_work_B1_33','kick-off','/ˈkɪk ɒf/','noun','시작 회의','The first meeting to launch a project.','Join the project {kick-off}.','프로젝트 시작 회의에 참석하세요.','kick-off','B1','work',2,'kickoff meeting launch project start'),
 ('w_work_B1_34','wrap up','/ræp ʌp/','verb phrase','마무리하다','To bring a task or meeting to a conclusion.','Let''s {wrap up} by three.','3시까지 마무리해요.','wrap up','B1','work',2,'wrap up finish conclude meeting'),
-('w_work_B1_35','hand off','/hænd ɒf/','verb phrase','인계하다','To transfer responsibility to someone else.','Please {hand off} this task to Jin.','이 업무를 진 씨에게 인계해주세요.','hand off','B1','work',2,'handoff transfer responsibility colleague');
+('w_work_B1_35','hand off','/hænd ɒf/','verb phrase','인계하다','To transfer responsibility to someone else.','Please {hand off} this task to Jin.','이 업무를 진 씨에게 인계해주세요.','hand off','B1','work',2,'handoff transfer responsibility colleague')
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- WORDS — B2 (35개)
@@ -161,7 +164,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_work_B2_32','incentive','/ɪnˈsentɪv/','noun','인센티브','Something that motivates or encourages action.','Offer a performance {incentive}.','성과 인센티브를 제공하세요.','incentive','B2','work',2,'incentive bonus reward motivation'),
 ('w_work_B2_33','benchmark','/ˈbentʃmɑːrk/','verb','기준을 삼다','To measure against a standard.','Let''s {benchmark} against industry leaders.','업계 선두와 비교 기준을 삼아요.','benchmark','B2','work',2,'benchmark compare industry standard'),
 ('w_work_B2_34','innovation','/ˌɪnəˈveɪʃən/','noun','혁신','A new idea or method that improves something.','Drive {innovation} at every level.','모든 수준에서 혁신을 이끄세요.','innovation','B2','work',2,'innovation idea lightbulb technology'),
-('w_work_B2_35','stakeholder map','/ˈsteɪkhoʊldər mæp/','noun phrase','이해관계자 지도','A visual tool showing all parties involved.','Create a {stakeholder map}.','이해관계자 지도를 만드세요.','stakeholder map','B2','work',2,'stakeholder map diagram chart');
+('w_work_B2_35','stakeholder map','/ˈsteɪkhoʊldər mæp/','noun phrase','이해관계자 지도','A visual tool showing all parties involved.','Create a {stakeholder map}.','이해관계자 지도를 만드세요.','stakeholder map','B2','work',2,'stakeholder map diagram chart')
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- WORDS — C1 (35개)
@@ -201,7 +205,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_work_C1_32','dilution','/daɪˈluːʃən/','noun','희석','A reduction in ownership percentage due to new shares.','Avoid share {dilution}.','주식 희석을 피하세요.','dilution','C1','work',3,'dilution shares equity stock'),
 ('w_work_C1_33','lien','/liːn/','noun','유치권','A legal right over property until a debt is paid.','The bank holds a {lien}.','은행이 유치권을 보유하고 있어요.','lien','C1','work',3,'lien property debt bank legal'),
 ('w_work_C1_34','subpoena','/səˈpiːnə/','noun','소환장','A legal document requiring attendance at court.','He received a {subpoena}.','그는 소환장을 받았어요.','subpoena','C1','work',3,'subpoena court legal document'),
-('w_work_C1_35','clawback','/ˈklɔːbæk/','noun','환수','The recovery of previously paid compensation.','Trigger a {clawback} clause.','환수 조항을 발동하세요.','clawback','C1','work',3,'clawback recover bonus finance');
+('w_work_C1_35','clawback','/ˈklɔːbæk/','noun','환수','The recovery of previously paid compensation.','Trigger a {clawback} clause.','환수 조항을 발동하세요.','clawback','C1','work',3,'clawback recover bonus finance')
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- WORDS — C2 (35개)
@@ -241,7 +246,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_work_C2_32','interlocutory','/ˌɪntəˈlɒkjʊtəri/','adjective','중간의·임시의','Relating to an interim court order or ruling.','File an {interlocutory} appeal.','중간 항소를 제기하세요.','interlocutory','C2','work',4,'interlocutory court appeal legal'),
 ('w_work_C2_33','non-compete','/ˌnɒn kəmˈpiːt/','noun','경업 금지 조항','A clause preventing work for competitors after leaving.','Review the {non-compete} clause.','경업 금지 조항을 검토하세요.','non-compete','C2','work',4,'non compete clause contract legal'),
 ('w_work_C2_34','subrogation','/ˌsʌbrəˈɡeɪʃən/','noun','대위 변제','The substitution of one party for another in a legal claim.','The insurer claims {subrogation}.','보험사가 대위 변제를 주장해요.','subrogation','C2','work',4,'subrogation insurance legal claim'),
-('w_work_C2_35','accretion','/əˈkriːʃən/','noun','증가·자산 가치 상승','Gradual increase in value of an asset over time.','Calculate {accretion} to par value.','액면가까지의 자산 가치 상승을 계산하세요.','accretion','C2','work',4,'accretion value finance growth');
+('w_work_C2_35','accretion','/əˈkriːʃən/','noun','증가·자산 가치 상승','Gradual increase in value of an asset over time.','Calculate {accretion} to par value.','액면가까지의 자산 가치 상승을 계산하세요.','accretion','C2','work',4,'accretion value finance growth')
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- PATTERNS (sentences) — A1 (7개) · 직업 소개
@@ -253,7 +259,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_work_A1_04','I have a meeting this afternoon.','저는 오늘 오후에 회의가 있어요.','have a meeting','have a + 명사" 패턴으로 일정을 표현해요. "this afternoon" = 오늘 오후.','일정 표현','A1','work','pattern',NULL,4),
 ('s_work_A1_05','Can you send me an email about that?','그것에 대해 이메일을 보내주실 수 있어요?','Can you send me','Can you + 동사?" 패턴은 정중한 요청이에요. 비즈니스 영어에서 매우 유용해요.','요청하기','A1','work','pattern',NULL,5),
 ('s_work_A1_06','My boss is very easy to work with.','제 상사는 같이 일하기 매우 편해요.','easy to work with','"easy to work with"는 동료를 칭찬할 때 쓰는 자연스러운 표현이에요.','동료 소개','A1','work','pattern',NULL,6),
-('s_work_A1_07','Let''s take a short break.','잠깐 휴식을 취해요.','take a short break','"take a break"는 "쉬다"라는 표현이에요. "short"를 넣으면 짧은 휴식임을 강조해요.','휴식 제안','A1','work','pattern',NULL,7);
+('s_work_A1_07','Let''s take a short break.','잠깐 휴식을 취해요.','take a short break','"take a break"는 "쉬다"라는 표현이에요. "short"를 넣으면 짧은 휴식임을 강조해요.','휴식 제안','A1','work','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- PATTERNS — A2 (7개) · 업무 요청
@@ -265,7 +272,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_work_A2_04','Please submit your timesheet by end of day.','오늘 업무 종료 전에 타임시트를 제출해주세요.','submit your timesheet','Please + 동사"로 시작하는 요청은 정중하지만 명확해요. "end of day" = 근무 종료 시간.','타임시트 제출','A2','work','pattern',NULL,11),
 ('s_work_A2_05','I will follow up with the client this week.','이번 주에 고객에게 후속 연락을 할게요.','follow up with','follow up with"는 "후속 조치를 취하다"라는 비즈니스 필수 표현이에요.','업무 보고','A2','work','pattern',NULL,12),
 ('s_work_A2_06','Can you approve this by tomorrow?','내일까지 이것을 승인해주실 수 있어요?','approve this by tomorrow','approve by + 날짜"로 승인 기한을 명확히 요청할 수 있어요.','승인 요청','A2','work','pattern',NULL,13),
-('s_work_A2_07','I am working on the project report right now.','지금 프로젝트 보고서를 작업 중이에요.','working on','I am working on..."은 현재 진행 중인 업무를 설명할 때 써요.','업무 현황','A2','work','pattern',NULL,14);
+('s_work_A2_07','I am working on the project report right now.','지금 프로젝트 보고서를 작업 중이에요.','working on','I am working on..."은 현재 진행 중인 업무를 설명할 때 써요.','업무 현황','A2','work','pattern',NULL,14)
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- PATTERNS — B1 (7개) · 회의 조율·이메일
@@ -277,7 +285,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_work_B1_04','Please find the briefing document attached.','브리핑 문서를 첨부파일로 확인해주세요.','Please find... attached','"Please find ... attached"는 첨부파일을 안내하는 이메일 필수 표현이에요.','이메일 첨부','B1','work','pattern',NULL,18),
 ('s_work_B1_05','Could you delegate this task to someone on your team?','이 업무를 팀원에게 위임해주실 수 있어요?','delegate this task to','delegate to"는 "~에게 위임하다"예요. 효율적인 팀 관리에서 핵심 동사예요.','업무 위임','B1','work','pattern',NULL,19),
 ('s_work_B1_06','We need to finalize the agenda before Thursday''s meeting.','목요일 회의 전에 안건을 확정해야 해요.','finalize the agenda','finalize"는 "최종 확정하다"예요. "before + 날짜"로 기한을 명시해요.','안건 확정','B1','work','pattern',NULL,20),
-('s_work_B1_07','The project is on track to meet the milestone by Q3.','프로젝트가 3분기까지 이정표를 달성할 궤도에 있어요.','on track to meet the milestone','"on track"은 "계획대로 진행 중"이에요. "milestone"과 함께 쓰면 프로젝트 보고에 매우 적합해요.','프로젝트 보고','B1','work','pattern',NULL,21);
+('s_work_B1_07','The project is on track to meet the milestone by Q3.','프로젝트가 3분기까지 이정표를 달성할 궤도에 있어요.','on track to meet the milestone','"on track"은 "계획대로 진행 중"이에요. "milestone"과 함께 쓰면 프로젝트 보고에 매우 적합해요.','프로젝트 보고','B1','work','pattern',NULL,21)
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- PATTERNS — B2 (7개) · 발표·성과 보고
@@ -289,7 +298,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_work_B2_04','The pivot to a subscription model improved our retention by twenty percent.','구독 모델로의 전환이 유지율을 20퍼센트 향상시켰어요.','pivot to a subscription model improved retention','"pivot to"는 전략 전환을 나타내요. 결과를 수치로 표현하면 설득력이 높아져요.','성과 분석','B2','work','pattern',NULL,25),
 ('s_work_B2_05','Our onboarding process is now fully scalable across markets.','온보딩 프로세스가 이제 모든 시장에 걸쳐 완전히 확장 가능해요.','fully scalable across markets','scalable across markets"는 글로벌 확장성을 표현하는 B2 필수 표현이에요.','사업 발표','B2','work','pattern',NULL,26),
 ('s_work_B2_06','Let me highlight the key takeaways from this fiscal year.','이번 회계연도의 핵심 시사점을 강조하겠어요.','highlight the key takeaways from this fiscal year','"takeaways"는 "핵심 결론"이에요. "fiscal year"와 함께 재무 발표에서 많이 써요.','발표 마무리','B2','work','pattern',NULL,27),
-('s_work_B2_07','We are benchmarking against top industry performers to close the gap.','격차를 줄이기 위해 업계 최고 기업들과 비교 기준을 삼고 있어요.','benchmarking against top industry performers','benchmarking against"는 경쟁사와 비교 분석함을 나타내요.','경쟁 분석','B2','work','pattern',NULL,28);
+('s_work_B2_07','We are benchmarking against top industry performers to close the gap.','격차를 줄이기 위해 업계 최고 기업들과 비교 기준을 삼고 있어요.','benchmarking against top industry performers','benchmarking against"는 경쟁사와 비교 분석함을 나타내요.','경쟁 분석','B2','work','pattern',NULL,28)
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- PATTERNS — C1 (7개) · 협상·법적 비즈니스
@@ -301,7 +311,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_work_C1_04','The indemnification clause protects both parties from third-party claims.','면책 조항은 양측을 제3자 청구로부터 보호해요.','indemnification clause protects both parties','indemnification clause"는 계약서에서 가장 협상이 많이 이루어지는 조항 중 하나예요.','계약 협상','C1','work','pattern',NULL,32),
 ('s_work_C1_05','Any dispute shall be resolved through binding arbitration in Seoul.','모든 분쟁은 서울에서 구속력 있는 중재로 해결되어야 해요.','resolved through binding arbitration','binding arbitration"은 "구속력 있는 중재"로 법원 소송 대신 선택하는 방법이에요.','분쟁 해결','C1','work','pattern',NULL,33),
 ('s_work_C1_06','We need to conduct a thorough audit before the restructuring begins.','구조 조정이 시작되기 전에 철저한 감사를 실시해야 해요.','conduct a thorough audit before the restructuring','conduct an audit"는 "감사를 실시하다"예요. "thorough"를 붙이면 심층적임을 강조해요.','재무 감사','C1','work','pattern',NULL,34),
-('s_work_C1_07','The governance framework must align with international best practices.','지배 구조 체계는 국제 모범 사례와 일치해야 해요.','governance framework must align with international best practices','align with best practices"는 글로벌 기준 준수를 표현할 때 써요.','기업 지배구조','C1','work','pattern',NULL,35);
+('s_work_C1_07','The governance framework must align with international best practices.','지배 구조 체계는 국제 모범 사례와 일치해야 해요.','governance framework must align with international best practices','align with best practices"는 글로벌 기준 준수를 표현할 때 써요.','기업 지배구조','C1','work','pattern',NULL,35)
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- PATTERNS — C2 (7개) · 고급 금융·법적 협상
@@ -313,4 +324,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_work_C2_04','The force majeure clause was invoked following the regulatory shutdown.','규제 폐쇄 이후 불가항력 조항이 발동되었어요.','force majeure clause was invoked following the regulatory shutdown','"invoke a clause"는 "조항을 발동하다"예요. "force majeure"는 계약 이행 불가 시 면책 조항이에요.','계약 분쟁','C2','work','pattern',NULL,39),
 ('s_work_C2_05','A leveraged buyout financed at six times EBITDA requires careful covenant monitoring.','6배 EBITDA로 조달된 차입 매수는 신중한 약정 모니터링이 필요해요.','leveraged buyout financed at six times EBITDA requires careful covenant monitoring','LBO 분석에서 "multiple of EBITDA"는 인수 가격 수준을 나타내요.','LBO 분석','C2','work','pattern',NULL,40),
 ('s_work_C2_06','Subrogation rights allow the insurer to step into the insured''s shoes legally.','대위 변제 권리는 보험사가 법적으로 피보험자의 지위를 대신할 수 있게 해요.','Subrogation rights allow the insurer to step into the insured''s shoes','"step into someone''s shoes"는 관용표현으로 "그 사람의 지위를 대신하다"예요.','보험·법적 청구','C2','work','pattern',NULL,41),
-('s_work_C2_07','The recapitalization plan involves converting mezzanine debt to equity at par.','자본 재편 계획은 메자닌 채무를 액면가로 주식으로 전환하는 것을 포함해요.','recapitalization plan involves converting mezzanine debt to equity at par','"at par"는 "액면가로"예요. "converting debt to equity"는 부채 탕감의 일반적인 방법이에요.','자본 구조 재편','C2','work','pattern',NULL,42);
+('s_work_C2_07','The recapitalization plan involves converting mezzanine debt to equity at par.','자본 재편 계획은 메자닌 채무를 액면가로 주식으로 전환하는 것을 포함해요.','recapitalization plan involves converting mezzanine debt to equity at par','"at par"는 "액면가로"예요. "converting debt to equity"는 부채 탕감의 일반적인 방법이에요.','자본 구조 재편','C2','work','pattern',NULL,42)
+ON CONFLICT (id) DO NOTHING;

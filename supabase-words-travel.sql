@@ -41,7 +41,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_travel_A1_32','food','/fuːd/','noun','음식','Things that people and animals eat.','I love trying local {food} when I travel.','여행할 때 현지 음식을 맛보는 것을 좋아해요.','food','A1','travel',1,'food local restaurant travel cuisine'),
 ('w_travel_A1_33','airport','/ˈɛrpɔːrt/','noun','공항','A place where planes land and take off.','We need to arrive at the {airport} two hours early.','공항에는 두 시간 일찍 도착해야 해요.','airport','A1','travel',1,'airport terminal airplane departure'),
 ('w_travel_A1_34','late','/leɪt/','adjective','늦은','After the expected or usual time.','Hurry up or we will be {late} for our flight.','서두르지 않으면 비행기를 놓쳐요.','late','A1','travel',2,'late hurry airport rush'),
-('w_travel_A1_35','early','/ˈɜːrli/','adjective','일찍','Before the expected or usual time.','Check-in starts {early} in the morning at six o''clock.','체크인은 아침 6시부터 일찍 시작해요.','early','A1','travel',2,'early morning sunrise departure');
+('w_travel_A1_35','early','/ˈɜːrli/','adjective','일찍','Before the expected or usual time.','Check-in starts {early} in the morning at six o''clock.','체크인은 아침 6시부터 일찍 시작해요.','early','A1','travel',2,'early morning sunrise departure')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- A2 — 35 WORDS
@@ -81,7 +82,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_travel_A2_32','delay','/dɪˈleɪ/','noun','지연','A period of time by which something is late.','There is a forty-minute {delay} due to heavy traffic.','교통 체증으로 40분 지연이 있어요.','delay','A2','travel',1,'delay clock airport waiting'),
 ('w_travel_A2_33','comfortable','/ˈkʌmftəbəl/','adjective','편안한','Making you feel relaxed and at ease.','The seats on the train were very {comfortable}.','기차 좌석이 매우 편안했어요.','comfortable','A2','travel',2,'comfortable seat train travel relax'),
 ('w_travel_A2_34','crowded','/ˈkraʊdɪd/','adjective','붐비는','Full of a large number of people.','The beach was too {crowded} in August.','8월에는 해변이 너무 붐볐어요.','crowded','A2','travel',2,'crowded beach summer people tourist'),
-('w_travel_A2_35','local','/ˈloʊkəl/','adjective','현지의','Belonging to or relating to a particular area.','Ask a {local} person for the best restaurant tips.','최고의 식당 팁은 현지인에게 물어보세요.','local','A2','travel',1,'local market food culture travel');
+('w_travel_A2_35','local','/ˈloʊkəl/','adjective','현지의','Belonging to or relating to a particular area.','Ask a {local} person for the best restaurant tips.','최고의 식당 팁은 현지인에게 물어보세요.','local','A2','travel',1,'local market food culture travel')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- B1 — 35 WORDS (IDs B1_01~35; w_travel_01~10 are legacy seed)
@@ -121,7 +123,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_travel_B1_32','stopover','/ˈstɒpoʊvər/','noun','경유 체류','A short stay in a place you are passing through on a longer journey.','We had a two-day {stopover} in Dubai on our way to London.','런던 가는 길에 두바이에서 이틀간 경유했어요.','stopover','B1','travel',2,'stopover dubai airport city hotel'),
 ('w_travel_B1_33','complain','/kəmˈpleɪn/','verb','불평하다','To say that you are unhappy about something.','He {complained} to the hotel manager about the noisy room.','시끄러운 방에 대해 호텔 매니저에게 불평했어요.','complained','B1','travel',2,'complaint hotel manager service problem'),
 ('w_travel_B1_34','phrase','/freɪz/','noun','표현, 어구','A small group of words that express an idea.','Learning a few useful {phrase}s can help a lot when travelling.','몇 가지 유용한 표현을 배우면 여행할 때 많이 도움이 돼요.','phrases','B1','travel',2,'phrase language learning travel communication'),
-('w_travel_B1_35','scenic','/ˈsiːnɪk/','adjective','경치 좋은','Having beautiful natural scenery.','We took the {scenic} route along the coast.','해안을 따라 경치 좋은 길로 갔어요.','scenic','B1','travel',2,'scenic route coast landscape nature');
+('w_travel_B1_35','scenic','/ˈsiːnɪk/','adjective','경치 좋은','Having beautiful natural scenery.','We took the {scenic} route along the coast.','해안을 따라 경치 좋은 길로 갔어요.','scenic','B1','travel',2,'scenic route coast landscape nature')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- B2 — 35 WORDS
@@ -161,7 +164,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_travel_B2_32','time zone','/ˈtaɪm zoʊn/','noun','시간대','One of the regions of the globe that has a standard time.','Flying across many {time zone}s causes jet lag.','여러 시간대를 넘는 비행은 시차 피로를 유발해요.','time zones','B2','travel',2,'time zone clock world map travel'),
 ('w_travel_B2_33','round-the-world','/ˌraʊnd ðə ˈwɜːrld/','adjective','세계 일주의','Describing a journey that goes all the way around the globe.','She bought a {round-the-world} ticket and visited twelve countries.','세계 일주 티켓을 사서 12개국을 방문했어요.','round-the-world','B2','travel',3,'round the world ticket flight globe'),
 ('w_travel_B2_34','expedition planner','/ˌekspɪˈdɪʃən ˈplænər/','noun','탐험 기획자','A person or tool that organises a complex journey.','We hired an {expedition planner} for our Antarctic trip.','남극 여행을 위해 탐험 기획자를 고용했어요.','expedition planner','B2','travel',3,'expedition planner antarctica adventure plan'),
-('w_travel_B2_35','uncharted','/ʌnˈtʃɑːrtɪd/','adjective','미지의, 지도에 없는','Not yet explored or mapped.','They ventured into {uncharted} territory deep in the rainforest.','그들은 열대우림 깊숙이 미지의 영역으로 모험을 떠났어요.','uncharted','B2','travel',3,'uncharted forest jungle explore adventure');
+('w_travel_B2_35','uncharted','/ʌnˈtʃɑːrtɪd/','adjective','미지의, 지도에 없는','Not yet explored or mapped.','They ventured into {uncharted} territory deep in the rainforest.','그들은 열대우림 깊숙이 미지의 영역으로 모험을 떠났어요.','uncharted','B2','travel',3,'uncharted forest jungle explore adventure')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- C1 — 35 WORDS
@@ -201,7 +205,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_travel_C1_32','traverse','/ˈtrævɜːrs/','noun','횡단, 가로지름','The act of crossing or passing through a place.','The {traverse} of the glacier took eight gruelling hours.','빙하 횡단은 8시간이 걸리는 힘든 경험이었어요.','traverse','C1','travel',3,'traverse glacier ice mountain expedition'),
 ('w_travel_C1_33','immerse','/ɪˈmɜːrs/','verb','몰입하다','To involve yourself deeply in an activity or culture.','She chose to {immerse} herself in the local community rather than tour.','그녀는 관광보다 현지 커뮤니티에 몰입하는 것을 선택했어요.','immerse','C1','travel',2,'immerse local community culture language'),
 ('w_travel_C1_34','foray','/ˈfɔːreɪ/','noun','짧은 탐험, 시도','A short trip or attempt into unfamiliar territory.','Our {foray} into the remote highlands was unexpectedly rewarding.','외딴 고지대로의 짧은 탐험은 예상치 못하게 보람 있었어요.','foray','C1','travel',3,'foray highlands remote nature rewarding'),
-('w_travel_C1_35','cartography','/kɑːrˈtɒɡrəfi/','noun','지도 제작학','The science and art of making maps.','His passion for {cartography} was born during a sailing voyage.','항해 여행 중에 지도 제작학에 대한 열정이 생겼어요.','cartography','C1','travel',3,'cartography map art sailing voyage history');
+('w_travel_C1_35','cartography','/kɑːrˈtɒɡrəfi/','noun','지도 제작학','The science and art of making maps.','His passion for {cartography} was born during a sailing voyage.','항해 여행 중에 지도 제작학에 대한 열정이 생겼어요.','cartography','C1','travel',3,'cartography map art sailing voyage history')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- C2 — 35 WORDS
@@ -241,7 +246,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_travel_C2_32','numinous','/ˈnjuːmɪnəs/','adjective','신성한, 경외감을 주는','Having a strong spiritual quality; evoking a sense of awe.','Standing at the ancient ruins produced a {numinous} feeling.','고대 유적 앞에 서면 경외감을 주는 느낌이 들었어요.','numinous','C2','travel',4,'numinous ruins ancient spiritual awe'),
 ('w_travel_C2_33','indigeneity','/ˌɪndɪˈdʒiːnɪti/','noun','토착성','The state of being indigenous or originating in a particular place.','The tourism board balanced promotion with respect for local {indigeneity}.','관광청은 홍보와 지역 토착성에 대한 존중 사이의 균형을 유지했어요.','indigeneity','C2','travel',4,'indigeneity local respect tourism balance'),
 ('w_travel_C2_34','cartophilia','/kɑːrˈtɒfɪliə/','noun','지도 수집 애호','The love of collecting and studying maps.','Her {cartophilia} began with a hand-drawn map found in her grandmother''s attic.','그녀의 지도 수집 애호는 할머니 다락방에서 발견한 손으로 그린 지도에서 시작됐어요.','cartophilia','C2','travel',4,'cartophilia map collection grandmother attic history'),
-('w_travel_C2_35','weltanschauung','/ˈveltɑːnˌʃaʊʊŋ/','noun','세계관','A comprehensive philosophy or world view shaping how one sees life.','Prolonged travel reshaped her {weltanschauung} fundamentally.','장기간의 여행이 그녀의 세계관을 근본적으로 바꿨어요.','weltanschauung','C2','travel',5,'weltanschauung worldview philosophy travel change');
+('w_travel_C2_35','weltanschauung','/ˈveltɑːnˌʃaʊʊŋ/','noun','세계관','A comprehensive philosophy or world view shaping how one sees life.','Prolonged travel reshaped her {weltanschauung} fundamentally.','장기간의 여행이 그녀의 세계관을 근본적으로 바꿨어요.','weltanschauung','C2','travel',5,'weltanschauung worldview philosophy travel change')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- A1 — 7 PATTERNS (목적지 묻기)
@@ -253,7 +259,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_travel_A1_04','Where is the airport?','공항이 어디에 있어요?','Where is the','건물이나 장소의 위치를 물을 때 "Where is ~?" 패턴을 써요.','위치 묻기','A1','travel','pattern',NULL,4),
 ('s_travel_A1_05','I need a map, please.','지도 한 장 주세요.','I need','"I need ~"는 무언가가 필요할 때 쓰는 가장 간단한 표현이에요.','여행 정보 센터','A1','travel','pattern',NULL,5),
 ('s_travel_A1_06','What time does it open?','몇 시에 열어요?','What time does it open','박물관이나 관광지의 운영 시간을 물을 때 자주 쓰는 표현이에요.','관광지 방문','A1','travel','pattern',NULL,6),
-('s_travel_A1_07','How much is the ticket?','표가 얼마예요?','How much is the','가격을 물을 때 쓰는 가장 간단하고 직접적인 표현이에요.','매표소','A1','travel','pattern',NULL,7);
+('s_travel_A1_07','How much is the ticket?','표가 얼마예요?','How much is the','가격을 물을 때 쓰는 가장 간단하고 직접적인 표현이에요.','매표소','A1','travel','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- A2 — 7 PATTERNS (예약, 체크인)
@@ -265,7 +272,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_travel_A2_04','I''d like to book a room for two nights.','2박짜리 방을 예약하고 싶어요.','I''d like to book','"I''d like to ~"는 무언가를 하고 싶다고 정중하게 표현할 때 써요.','호텔 예약','A2','travel','pattern',NULL,4),
 ('s_travel_A2_05','Is breakfast included in the price?','가격에 조식이 포함되어 있나요?','Is breakfast included','예약 시 포함 사항을 확인하는 표현이에요. "included"를 기억하세요.','예약 확인','A2','travel','pattern',NULL,5),
 ('s_travel_A2_06','Can I see the room first?','먼저 방을 볼 수 있을까요?','Can I see the room first','예약 전에 방 상태를 확인할 때 쓸 수 있는 표현이에요.','호텔 방문','A2','travel','pattern',NULL,6),
-('s_travel_A2_07','Do you have any rooms available?','빈 방이 있나요?','any rooms available','예약 없이 숙박 시설에 방문했을 때 쓰는 표현이에요.','즉흥 숙박 예약','A2','travel','pattern',NULL,7);
+('s_travel_A2_07','Do you have any rooms available?','빈 방이 있나요?','any rooms available','예약 없이 숙박 시설에 방문했을 때 쓰는 표현이에요.','즉흥 숙박 예약','A2','travel','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- B1 — 7 PATTERNS (길 찾기, 비자)
@@ -277,7 +285,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_travel_B1_04','Excuse me, is this seat taken?','실례합니다, 이 자리 비어 있나요?','is this seat taken','"Is this seat taken?"은 자리를 물을 때 쓰는 세련된 표현이에요. "Is this free?"도 OK예요.','기차·버스 탑승','B1','travel','pattern',NULL,4),
 ('s_travel_B1_05','How long does it take to get there by taxi?','택시로 거기까지 얼마나 걸려요?','How long does it take to get there','소요 시간을 물을 때 "How long does it take to ~?" 패턴을 써요.','교통 안내','B1','travel','pattern',NULL,5),
 ('s_travel_B1_06','My passport expires next month — will that be a problem?','여권이 다음 달에 만료되는데 문제가 될까요?','will that be a problem','입국 시 여권 유효 기간을 걱정할 때 쓸 수 있는 표현이에요.','입국 심사','B1','travel','pattern',NULL,6),
-('s_travel_B1_07','Could you recommend a good local area to stay in?','머물기에 좋은 현지 지역을 추천해 주실 수 있나요?','Could you recommend a good','추천을 정중하게 부탁할 때 "Could you recommend ~?"를 써요.','숙박 지역 조언','B1','travel','pattern',NULL,7);
+('s_travel_B1_07','Could you recommend a good local area to stay in?','머물기에 좋은 현지 지역을 추천해 주실 수 있나요?','Could you recommend a good','추천을 정중하게 부탁할 때 "Could you recommend ~?"를 써요.','숙박 지역 조언','B1','travel','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- B2 — 7 PATTERNS (여행 경험 공유)
@@ -289,7 +298,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_travel_B2_04','What really surprised me was how welcoming the locals were despite the language barrier.','정말 놀라웠던 것은 언어 장벽에도 불구하고 현지인들이 얼마나 따뜻하게 맞아줬는지예요.','What really surprised me was','경험의 놀라운 측면을 강조할 때 "What really surprised me was ~"를 써요.','문화 경험 공유','B2','travel','pattern',NULL,4),
 ('s_travel_B2_05','If I could go back, I''d spend more time in the countryside and less in the city.','다시 갈 수 있다면 도시보다 시골에서 더 많은 시간을 보낼 것 같아요.','If I could go back, I''d','가상의 재방문을 이야기할 때 "If I could go back, I''d ~" 가정법을 써요.','여행 회고','B2','travel','pattern',NULL,5),
 ('s_travel_B2_06','The culture shock hit me harder than I expected when I first arrived.','처음 도착했을 때 예상보다 훨씬 심한 문화 충격을 받았어요.','harder than I expected','결과가 예상을 초과했을 때 "harder than I expected"처럼 비교급을 써요.','문화 충격 경험','B2','travel','pattern',NULL,6),
-('s_travel_B2_07','Immersing yourself in the local language, even just a few phrases, opens so many doors.','현지어에 몰입하는 것, 심지어 몇 가지 표현만으로도 정말 많은 문이 열려요.','Immersing yourself in','경험의 가치를 강조할 때 동명사로 시작하는 "Immersing yourself in ~" 구조를 써요.','언어와 여행','B2','travel','pattern',NULL,7);
+('s_travel_B2_07','Immersing yourself in the local language, even just a few phrases, opens so many doors.','현지어에 몰입하는 것, 심지어 몇 가지 표현만으로도 정말 많은 문이 열려요.','Immersing yourself in','경험의 가치를 강조할 때 동명사로 시작하는 "Immersing yourself in ~" 구조를 써요.','언어와 여행','B2','travel','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- C1 — 7 PATTERNS (여행 철학)
@@ -301,7 +311,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_travel_C1_04','I''ve come to believe that it''s the unplanned moments that define a journey, not the itinerary.','계획되지 않은 순간들이 여행 일정이 아니라 여행을 정의한다고 생각하게 됐어요.','I''ve come to believe that','"I''ve come to ~"는 서서히 형성된 믿음이나 이해를 표현하는 세련된 패턴이에요.','여행 철학','C1','travel','pattern',NULL,4),
 ('s_travel_C1_05','What strikes me most about long-term travel is the way it erodes your sense of home.','장기 여행에서 가장 인상 깊은 점은 집에 대한 감각을 서서히 지운다는 거예요.','What strikes me most about','"What strikes me most about ~"은 분석적 의견을 격식 있게 도입하는 표현이에요.','여행과 정체성','C1','travel','pattern',NULL,5),
 ('s_travel_C1_06','Having lived as an expat for a decade, I no longer think of nationality as fixed.','10년간 해외 거주자로 살면서 더 이상 국적을 고정된 것으로 생각하지 않아요.','Having lived as an expat','완료 분사구문 "Having ~"은 과거 경험을 현재 믿음의 근거로 제시하는 C1 구조예요.','정체성 토론','C1','travel','pattern',NULL,6),
-('s_travel_C1_07','The most transformative journeys are those that shatter your assumptions, not confirm them.','가장 변화를 이끄는 여행은 당신의 가정을 확인하는 것이 아니라 산산이 부수는 것이에요.','those that shatter your assumptions','"those that ~"는 관계절로 종류를 구분할 때, "not ~ but ~"는 대조를 강조할 때 써요.','여행 철학 에세이','C1','travel','pattern',NULL,7);
+('s_travel_C1_07','The most transformative journeys are those that shatter your assumptions, not confirm them.','가장 변화를 이끄는 여행은 당신의 가정을 확인하는 것이 아니라 산산이 부수는 것이에요.','those that shatter your assumptions','"those that ~"는 관계절로 종류를 구분할 때, "not ~ but ~"는 대조를 강조할 때 써요.','여행 철학 에세이','C1','travel','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- C2 — 7 PATTERNS (문화 차이·여행 철학 심화)
@@ -313,4 +324,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_travel_C2_04','What separates tourism from travel is not the distance covered but the degree of self-interrogation involved.','관광과 여행을 구분하는 것은 이동한 거리가 아니라 관련된 자기 성찰의 정도예요.','What separates ~ from ~ is not ~ but','"What separates A from B is not X but Y"는 정의와 구분을 위한 정교한 C2 구조예요.','여행 vs 관광','C2','travel','pattern',NULL,4),
 ('s_travel_C2_05','There is an inherent ethical tension between the desire to witness poverty tourism and respecting local dignity.','빈곤 관광을 목격하려는 욕구와 현지인의 존엄성을 존중하는 것 사이에는 내재적 윤리적 긴장이 있어요.','inherent ethical tension between','"inherent ethical tension between A and B"는 양립하는 가치 사이의 갈등을 분석하는 학문적 표현이에요.','여행 윤리','C2','travel','pattern',NULL,5),
 ('s_travel_C2_06','The peripatetic intellectual tradition — from Aristotle to Ibn Battuta — equates movement with enlightenment.','아리스토텔레스부터 이븐 바투타까지의 순회 지식인 전통은 이동을 계몽과 동일시해요.','equates movement with enlightenment','대시(—)로 삽입구를 쓰고, "equates A with B"로 동치를 표현하는 C2 수사학 기법이에요.','학술 토론','C2','travel','pattern',NULL,6),
-('s_travel_C2_07','To sojourn is not merely to visit; it is to suspend one''s prior self and allow a place to reconstitute you.','잠시 머무는 것은 단순히 방문하는 것이 아니에요. 이전의 자아를 정지시키고 장소가 당신을 재구성하도록 허용하는 것이에요.','to suspend one''s prior self','"not merely to ~; it is to ~"는 두 부정사를 세미콜론으로 연결해 철학적 재정의를 하는 C2 구조예요.','여행 철학 에세이','C2','travel','pattern',NULL,7);
+('s_travel_C2_07','To sojourn is not merely to visit; it is to suspend one''s prior self and allow a place to reconstitute you.','잠시 머무는 것은 단순히 방문하는 것이 아니에요. 이전의 자아를 정지시키고 장소가 당신을 재구성하도록 허용하는 것이에요.','to suspend one''s prior self','"not merely to ~; it is to ~"는 두 부정사를 세미콜론으로 연결해 철학적 재정의를 하는 C2 구조예요.','여행 철학 에세이','C2','travel','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

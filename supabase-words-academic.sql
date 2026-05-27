@@ -240,7 +240,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_academic_C2_32','doxa','/ˈdɒksə/','noun','독사','Bourdieu''s term for unquestioned social beliefs.','{Doxa} is the set of assumptions we take for granted.','독사는 당연시하는 가정들의 집합이에요.','doxa','C2','academic',2,'doxa Bourdieu belief assumption'),
 ('w_academic_C2_33','liminality','/ˌlɪmɪˈnælɪti/','noun','경계성','The ambiguous transitional state between two phases.','{Liminality} describes in-between spaces of transformation.','경계성은 변환의 중간 공간을 묘사해요.','liminality','C2','academic',2,'liminality threshold transition ritual'),
 ('w_academic_C2_34','apophatic','/ˌæpəˈfætɪk/','adjective','부정적 신학적인','Describing something by what it is not.','The author uses an {apophatic} approach to define the concept.','저자는 개념을 정의하기 위해 부정적 접근법을 사용해요.','apophatic','C2','academic',2,'apophatic negation definition philosophy'),
-('w_academic_C2_35','exegesis','/ˌɛksɪˈdʒiːsɪs/','noun','주석','Critical interpretation of a text, especially religious scripture.','Her {exegesis} of the poem was groundbreaking.','그녀의 시에 대한 주석은 획기적이었어요.','exegesis','C2','academic',2,'exegesis interpretation text commentary');
+('w_academic_C2_35','exegesis','/ˌɛksɪˈdʒiːsɪs/','noun','주석','Critical interpretation of a text, especially religious scripture.','Her {exegesis} of the poem was groundbreaking.','그녀의 시에 대한 주석은 획기적이었어요.','exegesis','C2','academic',2,'exegesis interpretation text commentary')
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- PATTERNS (sentences)
@@ -312,4 +313,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_academic_C2_04','Bakhtin''s heteroglossia reveals the polyphonic nature of academic discourse itself.','바흐친의 이언론은 학술 담론 자체의 다성적 특성을 드러내요.','heteroglossia reveals the polyphonic nature','바흐친 이론을 담론 분석에 적용하는 표현이에요.','담론 분석 논문','C2','academic','pattern',NULL,4),
 ('s_academic_C2_05','The subaltern''s aporia lies in the impossibility of articulating resistance within the very language of the oppressor.','서발턴의 아포리아는 억압자의 언어 안에서 저항을 표현하는 것의 불가능성에 있어요.','subaltern''s aporia lies in the impossibility','포스트식민 이론의 핵심 긴장을 표현하는 고급 학술 문장이에요.','포스트식민 이론 논문','C2','academic','pattern',NULL,5),
 ('s_academic_C2_06','Bourdieu''s concept of habitus explains how doxa is reproduced across generations without conscious awareness.','부르디외의 아비투스 개념은 독사가 의식적 인식 없이 세대에 걸쳐 재생산되는 방식을 설명해요.','habitus explains how doxa is reproduced','부르디외의 핵심 개념을 연결하는 학술적 표현이에요.','사회학 이론 논문','C2','academic','pattern',NULL,6),
-('s_academic_C2_07','The onto-epistemological stance of the researcher inevitably shapes what counts as legitimate knowledge within the study.','연구자의 존재-인식론적 입장은 연구 내에서 무엇이 정당한 지식으로 인정되는지를 필연적으로 형성해요.','onto-epistemological stance','연구자의 철학적 입장이 연구 전체에 미치는 영향을 설명하는 표현이에요.','연구 방법론 논문','C2','academic','pattern',NULL,7);
+('s_academic_C2_07','The onto-epistemological stance of the researcher inevitably shapes what counts as legitimate knowledge within the study.','연구자의 존재-인식론적 입장은 연구 내에서 무엇이 정당한 지식으로 인정되는지를 필연적으로 형성해요.','onto-epistemological stance','연구자의 철학적 입장이 연구 전체에 미치는 영향을 설명하는 표현이에요.','연구 방법론 논문','C2','academic','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

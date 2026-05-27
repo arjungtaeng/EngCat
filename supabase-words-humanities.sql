@@ -40,7 +40,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_humanities_A1_32','world','/wɜːrld/','noun','세계, 세상','The earth and all its people; a realm of existence.','Great literature opens up the {world}.','훌륭한 문학은 세계를 열어줘요.','world','A1','humanities',1,'world globe earth explore'),
 ('w_humanities_A1_33','real','/riːl/','adjective','진짜의, 현실의','Actually existing; not imagined.','The characters feel very {real}.','등장인물들이 매우 현실적으로 느껴져요.','real','A1','humanities',2,'reality authentic genuine truth'),
 ('w_humanities_A1_34','class','/klɑːs/','noun','수업; 계층','A group lesson; also a social division.','We discussed the poem in {class}.','수업에서 그 시에 대해 토론했어요.','class','A1','humanities',2,'classroom learning education discussion'),
-('w_humanities_A1_35','remember','/rɪˈmembər/','verb','기억하다','To have in mind or bring back to mind.','I always {remember} the first book I loved.','저는 처음 좋아했던 책을 항상 기억해요.','remember','A1','humanities',2,'memory remember nostalgia books');
+('w_humanities_A1_35','remember','/rɪˈmembər/','verb','기억하다','To have in mind or bring back to mind.','I always {remember} the first book I loved.','저는 처음 좋아했던 책을 항상 기억해요.','remember','A1','humanities',2,'memory remember nostalgia books')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2 (초급)
@@ -80,7 +81,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_humanities_A2_32','ancient','/ˈeɪnʃənt/','adjective','고대의','Belonging to the very distant past.','{Ancient} myths still influence modern storytelling.','고대 신화는 아직도 현대 이야기 방식에 영향을 미쳐요.','ancient','A2','humanities',2,'ancient history ruins civilization'),
 ('w_humanities_A2_33','folktale','/ˈfoʊkteɪl/','noun','민담, 민화','A story passed down through ordinary people.','Korean {folktale}s often teach moral lessons.','한국 민담은 종종 도덕적 교훈을 가르쳐요.','folktale','A2','humanities',2,'folktale tradition culture story'),
 ('w_humanities_A2_34','narrative','/ˈnærətɪv/','noun','서사, 이야기 방식','A spoken or written account of events.','The {narrative} switches between two characters.','서사는 두 인물 사이를 오가요.','narrative','A2','humanities',1,'narrative storytelling structure plot'),
-('w_humanities_A2_35','genre','/ˈʒɑːnrə/','noun','장르','A category of artistic work defined by style or subject.','What is your favorite literary {genre}?','가장 좋아하는 문학 장르가 뭐예요?','genre','A2','humanities',1,'genre category books shelf');
+('w_humanities_A2_35','genre','/ˈʒɑːnrə/','noun','장르','A category of artistic work defined by style or subject.','What is your favorite literary {genre}?','가장 좋아하는 문학 장르가 뭐예요?','genre','A2','humanities',1,'genre category books shelf')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1 (중급)
@@ -120,7 +122,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_humanities_B1_32','audience','/ˈɔːdiəns/','noun','독자, 청중','The intended readers or viewers of a work.','The book found a wide {audience} in Europe.','그 책은 유럽에서 넓은 독자층을 형성했어요.','audience','B1','humanities',2,'audience readers crowd reception'),
 ('w_humanities_B1_33','passage','/ˈpæsɪdʒ/','noun','구절, 단락','A short section taken from a longer text.','This {passage} from the novel is often quoted.','소설의 이 구절은 자주 인용돼요.','passage','B1','humanities',2,'passage text excerpt highlight'),
 ('w_humanities_B1_34','illustrate','/ˈɪləstreɪt/','verb','설명하다; 삽화를 넣다','To explain or make clear with examples or pictures.','The author uses anecdotes to {illustrate} the theme.','작가는 주제를 설명하기 위해 일화를 사용해요.','illustrate','B1','humanities',2,'illustration example visual explain'),
-('w_humanities_B1_35','impact','/ˈɪmpækt/','noun','영향, 충격','A strong effect or impression.','This book had a huge {impact} on my life.','이 책은 제 삶에 큰 영향을 미쳤어요.','impact','B1','humanities',1,'impact effect change influence');
+('w_humanities_B1_35','impact','/ˈɪmpækt/','noun','영향, 충격','A strong effect or impression.','This book had a huge {impact} on my life.','이 책은 제 삶에 큰 영향을 미쳤어요.','impact','B1','humanities',1,'impact effect change influence')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2 (중상급)
@@ -160,7 +163,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_humanities_B2_32','ambivalence','/æmˈbɪvələns/','noun','양가감정, 양의성','Mixed feelings about someone or something.','The hero''s {ambivalence} toward his father drives the plot.','아버지에 대한 영웅의 양가감정이 줄거리를 이끌어요.','ambivalence','B2','humanities',3,'ambivalence mixed feelings conflict'),
 ('w_humanities_B2_33','consciousness','/ˈkɒnʃəsnəs/','noun','의식(意識)','The state of being aware; the stream of thoughts.','Virginia Woolf pioneered stream-of-{consciousness} narration.','버지니아 울프는 의식의 흐름 서술 방식을 개척했어요.','consciousness','B2','humanities',2,'consciousness mind stream thought'),
 ('w_humanities_B2_34','absurd','/əbˈsɜːrd/','adjective','부조리한, 불합리한','Wildly unreasonable or inappropriate; contrary to logic.','Kafka''s work captures the {absurd} nature of modern bureaucracy.','카프카의 작품은 현대 관료주의의 부조리한 특성을 담아요.','absurd','B2','humanities',2,'absurd surreal illogical kafkaesque'),
-('w_humanities_B2_35','critique','/krɪˈtiːk/','verb','비평하다','To evaluate a work in detail.','She was asked to {critique} a postmodern short story.','그녀는 포스트모던 단편 소설을 비평해달라는 요청을 받았어요.','critique','B2','humanities',2,'critique analysis evaluation writing');
+('w_humanities_B2_35','critique','/krɪˈtiːk/','verb','비평하다','To evaluate a work in detail.','She was asked to {critique} a postmodern short story.','그녀는 포스트모던 단편 소설을 비평해달라는 요청을 받았어요.','critique','B2','humanities',2,'critique analysis evaluation writing')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1 (고급)
@@ -200,7 +204,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_humanities_C1_32','lacuna','/ləˈkjuːnə/','noun','공백, 빠진 부분','A gap or missing portion in a text or argument.','The {lacuna} in the manuscript has puzzled scholars for decades.','원고의 공백은 수십 년간 학자들을 혼란스럽게 했어요.','lacuna','C1','humanities',3,'lacuna gap missing text'),
 ('w_humanities_C1_33','poetics','/poʊˈetɪks/','noun','시학, 시 이론','The theory and practice of literary composition.','Aristotle''s {poetics} defined tragedy for centuries.','아리스토텔레스의 시학은 수 세기 동안 비극을 정의했어요.','poetics','C1','humanities',2,'poetics theory aristotle literary'),
 ('w_humanities_C1_34','deixis','/ˈdaɪksɪs/','noun','직시(直示), 지시 표현','Words or phrases that require contextual information to interpret.','Understanding {deixis} is key to analyzing a dramatic monologue.','직시 표현을 이해하는 것은 극적 독백 분석의 핵심이에요.','deixis','C1','humanities',3,'deixis context language reference'),
-('w_humanities_C1_35','ekphrasis','/ˈekfrəsɪs/','noun','에크프라시스','A vivid verbal description of a visual work of art.','Keats'' Ode on a Grecian Urn is a famous example of {ekphrasis}.','키츠의 그리스 항아리에 부치는 송시는 에크프라시스의 유명한 예예요.','ekphrasis','C1','humanities',3,'ekphrasis art description poem visual');
+('w_humanities_C1_35','ekphrasis','/ˈekfrəsɪs/','noun','에크프라시스','A vivid verbal description of a visual work of art.','Keats'' Ode on a Grecian Urn is a famous example of {ekphrasis}.','키츠의 그리스 항아리에 부치는 송시는 에크프라시스의 유명한 예예요.','ekphrasis','C1','humanities',3,'ekphrasis art description poem visual')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2 (최상급)
@@ -240,7 +245,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_humanities_C2_32','perlocution','/ˌpɜːrləˈkjuːʃən/','noun','발화 효과 행위','The effect of an utterance on the listener beyond its literal meaning.','Great oratory achieves its goals through {perlocution}.','훌륭한 웅변은 발화 효과 행위를 통해 목표를 달성해요.','perlocution','C2','humanities',3,'perlocution effect speech language'),
 ('w_humanities_C2_33','dialogism','/daɪˈæləɡɪzəm/','noun','대화주의 (바흐친)','Bakhtin''s theory that all utterances are inherently dialogic.','{Dialogism} challenges the notion of the solitary author.','대화주의는 고독한 작가의 개념에 도전해요.','dialogism','C2','humanities',2,'dialogism bakhtin dialogue intertextual'),
 ('w_humanities_C2_34','negative capability','/ˌneɡətɪv keɪpəˈbɪlɪti/','noun','부정적 수용 능력 (키츠)','Keats''s term for the ability to remain in uncertainty without reaching for fact or reason.','Great poets possess the {negative capability} to dwell in mystery.','위대한 시인은 신비 속에 머무는 부정적 수용 능력을 지녀요.','negative capability','C2','humanities',2,'negative capability keats poetry uncertainty'),
-('w_humanities_C2_35','uncanny','/ʌnˈkæni/','adjective / noun','언캐니 (낯설면서 친숙한 공포)','Freud''s concept of the strangely familiar; the disturbing feeling caused by something both familiar and strange.','The gothic mansion creates a profound sense of the {uncanny}.','고딕 저택은 깊은 언캐니 감각을 만들어요.','uncanny','C2','humanities',2,'uncanny freud strange familiar horror');
+('w_humanities_C2_35','uncanny','/ʌnˈkæni/','adjective / noun','언캐니 (낯설면서 친숙한 공포)','Freud''s concept of the strangely familiar; the disturbing feeling caused by something both familiar and strange.','The gothic mansion creates a profound sense of the {uncanny}.','고딕 저택은 깊은 언캐니 감각을 만들어요.','uncanny','C2','humanities',2,'uncanny freud strange familiar horror')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A1 (책 추천)
@@ -252,7 +258,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_humanities_A1_04','Can you tell me the name of the book?','책 제목을 알려줄 수 있어요?','tell me the name','Can you ~?는 A1 수준에서 가장 자연스러운 요청 표현이에요.','제목 묻기','A1','humanities','pattern',NULL,4),
 ('s_humanities_A1_05','I want to read more books in English.','영어로 된 책을 더 읽고 싶어요.','read more books in English','I want to ~는 희망과 목표를 간단하게 표현하는 패턴이에요.','학습 목표','A1','humanities','pattern',NULL,5),
 ('s_humanities_A1_06','This poem is very beautiful.','이 시는 정말 아름다워요.','very beautiful','This ~ is very ~. 구조는 감상을 간결하게 전달해요.','시 감상','A1','humanities','pattern',NULL,6),
-('s_humanities_A1_07','Do you like to read stories?','이야기 읽는 걸 좋아하세요?','Do you like to read','Do you like to ~?는 취미를 묻는 가장 쉬운 표현이에요.','취미 묻기','A1','humanities','pattern',NULL,7);
+('s_humanities_A1_07','Do you like to read stories?','이야기 읽는 걸 좋아하세요?','Do you like to read','Do you like to ~?는 취미를 묻는 가장 쉬운 표현이에요.','취미 묻기','A1','humanities','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A2 (작가·장르)
@@ -264,7 +271,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_humanities_A2_04','Have you heard of this author before?','이 작가에 대해 들어본 적 있어요?','Have you heard of','Have you heard of ~?는 상대의 지식을 확인하는 자연스러운 표현이에요.','작가 소개','A2','humanities','pattern',NULL,11),
 ('s_humanities_A2_05','What kind of books do you usually read?','보통 어떤 종류의 책을 읽으세요?','What kind of books','What kind of ~?는 종류나 유형을 묻는 범용 패턴이에요.','장르 묻기','A2','humanities','pattern',NULL,12),
 ('s_humanities_A2_06','I prefer historical fiction to fantasy.','저는 판타지보다 역사 소설을 더 좋아해요.','prefer ~ to ~','prefer A to B 패턴으로 두 가지를 자연스럽게 비교할 수 있어요.','장르 비교','A2','humanities','pattern',NULL,13),
-('s_humanities_A2_07','The main character in this novel is very interesting.','이 소설의 주인공이 매우 흥미로워요.','main character ~ very interesting','The main character is ~로 인물을 소개하는 기본 표현이에요.','인물 소개','A2','humanities','pattern',NULL,14);
+('s_humanities_A2_07','The main character in this novel is very interesting.','이 소설의 주인공이 매우 흥미로워요.','main character ~ very interesting','The main character is ~로 인물을 소개하는 기본 표현이에요.','인물 소개','A2','humanities','pattern',NULL,14)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B1 (문학 분석)
@@ -276,7 +284,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_humanities_B1_04','What do you think the writer is trying to say?','작가가 무엇을 말하려 한다고 생각하세요?','what the writer is trying to say','What do you think ~?는 독자의 해석을 이끌어내는 토론 유도 표현이에요.','주제 토론','B1','humanities','pattern',NULL,18),
 ('s_humanities_B1_05','The conflict between tradition and modernity runs throughout the novel.','전통과 근대성 사이의 갈등이 소설 전반에 걸쳐 흐르고 있어요.','conflict between ~ runs throughout','run throughout은 "전반에 걸쳐 이어지다"는 뜻의 문학 분석 필수 표현이에요.','주제 분석','B1','humanities','pattern',NULL,19),
 ('s_humanities_B1_06','I found the narrator unreliable because his account kept changing.','화자의 설명이 계속 바뀌어서 신뢰하기 어렵다고 느꼈어요.','narrator unreliable ~ kept changing','kept + -ing는 반복적인 행동을 묘사하는 자연스러운 패턴이에요.','화자 분석','B1','humanities','pattern',NULL,20),
-('s_humanities_B1_07','Can you give an example from the text to support your idea?','당신의 생각을 뒷받침할 텍스트에서의 예시를 들어줄 수 있나요?','give an example from the text to support','give an example to support ~는 증거 기반 토론의 핵심 요청 표현이에요.','근거 요청','B1','humanities','pattern',NULL,21);
+('s_humanities_B1_07','Can you give an example from the text to support your idea?','당신의 생각을 뒷받침할 텍스트에서의 예시를 들어줄 수 있나요?','give an example from the text to support','give an example to support ~는 증거 기반 토론의 핵심 요청 표현이에요.','근거 요청','B1','humanities','pattern',NULL,21)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B2 (비평)
@@ -288,7 +297,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_humanities_B2_04','The subtext reveals a deep anxiety about social class.','서브텍스트는 사회 계층에 대한 깊은 불안을 드러내요.','subtext reveals a deep anxiety about','The subtext reveals ~ 패턴은 텍스트의 숨겨진 층위를 드러낼 때 써요.','서브텍스트','B2','humanities','pattern',NULL,25),
 ('s_humanities_B2_05','Reading the novel against its historical context changes how we interpret the ending.','소설을 역사적 맥락에 비추어 읽으면 결말 해석이 달라져요.','Reading ~ against its historical context','reading X against Y 구조는 텍스트를 외부 맥락과 연결하는 비평 방법이에요.','맥락 비평','B2','humanities','pattern',NULL,26),
 ('s_humanities_B2_06','The satirical tone forces the reader to question assumptions they might otherwise take for granted.','풍자적 어조는 독자로 하여금 당연하게 여길 수 있는 전제를 의심하게 만들어요.','satirical tone forces the reader to question','force the reader to ~는 텍스트가 독자에게 미치는 효과를 설명하는 표현이에요.','풍자 분석','B2','humanities','pattern',NULL,27),
-('s_humanities_B2_07','The paradox at the heart of the novel is that freedom leads to isolation.','소설의 핵심에 있는 역설은 자유가 고립으로 이어진다는 것이에요.','paradox at the heart of the novel','at the heart of ~은 핵심 주제나 역설을 강조하는 비평 표현이에요.','역설 분석','B2','humanities','pattern',NULL,28);
+('s_humanities_B2_07','The paradox at the heart of the novel is that freedom leads to isolation.','소설의 핵심에 있는 역설은 자유가 고립으로 이어진다는 것이에요.','paradox at the heart of the novel','at the heart of ~은 핵심 주제나 역설을 강조하는 비평 표현이에요.','역설 분석','B2','humanities','pattern',NULL,28)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C1 (문학 이론)
@@ -300,7 +310,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_humanities_C1_04','Deconstruction does not destroy meaning; it reveals the instability that was always already there.','해체주의는 의미를 파괴하지 않고, 항상 이미 그곳에 있던 불안정성을 드러내요.','always already there','always already는 데리다 이론의 핵심 표현으로 현재 안에 과거가 내포됨을 나타내요.','해체주의 이론','C1','humanities','pattern',NULL,32),
 ('s_humanities_C1_05','Phenomenological criticism foregrounds the reader''s lived experience of the text.','현상학적 비평은 텍스트에 대한 독자의 생생한 경험을 전면에 부각시켜요.','foregrounds the reader''s lived experience','foreground는 무언가를 중심으로 가져온다는 문학 이론 용어예요.','현상학 비평','C1','humanities','pattern',NULL,33),
 ('s_humanities_C1_06','Bakhtin''s concept of polyphony challenges the idea of a single authoritative voice in the novel.','바흐친의 다성 개념은 소설에서 단일하고 권위적인 목소리라는 생각에 도전해요.','polyphony challenges the idea of a single authoritative voice','challenge the idea of ~는 지배적 개념을 문제 삼는 학술 표현이에요.','다성 이론','C1','humanities','pattern',NULL,34),
-('s_humanities_C1_07','The sublime, as Burke defines it, involves a blend of terror and awe that exceeds rational comprehension.','버크가 정의한 숭고함은 이성적 이해를 초월하는 공포와 경외의 혼합을 포함해요.','involves a blend of ~ that exceeds rational comprehension','exceed rational comprehension은 숭고 미학을 설명하는 핵심 구절이에요.','숭고 미학','C1','humanities','pattern',NULL,35);
+('s_humanities_C1_07','The sublime, as Burke defines it, involves a blend of terror and awe that exceeds rational comprehension.','버크가 정의한 숭고함은 이성적 이해를 초월하는 공포와 경외의 혼합을 포함해요.','involves a blend of ~ that exceeds rational comprehension','exceed rational comprehension은 숭고 미학을 설명하는 핵심 구절이에요.','숭고 미학','C1','humanities','pattern',NULL,35)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C2 (문학 이론 심화)
@@ -312,4 +323,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_humanities_C2_04','As a rhizome, the text resists any single origin or fixed endpoint of meaning.','리좀으로서 텍스트는 어떠한 단일한 기원이나 고정된 의미의 종착점에도 저항해요.','resists any single origin or fixed endpoint','resist any single ~는 다원성과 열린 구조를 강조할 때 쓰는 표현이에요.','리좀 이론','C2','humanities','pattern',NULL,39),
 ('s_humanities_C2_05','Heteroglossia ensures that the novel can never be reduced to a single ideological position.','헤테로글로시아는 소설이 결코 단일한 이데올로기적 입장으로 환원될 수 없음을 보장해요.','can never be reduced to a single ideological position','be reduced to ~는 복잡성을 단순화하는 환원주의에 저항할 때 쓰는 표현이에요.','다성 이론','C2','humanities','pattern',NULL,40),
 ('s_humanities_C2_06','The chronotope of the threshold marks a liminal space where identity is suspended between states.','문지방의 크로노토프는 정체성이 두 상태 사이에 유예되는 경계적 공간을 표시해요.','marks a liminal space where identity is suspended between states','liminal space ~ suspended between states는 경계 공간의 특성을 묘사하는 핵심 표현이에요.','크로노토프 분석','C2','humanities','pattern',NULL,41),
-('s_humanities_C2_07','Negative capability, for Keats, is not a weakness but the poet''s supreme capacity to inhabit uncertainty without discomfort.','키츠에게 부정적 수용 능력은 약점이 아니라 불편 없이 불확실성 안에 머무는 시인의 최고 능력이에요.','not a weakness but the poet''s supreme capacity to inhabit uncertainty','inhabit uncertainty는 불확실성을 견디는 것이 아닌 그 안에 사는 것을 나타내는 키츠 핵심 표현이에요.','낭만 시학','C2','humanities','pattern',NULL,42);
+('s_humanities_C2_07','Negative capability, for Keats, is not a weakness but the poet''s supreme capacity to inhabit uncertainty without discomfort.','키츠에게 부정적 수용 능력은 약점이 아니라 불편 없이 불확실성 안에 머무는 시인의 최고 능력이에요.','not a weakness but the poet''s supreme capacity to inhabit uncertainty','inhabit uncertainty는 불확실성을 견디는 것이 아닌 그 안에 사는 것을 나타내는 키츠 핵심 표현이에요.','낭만 시학','C2','humanities','pattern',NULL,42)
+ON CONFLICT (id) DO NOTHING;

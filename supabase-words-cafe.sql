@@ -41,7 +41,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_cafe_A1_32','outside','/ˌaʊtˈsaɪd/','adverb','바깥에','In the open air, not inside a building.','Can we sit {outside}?','바깥에 앉을 수 있나요?','outside','A1','cafe',2,'outdoor seating cafe terrace sunny'),
 ('w_cafe_A1_33','inside','/ˌɪnˈsaɪd/','adverb','안쪽에','In the interior of a building.','I prefer to sit {inside}.','안쪽에 앉고 싶어요.','inside','A1','cafe',2,'cafe interior inside cozy warm'),
 ('w_cafe_A1_34','fresh','/freʃ/','adjective','신선한','Recently made or obtained.','Is this {fresh} today?','오늘 신선한 건가요?','fresh','A1','cafe',1,'fresh ingredients vegetables market morning'),
-('w_cafe_A1_35','sweet','/swiːt/','adjective','단','Having the pleasant taste of sugar.','This is really {sweet}.','이게 정말 달아요.','sweet','A1','cafe',2,'sweet dessert cake sugar taste');
+('w_cafe_A1_35','sweet','/swiːt/','adjective','단','Having the pleasant taste of sugar.','This is really {sweet}.','이게 정말 달아요.','sweet','A1','cafe',2,'sweet dessert cake sugar taste')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2 (35개)
@@ -82,7 +83,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_cafe_A2_32','bowl','/bəʊl/','noun','그릇','A round dish used to serve food.','Can I get that in a {bowl}?','그걸 그릇에 담아 줄 수 있나요?','bowl','A2','cafe',2,'bowl soup rice food ceramic restaurant'),
 ('w_cafe_A2_33','extra','/ˈekstrə/','adjective','추가의','More than what is usual or expected.','Can I get {extra} cheese?','치즈 추가로 주실 수 있나요?','extra','A2','cafe',1,'extra cheese topping food add-on restaurant'),
 ('w_cafe_A2_34','cut','/kʌt/','verb','자르다','To divide food into pieces.','Can you {cut} the pizza into eight slices?','피자를 여덟 조각으로 잘라주실 수 있나요?','cut','A2','cafe',2,'cutting pizza slices board knife restaurant'),
-('w_cafe_A2_35','enjoy','/ɪnˈdʒɔɪ/','verb','즐기다','To take pleasure in something.','I hope you {enjoy} your meal.','식사 맛있게 하세요.','enjoy','A2','cafe',1,'enjoying meal restaurant happy customer smile');
+('w_cafe_A2_35','enjoy','/ɪnˈdʒɔɪ/','verb','즐기다','To take pleasure in something.','I hope you {enjoy} your meal.','식사 맛있게 하세요.','enjoy','A2','cafe',1,'enjoying meal restaurant happy customer smile')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1 (35개)
@@ -123,7 +125,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_cafe_B1_32','marinated','/ˈmærɪneɪtɪd/','adjective','양념에 재운','Soaked in a sauce or seasoning before cooking.','The {marinated} chicken is so juicy.','양념에 재운 치킨이 정말 촉촉해요.','marinated','B1','cafe',1,'marinated chicken seasoning herbs restaurant grill'),
 ('w_cafe_B1_33','dietary restriction','/ˈdaɪətri rɪˈstrɪkʃən/','noun','식이 제한','A limitation on what foods a person can eat.','I have a {dietary restriction} — no dairy.','저는 유제품을 먹지 못해요.','dietary restriction','B1','cafe',1,'dietary restriction dairy free menu restaurant'),
 ('w_cafe_B1_34','course','/kɔːrs/','noun','코스','One of several dishes that make up a meal.','This is a three-{course} meal.','이건 3코스 식사예요.','course','B1','cafe',1,'three course meal restaurant dinner elegant'),
-('w_cafe_B1_35','halal','/həˈlɑːl/','adjective','할랄의','Permissible according to Muslim law.','Is there a {halal} option available?','할랄 옵션이 있나요?','halal','B1','cafe',2,'halal food certification menu restaurant mosque');
+('w_cafe_B1_35','halal','/həˈlɑːl/','adjective','할랄의','Permissible according to Muslim law.','Is there a {halal} option available?','할랄 옵션이 있나요?','halal','B1','cafe',2,'halal food certification menu restaurant mosque')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2 (35개)
@@ -164,7 +167,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_cafe_B2_32','tartness','/ˈtɑːrtnəs/','noun','새콤함','The quality of having a sharp, acidic taste.','The lemon curd has a pleasant {tartness}.','레몬 커드에 기분 좋은 새콤함이 있어요.','tartness','B2','cafe',2,'lemon curd tart sharp sour taste citrus'),
 ('w_cafe_B2_33','acidity','/əˈsɪdɪti/','noun','산도','The level of acid in food or wine.','The wine has a high {acidity} that cuts through the fat.','이 와인의 높은 산도가 기름기를 잡아줘요.','acidity','B2','cafe',1,'wine acidity glass tasting flavor profile'),
 ('w_cafe_B2_34','texture','/ˈtekstʃər/','noun','식감','The feel of a food in the mouth.','The {texture} of the mousse is incredibly smooth.','무스의 식감이 믿을 수 없을 만큼 부드러워요.','texture','B2','cafe',1,'mousse smooth texture spoon plate dessert'),
-('w_cafe_B2_35','flambé','/flæmˈbeɪ/','verb','플람베하다','To pour alcohol over food and set it alight briefly.','The waiter {flambéed} the crêpes at the table.','웨이터가 테이블 옆에서 크레이프를 플람베했어요.','flambéed','B2','cafe',2,'flambe crepe fire alcohol tableside restaurant');
+('w_cafe_B2_35','flambé','/flæmˈbeɪ/','verb','플람베하다','To pour alcohol over food and set it alight briefly.','The waiter {flambéed} the crêpes at the table.','웨이터가 테이블 옆에서 크레이프를 플람베했어요.','flambéed','B2','cafe',2,'flambe crepe fire alcohol tableside restaurant')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1 (35개)
@@ -205,7 +209,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_cafe_C1_32','praline','/ˈprɑːliːn/','noun','프랄린','A sweet candy made from nuts and caramelized sugar.','The dessert is topped with hazelnut {praline}.','디저트 위에 헤이즐넛 프랄린이 얹혀 있어요.','praline','C1','cafe',2,'praline hazelnut caramel sweet dessert'),
 ('w_cafe_C1_33','beurre blanc','/ˌbɜːr ˈblɒŋk/','noun','뵈르 블랑 소스','A classic French white butter sauce made with wine and shallots.','The halibut rests in a delicate {beurre blanc}.','광어가 섬세한 뵈르 블랑에 담겨 나와요.','beurre blanc','C1','cafe',2,'beurre blanc sauce butter fish restaurant french'),
 ('w_cafe_C1_34','confit','/ˈkɒnfi/','noun','콩피 (저온에 기름에 익힌)','Food slowly cooked in its own fat at a low temperature.','The duck leg {confit} is fall-off-the-bone tender.','오리 다리 콩피가 뼈에서 살이 쉽게 떨어질 만큼 연해요.','confit','C1','cafe',1,'duck confit leg fat slow cooked restaurant'),
-('w_cafe_C1_35','crémeux','/kreɪˈmø/','noun','크레뫼 (크리미 가나슈)','A very smooth, creamy ganache-based dessert component.','The plate features a dark chocolate {crémeux}.','접시에 다크 초콜릿 크레뫼가 올려져 있어요.','crémeux','C1','cafe',2,'cremeux chocolate creamy smooth dessert pastry');
+('w_cafe_C1_35','crémeux','/kreɪˈmø/','noun','크레뫼 (크리미 가나슈)','A very smooth, creamy ganache-based dessert component.','The plate features a dark chocolate {crémeux}.','접시에 다크 초콜릿 크레뫼가 올려져 있어요.','crémeux','C1','cafe',2,'cremeux chocolate creamy smooth dessert pastry')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2 (35개)
@@ -246,7 +251,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_cafe_C2_32','cru','/kruː/','noun','크뤼 (특정 포도밭)','A term for a vineyard or group of vineyards recognized for producing superior wine.','This is a Grand {Cru} Burgundy.','이것은 그랑 크뤼 부르고뉴예요.','cru','C2','cafe',1,'grand cru burgundy vineyard classified wine superior'),
 ('w_cafe_C2_33','négociant','/neɪˈɡɒʃɪənt/','noun','네고시앙 (와인 중개상)','A wine merchant who buys grapes or wine from growers to blend and bottle.','The {négociant} purchased juice from several domaines.','네고시앙이 여러 도멘에서 와인 원액을 구입했어요.','négociant','C2','cafe',2,'negociant merchant wine buyer burgundy bottle'),
 ('w_cafe_C2_34','bâtonnage','/bɑːtɒˈnɑːʒ/','noun','바토나주 (효모 찌꺼기 젓기)','The process of stirring wine lees to add richness and texture.','Weekly {bâtonnage} enriches the texture of this Chardonnay.','주 1회 바토나주가 이 샤르도네의 질감을 풍부하게 해줘요.','bâtonnage','C2','cafe',2,'batonnage stirring lees chardonnay texture barrel'),
-('w_cafe_C2_35','microbiome','/ˈmaɪkrəʊbaɪəʊm/','noun','미생물군 (발효 환경)','The community of microorganisms present in a fermentation environment.','Each winery''s {microbiome} is unique and shapes its wines.','각 와이너리의 미생물군은 고유하며 와인의 특성을 형성해요.','microbiome','C2','cafe',2,'microbiome winery fermentation unique bacteria yeast');
+('w_cafe_C2_35','microbiome','/ˈmaɪkrəʊbaɪəʊm/','noun','미생물군 (발효 환경)','The community of microorganisms present in a fermentation environment.','Each winery''s {microbiome} is unique and shapes its wines.','각 와이너리의 미생물군은 고유하며 와인의 특성을 형성해요.','microbiome','C2','cafe',2,'microbiome winery fermentation unique bacteria yeast')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A1 (7개)
@@ -259,7 +265,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_cafe_A1_04','Is this seat taken?','이 자리 비어 있나요?','Is this seat taken','카페나 식당에서 빈자리를 확인할 때 쓰는 기본 표현이에요.','자리 확인','A1','cafe','pattern',NULL,4),
 ('s_cafe_A1_05','How much is this?','이거 얼마예요?','How much is','가격을 물어볼 때 쓰는 가장 기본적인 표현이에요.','가격 문의','A1','cafe','pattern',NULL,5),
 ('s_cafe_A1_06','The bill, please.','계산서 주세요.','The bill, please','식사 후 계산을 요청하는 가장 간결한 표현이에요.','계산 요청','A1','cafe','pattern',NULL,6),
-('s_cafe_A1_07','This is delicious!','정말 맛있어요!','This is delicious','음식이 맛있을 때 바로 칭찬할 수 있는 가장 자연스러운 표현이에요.','음식 칭찬','A1','cafe','pattern',NULL,7);
+('s_cafe_A1_07','This is delicious!','정말 맛있어요!','This is delicious','음식이 맛있을 때 바로 칭찬할 수 있는 가장 자연스러운 표현이에요.','음식 칭찬','A1','cafe','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A2 (7개)
@@ -272,7 +279,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_cafe_A2_04','Could we split the bill?','계산을 따로 할 수 있나요?','split the bill','여러 명이 함께 식사 후 각자 계산하고 싶을 때 쓰는 표현이에요.','계산 분리','A2','cafe','pattern',NULL,4),
 ('s_cafe_A2_05','Can I have a refill, please?','리필 해주실 수 있나요?','a refill','음료나 물이 비었을 때 다시 채워달라고 요청하는 표현이에요.','리필 요청','A2','cafe','pattern',NULL,5),
 ('s_cafe_A2_06','How long is the wait?','얼마나 기다려야 하나요?','How long is the wait','식당이 꽉 찼을 때 대기 시간을 묻는 표현이에요.','대기 시간 문의','A2','cafe','pattern',NULL,6),
-('s_cafe_A2_07','Do you have a vegetarian option?','채식 메뉴가 있나요?','a vegetarian option','채식주의자이거나 고기를 먹지 않을 때 메뉴를 확인하는 표현이에요.','채식 메뉴 확인','A2','cafe','pattern',NULL,7);
+('s_cafe_A2_07','Do you have a vegetarian option?','채식 메뉴가 있나요?','a vegetarian option','채식주의자이거나 고기를 먹지 않을 때 메뉴를 확인하는 표현이에요.','채식 메뉴 확인','A2','cafe','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B1 (7개)
@@ -285,7 +293,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_cafe_B1_04','Is the kitchen able to accommodate dietary restrictions?','식이 제한에 맞춰 조리가 가능한가요?','accommodate dietary restrictions','"accommodate"는 요구를 수용한다는 뜻으로 레스토랑 맥락에서 자연스러운 표현이에요.','식이 제한 문의','B1','cafe','pattern',NULL,4),
 ('s_cafe_B1_05','Could I substitute the fries for a salad?','감자튀김 대신 샐러드로 바꿀 수 있나요?','substitute the fries for','"substitute A for B"는 A를 B로 교체한다는 표현이에요. 메뉴 커스터마이즈에 유용해요.','메뉴 변경 요청','B1','cafe','pattern',NULL,5),
 ('s_cafe_B1_06','I think there''s a mistake in the bill.','계산서에 실수가 있는 것 같아요.','I think there''s a mistake','"I think"를 앞에 붙이면 직접적인 항의보다 훨씬 예의 바르게 들려요.','계산서 오류 지적','B1','cafe','pattern',NULL,6),
-('s_cafe_B1_07','What''s the house specialty today?','오늘의 특선 요리는 무엇인가요?','the house specialty','레스토랑에서 셰프가 자신 있는 요리를 물어볼 때 쓰는 표현이에요.','특선 요리 문의','B1','cafe','pattern',NULL,7);
+('s_cafe_B1_07','What''s the house specialty today?','오늘의 특선 요리는 무엇인가요?','the house specialty','레스토랑에서 셰프가 자신 있는 요리를 물어볼 때 쓰는 표현이에요.','특선 요리 문의','B1','cafe','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B2 (7개)
@@ -298,7 +307,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_cafe_B2_04','I noticed the menu focuses heavily on locally sourced, seasonal produce.','메뉴가 로컬 식재료와 제철 재료를 중심으로 구성된 것 같아요.','locally sourced, seasonal produce','레스토랑의 철학을 인식하고 표현할 줄 아는 것은 미식가의 언어예요.','레스토랑 철학 언급','B2','cafe','pattern',NULL,4),
 ('s_cafe_B2_05','The texture of the mousse is incredibly light — it almost dissolves on the palate.','무스의 식감이 믿을 수 없을 만큼 가벼워요. 입안에서 녹아버리는 것 같아요.','dissolves on the palate','"on the palate"은 "입안에서"라는 뜻으로 음식 리뷰에서 자주 쓰는 표현이에요.','디저트 묘사','B2','cafe','pattern',NULL,5),
 ('s_cafe_B2_06','Could you tell me more about the provenance of the ingredients?','재료의 산지에 대해 더 알려주실 수 있나요?','provenance of the ingredients','좋은 레스토랑에서는 재료의 출처를 자랑스럽게 이야기해요. 이 질문으로 대화를 유도하세요.','재료 출처 문의','B2','cafe','pattern',NULL,6),
-('s_cafe_B2_07','I think the fermentation adds a wonderful complexity to the bread.','발효 과정이 빵에 훌륭한 복잡성을 더해주는 것 같아요.','fermentation adds a wonderful complexity','음식 제조 과정을 이해하고 표현하는 것은 B2 수준의 핵심 역량이에요.','요리 과정 언급','B2','cafe','pattern',NULL,7);
+('s_cafe_B2_07','I think the fermentation adds a wonderful complexity to the bread.','발효 과정이 빵에 훌륭한 복잡성을 더해주는 것 같아요.','fermentation adds a wonderful complexity','음식 제조 과정을 이해하고 표현하는 것은 B2 수준의 핵심 역량이에요.','요리 과정 언급','B2','cafe','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C1 (7개)
@@ -311,7 +321,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_cafe_C1_04','I appreciate how the reduction ties all the elements of the dish together.','리덕션이 요리의 모든 요소를 하나로 묶어주는 방식이 마음에 들어요.','the reduction ties all the elements together','"ties together"는 요소들을 통합한다는 뜻으로 요리 평론에서 유용한 표현이에요.','요리 기법 평론','C1','cafe','pattern',NULL,4),
 ('s_cafe_C1_05','Could you walk me through the foraging philosophy behind this seasonal menu?','이 시즌 메뉴의 채집 철학에 대해 설명해 주실 수 있나요?','walk me through the foraging philosophy','"walk me through"는 단계별로 설명해 달라는 뜻이에요. 지적 호기심을 표현하는 세련된 표현이에요.','레스토랑 철학 탐구','C1','cafe','pattern',NULL,5),
 ('s_cafe_C1_06','The Michelin inspector would certainly appreciate the restraint shown in the plating.','미슐랭 심사위원이라면 플레이팅의 절제미를 분명히 높이 평가할 거예요.','restraint shown in the plating','"restraint in plating"은 과하지 않은 절제된 플레이팅을 뜻해요. 파인 다이닝의 핵심 미학이에요.','파인 다이닝 평론','C1','cafe','pattern',NULL,6),
-('s_cafe_C1_07','The sous vide preparation ensures a consistency that would be impossible to achieve with traditional methods.','수비드 조리법으로 전통 방식으로는 불가능한 일관성을 달성해요.','ensures a consistency that would be impossible','"ensures a consistency"는 균일한 품질을 보장한다는 뜻이에요.','조리 기법 설명','C1','cafe','pattern',NULL,7);
+('s_cafe_C1_07','The sous vide preparation ensures a consistency that would be impossible to achieve with traditional methods.','수비드 조리법으로 전통 방식으로는 불가능한 일관성을 달성해요.','ensures a consistency that would be impossible','"ensures a consistency"는 균일한 품질을 보장한다는 뜻이에요.','조리 기법 설명','C1','cafe','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C2 (7개)
@@ -324,4 +335,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_cafe_C2_04','The appellation laws in Champagne strictly regulate the permitted varieties, yield per hectare, and minimum aging on lees.','샴페인의 원산지 명칭 법률은 허용 품종, 헥타르당 수확량, 효모 찌꺼기 위 최소 숙성 기간을 엄격히 규제해요.','appellation laws strictly regulate','원산지 명칭(appellation) 법률은 와인의 품질과 정체성을 보호하기 위한 법적 장치예요.','와인 원산지 명칭 설명','C2','cafe','pattern',NULL,4),
 ('s_cafe_C2_05','The chef''s application of spherification transforms a classic ponzu into tiny caviar pearls that burst with umami on the palate.','셰프의 구형화 기법이 클래식 폰즈를 입안에서 감칠맛이 터지는 작은 캐비어 구슬로 변환시켜요.','spherification transforms into caviar pearls','구형화는 분자 요리의 대표 기법으로 액체를 얇은 막으로 감싸 캐비어 형태로 만들어요.','분자 요리 묘사','C2','cafe','pattern',NULL,5),
 ('s_cafe_C2_06','What distinguishes a Grand Cru from a Premier Cru in Burgundy is ultimately a question of terroir specificity and the geological composition of the soil.','부르고뉴에서 그랑 크뤼와 프리미에 크뤼를 구별하는 것은 결국 테루아의 특수성과 토양의 지질학적 구성의 문제예요.','distinguishes Grand Cru from Premier Cru','그랑 크뤼와 프리미에 크뤼는 부르고뉴의 포도밭 등급 체계예요. 토양과 위치가 핵심이에요.','와인 등급 설명','C2','cafe','pattern',NULL,6),
-('s_cafe_C2_07','The biodynamic viticulture practiced here treats the entire estate as a self-sustaining organism, eschewing synthetic inputs in favor of astronomical planting calendars and herbal preparations.','여기서 시행하는 생명역동 포도 재배는 합성 투입물 대신 천문학적 식재 달력과 허브 제제를 선호하며 전체 부동산을 자급자족하는 유기체로 취급해요.','biodynamic viticulture treats the entire estate as a self-sustaining organism','생명역동 농업은 루돌프 슈타이너의 철학에 기반한 총체적 유기 농업 접근법이에요.','생명역동 농업 설명','C2','cafe','pattern',NULL,7);
+('s_cafe_C2_07','The biodynamic viticulture practiced here treats the entire estate as a self-sustaining organism, eschewing synthetic inputs in favor of astronomical planting calendars and herbal preparations.','여기서 시행하는 생명역동 포도 재배는 합성 투입물 대신 천문학적 식재 달력과 허브 제제를 선호하며 전체 부동산을 자급자족하는 유기체로 취급해요.','biodynamic viticulture treats the entire estate as a self-sustaining organism','생명역동 농업은 루돌프 슈타이너의 철학에 기반한 총체적 유기 농업 접근법이에요.','생명역동 농업 설명','C2','cafe','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

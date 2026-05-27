@@ -41,7 +41,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_weather_A1_32','thunder','/ˈθʌndər/','noun','천둥','The loud noise heard during a storm.','The {thunder} woke me up last night.','어젯밤에 천둥 소리에 잠이 깼어요.','thunder','A1','weather',3,'thunder storm lightning'),
 ('w_weather_A1_33','lightning','/ˈlaɪtnɪŋ/','noun','번개','A flash of bright light in the sky during a storm.','We saw {lightning} in the distance.','멀리서 번개가 보였어요.','lightning','A1','weather',3,'lightning flash storm night'),
 ('w_weather_A1_34','flood','/flʌd/','noun','홍수','An overflow of water over normally dry land.','Heavy rain caused a {flood} in the town.','폭우로 마을에 홍수가 났어요.','flood','A1','weather',3,'flood water street submerged'),
-('w_weather_A1_35','autumn','/ˈɔːtəm/','noun','가을','The season between summer and winter.','The leaves turn red in {autumn}.','가을에 나뭇잎이 빨갛게 물들어요.','autumn','A1','weather',3,'autumn leaves red orange fall');
+('w_weather_A1_35','autumn','/ˈɔːtəm/','noun','가을','The season between summer and winter.','The leaves turn red in {autumn}.','가을에 나뭇잎이 빨갛게 물들어요.','autumn','A1','weather',3,'autumn leaves red orange fall')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2 (35개)
@@ -82,7 +83,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_weather_A2_32','cloudburst','/ˈklaʊdbɜːrst/','noun','집중 호우','A sudden, very heavy shower.','A {cloudburst} flooded the underpass.','집중 호우로 지하차도가 침수됐어요.','cloudburst','A2','weather',3,'cloudburst flash flood rain'),
 ('w_weather_A2_33','mist','/mɪst/','noun','엷은 안개, 박무','A thin layer of cloud low over land.','The valley was covered in morning {mist}.','계곡이 아침 안개에 덮였어요.','mist','A2','weather',3,'mist morning valley soft'),
 ('w_weather_A2_34','sleet','/sliːt/','noun','진눈깨비','A mixture of rain and snow.','It''s not quite snow — it''s {sleet}.','완전한 눈은 아니고 진눈깨비예요.','sleet','A2','weather',3,'sleet rain snow mix winter'),
-('w_weather_A2_35','hazy','/ˈheɪzi/','adjective','뿌연, 안개 낀','Covered by a thin mist or haze.','The mountains look {hazy} in the distance.','산이 멀리서 뿌옇게 보여요.','hazy','A2','weather',3,'hazy sky mountains distance mist');
+('w_weather_A2_35','hazy','/ˈheɪzi/','adjective','뿌연, 안개 낀','Covered by a thin mist or haze.','The mountains look {hazy} in the distance.','산이 멀리서 뿌옇게 보여요.','hazy','A2','weather',3,'hazy sky mountains distance mist')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1 (35개)
@@ -123,7 +125,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_weather_B1_32','advisory','/ədˈvaɪzəri/','noun','기상 주의보','An official warning about potential weather hazards.','A travel {advisory} was issued for the mountain roads.','산악 도로에 대한 여행 주의보가 발령됐어요.','advisory','B1','weather',3,'advisory warning weather official'),
 ('w_weather_B1_33','trough','/trɒf/','noun','기압골','An elongated region of low atmospheric pressure.','A weather {trough} is bringing rain to the west.','기압골이 서쪽 지역에 비를 가져오고 있어요.','trough','B1','weather',3,'trough pressure weather map'),
 ('w_weather_B1_34','ridge','/rɪdʒ/','noun','고기압 마루, 능선','An elongated region of high atmospheric pressure.','A high pressure {ridge} will keep the weather fine.','고기압 마루가 날씨를 좋게 유지해줄 거예요.','ridge','B1','weather',3,'ridge high pressure map clear'),
-('w_weather_B1_35','seasonal','/ˈsiːzənəl/','adjective','계절적인, 계절에 따른','Related to or varying with the seasons.','The {seasonal} rains usually begin in June.','계절성 우기는 보통 6월에 시작해요.','seasonal','B1','weather',3,'seasonal rain monsoon cycle');
+('w_weather_B1_35','seasonal','/ˈsiːzənəl/','adjective','계절적인, 계절에 따른','Related to or varying with the seasons.','The {seasonal} rains usually begin in June.','계절성 우기는 보통 6월에 시작해요.','seasonal','B1','weather',3,'seasonal rain monsoon cycle')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2 (35개)
@@ -164,7 +167,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_weather_B2_32','isobar','/ˈaɪsəʊbɑːr/','noun','등압선','A line on a weather map connecting places of equal atmospheric pressure.','The closely packed {isobar}s indicate strong winds.','촘촘히 모인 등압선은 강한 바람을 나타내요.','isobars','B2','weather',3,'isobar weather map lines pressure'),
 ('w_weather_B2_33','isotherm','/ˈaɪsəʊθɜːrm/','noun','등온선','A line on a map connecting places of equal temperature.','The {isotherm}s show the north-south temperature gradient.','등온선은 남북 기온 경도를 보여줘요.','isotherms','B2','weather',3,'isotherm temperature map gradient'),
 ('w_weather_B2_34','anticyclone','/ˌæntiˈsaɪkloʊn/','noun','고기압','A system of winds that spiral outward from a high-pressure centre.','The {anticyclone} over Siberia brings dry, cold air.','시베리아의 고기압이 건조하고 차가운 공기를 가져와요.','anticyclone','B2','weather',2,'anticyclone high pressure map'),
-('w_weather_B2_35','ocean current','/ˈoʊʃən ˈkʌrənt/','noun','해류','A continuous, directed movement of seawater.','{Ocean current}s redistribute heat around the globe.','해류는 지구 전체에 열을 재분배해요.','ocean currents','B2','weather',2,'ocean current map sea temperature');
+('w_weather_B2_35','ocean current','/ˈoʊʃən ˈkʌrənt/','noun','해류','A continuous, directed movement of seawater.','{Ocean current}s redistribute heat around the globe.','해류는 지구 전체에 열을 재분배해요.','ocean currents','B2','weather',2,'ocean current map sea temperature')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1 (35개)
@@ -205,7 +209,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_weather_C1_32','coriolis effect','/ˌkɒriˈoʊlɪs ɪˈfekt/','noun','코리올리 효과','The deflection of moving air or water due to Earth''s rotation.','The {Coriolis effect} causes storms to spin.','코리올리 효과는 폭풍을 회전하게 만들어요.','Coriolis effect','C1','weather',2,'Coriolis effect rotation earth wind'),
 ('w_weather_C1_33','orographic lift','/ˌɒrəˈɡræfɪk lɪft/','noun','지형성 상승','The forced ascent of air over a mountain range, often causing precipitation.','{Orographic lift} makes the windward side of mountains much wetter.','지형성 상승이 산의 바람받이 쪽을 훨씬 습하게 만들어요.','orographic lift','C1','weather',3,'orographic lift mountain rain windward'),
 ('w_weather_C1_34','atmospheric river','/ˌætməsˈferɪk ˈrɪvər/','noun','대기천','A narrow band of concentrated moisture transport in the atmosphere.','An {atmospheric river} caused catastrophic flooding.','대기천이 대규모 홍수를 일으켰어요.','atmospheric river','C1','weather',2,'atmospheric river moisture flood map'),
-('w_weather_C1_35','climate sensitivity','/ˈklaɪmɪt senˈsɪtɪvɪti/','noun','기후 민감도','The expected rise in global temperature caused by a doubling of atmospheric CO₂.','Estimating {climate sensitivity} is a key challenge in research.','기후 민감도 추정은 연구의 핵심 과제예요.','climate sensitivity','C1','weather',2,'climate sensitivity CO2 temperature rise');
+('w_weather_C1_35','climate sensitivity','/ˈklaɪmɪt senˈsɪtɪvɪti/','noun','기후 민감도','The expected rise in global temperature caused by a doubling of atmospheric CO₂.','Estimating {climate sensitivity} is a key challenge in research.','기후 민감도 추정은 연구의 핵심 과제예요.','climate sensitivity','C1','weather',2,'climate sensitivity CO2 temperature rise')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2 (35개)
@@ -247,7 +252,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_weather_C2_32','emission pathway','/ɪˈmɪʃən ˈpɑːθweɪ/','noun','배출 경로','A trajectory describing future greenhouse gas emissions over time.','Choosing a steep {emission pathway} reduction is critical.','가파른 배출 경로 감소를 선택하는 것이 매우 중요해요.','emission pathway','C2','weather',2,'emission pathway CO2 reduction graph'),
 ('w_weather_C2_33','net zero','/net ˈzɪərəʊ/','noun','탄소 중립, 넷 제로','A state in which the greenhouse gases emitted are balanced by those removed from the atmosphere.','Many countries have pledged to achieve {net zero} by 2050.','많은 나라들이 2050년까지 탄소 중립 달성을 약속했어요.','net zero','C2','weather',2,'net zero carbon neutral target'),
 ('w_weather_C2_34','tectonic influence','/tekˈtɒnɪk ˈɪnfluəns/','noun','지각 변동의 영향','The effect of plate movement on long-term climate by reshaping landmasses and sea levels.','{Tectonic influence} shaped Earth''s climate over geological time.','지각 변동의 영향이 지질학적 시간에 걸쳐 지구 기후를 형성했어요.','tectonic influence','C2','weather',3,'tectonic plates climate geology'),
-('w_weather_C2_35','deep time climate','/diːp taɪm ˈklaɪmɪt/','noun phrase','심층 시간 기후 (지질학적 기후)','Climate conditions of geological eons, studied through rock and fossil records.','Understanding {deep time climate} helps contextualise modern warming.','심층 시간 기후를 이해하면 현대 온난화를 더 잘 이해할 수 있어요.','deep time climate','C2','weather',3,'deep time climate fossil geology record');
+('w_weather_C2_35','deep time climate','/diːp taɪm ˈklaɪmɪt/','noun phrase','심층 시간 기후 (지질학적 기후)','Climate conditions of geological eons, studied through rock and fossil records.','Understanding {deep time climate} helps contextualise modern warming.','심층 시간 기후를 이해하면 현대 온난화를 더 잘 이해할 수 있어요.','deep time climate','C2','weather',3,'deep time climate fossil geology record')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCES / PATTERNS — A1 (7개)
@@ -260,7 +266,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_weather_A1_04','It''s raining outside.','밖에 비가 오고 있어요.','It''s raining','동작이 지금 일어나고 있을 때는 "-ing" 형태를 써요. "It rains"보다 "It''s raining"이 지금 이 순간의 날씨를 묘사해요.','날씨 묘사','A1','weather','pattern',NULL,4),
 ('s_weather_A1_05','Don''t forget your umbrella!','우산 가져가는 거 잊지 마세요!','Don''t forget your umbrella','"Don''t forget your ~!"는 상대방을 걱정해 챙겨주는 표현이에요. 날씨 대화에서 자연스럽게 쓸 수 있어요.','날씨 조언','A1','weather','pattern',NULL,5),
 ('s_weather_A1_06','What is the weather like in winter?','겨울 날씨는 어때요?','weather like in winter','계절을 붙여 물으면 특정 계절의 날씨 특징을 알 수 있어요. "in + 계절" 조합을 꼭 기억하세요.','계절 날씨 묻기','A1','weather','pattern',NULL,6),
-('s_weather_A1_07','It is very cold today, isn''t it?','오늘 정말 춥죠, 그렇지 않나요?','isn''t it','문장 끝에 "isn''t it?"를 붙이면 상대방의 동의를 구하는 부가의문문이 돼요. 영국 영어에서 특히 자주 써요.','날씨 공감 구하기','A1','weather','pattern',NULL,7);
+('s_weather_A1_07','It is very cold today, isn''t it?','오늘 정말 춥죠, 그렇지 않나요?','isn''t it','문장 끝에 "isn''t it?"를 붙이면 상대방의 동의를 구하는 부가의문문이 돼요. 영국 영어에서 특히 자주 써요.','날씨 공감 구하기','A1','weather','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCES / PATTERNS — A2 (7개)
@@ -273,7 +280,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_weather_A2_04','The forecast says it will be cloudy all day.','예보에서 하루 종일 흐릴 거라고 해요.','The forecast says it will be','"The forecast says ~"는 일기 예보 내용을 전달할 때 쓰는 패턴이에요. 뉴스나 앱 정보를 공유할 때 자연스러워요.','예보 전달','A2','weather','pattern',NULL,4),
 ('s_weather_A2_05','It was so foggy this morning that I could barely see.','오늘 아침에 너무 안개가 끼어서 잘 보이지 않았어요.','so foggy that I could barely see','"so + 형용사 + that ~" 패턴은 결과를 강조해요. "barely"는 "거의 ~않다"는 뜻으로 부정적 상황을 강조할 때 써요.','날씨 상황 묘사','A2','weather','pattern',NULL,5),
 ('s_weather_A2_06','The temperature dropped suddenly overnight.','밤 사이에 기온이 갑자기 떨어졌어요.','temperature dropped suddenly overnight','"overnight"는 "밤 사이에"라는 뜻으로, 날씨가 빠르게 변한 상황을 표현할 때 자주 써요.','기온 변화 묘사','A2','weather','pattern',NULL,6),
-('s_weather_A2_07','I prefer sunny weather to rainy weather.','저는 비 오는 날보다 화창한 날을 더 좋아해요.','prefer A to B','"prefer A to B"는 "B보다 A를 더 좋아한다"는 표현이에요. 날씨 취향을 말할 때 자연스럽게 쓸 수 있어요.','날씨 선호 표현','A2','weather','pattern',NULL,7);
+('s_weather_A2_07','I prefer sunny weather to rainy weather.','저는 비 오는 날보다 화창한 날을 더 좋아해요.','prefer A to B','"prefer A to B"는 "B보다 A를 더 좋아한다"는 표현이에요. 날씨 취향을 말할 때 자연스럽게 쓸 수 있어요.','날씨 선호 표현','A2','weather','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCES / PATTERNS — B1 (7개)
@@ -286,7 +294,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_weather_B1_04','I would recommend bringing a light jacket in case the weather changes.','날씨가 변할 경우를 대비해 얇은 재킷을 챙기길 권해요.','in case the weather changes','"in case"는 "~에 대비해서"라는 뜻으로, 예방적 조언을 줄 때 꼭 쓰는 표현이에요.','옷차림 조언','B1','weather','pattern',NULL,4),
 ('s_weather_B1_05','The weather has been unusually warm for this time of year.','이맘때치고는 날씨가 유난히 따뜻해요.','unusually warm for this time of year','계절 평균과 비교해 현재 날씨가 특이하다고 말할 때 쓰는 표현이에요. "for this time of year"를 꼭 익혀두세요.','날씨 비교 묘사','B1','weather','pattern',NULL,5),
 ('s_weather_B1_06','There''s a severe weather warning in place for the northern regions.','북부 지역에 악천후 경보가 발령되어 있어요.','severe weather warning in place','"There''s a ~ warning in place"는 공식 기상 경보를 전달하는 뉴스식 표현이에요.','기상 경보 전달','B1','weather','pattern',NULL,6),
-('s_weather_B1_07','With the heat index above 40 degrees, outdoor activities are not advisable.','체감 온도가 40도를 넘으니 야외 활동은 권장하지 않아요.','heat index above, not advisable','체감 온도와 건강 권고를 연결하는 실용적 표현이에요. "not advisable"은 공식 권고문에서 자주 등장해요.','폭염 안전 조언','B1','weather','pattern',NULL,7);
+('s_weather_B1_07','With the heat index above 40 degrees, outdoor activities are not advisable.','체감 온도가 40도를 넘으니 야외 활동은 권장하지 않아요.','heat index above, not advisable','체감 온도와 건강 권고를 연결하는 실용적 표현이에요. "not advisable"은 공식 권고문에서 자주 등장해요.','폭염 안전 조언','B1','weather','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCES / PATTERNS — B2 (7개)
@@ -299,7 +308,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_weather_B2_04','The correlation between rising CO₂ levels and global average temperatures is well established.','CO₂ 수준 상승과 전 지구 평균 기온 사이의 상관관계는 잘 확립되어 있어요.','correlation is well established','"well established"는 과학적으로 검증된 사실을 언급할 때 쓰는 표현이에요. 토론에서 근거를 제시할 때 유용해요.','기후 과학 토론','B2','weather','pattern',NULL,4),
 ('s_weather_B2_05','Prolonged droughts in sub-Saharan Africa are threatening food security for millions.','사하라 이남 아프리카의 장기 가뭄이 수백만 명의 식량 안보를 위협하고 있어요.','Prolonged droughts threatening food security','사회적 영향을 설명하는 데 쓰는 구조로, "threaten + 명사"는 심각한 위협을 표현해요.','기후·사회 영향 토론','B2','weather','pattern',NULL,5),
 ('s_weather_B2_06','Rising sea levels pose an existential threat to low-lying island nations.','해수면 상승은 저지대 섬나라들에 실존적 위협을 가하고 있어요.','pose an existential threat','"pose a threat"은 "위협을 제기하다"라는 관용 표현이에요. "existential"은 생존 자체를 위협하는 수준의 위기를 나타내요.','기후·지정학 토론','B2','weather','pattern',NULL,6),
-('s_weather_B2_07','Governments must implement ambitious policies to transition to a low-carbon economy.','정부는 저탄소 경제로 전환하기 위한 야심찬 정책을 시행해야 해요.','implement ambitious policies to transition','기후 정책 토론의 핵심 표현이에요. "transition to"는 변화의 방향을 나타내며, 기후 관련 논문·보고서에서 자주 등장해요.','기후 정책 토론','B2','weather','pattern',NULL,7);
+('s_weather_B2_07','Governments must implement ambitious policies to transition to a low-carbon economy.','정부는 저탄소 경제로 전환하기 위한 야심찬 정책을 시행해야 해요.','implement ambitious policies to transition','기후 정책 토론의 핵심 표현이에요. "transition to"는 변화의 방향을 나타내며, 기후 관련 논문·보고서에서 자주 등장해요.','기후 정책 토론','B2','weather','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCES / PATTERNS — C1 (7개)
@@ -312,7 +322,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_weather_C1_04','Without significant reductions in radiative forcing, crossing multiple tipping points becomes increasingly probable.','복사 강제력을 크게 줄이지 않으면 여러 임계점을 넘을 가능성이 점점 높아져요.','Without significant reductions... becomes increasingly probable','조건절로 위험 시나리오를 논증하는 학술 표현이에요. "increasingly probable"은 확률의 점진적 증가를 표현해요.','기후 위험 논의','C1','weather','pattern',NULL,4),
 ('s_weather_C1_05','The thermohaline circulation is sensitive to freshwater input from melting ice sheets, which could disrupt heat distribution across the North Atlantic.','열염 순환은 빙상 녹음으로 인한 담수 유입에 민감하며, 이는 북대서양 전반의 열 분배를 교란할 수 있어요.','sensitive to freshwater input, could disrupt','"sensitive to"는 특정 요인에 민감하게 반응한다는 표현이에요. 관계절(which)로 결과를 이어 설명하는 학술 문장 구조예요.','해양 기후 논의','C1','weather','pattern',NULL,5),
 ('s_weather_C1_06','Climate models project a poleward shift of storm tracks, altering precipitation patterns in mid-latitudes.','기후 모델은 폭풍 경로의 극 방향 이동을 예측하며, 이는 중위도 강수 패턴을 변화시킬 거예요.','project a poleward shift, altering precipitation patterns','"project"가 명사가 아닌 동사로 "예측하다"를 뜻하는 학술적 용법이에요. 분사구문(altering)으로 결과를 우아하게 연결해요.','기후 모델 논의','C1','weather','pattern',NULL,6),
-('s_weather_C1_07','Robust attribution studies have established that the 2021 Pacific Northwest heat dome was virtually impossible without anthropogenic climate forcing.','강력한 귀인 연구들은 2021년 태평양 연안 북서부의 열돔이 인위적 기후 강제력 없이는 사실상 불가능했음을 규명했어요.','attribution studies, virtually impossible without anthropogenic','기후 귀인 과학(attribution science)의 핵심 표현이에요. "virtually impossible without"은 특정 원인의 결정적 역할을 논증할 때 써요.','기후 귀인 연구 토론','C1','weather','pattern',NULL,7);
+('s_weather_C1_07','Robust attribution studies have established that the 2021 Pacific Northwest heat dome was virtually impossible without anthropogenic climate forcing.','강력한 귀인 연구들은 2021년 태평양 연안 북서부의 열돔이 인위적 기후 강제력 없이는 사실상 불가능했음을 규명했어요.','attribution studies, virtually impossible without anthropogenic','기후 귀인 과학(attribution science)의 핵심 표현이에요. "virtually impossible without"은 특정 원인의 결정적 역할을 논증할 때 써요.','기후 귀인 연구 토론','C1','weather','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCES / PATTERNS — C2 (7개)
@@ -325,4 +336,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_weather_C2_04','The convergence of thermohaline circulation weakening, sea ice albedo feedback, and permafrost carbon release represents a compound risk that integrated assessment models may systematically underestimate.','열염 순환 약화, 해빙 알베도 피드백, 영구 동토층 탄소 방출의 수렴은 통합 평가 모델이 체계적으로 과소평가할 수 있는 복합적 위험을 나타내요.','convergence of... represents a compound risk that models may underestimate','세 가지 병렬 명사구를 "The convergence of A, B, and C"로 묶어 논지를 구성하는 고급 학술 구조예요.','기후 복합 위험 논의','C2','weather','pattern',NULL,4),
 ('s_weather_C2_05','Dendroclimatological reconstructions corroborate instrumentally derived temperature anomalies, lending credibility to projections that current forcing trajectories will breach Holocene temperature bounds within decades.','수목 연륜 기후학적 재구성은 기기로 도출된 기온 편차를 입증하며, 현재 강제력 궤적이 수십 년 내에 홀로세 기온 한계를 돌파할 것이라는 전망에 신뢰성을 부여해요.','corroborate, lending credibility to projections that will breach','"corroborate"는 "입증하다·확증하다"는 C2급 어휘예요. "lending credibility"는 분사구문으로 결과를 연결해요.','고기후 자료 해석 토론','C2','weather','pattern',NULL,5),
 ('s_weather_C2_06','Radiative forcing from short-lived climate pollutants, particularly black carbon and tropospheric ozone, constitutes a non-trivial fraction of total anthropogenic warming that near-term mitigation could rapidly reverse.','단기 기후 오염 물질, 특히 블랙 카본과 대류권 오존에 의한 복사 강제력은 근기간 완화를 통해 신속하게 되돌릴 수 있는 전체 인위적 온난화의 비무시적 비율을 구성해요.','short-lived climate pollutants, non-trivial fraction, mitigation could rapidly reverse','"non-trivial"은 "무시할 수 없는·상당한"을 뜻하는 학술 부정 수식어예요. 관계절(that near-term mitigation could rapidly reverse)이 핵심 논거를 담아요.','기후 완화 정책 학술 토론','C2','weather','pattern',NULL,6),
-('s_weather_C2_07','The epistemological challenge of projecting abrupt, threshold-crossing climate transitions lies in the inherently nonlinear dynamics of Earth system feedbacks, which resist reliable quantification within current modelling frameworks.','임계점을 넘는 갑작스러운 기후 전환을 예측하는 인식론적 과제는 현재 모델링 프레임워크 내에서 신뢰할 수 있는 정량화에 저항하는 지구 시스템 피드백의 본질적으로 비선형적인 역학에 있어요.','epistemological challenge, nonlinear dynamics, resist reliable quantification','"epistemological"은 지식의 한계를 논하는 철학 용어예요. 가장 높은 수준의 기후 과학 담론에서 나타나는 문장 구조와 어휘를 담고 있어요.','기후 과학 철학적 논의','C2','weather','pattern',NULL,7);
+('s_weather_C2_07','The epistemological challenge of projecting abrupt, threshold-crossing climate transitions lies in the inherently nonlinear dynamics of Earth system feedbacks, which resist reliable quantification within current modelling frameworks.','임계점을 넘는 갑작스러운 기후 전환을 예측하는 인식론적 과제는 현재 모델링 프레임워크 내에서 신뢰할 수 있는 정량화에 저항하는 지구 시스템 피드백의 본질적으로 비선형적인 역학에 있어요.','epistemological challenge, nonlinear dynamics, resist reliable quantification','"epistemological"은 지식의 한계를 논하는 철학 용어예요. 가장 높은 수준의 기후 과학 담론에서 나타나는 문장 구조와 어휘를 담고 있어요.','기후 과학 철학적 논의','C2','weather','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

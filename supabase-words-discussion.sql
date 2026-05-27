@@ -42,7 +42,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_discussion_A1_32','not','/nɒt/','adverb','아니','Used to make a word or phrase negative.','I do {not} agree with that idea.','그 생각에 동의하지 않아요.','not','A1','discussion',2,'person disagreeing negative'),
 ('w_discussion_A1_33','but','/bʌt/','conjunction','그런데, 하지만','Used to introduce a different or contrasting idea.','{But} there is another way to look at it.','하지만 다른 시각으로 볼 수도 있어요.','But','A1','discussion',1,'contrasting ideas two sides'),
 ('w_discussion_A1_34','because','/bɪˈkɒz/','conjunction','왜냐하면','For the reason that; used to give a reason.','{Because} I think it is more efficient.','왜냐하면 더 효율적이라고 생각하기 때문이에요.','Because','A1','discussion',1,'reason explanation arrow'),
-('w_discussion_A1_35','so','/soʊ/','conjunction','그래서, 따라서','Therefore; with the result that.','{So}, what is our conclusion?','그래서 우리의 결론이 뭔가요?','So','A1','discussion',2,'conclusion summary decision');
+('w_discussion_A1_35','so','/soʊ/','conjunction','그래서, 따라서','Therefore; with the result that.','{So}, what is our conclusion?','그래서 우리의 결론이 뭔가요?','So','A1','discussion',2,'conclusion summary decision')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2 (35개)
@@ -82,7 +83,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_discussion_A2_32','negative','/ˈneɡətɪv/','adjective','부정적인','Expressing refusal or disagreement; harmful or bad.','There are also some {negative} effects to consider.','고려해야 할 부정적인 영향도 있어요.','negative','A2','discussion',2,'negative downside risk warning'),
 ('w_discussion_A2_33','side','/saɪd/','noun','측면, 입장','One of the positions in a debate or argument.','I can see both {sides} of the argument.','논쟁의 양면을 다 볼 수 있어요.','sides','A2','discussion',1,'balance two sides debate'),
 ('w_discussion_A2_34','view','/vjuː/','noun','견해, 관점','A particular way of considering something; an opinion.','What is your {view} on this?','이것에 대한 당신의 견해는 뭔가요?','view','A2','discussion',1,'viewpoint perspective angle'),
-('w_discussion_A2_35','respond','/rɪˈspɒnd/','verb','반응하다, 응답하다','To say or do something as a reply.','How would you {respond} to that argument?','그 주장에 어떻게 응답하시겠어요?','respond','A2','discussion',2,'reply response conversation');
+('w_discussion_A2_35','respond','/rɪˈspɒnd/','verb','반응하다, 응답하다','To say or do something as a reply.','How would you {respond} to that argument?','그 주장에 어떻게 응답하시겠어요?','respond','A2','discussion',2,'reply response conversation')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1 (35개)
@@ -122,7 +124,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_discussion_B1_32','alternative','/ɔːlˈtɜːrnətɪv/','noun','대안','One of two or more available possibilities.','Do you have any {alternative} suggestions?','다른 대안적 제안이 있나요?','alternative','B1','discussion',1,'alternative option choice branch'),
 ('w_discussion_B1_33','propose','/prəˈpoʊz/','verb','제안하다','To put forward a plan for consideration.','I would like to {propose} a compromise.','타협안을 제안하고 싶어요.','propose','B1','discussion',1,'proposal plan whiteboard meeting'),
 ('w_discussion_B1_34','reflect','/rɪˈflekt/','verb','반영하다; 깊이 생각하다','To think deeply about something; to show or express something.','Take a moment to {reflect} on what was said.','말해진 것에 대해 잠시 생각해 봐요.','reflect','B1','discussion',2,'reflection thinking deep thought mirror'),
-('w_discussion_B1_35','exchange','/ɪksˈtʃeɪndʒ/','noun','교환, 의견 나눔','An act of giving and receiving ideas or opinions.','This {exchange} of ideas has been very helpful.','이런 의견 교환이 매우 유익했어요.','exchange','B1','discussion',2,'exchange ideas conversation dialogue');
+('w_discussion_B1_35','exchange','/ɪksˈtʃeɪndʒ/','noun','교환, 의견 나눔','An act of giving and receiving ideas or opinions.','This {exchange} of ideas has been very helpful.','이런 의견 교환이 매우 유익했어요.','exchange','B1','discussion',2,'exchange ideas conversation dialogue')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2 (35개)
@@ -162,7 +165,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_discussion_B2_32','framework','/ˈfreɪmwɜːrk/','noun','틀, 체계','A basic structure underlying a system, concept, or text.','We need a clear {framework} for this debate.','이 토론을 위한 명확한 틀이 필요해요.','framework','B2','discussion',1,'framework structure system organization'),
 ('w_discussion_B2_33','concession','/kənˈseʃən/','noun','양보, 인정','An acknowledgment that something is true or valid.','Making a {concession} can strengthen your overall position.','양보를 하면 전체적인 입장이 강화될 수 있어요.','concession','B2','discussion',2,'concession compromise negotiate'),
 ('w_discussion_B2_34','diverge','/daɪˈvɜːrdʒ/','verb','갈라지다, 의견이 나뉘다','To differ in opinion or direction from something.','Our views {diverge} sharply on this point.','이 지점에서 우리 견해는 크게 갈려요.','diverge','B2','discussion',2,'diverge split difference opinion fork'),
-('w_discussion_B2_35','consensus','/kənˈsensəs/','noun','합의, 의견 일치','A general agreement reached by a group.','Can we reach a {consensus} on this issue?','이 문제에 대해 합의에 도달할 수 있을까요?','consensus','B2','discussion',1,'consensus agreement group decision');
+('w_discussion_B2_35','consensus','/kənˈsensəs/','noun','합의, 의견 일치','A general agreement reached by a group.','Can we reach a {consensus} on this issue?','이 문제에 대해 합의에 도달할 수 있을까요?','consensus','B2','discussion',1,'consensus agreement group decision')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1 (35개)
@@ -202,7 +206,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_discussion_C1_32','modality','/moʊˈdælɪti/','noun','양상, 방식','A particular form or mode of expressing something.','The {modality} of the argument shifts throughout.','주장의 양상이 전반에 걸쳐 변해요.','modality','C1','discussion',2,'modality mode expression form'),
 ('w_discussion_C1_33','absolve','/əbˈzɒlv/','verb','면제하다, 책임을 벗기다','To declare someone free from blame or responsibility.','You cannot simply {absolve} yourself of responsibility.','단순히 책임에서 벗어날 수는 없어요.','absolve','C1','discussion',2,'absolution responsibility free blame'),
 ('w_discussion_C1_34','interpolate','/ɪnˈtɜːrpəleɪt/','verb','끼워 넣다; 보간하다','To insert something into a text or argument; to estimate.','Do not {interpolate} your own assumptions into the text.','텍스트에 자신의 가정을 끼워 넣지 마세요.','interpolate','C1','discussion',2,'interpolate insert estimate assumption'),
-('w_discussion_C1_35','dissertation','/ˌdɪsəˈteɪʃən/','noun','논문, 상세한 논술','A long essay, especially one written for a university degree.','Her {dissertation} explored the ethics of AI.','그녀의 논문은 AI 윤리를 탐구했어요.','dissertation','C1','discussion',2,'dissertation thesis academic writing');
+('w_discussion_C1_35','dissertation','/ˌdɪsəˈteɪʃən/','noun','논문, 상세한 논술','A long essay, especially one written for a university degree.','Her {dissertation} explored the ethics of AI.','그녀의 논문은 AI 윤리를 탐구했어요.','dissertation','C1','discussion',2,'dissertation thesis academic writing')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2 (35개)
@@ -242,7 +247,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_discussion_C2_32','autopoiesis','/ˌɔːtəʊpɔɪˈiːsɪs/','noun','자기 생산, 자기 조직','A system capable of reproducing and maintaining itself.','The discourse functions as an {autopoiesis}.','그 담론은 자기 생산적인 기능을 해요.','autopoiesis','C2','discussion',2,'autopoiesis self organization system theory'),
 ('w_discussion_C2_33','apophatic','/ˌæpəˈfætɪk/','adjective','부정신학적인; 부정을 통해 정의하는','Relating to the approach of describing something by saying what it is not.','The {apophatic} method defines by negation.','부정신학적 방법은 부정을 통해 정의해요.','apophatic','C2','discussion',2,'apophatic via negativa theology definition'),
 ('w_discussion_C2_34','metalinguistic','/ˌmetəlɪŋˈɡwɪstɪk/','adjective','메타언어학적인','Relating to language used to analyse or describe language itself.','The debate became {metalinguistic} in nature.','토론이 본질적으로 메타언어학적이 됐어요.','metalinguistic','C2','discussion',2,'metalinguistic language about language analysis'),
-('w_discussion_C2_35','undecidability','/ʌndɪˌsaɪdəˈbɪlɪti/','noun','결정 불가능성','The property of a statement that can be neither proved nor disproved.','Derrida linked {undecidability} to language itself.','데리다는 결정 불가능성을 언어 자체와 연결시켰어요.','undecidability','C2','discussion',2,'undecidability Derrida language uncertainty');
+('w_discussion_C2_35','undecidability','/ʌndɪˌsaɪdəˈbɪlɪti/','noun','결정 불가능성','The property of a statement that can be neither proved nor disproved.','Derrida linked {undecidability} to language itself.','데리다는 결정 불가능성을 언어 자체와 연결시켰어요.','undecidability','C2','discussion',2,'undecidability Derrida language uncertainty')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A1 (7개): 의견 말하기
@@ -254,7 +260,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_discussion_A1_04','Maybe you are right.','아마도 당신이 맞을 수도 있어요.','Maybe you are right','완전히 확신하지 못할 때 "Maybe"를 붙여서 유연하게 동의를 표현해요. 대화 분위기를 부드럽게 유지해줘요.','부분 동의','A1','discussion','pattern',NULL,4),
 ('s_discussion_A1_05','I am not sure about that.','그것에 대해 잘 모르겠어요.','I am not sure','확신이 없을 때 "I am not sure"를 쓰면 솔직하면서도 공손하게 들려요.','불확실','A1','discussion','pattern',NULL,5),
 ('s_discussion_A1_06','That is a good idea.','그건 좋은 생각이에요.','That is a good idea','상대방의 아이디어를 긍정할 때 가장 간단하고 자연스러운 표현이에요. 대화를 활기차게 만들어줘요.','칭찬·긍정','A1','discussion','pattern',NULL,6),
-('s_discussion_A1_07','I like your idea.','당신의 아이디어가 마음에 들어요.','I like your idea','"I like your idea."는 "Good idea."보다 더 개인적이고 따뜻한 느낌을 줘요. 상대방이 기분 좋게 느낄 수 있어요.','격려·지지','A1','discussion','pattern',NULL,7);
+('s_discussion_A1_07','I like your idea.','당신의 아이디어가 마음에 들어요.','I like your idea','"I like your idea."는 "Good idea."보다 더 개인적이고 따뜻한 느낌을 줘요. 상대방이 기분 좋게 느낄 수 있어요.','격려·지지','A1','discussion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A2 (7개): 동의/반대
@@ -266,7 +273,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_discussion_A2_04','Could you explain your reason?','이유를 설명해 주실 수 있나요?','explain your reason','상대방의 논거를 이해하고 싶을 때 쓰는 정중한 표현이에요. 토론을 더 깊이 있게 만들어줘요.','이유 묻기','A2','discussion','pattern',NULL,4),
 ('s_discussion_A2_05','I think both sides have a point.','양쪽 다 일리가 있다고 생각해요.','both sides have a point','양쪽 의견을 균형 있게 인정할 때 쓰는 표현이에요. 중립적인 입장에서 토론을 진행할 때 유용해요.','중립·균형','A2','discussion','pattern',NULL,5),
 ('s_discussion_A2_06','Can you give me an example?','예시를 들어 주실 수 있나요?','give me an example','이해를 높이기 위해 구체적인 예를 요청할 때 쓰는 표현이에요.','예시 요청','A2','discussion','pattern',NULL,6),
-('s_discussion_A2_07','I suggest we discuss this more carefully.','이것을 더 신중하게 논의해 보는 게 어떨까요?','I suggest we discuss','"I suggest we ~"는 그룹 토론에서 방향을 제안할 때 자연스럽게 쓸 수 있는 표현이에요.','제안','A2','discussion','pattern',NULL,7);
+('s_discussion_A2_07','I suggest we discuss this more carefully.','이것을 더 신중하게 논의해 보는 게 어떨까요?','I suggest we discuss','"I suggest we ~"는 그룹 토론에서 방향을 제안할 때 자연스럽게 쓸 수 있는 표현이에요.','제안','A2','discussion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B1 (7개): 근거 제시
@@ -278,7 +286,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_discussion_B1_04','I would argue that the benefits outweigh the risks.','저는 이점이 위험보다 크다고 주장하겠어요.','I would argue that','"I would argue that ~"는 자신의 주장을 자신감 있게 펼칠 때 쓰는 B1 이상 필수 표현이에요.','주장','B1','discussion','pattern',NULL,4),
 ('s_discussion_B1_05','That is a valid concern, but consider the following.','그건 타당한 우려이지만, 다음을 고려해 주세요.','That is a valid concern, but','상대방의 주장을 인정하면서도 반론을 제기하는 세련된 방법이에요. 토론에서 균형감을 보여줘요.','인정 후 반론','B1','discussion','pattern',NULL,5),
 ('s_discussion_B1_06','Could you support that claim with evidence?','그 주장을 증거로 뒷받침해 주실 수 있나요?','support that claim with evidence','근거 없는 주장에 대해 정중하게 증거를 요구하는 표현이에요. 비판적 사고 능력을 보여줘요.','증거 요구','B1','discussion','pattern',NULL,6),
-('s_discussion_B1_07','Taking everything into account, I believe this is the best option.','모든 것을 고려했을 때, 이것이 최선의 선택이라고 생각해요.','Taking everything into account','"Taking everything into account"는 결론을 내리기 전에 균형 잡힌 판단을 했음을 보여주는 표현이에요.','결론','B1','discussion','pattern',NULL,7);
+('s_discussion_B1_07','Taking everything into account, I believe this is the best option.','모든 것을 고려했을 때, 이것이 최선의 선택이라고 생각해요.','Taking everything into account','"Taking everything into account"는 결론을 내리기 전에 균형 잡힌 판단을 했음을 보여주는 표현이에요.','결론','B1','discussion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B2 (7개): 반론, 비판적 사고
@@ -290,7 +299,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_discussion_B2_04','We need to distinguish between correlation and causation here.','여기서 상관관계와 인과관계를 구분해야 해요.','distinguish between correlation and causation','논리적 오류 중 가장 흔한 인과 오류를 지적할 때 쓰는 표현이에요. 비판적 사고의 핵심 패턴이에요.','논리적 오류 지적','B2','discussion','pattern',NULL,4),
 ('s_discussion_B2_05','While I concede that point, the broader implication is more concerning.','그 부분은 인정하지만, 더 큰 함의가 더 걱정스러워요.','While I concede that point','부분적으로 동의하면서도 더 중요한 쟁점으로 이동하는 고급 토론 기술이에요.','부분 인정 후 전환','B2','discussion','pattern',NULL,5),
 ('s_discussion_B2_06','Your reasoning contains an implicit bias worth examining.','당신의 논리에는 검토할 만한 암묵적 편향이 있어요.','contains an implicit bias','논리의 구조적 편향을 지적하는 비판적 패턴이에요. 격식 있는 토론에서 매우 설득력 있게 들려요.','편향 지적','B2','discussion','pattern',NULL,6),
-('s_discussion_B2_07','The nuance of this issue is often lost in simplistic narratives.','이 문제의 뉘앙스는 단순한 이야기에서 종종 사라져요.','The nuance of this issue','복잡한 문제를 지나치게 단순화하는 경향을 지적할 때 쓰는 표현이에요.','복잡성 강조','B2','discussion','pattern',NULL,7);
+('s_discussion_B2_07','The nuance of this issue is often lost in simplistic narratives.','이 문제의 뉘앙스는 단순한 이야기에서 종종 사라져요.','The nuance of this issue','복잡한 문제를 지나치게 단순화하는 경향을 지적할 때 쓰는 표현이에요.','복잡성 강조','B2','discussion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C1 (7개): 논증
@@ -302,7 +312,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_discussion_C1_04','I would postulate that the causal chain is more complex than suggested.','인과 사슬이 제시된 것보다 더 복잡하다고 가정해 볼 수 있어요.','postulate that the causal chain','"postulate"를 사용하면 가설적인 논점을 학문적으로 제시할 수 있어요.','가설 제시','C1','discussion','pattern',NULL,4),
 ('s_discussion_C1_05','Your inductive generalization requires a much larger sample to hold.','당신의 귀납적 일반화는 성립하려면 훨씬 더 큰 표본이 필요해요.','inductive generalization requires a much larger sample','귀납적 오류 중 성급한 일반화를 지적하는 정교한 표현이에요.','귀납 오류 비판','C1','discussion','pattern',NULL,5),
 ('s_discussion_C1_06','The cogency of your case depends on whether we accept the axiom.','당신 논거의 설득력은 우리가 그 공리를 받아들이느냐에 달려 있어요.','cogency of your case depends on','논증의 전제 조건을 명확히 지적하는 고급 표현이에요. 학술 토론에서 매우 효과적이에요.','조건부 평가','C1','discussion','pattern',NULL,6),
-('s_discussion_C1_07','Even if we grant the premise, the conclusion does not necessarily follow.','전제를 인정하더라도, 결론이 반드시 따라오는 것은 아니에요.','the conclusion does not necessarily follow','전제와 결론 사이의 논리적 비약을 지적하는 핵심 반박 패턴이에요.','논리적 비약 지적','C1','discussion','pattern',NULL,7);
+('s_discussion_C1_07','Even if we grant the premise, the conclusion does not necessarily follow.','전제를 인정하더라도, 결론이 반드시 따라오는 것은 아니에요.','the conclusion does not necessarily follow','전제와 결론 사이의 논리적 비약을 지적하는 핵심 반박 패턴이에요.','논리적 비약 지적','C1','discussion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C2 (7개): 철학적 토론
@@ -314,4 +325,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_discussion_C2_04','From a hermeneutic standpoint, we must read the text against its historical horizon.','해석학적 관점에서, 우리는 텍스트를 역사적 지평에 대비해서 읽어야 해요.','From a hermeneutic standpoint','가다머의 지평 융합 개념을 활용한 표현이에요. 텍스트 해석의 역사성을 강조할 때 써요.','해석학적 분석','C2','discussion','pattern',NULL,4),
 ('s_discussion_C2_05','The ontological claim embedded in that statement demands further scrutiny.','그 진술에 내재된 존재론적 주장은 더 면밀한 검토가 필요해요.','ontological claim embedded in','존재론적 가정을 명시적으로 드러내는 표현이에요. 철학적 토론에서 숨겨진 가정을 지적할 때 유용해요.','존재론적 비판','C2','discussion','pattern',NULL,5),
 ('s_discussion_C2_06','That paradigmatic case cannot be used to justify the broader theoretical framework.','그 패러다임적 사례는 더 광범위한 이론적 틀을 정당화하는 데 사용될 수 없어요.','paradigmatic case cannot be used to justify','쿤의 패러다임 개념을 활용해 사례와 이론 사이의 논리적 간격을 지적하는 표현이에요.','패러다임 비판','C2','discussion','pattern',NULL,6),
-('s_discussion_C2_07','The praxis of this theory reveals a tension between its normative and descriptive claims.','이 이론의 실천은 규범적 주장과 서술적 주장 사이의 긴장을 드러내요.','praxis of this theory reveals a tension','이론과 실천의 긴장을 비판하는 고급 표현이에요. 프락시스 개념을 아는 C2 학습자에게 적합해요.','이론과 실천의 긴장','C2','discussion','pattern',NULL,7);
+('s_discussion_C2_07','The praxis of this theory reveals a tension between its normative and descriptive claims.','이 이론의 실천은 규범적 주장과 서술적 주장 사이의 긴장을 드러내요.','praxis of this theory reveals a tension','이론과 실천의 긴장을 비판하는 고급 표현이에요. 프락시스 개념을 아는 C2 학습자에게 적합해요.','이론과 실천의 긴장','C2','discussion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

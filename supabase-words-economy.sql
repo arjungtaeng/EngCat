@@ -41,7 +41,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_economy_A1_32','exchange','/ɪkˈstʃeɪndʒ/','noun','환전; 교환','Converting one currency to another; or swapping goods.','Where can I {exchange} my money?','어디서 환전할 수 있나요?','exchange','A1','economy',2,'currency exchange counter travel money'),
 ('w_economy_A1_33','rich','/rɪtʃ/','adjective','부유한','Having a lot of money.','She is very {rich} and owns many businesses.','그녀는 매우 부유하고 많은 사업체를 가지고 있어요.','rich','A1','economy',3,'wealthy luxury car mansion success'),
 ('w_economy_A1_34','poor','/pʊər/','adjective','가난한','Having little money.','Many people are still very {poor}.','아직도 많은 사람들이 매우 가난해요.','poor','A1','economy',3,'poverty street urban hardship community'),
-('w_economy_A1_35','number','/ˈnʌmbər/','noun','숫자','A mathematical value used to count or calculate.','What {number} should I call?','어떤 번호로 전화해야 하나요?','number','A1','economy',3,'numbers calculator math finance digits');
+('w_economy_A1_35','number','/ˈnʌmbər/','noun','숫자','A mathematical value used to count or calculate.','What {number} should I call?','어떤 번호로 전화해야 하나요?','number','A1','economy',3,'numbers calculator math finance digits')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2 (초급: 저축·대출·수입)
@@ -82,7 +83,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_economy_A2_32','currency','/ˈkɜːrənsi/','noun','통화, 화폐','The money used in a particular country.','The {currency} in Japan is the yen.','일본의 통화는 엔이에요.','currency','A2','economy',2,'currency exchange world money coins'),
 ('w_economy_A2_33','poverty','/ˈpɒvərti/','noun','빈곤','The state of being extremely poor.','Many families still live in {poverty}.','많은 가정이 아직도 빈곤 속에 살아요.','poverty','A2','economy',2,'poverty community urban hardship aid'),
 ('w_economy_A2_34','wealth','/welθ/','noun','부, 재산','A large amount of money or valuable possessions.','Education can be a path to {wealth}.','교육은 부를 이루는 길이 될 수 있어요.','wealth','A2','economy',2,'wealth success business growth prosperity'),
-('w_economy_A2_35','transaction','/træˈnzækʃən/','noun','거래, 거래 내역','An act of buying or selling something.','Check your recent {transactions} online.','온라인에서 최근 거래 내역을 확인하세요.','transaction','A2','economy',2,'transaction bank app mobile screen finance');
+('w_economy_A2_35','transaction','/træˈnzækʃən/','noun','거래, 거래 내역','An act of buying or selling something.','Check your recent {transactions} online.','온라인에서 최근 거래 내역을 확인하세요.','transaction','A2','economy',2,'transaction bank app mobile screen finance')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1 (중급: 경제 지표·시장)
@@ -123,7 +125,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_economy_B1_32','trade deficit','/treɪd ˈdefɪsɪt/','noun','무역 적자','When imports exceed exports in value.','The nation''s {trade deficit} widened.','그 나라의 무역 적자가 확대됐어요.','trade deficit','B1','economy',2,'trade deficit graph negative import export'),
 ('w_economy_B1_33','merger','/ˈmɜːrdʒər/','noun','기업 합병','The combining of two companies into one.','The {merger} created the largest bank in the region.','그 합병으로 지역 최대 은행이 탄생했어요.','merger','B1','economy',2,'merger business handshake corporate deal'),
 ('w_economy_B1_34','shareholder','/ˈʃeərhoʊldər/','noun','주주','A person who owns shares in a company.','{Shareholders} voted against the proposal.','주주들이 제안에 반대표를 던졌어요.','shareholder','B1','economy',2,'shareholder meeting boardroom vote corporate'),
-('w_economy_B1_35','forecast','/ˈfɔːrkæst/','noun','전망, 예측','A prediction of future economic trends.','The economic {forecast} for next year is positive.','내년의 경제 전망은 긍정적이에요.','forecast','B1','economy',2,'economic forecast data chart analyst presentation');
+('w_economy_B1_35','forecast','/ˈfɔːrkæst/','noun','전망, 예측','A prediction of future economic trends.','The economic {forecast} for next year is positive.','내년의 경제 전망은 긍정적이에요.','forecast','B1','economy',2,'economic forecast data chart analyst presentation')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2 (중상급: 투자·시장 심화)
@@ -164,7 +167,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_economy_B2_32','inflation rate','/ɪnˈfleɪʃən reɪt/','noun','물가상승률','The rate at which prices increase over time.','The {inflation rate} reached a forty-year high.','물가상승률이 40년 만에 최고치를 기록했어요.','inflation rate','B2','economy',2,'inflation rate CPI chart economy data'),
 ('w_economy_B2_33','benchmark','/ˈbentʃmɑːrk/','noun','기준, 벤치마크','A standard used for comparing performance.','The fund underperformed its {benchmark} index.','그 펀드는 기준 지수를 밑도는 성과를 냈어요.','benchmark','B2','economy',2,'benchmark comparison chart performance finance'),
 ('w_economy_B2_34','speculation','/ˌspekjʊˈleɪʃən/','noun','투기','Buying risky assets hoping for profit.','Property {speculation} drove up house prices.','부동산 투기가 주택 가격을 올렸어요.','speculation','B2','economy',2,'speculation real estate risk investment market'),
-('w_economy_B2_35','economic cycle','/ˌiːkəˈnɒmɪk ˈsaɪkəl/','noun','경기 순환','The recurring pattern of expansion and contraction in an economy.','Understanding the {economic cycle} helps investors plan.','경기 순환을 이해하면 투자자들이 계획을 세우는 데 도움이 돼요.','economic cycle','B2','economy',2,'economic cycle wave chart boom recession');
+('w_economy_B2_35','economic cycle','/ˌiːkəˈnɒmɪk ˈsaɪkəl/','noun','경기 순환','The recurring pattern of expansion and contraction in an economy.','Understanding the {economic cycle} helps investors plan.','경기 순환을 이해하면 투자자들이 계획을 세우는 데 도움이 돼요.','economic cycle','B2','economy',2,'economic cycle wave chart boom recession')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1 (고급: 경제 정책 분석)
@@ -205,7 +209,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_economy_C1_32','opportunity cost','/ˌɒpəˈtjuːnɪti kɒst/','noun','기회 비용','The value of the next best option forgone.','Going to university has an {opportunity cost} of lost wages.','대학 진학에는 포기된 임금이라는 기회 비용이 있어요.','opportunity cost','C1','economy',2,'opportunity cost decision choice trade-off economics'),
 ('w_economy_C1_33','hyperinflation','/ˌhaɪpərɪnˈfleɪʃən/','noun','초인플레이션','Extremely rapid and out-of-control price increases.','Zimbabwe suffered severe {hyperinflation} in the 2000s.','짐바브웨는 2000년대 심각한 초인플레이션을 겪었어요.','hyperinflation','C1','economy',2,'hyperinflation banknotes wheelbarrow crisis Zimbabwe'),
 ('w_economy_C1_34','fiscal consolidation','/ˈfɪskəl kənsɒlɪˈdeɪʃən/','noun','재정 건전화','Reducing budget deficits through spending cuts or tax rises.','{Fiscal consolidation} was necessary to restore investor confidence.','재정 건전화는 투자자 신뢰 회복에 필요했어요.','fiscal consolidation','C1','economy',2,'fiscal consolidation budget government documents finance'),
-('w_economy_C1_35','income inequality','/ˈɪnkʌm ˌɪnɪˈkwɒlɪti/','noun','소득 불평등','The unequal distribution of income in society.','Rising {income inequality} is a global concern.','증가하는 소득 불평등은 세계적인 우려예요.','income inequality','C1','economy',1,'income inequality wealth gap poverty rich poor');
+('w_economy_C1_35','income inequality','/ˈɪnkʌm ˌɪnɪˈkwɒlɪti/','noun','소득 불평등','The unequal distribution of income in society.','Rising {income inequality} is a global concern.','증가하는 소득 불평등은 세계적인 우려예요.','income inequality','C1','economy',1,'income inequality wealth gap poverty rich poor')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2 (최고급: 경제 이론·전문 용어)
@@ -246,7 +251,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_economy_C2_32','modern monetary theory','/ˈmɒdərn ˈmʌnɪtəri ˈθɪəri/','noun','현대화폐이론 (MMT)','A theory arguing governments can spend freely as currency issuers.','Proponents of {modern monetary theory} reject deficit concerns.','현대화폐이론 지지자들은 재정 적자 우려를 거부해요.','modern monetary theory','C2','economy',2,'MMT modern monetary theory policy debate economists'),
 ('w_economy_C2_33','trickle-down economics','/ˈtrɪkəl daʊn ˌiːkəˈnɒmɪks/','noun','낙수 경제학','The theory that tax cuts for the rich benefit everyone.','Critics say {trickle-down economics} mostly benefits the wealthy.','비평가들은 낙수 경제학이 주로 부유층에게 이익이 된다고 해요.','trickle-down economics','C2','economy',2,'trickle down economics wealth gap inequality debate'),
 ('w_economy_C2_34','information asymmetry','/ˌɪnfəˈmeɪʃən eɪˈsɪmɪtri/','noun','정보 비대칭','When different parties have access to different amounts of information.','{Information asymmetry} causes market inefficiency.','정보 비대칭은 시장 비효율을 초래해요.','information asymmetry','C2','economy',2,'information asymmetry market buyer seller knowledge'),
-('w_economy_C2_35','general equilibrium','/ˈdʒenərəl ˌiːkwɪˈlɪbriəm/','noun','일반 균형','A state where all markets in an economy clear simultaneously.','Walras developed the theory of {general equilibrium}.','왈라스는 일반 균형 이론을 발전시켰어요.','general equilibrium','C2','economy',3,'general equilibrium economics theory mathematics model');
+('w_economy_C2_35','general equilibrium','/ˈdʒenərəl ˌiːkwɪˈlɪbriəm/','noun','일반 균형','A state where all markets in an economy clear simultaneously.','Walras developed the theory of {general equilibrium}.','왈라스는 일반 균형 이론을 발전시켰어요.','general equilibrium','C2','economy',3,'general equilibrium economics theory mathematics model')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A1 (가격·계산 패턴, 7개)
@@ -259,7 +265,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_economy_A1_04','I''ll take it.','이것으로 할게요.','I''ll take it','구매를 결정할 때 쓰는 짧고 자연스러운 표현이에요.','구매 결정','A1','economy','pattern',NULL,4),
 ('s_economy_A1_05','Can I get a receipt, please?','영수증 주실 수 있나요?','Can I get a receipt','정중한 요청에 "Can I get ~?"은 아주 자연스러운 표현이에요.','계산 후','A1','economy','pattern',NULL,5),
 ('s_economy_A1_06','Is there a discount?','할인이 있나요?','Is there a discount','세일이나 특별가를 물을 때 가장 많이 쓰는 표현이에요.','쇼핑','A1','economy','pattern',NULL,6),
-('s_economy_A1_07','Keep the change.','거스름돈은 괜찮아요.','Keep the change','팁을 주거나 소액 거스름돈을 포기할 때 쓰는 표현이에요.','현금 계산','A1','economy','pattern',NULL,7);
+('s_economy_A1_07','Keep the change.','거스름돈은 괜찮아요.','Keep the change','팁을 주거나 소액 거스름돈을 포기할 때 쓰는 표현이에요.','현금 계산','A1','economy','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A2 (저축·대출 패턴, 7개)
@@ -272,7 +279,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_economy_A2_04','My credit card bill came out to a lot this month.','이번 달 신용카드 명세서가 많이 나왔어요.','came out to','came out to + 금액: 최종 금액이 얼마가 나왔다고 말할 때 써요.','카드 명세서','A2','economy','pattern',NULL,4),
 ('s_economy_A2_05','I get paid at the end of the month.','월말에 급여를 받아요.','get paid','get paid: 급여가 지급된다는 표현. 능동형보다 훨씬 자연스러워요.','급여 관련','A2','economy','pattern',NULL,5),
 ('s_economy_A2_06','I''m in debt right now, so I can''t afford it.','지금 빚이 있어서 그것을 살 여유가 없어요.','in debt','in debt: 빚이 있는 상태. "I owe money"보다 더 자연스러운 표현이에요.','금전 상황','A2','economy','pattern',NULL,6),
-('s_economy_A2_07','Could you transfer the money to my account?','제 계좌로 이체해 주실 수 있나요?','transfer the money to my account','transfer A to B: A를 B로 이체하다. 은행 업무에서 자주 써요.','송금 요청','A2','economy','pattern',NULL,7);
+('s_economy_A2_07','Could you transfer the money to my account?','제 계좌로 이체해 주실 수 있나요?','transfer the money to my account','transfer A to B: A를 B로 이체하다. 은행 업무에서 자주 써요.','송금 요청','A2','economy','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B1 (경제 지표 논의 패턴, 7개)
@@ -285,7 +293,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_economy_B1_04','GDP grew by two percent compared to last year.','GDP가 작년 대비 2% 성장했어요.','compared to last year','compared to: 수치 비교에 가장 많이 쓰이는 표현이에요.','경제 성장 발표','B1','economy','pattern',NULL,4),
 ('s_economy_B1_05','There is a growing concern about the trade deficit.','무역 적자에 대한 우려가 커지고 있어요.','growing concern about','there is a growing concern about: 점점 심각해지는 문제를 언급할 때 써요.','경제 뉴스','B1','economy','pattern',NULL,5),
 ('s_economy_B1_06','The economy is showing signs of recovery.','경제가 회복 조짐을 보이고 있어요.','showing signs of recovery','show signs of + 명사: 징후가 나타나다는 표현이에요.','경기 회복 토론','B1','economy','pattern',NULL,6),
-('s_economy_B1_07','Consumer spending has slowed down significantly this quarter.','소비자 지출이 이번 분기에 크게 둔화됐어요.','has slowed down significantly','현재완료 + significantly: 주목할 만한 변화를 강조하는 패턴이에요.','경제 분석','B1','economy','pattern',NULL,7);
+('s_economy_B1_07','Consumer spending has slowed down significantly this quarter.','소비자 지출이 이번 분기에 크게 둔화됐어요.','has slowed down significantly','현재완료 + significantly: 주목할 만한 변화를 강조하는 패턴이에요.','경제 분석','B1','economy','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B2 (투자·시장 패턴, 7개)
@@ -298,7 +307,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_economy_B2_04','Hedge funds tend to perform well in volatile markets.','헤지펀드는 변동성이 높은 시장에서 좋은 성과를 내는 경향이 있어요.','tend to perform well in','tend to: 일반적 경향을 설명할 때 쓰는 표현이에요.','투자 전략','B2','economy','pattern',NULL,4),
 ('s_economy_B2_05','The bond yield rose sharply following the Fed''s announcement.','연준 발표 이후 채권 수익률이 급격히 상승했어요.','rose sharply following','following + 명사: "~ 이후에"라는 뜻으로 인과관계를 연결해요.','채권 시장','B2','economy','pattern',NULL,5),
 ('s_economy_B2_06','Investors are fleeing to safe-haven assets amid uncertainty.','불확실성 속에서 투자자들이 안전 자산으로 이동하고 있어요.','fleeing to safe-haven assets amid','amid + 명사: "~ 속에서"라는 표현으로 배경 상황을 나타내요.','위험 회피 전략','B2','economy','pattern',NULL,6),
-('s_economy_B2_07','The equity market rebounded after the initial sell-off.','초기 매도세 이후 주식 시장이 반등했어요.','rebounded after the initial sell-off','rebound after: 하락 이후 반등을 표현하는 금융 뉴스의 핵심 패턴이에요.','시장 동향','B2','economy','pattern',NULL,7);
+('s_economy_B2_07','The equity market rebounded after the initial sell-off.','초기 매도세 이후 주식 시장이 반등했어요.','rebounded after the initial sell-off','rebound after: 하락 이후 반등을 표현하는 금융 뉴스의 핵심 패턴이에요.','시장 동향','B2','economy','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C1 (경제 정책 분석 패턴, 7개)
@@ -311,7 +321,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_economy_C1_04','Protectionist tariffs may shield domestic producers but ultimately harm consumers.','보호무역 관세는 국내 생산자를 보호할 수 있지만 결국 소비자에게 해를 끼쳐요.','may shield ... but ultimately','may ... but ultimately: 단기 효과와 장기 결과를 대조할 때 쓰는 구조예요.','무역 정책 논의','C1','economy','pattern',NULL,4),
 ('s_economy_C1_05','Comparative advantage theory suggests that specialization leads to greater overall welfare.','비교우위 이론은 특화가 전체적인 복지 향상으로 이어진다고 주장해요.','theory suggests that','theory suggests that: 이론의 주장을 소개하는 학술적 표현이에요.','경제 이론 설명','C1','economy','pattern',NULL,5),
 ('s_economy_C1_06','Excessive reliance on subsidies can distort market signals and reduce efficiency.','보조금에 대한 과도한 의존은 시장 신호를 왜곡하고 효율성을 낮출 수 있어요.','distort market signals','distort market signals: 시장 메커니즘이 제대로 작동하지 않을 때 쓰는 표현이에요.','시장 왜곡 분석','C1','economy','pattern',NULL,6),
-('s_economy_C1_07','Moral hazard arises when one party is insulated from the consequences of their decisions.','도덕적 해이는 한쪽이 자신의 결정 결과로부터 보호받을 때 발생해요.','is insulated from the consequences','be insulated from: 결과나 영향을 받지 않는 상태를 표현해요.','경제 인센티브 분석','C1','economy','pattern',NULL,7);
+('s_economy_C1_07','Moral hazard arises when one party is insulated from the consequences of their decisions.','도덕적 해이는 한쪽이 자신의 결정 결과로부터 보호받을 때 발생해요.','is insulated from the consequences','be insulated from: 결과나 영향을 받지 않는 상태를 표현해요.','경제 인센티브 분석','C1','economy','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C2 (경제 이론·학술 분석 패턴, 7개)
@@ -324,4 +335,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_economy_C2_04','Heterodox economists challenge the assumption that markets naturally tend toward equilibrium.','비주류 경제학자들은 시장이 자연적으로 균형을 향해 가는 경향이 있다는 가정에 도전해요.','challenge the assumption that','challenge the assumption that: 주류 이론의 전제를 의문시하는 학술적 표현이에요.','경제학 패러다임 토론','C2','economy','pattern',NULL,4),
 ('s_economy_C2_05','Asymmetric information between buyers and sellers leads to adverse selection and market inefficiency.','구매자와 판매자 간의 정보 비대칭은 역선택과 시장 비효율로 이어져요.','leads to adverse selection','leads to: 결과를 도출하는 인과 표현으로 학술 글쓰기에 필수적이에요.','정보 경제학','C2','economy','pattern',NULL,5),
 ('s_economy_C2_06','The Gini coefficient measures the extent to which income distribution deviates from perfect equality.','지니 계수는 소득 분배가 완전한 평등에서 얼마나 벗어나는지를 측정해요.','measures the extent to which','measures the extent to which: 정도·수준을 객관적으로 측정하는 학술 표현이에요.','소득 불평등 측정','C2','economy','pattern',NULL,6),
-('s_economy_C2_07','A liquidity trap renders conventional monetary policy ineffective, as near-zero rates fail to stimulate demand.','유동성 함정은 제로에 가까운 금리가 수요를 자극하지 못하면서 기존 통화 정책을 무효화해요.','renders conventional monetary policy ineffective','render + O + adjective: "~을 ~한 상태로 만들다"라는 C1+ 핵심 동사 패턴이에요.','통화 정책 한계 분석','C2','economy','pattern',NULL,7);
+('s_economy_C2_07','A liquidity trap renders conventional monetary policy ineffective, as near-zero rates fail to stimulate demand.','유동성 함정은 제로에 가까운 금리가 수요를 자극하지 못하면서 기존 통화 정책을 무효화해요.','renders conventional monetary policy ineffective','render + O + adjective: "~을 ~한 상태로 만들다"라는 C1+ 핵심 동사 패턴이에요.','통화 정책 한계 분석','C2','economy','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

@@ -40,7 +40,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_media_A1_32','subscribe','/səbˈskraɪb/','verb','구독하다','To sign up to receive content from a creator.','I {subscribe} to a lot of cooking channels.','저는 요리 채널을 많이 구독해요.','subscribe','A1','media',1,'youtube subscribe button bell notification'),
 ('w_media_A1_33','notification','/ˌnoʊtɪfɪˈkeɪʃən/','noun','알림','A message that alerts you to an update.','Turn on {notifications} so you don''t miss anything.','아무것도 놓치지 않도록 알림을 켜 두세요.','notifications','A1','media',2,'phone notification bell alert lock screen'),
 ('w_media_A1_34','follow','/ˈfɒloʊ/','verb','팔로우하다','To subscribe to someone''s updates on social media.','I {follow} a lot of travel accounts.','저는 여행 계정을 많이 팔로우해요.','follow','A1','media',1,'follow button instagram social media profile'),
-('w_media_A1_35','download','/ˈdaʊnloʊd/','verb','다운로드하다','To save a file from the internet to a device.','{Download} the app and sign up for free.','앱을 다운로드하고 무료로 가입하세요.','Download','A1','media',1,'downloading app phone progress bar install');
+('w_media_A1_35','download','/ˈdaʊnloʊd/','verb','다운로드하다','To save a file from the internet to a device.','{Download} the app and sign up for free.','앱을 다운로드하고 무료로 가입하세요.','Download','A1','media',1,'downloading app phone progress bar install')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2
@@ -80,7 +81,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_media_A2_32','emoji','/ɪˈmoʊdʒi/','noun','이모지','A small digital image used in messages.','Her message was just three {emojis}.','그녀의 메시지는 이모지 세 개뿐이었어요.','emojis','A2','media',2,'emoji keyboard message phone chat colorful'),
 ('w_media_A2_33','react','/riˈækt/','verb','반응하다 (이모지로)','To respond to a post with an emoji reaction.','Everyone {reacted} with a heart to her post.','모두가 그녀의 게시물에 하트로 반응했어요.','reacted','A2','media',2,'react heart emoji post facebook reaction'),
 ('w_media_A2_34','content','/ˈkɒntent/','noun','콘텐츠','Material such as text, images, or video published online.','Good {content} takes time to create.','좋은 콘텐츠를 만드는 데는 시간이 걸려요.','content','A2','media',1,'creating content camera laptop editing desk'),
-('w_media_A2_35','account','/əˈkaʊnt/','noun','계정','A personal profile registered on an online platform.','Create a free {account} to get started.','시작하려면 무료 계정을 만드세요.','account','A2','media',1,'social media account signup login phone app');
+('w_media_A2_35','account','/əˈkaʊnt/','noun','계정','A personal profile registered on an online platform.','Create a free {account} to get started.','시작하려면 무료 계정을 만드세요.','account','A2','media',1,'social media account signup login phone app')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1
@@ -120,7 +122,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_media_B1_32','spoiler','/ˈspɔɪlər/','noun','스포일러','Information that reveals key plot points before someone has seen/read them.','Warning: this review contains {spoilers}.','경고: 이 리뷰에는 스포일러가 포함되어 있어요.','spoilers','B1','media',2,'spoiler warning movie review no spoiler banner'),
 ('w_media_B1_33','streaming service','/ˈstriːmɪŋ ˈsɜːrvɪs/','noun','스트리밍 서비스','An online platform that provides on-demand audio or video content.','Which {streaming service} do you subscribe to?','어떤 스트리밍 서비스 구독해요?','streaming service','B1','media',1,'netflix spotify streaming service logo subscription'),
 ('w_media_B1_34','verified','/ˈverɪfaɪd/','adjective','인증된','Having a badge confirming authenticity on a social media account.','Getting {verified} on Instagram boosts credibility.','인스타그램에서 인증 받으면 신뢰도가 올라가요.','verified','B1','media',2,'verified blue checkmark instagram account badge'),
-('w_media_B1_35','clip','/klɪp/','verb','클립으로 잘라내다','To extract a short segment from a longer video.','He {clipped} the funniest moments for his highlights.','그는 가장 재미있는 순간들을 클립으로 잘라 하이라이트를 만들었어요.','clipped','B1','media',2,'clipping video highlights editing short cut');
+('w_media_B1_35','clip','/klɪp/','verb','클립으로 잘라내다','To extract a short segment from a longer video.','He {clipped} the funniest moments for his highlights.','그는 가장 재미있는 순간들을 클립으로 잘라 하이라이트를 만들었어요.','clipped','B1','media',2,'clipping video highlights editing short cut')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2
@@ -160,7 +163,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_media_B2_32','sensationalism','/senˈseɪʃənəlɪzəm/','noun','선정주의','The use of shocking or exaggerated stories to attract attention.','Tabloid journalism often relies on {sensationalism}.','타블로이드 저널리즘은 종종 선정주의에 의존해요.','sensationalism','B2','media',1,'sensationalism tabloid headline shocking exaggerated news'),
 ('w_media_B2_33','public opinion','/ˈpʌblɪk əˈpɪnjən/','noun','여론','The collective views held by a large number of people on a topic.','Social media now shapes {public opinion} faster than ever.','소셜 미디어가 이제 그 어느 때보다 빠르게 여론을 형성해요.','public opinion','B2','media',1,'public opinion poll social media influence speed'),
 ('w_media_B2_34','editorial','/ˌedɪˈtɔːriəl/','noun','사설, 편집의','An article expressing the opinion of a publication.','The newspaper ran a critical {editorial} on the policy.','그 신문은 정책에 비판적인 사설을 실었어요.','editorial','B2','media',1,'editorial newspaper opinion page critical analysis'),
-('w_media_B2_35','press freedom','/pres ˈfriːdəm/','noun','언론의 자유','The freedom of journalists and news organisations to report without restriction.','Journalists worldwide fight to protect {press freedom}.','전 세계 기자들은 언론의 자유를 지키기 위해 싸우고 있어요.','press freedom','B2','media',1,'press freedom journalism protest newspaper freedom');
+('w_media_B2_35','press freedom','/pres ˈfriːdəm/','noun','언론의 자유','The freedom of journalists and news organisations to report without restriction.','Journalists worldwide fight to protect {press freedom}.','전 세계 기자들은 언론의 자유를 지키기 위해 싸우고 있어요.','press freedom','B2','media',1,'press freedom journalism protest newspaper freedom')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1
@@ -200,7 +204,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_media_C1_32','weaponized information','/ˈwepənaɪzd ɪnfərˈmeɪʃən/','noun','무기화된 정보','Information deliberately distorted to destabilize societies.','Democracies struggle to defend against {weaponized information}.','민주주의는 무기화된 정보에 맞서 싸우고 있어요.','weaponized information','C1','media',1,'weaponized information democracy defense disinformation'),
 ('w_media_C1_33','credibility cues','/ˌkredɪˈbɪlɪti kjuːz/','noun','신뢰성 단서','Visual or contextual signals that indicate whether information is trustworthy.','Readers use {credibility cues} to judge news reliability.','독자들은 신뢰성 단서를 이용해 뉴스 신뢰도를 판단해요.','credibility cues','C1','media',2,'credibility cues news source trust signal evaluation'),
 ('w_media_C1_34','transparency reporting','/trænsˈpærənsi rɪˈpɔːrtɪŋ/','noun','투명성 보고','Public disclosure by platforms about their moderation and ad policies.','Regulators now require quarterly {transparency reporting}.','규제당국은 이제 분기별 투명성 보고를 요구해요.','transparency reporting','C1','media',2,'transparency reporting regulation platform accountability'),
-('w_media_C1_35','editorial independence','/ˌedɪˈtɔːriəl ˌɪndɪˈpendəns/','noun','편집권 독립','The freedom of journalists to report without interference from owners or advertisers.','Public broadcasters must protect {editorial independence}.','공영 방송은 편집권 독립을 지켜야 해요.','editorial independence','C1','media',1,'editorial independence journalism freedom owner advertiser');
+('w_media_C1_35','editorial independence','/ˌedɪˈtɔːriəl ˌɪndɪˈpendəns/','noun','편집권 독립','The freedom of journalists to report without interference from owners or advertisers.','Public broadcasters must protect {editorial independence}.','공영 방송은 편집권 독립을 지켜야 해요.','editorial independence','C1','media',1,'editorial independence journalism freedom owner advertiser')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2
@@ -240,7 +245,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_media_C2_32','technological solutionism','/ˌteknəˈlɒdʒɪkəl ˈsoʊluːʃənɪzəm/','noun','기술 만능주의','The belief that every social problem can be solved with a technological fix.','Morozov criticized Silicon Valley''s {technological solutionism}.','모로조프는 실리콘 밸리의 기술 만능주의를 비판했어요.','technological solutionism','C2','media',2,'technological solutionism Morozov Silicon Valley fix problem'),
 ('w_media_C2_33','critical data studies','/ˈkrɪtɪkəl ˈdeɪtə ˈstʌdiz/','noun','비판적 데이터 연구','An academic field examining the political and ethical dimensions of data collection.','Scholars in {critical data studies} interrogate platform surveillance.','비판적 데이터 연구 학자들은 플랫폼 감시를 문제 삼아요.','critical data studies','C2','media',2,'critical data studies surveillance platform ethics academic'),
 ('w_media_C2_34','post-digital','/poʊst ˈdɪdʒɪtəl/','adjective','포스트디지털의','Relating to a culture where digital technology is so pervasive it is no longer remarkable.','We live in a {post-digital} media landscape.','우리는 포스트디지털 미디어 환경 속에 살고 있어요.','post-digital','C2','media',2,'post-digital ubiquitous technology pervasive media culture'),
-('w_media_C2_35','legitimation crisis','/ˌledʒɪtɪˈmeɪʃən ˈkraɪsɪs/','noun','정당성 위기','A breakdown of trust in social institutions, accelerated by media exposure.','Social media has triggered a {legitimation crisis} for mainstream journalism.','소셜 미디어가 주류 저널리즘의 정당성 위기를 촉발했어요.','legitimation crisis','C2','media',1,'legitimation crisis journalism trust mainstream media decline');
+('w_media_C2_35','legitimation crisis','/ˌledʒɪtɪˈmeɪʃən ˈkraɪsɪs/','noun','정당성 위기','A breakdown of trust in social institutions, accelerated by media exposure.','Social media has triggered a {legitimation crisis} for mainstream journalism.','소셜 미디어가 주류 저널리즘의 정당성 위기를 촉발했어요.','legitimation crisis','C2','media',1,'legitimation crisis journalism trust mainstream media decline')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A1 (영상·뉴스 공유)
@@ -252,7 +258,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_media_A1_04','What are you watching?','뭐 보고 있어요?','What are you watching','상대방이 지금 하고 있는 행동을 물을 때는 What are you + -ing?를 써요.','일상 대화','A1','media','pattern',NULL,4),
 ('s_media_A1_05','Have you heard the news today?','오늘 뉴스 들었어요?','Have you heard','최근 소식을 아는지 확인할 때는 Have you heard...?를 써요.','뉴스 확인','A1','media','pattern',NULL,5),
 ('s_media_A1_06','This photo is amazing — where did you take it?','이 사진 정말 대단해요. 어디서 찍었어요?','where did you take it','사진을 칭찬하며 장소를 물을 때 자연스러운 표현이에요. where did you + 동사 패턴이에요.','사진 감상','A1','media','pattern',NULL,6),
-('s_media_A1_07','I listen to music on my phone every day.','저는 매일 휴대폰으로 음악을 들어요.','listen to music on my phone','습관을 말할 때는 현재 시제를 써요. on my phone은 기기를 나타낼 때 유용한 표현이에요.','음악 습관','A1','media','pattern',NULL,7);
+('s_media_A1_07','I listen to music on my phone every day.','저는 매일 휴대폰으로 음악을 들어요.','listen to music on my phone','습관을 말할 때는 현재 시제를 써요. on my phone은 기기를 나타낼 때 유용한 표현이에요.','음악 습관','A1','media','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A2 (SNS 활동)
@@ -264,7 +271,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_media_A2_04','Have you seen what''s trending today?','오늘 트렌딩에 뭐 있는지 봤어요?','Have you seen what''s trending','최근 유행 중인 것을 묻는 표현이에요. trending은 SNS에서 핵심 키워드예요.','트렌딩 화제','A2','media','pattern',NULL,4),
 ('s_media_A2_05','She uploaded a new video — it already has a million views.','그녀가 새 영상을 올렸어요. 벌써 조회수가 백만이에요.','already has a million views','already는 예상보다 일찍 일어난 일에 대한 놀라움을 강조해요.','조회수 화제','A2','media','pattern',NULL,5),
 ('s_media_A2_06','You can find me on Instagram at @username.','인스타그램에서 @username으로 찾을 수 있어요.','You can find me on','SNS 계정을 알려줄 때 You can find me on + 플랫폼 at + @계정명 패턴을 써요.','계정 소개','A2','media','pattern',NULL,6),
-('s_media_A2_07','I''ve been spending too much time scrolling lately.','요즘 스크롤하면서 시간을 너무 많이 보내고 있어요.','spending too much time scrolling','I''ve been + -ing는 최근의 습관이나 상태를 반성할 때 유용해요.','SNS 과다 사용','A2','media','pattern',NULL,7);
+('s_media_A2_07','I''ve been spending too much time scrolling lately.','요즘 스크롤하면서 시간을 너무 많이 보내고 있어요.','spending too much time scrolling','I''ve been + -ing는 최근의 습관이나 상태를 반성할 때 유용해요.','SNS 과다 사용','A2','media','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B1 (콘텐츠 추천 및 알고리즘)
@@ -276,7 +284,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_media_B1_04','The engagement rate tells you whether the content is working.','참여율이 콘텐츠가 효과적인지 알려줘요.','tells you whether','whether는 두 가지 가능성이 있을 때 써요. tell you whether는 분석을 설명할 때 유용해요.','콘텐츠 분석','B1','media','pattern',NULL,4),
 ('s_media_B1_05','I''m thinking of starting a podcast — what do you think?','팟캐스트를 시작할까 생각 중이에요. 어떻게 생각해요?','I''m thinking of starting','I''m thinking of + -ing는 아직 결정하지 않은 계획을 조심스럽게 꺼낼 때 써요.','미디어 창작 계획','B1','media','pattern',NULL,5),
 ('s_media_B1_06','Did you see that video went viral overnight?','그 영상이 하룻밤 사이에 바이럴된 거 봤어요?','went viral overnight','go viral은 콘텐츠가 폭발적으로 퍼지는 것을 뜻해요. overnight은 매우 빠른 확산을 강조해요.','바이럴 화제','B1','media','pattern',NULL,6),
-('s_media_B1_07','I always check the analytics before deciding what to post next.','다음에 뭘 올릴지 결정하기 전에 항상 분석 데이터를 확인해요.','before deciding what to post','before + -ing는 어떤 행동을 하기 전의 습관을 나타내요. 콘텐츠 전략 설명에 유용해요.','콘텐츠 전략','B1','media','pattern',NULL,7);
+('s_media_B1_07','I always check the analytics before deciding what to post next.','다음에 뭘 올릴지 결정하기 전에 항상 분석 데이터를 확인해요.','before deciding what to post','before + -ing는 어떤 행동을 하기 전의 습관을 나타내요. 콘텐츠 전략 설명에 유용해요.','콘텐츠 전략','B1','media','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B2 (미디어 비평)
@@ -288,7 +297,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_media_B2_04','The way the story was framed really influenced how I felt about it.','그 이야기가 프레이밍된 방식이 제 감정에 정말 큰 영향을 줬어요.','The way ... was framed','The way + 절은 어떤 사건이 제시된 방식을 분석할 때 쓰는 고급 패턴이에요.','미디어 프레이밍','B2','media','pattern',NULL,4),
 ('s_media_B2_05','It''s hard to tell whether a source is reliable these days.','요즘에는 출처가 신뢰할 수 있는지 판단하기 어려워요.','It''s hard to tell whether','It''s hard to + 동사 패턴은 어려움을 공유할 때 써요. whether는 두 가능성 사이의 불확실성을 나타내요.','정보 신뢰성','B2','media','pattern',NULL,5),
 ('s_media_B2_06','Social media algorithms tend to reinforce our existing beliefs.','소셜 미디어 알고리즘은 우리의 기존 믿음을 강화하는 경향이 있어요.','tend to reinforce','tend to + 동사는 일반적인 경향이나 패턴을 말할 때 써요. 분석적인 주장을 부드럽게 만들어줘요.','에코 챔버 논의','B2','media','pattern',NULL,6),
-('s_media_B2_07','What concerns me most is the lack of transparency in how these platforms operate.','가장 걱정되는 건 이 플랫폼들이 운영되는 방식의 투명성 부재예요.','What concerns me most is','What concerns me most is + 절은 자신의 핵심 우려를 강조하며 시작하는 고급 문어체 패턴이에요.','플랫폼 비판','B2','media','pattern',NULL,7);
+('s_media_B2_07','What concerns me most is the lack of transparency in how these platforms operate.','가장 걱정되는 건 이 플랫폼들이 운영되는 방식의 투명성 부재예요.','What concerns me most is','What concerns me most is + 절은 자신의 핵심 우려를 강조하며 시작하는 고급 문어체 패턴이에요.','플랫폼 비판','B2','media','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C1 (미디어 영향력 논의)
@@ -300,7 +310,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_media_C1_04','What''s particularly troubling is the way disinformation campaigns exploit our confirmation bias.','특히 걱정스러운 것은 허위정보 캠페인이 우리의 확증 편향을 악용하는 방식이에요.','What''s particularly troubling is','What''s + 형용사 + is는 핵심 문제를 강조하는 C1 수준 강조 구문이에요.','허위정보 분석','C1','media','pattern',NULL,4),
 ('s_media_C1_05','Platform governance needs to balance free expression with accountability.','플랫폼 거버넌스는 표현의 자유와 책임 사이의 균형을 잡아야 해요.','needs to balance ... with','need to balance A with B는 두 가지 상충하는 가치를 논의할 때 쓰는 고급 표현이에요.','플랫폼 정책 논의','C1','media','pattern',NULL,5),
 ('s_media_C1_06','The erosion of editorial independence poses a long-term threat to democratic discourse.','편집권 독립의 침식은 민주적 담론에 장기적인 위협이 돼요.','poses a long-term threat to','pose a threat to는 위험을 공식적으로 서술할 때 써요. erosion은 점진적 약화를 나타내는 핵심 명사예요.','언론 자유 논의','C1','media','pattern',NULL,6),
-('s_media_C1_07','Unless we develop robust media literacy education, we will remain vulnerable to manipulation.','탄탄한 미디어 리터러시 교육을 개발하지 않으면 조작에 취약한 상태가 지속돼요.','Unless we develop ... we will remain','Unless + 현재형은 조건의 부재를 강조해요. remain vulnerable to는 위험 상태의 지속성을 표현해요.','미디어 교육 필요성','C1','media','pattern',NULL,7);
+('s_media_C1_07','Unless we develop robust media literacy education, we will remain vulnerable to manipulation.','탄탄한 미디어 리터러시 교육을 개발하지 않으면 조작에 취약한 상태가 지속돼요.','Unless we develop ... we will remain','Unless + 현재형은 조건의 부재를 강조해요. remain vulnerable to는 위험 상태의 지속성을 표현해요.','미디어 교육 필요성','C1','media','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C2 (미디어 영향력 심화 논의)
@@ -312,4 +323,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_media_C2_04','One cannot disentangle the question of media power from broader structures of political and economic hegemony.','미디어 권력의 문제는 정치·경제적 헤게모니의 광범위한 구조에서 분리할 수 없어요.','One cannot disentangle ... from','One cannot disentangle A from B는 두 개념이 불가분의 관계임을 주장하는 학술적 패턴이에요.','구조적 분석','C2','media','pattern',NULL,4),
 ('s_media_C2_05','The epistemological implications of deepfake technology call into question the evidentiary status of audiovisual media.','딥페이크 기술의 인식론적 함의는 시청각 미디어의 증거적 지위에 의문을 제기해요.','call into question the ... status of','call into question은 근본 전제에 이의를 제기할 때 쓰는 학술 필수 표현이에요.','딥페이크 철학','C2','media','pattern',NULL,5),
 ('s_media_C2_06','Semiotics reveals how media texts encode ideological assumptions that audiences may naturalise without critical reflection.','기호학은 미디어 텍스트가 비판적 성찰 없이 수용자가 자연스럽게 받아들일 수 있는 이데올로기적 가정을 어떻게 코드화하는지 드러내요.','encode ideological assumptions that audiences may naturalise','encode + 목적어 + that절은 숨겨진 의미 구조를 분석하는 기호학적 패턴이에요.','기호학적 분석','C2','media','pattern',NULL,6),
-('s_media_C2_07','To the extent that platforms function as ideological state apparatuses, regulating them is not merely a technical but a deeply political project.','플랫폼이 이데올로기적 국가 기구로 기능하는 한, 플랫폼 규제는 단순히 기술적인 것이 아니라 깊이 정치적인 프로젝트예요.','To the extent that ... not merely ... but','To the extent that는 조건의 범위를 한정하는 C2 수준 패턴이에요. not merely A but B는 더 깊은 차원을 강조해요.','플랫폼 규제 논쟁','C2','media','pattern',NULL,7);
+('s_media_C2_07','To the extent that platforms function as ideological state apparatuses, regulating them is not merely a technical but a deeply political project.','플랫폼이 이데올로기적 국가 기구로 기능하는 한, 플랫폼 규제는 단순히 기술적인 것이 아니라 깊이 정치적인 프로젝트예요.','To the extent that ... not merely ... but','To the extent that는 조건의 범위를 한정하는 C2 수준 패턴이에요. not merely A but B는 더 깊은 차원을 강조해요.','플랫폼 규제 논쟁','C2','media','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

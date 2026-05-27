@@ -42,7 +42,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_emotion_A1_32','proud','/praʊd/','adjective','자랑스러운','Feeling deep pleasure from achievement.','I''m so {proud} of my little sister.','여동생이 너무 자랑스러워요.','proud','A1','emotion',1,'person proud achievement award'),
 ('w_emotion_A1_33','shy','/ʃaɪ/','adjective','수줍은','Nervous or timid in the company of others.','She is very {shy} around new people.','그녀는 새로운 사람들 앞에서 매우 수줍어해요.','shy','A1','emotion',2,'shy person quiet introvert'),
 ('w_emotion_A1_34','kind','/kaɪnd/','adjective','친절한','Having a gentle, caring nature.','She is so {kind} to everyone.','그녀는 모든 사람에게 정말 친절해요.','kind','A1','emotion',2,'person kind helping others'),
-('w_emotion_A1_35','fun','/fʌn/','adjective','즐거운, 재미있는','Providing amusement or enjoyment.','The trip was so {fun}!','그 여행은 정말 즐거웠어요!','fun','A1','emotion',1,'friends having fun travel trip');
+('w_emotion_A1_35','fun','/fʌn/','adjective','즐거운, 재미있는','Providing amusement or enjoyment.','The trip was so {fun}!','그 여행은 정말 즐거웠어요!','fun','A1','emotion',1,'friends having fun travel trip')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2 (35 words)
@@ -83,7 +84,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_emotion_A2_32','jealous','/ˈdʒeləs/','adjective','부러운','Feeling envy of someone''s advantages.','I''m a little {jealous} of your lifestyle.','당신의 라이프스타일이 좀 부러워요.','jealous','A2','emotion',2,'person envious admiring others'),
 ('w_emotion_A2_33','overwhelmed','/ˌoʊvərˈwelmd/','adjective','압도된','Buried under too much at once.','I feel {overwhelmed} by all the choices.','선택지가 너무 많아서 압도돼요.','overwhelmed','A2','emotion',2,'person overwhelmed too many options'),
 ('w_emotion_A2_34','upset','/ʌpˈset/','adjective','기분이 상한','Emotionally disturbed or troubled.','She was {upset} because nobody remembered her birthday.','아무도 생일을 기억하지 않아서 기분이 상했어요.','upset','A2','emotion',2,'person upset birthday forgotten'),
-('w_emotion_A2_35','cheerful','/ˈtʃɪrfəl/','adjective','쾌활한','Positive and happy in manner.','He stayed {cheerful} even when things went wrong.','일이 잘못되어도 쾌활함을 유지했어요.','cheerful','A2','emotion',2,'person cheerful positive attitude');
+('w_emotion_A2_35','cheerful','/ˈtʃɪrfəl/','adjective','쾌활한','Positive and happy in manner.','He stayed {cheerful} even when things went wrong.','일이 잘못되어도 쾌활함을 유지했어요.','cheerful','A2','emotion',2,'person cheerful positive attitude')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1 (35 words)
@@ -124,7 +126,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_emotion_B1_32','grateful','/ˈɡreɪtfəl/','adjective','깊이 감사하는','Feeling or showing appreciation for kindness.','I''m deeply {grateful} for this opportunity.','이 기회에 깊이 감사드려요.','grateful','B1','emotion',1,'person grateful opportunity hand gesture'),
 ('w_emotion_B1_33','energetic','/ˌenərˈdʒetɪk/','adjective','활기찬','Having or showing great energy or vitality.','She felt {energetic} after a good night''s sleep.','숙면 후에 활기차게 느껴졌어요.','energetic','B1','emotion',2,'person energetic morning active'),
 ('w_emotion_B1_34','withdrawn','/wɪðˈdrɔːn/','adjective','내성적인, 말이 없어진','Retreating from others; emotionally detached.','He became {withdrawn} after the loss.','상실 후 그는 말이 없어졌어요.','withdrawn','B1','emotion',3,'person withdrawn alone quiet sad'),
-('w_emotion_B1_35','vulnerable','/ˈvʌlnərəbəl/','adjective','취약한, 상처받기 쉬운','Open to emotional hurt or attack.','She felt {vulnerable} opening up about her past.','과거에 대해 털어놓으면서 마음이 연약하게 느껴졌어요.','vulnerable','B1','emotion',2,'person vulnerable opening up sharing feelings');
+('w_emotion_B1_35','vulnerable','/ˈvʌlnərəbəl/','adjective','취약한, 상처받기 쉬운','Open to emotional hurt or attack.','She felt {vulnerable} opening up about her past.','과거에 대해 털어놓으면서 마음이 연약하게 느껴졌어요.','vulnerable','B1','emotion',2,'person vulnerable opening up sharing feelings')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2 (35 words)
@@ -165,7 +168,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_emotion_B2_32','disillusioned','/ˌdɪsɪˈluːʒənd/','adjective','환멸을 느끼는','Disappointed by the reality of something once idealised.','He became {disillusioned} with politics.','그는 정치에 환멸을 느끼게 됐어요.','disillusioned','B2','emotion',3,'person disillusioned politics disappointed reality'),
 ('w_emotion_B2_33','yearning','/ˈjɜːrnɪŋ/','adjective','갈망하는','Feeling a tender or urgent desire for something.','She had a deep {yearning} for connection.','그녀는 유대감에 대한 깊은 갈망이 있었어요.','yearning','B2','emotion',2,'person yearning connection longing desire'),
 ('w_emotion_B2_34','liberated','/ˈlɪbəreɪtɪd/','adjective','해방된, 자유로운 기분인','Free from social conventions or oppressive situations.','She felt {liberated} after quitting the toxic job.','독성적인 직장을 그만두고 해방된 기분이었어요.','liberated','B2','emotion',2,'person liberated quitting job free'),
-('w_emotion_B2_35','conflicted','/kənˈflɪktɪd/','adjective','복잡한 심경인','Experiencing inner conflict between opposing feelings.','He felt deeply {conflicted} about the decision.','그 결정에 대해 깊이 복잡한 심경이었어요.','conflicted','B2','emotion',2,'person conflicted decision complexity inner');
+('w_emotion_B2_35','conflicted','/kənˈflɪktɪd/','adjective','복잡한 심경인','Experiencing inner conflict between opposing feelings.','He felt deeply {conflicted} about the decision.','그 결정에 대해 깊이 복잡한 심경이었어요.','conflicted','B2','emotion',2,'person conflicted decision complexity inner')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1 (35 words)
@@ -206,7 +210,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_emotion_C1_32','elusive','/ɪˈluːsɪv/','adjective','포착하기 어려운','(of an emotion) difficult to pin down or describe clearly.','True joy felt {elusive} in the midst of success.','성공 속에서도 진정한 기쁨은 포착하기 어려웠어요.','elusive','C1','emotion',3,'abstract elusive joy success'),
 ('w_emotion_C1_33','tumultuous','/tjuːˈmʌltʃuəs/','adjective','격동적인','Making an uproar; emotionally turbulent.','The years after the loss were {tumultuous}.','상실 이후의 몇 년은 감정적으로 격동적이었어요.','tumultuous','C1','emotion',2,'person tumultuous emotional turbulent years'),
 ('w_emotion_C1_34','reverent','/ˈrevərənt/','adjective','경외하는','Feeling or showing deep and solemn respect.','She had a {reverent} appreciation for classical music.','그녀는 클래식 음악에 경외에 가까운 감사함을 느꼈어요.','reverent','C1','emotion',3,'person reverent classical music concert'),
-('w_emotion_C1_35','disaffected','/ˌdɪsəˈfektɪd/','adjective','불만을 품은, 등을 돌린','No longer satisfied or loyal; dissatisfied.','Many {disaffected} workers left the company.','불만을 품은 많은 직원들이 회사를 떠났어요.','disaffected','C1','emotion',3,'disaffected workers leaving company');
+('w_emotion_C1_35','disaffected','/ˌdɪsəˈfektɪd/','adjective','불만을 품은, 등을 돌린','No longer satisfied or loyal; dissatisfied.','Many {disaffected} workers left the company.','불만을 품은 많은 직원들이 회사를 떠났어요.','disaffected','C1','emotion',3,'disaffected workers leaving company')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2 (35 words)
@@ -247,7 +252,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_emotion_C2_32','crestfallen','/ˈkrestfɔːlən/','adjective','풀이 죽은, 의기소침한','Sad and disappointed.','He looked {crestfallen} when his idea was rejected.','아이디어가 거절당하자 풀이 죽어 보였어요.','crestfallen','C2','emotion',2,'person crestfallen idea rejected sad'),
 ('w_emotion_C2_33','truculent','/ˈtrʌkjʊlənt/','adjective','시비를 걸려는, 공격적인','Eager or quick to argue or fight.','He adopted a {truculent} tone in the negotiation.','협상에서 시비를 거는 어조를 취했어요.','truculent','C2','emotion',3,'person truculent negotiation aggressive tone'),
 ('w_emotion_C2_34','phlegmatic','/fleɡˈmætɪk/','adjective','냉정한, 감정이 없어 보이는','Having an unemotional and stolidly calm disposition.','He received both praise and blame with {phlegmatic} calm.','칭찬과 비난 모두를 냉정하게 받아들였어요.','phlegmatic','C2','emotion',2,'person phlegmatic calm unemotional stoic'),
-('w_emotion_C2_35','ineffable','/ɪnˈefəbəl/','adjective','경외감이 너무 커서 말로 못 할','Too sacred or overwhelming to be expressed.','The beauty of the landscape was {ineffable}.','그 풍경의 아름다움은 말로 표현할 수 없었어요.','ineffable','C2','emotion',2,'landscape ineffable beauty overwhelming awe');
+('w_emotion_C2_35','ineffable','/ɪnˈefəbəl/','adjective','경외감이 너무 커서 말로 못 할','Too sacred or overwhelming to be expressed.','The beauty of the landscape was {ineffable}.','그 풍경의 아름다움은 말로 표현할 수 없었어요.','ineffable','C2','emotion',2,'landscape ineffable beauty overwhelming awe')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCE PATTERNS — A1 (7 patterns)
@@ -260,7 +266,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_emotion_A1_04','Are you okay?','괜찮아요?','Are you okay','상대방 걱정을 가볍게 물을 때 쓸 수 있는 표현이에요.','걱정 표현','A1','emotion','pattern',NULL,4),
 ('s_emotion_A1_05','I''m scared.','무서워요.','I''m scared','감정 형용사 앞에 I''m을 붙이면 바로 기분을 전달할 수 있어요.','공포 표현','A1','emotion','pattern',NULL,5),
 ('s_emotion_A1_06','I feel good!','기분이 좋아요!','feel good','feel good은 신체적으로도, 감정적으로도 쓸 수 있는 표현이에요.','긍정 감정','A1','emotion','pattern',NULL,6),
-('s_emotion_A1_07','I''m not okay.','괜찮지 않아요.','not okay','부정형으로 솔직하게 감정을 표현하는 표현이에요.','솔직한 감정 표현','A1','emotion','pattern',NULL,7);
+('s_emotion_A1_07','I''m not okay.','괜찮지 않아요.','not okay','부정형으로 솔직하게 감정을 표현하는 표현이에요.','솔직한 감정 표현','A1','emotion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCE PATTERNS — A2 (7 patterns)
@@ -273,7 +280,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_emotion_A2_04','I felt really grateful for your help.','도움에 정말 감사함을 느꼈어요.','felt really grateful','과거에 느낀 감정을 felt로 표현하는 패턴이에요.','감사 표현','A2','emotion','pattern',NULL,4),
 ('s_emotion_A2_05','He was so surprised by the news.','그는 그 소식에 정말 놀랐어요.','so surprised','so + 감정 형용사로 감정의 강도를 표현해요.','놀람 표현','A2','emotion','pattern',NULL,5),
 ('s_emotion_A2_06','I''m feeling a bit bored at home.','집에서 좀 지루하게 느껴지고 있어요.','feeling a bit bored','현재진행형 am feeling은 지금 이 순간의 감정에 집중하는 표현이에요.','지루함 표현','A2','emotion','pattern',NULL,6),
-('s_emotion_A2_07','I was so relieved to hear that.','그 말을 듣고 정말 안도했어요.','so relieved to hear','relieved to + 동사원형은 안도의 이유를 함께 표현하는 패턴이에요.','안도 표현','A2','emotion','pattern',NULL,7);
+('s_emotion_A2_07','I was so relieved to hear that.','그 말을 듣고 정말 안도했어요.','so relieved to hear','relieved to + 동사원형은 안도의 이유를 함께 표현하는 패턴이에요.','안도 표현','A2','emotion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCE PATTERNS — B1 (7 patterns)
@@ -286,7 +294,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_emotion_B1_04','That must have been really frustrating for you.','그게 당신에게 정말 답답했겠어요.','must have been really frustrating','must have been은 상대방이 겪었을 감정에 공감할 때 쓰는 표현이에요.','공감 표현','B1','emotion','pattern',NULL,4),
 ('s_emotion_B1_05','I felt so guilty about what happened.','일어난 일에 대해 정말 죄책감을 느꼈어요.','felt so guilty','felt guilty about + 명사/동명사는 죄책감을 표현하는 자연스러운 패턴이에요.','죄책감 표현','B1','emotion','pattern',NULL,5),
 ('s_emotion_B1_06','She seemed really enthusiastic about the project.','그녀는 프로젝트에 정말 열의를 보이는 것 같았어요.','seemed really enthusiastic','seemed + 부사 + 감정 형용사로 다른 사람의 감정을 자연스럽게 묘사해요.','감정 묘사','B1','emotion','pattern',NULL,6),
-('s_emotion_B1_07','I''m so relieved it all worked out in the end.','결국 다 잘 풀려서 정말 안도돼요.','so relieved it all worked out','it all worked out은 일이 잘 해결됐을 때 쓰는 표현이에요.','안도 표현','B1','emotion','pattern',NULL,7);
+('s_emotion_B1_07','I''m so relieved it all worked out in the end.','결국 다 잘 풀려서 정말 안도돼요.','so relieved it all worked out','it all worked out은 일이 잘 해결됐을 때 쓰는 표현이에요.','안도 표현','B1','emotion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCE PATTERNS — B2 (7 patterns)
@@ -299,7 +308,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_emotion_B2_04','I find it hard to put into words how grateful I am.','얼마나 감사한지 말로 표현하기가 어려워요.','hard to put into words','put into words는 감정을 언어로 담기 어려울 때 쓰는 세련된 표현이에요.','감사 표현','B2','emotion','pattern',NULL,4),
 ('s_emotion_B2_05','There''s something bittersweet about saying goodbye.','작별 인사를 하는 것에는 달콤씁쓸한 무언가가 있어요.','something bittersweet','bittersweet는 기쁨과 슬픔이 혼재하는 감정을 한 단어로 표현해요.','복잡한 감정','B2','emotion','pattern',NULL,5),
 ('s_emotion_B2_06','I was completely overwhelmed with gratitude.','감사함으로 완전히 압도됐어요.','overwhelmed with gratitude','overwhelmed with + 긍정 감정은 강한 긍정 감정 상태를 표현해요.','감사 표현','B2','emotion','pattern',NULL,6),
-('s_emotion_B2_07','The situation left me feeling utterly bewildered.','그 상황은 저를 완전히 어리둥절하게 만들었어요.','left me feeling utterly bewildered','left me feeling + 형용사는 상황이 어떤 감정을 남겼는지 표현하는 B2 패턴이에요.','혼란 표현','B2','emotion','pattern',NULL,7);
+('s_emotion_B2_07','The situation left me feeling utterly bewildered.','그 상황은 저를 완전히 어리둥절하게 만들었어요.','left me feeling utterly bewildered','left me feeling + 형용사는 상황이 어떤 감정을 남겼는지 표현하는 B2 패턴이에요.','혼란 표현','B2','emotion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCE PATTERNS — C1 (7 patterns)
@@ -312,7 +322,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_emotion_C1_04','His pensive silence spoke volumes about how he truly felt.','그의 생각에 잠긴 침묵이 그가 실제로 어떻게 느끼는지 많은 것을 말해줬어요.','pensive silence spoke volumes','spoke volumes는 말보다 행동이나 표정이 더 많은 것을 전달한다는 뜻이에요.','감정 묘사','C1','emotion','pattern',NULL,4),
 ('s_emotion_C1_05','I couldn''t shake the feeling that something was deeply wrong.','뭔가 심각하게 잘못됐다는 느낌을 떨쳐낼 수 없었어요.','couldn''t shake the feeling','couldn''t shake the feeling은 불안한 직감이 계속 남아있을 때 쓰는 표현이에요.','불안 표현','C1','emotion','pattern',NULL,5),
 ('s_emotion_C1_06','There was an overwhelming sense of trepidation as the moment approached.','그 순간이 다가오면서 압도적인 불안감이 밀려왔어요.','overwhelming sense of trepidation','overwhelming + 감정 명사는 감정이 밀려오는 강도를 극적으로 표현해요.','긴장 표현','C1','emotion','pattern',NULL,6),
-('s_emotion_C1_07','She experienced a strange mix of jubilation and loss.','그녀는 기쁨과 상실감이 묘하게 뒤섞인 감정을 경험했어요.','a strange mix of jubilation and loss','a strange mix of A and B는 상반된 두 감정이 공존하는 상태를 표현해요.','복합 감정','C1','emotion','pattern',NULL,7);
+('s_emotion_C1_07','She experienced a strange mix of jubilation and loss.','그녀는 기쁨과 상실감이 묘하게 뒤섞인 감정을 경험했어요.','a strange mix of jubilation and loss','a strange mix of A and B는 상반된 두 감정이 공존하는 상태를 표현해요.','복합 감정','C1','emotion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- SENTENCE PATTERNS — C2 (7 patterns)
@@ -325,4 +336,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_emotion_C2_04','The lugubrious atmosphere of the old house seemed to seep into my very bones.','오래된 집의 음울한 분위기가 내 뼛속까지 스며드는 것 같았어요.','lugubrious atmosphere seemed to seep','seep into one''s bones는 분위기나 감정이 깊숙이 침투함을 표현하는 문학적 표현이에요.','감정 묘사','C2','emotion','pattern',NULL,4),
 ('s_emotion_C2_05','His magnanimous response to the criticism left everyone in the room humbled.','비판에 대한 그의 관대한 반응이 방 안의 모든 사람을 겸허하게 만들었어요.','magnanimous response left everyone humbled','left everyone humbled는 특정 행동이 주변 사람들에게 깊은 인상을 남겼음을 표현해요.','감정 뉘앙스','C2','emotion','pattern',NULL,5),
 ('s_emotion_C2_06','She was ebullient on the surface, yet I sensed an undercurrent of lachrymose longing.','그녀는 겉으로는 활기차 보였지만, 눈물 어린 그리움의 저류가 느껴졌어요.','ebullient on the surface, yet undercurrent of lachrymose','undercurrent of + 감정은 표면 아래 숨겨진 감정을 암시하는 문학적 표현이에요.','복합 감정','C2','emotion','pattern',NULL,6),
-('s_emotion_C2_07','It is only in retrospect that I can appreciate the bittersweet richness of those years.','이제 돌이켜보니 그 시절의 달콤씁쓸한 풍요로움이 비로소 감사하게 느껴져요.','only in retrospect that I can appreciate','only in retrospect는 지나고 나서야 알 수 있는 통찰을 전달하는 고급 표현이에요.','감정 뉘앙스','C2','emotion','pattern',NULL,7);
+('s_emotion_C2_07','It is only in retrospect that I can appreciate the bittersweet richness of those years.','이제 돌이켜보니 그 시절의 달콤씁쓸한 풍요로움이 비로소 감사하게 느껴져요.','only in retrospect that I can appreciate','only in retrospect는 지나고 나서야 알 수 있는 통찰을 전달하는 고급 표현이에요.','감정 뉘앙스','C2','emotion','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

@@ -40,7 +40,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_negotiation_A1_32','open','/ˈəʊpən/','adjective','열린, 개방적인','Willing to consider new ideas.','I am {open} to other suggestions.','다른 제안에 열려 있어요.','open','A1','negotiation',2,'open door opportunity discussion flexible'),
 ('w_negotiation_A1_33','right','/raɪt/','adjective','맞는, 올바른','Correct or appropriate.','We need to find the {right} solution for both sides.','양쪽에 맞는 해결책을 찾아야 해요.','right','A1','negotiation',2,'correct right check mark solution'),
 ('w_negotiation_A1_34','work','/wɜːk/','verb','효과가 있다','To function effectively or be successful.','This plan can {work} if we cooperate.','협력하면 이 계획은 효과가 있을 거예요.','work','A1','negotiation',2,'teamwork cooperation plan effective'),
-('w_negotiation_A1_35','think','/θɪŋk/','verb','생각하다','To use your mind to consider something.','Let me {think} about it and get back to you.','생각해 보고 다시 연락할게요.','think','A1','negotiation',2,'thinking considering person office pause');
+('w_negotiation_A1_35','think','/θɪŋk/','verb','생각하다','To use your mind to consider something.','Let me {think} about it and get back to you.','생각해 보고 다시 연락할게요.','think','A1','negotiation',2,'thinking considering person office pause')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════
 -- WORDS — A2 (35개)
@@ -80,7 +81,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_negotiation_A2_32','invoice','/ˈɪnvɔɪs/','noun','청구서, 인보이스','A document listing goods or services provided and their cost.','Please send the {invoice} to our accounts department.','회계 부서로 청구서를 보내주세요.','invoice','A2','negotiation',1,'invoice receipt billing payment document'),
 ('w_negotiation_A2_33','guarantee','/ˌɡærənˈtiː/','noun','보장, 보증','A formal assurance that certain conditions will be met.','Can you {guarantee} delivery by Monday?','월요일까지 배송을 보장해주실 수 있나요?','guarantee','A2','negotiation',1,'guarantee warranty promise assurance certificate'),
 ('w_negotiation_A2_34','review','/rɪˈvjuː/','verb','검토하다','To examine something in detail to assess it.','We will {review} the proposal and respond tomorrow.','제안서를 검토하고 내일 답변드릴게요.','review','A2','negotiation',1,'review document reading analysis office'),
-('w_negotiation_A2_35','meeting','/ˈmiːtɪŋ/','noun','회의','A gathering of people for discussion.','Can we set up a {meeting} to finalize the details?','세부 사항을 확정하기 위한 회의를 잡을 수 있나요?','meeting','A2','negotiation',1,'meeting conference room business discussion table');
+('w_negotiation_A2_35','meeting','/ˈmiːtɪŋ/','noun','회의','A gathering of people for discussion.','Can we set up a {meeting} to finalize the details?','세부 사항을 확정하기 위한 회의를 잡을 수 있나요?','meeting','A2','negotiation',1,'meeting conference room business discussion table')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════
 -- WORDS — B1 (35개)
@@ -120,7 +122,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_negotiation_B1_32','extension','/ɪkˈstenʃən/','noun','연장','An increase in the length of time allowed.','We need a two-week {extension} on the deadline.','마감일을 2주 연장해야 해요.','extension','B1','negotiation',2,'extension time deadline extra period calendar'),
 ('w_negotiation_B1_33','headroom','/ˈhedrʊm/','noun','협상 여지','Room or space available for negotiation or movement.','There is very little {headroom} left on the price.','가격에 협상 여지가 거의 없어요.','headroom','B1','negotiation',2,'space room margin flexibility negotiation'),
 ('w_negotiation_B1_34','walk away','/wɔːk əˈweɪ/','phrase','협상에서 물러나다','To leave a negotiation without reaching agreement.','We are prepared to {walk away} if terms worsen.','조건이 나빠지면 물러날 준비가 돼 있어요.','walk away','B1','negotiation',1,'walk away exit leave negotiation table'),
-('w_negotiation_B1_35','penalty clause','/ˈpenəlti klɔːz/','phrase','위약금 조항','A clause specifying punishment for failing obligations.','The {penalty clause} protects both parties.','위약금 조항은 양 당사자를 보호해요.','penalty clause','B1','negotiation',1,'penalty clause contract protection legal');
+('w_negotiation_B1_35','penalty clause','/ˈpenəlti klɔːz/','phrase','위약금 조항','A clause specifying punishment for failing obligations.','The {penalty clause} protects both parties.','위약금 조항은 양 당사자를 보호해요.','penalty clause','B1','negotiation',1,'penalty clause contract protection legal')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════
 -- WORDS — B2 (35개)
@@ -160,7 +163,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_negotiation_B2_32','waiver','/ˈweɪvər/','noun','권리 포기','The act of voluntarily giving up a right.','Signing this form is a {waiver} of your claim.','이 양식에 서명하면 청구권을 포기하는 거예요.','waiver','B2','negotiation',1,'waiver relinquish right legal form signature'),
 ('w_negotiation_B2_33','retention','/rɪˈtenʃən/','noun','유보금, 보류','A sum withheld until work is satisfactorily completed.','A 10% {retention} is held until project handover.','프로젝트 인계까지 10% 유보금이 보류돼요.','retention','B2','negotiation',2,'retention holdback payment completion handover'),
 ('w_negotiation_B2_34','price cap','/praɪs kæp/','noun','가격 상한','A maximum price set by agreement or regulation.','The contract includes a {price cap} clause.','계약서에 가격 상한 조항이 포함돼 있어요.','price cap','B2','negotiation',2,'price cap maximum ceiling limit contract'),
-('w_negotiation_B2_35','liquidated damages','/ˈlɪkwɪdeɪtɪd ˈdæmɪdʒɪz/','noun','손해배상 예정액','A pre-agreed sum payable if a party breaches a contract.','The contract specifies {liquidated damages} of 1% per day.','계약서에 하루 1%의 손해배상 예정액이 명시돼 있어요.','liquidated damages','B2','negotiation',1,'liquidated damages penalty contract legal fine');
+('w_negotiation_B2_35','liquidated damages','/ˈlɪkwɪdeɪtɪd ˈdæmɪdʒɪz/','noun','손해배상 예정액','A pre-agreed sum payable if a party breaches a contract.','The contract specifies {liquidated damages} of 1% per day.','계약서에 하루 1%의 손해배상 예정액이 명시돼 있어요.','liquidated damages','B2','negotiation',1,'liquidated damages penalty contract legal fine')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════
 -- WORDS — C1 (35개)
@@ -200,7 +204,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_negotiation_C1_32','variation order','/ˌveəriˈeɪʃən ˈɔːdər/','noun','변경 명령서','A formal instruction to alter the scope of work.','Each {variation order} must be approved in writing.','각 변경 명령서는 서면으로 승인돼야 해요.','variation order','C1','negotiation',2,'variation order change scope work construction'),
 ('w_negotiation_C1_33','contra proferentem','/ˌkɒntrə prəˈferəntem/','noun','불명확 조항의 제안자 불리 해석','The rule that ambiguous terms are read against the drafter.','The court applied {contra proferentem} to the clause.','법원은 해당 조항에 제안자 불리 원칙을 적용했어요.','contra proferentem','C1','negotiation',2,'ambiguous clause interpretation drafter legal principle'),
 ('w_negotiation_C1_34','force majeure clause','/ˌfɔːs mæˈʒɜːr klɔːz/','noun','불가항력 조항','A contract provision excusing non-performance due to extraordinary events.','The {force majeure clause} was invoked during the supply crisis.','공급 위기 동안 불가항력 조항이 발동됐어요.','force majeure clause','C1','negotiation',1,'force majeure clause contract disaster extraordinary event'),
-('w_negotiation_C1_35','duty of care','/ˈdjuːti əv keər/','noun','주의 의무','A legal obligation to avoid acts likely to cause harm.','The advisor breached her {duty of care} to the client.','어드바이저가 의뢰인에 대한 주의 의무를 위반했어요.','duty of care','C1','negotiation',1,'duty of care negligence obligation standard professional');
+('w_negotiation_C1_35','duty of care','/ˈdjuːti əv keər/','noun','주의 의무','A legal obligation to avoid acts likely to cause harm.','The advisor breached her {duty of care} to the client.','어드바이저가 의뢰인에 대한 주의 의무를 위반했어요.','duty of care','C1','negotiation',1,'duty of care negligence obligation standard professional')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════
 -- WORDS — C2 (35개)
@@ -240,7 +245,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_negotiation_C2_32','cy-pres','/siː ˈpreɪ/','noun','유사 목적 원칙','A doctrine applying funds to a purpose as close as possible to the original.','The court applied {cy-pres} to redirect the charitable funds.','법원은 자선 기금을 전용하기 위해 유사 목적 원칙을 적용했어요.','cy-pres','C2','negotiation',2,'cy-pres trust fund redirect charitable purpose legal'),
 ('w_negotiation_C2_33','non est factum','/nɒn est ˈfæktəm/','noun','서명 착오의 항변','A plea that a signed document was fundamentally different from what was intended.','The signatory pleaded {non est factum} to void the deed.','서명자는 증서를 무효화하기 위해 서명 착오를 주장했어요.','non est factum','C2','negotiation',2,'non est factum signed document fundamental mistake plea'),
 ('w_negotiation_C2_34','caveat emptor','/ˌkæviæt ˈemptɔːr/','noun','구매자 위험 부담 원칙','The principle that buyers must take care to inspect goods before purchase.','The sale was governed by {caveat emptor}.','매매는 구매자 위험 부담 원칙에 따라 이루어졌어요.','caveat emptor','C2','negotiation',1,'caveat emptor buyer beware inspection goods legal'),
-('w_negotiation_C2_35','uberrimae fidei','/juːˌberɪmiː ˈfɪdɪˌaɪ/','noun','최고 선의의 원칙','The principle requiring utmost good faith, especially in insurance contracts.','Insurance contracts demand {uberrimae fidei} from both parties.','보험 계약은 양 당사자에게 최고 선의를 요구해요.','uberrimae fidei','C2','negotiation',1,'uberrimae fidei utmost good faith insurance contract legal');
+('w_negotiation_C2_35','uberrimae fidei','/juːˌberɪmiː ˈfɪdɪˌaɪ/','noun','최고 선의의 원칙','The principle requiring utmost good faith, especially in insurance contracts.','Insurance contracts demand {uberrimae fidei} from both parties.','보험 계약은 양 당사자에게 최고 선의를 요구해요.','uberrimae fidei','C2','negotiation',1,'uberrimae fidei utmost good faith insurance contract legal')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════
 -- PATTERNS — A1 (7개) : 요청·제안
@@ -252,7 +258,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_negotiation_A1_04','I need more time to decide.','결정하는 데 시간이 더 필요해요.','I need more time','결정을 미룰 때 자연스럽게 쓸 수 있어요.','시간 요청','A1','negotiation','pattern',NULL,4),
 ('s_negotiation_A1_05','Is that your best offer?','그게 최선의 제안인가요?','best offer','상대방이 더 낮출 여지가 있는지 물어볼 때 써요.','최선 확인','A1','negotiation','pattern',NULL,5),
 ('s_negotiation_A1_06','Let''s try to work this out.','함께 해결해 보도록 해요.','Let''s try','협력적인 분위기를 만들 때 쓰는 표현이에요.','협력 제안','A1','negotiation','pattern',NULL,6),
-('s_negotiation_A1_07','I think we can agree on that.','그 부분에서 합의할 수 있을 것 같아요.','I think we can agree','조심스럽게 합의 가능성을 표현해요.','합의 신호','A1','negotiation','pattern',NULL,7);
+('s_negotiation_A1_07','I think we can agree on that.','그 부분에서 합의할 수 있을 것 같아요.','I think we can agree','조심스럽게 합의 가능성을 표현해요.','합의 신호','A1','negotiation','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════
 -- PATTERNS — A2 (7개) : 가격 협상
@@ -264,7 +271,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_negotiation_A2_04','That''s a bit over our budget — can we meet in the middle?','예산을 조금 초과하네요. 중간 지점에서 만날 수 있을까요?','meet in the middle','타협을 부드럽게 제안하는 표현이에요.','중간 타협 제안','A2','negotiation','pattern',NULL,11),
 ('s_negotiation_A2_05','Can we include free shipping in the deal?','거래에 무료 배송을 포함시킬 수 있나요?','include free shipping','추가 혜택을 조건으로 요청하는 패턴이에요.','추가 조건 요청','A2','negotiation','pattern',NULL,12),
 ('s_negotiation_A2_06','We''d like to confirm the payment terms in writing.','지불 조건을 서면으로 확인하고 싶어요.','confirm the payment terms in writing','중요한 조건을 문서화할 때 써요.','조건 문서화','A2','negotiation','pattern',NULL,13),
-('s_negotiation_A2_07','Is there any flexibility on the delivery date?','납품 날짜에 유연성이 있나요?','flexibility on the delivery date','일정 협상을 시작할 때 쓰는 표현이에요.','일정 협상','A2','negotiation','pattern',NULL,14);
+('s_negotiation_A2_07','Is there any flexibility on the delivery date?','납품 날짜에 유연성이 있나요?','flexibility on the delivery date','일정 협상을 시작할 때 쓰는 표현이에요.','일정 협상','A2','negotiation','pattern',NULL,14)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════
 -- PATTERNS — B1 (7개) : 조건 제시
@@ -276,7 +284,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_negotiation_B1_04','We can agree to that clause, provided that payment terms are extended to sixty days.','지불 기간을 60일로 연장해 주신다면 해당 조항에 동의할 수 있어요.','provided that','조건부 동의를 표현하는 핵심 패턴이에요.','조건부 동의','B1','negotiation','pattern',NULL,18),
 ('s_negotiation_B1_05','We have a firm deadline of the fifteenth, so we''ll need a decision by then.','15일이 확정 마감일이라 그때까지 결정이 필요해요.','firm deadline','시간적 압박을 협상 도구로 사용하는 표현이에요.','마감 압박','B1','negotiation','pattern',NULL,19),
 ('s_negotiation_B1_06','All stakeholders have agreed on the agenda, so let''s move to the binding clauses.','모든 이해관계자가 의제에 동의했으니 구속력 있는 조항으로 넘어가요.','All stakeholders have agreed','회의 진행을 공식적으로 전환할 때 써요.','의제 전환','B1','negotiation','pattern',NULL,20),
-('s_negotiation_B1_07','If we can''t reach a compromise today, we may need to involve a mediator.','오늘 타협에 이르지 못하면 조정인을 참여시켜야 할 수도 있어요.','reach a compromise','중재를 암시해 협상 속도를 높이는 표현이에요.','중재 암시','B1','negotiation','pattern',NULL,21);
+('s_negotiation_B1_07','If we can''t reach a compromise today, we may need to involve a mediator.','오늘 타협에 이르지 못하면 조정인을 참여시켜야 할 수도 있어요.','reach a compromise','중재를 암시해 협상 속도를 높이는 표현이에요.','중재 암시','B1','negotiation','pattern',NULL,21)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════
 -- PATTERNS — B2 (7개) : 계약 조율
@@ -288,7 +297,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_negotiation_B2_04','Payment will be released from escrow only upon satisfactory delivery and inspection.','만족스러운 납품 및 검수 후에만 에스크로에서 지불이 해제돼요.','released from escrow only upon','에스크로 조건을 명확히 설정하는 계약 언어예요.','에스크로 조건 설정','B2','negotiation','pattern',NULL,25),
 ('s_negotiation_B2_05','We need to include a force majeure clause covering pandemics and supply chain disruptions.','팬데믹과 공급망 혼란을 포함하는 불가항력 조항이 필요해요.','force majeure clause covering','현대 계약에 필수적인 불가항력 조항을 협상할 때 써요.','불가항력 조항 삽입','B2','negotiation','pattern',NULL,26),
 ('s_negotiation_B2_06','The liquidated damages rate of two percent per week is disproportionate and should be reduced.','주당 2%의 약정 손해배상률은 과도하므로 낮춰야 해요.','disproportionate and should be reduced','손해배상 비율이 과하다고 반박할 때 쓰는 표현이에요.','약정 손해배상 협상','B2','negotiation','pattern',NULL,27),
-('s_negotiation_B2_07','Both parties should ratify the final agreement by the end of the month to avoid further delays.','추가 지연을 피하기 위해 양 당사자가 이번 달 말까지 최종 합의를 비준해야 해요.','Both parties should ratify','공식 비준 절차를 촉구하는 표현이에요.','비준 촉구','B2','negotiation','pattern',NULL,28);
+('s_negotiation_B2_07','Both parties should ratify the final agreement by the end of the month to avoid further delays.','추가 지연을 피하기 위해 양 당사자가 이번 달 말까지 최종 합의를 비준해야 해요.','Both parties should ratify','공식 비준 절차를 촉구하는 표현이에요.','비준 촉구','B2','negotiation','pattern',NULL,28)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════
 -- PATTERNS — C1 (7개) : 법적 협상
@@ -300,7 +310,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_negotiation_C1_04','The remedy available for breach of this covenant is specific performance, not merely damages.','이 약정 위반에 대한 구제책은 손해배상뿐만 아니라 특정 이행이에요.','remedy available is specific performance','손해배상 대신 특정 이행을 구제책으로 주장하는 표현이에요.','특정 이행 주장','C1','negotiation','pattern',NULL,32),
 ('s_negotiation_C1_05','The jurisdiction clause designates Singapore as the exclusive forum for all disputes.','관할권 조항은 모든 분쟁에 대해 싱가포르를 독점적 법정지로 지정해요.','jurisdiction clause designates','관할권 조항의 내용을 명시적으로 인용하는 법적 표현이에요.','관할권 조항 인용','C1','negotiation','pattern',NULL,33),
 ('s_negotiation_C1_06','Subrogation rights vest in the insurer upon payment of the insured''s claim.','피보험자의 청구 지급 시 보험사에게 대위 청구권이 발생해요.','Subrogation rights vest in the insurer','보험 분쟁 협상에서 대위 청구권을 주장하는 표현이에요.','대위 청구권 주장','C1','negotiation','pattern',NULL,34),
-('s_negotiation_C1_07','The conditions precedent to drawdown have not been satisfied, suspending our obligation to lend.','대출 실행의 선행 조건이 충족되지 않아 우리의 대출 의무가 정지됐어요.','conditions precedent to drawdown have not been satisfied','선행 조건 미충족을 근거로 의무를 정지시키는 표현이에요.','선행 조건 미충족 주장','C1','negotiation','pattern',NULL,35);
+('s_negotiation_C1_07','The conditions precedent to drawdown have not been satisfied, suspending our obligation to lend.','대출 실행의 선행 조건이 충족되지 않아 우리의 대출 의무가 정지됐어요.','conditions precedent to drawdown have not been satisfied','선행 조건 미충족을 근거로 의무를 정지시키는 표현이에요.','선행 조건 미충족 주장','C1','negotiation','pattern',NULL,35)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════
 -- PATTERNS — C2 (7개) : 고급 법적 협상
@@ -312,4 +323,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_negotiation_C2_04','Novation extinguishes the original obligation and substitutes a new contract between the parties, thereby releasing the original debtor.','계약 갱신은 원래 의무를 소멸시키고 새로운 계약으로 대체해 원래 채무자를 면책시켜요.','Novation extinguishes the original obligation','채무 교체의 법적 효과를 정확히 설명하는 표현이에요.','계약 갱신 효과 설명','C2','negotiation','pattern',NULL,39),
 ('s_negotiation_C2_05','Under the rule in contra proferentem, the ambiguous exclusion clause is construed against the party who drafted it.','작성자 불이익 원칙에 따라 모호한 면책 조항은 이를 작성한 당사자에게 불리하게 해석돼요.','contra proferentem construed against the drafter','모호한 계약 조항에서 유리한 해석을 확보하는 전략적 표현이에요.','작성자 불이익 원칙 적용','C2','negotiation','pattern',NULL,40),
 ('s_negotiation_C2_06','The unjust enrichment claim rests on the defendant''s failure to make restitution following rescission of the contract.','부당 이득 청구는 계약 취소 후 피고의 원상 회복 불이행에 근거해요.','unjust enrichment rests on failure to make restitution','계약 취소 후 원상 회복 의무 불이행을 공격하는 법적 논리예요.','부당 이득 청구 근거 제시','C2','negotiation','pattern',NULL,41),
-('s_negotiation_C2_07','Piercing the corporate veil is warranted where the subsidiary was used as a mere facade to evade pre-existing contractual obligations.','자회사가 기존 계약 의무를 회피하기 위한 단순 위장 수단으로 사용된 경우 법인격 부인이 정당화돼요.','Piercing the corporate veil is warranted','법인격을 이용한 의무 회피에 대응하는 최고급 법적 주장이에요.','법인격 부인 주장','C2','negotiation','pattern',NULL,42);
+('s_negotiation_C2_07','Piercing the corporate veil is warranted where the subsidiary was used as a mere facade to evade pre-existing contractual obligations.','자회사가 기존 계약 의무를 회피하기 위한 단순 위장 수단으로 사용된 경우 법인격 부인이 정당화돼요.','Piercing the corporate veil is warranted','법인격을 이용한 의무 회피에 대응하는 최고급 법적 주장이에요.','법인격 부인 주장','C2','negotiation','pattern',NULL,42)
+ON CONFLICT (id) DO NOTHING;

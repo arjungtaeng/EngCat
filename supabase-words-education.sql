@@ -40,7 +40,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_education_A1_32','name','/neɪm/','noun','이름','A word used to identify a person or thing.','What is your {name}?','이름이 어떻게 되세요?','name','A1','education',2,'name tag label identity'),
 ('w_education_A1_33','grade','/ɡreɪd/','noun','학년, 성적','A class level in school; a mark showing quality of work.','I am in the third {grade}.','저는 3학년이에요.','grade','A1','education',1,'grade school level report card'),
 ('w_education_A1_34','easy','/ˈiːzi/','adjective','쉬운','Not difficult; achieved without much effort.','This exercise is very {easy}.','이 연습 문제는 매우 쉬워요.','easy','A1','education',2,'easy simple exercise learning'),
-('w_education_A1_35','difficult','/ˈdɪfɪkəlt/','adjective','어려운','Needing much effort or skill.','The grammar rule is {difficult}.','그 문법 규칙은 어려워요.','difficult','A1','education',2,'difficult challenge hard studying');
+('w_education_A1_35','difficult','/ˈdɪfɪkəlt/','adjective','어려운','Needing much effort or skill.','The grammar rule is {difficult}.','그 문법 규칙은 어려워요.','difficult','A1','education',2,'difficult challenge hard studying')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2 (35)
@@ -80,7 +81,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_education_A2_32','break','/breɪk/','noun','휴식 시간','A short period of rest during school.','We have a {break} at eleven.','11시에 쉬는 시간이 있어요.','break','A2','education',2,'break recess students playground'),
 ('w_education_A2_33','schedule','/ˈskedʒuːl/','noun','시간표, 일정','A timetable of classes or events.','Check your {schedule} for tomorrow.','내일 시간표를 확인해 주세요.','schedule','A2','education',2,'schedule timetable planner school'),
 ('w_education_A2_34','classmate','/ˈklɑːsmeɪt/','noun','반 친구','A member of the same class at school.','My {classmate} helped me with the homework.','반 친구가 숙제를 도와줬어요.','classmate','A2','education',2,'classmates students friends school'),
-('w_education_A2_35','knowledge','/ˈnɒlɪdʒ/','noun','지식','Facts and information gained through learning.','Reading builds your {knowledge}.','독서는 지식을 쌓아줘요.','knowledge','A2','education',1,'knowledge books learning brain');
+('w_education_A2_35','knowledge','/ˈnɒlɪdʒ/','noun','지식','Facts and information gained through learning.','Reading builds your {knowledge}.','독서는 지식을 쌓아줘요.','knowledge','A2','education',1,'knowledge books learning brain')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1 (35)
@@ -120,7 +122,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_education_B1_32','revise','/rɪˈvaɪz/','verb','수정하다, 복습하다','To change or improve written work; to study for an exam.','I need to {revise} my essay before submitting it.','제출 전에 에세이를 수정해야 해요.','revise','B1','education',1,'revise edit paper studying'),
 ('w_education_B1_33','concentrate','/ˈkɒnsəntreɪt/','verb','집중하다','To focus your thoughts and attention.','It''s hard to {concentrate} when it''s noisy.','시끄러울 때 집중하기 어려워요.','concentrate','B1','education',1,'concentrate focus study quiet'),
 ('w_education_B1_34','comprehension','/ˌkɒmprɪˈhenʃən/','noun','이해력, 독해','The ability to understand written or spoken language.','The exam includes a {comprehension} passage.','시험에 독해 지문이 포함돼요.','comprehension','B1','education',1,'comprehension reading text understanding'),
-('w_education_B1_35','plagiarism','/ˈpleɪdʒərɪzəm/','noun','표절','Using someone else''s work or ideas without permission.','{Plagiarism} can result in failing the course.','표절은 수업 낙제로 이어질 수 있어요.','plagiarism','B1','education',1,'plagiarism copying academic dishonesty');
+('w_education_B1_35','plagiarism','/ˈpleɪdʒərɪzəm/','noun','표절','Using someone else''s work or ideas without permission.','{Plagiarism} can result in failing the course.','표절은 수업 낙제로 이어질 수 있어요.','plagiarism','B1','education',1,'plagiarism copying academic dishonesty')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2 (35)
@@ -160,7 +163,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_education_B2_32','cohort','/ˈkoʊhɔːrt/','noun','(동기) 집단','A group of students who begin study at the same time.','The 2024 {cohort} has fifty students.','2024년 동기는 50명이에요.','cohort','B2','education',2,'cohort group students year class'),
 ('w_education_B2_33','interdisciplinary','/ˌɪntərdɪˈsɪplɪneri/','adjective','학제 간의','Involving two or more academic disciplines.','The course takes an {interdisciplinary} approach.','이 강의는 학제 간 접근법을 취해요.','interdisciplinary','B2','education',2,'interdisciplinary cross-subject research academic'),
 ('w_education_B2_34','prerequisite','/ˌpriːˈrekwɪzɪt/','noun','선수 과목, 전제 조건','A required course or condition before another can be taken.','Statistics is a {prerequisite} for this module.','통계학은 이 모듈의 선수 과목이에요.','prerequisite','B2','education',2,'prerequisite requirement course condition'),
-('w_education_B2_35','pedagogy','/ˈpedəɡɒdʒi/','noun','교수법','The method and practice of teaching.','Modern {pedagogy} emphasizes active learning.','현대 교수법은 능동적 학습을 강조해요.','pedagogy','B2','education',1,'pedagogy teaching method education practice');
+('w_education_B2_35','pedagogy','/ˈpedəɡɒdʒi/','noun','교수법','The method and practice of teaching.','Modern {pedagogy} emphasizes active learning.','현대 교수법은 능동적 학습을 강조해요.','pedagogy','B2','education',1,'pedagogy teaching method education practice')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1 (35)
@@ -200,7 +204,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_education_C1_32','operationalise','/ˌɒpərˈeɪʃənəlaɪz/','verb','조작화하다','To define a concept in measurable terms for research.','You need to {operationalise} the variable.','변수를 조작화해야 해요.','operationalise','C1','education',2,'operationalise measure define research'),
 ('w_education_C1_33','posit','/ˈpɒzɪt/','verb','가정하다, 상정하다','To put forward as a fact or basis for argument.','The author {posits} that education shapes identity.','저자는 교육이 정체성을 형성한다고 상정해요.','posit','C1','education',2,'posit argue claim academic'),
 ('w_education_C1_34','substantiate','/səbˈstænʃieɪt/','verb','입증하다, 뒷받침하다','To provide evidence to support a claim.','You must {substantiate} every claim with evidence.','모든 주장을 증거로 뒷받침해야 해요.','substantiate','C1','education',1,'substantiate evidence support proof'),
-('w_education_C1_35','nuanced','/ˈnjuːɑːnst/','adjective','미묘한 차이가 있는','Showing subtle distinctions and complexities.','A {nuanced} reading reveals deeper meaning.','미묘한 독해는 더 깊은 의미를 드러내요.','nuanced','C1','education',2,'nuanced subtle complex analysis');
+('w_education_C1_35','nuanced','/ˈnjuːɑːnst/','adjective','미묘한 차이가 있는','Showing subtle distinctions and complexities.','A {nuanced} reading reveals deeper meaning.','미묘한 독해는 더 깊은 의미를 드러내요.','nuanced','C1','education',2,'nuanced subtle complex analysis')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2 (35)
@@ -240,7 +245,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_education_C2_32','propaedeutic','/ˌprɒpɪˈdjuːtɪk/','adjective','예비 교육의','Serving as an introduction to further study.','Logic is a {propaedeutic} discipline for philosophy.','논리학은 철학을 위한 예비 교육 분야예요.','propaedeutic','C2','education',3,'propaedeutic preparatory study foundation'),
 ('w_education_C2_33','catharsis','/kəˈθɑːrsɪs/','noun','카타르시스, 정화','A release of emotion through artistic or learning experience.','Reading great literature can provide {catharsis}.','위대한 문학을 읽으면 카타르시스를 얻을 수 있어요.','catharsis','C2','education',2,'catharsis emotion release learning'),
 ('w_education_C2_34','cogito','/ˈkɒdʒɪtoʊ/','noun','코기토','Descartes'' principle "I think, therefore I am".','The {cogito} is the foundation of Cartesian philosophy.','코기토는 데카르트 철학의 토대예요.','cogito','C2','education',2,'cogito Descartes thinking existence philosophy'),
-('w_education_C2_35','anamnesis','/ˌænæmˈniːsɪs/','noun','상기, 아남네시스','Plato''s theory that learning is a process of recollection.','Plato''s {anamnesis} theory suggests knowledge is innate.','플라톤의 상기 이론은 지식이 내재적이라고 제안해요.','anamnesis','C2','education',2,'anamnesis Plato recollection knowledge');
+('w_education_C2_35','anamnesis','/ˌænæmˈniːsɪs/','noun','상기, 아남네시스','Plato''s theory that learning is a process of recollection.','Plato''s {anamnesis} theory suggests knowledge is innate.','플라톤의 상기 이론은 지식이 내재적이라고 제안해요.','anamnesis','C2','education',2,'anamnesis Plato recollection knowledge')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS (sentences) — A1 (7)
@@ -253,7 +259,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_education_A1_04','Can you say that again, please?','다시 한 번 말씀해 주실 수 있어요?','Can you say that again','이해 못했을 때 정중하게 다시 말해달라고 하는 표현이에요.','수업 중','A1','education','pattern',NULL,4),
 ('s_education_A1_05','What does this word mean?','이 단어는 무슨 뜻이에요?','What does ... mean','모르는 단어의 뜻을 물어볼 때 가장 기본적인 표현이에요.','어휘 확인','A1','education','pattern',NULL,5),
 ('s_education_A1_06','I don''t understand. Can you help me?','이해가 안 돼요. 도와주실 수 있어요?','I don''t understand','솔직하게 모른다고 말하는 것이 배움의 첫 걸음이에요.','도움 요청','A1','education','pattern',NULL,6),
-('s_education_A1_07','We have a test tomorrow.','내일 시험이 있어요.','We have a test','시험을 안내할 때 쓰는 가장 간단한 표현이에요.','시험 안내','A1','education','pattern',NULL,7);
+('s_education_A1_07','We have a test tomorrow.','내일 시험이 있어요.','We have a test','시험을 안내할 때 쓰는 가장 간단한 표현이에요.','시험 안내','A1','education','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — A2 (7)
@@ -266,7 +273,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_education_A2_04','What chapter is the exam on?','시험 범위가 몇 장이에요?','What chapter is ... on','시험 범위를 확인할 때 꼭 필요한 표현이에요.','시험 준비','A2','education','pattern',NULL,4),
 ('s_education_A2_05','The homework is due on Friday.','숙제 제출 기한은 금요일이에요.','is due on','마감일을 표현할 때 be due on을 사용해요.','과제 안내','A2','education','pattern',NULL,5),
 ('s_education_A2_06','I failed the quiz, so I need to try harder.','쪽지 시험에서 떨어져서 더 열심히 해야 해요.','I failed ... so I need to','결과와 다짐을 연결할 때 so를 사용해요.','자기 반성','A2','education','pattern',NULL,6),
-('s_education_A2_07','Can I borrow your notes from yesterday''s class?','어제 수업 필기 빌릴 수 있어요?','Can I borrow','정중하게 빌려달라고 부탁하는 표현이에요.','친구에게 부탁','A2','education','pattern',NULL,7);
+('s_education_A2_07','Can I borrow your notes from yesterday''s class?','어제 수업 필기 빌릴 수 있어요?','Can I borrow','정중하게 빌려달라고 부탁하는 표현이에요.','친구에게 부탁','A2','education','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B1 (7)
@@ -279,7 +287,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_education_B1_04','In my presentation, I will cover three main points.','발표에서 세 가지 주요 논점을 다룰 거예요.','I will cover','발표 구조를 미리 안내할 때 쓰는 표현이에요.','발표 구조 안내','B1','education','pattern',NULL,4),
 ('s_education_B1_05','I''m not sure I understand the difference between these two terms.','이 두 용어의 차이를 잘 모르겠어요.','I''m not sure I understand','확신이 없을 때 부드럽게 물어보는 정중한 표현이에요.','개념 확인','B1','education','pattern',NULL,5),
 ('s_education_B1_06','To sum up, the evidence suggests that practice improves fluency.','요약하면, 증거는 연습이 유창성을 향상시킨다고 제안해요.','To sum up','발표나 에세이를 마무리할 때 쓰는 전형적인 표현이에요.','발표 마무리','B1','education','pattern',NULL,6),
-('s_education_B1_07','I applied for a scholarship and I''m waiting to hear back.','장학금을 신청했고 결과를 기다리고 있어요.','waiting to hear back','결과를 기다리는 상황을 표현할 때 쓰는 관용 표현이에요.','장학금 지원','B1','education','pattern',NULL,7);
+('s_education_B1_07','I applied for a scholarship and I''m waiting to hear back.','장학금을 신청했고 결과를 기다리고 있어요.','waiting to hear back','결과를 기다리는 상황을 표현할 때 쓰는 관용 표현이에요.','장학금 지원','B1','education','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — B2 (7)
@@ -292,7 +301,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_education_B2_04','Building on the previous speaker''s argument, I would like to add that...','이전 발언자의 주장을 바탕으로, 추가하고 싶은 것은...','Building on','토론에서 앞선 의견을 이어받아 자신의 논점을 더할 때 쓰는 표현이에요.','토론 참여','B2','education','pattern',NULL,4),
 ('s_education_B2_05','The empirical evidence does not fully support this hypothesis.','실증적 증거가 이 가설을 완전히 지지하지는 않아요.','empirical evidence ... does not fully support','학술 글쓰기에서 가설의 한계를 조심스럽게 언급할 때 쓰는 표현이에요.','연구 결과 평가','B2','education','pattern',NULL,5),
 ('s_education_B2_06','This dissertation critically examines the relationship between pedagogy and identity.','이 논문은 교수법과 정체성의 관계를 비판적으로 검토해요.','critically examines','학위 논문의 목적을 설명할 때 쓰는 학술적 표현이에요.','논문 소개','B2','education','pattern',NULL,6),
-('s_education_B2_07','I would contend that peer learning is as effective as direct instruction.','동료 학습이 직접 교수만큼 효과적이라고 주장하고 싶어요.','I would contend that','토론에서 신중하게 주장을 제시할 때 contend를 쓰면 격식 있게 들려요.','학술 주장','B2','education','pattern',NULL,7);
+('s_education_B2_07','I would contend that peer learning is as effective as direct instruction.','동료 학습이 직접 교수만큼 효과적이라고 주장하고 싶어요.','I would contend that','토론에서 신중하게 주장을 제시할 때 contend를 쓰면 격식 있게 들려요.','학술 주장','B2','education','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C1 (7)
@@ -305,7 +315,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_education_C1_04','It is worth noting that the sample size limits the generalisability of these findings.','표본 크기가 연구 결과의 일반화 가능성을 제한한다는 점을 언급할 필요가 있어요.','It is worth noting that','학술 글쓰기에서 한계나 주의사항을 부드럽게 제시하는 표현이에요.','연구 한계 기술','C1','education','pattern',NULL,4),
 ('s_education_C1_05','Reflexivity demands that the researcher acknowledge their own positionality.','성찰성은 연구자가 자신의 위치성을 인정할 것을 요구해요.','demands that the researcher acknowledge','연구 윤리 논의에서 연구자의 성찰을 강조하는 학술 표현이에요.','연구 윤리','C1','education','pattern',NULL,5),
 ('s_education_C1_06','The literature review reveals a significant lacuna in studies on postgraduate wellbeing.','문헌 검토는 대학원생 복지에 관한 연구의 중요한 공백을 드러내요.','reveals a significant lacuna','lacuna는 지식이나 연구의 빈 공간을 뜻하는 고급 학술 어휘예요.','문헌 검토','C1','education','pattern',NULL,6),
-('s_education_C1_07','This paper posits that critical pedagogy must account for the socioeconomic context of learners.','이 논문은 비판적 교수법이 학습자의 사회경제적 맥락을 고려해야 한다고 상정해요.','posits that','posit은 논문에서 핵심 가정이나 전제를 제시할 때 쓰는 정확한 학술어예요.','논문 핵심 주장','C1','education','pattern',NULL,7);
+('s_education_C1_07','This paper posits that critical pedagogy must account for the socioeconomic context of learners.','이 논문은 비판적 교수법이 학습자의 사회경제적 맥락을 고려해야 한다고 상정해요.','posits that','posit은 논문에서 핵심 가정이나 전제를 제시할 때 쓰는 정확한 학술어예요.','논문 핵심 주장','C1','education','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS — C2 (7)
@@ -318,4 +329,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_education_C2_04','Hegemonic discourse in curricula reproduces socioeconomic inequalities through the hidden curriculum.','교육 과정의 헤게모니적 담론은 잠재적 교육 과정을 통해 사회경제적 불평등을 재생산해요.','reproduces ... through the hidden curriculum','hidden curriculum은 공식 과목 외에 무의식적으로 전달되는 가치를 뜻하는 교육학 용어예요.','비판 교육학','C2','education','pattern',NULL,4),
 ('s_education_C2_05','Phenomenological inquiry foregrounds the lived experience of learners as the primary unit of analysis.','현상학적 탐구는 학습자의 살아있는 경험을 분석의 주요 단위로 전면에 내세워요.','foregrounds the lived experience','foreground는 무언가를 중심이나 전면에 배치한다는 의미의 학술적 동사예요.','연구 방법론 논의','C2','education','pattern',NULL,5),
 ('s_education_C2_06','Rhizomatic learning theory, as advanced by Cormier, resists arborescent models of knowledge transmission.','코미에가 발전시킨 리좀적 학습 이론은 나무형 지식 전달 모델에 저항해요.','resists arborescent models','arborescent은 나무처럼 계층적이고 선형적인 구조를 뜻하는 들뢰즈 철학 용어예요.','교육 이론 논의','C2','education','pattern',NULL,6),
-('s_education_C2_07','The praxis-oriented approach collapses the distinction between knowledge production and social transformation.','프락시스 지향 접근은 지식 생산과 사회 변혁 사이의 구분을 무너뜨려요.','collapses the distinction between','collapse a distinction은 두 개념 사이의 경계를 허물 때 쓰는 고급 학술 표현이에요.','비판 이론','C2','education','pattern',NULL,7);
+('s_education_C2_07','The praxis-oriented approach collapses the distinction between knowledge production and social transformation.','프락시스 지향 접근은 지식 생산과 사회 변혁 사이의 구분을 무너뜨려요.','collapses the distinction between','collapse a distinction은 두 개념 사이의 경계를 허물 때 쓰는 고급 학술 표현이에요.','비판 이론','C2','education','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;

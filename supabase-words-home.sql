@@ -40,7 +40,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_home_A1_32','toilet','/ˈtɔɪlɪt/','noun','화장실','A sanitary device used to dispose of bodily waste.','The {toilet} is at the end of the hallway.','화장실은 복도 끝에 있어요.','toilet','A1','home',2,'toilet bathroom sanitary'),
 ('w_home_A1_33','rug','/rʌɡ/','noun','깔개, 러그','A floor covering, usually smaller than a carpet.','There is a colourful {rug} in the living room.','거실에 알록달록한 러그가 있어요.','rug','A1','home',3,'rug carpet floor interior'),
 ('w_home_A1_34','pillow','/ˈpɪloʊ/','noun','베개','A soft bag filled with material, used to rest the head on.','I need an extra {pillow} on my bed.','침대에 베개가 하나 더 필요해요.','pillow','A1','home',3,'pillow bed sleep bedroom'),
-('w_home_A1_35','blanket','/ˈblæŋkɪt/','noun','담요','A large piece of soft cloth used to keep warm in bed.','It is cold; grab a {blanket}.','추우니까 담요를 가져오세요.','blanket','A1','home',3,'blanket warm bed sleep');
+('w_home_A1_35','blanket','/ˈblæŋkɪt/','noun','담요','A large piece of soft cloth used to keep warm in bed.','It is cold; grab a {blanket}.','추우니까 담요를 가져오세요.','blanket','A1','home',3,'blanket warm bed sleep')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — A2 (35개)
@@ -80,7 +81,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_home_A2_32','neighborhood','/ˈneɪbərhʊd/','noun','동네, 주거 지역','The area around where a person lives.','This is a very safe {neighborhood}.','이 동네는 매우 안전해요.','neighborhood','A2','home',2,'neighborhood street residential'),
 ('w_home_A2_33','furniture','/ˈfɜːrnɪtʃər/','noun','가구 (배치)','Large movable objects in a home for use and decoration.','We rearranged the {furniture} over the weekend.','주말에 가구를 재배치했어요.','furniture','A2','home',1,'furniture arrangement interior'),
 ('w_home_A2_34','paint','/peɪnt/','verb','페인트를 칠하다','To apply paint to a surface to change its colour.','We decided to {paint} the walls white.','벽을 흰색으로 칠하기로 했어요.','paint','A2','home',2,'painting wall colour interior'),
-('w_home_A2_35','security','/sɪˈkjʊərɪti/','noun','보안, 경비','Measures taken to protect a place or person from danger.','The building has a twenty-four-hour {security} system.','건물에 24시간 보안 시스템이 있어요.','security','A2','home',2,'security camera lock building');
+('w_home_A2_35','security','/sɪˈkjʊərɪti/','noun','보안, 경비','Measures taken to protect a place or person from danger.','The building has a twenty-four-hour {security} system.','건물에 24시간 보안 시스템이 있어요.','security','A2','home',2,'security camera lock building')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B1 (35개)
@@ -120,7 +122,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_home_B1_32','fuse box','/ˈfjuːz bɒks/','noun','두꺼비집, 배전반','A box containing the fuses or circuit breakers for a building.','The power went out; check the {fuse box}.','정전됐어요. 두꺼비집을 확인해 보세요.','fuse box','B1','home',3,'fuse box electricity panel'),
 ('w_home_B1_33','water meter','/ˈwɔːtər miːtər/','noun','수도 계량기','A device that measures the amount of water used.','The {water meter} reading was much higher this month.','이번 달 수도 계량기 수치가 훨씬 높아요.','water meter','B1','home',3,'water meter utility reading'),
 ('w_home_B1_34','move in','/muːv ɪn/','phrasal verb','입주하다','To begin to live in a new home.','We are planning to {move in} next Friday.','다음 주 금요일에 입주할 계획이에요.','move in','B1','home',1,'moving boxes new home'),
-('w_home_B1_35','move out','/muːv aʊt/','phrasal verb','이사 나가다','To stop living in a place and leave permanently.','The tenants will {move out} at the end of the month.','세입자들이 월말에 이사 나갈 거예요.','move out','B1','home',1,'moving packing boxes leaving');
+('w_home_B1_35','move out','/muːv aʊt/','phrasal verb','이사 나가다','To stop living in a place and leave permanently.','The tenants will {move out} at the end of the month.','세입자들이 월말에 이사 나갈 거예요.','move out','B1','home',1,'moving packing boxes leaving')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — B2 (35개)
@@ -160,7 +163,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_home_B2_32','surveyor','/sərˈveɪər/','noun','감정사, 측량사','A professional who assesses the condition or value of a property.','The {surveyor} found cracks in the foundation.','감정사가 기초에서 균열을 발견했어요.','surveyor','B2','home',2,'surveyor property inspection'),
 ('w_home_B2_33','repossession','/ˌriːpəˈzeʃən/','noun','압류, 회수','The taking back of property when a buyer fails to keep up payments.','The bank threatened {repossession} after months of missed payments.','수개월 연체 후 은행이 압류를 경고했어요.','repossession','B2','home',3,'repossession bank finance'),
 ('w_home_B2_34','eco-friendly','/ˌiːkoʊ ˈfrendli/','adjective','친환경적인','Designed to have minimal impact on the environment.','They chose {eco-friendly} materials for the renovation.','리모델링에 친환경 소재를 선택했어요.','eco-friendly','B2','home',2,'eco friendly green building'),
-('w_home_B2_35','smart home','/smɑːrt hoʊm/','noun','스마트홈','A home equipped with devices that can be controlled remotely or automatically.','They installed a {smart home} system that controls lighting.','조명을 제어하는 스마트홈 시스템을 설치했어요.','smart home','B2','home',2,'smart home technology interior');
+('w_home_B2_35','smart home','/smɑːrt hoʊm/','noun','스마트홈','A home equipped with devices that can be controlled remotely or automatically.','They installed a {smart home} system that controls lighting.','조명을 제어하는 스마트홈 시스템을 설치했어요.','smart home','B2','home',2,'smart home technology interior')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C1 (35개)
@@ -200,7 +204,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_home_C1_32','exchange of contracts','/ɪksˈtʃeɪndʒ əv ˈkɒntræks/','noun','계약서 교환','The point in a property transaction where both parties sign and exchange legal contracts.','After the {exchange of contracts}, neither party can withdraw without penalty.','계약서 교환 후에는 위약금 없이 철회할 수 없어요.','exchange of contracts','C1','home',2,'exchange contracts legal property'),
 ('w_home_C1_33','gazumping','/ɡəˈzʌmpɪŋ/','noun','가즈엄핑 (뒤늦은 경쟁 입찰로 거래 훼방)','The practice of a seller accepting a higher offer from a new buyer after already accepting one from another.','They lost the house to {gazumping} at the last minute.','마지막 순간에 가즈엄핑으로 집을 빼앗겼어요.','gazumping','C1','home',3,'gazumping property sale'),
 ('w_home_C1_34','chain','/tʃeɪn/','noun','(부동산) 연쇄 거래','A series of linked house purchases where each depends on the others completing.','The sale collapsed because someone in the {chain} dropped out.','연쇄 거래 중 누군가가 빠지면서 매각이 무산됐어요.','chain','C1','home',3,'chain property transaction'),
-('w_home_C1_35','completion','/kəmˈpliːʃən/','noun','계약 완료 (잔금 납입)','The final stage of a property purchase when money is transferred and keys are handed over.','On the day of {completion}, we got the keys to our new home.','계약 완료일에 새 집 열쇠를 받았어요.','completion','C1','home',2,'completion property keys');
+('w_home_C1_35','completion','/kəmˈpliːʃən/','noun','계약 완료 (잔금 납입)','The final stage of a property purchase when money is transferred and keys are handed over.','On the day of {completion}, we got the keys to our new home.','계약 완료일에 새 집 열쇠를 받았어요.','completion','C1','home',2,'completion property keys')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- WORDS — C2 (35개)
@@ -240,7 +245,8 @@ INSERT INTO words (id, en, ipa, pos, ko, definition, example_en, example_ko, hig
 ('w_home_C2_32','lis pendens','/lɪs ˈpendənz/','noun','소송 계류 통지 (부동산)','A formal notice that a lawsuit has been filed concerning title to a property.','A {lis pendens} was recorded to protect the claimant''s interest.','청구인의 권리를 보호하기 위해 소송 계류 통지가 등록됐어요.','lis pendens','C2','home',3,'lis pendens legal property lawsuit'),
 ('w_home_C2_33','seisin','/ˈsiːzɪn/','noun','토지 점유권 (영미 법률)','Lawful possession of a feudal estate; in modern use, the legal possession of freehold land.','The doctrine of {seisin} underpins ancient English land law.','점유권 원칙은 고대 영국 토지법의 기반이에요.','seisin','C2','home',3,'seisin possession land legal'),
 ('w_home_C2_34','inter vivos trust','/ˌɪntər ˈvaɪvɒs trʌst/','noun','생전 신탁','A trust created during the settlor''s lifetime to manage or transfer property.','He placed his estate in an {inter vivos trust} to avoid probate.','그는 유언 검인을 피하기 위해 재산을 생전 신탁에 넣었어요.','inter vivos trust','C2','home',3,'inter vivos trust property legal'),
-('w_home_C2_35','profit à prendre','/ˈprɒfɪt ə ˈprɑːndr/','noun','수익권 (타인 토지에서의 자원 채취권)','A right to take natural resources from someone else''s land.','The farmer held a {profit à prendre} to graze cattle on the common.','그 농부는 공유지에서 가축을 방목할 수 있는 수익권을 갖고 있었어요.','profit à prendre','C2','home',3,'profit a prendre land rights legal');
+('w_home_C2_35','profit à prendre','/ˈprɒfɪt ə ˈprɑːndr/','noun','수익권 (타인 토지에서의 자원 채취권)','A right to take natural resources from someone else''s land.','The farmer held a {profit à prendre} to graze cattle on the common.','그 농부는 공유지에서 가축을 방목할 수 있는 수익권을 갖고 있었어요.','profit à prendre','C2','home',3,'profit a prendre land rights legal')
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS (sentences) — A1 (7개)
@@ -253,7 +259,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_home_A1_04','I sleep in the bedroom.','침실에서 자요.','I sleep in','방의 기능을 설명할 때 "I ... in the ..." 구조를 써요.','방 용도 설명','A1','home','pattern',NULL,4),
 ('s_home_A1_05','The kitchen is next to the living room.','주방은 거실 옆에 있어요.','next to','위치 관계를 설명할 때 next to, in front of, behind 같은 전치사구를 사용해요.','위치 설명','A1','home','pattern',NULL,5),
 ('s_home_A1_06','I open the window every morning.','저는 매일 아침 창문을 열어요.','every morning','일상적 행동을 말할 때 "I ... every morning/day/week"를 써요.','일상 표현','A1','home','pattern',NULL,6),
-('s_home_A1_07','There is a big table in the dining room.','식당에 큰 테이블이 있어요.','There is','존재를 나타낼 때 "There is/are..." 구조를 사용해요.','집 묘사','A1','home','pattern',NULL,7);
+('s_home_A1_07','There is a big table in the dining room.','식당에 큰 테이블이 있어요.','There is','존재를 나타낼 때 "There is/are..." 구조를 사용해요.','집 묘사','A1','home','pattern',NULL,7)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS (sentences) — A2 (7개)
@@ -266,7 +273,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_home_A2_04','We need to clean the apartment before moving out.','이사 나가기 전에 아파트를 청소해야 해요.','before moving out','동작의 순서를 나타낼 때 "before/after ~ing"를 써요.','이사 준비','A2','home','pattern',NULL,11),
 ('s_home_A2_05','Could you please turn down the music? The walls are thin.','음악 소리를 줄여 주실 수 있나요? 벽이 얇아서요.','Could you please','"Could you please...?"는 이웃에게 정중하게 부탁할 때 유용해요.','이웃 소통','A2','home','pattern',NULL,12),
 ('s_home_A2_06','The heating isn''t working properly.','난방이 제대로 작동하지 않아요.','isn''t working properly','가전·시설 문제를 신고할 때 "isn''t/aren''t working properly" 패턴을 써요.','시설 문제 신고','A2','home','pattern',NULL,13),
-('s_home_A2_07','I share a flat with two other people.','두 명의 다른 사람들과 함께 아파트에 살아요.','I share ... with','주거를 함께 한다는 표현은 "I share ... with ..."을 사용해요.','동거 표현','A2','home','pattern',NULL,14);
+('s_home_A2_07','I share a flat with two other people.','두 명의 다른 사람들과 함께 아파트에 살아요.','I share ... with','주거를 함께 한다는 표현은 "I share ... with ..."을 사용해요.','동거 표현','A2','home','pattern',NULL,14)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS (sentences) — B1 (7개)
@@ -279,7 +287,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_home_B1_04','We''re thinking of having the kitchen renovated.','주방을 리모델링하는 것을 고려하고 있어요.','thinking of having ... renovated','"have something done"은 제3자에게 작업을 맡기는 것을 표현해요.','리모델링 계획','B1','home','pattern',NULL,18),
 ('s_home_B1_05','The maintenance fee covers communal area cleaning.','관리비에 공용 구역 청소가 포함돼요.','covers','포함 범위를 설명할 때 "covers ..." 동사를 활용해요.','관리비 설명','B1','home','pattern',NULL,19),
 ('s_home_B1_06','We need to give one month''s notice before moving out.','이사 나가기 전에 한 달 전 통보를 해야 해요.','give one month''s notice','임대차 종료 절차를 설명할 때 "give notice" 표현을 사용해요.','이사 절차','B1','home','pattern',NULL,20),
-('s_home_B1_07','The property comes with off-street parking.','이 부동산에는 전용 주차 공간이 포함돼요.','comes with','포함 사항을 설명할 때 "comes with ..."는 매우 자연스러운 표현이에요.','매물 설명','B1','home','pattern',NULL,21);
+('s_home_B1_07','The property comes with off-street parking.','이 부동산에는 전용 주차 공간이 포함돼요.','comes with','포함 사항을 설명할 때 "comes with ..."는 매우 자연스러운 표현이에요.','매물 설명','B1','home','pattern',NULL,21)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS (sentences) — B2 (7개)
@@ -292,7 +301,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_home_B2_04','The current market valuation sits at around four hundred thousand.','현재 시장 감정 평가액은 약 40만 파운드예요.','sits at around','수치를 개략적으로 표현할 때 "sits at around ..."를 사용해요.','부동산 가치','B2','home','pattern',NULL,25),
 ('s_home_B2_05','We decided to invest in eco-friendly insulation to cut our energy bills.','에너지 요금을 줄이기 위해 친환경 단열재에 투자하기로 했어요.','decided to invest in','투자 결정을 말할 때 "decided to invest in ..." 패턴을 사용해요.','에너지 효율','B2','home','pattern',NULL,26),
 ('s_home_B2_06','The location is ideal for commuters, with excellent transport links.','이 위치는 통근자에게 이상적이며 대중교통 연결이 훌륭해요.','ideal for','대상에 적합하다는 표현은 "ideal for ..." 구조를 사용해요.','입지 설명','B2','home','pattern',NULL,27),
-('s_home_B2_07','There is a restrictive covenant preventing any alteration to the façade.','정면 외관 변경을 금지하는 토지 사용 제한 약정이 있어요.','preventing','금지 사항을 설명할 때 "preventing + 동명사"를 활용해요.','계약 조항 설명','B2','home','pattern',NULL,28);
+('s_home_B2_07','There is a restrictive covenant preventing any alteration to the façade.','정면 외관 변경을 금지하는 토지 사용 제한 약정이 있어요.','preventing','금지 사항을 설명할 때 "preventing + 동명사"를 활용해요.','계약 조항 설명','B2','home','pattern',NULL,28)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS (sentences) — C1 (7개)
@@ -305,7 +315,8 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_home_C1_04','The arbitration panel ruled in favour of the tenant regarding the deposit.','중재 위원단이 보증금 문제에서 세입자에게 유리한 판결을 내렸어요.','ruled in favour of','판결 결과를 설명할 때 "rule in favour of ..."는 격식체 법률 표현이에요.','분쟁 해결','C1','home','pattern',NULL,32),
 ('s_home_C1_05','An easement was granted to the utility company for access to the underground pipes.','공공 설비 회사에 지하 파이프 접근을 위한 지역권이 부여됐어요.','was granted to','피동태를 사용한 법률 문장에서 "was granted to ..." 구조는 매우 자연스러워요.','지역권 설명','C1','home','pattern',NULL,33),
 ('s_home_C1_06','The property is subject to a restrictive covenant that limits its use to residential purposes only.','이 부동산은 거주 목적으로만 사용을 제한하는 약정의 적용을 받아요.','is subject to','법적 제한을 설명할 때 "is subject to ..." 패턴이 격식 있는 표현이에요.','법적 제한 설명','C1','home','pattern',NULL,34),
-('s_home_C1_07','Failure to disclose a known encumbrance may constitute a breach of contract.','알려진 담보를 공개하지 않으면 계약 위반에 해당할 수 있어요.','may constitute','법적 가능성을 논할 때 "may constitute ..." 구조는 격식체에서 자주 써요.','법적 의무 설명','C1','home','pattern',NULL,35);
+('s_home_C1_07','Failure to disclose a known encumbrance may constitute a breach of contract.','알려진 담보를 공개하지 않으면 계약 위반에 해당할 수 있어요.','may constitute','법적 가능성을 논할 때 "may constitute ..." 구조는 격식체에서 자주 써요.','법적 의무 설명','C1','home','pattern',NULL,35)
+ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════
 -- PATTERNS (sentences) — C2 (7개)
@@ -318,4 +329,5 @@ INSERT INTO sentences (id, en, ko, highlight, tip, situation, cefr, topic_id, ty
 ('s_home_C2_04','Under the doctrine of adverse possession, he claimed title to the strip of land.','시효 취득 원칙에 따라 그는 그 토지 조각에 대한 소유권을 주장했어요.','Under the doctrine of','법적 원칙을 인용할 때 "Under the doctrine of ..." 구조가 격식 있는 표현이에요.','소유권 주장','C2','home','pattern',NULL,39),
 ('s_home_C2_05','The beneficial interest vested in the claimant was not apparent from the registered title.','청구인에게 귀속된 수익적 권리는 등기 소유권에서 명확하지 않았어요.','vested in','권리 귀속을 설명할 때 "vested in ..." 구조는 신탁법·부동산법에서 핵심 표현이에요.','수익적 권리','C2','home','pattern',NULL,40),
 ('s_home_C2_06','A lis pendens was registered to protect the plaintiff''s equitable interest pending trial.','재판 계류 중 원고의 형평법적 권리를 보호하기 위해 소송 계류 통지가 등록됐어요.','to protect ... pending trial','목적과 조건을 결합할 때 "to protect ... pending ..." 구조를 사용해요.','소송 중 보전','C2','home','pattern',NULL,41),
-('s_home_C2_07','The strata committee voted to levy a special assessment to fund roof remediation works.','구분 소유 위원회가 지붕 보수 공사 비용 마련을 위해 특별 부과금을 부과하기로 의결했어요.','voted to levy','결의 사항을 보고할 때 "voted to + 동사원형" 구조는 공식 회의록에서 자주 등장해요.','구분 소유 관리','C2','home','pattern',NULL,42);
+('s_home_C2_07','The strata committee voted to levy a special assessment to fund roof remediation works.','구분 소유 위원회가 지붕 보수 공사 비용 마련을 위해 특별 부과금을 부과하기로 의결했어요.','voted to levy','결의 사항을 보고할 때 "voted to + 동사원형" 구조는 공식 회의록에서 자주 등장해요.','구분 소유 관리','C2','home','pattern',NULL,42)
+ON CONFLICT (id) DO NOTHING;
