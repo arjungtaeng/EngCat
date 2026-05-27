@@ -207,11 +207,9 @@ function ECScreenStats() {
   const carouselEnd = () => {
     if (!dragging.current) return;
     dragging.current = false;
-    const dx = lastDx.current;
     lastDx.current = 0;
     setDragDx(0);
-    if      (dx >  ITEM_W * 0.25) setCarouselIdx(i => Math.max(0, i - 1));
-    else if (dx < -ITEM_W * 0.25) setCarouselIdx(i => Math.min(6, i + 1));
+    setCarouselIdx(flameStage); // 손을 떼면 현재 단계(컬러 불꽃)로 자동 복귀
   };
 
   const tints = ['rgba(244,241,235,0.06)', 'rgba(232,178,106,0.28)', 'rgba(232,178,106,0.6)', T.accent];
