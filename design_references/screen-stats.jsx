@@ -189,6 +189,7 @@ function ECScreenStats() {
   // ── 캐러셀 상태 ────────────────────────────────────────────────
   const [carouselIdx, setCarouselIdx] = React.useState(flameStage);
   const [dragDx, setDragDx] = React.useState(0);
+  const [returnDur, setReturnDur] = React.useState(0.6); // 복귀 트랜지션 시간(s) — 거리 비례
   const dragging = React.useRef(false);
   const startX = React.useRef(0);
   const lastDx = React.useRef(0);
@@ -207,6 +208,9 @@ function ECScreenStats() {
   const carouselEnd = () => {
     if (!dragging.current) return;
     dragging.current = false;
+    // 복귀 속도를 일정하게: 이동 거리에 비례해 시간 조정 (옆 불꽃이든 먼 불꽃이든 같은 속도감)
+    const dist = Math.abs(lastDx.current);
+    setReturnDur(Math.min(1.8, Math.max(0.45, (dist / ITEM_W) * 0.6)));
     lastDx.current = 0;
     setDragDx(0);
     setCarouselIdx(flameStage); // 손을 떼면 현재 단계(컬러 불꽃)로 자동 복귀
@@ -276,7 +280,7 @@ function ECScreenStats() {
                     left: '50%',
                     top: '50%',
                     transform: `translate(calc(-50% + ${off}px), -50%) scale(${scale.toFixed(3)})`,
-                    transition: dragging.current ? 'none' : 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+                    transition: dragging.current ? 'none' : `transform ${returnDur}s cubic-bezier(0.22, 1, 0.36, 1)`,
                     filter: isColor ? 'none' : 'grayscale(100%)',
                     opacity: isColor ? 1 : Math.max(0.35, 0.35 + 0.5 * t),
                     pointerEvents: 'none',
