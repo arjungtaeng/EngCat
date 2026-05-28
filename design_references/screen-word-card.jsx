@@ -10,63 +10,58 @@ const getTTSSettings = () => ({
   rate:  'medium',
 });
 
-// 단어 + 스피커 — 한 줄에 들어가면 단어 옆, 길어 줄바꿈되면 단어 마지막 글자 위치 아래
+// 단어 + 스피커 — 스피커는 항상 옆에 inline.
+// 단어가 한 줄에 안 들어가면 fontSize를 줄여서 한 줄에 맞춤 (최소 36px까지).
 function WordWithSpeaker({ word, speak, T, isDark }) {
   const containerRef = React.useRef(null);
   const measureRef = React.useRef(null);
-  const [needsWrap, setNeedsWrap] = React.useState(false);
+  const [fontSize, setFontSize] = React.useState(56);
 
   React.useLayoutEffect(() => {
     if (!containerRef.current || !measureRef.current) return;
-    const cw = containerRef.current.clientWidth;
-    const wnat = measureRef.current.scrollWidth;
-    const SPEAKER_GAP = 30; // marginLeft + speaker width 대략
-    setNeedsWrap(wnat + SPEAKER_GAP > cw);
+    const available = containerRef.current.clientWidth - 32; // 스피커 + 여백
+    const MAX = 56;
+    const MIN = 36;
+    let fs = MAX;
+    measureRef.current.style.fontSize = fs + 'px';
+    while (measureRef.current.scrollWidth > available && fs > MIN) {
+      fs -= 1;
+      measureRef.current.style.fontSize = fs + 'px';
+    }
+    setFontSize(fs);
   }, [word.en]);
 
   const speakerColor = isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.3)';
 
   return (
-    <div ref={containerRef} style={{ position: 'relative', marginBottom: 4 }}>
-      {/* hidden 측정용 — 한 줄로 강제해 단어 본연 폭을 잼 */}
+    <div ref={containerRef} style={{ marginBottom: 4 }}>
+      {/* hidden 측정용 — nowrap 폭을 잼 */}
       <div ref={measureRef} aria-hidden="true" style={{
         visibility: 'hidden',
         position: 'absolute',
         whiteSpace: 'nowrap',
         pointerEvents: 'none',
         fontFamily: T.display, fontWeight: 400,
-        fontSize: 56, lineHeight: 1,
+        lineHeight: 1,
         letterSpacing: -1,
       }}>{word.en}</div>
 
       <div style={{
         fontFamily: T.display, fontWeight: 400,
-        fontSize: 56, lineHeight: 1, color: T.text,
+        fontSize: fontSize, lineHeight: 1, color: T.text,
         letterSpacing: -1,
-        wordBreak: 'break-word',
+        overflowWrap: 'break-word', // 최소 fontSize에서도 안 맞으면 단어 줄바꿈
       }}>
         {word.en}
-        {!needsWrap && (
-          <span onClick={() => speak(word.en)} style={{
-            display: 'inline-block',
-            marginLeft: 10,
-            verticalAlign: 'baseline',
-            position: 'relative',
-            top: 6,
-            cursor: 'pointer',
-          }}>{ECIcon.speaker(speakerColor, 19)}</span>
-        )}
-      </div>
-
-      {needsWrap && (
-        <div onClick={() => speak(word.en)} style={{
-          marginTop: 6,
-          textAlign: 'right',
+        <span onClick={() => speak(word.en)} style={{
+          display: 'inline-block',
+          marginLeft: 10,
+          verticalAlign: 'baseline',
+          position: 'relative',
+          top: 6,
           cursor: 'pointer',
-        }}>
-          <span style={{ display: 'inline-block' }}>{ECIcon.speaker(speakerColor, 19)}</span>
-        </div>
-      )}
+        }}>{ECIcon.speaker(speakerColor, 19)}</span>
+      </div>
     </div>
   );
 }
