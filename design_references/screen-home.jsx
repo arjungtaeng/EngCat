@@ -176,7 +176,7 @@ function ECScreenHome() {
                 lineHeight: 0,
                 pointerEvents: 'none',
               }}>
-                <svg viewBox="0 0 320 200" width="86" height="54" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 380 200" width="100" height="53" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <filter id="bubble-shadow" x="-10%" y="-10%" width="120%" height="140%">
                       <feDropShadow dx="0" dy="3" stdDeviation="8" floodColor="#000" floodOpacity="0.12" />
@@ -184,14 +184,14 @@ function ECScreenHome() {
                   </defs>
                   <path
                     filter="url(#bubble-shadow)"
-                    d="M 48 16 L 272 16 Q 304 16 304 48 L 304 96 Q 304 128 272 128 L 170 128 C 162 128 158 134 152 144 C 142 158 128 168 108 176 C 116 162 122 148 124 140 C 126 132 124 128 116 128 L 48 128 Q 16 128 16 96 L 16 48 Q 16 16 48 16 Z"
+                    d="M 76 16 L 304 16 Q 364 16 364 76 Q 364 136 304 136 L 218 136 C 210 136 206 142 200 152 C 190 166 176 176 156 184 C 164 170 170 156 172 148 C 174 140 172 136 164 136 L 76 136 Q 16 136 16 76 Q 16 16 76 16 Z"
                     fill={bubbleFill}
                   />
                   <text
-                    x="160" y="92"
+                    x="190" y="100"
                     textAnchor="middle"
                     fontFamily="Outfit, system-ui, sans-serif"
-                    fontSize="64"
+                    fontSize="72"
                     fontWeight="600"
                     fill={textFill}
                   >Hi</text>
