@@ -281,12 +281,12 @@ function ECScreenHome() {
                   window.ECSession.wordIndex = i;
                   window.ECNav?.go('word-card');
                 }} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
-                  <div style={{ position: 'relative' }}>
+                  <div style={{ position: 'relative', borderRadius: 14, overflow: 'hidden' }}>
                     {c.img
-                      ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', borderRadius: 14 }} alt={c.en} />
-                      : <ECPlaceholder height={150} tint={c.tint} radius={14} label={c.en}/>
+                      ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={c.en} />
+                      : <ECPlaceholder height={150} tint={c.tint} radius={0} label={c.en}/>
                     }
-                    {/* 완료 표시 — 우측 끝, 상단에서 10% 아래, 가로 짧은 바 */}
+                    {/* 완료 표시 — 이미지 우측 끝에 붙음, 상단에서 10% 아래, 가로 짧은 바 */}
                     {isDone && (
                       <div style={{
                         position: 'absolute',
@@ -295,7 +295,6 @@ function ECScreenHome() {
                         width: 26,
                         height: 3,
                         background: T.accent,
-                        borderRadius: '2px 0 0 2px',
                       }} />
                     )}
                   </div>
