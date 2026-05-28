@@ -5,9 +5,19 @@
 function ECScreenSentenceCard() {
   const T = ECTokens;
   const isDark = T.text === '#F8F5EF';
-  const todaySession = React.useMemo(() => window.ECGetTodaySession(), []);
-  // 오늘 분량의 표현 (패턴 → 콜로 → 이디엄 → 뉘앙스 순서)
-  const sentences = todaySession.expressions.length > 0 ? todaySession.expressions : ECData.sentences;
+  // 홈에서 넘긴 출처가 있으면 그것을 사용 (review / preview 모드 — 홈 화면과 동일한 카드)
+  // 없으면 오늘의 학습 expressions를 사용 (학습 시작하기 흐름)
+  const cardSource = React.useRef(window.ECCardSource || null);
+  React.useEffect(() => { window.ECCardSource = null; }, []);
+
+  const sentences = React.useMemo(() => {
+    const src = cardSource.current;
+    if (src && Array.isArray(src.expressions) && src.expressions.length > 0) {
+      return src.expressions;
+    }
+    const ts = window.ECGetTodaySession();
+    return ts.expressions.length > 0 ? ts.expressions : ECData.sentences;
+  }, []);
   const session = ECSession;
 
   const [idx, setIdx] = React.useState(session.sentenceIndex);

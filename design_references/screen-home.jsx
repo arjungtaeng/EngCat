@@ -195,7 +195,11 @@ function ECScreenHome() {
           </div>
 
           {/* CTA */}
-          <div onClick={() => window.ECNav?.go('word-card')} style={{
+          <div onClick={() => {
+            // 오늘의 학습 흐름 — 이전 복습/예습 클릭 잔재 청소
+            window.ECCardSource = null;
+            window.ECNav?.go('word-card');
+          }} style={{
             marginTop: 16, height: 50, borderRadius: 14, background: T.accent,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
             color: T.bg0, fontWeight: 600, fontSize: 15, cursor: 'pointer',
