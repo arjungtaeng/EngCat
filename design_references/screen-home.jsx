@@ -174,7 +174,7 @@ function ECScreenHome() {
             <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}.</span>
           </div>
         </div>
-        {/* 마스코트 + Hi 말풍선 (v145 시점 — SVG, 다크: 크림 / 라이트: 다크) */}
+        {/* 마스코트 + 인사 말풍선 — 우측 고정 + 좌측 가변 + 꼬리 절대 위치 */}
         <div style={{ flexShrink: 0, position: 'relative', marginRight: 40 }}>
           {(() => {
             const isDarkMode = T.text === '#F8F5EF';
@@ -185,29 +185,43 @@ function ECScreenHome() {
                 position: 'absolute',
                 bottom: 'calc(100% - 5px)',
                 right: -40,
-                lineHeight: 0,
                 pointerEvents: 'none',
               }}>
-                <svg viewBox="0 0 380 200" width="54" height="28" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <filter id="bubble-shadow" x="-10%" y="-10%" width="120%" height="140%">
-                      <feDropShadow dx="0" dy="3" stdDeviation="8" floodColor="#000" floodOpacity="0.12" />
-                    </filter>
-                  </defs>
-                  <path
-                    filter="url(#bubble-shadow)"
-                    d="M 76 16 L 304 16 Q 364 16 364 76 Q 364 136 304 136 L 198 136 C 190 136 186 142 180 152 C 170 166 156 176 136 184 C 144 170 150 156 152 148 C 154 140 152 136 144 136 L 76 136 Q 16 136 16 76 Q 16 16 76 16 Z"
-                    fill={bubbleFill}
-                  />
-                  <text
-                    x="190" y="100"
-                    textAnchor="middle"
-                    fontFamily="Outfit, system-ui, sans-serif"
-                    fontSize="72"
-                    fontWeight="600"
-                    fill={textFill}
-                  >Hi</text>
-                </svg>
+                <div style={{
+                  position: 'relative',
+                  background: bubbleFill,
+                  color: textFill,
+                  fontFamily: 'Outfit, system-ui, sans-serif',
+                  fontWeight: 600,
+                  fontSize: 11,
+                  lineHeight: 1.3,
+                  padding: '5px 11px',
+                  borderRadius: 12,
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                }}>
+                  {bubbleGreeting}
+                  {/* 꼬리 — 풍선 우측 기준 고정 위치 (텍스트 길이 변해도 그대로) */}
+                  <svg
+                    viewBox="130 130 76 60"
+                    width="22"
+                    height="17"
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      right: 14,
+                      marginTop: -1,
+                      overflow: 'visible',
+                      display: 'block',
+                    }}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M 198 136 C 190 136 186 142 180 152 C 170 166 156 176 136 184 C 144 170 150 156 152 148 C 154 140 152 136 144 136 L 198 136 Z"
+                      fill={bubbleFill}
+                    />
+                  </svg>
+                </div>
               </div>
             );
           })()}
