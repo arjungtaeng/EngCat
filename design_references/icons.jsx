@@ -111,7 +111,7 @@ const ECIcon = {
       alt="EngCat"
       width={s}
       height={s}
-      style={{ display: 'block', transform: 'scaleX(-1)' }}
+      style={{ display: 'block' }}
     />
   ),
   bookmark: (c = 'currentColor', s = 20, filled = false) => (
