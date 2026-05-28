@@ -67,6 +67,7 @@ export async function loadCardsFromSupabase(userLevel: string = 'B1'): Promise<L
     tint:     tintFor(w.topic_id || ''),
     img:      w.image_url || null,
     imgKey:   w.image_keyword || '',
+    usageFrequency: w.usage_frequency || 2,
   }));
 
   const sentences: SentenceCard[] = (sentencesRes.data || []).map((s: any) => ({
@@ -81,6 +82,7 @@ export async function loadCardsFromSupabase(userLevel: string = 'B1'): Promise<L
     topicId:   s.topic_id || '',
     tint:      tintFor(s.topic_id || ''),
     img:       s.image_url || null,
+    usageFrequency: s.usage_frequency || 2,
     examples: [
       s.ex1 ? { en: s.ex1, ko: s.ex1_ko || '' } : null,
       s.ex2 ? { en: s.ex2, ko: s.ex2_ko || '' } : null,
@@ -109,6 +111,7 @@ export async function loadCardsFromSupabase(userLevel: string = 'B1'): Promise<L
         topicId:   c.topic_id || '',
         tint:      tintFor(c.topic_id || ''),
         img:       c.image_url || null,
+        usageFrequency: c.usage_frequency || 2,
       }))
     : [];
 
@@ -131,6 +134,7 @@ export async function loadCardsFromSupabase(userLevel: string = 'B1'): Promise<L
         topicId:   i.topic_id || '',
         tint:      tintFor(i.topic_id || ''),
         img:       i.image_url || null,
+        usageFrequency: i.usage_frequency || 1,
       }))
     : [];
 
@@ -156,6 +160,7 @@ export async function loadCardsFromSupabase(userLevel: string = 'B1'): Promise<L
         topicId:    n.topic_id || '',
         tint:       tintFor(n.topic_id || ''),
         img:        n.image_url || null,
+        usageFrequency: n.usage_frequency || 1,
       }))
     : [];
 

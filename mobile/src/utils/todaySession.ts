@@ -1,5 +1,6 @@
 import type { WordCard, SentenceCard } from '../store/useCardsStore';
 import type { LearningRecord } from './learningRecord';
+import { getLeveledContent, type CEFRLevel } from './leveledSession';
 
 export const TOPIC_NAMES: Record<string, string> = {
   greeting:     '인사·소개',
@@ -113,17 +114,20 @@ export function getTodaySession(
     };
   }
 
-  // 토픽 내에서도 이미지 있는 카드 우선 선정
+  // 토픽 내에서 레벨별 분배 적용
   const topicWordsAll = words.filter(w => w.topicId === topic);
-  const wordsWithImg    = shuffleStable(topicWordsAll.filter(w => w.img), seed);
-  const wordsWithoutImg = shuffleStable(topicWordsAll.filter(w => !w.img), seed);
+  const leveledWords = getLeveledContent(topicWordsAll, level as CEFRLevel, comp.words);
+  const wordsWithImg    = shuffleStable(leveledWords.filter(w => w.img), seed);
+  const wordsWithoutImg = shuffleStable(leveledWords.filter(w => !w.img), seed);
   const todayWords = [...wordsWithImg, ...wordsWithoutImg].slice(0, comp.words);
 
   const topicExp = expressions.filter(e => e.topicId === topic);
   const pickWithImg = (arr: SentenceCard[], n: number) => {
     if (n === 0) return [];
-    const withImg = shuffleStable(arr.filter(e => e.img), seed);
-    const noImg   = shuffleStable(arr.filter(e => !e.img), seed);
+    // 레벨별 분배 적용
+    const leveledArr = getLeveledContent(arr, level as CEFRLevel, n);
+    const withImg = shuffleStable(leveledArr.filter(e => e.img), seed);
+    const noImg   = shuffleStable(leveledArr.filter(e => !e.img), seed);
     return [...withImg, ...noImg].slice(0, n);
   };
   const patterns     = pickWithImg(topicExp.filter(e => e.type === 'pattern'),     comp.patterns);
@@ -181,17 +185,15 @@ export function getReviewSession(
     };
   }
 
-  // 첫날: 레벨 composition에 맞는 단어/표현 무작위 예습
+  // 첫날: 레벨별 분배를 적용한 예습 세션
   const seed = getDayOfYear();
-  const matchesLevel = <T extends { cefr?: string }>(arr: T[]): T[] =>
-    arr.filter(x => !x.cefr || x.cefr === level);
-
-  const previewWords = shuffleStable(matchesLevel(allWords), seed).slice(0, comp.words);
+  const previewWords = getLeveledContent(allWords, level as CEFRLevel, comp.words);
 
   const pickByType = (type: SentenceCard['type'], n: number) => {
     if (n === 0) return [];
-    const pool = matchesLevel(allExpressions.filter(e => e.type === type));
-    return shuffleStable(pool, seed).slice(0, n);
+    const pool = allExpressions.filter(e => e.type === type);
+    const leveledPool = getLeveledContent(pool, level as CEFRLevel, n);
+    return shuffleStable(leveledPool, seed).slice(0, n);
   };
   const previewExpressions = [
     ...pickByType('pattern',     comp.patterns),

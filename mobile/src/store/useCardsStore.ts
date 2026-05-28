@@ -16,6 +16,7 @@ export interface WordCard {
   tint: string;
   img: string | null;
   imgKey: string;
+  usageFrequency?: number;
 }
 
 export interface SentenceCard {
@@ -45,6 +46,7 @@ export interface SentenceCard {
   topicId: string;
   tint: string;
   img: string | null;
+  usageFrequency?: number;
 }
 
 interface CardsStore {
