@@ -44,6 +44,65 @@ function _shuffleStable(arr, seed) {
     .map(o => o.x);
 }
 
+// ── 레벨별 콘텐츠 분배 알고리즘 (mobile의 leveledSession.ts와 동일) ──
+const _CEFR_LEVELS = ['A1','A2','B1','B2','C1','C2'];
+const _LEVEL_DISTRIBUTION = {
+  A1: { prev: 0,  current: 85, next: 15 },
+  A2: { prev: 15, current: 75, next: 10 },
+  B1: { prev: 10, current: 75, next: 15 },
+  B2: { prev: 10, current: 75, next: 15 },
+  C1: { prev: 10, current: 75, next: 15 },
+  C2: { prev: 15, current: 85, next: 0  },
+};
+
+function _matchesLevel(item, target, position) {
+  if (!item.cefr) return false;
+  const i = _CEFR_LEVELS.indexOf(item.cefr);
+  const t = _CEFR_LEVELS.indexOf(target);
+  if (position === 'current') return item.cefr === target;
+  if (position === 'prev') {
+    if (i === t - 1) return true;
+    if (i === t - 2 && (item.usageFrequency || item.usage_frequency || 0) >= 3) return true;
+    return false;
+  }
+  if (position === 'next') {
+    if (i === t + 1) return true;
+    if (i === t + 2 && (item.usageFrequency || item.usage_frequency || 0) >= 4) return true;
+    return false;
+  }
+  return false;
+}
+
+// 사용자 레벨에 따른 콘텐츠 믹스 + 폴백
+window.ECGetLeveledContent = function(allItems, userLevel, countNeeded) {
+  if (countNeeded <= 0) return [];
+  const dist = _LEVEL_DISTRIBUTION[userLevel];
+  if (!dist) return [];
+  const pCount = Math.round((countNeeded * dist.prev) / 100);
+  const cCount = Math.round((countNeeded * dist.current) / 100);
+  const nCount = Math.round((countNeeded * dist.next) / 100);
+  const prev = allItems.filter(x => _matchesLevel(x, userLevel, 'prev'));
+  const curr = allItems.filter(x => _matchesLevel(x, userLevel, 'current'));
+  const next = allItems.filter(x => _matchesLevel(x, userLevel, 'next'));
+  const sh = a => [...a].sort(() => Math.random() - 0.5);
+  const result = [];
+  const used = new Set();
+  const take = (pool, n) => {
+    const picked = sh(pool.filter(x => !used.has(x))).slice(0, n);
+    picked.forEach(x => used.add(x));
+    return picked;
+  };
+  if (pCount > 0) result.push(...take(prev, pCount));
+  if (cCount > 0) result.push(...take(curr, cCount));
+  if (nCount > 0) result.push(...take(next, nCount));
+  // 폴백: current → next → prev → 전체
+  if (result.length < countNeeded) result.push(...take(curr, countNeeded - result.length));
+  if (result.length < countNeeded) result.push(...take(next, countNeeded - result.length));
+  if (result.length < countNeeded) result.push(...take(prev, countNeeded - result.length));
+  if (result.length < countNeeded) result.push(...take(allItems, countNeeded - result.length));
+  return sh(result).slice(0, countNeeded);
+};
+
 function _getUserId() {
   try {
     const u = JSON.parse(localStorage.getItem('engcat_user') || '{}');
@@ -103,25 +162,26 @@ window.ECGetTodaySession = function() {
     };
   }
 
-  const pick = (arr, n) => n <= 0 ? [] : _shuffleStable(arr, seed).slice(0, n);
+  // 토픽 내에서 레벨별 분배 적용 (mobile과 동일)
+  const wordsForTopic = (data.words || []).filter(w => w.topicId === topic);
+  const todayWords = window.ECGetLeveledContent(wordsForTopic, level, comp.words);
 
-  const wordsForTopic = (data.words || []).filter(w => w.topicId === topic && (!w.cefr || w.cefr === level));
-  const todayWords = pick(wordsForTopic.length > 0 ? wordsForTopic : (data.words || []).filter(w => w.topicId === topic), comp.words);
-
+  // 패턴: window.ECData.patterns(레벨 정확 일치) 우선, 없으면 sentences에서 레벨 분배
   const newPatterns = ((window.ECData && window.ECData.patterns) || []).filter(p => p.topic === topic && p.level === level);
   const sentences = data.sentences || [];
   const sentencePool = sentences.filter(s => s.topicId === topic && (s.type === 'pattern' || !s.type));
-  const patternPool = newPatterns.length > 0 ? newPatterns : sentencePool;
-  const patterns = _shuffleStable(patternPool, seed).slice(0, comp.patterns);
+  const patterns = newPatterns.length > 0
+    ? _shuffleStable(newPatterns, seed).slice(0, comp.patterns)
+    : window.ECGetLeveledContent(sentencePool, level, comp.patterns);
 
   const collPool = (data.collocations || []).filter(c => c.topicId === topic);
-  const collocations = pick(collPool, comp.collocations);
+  const collocations = window.ECGetLeveledContent(collPool, level, comp.collocations);
 
   const idiomPool = (data.idioms || []).filter(i => i.topicId === topic);
-  const idioms = pick(idiomPool, comp.idioms);
+  const idioms = window.ECGetLeveledContent(idiomPool, level, comp.idioms);
 
   const nuancePool = (data.nuances || []).filter(n => n.topicId === topic);
-  const nuances = pick(nuancePool, comp.nuances);
+  const nuances = window.ECGetLeveledContent(nuancePool, level, comp.nuances);
 
   const expressions = [...patterns, ...collocations, ...idioms, ...nuances];
 
@@ -235,19 +295,12 @@ window.ECGetReviewSession = function() {
     };
   }
 
-  // 첫날 (학습 이력 없음): 예습
-  const seed = window.ECGetDayOfYear();
-  const wordsForLevel    = allWords.filter(w => !w.cefr || w.cefr === level);
-  const patternsForLevel = allPatterns.filter(p => p.level === level);
-  const collForLevel     = allColloc.filter(c => !c.cefr || c.cefr === level);
-  const idiomForLevel    = allIdioms.filter(i => !i.cefr || i.cefr === level);
-  const nuanceForLevel   = allNuances.filter(n => !n.cefr || n.cefr === level);
-
-  const previewWords    = _shuffleStable(wordsForLevel,    seed).slice(0, comp.words);
-  const previewPatterns = tagType(_shuffleStable(patternsForLevel, seed).slice(0, comp.patterns),          'pattern');
-  const previewColloc   = tagType(_shuffleStable(collForLevel,     seed).slice(0, comp.collocations || 0), 'collocation');
-  const previewIdioms   = tagType(_shuffleStable(idiomForLevel,    seed).slice(0, comp.idioms       || 0), 'idiom');
-  const previewNuances  = tagType(_shuffleStable(nuanceForLevel,   seed).slice(0, comp.nuances      || 0), 'nuance');
+  // 첫날 (학습 이력 없음): 예습 — 레벨별 분배 적용
+  const previewWords    = window.ECGetLeveledContent(allWords,    level, comp.words);
+  const previewPatterns = tagType(window.ECGetLeveledContent(allPatterns, level, comp.patterns),          'pattern');
+  const previewColloc   = tagType(window.ECGetLeveledContent(allColloc,   level, comp.collocations || 0), 'collocation');
+  const previewIdioms   = tagType(window.ECGetLeveledContent(allIdioms,   level, comp.idioms       || 0), 'idiom');
+  const previewNuances  = tagType(window.ECGetLeveledContent(allNuances,  level, comp.nuances      || 0), 'nuance');
 
   return {
     isPreview: true,

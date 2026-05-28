@@ -1,17 +1,25 @@
 #!/bin/sh
-# Auto-update EngCat version in Profile.tsx based on commit count
+# Auto-update EngCat version in both mobile app + GitHub Pages site
 # Formula: v = ((commitCount - 1) % 500) + 1
 # Range cycles 1~500: commit 1=v1, 500=v500, 501=v1, 1000=v500, 1001=v1...
-
-PROFILE_FILE="mobile/src/screens/Profile.tsx"
-[ -f "$PROFILE_FILE" ] || exit 0
 
 # Next commit count (current HEAD count + 1)
 COMMIT_COUNT=$(git rev-list --count HEAD 2>/dev/null || echo 0)
 NEXT=$((COMMIT_COUNT + 1))
 VERSION=$(( ((NEXT - 1) % 500) + 1 ))
 
-# Update the version line in-place
-sed -i.bak "s/EngCat v[0-9]\{1,\}/EngCat v$VERSION/" "$PROFILE_FILE"
-rm -f "$PROFILE_FILE.bak"
-git add "$PROFILE_FILE"
+# 1. Mobile app version (Profile.tsx)
+PROFILE_FILE="mobile/src/screens/Profile.tsx"
+if [ -f "$PROFILE_FILE" ]; then
+  sed -i.bak "s/EngCat v[0-9]\{1,\}/EngCat v$VERSION/" "$PROFILE_FILE"
+  rm -f "$PROFILE_FILE.bak"
+  git add "$PROFILE_FILE"
+fi
+
+# 2. GitHub Pages site version (index.html)
+INDEX_FILE="index.html"
+if [ -f "$INDEX_FILE" ]; then
+  sed -i.bak "s/window\.EC_VER *= *[0-9]\{1,\};/window.EC_VER = $VERSION;/" "$INDEX_FILE"
+  rm -f "$INDEX_FILE.bak"
+  git add "$INDEX_FILE"
+fi
