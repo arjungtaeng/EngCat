@@ -132,11 +132,11 @@ function ECScreenSentenceCard() {
       onTouchEnd={handleTouchEnd}
     >
 
-      {/* Full-bleed landscape image */}
+      {/* Full-bleed landscape image — 단어 카드와 동일한 70% 높이 */}
       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
         {s.img
-          ? <img src={s.img} style={{ width: '100%', height: '50%', objectFit: 'cover', objectPosition: 'center' }} alt={s.en} />
-          : <div style={{ width: '100%', height: '50%' }}><ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.en}/></div>
+          ? <img src={s.img} style={{ width: '100%', height: '70%', objectFit: 'cover', objectPosition: 'center' }} alt={s.en} />
+          : <div style={{ width: '100%', height: '70%' }}><ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.en}/></div>
         }
         <div style={{ position: 'absolute', inset: 0, background: overlayGrad }}/>
       </div>
@@ -172,7 +172,7 @@ function ECScreenSentenceCard() {
           transition: contentTransition,
         }}
       >
-        <div style={{ flex: '0 0 40%', minHeight: 120 }} />
+        <div style={{ flex: '0 0 52%', minHeight: 120 }} />
 
         <div style={{ padding: '0 22px 20px' }}>
 
