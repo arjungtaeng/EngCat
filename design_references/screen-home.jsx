@@ -211,40 +211,83 @@ function ECScreenHome() {
       </div>
 
       {/* Section: 복습 단어 (or 예습 단어) */}
-      {reviewWords.length > 0 && (<>
-        <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          <div>
-            <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 단어' : '복습 단어'}</div>
-            {!isPreview && reviewTopicLabel && (
-              <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.2, textTransform: 'uppercase', marginTop: 4, fontWeight: 600 }}>
-                복습 토픽 · {reviewTopicLabel}
-              </div>
-            )}
-          </div>
-          <div style={{ fontSize: 12, color: T.textDim }}>{reviewWords.length}개</div>
-        </div>
-        <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto' }}>
-          {reviewWords.map((c, i) => (
-            <div key={c.id} onClick={() => {
-              window.ECCardSource = { mode: isPreview ? 'preview' : 'review', words: reviewWords, startIndex: i };
-              window.ECSession.wordIndex = i;
-              window.ECNav?.go('word-card');
-            }} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
-              <div style={{ position: 'relative' }}>
-                {c.img
-                  ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', borderRadius: 14 }} alt={c.en} />
-                  : <ECPlaceholder height={150} tint={c.tint} radius={14} label={c.en}/>
-                }
-              </div>
-              <div style={{ marginTop: 8, fontFamily: T.display, fontWeight: 400, fontSize: 17, color: T.text }}>{c.en}</div>
-              <div style={{ fontSize: 12, color: T.textDim, marginTop: 1 }}>{(c.ko || '').split(',')[0]}</div>
+      {reviewWords.length > 0 && (() => {
+        const completedSet = session.completedWordIds || new Set();
+        const doneCount = reviewWords.filter(c => completedSet.has(c.id)).length;
+        const allDone = doneCount === reviewWords.length && reviewWords.length > 0;
+        return (<>
+          <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+            <div>
+              <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 단어' : '복습 단어'}</div>
+              {!isPreview && reviewTopicLabel && (
+                <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.2, textTransform: 'uppercase', marginTop: 4, fontWeight: 600 }}>
+                  복습 토픽 · {reviewTopicLabel}
+                </div>
+              )}
             </div>
-          ))}
-        </div>
-      </>)}
+            <div style={{ fontSize: 12, color: T.textDim }}>
+              {doneCount > 0 ? `${doneCount} / ${reviewWords.length} 완료` : `${reviewWords.length}개`}
+            </div>
+          </div>
+          <div style={{ padding: '0 22px', display: 'flex', gap: 10, overflowX: 'auto' }}>
+            {reviewWords.map((c, i) => {
+              const isDone = completedSet.has(c.id);
+              return (
+                <div key={c.id} onClick={() => {
+                  window.ECCardSource = { mode: isPreview ? 'preview' : 'review', words: reviewWords, startIndex: i };
+                  window.ECSession.wordIndex = i;
+                  window.ECNav?.go('word-card');
+                }} style={{ flex: '0 0 130px', cursor: 'pointer', opacity: isDone ? 0.45 : 1, transition: 'opacity 0.2s' }}>
+                  <div style={{ position: 'relative' }}>
+                    {c.img
+                      ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', borderRadius: 14 }} alt={c.en} />
+                      : <ECPlaceholder height={150} tint={c.tint} radius={14} label={c.en}/>
+                    }
+                    {isDone && (
+                      <div style={{
+                        position: 'absolute', top: 8, right: 8,
+                        width: 24, height: 24, borderRadius: 999,
+                        background: T.accent, color: T.bg0,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 14, fontWeight: 700, lineHeight: 1,
+                      }}>✓</div>
+                    )}
+                  </div>
+                  <div style={{ marginTop: 8, fontFamily: T.display, fontWeight: 400, fontSize: 17, color: T.text }}>{c.en}</div>
+                  <div style={{ fontSize: 12, color: T.textDim, marginTop: 1 }}>{(c.ko || '').split(',')[0]}</div>
+                </div>
+              );
+            })}
+          </div>
+          {/* 완료 후 추천 박스 */}
+          {allDone && (
+            <div style={{ padding: '12px 22px 0' }}>
+              <div onClick={() => {
+                window.ECReviewSeedOffset = (window.ECReviewSeedOffset || 0) + 1;
+                setDataVersion(v => v + 1);
+              }} style={{
+                padding: '14px 16px', borderRadius: 14,
+                background: T.accentSoft, border: `1px dashed ${T.accent}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+                cursor: 'pointer',
+              }}>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: T.accent, marginBottom: 2 }}>🎉 {reviewWords.length}개 모두 끝!</div>
+                  <div style={{ fontSize: 11.5, color: T.accent, opacity: 0.85 }}>새 단어 {reviewWords.length}개 더 학습해 볼까요?</div>
+                </div>
+                <div style={{ color: T.accent, fontSize: 13, fontWeight: 600, fontFamily: T.mono }}>+ 추천받기</div>
+              </div>
+            </div>
+          )}
+        </>);
+      })()}
 
       {/* Section: 복습 표현 (or 예습 표현) — 패턴 + 콜로 + 이디엄 + 뉘앙스 */}
-      {reviewExpressions.length > 0 && (<>
+      {reviewExpressions.length > 0 && (() => {
+        const completedExprSet = session.completedSentenceIds || new Set();
+        const doneExprCount = reviewExpressions.filter(e => completedExprSet.has(e.id)).length;
+        const allExprDone = doneExprCount === reviewExpressions.length && reviewExpressions.length > 0;
+        return (<>
         <div style={{ padding: '28px 22px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
           <div>
             <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 표현' : '복습 표현'}</div>
@@ -254,11 +297,9 @@ function ECScreenHome() {
               </div>
             )}
           </div>
-          <div onClick={() => {
-            // "더 보기" — offset을 올려 복습 단어/표현 모두 새 셋으로 교체
-            window.ECReviewSeedOffset = (window.ECReviewSeedOffset || 0) + 1;
-            setDataVersion(v => v + 1);
-          }} style={{ fontSize: 12, color: T.accent, cursor: 'pointer' }}>더 보기</div>
+          <div style={{ fontSize: 12, color: T.textDim }}>
+            {doneExprCount > 0 ? `${doneExprCount} / ${reviewExpressions.length} 완료` : `${reviewExpressions.length}개`}
+          </div>
         </div>
         <div style={{ padding: '0 22px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {reviewExpressions.map((e, i) => {
@@ -266,6 +307,7 @@ function ECScreenHome() {
             const typeLabel = EXPR_TYPE_LABELS[type] || '패턴';
             const title = e.pattern || e.en || (e.wordA && e.wordB ? `${e.wordA} vs ${e.wordB}` : '');
             const desc  = e.explanation || e.ko || e.comparison || '';
+            const isDone = completedExprSet.has(e.id);
             return (
               <div key={e.id || i} onClick={() => {
                 window.ECCardSource = {
@@ -280,6 +322,7 @@ function ECScreenHome() {
                 background: T.bg2, border: `1px solid ${T.hair}`,
                 display: 'flex', alignItems: 'center', gap: 12,
                 cursor: 'pointer',
+                opacity: isDone ? 0.45 : 1, transition: 'opacity 0.2s',
               }}>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
@@ -288,6 +331,14 @@ function ECScreenHome() {
                       background: T.accentSoft, color: T.accent,
                       fontFamily: T.mono, fontSize: 9, letterSpacing: 1, textTransform: 'uppercase', fontWeight: 600,
                     }}>{typeLabel}</div>
+                    {isDone && (
+                      <div style={{
+                        width: 18, height: 18, borderRadius: 999,
+                        background: T.accent, color: T.bg0,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 10, fontWeight: 700, lineHeight: 1,
+                      }}>✓</div>
+                    )}
                   </div>
                   <div style={{
                     fontFamily: T.display, fontWeight: 400,
@@ -305,8 +356,28 @@ function ECScreenHome() {
               </div>
             );
           })}
+          {/* 완료 후 추천 박스 */}
+          {allExprDone && (
+            <div onClick={() => {
+              window.ECReviewSeedOffset = (window.ECReviewSeedOffset || 0) + 1;
+              setDataVersion(v => v + 1);
+            }} style={{
+              marginTop: 4,
+              padding: '14px 16px', borderRadius: 14,
+              background: T.accentSoft, border: `1px dashed ${T.accent}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+              cursor: 'pointer',
+            }}>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 13, fontWeight: 600, color: T.accent, marginBottom: 2 }}>🎉 {reviewExpressions.length}개 모두 끝!</div>
+                <div style={{ fontSize: 11.5, color: T.accent, opacity: 0.85 }}>새 표현 {reviewExpressions.length}개 더 학습해 볼까요?</div>
+              </div>
+              <div style={{ color: T.accent, fontSize: 13, fontWeight: 600, fontFamily: T.mono }}>+ 추천받기</div>
+            </div>
+          )}
         </div>
-      </>)}
+        </>);
+      })()}
 
       {/* Section: 오늘의 퀴즈 */}
       <div style={{ padding: '28px 22px 24px' }}>

@@ -1,0 +1,1262 @@
+[
+  {
+    "id": "s_academic_A1_06",
+    "en": "Is this the right answer?",
+    "ko": "이게 맞는 답인가요?",
+    "highlight": "the right answer",
+    "situation": "수업 중",
+    "cefr": "A1",
+    "topic_id": "academic",
+    "tip": "자신의 답이 맞는지 확인할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_academic_A1_02",
+    "en": "How do you spell that word?",
+    "ko": "그 단어의 철자가 어떻게 되나요?",
+    "highlight": "spell that word",
+    "situation": "수업 중",
+    "cefr": "A1",
+    "topic_id": "academic",
+    "tip": "단어 철자를 모를 때 물어보는 기본 표현이에요."
+  },
+  {
+    "id": "s_academic_A1_03",
+    "en": "I don't understand. Can you speak more slowly?",
+    "ko": "이해가 안 돼요. 더 천천히 말씀해 주실 수 있나요?",
+    "highlight": "speak more slowly",
+    "situation": "수업 중",
+    "cefr": "A1",
+    "topic_id": "academic",
+    "tip": "속도가 너무 빠를 때 정중하게 요청하는 표현이에요."
+  },
+  {
+    "id": "s_academic_A1_05",
+    "en": "May I ask a question?",
+    "ko": "질문해도 되나요?",
+    "highlight": "May I ask a question",
+    "situation": "수업 중",
+    "cefr": "A1",
+    "topic_id": "academic",
+    "tip": "수업 중에 조용히 질문 허락을 구하는 표현이에요."
+  },
+  {
+    "id": "s_academic_A1_04",
+    "en": "What does this word mean?",
+    "ko": "이 단어는 무슨 의미인가요?",
+    "highlight": "this word mean",
+    "situation": "수업 중",
+    "cefr": "A1",
+    "topic_id": "academic",
+    "tip": "새로운 단어를 만났을 때 뜻을 묻는 가장 기본적인 표현이에요."
+  },
+  {
+    "id": "s_academic_A1_01",
+    "en": "Can you explain that again?",
+    "ko": "다시 설명해 주실 수 있나요?",
+    "highlight": "explain that again",
+    "situation": "수업 중",
+    "cefr": "A1",
+    "topic_id": "academic",
+    "tip": "이해 못했을 때 정중하게 다시 설명을 요청하는 표현이에요."
+  },
+  {
+    "id": "s_academic_A1_07",
+    "en": "Please write it on the board.",
+    "ko": "칠판에 적어 주세요.",
+    "highlight": "write it on the board",
+    "situation": "수업 중",
+    "cefr": "A1",
+    "topic_id": "academic",
+    "tip": "선생님에게 칠판에 적어달라고 부탁하는 표현이에요."
+  },
+  {
+    "id": "s_academic_A2_07",
+    "en": "Let's discuss the topic together.",
+    "ko": "함께 주제를 토론해 봐요.",
+    "highlight": "discuss the topic together",
+    "situation": "그룹 학습",
+    "cefr": "A2",
+    "topic_id": "academic",
+    "tip": "그룹 토론을 시작할 때 쓰는 자연스러운 표현이에요."
+  },
+  {
+    "id": "s_academic_A2_05",
+    "en": "In my opinion, the results are interesting.",
+    "ko": "제 의견으로는, 결과가 흥미로워요.",
+    "highlight": "In my opinion",
+    "situation": "토론·발표 중",
+    "cefr": "A2",
+    "topic_id": "academic",
+    "tip": "자신의 견해를 부드럽게 제시하는 표현이에요."
+  },
+  {
+    "id": "s_academic_A2_03",
+    "en": "I think I understand, but let me check.",
+    "ko": "이해한 것 같은데, 확인해 볼게요.",
+    "highlight": "I think I understand",
+    "situation": "수업·학습 중",
+    "cefr": "A2",
+    "topic_id": "academic",
+    "tip": "완전히 확신하지 못할 때 겸손하게 확인하는 표현이에요."
+  },
+  {
+    "id": "s_academic_A2_06",
+    "en": "Where did you find that information?",
+    "ko": "그 정보를 어디서 찾으셨나요?",
+    "highlight": "find that information",
+    "situation": "연구·토론 중",
+    "cefr": "A2",
+    "topic_id": "academic",
+    "tip": "출처를 확인할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_academic_A2_04",
+    "en": "Can you summarize what we learned today?",
+    "ko": "오늘 배운 것을 요약해 주실 수 있나요?",
+    "highlight": "summarize what we learned",
+    "situation": "수업 마무리",
+    "cefr": "A2",
+    "topic_id": "academic",
+    "tip": "수업이 끝날 때 내용을 정리하며 묻는 표현이에요."
+  },
+  {
+    "id": "s_academic_A2_01",
+    "en": "Could you give me an example?",
+    "ko": "예시를 들어 주실 수 있나요?",
+    "highlight": "give me an example",
+    "situation": "수업·토론 중",
+    "cefr": "A2",
+    "topic_id": "academic",
+    "tip": "설명을 더 잘 이해하고 싶을 때 예시를 요청하는 표현이에요."
+  },
+  {
+    "id": "s_academic_A2_02",
+    "en": "What is the main point of this article?",
+    "ko": "이 글의 핵심 요점은 무엇인가요?",
+    "highlight": "main point",
+    "situation": "독서·발표 후",
+    "cefr": "A2",
+    "topic_id": "academic",
+    "tip": "글을 읽고 중심 내용을 파악할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_academic_B1_05",
+    "en": "The results demonstrate a significant improvement.",
+    "ko": "결과는 유의미한 향상을 보여줘요.",
+    "highlight": "demonstrate a significant improvement",
+    "situation": "연구 결과 발표",
+    "cefr": "B1",
+    "topic_id": "academic",
+    "tip": "통계적으로 유의미한 결과를 발표할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_academic_B1_07",
+    "en": "We need to consider the methodological limitations.",
+    "ko": "방법론적 한계를 고려해야 해요.",
+    "highlight": "methodological limitations",
+    "situation": "논문 심사",
+    "cefr": "B1",
+    "topic_id": "academic",
+    "tip": "연구 방법의 제약을 논의할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_academic_B1_04",
+    "en": "One limitation of this study is the small sample size.",
+    "ko": "이 연구의 한 가지 한계는 표본 크기가 작다는 점이에요.",
+    "highlight": "limitation of this study",
+    "situation": "논문 결론",
+    "cefr": "B1",
+    "topic_id": "academic",
+    "tip": "연구의 약점을 솔직하게 인정하는 학술적 표현이에요."
+  },
+  {
+    "id": "s_academic_B1_06",
+    "en": "It is important to cite all your sources correctly.",
+    "ko": "모든 출처를 정확하게 인용하는 것이 중요해요.",
+    "highlight": "cite all your sources correctly",
+    "situation": "글쓰기 지도",
+    "cefr": "B1",
+    "topic_id": "academic",
+    "tip": "학술 글쓰기에서 인용의 중요성을 강조하는 표현이에요."
+  },
+  {
+    "id": "s_academic_B1_03",
+    "en": "This study aims to analyze the correlation between variables.",
+    "ko": "이 연구는 변수 간의 상관관계를 분석하는 것을 목표로 해요.",
+    "highlight": "analyze the correlation between variables",
+    "situation": "논문 서론",
+    "cefr": "B1",
+    "topic_id": "academic",
+    "tip": "연구 목적을 설명할 때 쓰는 공식적인 표현이에요."
+  },
+  {
+    "id": "s_academic_B1_02",
+    "en": "Based on the data, we can conclude that the method is effective.",
+    "ko": "데이터를 바탕으로, 그 방법이 효과적이라고 결론 내릴 수 있어요.",
+    "highlight": "Based on the data",
+    "situation": "연구 발표",
+    "cefr": "B1",
+    "topic_id": "academic",
+    "tip": "데이터 근거로 결론을 이끌어낼 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_academic_B1_01",
+    "en": "The evidence suggests that this hypothesis is correct.",
+    "ko": "증거는 이 가설이 옳다는 것을 시사해요.",
+    "highlight": "evidence suggests",
+    "situation": "논문·발표",
+    "cefr": "B1",
+    "topic_id": "academic",
+    "tip": "데이터가 이론을 뒷받침할 때 쓰는 학술적 표현이에요."
+  },
+  {
+    "id": "s_academic_B2_01",
+    "en": "A mixed-methods approach was adopted to ensure both validity and reliability.",
+    "ko": "타당성과 신뢰도를 모두 확보하기 위해 혼합 방법론을 채택했어요.",
+    "highlight": "validity and reliability",
+    "situation": "연구 방법 섹션",
+    "cefr": "B2",
+    "topic_id": "academic",
+    "tip": "두 개의 핵심 연구 품질 지표를 동시에 다루는 표현이에요."
+  },
+  {
+    "id": "s_academic_B2_07",
+    "en": "Triangulation of data sources strengthened the credibility of the findings.",
+    "ko": "데이터 출처의 삼각검증은 연구 결과의 신뢰성을 강화했어요.",
+    "highlight": "Triangulation of data sources",
+    "situation": "연구 방법",
+    "cefr": "B2",
+    "topic_id": "academic",
+    "tip": "여러 데이터 출처로 결과를 검증하는 방법을 설명하는 표현이에요."
+  },
+  {
+    "id": "s_academic_B2_03",
+    "en": "The findings must be interpreted within the theoretical framework outlined earlier.",
+    "ko": "연구 결과는 앞서 제시한 이론적 틀 안에서 해석되어야 해요.",
+    "highlight": "interpreted within the theoretical framework",
+    "situation": "논문 논의",
+    "cefr": "B2",
+    "topic_id": "academic",
+    "tip": "이론과 결과를 연결할 때 쓰는 학술적 표현이에요."
+  },
+  {
+    "id": "s_academic_B2_04",
+    "en": "Peer review ensures the quality and credibility of published research.",
+    "ko": "동료 심사는 게재된 연구의 질과 신뢰성을 보장해요.",
+    "highlight": "Peer review ensures the quality",
+    "situation": "연구 윤리 논의",
+    "cefr": "B2",
+    "topic_id": "academic",
+    "tip": "학술 출판 시스템을 설명하는 표현이에요."
+  },
+  {
+    "id": "s_academic_B2_05",
+    "en": "The study operationalized the concept of engagement as time-on-task.",
+    "ko": "연구는 참여도 개념을 과제 시간으로 조작화했어요.",
+    "highlight": "operationalized the concept of engagement",
+    "situation": "연구 설계",
+    "cefr": "B2",
+    "topic_id": "academic",
+    "tip": "추상적 개념을 측정 가능하게 정의하는 방법을 설명하는 표현이에요."
+  },
+  {
+    "id": "s_academic_B2_02",
+    "en": "The qualitative data were analyzed using thematic analysis.",
+    "ko": "질적 데이터는 주제별 분석을 사용하여 분석되었어요.",
+    "highlight": "qualitative data were analyzed using thematic analysis",
+    "situation": "연구 방법",
+    "cefr": "B2",
+    "topic_id": "academic",
+    "tip": "질적 연구 방법을 설명할 때 쓰는 공식 표현이에요."
+  },
+  {
+    "id": "s_academic_B2_06",
+    "en": "The literature review revealed a significant gap in existing research.",
+    "ko": "문헌 검토는 기존 연구에서 상당한 공백을 드러냈어요.",
+    "highlight": "literature review revealed a significant gap",
+    "situation": "논문 서론",
+    "cefr": "B2",
+    "topic_id": "academic",
+    "tip": "연구의 필요성을 정당화하는 표현이에요."
+  },
+  {
+    "id": "s_academic_C1_01",
+    "en": "The ontological assumptions underlying this research privilege a realist view of knowledge.",
+    "ko": "이 연구의 기저에 있는 존재론적 가정은 지식에 대한 실재론적 관점을 우선시해요.",
+    "highlight": "ontological assumptions underlying",
+    "situation": "학술 세미나",
+    "cefr": "C1",
+    "topic_id": "academic",
+    "tip": "연구의 철학적 기반을 비판적으로 검토하는 표현이에요."
+  },
+  {
+    "id": "s_academic_C1_03",
+    "en": "A phenomenological approach foregrounds the lived experience of the participants.",
+    "ko": "현상학적 접근법은 참여자의 살아있는 경험을 전면에 내세워요.",
+    "highlight": "phenomenological approach foregrounds",
+    "situation": "연구 설계 발표",
+    "cefr": "C1",
+    "topic_id": "academic",
+    "tip": "현상학적 연구 방법의 핵심 특성을 설명하는 표현이에요."
+  },
+  {
+    "id": "s_academic_C1_04",
+    "en": "This paper problematizes the binary opposition between objective and subjective knowledge.",
+    "ko": "이 논문은 객관적 지식과 주관적 지식 사이의 이분법적 대립을 문제화해요.",
+    "highlight": "problematizes the binary opposition",
+    "situation": "논문 서론·토론",
+    "cefr": "C1",
+    "topic_id": "academic",
+    "tip": "이분법적 사고를 비판적으로 다루는 학술 논문 표현이에요."
+  },
+  {
+    "id": "s_academic_C1_07",
+    "en": "Grounded theory allows theory to emerge inductively from the data rather than being imposed a priori.",
+    "ko": "근거 이론은 이론이 사전에 부과되는 것이 아니라 데이터에서 귀납적으로 출현하도록 해요.",
+    "highlight": "emerge inductively from the data",
+    "situation": "연구 방법론 강의",
+    "cefr": "C1",
+    "topic_id": "academic",
+    "tip": "근거 이론의 핵심 원리를 설명하는 표현이에요."
+  },
+  {
+    "id": "s_academic_C1_05",
+    "en": "Reflexivity requires the researcher to critically examine their own positionality.",
+    "ko": "성찰성은 연구자가 자신의 위치성을 비판적으로 검토할 것을 요구해요.",
+    "highlight": "Reflexivity requires",
+    "situation": "연구 방법 발표",
+    "cefr": "C1",
+    "topic_id": "academic",
+    "tip": "질적 연구에서 성찰성의 역할을 설명하는 표현이에요."
+  },
+  {
+    "id": "s_academic_C1_02",
+    "en": "The deductive framework constrains the researcher's ability to uncover emergent themes.",
+    "ko": "연역적 틀은 연구자가 출현하는 주제를 발견하는 능력을 제한해요.",
+    "highlight": "deductive framework constrains",
+    "situation": "방법론 토론",
+    "cefr": "C1",
+    "topic_id": "academic",
+    "tip": "연역적 방법론의 한계를 논의하는 표현이에요."
+  },
+  {
+    "id": "s_academic_C1_06",
+    "en": "The hegemonic discourse normalizes certain assumptions while marginalizing others.",
+    "ko": "헤게모니적 담론은 특정 가정을 정상화하면서 다른 것들을 소외시켜요.",
+    "highlight": "hegemonic discourse normalizes",
+    "situation": "비판 이론 세미나",
+    "cefr": "C1",
+    "topic_id": "academic",
+    "tip": "권력과 담론의 관계를 분석하는 표현이에요."
+  },
+  {
+    "id": "s_academic_C2_01",
+    "en": "Derrida's concept of différance destabilizes the logocentric assumption that meaning is fixed and present.",
+    "ko": "데리다의 차연 개념은 의미가 고정되어 현존한다는 로고스중심주의적 가정을 불안정하게 해요.",
+    "highlight": "différance destabilizes the logocentric assumption",
+    "situation": "철학 세미나·논문",
+    "cefr": "C2",
+    "topic_id": "academic",
+    "tip": "해체론적 분석을 적용하는 고급 학술 논문 표현이에요."
+  },
+  {
+    "id": "s_academic_C2_04",
+    "en": "Bakhtin's heteroglossia reveals the polyphonic nature of academic discourse itself.",
+    "ko": "바흐친의 이언론은 학술 담론 자체의 다성적 특성을 드러내요.",
+    "highlight": "heteroglossia reveals the polyphonic nature",
+    "situation": "담론 분석 논문",
+    "cefr": "C2",
+    "topic_id": "academic",
+    "tip": "바흐친 이론을 담론 분석에 적용하는 표현이에요."
+  },
+  {
+    "id": "s_academic_C2_07",
+    "en": "The onto-epistemological stance of the researcher inevitably shapes what counts as legitimate knowledge within the study.",
+    "ko": "연구자의 존재-인식론적 입장은 연구 내에서 무엇이 정당한 지식으로 인정되는지를 필연적으로 형성해요.",
+    "highlight": "onto-epistemological stance",
+    "situation": "연구 방법론 논문",
+    "cefr": "C2",
+    "topic_id": "academic",
+    "tip": "연구자의 철학적 입장이 연구 전체에 미치는 영향을 설명하는 표현이에요."
+  },
+  {
+    "id": "s_academic_C2_03",
+    "en": "The rhizomatic structure of the text resists linear reading and hierarchical interpretation.",
+    "ko": "텍스트의 리좀적 구조는 선형적 읽기와 위계적 해석에 저항해요.",
+    "highlight": "rhizomatic structure resists",
+    "situation": "문학 이론 논문",
+    "cefr": "C2",
+    "topic_id": "academic",
+    "tip": "들뢰즈의 리좀 개념을 텍스트 분석에 적용하는 표현이에요."
+  },
+  {
+    "id": "s_academic_C2_02",
+    "en": "Foucauldian genealogy traces how the episteme of an era disciplines and normalizes subjects.",
+    "ko": "푸코적 계보학은 한 시대의 에피스테메가 어떻게 주체를 규율하고 정상화하는지 추적해요.",
+    "highlight": "Foucauldian genealogy traces",
+    "situation": "비판 이론 논문",
+    "cefr": "C2",
+    "topic_id": "academic",
+    "tip": "푸코의 계보학적 방법을 적용한 논문 서술 방식이에요."
+  },
+  {
+    "id": "s_academic_C2_05",
+    "en": "The subaltern's aporia lies in the impossibility of articulating resistance within the very language of the oppressor.",
+    "ko": "서발턴의 아포리아는 억압자의 언어 안에서 저항을 표현하는 것의 불가능성에 있어요.",
+    "highlight": "subaltern's aporia lies in the impossibility",
+    "situation": "포스트식민 이론 논문",
+    "cefr": "C2",
+    "topic_id": "academic",
+    "tip": "포스트식민 이론의 핵심 긴장을 표현하는 고급 학술 문장이에요."
+  },
+  {
+    "id": "s_academic_C2_06",
+    "en": "Bourdieu's concept of habitus explains how doxa is reproduced across generations without conscious awareness.",
+    "ko": "부르디외의 아비투스 개념은 독사가 의식적 인식 없이 세대에 걸쳐 재생산되는 방식을 설명해요.",
+    "highlight": "habitus explains how doxa is reproduced",
+    "situation": "사회학 이론 논문",
+    "cefr": "C2",
+    "topic_id": "academic",
+    "tip": "부르디외의 핵심 개념을 연결하는 학술적 표현이에요."
+  },
+  {
+    "id": "s_discussion_A1_03",
+    "en": "What do you think about that?",
+    "ko": "그것에 대해 어떻게 생각해요?",
+    "highlight": "What do you think",
+    "situation": "의견 묻기",
+    "cefr": "A1",
+    "topic_id": "discussion",
+    "tip": "상대방의 의견을 구할 때 가장 기본적인 표현이에요. 토론을 시작하는 데 꼭 필요해요."
+  },
+  {
+    "id": "s_discussion_A1_07",
+    "en": "I like your idea.",
+    "ko": "당신의 아이디어가 마음에 들어요.",
+    "highlight": "I like your idea",
+    "situation": "격려·지지",
+    "cefr": "A1",
+    "topic_id": "discussion",
+    "tip": "\"I like your idea.\"는 \"Good idea.\"보다 더 개인적이고 따뜻한 느낌을 줘요. 상대방이 기분 좋게 느낄 수 있어요."
+  },
+  {
+    "id": "s_discussion_A1_02",
+    "en": "I do not think that is a good idea.",
+    "ko": "그건 좋은 생각이 아닌 것 같아요.",
+    "highlight": "I do not think",
+    "situation": "반대",
+    "cefr": "A1",
+    "topic_id": "discussion",
+    "tip": "부드럽게 반대 의견을 말할 때 \"I do not think ~\"를 쓰면 직접적인 거절보다 훨씬 공손하게 들려요."
+  },
+  {
+    "id": "s_discussion_A1_06",
+    "en": "That is a good idea.",
+    "ko": "그건 좋은 생각이에요.",
+    "highlight": "That is a good idea",
+    "situation": "칭찬·긍정",
+    "cefr": "A1",
+    "topic_id": "discussion",
+    "tip": "상대방의 아이디어를 긍정할 때 가장 간단하고 자연스러운 표현이에요. 대화를 활기차게 만들어줘요."
+  },
+  {
+    "id": "s_discussion_A1_05",
+    "en": "I am not sure about that.",
+    "ko": "그것에 대해 잘 모르겠어요.",
+    "highlight": "I am not sure",
+    "situation": "불확실",
+    "cefr": "A1",
+    "topic_id": "discussion",
+    "tip": "확신이 없을 때 \"I am not sure\"를 쓰면 솔직하면서도 공손하게 들려요."
+  },
+  {
+    "id": "s_discussion_A1_01",
+    "en": "I think so too.",
+    "ko": "저도 그렇게 생각해요.",
+    "highlight": "I think so",
+    "situation": "동의",
+    "cefr": "A1",
+    "topic_id": "discussion",
+    "tip": "동의를 표현할 때 \"I think so too.\"는 가장 자연스러운 표현이에요. \"Me too.\"보다 대화에서 더 자연스럽게 들려요."
+  },
+  {
+    "id": "s_discussion_A1_04",
+    "en": "Maybe you are right.",
+    "ko": "아마도 당신이 맞을 수도 있어요.",
+    "highlight": "Maybe you are right",
+    "situation": "부분 동의",
+    "cefr": "A1",
+    "topic_id": "discussion",
+    "tip": "완전히 확신하지 못할 때 \"Maybe\"를 붙여서 유연하게 동의를 표현해요. 대화 분위기를 부드럽게 유지해줘요."
+  },
+  {
+    "id": "s_discussion_A2_06",
+    "en": "Can you give me an example?",
+    "ko": "예시를 들어 주실 수 있나요?",
+    "highlight": "give me an example",
+    "situation": "예시 요청",
+    "cefr": "A2",
+    "topic_id": "discussion",
+    "tip": "이해를 높이기 위해 구체적인 예를 요청할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_discussion_A2_01",
+    "en": "I agree with your opinion.",
+    "ko": "당신의 의견에 동의해요.",
+    "highlight": "I agree with",
+    "situation": "동의",
+    "cefr": "A2",
+    "topic_id": "discussion",
+    "tip": "단순히 \"I agree.\"보다 \"I agree with your opinion.\"이 더 구체적이고 진지하게 들려요."
+  },
+  {
+    "id": "s_discussion_A2_02",
+    "en": "I see your point, but I disagree.",
+    "ko": "당신의 의견은 이해하지만, 동의하지 않아요.",
+    "highlight": "I see your point, but",
+    "situation": "반대",
+    "cefr": "A2",
+    "topic_id": "discussion",
+    "tip": "반대 의견을 말할 때 상대방의 입장을 먼저 인정하면 더 공손하게 들려요. \"I see your point, but ~\"은 매우 유용한 패턴이에요."
+  },
+  {
+    "id": "s_discussion_A2_07",
+    "en": "I suggest we discuss this more carefully.",
+    "ko": "이것을 더 신중하게 논의해 보는 게 어떨까요?",
+    "highlight": "I suggest we discuss",
+    "situation": "제안",
+    "cefr": "A2",
+    "topic_id": "discussion",
+    "tip": "\"I suggest we ~\"는 그룹 토론에서 방향을 제안할 때 자연스럽게 쓸 수 있는 표현이에요."
+  },
+  {
+    "id": "s_discussion_A2_04",
+    "en": "Could you explain your reason?",
+    "ko": "이유를 설명해 주실 수 있나요?",
+    "highlight": "explain your reason",
+    "situation": "이유 묻기",
+    "cefr": "A2",
+    "topic_id": "discussion",
+    "tip": "상대방의 논거를 이해하고 싶을 때 쓰는 정중한 표현이에요. 토론을 더 깊이 있게 만들어줘요."
+  },
+  {
+    "id": "s_discussion_A2_05",
+    "en": "I think both sides have a point.",
+    "ko": "양쪽 다 일리가 있다고 생각해요.",
+    "highlight": "both sides have a point",
+    "situation": "중립·균형",
+    "cefr": "A2",
+    "topic_id": "discussion",
+    "tip": "양쪽 의견을 균형 있게 인정할 때 쓰는 표현이에요. 중립적인 입장에서 토론을 진행할 때 유용해요."
+  },
+  {
+    "id": "s_discussion_A2_03",
+    "en": "In my opinion, we should try a different approach.",
+    "ko": "제 의견으로는 다른 방법을 시도해야 해요.",
+    "highlight": "In my opinion",
+    "situation": "의견 제시",
+    "cefr": "A2",
+    "topic_id": "discussion",
+    "tip": "자신의 의견을 말할 때 \"In my opinion\"을 앞에 붙이면 주관적인 견해임을 분명히 해줘요."
+  },
+  {
+    "id": "s_discussion_B1_05",
+    "en": "That is a valid concern, but consider the following.",
+    "ko": "그건 타당한 우려이지만, 다음을 고려해 주세요.",
+    "highlight": "That is a valid concern, but",
+    "situation": "인정 후 반론",
+    "cefr": "B1",
+    "topic_id": "discussion",
+    "tip": "상대방의 주장을 인정하면서도 반론을 제기하는 세련된 방법이에요. 토론에서 균형감을 보여줘요."
+  },
+  {
+    "id": "s_discussion_B1_06",
+    "en": "Could you support that claim with evidence?",
+    "ko": "그 주장을 증거로 뒷받침해 주실 수 있나요?",
+    "highlight": "support that claim with evidence",
+    "situation": "증거 요구",
+    "cefr": "B1",
+    "topic_id": "discussion",
+    "tip": "근거 없는 주장에 대해 정중하게 증거를 요구하는 표현이에요. 비판적 사고 능력을 보여줘요."
+  },
+  {
+    "id": "s_discussion_B1_01",
+    "en": "The evidence suggests that this approach is more effective.",
+    "ko": "증거에 따르면 이 방법이 더 효과적이에요.",
+    "highlight": "The evidence suggests",
+    "situation": "근거 제시",
+    "cefr": "B1",
+    "topic_id": "discussion",
+    "tip": "근거를 제시할 때 \"The evidence suggests that ~\"를 쓰면 주관적인 의견이 아니라 데이터에 기반한 주장처럼 들려요."
+  },
+  {
+    "id": "s_discussion_B1_07",
+    "en": "Taking everything into account, I believe this is the best option.",
+    "ko": "모든 것을 고려했을 때, 이것이 최선의 선택이라고 생각해요.",
+    "highlight": "Taking everything into account",
+    "situation": "결론",
+    "cefr": "B1",
+    "topic_id": "discussion",
+    "tip": "\"Taking everything into account\"는 결론을 내리기 전에 균형 잡힌 판단을 했음을 보여주는 표현이에요."
+  },
+  {
+    "id": "s_discussion_B1_04",
+    "en": "I would argue that the benefits outweigh the risks.",
+    "ko": "저는 이점이 위험보다 크다고 주장하겠어요.",
+    "highlight": "I would argue that",
+    "situation": "주장",
+    "cefr": "B1",
+    "topic_id": "discussion",
+    "tip": "\"I would argue that ~\"는 자신의 주장을 자신감 있게 펼칠 때 쓰는 B1 이상 필수 표현이에요."
+  },
+  {
+    "id": "s_discussion_B1_02",
+    "en": "From my perspective, the main issue is the lack of funding.",
+    "ko": "제 관점에서, 주요 문제는 자금 부족이에요.",
+    "highlight": "From my perspective",
+    "situation": "관점 제시",
+    "cefr": "B1",
+    "topic_id": "discussion",
+    "tip": "자신의 시각을 명확히 하면서 주장을 펼칠 때 쓰는 표현이에요. \"In my opinion\"보다 더 분석적인 느낌이에요."
+  },
+  {
+    "id": "s_discussion_B1_03",
+    "en": "To elaborate on that point, let me give you a concrete example.",
+    "ko": "그 부분을 더 설명하자면, 구체적인 예를 들어 드릴게요.",
+    "highlight": "To elaborate on that point",
+    "situation": "부연 설명",
+    "cefr": "B1",
+    "topic_id": "discussion",
+    "tip": "\"To elaborate on that point\"는 앞서 말한 내용을 더 자세히 설명할 때 쓰는 고급 패턴이에요."
+  },
+  {
+    "id": "s_discussion_B2_02",
+    "en": "I would like to rebut that point directly.",
+    "ko": "그 부분을 직접 반박하고 싶어요.",
+    "highlight": "rebut that point directly",
+    "situation": "반박",
+    "cefr": "B2",
+    "topic_id": "discussion",
+    "tip": "\"rebut\"은 공식적인 토론에서 반박할 때 쓰는 동사예요. \"disagree\"보다 훨씬 강하고 논리적인 어감이에요."
+  },
+  {
+    "id": "s_discussion_B2_03",
+    "en": "That claim lacks empirical support.",
+    "ko": "그 주장에는 실증적 근거가 부족해요.",
+    "highlight": "lacks empirical support",
+    "situation": "비판적 분석",
+    "cefr": "B2",
+    "topic_id": "discussion",
+    "tip": "데이터나 연구 없이 이루어진 주장을 비판할 때 쓰는 표현이에요. 학술적이고 설득력 있게 들려요."
+  },
+  {
+    "id": "s_discussion_B2_05",
+    "en": "While I concede that point, the broader implication is more concerning.",
+    "ko": "그 부분은 인정하지만, 더 큰 함의가 더 걱정스러워요.",
+    "highlight": "While I concede that point",
+    "situation": "부분 인정 후 전환",
+    "cefr": "B2",
+    "topic_id": "discussion",
+    "tip": "부분적으로 동의하면서도 더 중요한 쟁점으로 이동하는 고급 토론 기술이에요."
+  },
+  {
+    "id": "s_discussion_B2_04",
+    "en": "We need to distinguish between correlation and causation here.",
+    "ko": "여기서 상관관계와 인과관계를 구분해야 해요.",
+    "highlight": "distinguish between correlation and causation",
+    "situation": "논리적 오류 지적",
+    "cefr": "B2",
+    "topic_id": "discussion",
+    "tip": "논리적 오류 중 가장 흔한 인과 오류를 지적할 때 쓰는 표현이에요. 비판적 사고의 핵심 패턴이에요."
+  },
+  {
+    "id": "s_discussion_B2_06",
+    "en": "Your reasoning contains an implicit bias worth examining.",
+    "ko": "당신의 논리에는 검토할 만한 암묵적 편향이 있어요.",
+    "highlight": "contains an implicit bias",
+    "situation": "편향 지적",
+    "cefr": "B2",
+    "topic_id": "discussion",
+    "tip": "논리의 구조적 편향을 지적하는 비판적 패턴이에요. 격식 있는 토론에서 매우 설득력 있게 들려요."
+  },
+  {
+    "id": "s_discussion_B2_01",
+    "en": "Your argument seems to rest on a flawed premise.",
+    "ko": "당신의 주장은 잘못된 전제에 기반하는 것 같아요.",
+    "highlight": "rest on a flawed premise",
+    "situation": "전제 반박",
+    "cefr": "B2",
+    "topic_id": "discussion",
+    "tip": "전제 자체의 오류를 지적하는 강력한 반박 패턴이에요. 단순히 결론에 반대하는 것보다 더 설득력이 있어요."
+  },
+  {
+    "id": "s_discussion_B2_07",
+    "en": "The nuance of this issue is often lost in simplistic narratives.",
+    "ko": "이 문제의 뉘앙스는 단순한 이야기에서 종종 사라져요.",
+    "highlight": "The nuance of this issue",
+    "situation": "복잡성 강조",
+    "cefr": "B2",
+    "topic_id": "discussion",
+    "tip": "복잡한 문제를 지나치게 단순화하는 경향을 지적할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_discussion_C1_04",
+    "en": "I would postulate that the causal chain is more complex than suggested.",
+    "ko": "인과 사슬이 제시된 것보다 더 복잡하다고 가정해 볼 수 있어요.",
+    "highlight": "postulate that the causal chain",
+    "situation": "가설 제시",
+    "cefr": "C1",
+    "topic_id": "discussion",
+    "tip": "\"postulate\"를 사용하면 가설적인 논점을 학문적으로 제시할 수 있어요."
+  },
+  {
+    "id": "s_discussion_C1_02",
+    "en": "Let me deconstruct the underlying assumptions of that argument.",
+    "ko": "그 주장의 근본 가정들을 해체해 볼게요.",
+    "highlight": "deconstruct the underlying assumptions",
+    "situation": "가정 해체",
+    "cefr": "C1",
+    "topic_id": "discussion",
+    "tip": "가정 자체를 분석하는 것은 강력한 비판 전략이에요. 이 패턴은 매우 학문적이고 설득력 있어요."
+  },
+  {
+    "id": "s_discussion_C1_06",
+    "en": "The cogency of your case depends on whether we accept the axiom.",
+    "ko": "당신 논거의 설득력은 우리가 그 공리를 받아들이느냐에 달려 있어요.",
+    "highlight": "cogency of your case depends on",
+    "situation": "조건부 평가",
+    "cefr": "C1",
+    "topic_id": "discussion",
+    "tip": "논증의 전제 조건을 명확히 지적하는 고급 표현이에요. 학술 토론에서 매우 효과적이에요."
+  },
+  {
+    "id": "s_discussion_C1_01",
+    "en": "The syllogism you presented is formally valid but materially unsound.",
+    "ko": "당신이 제시한 삼단논법은 형식적으로는 타당하지만 내용상 불건전해요.",
+    "highlight": "formally valid but materially unsound",
+    "situation": "논리 비판",
+    "cefr": "C1",
+    "topic_id": "discussion",
+    "tip": "타당성(validity)과 건전성(soundness)을 구분하는 이 표현은 논리학의 핵심 구분을 활용해요."
+  },
+  {
+    "id": "s_discussion_C1_07",
+    "en": "Even if we grant the premise, the conclusion does not necessarily follow.",
+    "ko": "전제를 인정하더라도, 결론이 반드시 따라오는 것은 아니에요.",
+    "highlight": "the conclusion does not necessarily follow",
+    "situation": "논리적 비약 지적",
+    "cefr": "C1",
+    "topic_id": "discussion",
+    "tip": "전제와 결론 사이의 논리적 비약을 지적하는 핵심 반박 패턴이에요."
+  },
+  {
+    "id": "s_discussion_C1_05",
+    "en": "Your inductive generalization requires a much larger sample to hold.",
+    "ko": "당신의 귀납적 일반화는 성립하려면 훨씬 더 큰 표본이 필요해요.",
+    "highlight": "inductive generalization requires a much larger sample",
+    "situation": "귀납 오류 비판",
+    "cefr": "C1",
+    "topic_id": "discussion",
+    "tip": "귀납적 오류 중 성급한 일반화를 지적하는 정교한 표현이에요."
+  },
+  {
+    "id": "s_discussion_C1_03",
+    "en": "That reasoning commits the fallacy of false dichotomy.",
+    "ko": "그 추론은 거짓 이분법의 오류를 범하고 있어요.",
+    "highlight": "commits the fallacy of false dichotomy",
+    "situation": "논리 오류 지적",
+    "cefr": "C1",
+    "topic_id": "discussion",
+    "tip": "논리적 오류의 이름을 정확히 지적하는 것은 고급 토론의 핵심 기술이에요."
+  },
+  {
+    "id": "s_discussion_C2_04",
+    "en": "From a hermeneutic standpoint, we must read the text against its historical horizon.",
+    "ko": "해석학적 관점에서, 우리는 텍스트를 역사적 지평에 대비해서 읽어야 해요.",
+    "highlight": "From a hermeneutic standpoint",
+    "situation": "해석학적 분석",
+    "cefr": "C2",
+    "topic_id": "discussion",
+    "tip": "가다머의 지평 융합 개념을 활용한 표현이에요. 텍스트 해석의 역사성을 강조할 때 써요."
+  },
+  {
+    "id": "s_discussion_C2_03",
+    "en": "Without intersubjectivity, the very possibility of shared meaning collapses.",
+    "ko": "상호주관성 없이는 공유된 의미의 가능성 자체가 붕괴돼요.",
+    "highlight": "Without intersubjectivity",
+    "situation": "소통의 조건",
+    "cefr": "C2",
+    "topic_id": "discussion",
+    "tip": "후설과 하버마스의 개념을 활용해 의사소통의 근본 조건을 논할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_discussion_C2_02",
+    "en": "This discourse is inherently logocentric in its privileging of spoken reason.",
+    "ko": "이 담론은 구어적 이성을 특권화하는 점에서 본질적으로 로고스 중심주의적이에요.",
+    "highlight": "inherently logocentric",
+    "situation": "담론 비판",
+    "cefr": "C2",
+    "topic_id": "discussion",
+    "tip": "데리다의 로고스 중심주의 비판을 적용하는 표현이에요. 언어와 의미의 권력 구조를 분석할 때 써요."
+  },
+  {
+    "id": "s_discussion_C2_01",
+    "en": "The aporia here is that every attempt to define the term undermines itself.",
+    "ko": "여기서의 아포리아는 용어를 정의하려는 모든 시도가 스스로를 약화시킨다는 거예요.",
+    "highlight": "The aporia here is",
+    "situation": "철학적 역설",
+    "cefr": "C2",
+    "topic_id": "discussion",
+    "tip": "아포리아는 소크라테스 대화에서 나온 개념으로, 자기 모순적 난점을 지적할 때 사용해요."
+  },
+  {
+    "id": "s_discussion_C2_07",
+    "en": "The praxis of this theory reveals a tension between its normative and descriptive claims.",
+    "ko": "이 이론의 실천은 규범적 주장과 서술적 주장 사이의 긴장을 드러내요.",
+    "highlight": "praxis of this theory reveals a tension",
+    "situation": "이론과 실천의 긴장",
+    "cefr": "C2",
+    "topic_id": "discussion",
+    "tip": "이론과 실천의 긴장을 비판하는 고급 표현이에요. 프락시스 개념을 아는 C2 학습자에게 적합해요."
+  },
+  {
+    "id": "s_discussion_C2_05",
+    "en": "The ontological claim embedded in that statement demands further scrutiny.",
+    "ko": "그 진술에 내재된 존재론적 주장은 더 면밀한 검토가 필요해요.",
+    "highlight": "ontological claim embedded in",
+    "situation": "존재론적 비판",
+    "cefr": "C2",
+    "topic_id": "discussion",
+    "tip": "존재론적 가정을 명시적으로 드러내는 표현이에요. 철학적 토론에서 숨겨진 가정을 지적할 때 유용해요."
+  },
+  {
+    "id": "s_discussion_C2_06",
+    "en": "That paradigmatic case cannot be used to justify the broader theoretical framework.",
+    "ko": "그 패러다임적 사례는 더 광범위한 이론적 틀을 정당화하는 데 사용될 수 없어요.",
+    "highlight": "paradigmatic case cannot be used to justify",
+    "situation": "패러다임 비판",
+    "cefr": "C2",
+    "topic_id": "discussion",
+    "tip": "쿤의 패러다임 개념을 활용해 사례와 이론 사이의 논리적 간격을 지적하는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_A1_04",
+    "en": "I need more time to decide.",
+    "ko": "결정하는 데 시간이 더 필요해요.",
+    "highlight": "I need more time",
+    "situation": "시간 요청",
+    "cefr": "A1",
+    "topic_id": "negotiation",
+    "tip": "결정을 미룰 때 자연스럽게 쓸 수 있어요."
+  },
+  {
+    "id": "s_negotiation_A1_07",
+    "en": "I think we can agree on that.",
+    "ko": "그 부분에서 합의할 수 있을 것 같아요.",
+    "highlight": "I think we can agree",
+    "situation": "합의 신호",
+    "cefr": "A1",
+    "topic_id": "negotiation",
+    "tip": "조심스럽게 합의 가능성을 표현해요."
+  },
+  {
+    "id": "s_negotiation_A1_01",
+    "en": "Can we agree on this?",
+    "ko": "이걸로 합의할 수 있을까요?",
+    "highlight": "Can we agree",
+    "situation": "합의 제안",
+    "cefr": "A1",
+    "topic_id": "negotiation",
+    "tip": "합의를 제안할 때 쓰는 가장 기본적인 표현이에요."
+  },
+  {
+    "id": "s_negotiation_A1_03",
+    "en": "Can you give me a discount?",
+    "ko": "할인해 주실 수 있나요?",
+    "highlight": "give me a discount",
+    "situation": "할인 요청",
+    "cefr": "A1",
+    "topic_id": "negotiation",
+    "tip": "할인을 요청할 때 쓰는 가장 쉬운 표현이에요."
+  },
+  {
+    "id": "s_negotiation_A1_02",
+    "en": "I want a better price.",
+    "ko": "더 좋은 가격을 원해요.",
+    "highlight": "I want",
+    "situation": "가격 요청",
+    "cefr": "A1",
+    "topic_id": "negotiation",
+    "tip": "원하는 것을 직접적으로 표현할 때 써요."
+  },
+  {
+    "id": "s_negotiation_A1_06",
+    "en": "Let's try to work this out.",
+    "ko": "함께 해결해 보도록 해요.",
+    "highlight": "Let's try",
+    "situation": "협력 제안",
+    "cefr": "A1",
+    "topic_id": "negotiation",
+    "tip": "협력적인 분위기를 만들 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_A1_05",
+    "en": "Is that your best offer?",
+    "ko": "그게 최선의 제안인가요?",
+    "highlight": "best offer",
+    "situation": "최선 확인",
+    "cefr": "A1",
+    "topic_id": "negotiation",
+    "tip": "상대방이 더 낮출 여지가 있는지 물어볼 때 써요."
+  },
+  {
+    "id": "s_negotiation_A2_02",
+    "en": "If you lower the price, we'll place a bigger order.",
+    "ko": "가격을 낮춰주시면 더 많이 주문할게요.",
+    "highlight": "If you lower the price",
+    "situation": "조건부 제안",
+    "cefr": "A2",
+    "topic_id": "negotiation",
+    "tip": "조건을 제시하며 협상하는 패턴이에요."
+  },
+  {
+    "id": "s_negotiation_A2_05",
+    "en": "Can we include free shipping in the deal?",
+    "ko": "거래에 무료 배송을 포함시킬 수 있나요?",
+    "highlight": "include free shipping",
+    "situation": "추가 조건 요청",
+    "cefr": "A2",
+    "topic_id": "negotiation",
+    "tip": "추가 혜택을 조건으로 요청하는 패턴이에요."
+  },
+  {
+    "id": "s_negotiation_A2_06",
+    "en": "We'd like to confirm the payment terms in writing.",
+    "ko": "지불 조건을 서면으로 확인하고 싶어요.",
+    "highlight": "confirm the payment terms in writing",
+    "situation": "조건 문서화",
+    "cefr": "A2",
+    "topic_id": "negotiation",
+    "tip": "중요한 조건을 문서화할 때 써요."
+  },
+  {
+    "id": "s_negotiation_A2_01",
+    "en": "Could you reduce the price a little?",
+    "ko": "가격을 조금 낮춰주실 수 있나요?",
+    "highlight": "Could you reduce",
+    "situation": "가격 조정 요청",
+    "cefr": "A2",
+    "topic_id": "negotiation",
+    "tip": "could로 시작하면 더 공손하게 들려요."
+  },
+  {
+    "id": "s_negotiation_A2_07",
+    "en": "Is there any flexibility on the delivery date?",
+    "ko": "납품 날짜에 유연성이 있나요?",
+    "highlight": "flexibility on the delivery date",
+    "situation": "일정 협상",
+    "cefr": "A2",
+    "topic_id": "negotiation",
+    "tip": "일정 협상을 시작할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_A2_03",
+    "en": "What discount can you offer for bulk orders?",
+    "ko": "대량 주문 시 어떤 할인을 제공할 수 있나요?",
+    "highlight": "discount for bulk orders",
+    "situation": "대량 할인 요청",
+    "cefr": "A2",
+    "topic_id": "negotiation",
+    "tip": "대량 구매 할인을 물어볼 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_A2_04",
+    "en": "That's a bit over our budget — can we meet in the middle?",
+    "ko": "예산을 조금 초과하네요. 중간 지점에서 만날 수 있을까요?",
+    "highlight": "meet in the middle",
+    "situation": "중간 타협 제안",
+    "cefr": "A2",
+    "topic_id": "negotiation",
+    "tip": "타협을 부드럽게 제안하는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_B1_07",
+    "en": "If we can't reach a compromise today, we may need to involve a mediator.",
+    "ko": "오늘 타협에 이르지 못하면 조정인을 참여시켜야 할 수도 있어요.",
+    "highlight": "reach a compromise",
+    "situation": "중재 암시",
+    "cefr": "B1",
+    "topic_id": "negotiation",
+    "tip": "중재를 암시해 협상 속도를 높이는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_B1_01",
+    "en": "We're prepared to commit to a two-year contract if you can lower the unit price.",
+    "ko": "단가를 낮춰주시면 2년 계약을 체결할 준비가 돼 있어요.",
+    "highlight": "prepared to commit",
+    "situation": "장기 계약 제안",
+    "cefr": "B1",
+    "topic_id": "negotiation",
+    "tip": "장기 계약을 레버리지로 활용하는 협상 패턴이에요."
+  },
+  {
+    "id": "s_negotiation_B1_04",
+    "en": "We can agree to that clause, provided that payment terms are extended to sixty days.",
+    "ko": "지불 기간을 60일로 연장해 주신다면 해당 조항에 동의할 수 있어요.",
+    "highlight": "provided that",
+    "situation": "조건부 동의",
+    "cefr": "B1",
+    "topic_id": "negotiation",
+    "tip": "조건부 동의를 표현하는 핵심 패턴이에요."
+  },
+  {
+    "id": "s_negotiation_B1_02",
+    "en": "Would you be open to a counterproposal on the delivery schedule?",
+    "ko": "납품 일정에 대한 역제안을 받아들이실 수 있나요?",
+    "highlight": "open to a counterproposal",
+    "situation": "역제안 제시",
+    "cefr": "B1",
+    "topic_id": "negotiation",
+    "tip": "상대방의 개방성을 부드럽게 타진하는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_B1_06",
+    "en": "All stakeholders have agreed on the agenda, so let's move to the binding clauses.",
+    "ko": "모든 이해관계자가 의제에 동의했으니 구속력 있는 조항으로 넘어가요.",
+    "highlight": "All stakeholders have agreed",
+    "situation": "의제 전환",
+    "cefr": "B1",
+    "topic_id": "negotiation",
+    "tip": "회의 진행을 공식적으로 전환할 때 써요."
+  },
+  {
+    "id": "s_negotiation_B1_05",
+    "en": "We have a firm deadline of the fifteenth, so we'll need a decision by then.",
+    "ko": "15일이 확정 마감일이라 그때까지 결정이 필요해요.",
+    "highlight": "firm deadline",
+    "situation": "마감 압박",
+    "cefr": "B1",
+    "topic_id": "negotiation",
+    "tip": "시간적 압박을 협상 도구로 사용하는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_B1_03",
+    "en": "Our position is that the penalty clause needs to be revised.",
+    "ko": "위약금 조항은 수정되어야 한다는 것이 우리의 입장이에요.",
+    "highlight": "Our position is that",
+    "situation": "입장 표명",
+    "cefr": "B1",
+    "topic_id": "negotiation",
+    "tip": "협상 입장을 명확히 표명할 때 쓰는 격식 표현이에요."
+  },
+  {
+    "id": "s_negotiation_B2_07",
+    "en": "Both parties should ratify the final agreement by the end of the month to avoid further delays.",
+    "ko": "추가 지연을 피하기 위해 양 당사자가 이번 달 말까지 최종 합의를 비준해야 해요.",
+    "highlight": "Both parties should ratify",
+    "situation": "비준 촉구",
+    "cefr": "B2",
+    "topic_id": "negotiation",
+    "tip": "공식 비준 절차를 촉구하는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_B2_06",
+    "en": "The liquidated damages rate of two percent per week is disproportionate and should be reduced.",
+    "ko": "주당 2%의 약정 손해배상률은 과도하므로 낮춰야 해요.",
+    "highlight": "disproportionate and should be reduced",
+    "situation": "약정 손해배상 협상",
+    "cefr": "B2",
+    "topic_id": "negotiation",
+    "tip": "손해배상 비율이 과하다고 반박할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_B2_05",
+    "en": "We need to include a force majeure clause covering pandemics and supply chain disruptions.",
+    "ko": "팬데믹과 공급망 혼란을 포함하는 불가항력 조항이 필요해요.",
+    "highlight": "force majeure clause covering",
+    "situation": "불가항력 조항 삽입",
+    "cefr": "B2",
+    "topic_id": "negotiation",
+    "tip": "현대 계약에 필수적인 불가항력 조항을 협상할 때 써요."
+  },
+  {
+    "id": "s_negotiation_B2_04",
+    "en": "Payment will be released from escrow only upon satisfactory delivery and inspection.",
+    "ko": "만족스러운 납품 및 검수 후에만 에스크로에서 지불이 해제돼요.",
+    "highlight": "released from escrow only upon",
+    "situation": "에스크로 조건 설정",
+    "cefr": "B2",
+    "topic_id": "negotiation",
+    "tip": "에스크로 조건을 명확히 설정하는 계약 언어예요."
+  },
+  {
+    "id": "s_negotiation_B2_01",
+    "en": "The indemnity clause as drafted exposes us to unlimited liability, which we cannot accept.",
+    "ko": "현재 초안의 면책 조항은 무제한 책임을 노출시켜서 받아들일 수 없어요.",
+    "highlight": "exposes us to unlimited liability",
+    "situation": "면책 조항 협상",
+    "cefr": "B2",
+    "topic_id": "negotiation",
+    "tip": "책임 범위를 구체적으로 지목하며 수정을 요구하는 패턴이에요."
+  },
+  {
+    "id": "s_negotiation_B2_03",
+    "en": "The warranty period should be extended to twenty-four months to align with industry standards.",
+    "ko": "산업 표준에 맞추기 위해 보증 기간을 24개월로 연장해야 해요.",
+    "highlight": "to align with industry standards",
+    "situation": "보증 기간 협상",
+    "cefr": "B2",
+    "topic_id": "negotiation",
+    "tip": "업계 기준을 근거로 조건 개선을 요구하는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_B2_02",
+    "en": "We propose that any disputes be referred to arbitration under ICC rules.",
+    "ko": "모든 분쟁은 ICC 규정에 따른 중재에 회부할 것을 제안해요.",
+    "highlight": "referred to arbitration",
+    "situation": "분쟁 해결 조항 제안",
+    "cefr": "B2",
+    "topic_id": "negotiation",
+    "tip": "분쟁 해결 조항을 제안하는 격식 표현이에요."
+  },
+  {
+    "id": "s_negotiation_C1_02",
+    "en": "The lien held by the creditor must be discharged prior to transfer of title.",
+    "ko": "채권자가 보유한 유치권은 소유권 이전 전에 해제돼야 해요.",
+    "highlight": "lien held by the creditor must be discharged",
+    "situation": "유치권 해제 요구",
+    "cefr": "C1",
+    "topic_id": "negotiation",
+    "tip": "소유권 이전 전 유치권 해제를 요구하는 법적 표현이에요."
+  },
+  {
+    "id": "s_negotiation_C1_05",
+    "en": "The jurisdiction clause designates Singapore as the exclusive forum for all disputes.",
+    "ko": "관할권 조항은 모든 분쟁에 대해 싱가포르를 독점적 법정지로 지정해요.",
+    "highlight": "jurisdiction clause designates",
+    "situation": "관할권 조항 인용",
+    "cefr": "C1",
+    "topic_id": "negotiation",
+    "tip": "관할권 조항의 내용을 명시적으로 인용하는 법적 표현이에요."
+  },
+  {
+    "id": "s_negotiation_C1_01",
+    "en": "The fiduciary obligations imposed on the trustee preclude self-dealing in this transaction.",
+    "ko": "수탁자에게 부과된 신탁 의무는 이 거래에서 자기 거래를 배제해요.",
+    "highlight": "fiduciary obligations preclude",
+    "situation": "신탁 의무 주장",
+    "cefr": "C1",
+    "topic_id": "negotiation",
+    "tip": "신탁 의무를 근거로 자기 거래를 차단하는 법적 주장이에요."
+  },
+  {
+    "id": "s_negotiation_C1_06",
+    "en": "Subrogation rights vest in the insurer upon payment of the insured's claim.",
+    "ko": "피보험자의 청구 지급 시 보험사에게 대위 청구권이 발생해요.",
+    "highlight": "Subrogation rights vest in the insurer",
+    "situation": "대위 청구권 주장",
+    "cefr": "C1",
+    "topic_id": "negotiation",
+    "tip": "보험 분쟁 협상에서 대위 청구권을 주장하는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_C1_07",
+    "en": "The conditions precedent to drawdown have not been satisfied, suspending our obligation to lend.",
+    "ko": "대출 실행의 선행 조건이 충족되지 않아 우리의 대출 의무가 정지됐어요.",
+    "highlight": "conditions precedent to drawdown have not been satisfied",
+    "situation": "선행 조건 미충족 주장",
+    "cefr": "C1",
+    "topic_id": "negotiation",
+    "tip": "선행 조건 미충족을 근거로 의무를 정지시키는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_C1_04",
+    "en": "The remedy available for breach of this covenant is specific performance, not merely damages.",
+    "ko": "이 약정 위반에 대한 구제책은 손해배상뿐만 아니라 특정 이행이에요.",
+    "highlight": "remedy available is specific performance",
+    "situation": "특정 이행 주장",
+    "cefr": "C1",
+    "topic_id": "negotiation",
+    "tip": "손해배상 대신 특정 이행을 구제책으로 주장하는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_C1_03",
+    "en": "We are seeking an injunction to restrain the respondent from further breach of the covenant.",
+    "ko": "피응답인의 추가적인 약정 위반을 막기 위해 금지 명령을 구하고 있어요.",
+    "highlight": "seeking an injunction to restrain",
+    "situation": "금지 명령 신청",
+    "cefr": "C1",
+    "topic_id": "negotiation",
+    "tip": "법원에 금지 명령을 신청할 때 쓰는 고급 법적 표현이에요."
+  },
+  {
+    "id": "s_negotiation_C2_07",
+    "en": "Piercing the corporate veil is warranted where the subsidiary was used as a mere facade to evade pre-existing contractual obligations.",
+    "ko": "자회사가 기존 계약 의무를 회피하기 위한 단순 위장 수단으로 사용된 경우 법인격 부인이 정당화돼요.",
+    "highlight": "Piercing the corporate veil is warranted",
+    "situation": "법인격 부인 주장",
+    "cefr": "C2",
+    "topic_id": "negotiation",
+    "tip": "법인격을 이용한 의무 회피에 대응하는 최고급 법적 주장이에요."
+  },
+  {
+    "id": "s_negotiation_C2_06",
+    "en": "The unjust enrichment claim rests on the defendant's failure to make restitution following rescission of the contract.",
+    "ko": "부당 이득 청구는 계약 취소 후 피고의 원상 회복 불이행에 근거해요.",
+    "highlight": "unjust enrichment rests on failure to make restitution",
+    "situation": "부당 이득 청구 근거 제시",
+    "cefr": "C2",
+    "topic_id": "negotiation",
+    "tip": "계약 취소 후 원상 회복 의무 불이행을 공격하는 법적 논리예요."
+  },
+  {
+    "id": "s_negotiation_C2_03",
+    "en": "The contract is void ab initio on the grounds of economic duress applied during the execution phase.",
+    "ko": "계약 체결 단계에서 가해진 경제적 강박을 이유로 계약은 처음부터 무효예요.",
+    "highlight": "void ab initio on the grounds of economic duress",
+    "situation": "경제적 강박 무효 주장",
+    "cefr": "C2",
+    "topic_id": "negotiation",
+    "tip": "경제적 강박을 이유로 계약 자체를 무효화하는 강력한 법적 주장이에요."
+  },
+  {
+    "id": "s_negotiation_C2_01",
+    "en": "The doctrine of promissory estoppel bars the claimant from resiling from the representation made during pre-contractual negotiations.",
+    "ko": "약속적 금반언 원칙은 계약 전 협상 중 이루어진 진술에서 청구인이 후퇴하는 것을 막아요.",
+    "highlight": "promissory estoppel bars the claimant from resiling",
+    "situation": "약속적 금반언 주장",
+    "cefr": "C2",
+    "topic_id": "negotiation",
+    "tip": "선계약 단계의 진술을 법적으로 구속하는 고급 주장이에요."
+  },
+  {
+    "id": "s_negotiation_C2_04",
+    "en": "Novation extinguishes the original obligation and substitutes a new contract between the parties, thereby releasing the original debtor.",
+    "ko": "계약 갱신은 원래 의무를 소멸시키고 새로운 계약으로 대체해 원래 채무자를 면책시켜요.",
+    "highlight": "Novation extinguishes the original obligation",
+    "situation": "계약 갱신 효과 설명",
+    "cefr": "C2",
+    "topic_id": "negotiation",
+    "tip": "채무 교체의 법적 효과를 정확히 설명하는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_C2_02",
+    "en": "Quantum meruit entitles the claimant to reasonable remuneration for services rendered in the absence of an agreed price.",
+    "ko": "약정 가격이 없는 경우 제공된 서비스에 대해 합리적인 보수를 청구할 권리가 있어요.",
+    "highlight": "Quantum meruit entitles",
+    "situation": "정당 보수 청구",
+    "cefr": "C2",
+    "topic_id": "negotiation",
+    "tip": "가격 미합의 상황에서 보수를 청구하는 법적 근거를 제시하는 표현이에요."
+  },
+  {
+    "id": "s_negotiation_C2_05",
+    "en": "Under the rule in contra proferentem, the ambiguous exclusion clause is construed against the party who drafted it.",
+    "ko": "작성자 불이익 원칙에 따라 모호한 면책 조항은 이를 작성한 당사자에게 불리하게 해석돼요.",
+    "highlight": "contra proferentem construed against the drafter",
+    "situation": "작성자 불이익 원칙 적용",
+    "cefr": "C2",
+    "topic_id": "negotiation",
+    "tip": "모호한 계약 조항에서 유리한 해석을 확보하는 전략적 표현이에요."
+  }
+]

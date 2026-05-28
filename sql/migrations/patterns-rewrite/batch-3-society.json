@@ -1,0 +1,2102 @@
+[
+  {
+    "id": "s_economy_A1_04",
+    "en": "I'll take it.",
+    "ko": "이것으로 할게요.",
+    "highlight": "I'll take it",
+    "situation": "구매 결정",
+    "cefr": "A1",
+    "topic_id": "economy",
+    "tip": "구매를 결정할 때 쓰는 짧고 자연스러운 표현이에요."
+  },
+  {
+    "id": "s_economy_A1_05",
+    "en": "Can I get a receipt, please?",
+    "ko": "영수증 주실 수 있나요?",
+    "highlight": "Can I get a receipt",
+    "situation": "계산 후",
+    "cefr": "A1",
+    "topic_id": "economy",
+    "tip": "정중한 요청에 \"Can I get ~?\"은 아주 자연스러운 표현이에요."
+  },
+  {
+    "id": "s_economy_A1_06",
+    "en": "Is there a discount?",
+    "ko": "할인이 있나요?",
+    "highlight": "Is there a discount",
+    "situation": "쇼핑",
+    "cefr": "A1",
+    "topic_id": "economy",
+    "tip": "세일이나 특별가를 물을 때 가장 많이 쓰는 표현이에요."
+  },
+  {
+    "id": "s_economy_A1_01",
+    "en": "How much does this cost?",
+    "ko": "이게 얼마예요?",
+    "highlight": "How much does this cost",
+    "situation": "가격 물어보기",
+    "cefr": "A1",
+    "topic_id": "economy",
+    "tip": "가장 기본적인 가격 질문. \"How much is this?\"로도 써요."
+  },
+  {
+    "id": "s_economy_A1_02",
+    "en": "Can I pay by card?",
+    "ko": "카드로 계산할 수 있나요?",
+    "highlight": "pay by card",
+    "situation": "계산",
+    "cefr": "A1",
+    "topic_id": "economy",
+    "tip": "계산 방법을 물을 때 pay by card/cash 표현을 써요."
+  },
+  {
+    "id": "s_economy_A1_07",
+    "en": "Keep the change.",
+    "ko": "거스름돈은 괜찮아요.",
+    "highlight": "Keep the change",
+    "situation": "현금 계산",
+    "cefr": "A1",
+    "topic_id": "economy",
+    "tip": "팁을 주거나 소액 거스름돈을 포기할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_economy_A1_03",
+    "en": "Do you have anything cheaper?",
+    "ko": "더 저렴한 것이 있나요?",
+    "highlight": "anything cheaper",
+    "situation": "쇼핑 협상",
+    "cefr": "A1",
+    "topic_id": "economy",
+    "tip": "anything + 비교급으로 더 나은 선택지를 물어봐요."
+  },
+  {
+    "id": "s_economy_A2_03",
+    "en": "Can I apply for a loan here?",
+    "ko": "여기서 대출 신청을 할 수 있나요?",
+    "highlight": "apply for a loan",
+    "situation": "은행 방문",
+    "cefr": "A2",
+    "topic_id": "economy",
+    "tip": "apply for + 명사: 대출, 직업, 비자 등을 신청할 때 사용해요."
+  },
+  {
+    "id": "s_economy_A2_01",
+    "en": "I'm trying to save up for a trip.",
+    "ko": "여행을 위해 저축하려고 해요.",
+    "highlight": "save up for",
+    "situation": "저축 목표",
+    "cefr": "A2",
+    "topic_id": "economy",
+    "tip": "save up for + 명사: 특정 목표를 위해 돈을 모을 때 써요."
+  },
+  {
+    "id": "s_economy_A2_02",
+    "en": "I need to stick to my budget this month.",
+    "ko": "이번 달은 예산을 지켜야 해요.",
+    "highlight": "stick to my budget",
+    "situation": "예산 관리",
+    "cefr": "A2",
+    "topic_id": "economy",
+    "tip": "stick to my budget: 계획된 금액 안에서 쓰겠다는 의미예요."
+  },
+  {
+    "id": "s_economy_A2_05",
+    "en": "I get paid at the end of the month.",
+    "ko": "월말에 급여를 받아요.",
+    "highlight": "get paid",
+    "situation": "급여 관련",
+    "cefr": "A2",
+    "topic_id": "economy",
+    "tip": "get paid: 급여가 지급된다는 표현. 능동형보다 훨씬 자연스러워요."
+  },
+  {
+    "id": "s_economy_A2_04",
+    "en": "My credit card bill came out to a lot this month.",
+    "ko": "이번 달 신용카드 명세서가 많이 나왔어요.",
+    "highlight": "came out to",
+    "situation": "카드 명세서",
+    "cefr": "A2",
+    "topic_id": "economy",
+    "tip": "came out to + 금액: 최종 금액이 얼마가 나왔다고 말할 때 써요."
+  },
+  {
+    "id": "s_economy_A2_07",
+    "en": "Could you transfer the money to my account?",
+    "ko": "제 계좌로 이체해 주실 수 있나요?",
+    "highlight": "transfer the money to my account",
+    "situation": "송금 요청",
+    "cefr": "A2",
+    "topic_id": "economy",
+    "tip": "transfer A to B: A를 B로 이체하다. 은행 업무에서 자주 써요."
+  },
+  {
+    "id": "s_economy_A2_06",
+    "en": "I'm in debt right now, so I can't afford it.",
+    "ko": "지금 빚이 있어서 그것을 살 여유가 없어요.",
+    "highlight": "in debt",
+    "situation": "금전 상황",
+    "cefr": "A2",
+    "topic_id": "economy",
+    "tip": "in debt: 빚이 있는 상태. \"I owe money\"보다 더 자연스러운 표현이에요."
+  },
+  {
+    "id": "s_economy_B1_01",
+    "en": "Inflation has been rising steadily over the past few months.",
+    "ko": "지난 몇 달 동안 인플레이션이 꾸준히 상승해 왔어요.",
+    "highlight": "has been rising steadily",
+    "situation": "경제 뉴스 토론",
+    "cefr": "B1",
+    "topic_id": "economy",
+    "tip": "현재완료 진행형은 과거부터 지금까지 계속되는 변화를 표현할 때 써요."
+  },
+  {
+    "id": "s_economy_B1_02",
+    "en": "The unemployment rate dropped to its lowest level in a decade.",
+    "ko": "실업률이 10년 만에 최저 수준으로 떨어졌어요.",
+    "highlight": "dropped to its lowest level in",
+    "situation": "경제 지표 설명",
+    "cefr": "B1",
+    "topic_id": "economy",
+    "tip": "drop to + 최상급 + in + 기간: 기록적 수치를 표현하는 패턴이에요."
+  },
+  {
+    "id": "s_economy_B1_03",
+    "en": "The central bank is expected to raise interest rates next month.",
+    "ko": "중앙은행이 다음 달 금리를 인상할 것으로 예상돼요.",
+    "highlight": "is expected to",
+    "situation": "금리 전망 토론",
+    "cefr": "B1",
+    "topic_id": "economy",
+    "tip": "be expected to + 동사: 예상되는 일을 말할 때 자연스러운 표현이에요."
+  },
+  {
+    "id": "s_economy_B1_05",
+    "en": "There is a growing concern about the trade deficit.",
+    "ko": "무역 적자에 대한 우려가 커지고 있어요.",
+    "highlight": "growing concern about",
+    "situation": "경제 뉴스",
+    "cefr": "B1",
+    "topic_id": "economy",
+    "tip": "there is a growing concern about: 점점 심각해지는 문제를 언급할 때 써요."
+  },
+  {
+    "id": "s_economy_B1_07",
+    "en": "Consumer spending has slowed down significantly this quarter.",
+    "ko": "소비자 지출이 이번 분기에 크게 둔화됐어요.",
+    "highlight": "has slowed down significantly",
+    "situation": "경제 분석",
+    "cefr": "B1",
+    "topic_id": "economy",
+    "tip": "현재완료 + significantly: 주목할 만한 변화를 강조하는 패턴이에요."
+  },
+  {
+    "id": "s_economy_B1_06",
+    "en": "The economy is showing signs of recovery.",
+    "ko": "경제가 회복 조짐을 보이고 있어요.",
+    "highlight": "showing signs of recovery",
+    "situation": "경기 회복 토론",
+    "cefr": "B1",
+    "topic_id": "economy",
+    "tip": "show signs of + 명사: 징후가 나타나다는 표현이에요."
+  },
+  {
+    "id": "s_economy_B1_04",
+    "en": "GDP grew by two percent compared to last year.",
+    "ko": "GDP가 작년 대비 2% 성장했어요.",
+    "highlight": "compared to last year",
+    "situation": "경제 성장 발표",
+    "cefr": "B1",
+    "topic_id": "economy",
+    "tip": "compared to: 수치 비교에 가장 많이 쓰이는 표현이에요."
+  },
+  {
+    "id": "s_economy_B2_02",
+    "en": "The market correction was sharper than analysts had predicted.",
+    "ko": "시장 조정이 애널리스트들의 예상보다 훨씬 가파르게 나타났어요.",
+    "highlight": "sharper than analysts had predicted",
+    "situation": "시장 분석",
+    "cefr": "B2",
+    "topic_id": "economy",
+    "tip": "과거완료(had predicted)는 기준 시점보다 이전에 일어난 일을 표현해요."
+  },
+  {
+    "id": "s_economy_B2_07",
+    "en": "The equity market rebounded after the initial sell-off.",
+    "ko": "초기 매도세 이후 주식 시장이 반등했어요.",
+    "highlight": "rebounded after the initial sell-off",
+    "situation": "시장 동향",
+    "cefr": "B2",
+    "topic_id": "economy",
+    "tip": "rebound after: 하락 이후 반등을 표현하는 금융 뉴스의 핵심 패턴이에요."
+  },
+  {
+    "id": "s_economy_B2_04",
+    "en": "Hedge funds tend to perform well in volatile markets.",
+    "ko": "헤지펀드는 변동성이 높은 시장에서 좋은 성과를 내는 경향이 있어요.",
+    "highlight": "tend to perform well in",
+    "situation": "투자 전략",
+    "cefr": "B2",
+    "topic_id": "economy",
+    "tip": "tend to: 일반적 경향을 설명할 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_economy_B2_01",
+    "en": "Diversifying your portfolio is key to managing risk.",
+    "ko": "포트폴리오를 다양화하는 것이 위험 관리의 핵심이에요.",
+    "highlight": "diversifying your portfolio is key to",
+    "situation": "투자 조언",
+    "cefr": "B2",
+    "topic_id": "economy",
+    "tip": "S + is key to + -ing: \"~하는 데 핵심이다\"라는 표현이에요."
+  },
+  {
+    "id": "s_economy_B2_06",
+    "en": "Investors are fleeing to safe-haven assets amid uncertainty.",
+    "ko": "불확실성 속에서 투자자들이 안전 자산으로 이동하고 있어요.",
+    "highlight": "fleeing to safe-haven assets amid",
+    "situation": "위험 회피 전략",
+    "cefr": "B2",
+    "topic_id": "economy",
+    "tip": "amid + 명사: \"~ 속에서\"라는 표현으로 배경 상황을 나타내요."
+  },
+  {
+    "id": "s_economy_B2_05",
+    "en": "The bond yield rose sharply following the Fed's announcement.",
+    "ko": "연준 발표 이후 채권 수익률이 급격히 상승했어요.",
+    "highlight": "rose sharply following",
+    "situation": "채권 시장",
+    "cefr": "B2",
+    "topic_id": "economy",
+    "tip": "following + 명사: \"~ 이후에\"라는 뜻으로 인과관계를 연결해요."
+  },
+  {
+    "id": "s_economy_B2_03",
+    "en": "Liquidity dried up quickly as investors panicked.",
+    "ko": "투자자들이 공황 상태에 빠지면서 유동성이 빠르게 말랐어요.",
+    "highlight": "dried up",
+    "situation": "금융 위기 논의",
+    "cefr": "B2",
+    "topic_id": "economy",
+    "tip": "dry up: 자원·유동성이 갑자기 고갈되다는 생생한 표현이에요."
+  },
+  {
+    "id": "s_economy_C1_06",
+    "en": "Excessive reliance on subsidies can distort market signals and reduce efficiency.",
+    "ko": "보조금에 대한 과도한 의존은 시장 신호를 왜곡하고 효율성을 낮출 수 있어요.",
+    "highlight": "distort market signals",
+    "situation": "시장 왜곡 분석",
+    "cefr": "C1",
+    "topic_id": "economy",
+    "tip": "distort market signals: 시장 메커니즘이 제대로 작동하지 않을 때 쓰는 표현이에요."
+  },
+  {
+    "id": "s_economy_C1_04",
+    "en": "Protectionist tariffs may shield domestic producers but ultimately harm consumers.",
+    "ko": "보호무역 관세는 국내 생산자를 보호할 수 있지만 결국 소비자에게 해를 끼쳐요.",
+    "highlight": "may shield ... but ultimately",
+    "situation": "무역 정책 논의",
+    "cefr": "C1",
+    "topic_id": "economy",
+    "tip": "may ... but ultimately: 단기 효과와 장기 결과를 대조할 때 쓰는 구조예요."
+  },
+  {
+    "id": "s_economy_C1_01",
+    "en": "Austerity measures have been criticized for deepening inequality rather than reducing the deficit.",
+    "ko": "긴축 조치는 적자를 줄이기보다 불평등을 심화시켰다는 비판을 받아왔어요.",
+    "highlight": "criticized for deepening",
+    "situation": "경제 정책 비판",
+    "cefr": "C1",
+    "topic_id": "economy",
+    "tip": "be criticized for + -ing: 비판의 근거를 제시하는 고급 표현이에요."
+  },
+  {
+    "id": "s_economy_C1_03",
+    "en": "The government's privatization drive has faced strong opposition from trade unions.",
+    "ko": "정부의 민영화 추진은 노동조합의 강한 반대에 직면했어요.",
+    "highlight": "faced strong opposition from",
+    "situation": "정책 논쟁",
+    "cefr": "C1",
+    "topic_id": "economy",
+    "tip": "face opposition from: 반대에 부딪히다는 표현으로 정치 논의에서 자주 써요."
+  },
+  {
+    "id": "s_economy_C1_02",
+    "en": "Deregulation of the financial sector in the 1980s is often linked to greater systemic risk.",
+    "ko": "1980년대 금융 부문 규제 완화는 종종 더 큰 시스템 위험과 연결지어져요.",
+    "highlight": "is often linked to",
+    "situation": "역사적 정책 분석",
+    "cefr": "C1",
+    "topic_id": "economy",
+    "tip": "be linked to: 두 현상 간의 인과 혹은 연관성을 표현할 때 써요."
+  },
+  {
+    "id": "s_economy_C1_05",
+    "en": "Comparative advantage theory suggests that specialization leads to greater overall welfare.",
+    "ko": "비교우위 이론은 특화가 전체적인 복지 향상으로 이어진다고 주장해요.",
+    "highlight": "theory suggests that",
+    "situation": "경제 이론 설명",
+    "cefr": "C1",
+    "topic_id": "economy",
+    "tip": "theory suggests that: 이론의 주장을 소개하는 학술적 표현이에요."
+  },
+  {
+    "id": "s_economy_C1_07",
+    "en": "Moral hazard arises when one party is insulated from the consequences of their decisions.",
+    "ko": "도덕적 해이는 한쪽이 자신의 결정 결과로부터 보호받을 때 발생해요.",
+    "highlight": "is insulated from the consequences",
+    "situation": "경제 인센티브 분석",
+    "cefr": "C1",
+    "topic_id": "economy",
+    "tip": "be insulated from: 결과나 영향을 받지 않는 상태를 표현해요."
+  },
+  {
+    "id": "s_economy_C2_02",
+    "en": "The securitization of mortgage-backed assets obscured the underlying credit risk from investors.",
+    "ko": "주택담보대출 기반 자산의 유동화는 투자자들로부터 내재된 신용 위험을 가렸어요.",
+    "highlight": "obscured the underlying credit risk",
+    "situation": "2008 금융 위기 분석",
+    "cefr": "C2",
+    "topic_id": "economy",
+    "tip": "obscure + risk: 위험이 감춰지다는 표현으로 금융 위기 분석에 자주 쓰여요."
+  },
+  {
+    "id": "s_economy_C2_06",
+    "en": "The Gini coefficient measures the extent to which income distribution deviates from perfect equality.",
+    "ko": "지니 계수는 소득 분배가 완전한 평등에서 얼마나 벗어나는지를 측정해요.",
+    "highlight": "measures the extent to which",
+    "situation": "소득 불평등 측정",
+    "cefr": "C2",
+    "topic_id": "economy",
+    "tip": "measures the extent to which: 정도·수준을 객관적으로 측정하는 학술 표현이에요."
+  },
+  {
+    "id": "s_economy_C2_03",
+    "en": "Rent-seeking behavior undermines allocative efficiency by redirecting resources toward unproductive activities.",
+    "ko": "지대추구 행동은 자원을 비생산적 활동으로 전환시켜 배분 효율성을 훼손해요.",
+    "highlight": "undermines allocative efficiency",
+    "situation": "경제적 비효율 분석",
+    "cefr": "C2",
+    "topic_id": "economy",
+    "tip": "undermine efficiency: 효율성을 잠식하다는 표현으로 경제 왜곡을 비판할 때 써요."
+  },
+  {
+    "id": "s_economy_C2_07",
+    "en": "A liquidity trap renders conventional monetary policy ineffective, as near-zero rates fail to stimulate demand.",
+    "ko": "유동성 함정은 제로에 가까운 금리가 수요를 자극하지 못하면서 기존 통화 정책을 무효화해요.",
+    "highlight": "renders conventional monetary policy ineffective",
+    "situation": "통화 정책 한계 분석",
+    "cefr": "C2",
+    "topic_id": "economy",
+    "tip": "render + O + adjective: \"~을 ~한 상태로 만들다\"라는 C1+ 핵심 동사 패턴이에요."
+  },
+  {
+    "id": "s_economy_C2_05",
+    "en": "Asymmetric information between buyers and sellers leads to adverse selection and market inefficiency.",
+    "ko": "구매자와 판매자 간의 정보 비대칭은 역선택과 시장 비효율로 이어져요.",
+    "highlight": "leads to adverse selection",
+    "situation": "정보 경제학",
+    "cefr": "C2",
+    "topic_id": "economy",
+    "tip": "leads to: 결과를 도출하는 인과 표현으로 학술 글쓰기에 필수적이에요."
+  },
+  {
+    "id": "s_economy_C2_01",
+    "en": "Econometric models rely on large datasets to identify causal relationships between variables.",
+    "ko": "계량경제 모델은 변수 간의 인과 관계를 파악하기 위해 대규모 데이터셋에 의존해요.",
+    "highlight": "identify causal relationships between",
+    "situation": "학술 연구 방법론",
+    "cefr": "C2",
+    "topic_id": "economy",
+    "tip": "identify causal relationships: 인과성 파악이라는 계량경제학의 핵심 목표를 표현해요."
+  },
+  {
+    "id": "s_economy_C2_04",
+    "en": "Heterodox economists challenge the assumption that markets naturally tend toward equilibrium.",
+    "ko": "비주류 경제학자들은 시장이 자연적으로 균형을 향해 가는 경향이 있다는 가정에 도전해요.",
+    "highlight": "challenge the assumption that",
+    "situation": "경제학 패러다임 토론",
+    "cefr": "C2",
+    "topic_id": "economy",
+    "tip": "challenge the assumption that: 주류 이론의 전제를 의문시하는 학술적 표현이에요."
+  },
+  {
+    "id": "s_technology_A1_06",
+    "en": "I don't know my password.",
+    "ko": "비밀번호를 모르겠어요.",
+    "highlight": "I don't know",
+    "situation": "로그인 문제",
+    "cefr": "A1",
+    "topic_id": "technology",
+    "tip": "모르는 것을 솔직하게 말할 때 \"I don't know\"를 써요."
+  },
+  {
+    "id": "s_technology_A1_05",
+    "en": "Please take a photo of us.",
+    "ko": "저희 사진 찍어주세요.",
+    "highlight": "Please take a photo",
+    "situation": "사진 촬영",
+    "cefr": "A1",
+    "topic_id": "technology",
+    "tip": "\"Please + 동사원형\"은 부드러운 명령 표현이에요."
+  },
+  {
+    "id": "s_technology_A1_07",
+    "en": "This screen is too small.",
+    "ko": "이 화면이 너무 작아요.",
+    "highlight": "too small",
+    "situation": "화면 크기",
+    "cefr": "A1",
+    "topic_id": "technology",
+    "tip": "크기나 정도를 표현할 때 \"too + 형용사\"를 써요."
+  },
+  {
+    "id": "s_technology_A1_04",
+    "en": "Where can I charge my phone?",
+    "ko": "어디서 휴대폰을 충전할 수 있나요?",
+    "highlight": "Where can I charge",
+    "situation": "충전",
+    "cefr": "A1",
+    "topic_id": "technology",
+    "tip": "장소를 물을 때 \"Where can I...?\"로 시작해요."
+  },
+  {
+    "id": "s_technology_A1_01",
+    "en": "How do I use this app?",
+    "ko": "이 앱 어떻게 사용해요?",
+    "highlight": "How do I use",
+    "situation": "앱 사용",
+    "cefr": "A1",
+    "topic_id": "technology",
+    "tip": "사용 방법을 물을 때 \"How do I...?\"를 써요."
+  },
+  {
+    "id": "s_technology_A1_03",
+    "en": "My phone is not working.",
+    "ko": "제 휴대폰이 작동하지 않아요.",
+    "highlight": "is not working",
+    "situation": "기기 문제",
+    "cefr": "A1",
+    "topic_id": "technology",
+    "tip": "기기 고장을 알릴 때 \"is not working\"을 사용해요."
+  },
+  {
+    "id": "s_technology_A1_02",
+    "en": "Can you turn on the computer, please?",
+    "ko": "컴퓨터를 켜주시겠어요?",
+    "highlight": "Can you turn on",
+    "situation": "기기 작동",
+    "cefr": "A1",
+    "topic_id": "technology",
+    "tip": "정중하게 부탁할 때 \"Can you...?\"를 써요."
+  },
+  {
+    "id": "s_technology_A2_07",
+    "en": "The download is taking forever.",
+    "ko": "다운로드가 너무 오래 걸려요.",
+    "highlight": "taking forever",
+    "situation": "다운로드 속도",
+    "cefr": "A2",
+    "topic_id": "technology",
+    "tip": "무언가가 매우 오래 걸린다는 것을 강조할 때 \"taking forever\"를 써요."
+  },
+  {
+    "id": "s_technology_A2_05",
+    "en": "Make sure to back up your files before deleting them.",
+    "ko": "파일을 삭제하기 전에 반드시 백업하세요.",
+    "highlight": "Make sure to back up",
+    "situation": "데이터 백업",
+    "cefr": "A2",
+    "topic_id": "technology",
+    "tip": "중요한 조언을 강조할 때 \"Make sure to...\"를 써요."
+  },
+  {
+    "id": "s_technology_A2_04",
+    "en": "My battery keeps dying so quickly.",
+    "ko": "배터리가 너무 빨리 닳아요.",
+    "highlight": "keeps dying",
+    "situation": "배터리 문제",
+    "cefr": "A2",
+    "topic_id": "technology",
+    "tip": "반복되는 문제를 표현할 때 \"keeps + -ing\"를 써요."
+  },
+  {
+    "id": "s_technology_A2_01",
+    "en": "Have you tried turning it off and on again?",
+    "ko": "껐다가 다시 켜 보셨나요?",
+    "highlight": "Have you tried",
+    "situation": "기술 문제 해결",
+    "cefr": "A2",
+    "topic_id": "technology",
+    "tip": "조언을 제안할 때 \"Have you tried...?\"는 아주 자연스러운 표현이에요."
+  },
+  {
+    "id": "s_technology_A2_03",
+    "en": "You need to update the software first.",
+    "ko": "먼저 소프트웨어를 업데이트해야 해요.",
+    "highlight": "You need to update",
+    "situation": "소프트웨어 업데이트",
+    "cefr": "A2",
+    "topic_id": "technology",
+    "tip": "필요한 행동을 설명할 때 \"You need to...\"를 써요."
+  },
+  {
+    "id": "s_technology_A2_06",
+    "en": "I accidentally deleted the file. Can I get it back?",
+    "ko": "실수로 파일을 삭제했어요. 복구할 수 있나요?",
+    "highlight": "I accidentally deleted",
+    "situation": "파일 복구",
+    "cefr": "A2",
+    "topic_id": "technology",
+    "tip": "실수를 설명할 때 \"I accidentally...\"를 써요."
+  },
+  {
+    "id": "s_technology_A2_02",
+    "en": "The wifi isn't connecting. What should I do?",
+    "ko": "와이파이가 연결이 안 돼요. 어떻게 하면 좋을까요?",
+    "highlight": "What should I do",
+    "situation": "와이파이 문제",
+    "cefr": "A2",
+    "topic_id": "technology",
+    "tip": "해결책을 물을 때 \"What should I do?\"를 써요."
+  },
+  {
+    "id": "s_technology_B1_02",
+    "en": "In simple terms, the cloud is like an online hard drive.",
+    "ko": "쉽게 말하면, 클라우드는 온라인 하드 드라이브 같은 거예요.",
+    "highlight": "In simple terms",
+    "situation": "클라우드 설명",
+    "cefr": "B1",
+    "topic_id": "technology",
+    "tip": "복잡한 개념을 쉽게 설명할 때 \"In simple terms\"을 사용해요."
+  },
+  {
+    "id": "s_technology_B1_06",
+    "en": "One of the downsides is that it uses a lot of battery.",
+    "ko": "단점 중 하나는 배터리를 많이 소모한다는 거예요.",
+    "highlight": "One of the downsides is",
+    "situation": "기술 단점",
+    "cefr": "B1",
+    "topic_id": "technology",
+    "tip": "단점을 언급할 때 \"One of the downsides is...\"를 써요."
+  },
+  {
+    "id": "s_technology_B1_01",
+    "en": "Basically, it works by analyzing your data and making predictions.",
+    "ko": "기본적으로, 데이터를 분석해서 예측하는 방식으로 작동해요.",
+    "highlight": "Basically, it works by",
+    "situation": "기술 설명",
+    "cefr": "B1",
+    "topic_id": "technology",
+    "tip": "기술 개념을 쉽게 설명할 때 \"Basically, it works by...\"를 써요."
+  },
+  {
+    "id": "s_technology_B1_04",
+    "en": "Have you heard of this new app? It's supposed to be really useful.",
+    "ko": "이 새로운 앱 들어봤어요? 정말 유용하다고 해요.",
+    "highlight": "It's supposed to be",
+    "situation": "앱 추천",
+    "cefr": "B1",
+    "topic_id": "technology",
+    "tip": "다른 사람의 말을 전할 때 \"It's supposed to be...\"를 써요."
+  },
+  {
+    "id": "s_technology_B1_03",
+    "en": "The main advantage of this technology is that it saves time.",
+    "ko": "이 기술의 가장 큰 장점은 시간을 절약해준다는 거예요.",
+    "highlight": "The main advantage is",
+    "situation": "기술 장점",
+    "cefr": "B1",
+    "topic_id": "technology",
+    "tip": "장점을 설명할 때 \"The main advantage is...\"를 써요."
+  },
+  {
+    "id": "s_technology_B1_05",
+    "en": "The reason encryption is important is that it keeps your data safe.",
+    "ko": "암호화가 중요한 이유는 데이터를 안전하게 보호해주기 때문이에요.",
+    "highlight": "The reason... is that",
+    "situation": "보안 설명",
+    "cefr": "B1",
+    "topic_id": "technology",
+    "tip": "이유를 설명할 때 \"The reason... is that...\"을 써요."
+  },
+  {
+    "id": "s_technology_B1_07",
+    "en": "This feature was designed to make things easier for users.",
+    "ko": "이 기능은 사용자를 위해 더 편리하게 만들기 위해 설계됐어요.",
+    "highlight": "was designed to",
+    "situation": "기능 설명",
+    "cefr": "B1",
+    "topic_id": "technology",
+    "tip": "목적을 설명할 때 \"was designed to...\"를 써요."
+  },
+  {
+    "id": "s_technology_B2_03",
+    "en": "What sets this algorithm apart is its ability to learn from very little data.",
+    "ko": "이 알고리즘을 차별화하는 것은 매우 적은 데이터로 학습하는 능력이에요.",
+    "highlight": "What sets... apart is",
+    "situation": "알고리즘 비교",
+    "cefr": "B2",
+    "topic_id": "technology",
+    "tip": "차별점을 강조할 때 \"What sets... apart is...\"를 써요."
+  },
+  {
+    "id": "s_technology_B2_06",
+    "en": "It remains to be seen whether blockchain will become mainstream.",
+    "ko": "블록체인이 주류가 될지는 아직 두고 봐야 해요.",
+    "highlight": "It remains to be seen whether",
+    "situation": "기술 전망",
+    "cefr": "B2",
+    "topic_id": "technology",
+    "tip": "불확실한 미래를 말할 때 \"It remains to be seen whether...\"을 써요."
+  },
+  {
+    "id": "s_technology_B2_07",
+    "en": "To put it simply, large language models learn patterns from enormous amounts of text.",
+    "ko": "쉽게 말하면, 거대 언어 모델은 방대한 양의 텍스트에서 패턴을 학습해요.",
+    "highlight": "To put it simply",
+    "situation": "AI 설명",
+    "cefr": "B2",
+    "topic_id": "technology",
+    "tip": "복잡한 개념을 단순화할 때 \"To put it simply...\"를 써요."
+  },
+  {
+    "id": "s_technology_B2_01",
+    "en": "AI is increasingly being used to automate tasks that humans used to do.",
+    "ko": "AI는 인간이 하던 작업을 자동화하는 데 점점 더 많이 활용되고 있어요.",
+    "highlight": "increasingly being used to",
+    "situation": "AI 활용",
+    "cefr": "B2",
+    "topic_id": "technology",
+    "tip": "트렌드를 설명할 때 \"is increasingly being used to...\"를 써요."
+  },
+  {
+    "id": "s_technology_B2_02",
+    "en": "One concern with machine learning is the potential for bias in the data.",
+    "ko": "머신러닝의 한 가지 우려점은 데이터 편향 가능성이에요.",
+    "highlight": "One concern with... is",
+    "situation": "AI 문제점",
+    "cefr": "B2",
+    "topic_id": "technology",
+    "tip": "문제점을 제기할 때 \"One concern with... is...\"를 써요."
+  },
+  {
+    "id": "s_technology_B2_04",
+    "en": "The way I see it, data privacy should be a fundamental right.",
+    "ko": "제 생각에는 데이터 프라이버시가 기본권이어야 해요.",
+    "highlight": "The way I see it",
+    "situation": "데이터 프라이버시",
+    "cefr": "B2",
+    "topic_id": "technology",
+    "tip": "자신의 의견을 표현할 때 \"The way I see it...\"을 써요."
+  },
+  {
+    "id": "s_technology_B2_05",
+    "en": "There is growing evidence that automation is reshaping the job market.",
+    "ko": "자동화가 취업 시장을 재편하고 있다는 증거가 점점 늘고 있어요.",
+    "highlight": "There is growing evidence that",
+    "situation": "자동화 영향",
+    "cefr": "B2",
+    "topic_id": "technology",
+    "tip": "증거를 제시할 때 \"There is growing evidence that...\"을 써요."
+  },
+  {
+    "id": "s_technology_C1_01",
+    "en": "The implications of quantum computing for current encryption are profound and unsettling.",
+    "ko": "양자 컴퓨팅이 현재 암호화에 미치는 영향은 심대하고 불안한 수준이에요.",
+    "highlight": "implications... are profound",
+    "situation": "양자 컴퓨팅 영향",
+    "cefr": "C1",
+    "topic_id": "technology",
+    "tip": "심각한 영향을 논의할 때 \"the implications... are profound\"를 써요."
+  },
+  {
+    "id": "s_technology_C1_05",
+    "en": "It would be premature to conclude that federated learning has solved the privacy problem.",
+    "ko": "연합 학습이 프라이버시 문제를 해결했다고 결론짓는 것은 시기상조예요.",
+    "highlight": "It would be premature to conclude",
+    "situation": "기술 평가",
+    "cefr": "C1",
+    "topic_id": "technology",
+    "tip": "성급한 결론을 경계할 때 \"It would be premature to conclude\"를 써요."
+  },
+  {
+    "id": "s_technology_C1_04",
+    "en": "The challenge lies not in building capable AI, but in ensuring it remains controllable.",
+    "ko": "어려운 점은 유능한 AI를 구축하는 것이 아니라 제어 가능한 상태를 유지하는 것이에요.",
+    "highlight": "The challenge lies not in... but in",
+    "situation": "AI 안전",
+    "cefr": "C1",
+    "topic_id": "technology",
+    "tip": "핵심 어려움을 표현할 때 \"The challenge lies not in... but in...\"을 써요."
+  },
+  {
+    "id": "s_technology_C1_03",
+    "en": "Edge computing fundamentally shifts the architecture of how data is processed.",
+    "ko": "엣지 컴퓨팅은 데이터 처리 방식의 아키텍처를 근본적으로 변화시켜요.",
+    "highlight": "fundamentally shifts",
+    "situation": "기술 패러다임",
+    "cefr": "C1",
+    "topic_id": "technology",
+    "tip": "근본적인 변화를 표현할 때 \"fundamentally shifts\"를 써요."
+  },
+  {
+    "id": "s_technology_C1_07",
+    "en": "Prompt engineering is evolving so rapidly that best practices are still being established.",
+    "ko": "프롬프트 엔지니어링이 너무 빠르게 발전해서 모범 사례가 아직 확립되고 있는 중이에요.",
+    "highlight": "is evolving so rapidly that",
+    "situation": "AI 실무",
+    "cefr": "C1",
+    "topic_id": "technology",
+    "tip": "빠른 변화를 표현할 때 \"is evolving so rapidly that...\"를 써요."
+  },
+  {
+    "id": "s_technology_C1_06",
+    "en": "Scalability and latency are often in tension with each other in distributed systems.",
+    "ko": "분산 시스템에서 확장성과 지연 시간은 종종 서로 상충 관계에 있어요.",
+    "highlight": "are often in tension with each other",
+    "situation": "시스템 설계",
+    "cefr": "C1",
+    "topic_id": "technology",
+    "tip": "상충 관계를 설명할 때 \"are in tension with each other\"를 써요."
+  },
+  {
+    "id": "s_technology_C1_02",
+    "en": "We must grapple with the ethical dimensions of deploying autonomous systems at scale.",
+    "ko": "자율 시스템을 대규모로 배포하는 것의 윤리적 측면을 진지하게 다뤄야 해요.",
+    "highlight": "We must grapple with",
+    "situation": "AI 윤리",
+    "cefr": "C1",
+    "topic_id": "technology",
+    "tip": "어려운 문제를 직면해야 한다고 표현할 때 \"must grapple with\"를 써요."
+  },
+  {
+    "id": "s_technology_C2_05",
+    "en": "Exascale computing opens the door to simulations of unprecedented fidelity and scope.",
+    "ko": "엑사스케일 컴퓨팅은 전례 없는 충실도와 규모의 시뮬레이션의 문을 열어요.",
+    "highlight": "opens the door to... of unprecedented",
+    "situation": "슈퍼컴퓨팅",
+    "cefr": "C2",
+    "topic_id": "technology",
+    "tip": "전례 없는 기회를 표현할 때 \"opens the door to... of unprecedented\"를 써요."
+  },
+  {
+    "id": "s_technology_C2_01",
+    "en": "The notion of substrate independence raises fundamental questions about the nature of consciousness itself.",
+    "ko": "기질 독립성 개념은 의식 자체의 본질에 관한 근본적인 질문을 제기해요.",
+    "highlight": "raises fundamental questions about the nature of",
+    "situation": "기술 철학",
+    "cefr": "C2",
+    "topic_id": "technology",
+    "tip": "근본적인 철학적 문제를 제기할 때 쓰는 고급 표현이에요."
+  },
+  {
+    "id": "s_technology_C2_07",
+    "en": "Biomimetic and neuromorphic paradigms converge on the insight that nature has already solved many engineering problems we struggle with.",
+    "ko": "생체 모방과 뉴로모픽 패러다임은 자연이 이미 우리가 씨름하는 많은 공학적 문제를 해결했다는 통찰로 수렴해요.",
+    "highlight": "converge on the insight that",
+    "situation": "기술 철학",
+    "cefr": "C2",
+    "topic_id": "technology",
+    "tip": "여러 분야가 같은 결론에 도달할 때 \"converge on the insight that\"을 써요."
+  },
+  {
+    "id": "s_technology_C2_02",
+    "en": "Whether emergent capabilities in AI systems reflect genuine understanding or sophisticated pattern-matching remains deeply contested.",
+    "ko": "AI 시스템의 창발적 능력이 진정한 이해를 반영하는지 아니면 정교한 패턴 매칭인지는 아직 깊이 논쟁 중이에요.",
+    "highlight": "remains deeply contested",
+    "situation": "AI 철학",
+    "cefr": "C2",
+    "topic_id": "technology",
+    "tip": "학문적으로 논쟁 중인 주제를 표현할 때 \"remains deeply contested\"를 써요."
+  },
+  {
+    "id": "s_technology_C2_04",
+    "en": "The epistemological limitations of stochastic systems make absolute reliability an inherently unattainable goal.",
+    "ko": "확률론적 시스템의 인식론적 한계로 인해 절대적 신뢰성은 본질적으로 달성 불가능한 목표예요.",
+    "highlight": "make... an inherently unattainable goal",
+    "situation": "기술 한계",
+    "cefr": "C2",
+    "topic_id": "technology",
+    "tip": "불가능한 목표를 강조할 때 \"make... an inherently unattainable goal\"을 써요."
+  },
+  {
+    "id": "s_technology_C2_03",
+    "en": "Instrumental convergence suggests that sufficiently advanced AI will tend toward resource acquisition regardless of its original objectives.",
+    "ko": "수단적 수렴은 충분히 발전한 AI가 원래 목적과 무관하게 자원 획득 방향으로 수렴할 것임을 시사해요.",
+    "highlight": "tends toward... regardless of",
+    "situation": "AI 안전 이론",
+    "cefr": "C2",
+    "topic_id": "technology",
+    "tip": "일반적 경향과 예외를 표현할 때 \"tends toward... regardless of...\"를 써요."
+  },
+  {
+    "id": "s_technology_C2_06",
+    "en": "Corrigibility and autonomy exist in inherent tension — a more capable agent may naturally resist correction.",
+    "ko": "교정 가능성과 자율성은 본질적인 긴장 관계에 있어요 — 더 유능한 에이전트는 자연스럽게 교정에 저항할 수 있어요.",
+    "highlight": "exist in inherent tension",
+    "situation": "AI 안전 딜레마",
+    "cefr": "C2",
+    "topic_id": "technology",
+    "tip": "두 개념 간의 본질적 갈등을 논할 때 \"exist in inherent tension\"을 써요."
+  },
+  {
+    "id": "s_environment_A1_03",
+    "en": "Please pick up the litter.",
+    "ko": "쓰레기를 주워주세요.",
+    "highlight": "pick up the litter",
+    "situation": "환경 실천",
+    "cefr": "A1",
+    "topic_id": "environment",
+    "tip": "Please + 명령문은 정중하게 요청할 때 사용해요."
+  },
+  {
+    "id": "s_environment_A1_04",
+    "en": "The sky looks very blue today.",
+    "ko": "오늘 하늘이 정말 파래 보여요.",
+    "highlight": "looks very blue",
+    "situation": "환경 실천",
+    "cefr": "A1",
+    "topic_id": "environment",
+    "tip": "look + 형용사는 외관을 묘사할 때 써요."
+  },
+  {
+    "id": "s_environment_A1_01",
+    "en": "Let's recycle this.",
+    "ko": "이거 재활용해요.",
+    "highlight": "Let's recycle",
+    "situation": "환경 실천",
+    "cefr": "A1",
+    "topic_id": "environment",
+    "tip": "Let's...는 함께 무언가를 하자고 제안할 때 써요."
+  },
+  {
+    "id": "s_environment_A1_06",
+    "en": "We need clean water to live.",
+    "ko": "우리는 살기 위해 깨끗한 물이 필요해요.",
+    "highlight": "need clean water",
+    "situation": "환경 실천",
+    "cefr": "A1",
+    "topic_id": "environment",
+    "tip": "need + 명사는 필요한 것을 표현해요."
+  },
+  {
+    "id": "s_environment_A1_07",
+    "en": "Turn off the light when you leave.",
+    "ko": "나갈 때 불을 꺼주세요.",
+    "highlight": "Turn off the light",
+    "situation": "환경 실천",
+    "cefr": "A1",
+    "topic_id": "environment",
+    "tip": "Turn off...는 절전·절약 행동을 권고할 때 흔히 써요."
+  },
+  {
+    "id": "s_environment_A1_05",
+    "en": "I love walking in the forest.",
+    "ko": "저는 숲속에서 걷는 걸 좋아해요.",
+    "highlight": "love walking",
+    "situation": "환경 실천",
+    "cefr": "A1",
+    "topic_id": "environment",
+    "tip": "love + -ing는 좋아하는 활동을 말할 때 써요."
+  },
+  {
+    "id": "s_environment_A1_02",
+    "en": "Don't waste water.",
+    "ko": "물을 낭비하지 마세요.",
+    "highlight": "Don't waste",
+    "situation": "환경 실천",
+    "cefr": "A1",
+    "topic_id": "environment",
+    "tip": "Don't + 동사원형은 금지 또는 권고를 나타내요."
+  },
+  {
+    "id": "s_environment_A2_02",
+    "en": "Try to use less plastic every day.",
+    "ko": "매일 플라스틱을 덜 쓰려고 노력해보세요.",
+    "highlight": "Try to use less",
+    "situation": "재활용·절약",
+    "cefr": "A2",
+    "topic_id": "environment",
+    "tip": "Try to + 동사원형은 노력을 권장할 때 써요."
+  },
+  {
+    "id": "s_environment_A2_03",
+    "en": "Taking public transport reduces pollution.",
+    "ko": "대중교통 이용이 오염을 줄여요.",
+    "highlight": "reduces pollution",
+    "situation": "재활용·절약",
+    "cefr": "A2",
+    "topic_id": "environment",
+    "tip": "동명사 주어는 행동 자체의 효과를 설명할 때 자연스러워요."
+  },
+  {
+    "id": "s_environment_A2_04",
+    "en": "Have you tried composting your food scraps?",
+    "ko": "음식물 쓰레기 퇴비로 만들어 보셨어요?",
+    "highlight": "tried composting",
+    "situation": "재활용·절약",
+    "cefr": "A2",
+    "topic_id": "environment",
+    "tip": "Have you tried + -ing는 새로운 방법을 제안할 때 써요."
+  },
+  {
+    "id": "s_environment_A2_05",
+    "en": "It's important to save energy at home.",
+    "ko": "집에서 에너지를 절약하는 것이 중요해요.",
+    "highlight": "It's important to",
+    "situation": "재활용·절약",
+    "cefr": "A2",
+    "topic_id": "environment",
+    "tip": "It's important to + 동사원형은 중요성을 강조해요."
+  },
+  {
+    "id": "s_environment_A2_06",
+    "en": "I always bring my own bag to the shop.",
+    "ko": "저는 항상 가게에 개인 가방을 가져가요.",
+    "highlight": "always bring my own",
+    "situation": "재활용·절약",
+    "cefr": "A2",
+    "topic_id": "environment",
+    "tip": "always + 현재시제는 반복 습관을 나타내요."
+  },
+  {
+    "id": "s_environment_A2_07",
+    "en": "Why don't we plant some trees this weekend?",
+    "ko": "이번 주말에 나무를 심는 건 어때요?",
+    "highlight": "Why don't we plant",
+    "situation": "재활용·절약",
+    "cefr": "A2",
+    "topic_id": "environment",
+    "tip": "Why don't we...는 함께 하는 활동을 제안할 때 써요."
+  },
+  {
+    "id": "s_environment_A2_01",
+    "en": "You should separate your recyclables.",
+    "ko": "재활용품을 분리해야 해요.",
+    "highlight": "should separate",
+    "situation": "재활용·절약",
+    "cefr": "A2",
+    "topic_id": "environment",
+    "tip": "should + 동사원형은 의무나 권고를 나타내요."
+  },
+  {
+    "id": "s_environment_B1_03",
+    "en": "Renewable energy is becoming cheaper every year.",
+    "ko": "재생에너지는 매년 더 저렴해지고 있어요.",
+    "highlight": "is becoming cheaper",
+    "situation": "기후 변화",
+    "cefr": "B1",
+    "topic_id": "environment",
+    "tip": "is becoming + 비교급은 점진적 변화를 표현해요."
+  },
+  {
+    "id": "s_environment_B1_01",
+    "en": "Climate change is affecting every country in the world.",
+    "ko": "기후 변화는 세계 모든 나라에 영향을 미치고 있어요.",
+    "highlight": "is affecting every country",
+    "situation": "기후 변화",
+    "cefr": "B1",
+    "topic_id": "environment",
+    "tip": "현재진행형은 지금도 계속되는 변화를 강조해요."
+  },
+  {
+    "id": "s_environment_B1_04",
+    "en": "Scientists have warned us about the dangers of deforestation.",
+    "ko": "과학자들은 삼림 벌채의 위험성에 대해 경고해왔어요.",
+    "highlight": "have warned us about",
+    "situation": "기후 변화",
+    "cefr": "B1",
+    "topic_id": "environment",
+    "tip": "현재완료는 과거부터 지금까지 이어진 경고를 강조해요."
+  },
+  {
+    "id": "s_environment_B1_07",
+    "en": "Switching to solar energy would significantly cut our carbon footprint.",
+    "ko": "태양 에너지로 전환하면 탄소 발자국을 크게 줄일 수 있어요.",
+    "highlight": "would significantly cut",
+    "situation": "기후 변화",
+    "cefr": "B1",
+    "topic_id": "environment",
+    "tip": "조동사 would는 가정적 결과나 권고를 부드럽게 표현해요."
+  },
+  {
+    "id": "s_environment_B1_05",
+    "en": "We need to find a balance between development and conservation.",
+    "ko": "개발과 보전 사이의 균형을 찾아야 해요.",
+    "highlight": "find a balance between",
+    "situation": "기후 변화",
+    "cefr": "B1",
+    "topic_id": "environment",
+    "tip": "find a balance between A and B는 균형의 필요성을 논할 때 유용해요."
+  },
+  {
+    "id": "s_environment_B1_02",
+    "en": "If we reduce emissions now, we can slow global warming.",
+    "ko": "지금 배출량을 줄이면 지구 온난화를 늦출 수 있어요.",
+    "highlight": "If we reduce...we can",
+    "situation": "기후 변화",
+    "cefr": "B1",
+    "topic_id": "environment",
+    "tip": "If + 현재시제, 주어 + can은 현실적 가능성을 나타내요."
+  },
+  {
+    "id": "s_environment_B1_06",
+    "en": "Many species are at risk of extinction due to habitat loss.",
+    "ko": "서식지 손실로 인해 많은 종이 멸종 위기에 처해 있어요.",
+    "highlight": "at risk of extinction due to",
+    "situation": "기후 변화",
+    "cefr": "B1",
+    "topic_id": "environment",
+    "tip": "due to + 명사는 원인을 간결하게 설명해요."
+  },
+  {
+    "id": "s_environment_B2_06",
+    "en": "By investing in reforestation, we can partially offset our carbon emissions.",
+    "ko": "재조림에 투자함으로써 탄소 배출량을 부분적으로 상쇄할 수 있어요.",
+    "highlight": "By investing in...we can partially offset",
+    "situation": "환경 정책",
+    "cefr": "B2",
+    "topic_id": "environment",
+    "tip": "By + -ing는 수단을, partially offset은 현실적 기대치를 표현해요."
+  },
+  {
+    "id": "s_environment_B2_04",
+    "en": "Sustainable development requires balancing economic growth with ecological preservation.",
+    "ko": "지속 가능한 개발은 경제 성장과 생태 보전의 균형을 필요로 해요.",
+    "highlight": "requires balancing...with",
+    "situation": "환경 정책",
+    "cefr": "B2",
+    "topic_id": "environment",
+    "tip": "require + 동명사는 필수 조건을 나타내요."
+  },
+  {
+    "id": "s_environment_B2_03",
+    "en": "Unless drastic action is taken, we will exceed the 1.5 degree threshold.",
+    "ko": "과감한 조치가 취해지지 않으면 1.5도 한계를 초과할 거예요.",
+    "highlight": "Unless drastic action is taken",
+    "situation": "환경 정책",
+    "cefr": "B2",
+    "topic_id": "environment",
+    "tip": "Unless + 수동태 절은 조건의 부정을 강조해요."
+  },
+  {
+    "id": "s_environment_B2_01",
+    "en": "Governments must implement stricter emission controls without delay.",
+    "ko": "정부는 지체 없이 더 엄격한 배출 규제를 시행해야 해요.",
+    "highlight": "must implement stricter",
+    "situation": "환경 정책",
+    "cefr": "B2",
+    "topic_id": "environment",
+    "tip": "must + 동사원형은 강한 의무를 나타내고, stricter는 비교급으로 강도를 높여요."
+  },
+  {
+    "id": "s_environment_B2_07",
+    "en": "Public awareness campaigns have proven effective in changing consumer behaviour.",
+    "ko": "공공 인식 제고 캠페인은 소비자 행동 변화에 효과적인 것으로 입증됐어요.",
+    "highlight": "have proven effective in changing",
+    "situation": "환경 정책",
+    "cefr": "B2",
+    "topic_id": "environment",
+    "tip": "have proven + 형용사 + in + -ing는 증거에 기반한 주장을 나타내요."
+  },
+  {
+    "id": "s_environment_B2_02",
+    "en": "A carbon tax could incentivise businesses to invest in clean technology.",
+    "ko": "탄소세는 기업들이 청정 기술에 투자하도록 유도할 수 있어요.",
+    "highlight": "could incentivise businesses to",
+    "situation": "환경 정책",
+    "cefr": "B2",
+    "topic_id": "environment",
+    "tip": "could + 동사원형은 정책 효과를 신중하게 제안할 때 써요."
+  },
+  {
+    "id": "s_environment_B2_05",
+    "en": "The treaty obliges all signatories to report their greenhouse gas emissions annually.",
+    "ko": "그 조약은 모든 서명국이 온실가스 배출량을 매년 보고하도록 의무화해요.",
+    "highlight": "obliges all signatories to",
+    "situation": "환경 정책",
+    "cefr": "B2",
+    "topic_id": "environment",
+    "tip": "oblige + 목적어 + to 부정사는 공식적 의무를 표현해요."
+  },
+  {
+    "id": "s_environment_C1_05",
+    "en": "Paleoclimatological records suggest that today's warming is unprecedented in at least 800,000 years.",
+    "ko": "고기후학 기록은 오늘날의 온난화가 최소 80만 년 중 전례 없는 것임을 시사해요.",
+    "highlight": "suggest that...is unprecedented in",
+    "situation": "기후 과학",
+    "cefr": "C1",
+    "topic_id": "environment",
+    "tip": "suggest that + 절은 증거에 기반한 신중한 주장을 나타내요."
+  },
+  {
+    "id": "s_environment_C1_01",
+    "en": "Anthropogenic emissions have unequivocally altered the Earth's energy balance.",
+    "ko": "인위적 배출이 지구의 에너지 균형을 명백히 변화시켰어요.",
+    "highlight": "have unequivocally altered",
+    "situation": "기후 과학",
+    "cefr": "C1",
+    "topic_id": "environment",
+    "tip": "현재완료 + 부사(unequivocally)는 과학적 확신을 강조해요."
+  },
+  {
+    "id": "s_environment_C1_02",
+    "en": "The precautionary principle dictates that we act before scientific consensus is fully established.",
+    "ko": "사전 예방 원칙은 과학적 합의가 완전히 형성되기 전에 행동하도록 요구해요.",
+    "highlight": "dictates that we act before",
+    "situation": "기후 과학",
+    "cefr": "C1",
+    "topic_id": "environment",
+    "tip": "dictate that + 절은 원칙이나 규범이 요구하는 바를 표현해요."
+  },
+  {
+    "id": "s_environment_C1_04",
+    "en": "Trophic cascades illustrate how the removal of a single species can destabilise an entire ecosystem.",
+    "ko": "영양 단계 연쇄반응은 단 한 종의 제거가 전체 생태계를 불안정하게 만들 수 있음을 보여줘요.",
+    "highlight": "how the removal of a single species can destabilise",
+    "situation": "기후 과학",
+    "cefr": "C1",
+    "topic_id": "environment",
+    "tip": "간접의문문 + can은 복잡한 생태적 메커니즘을 설명할 때 유용해요."
+  },
+  {
+    "id": "s_environment_C1_06",
+    "en": "Geoengineering proposals must be evaluated against the risk of unintended ecological consequences.",
+    "ko": "지구공학 제안은 의도치 않은 생태적 결과의 위험과 대비해 평가돼야 해요.",
+    "highlight": "must be evaluated against the risk of",
+    "situation": "기후 과학",
+    "cefr": "C1",
+    "topic_id": "environment",
+    "tip": "must be + 과거분사는 필수적 절차를 강조하는 수동태예요."
+  },
+  {
+    "id": "s_environment_C1_07",
+    "en": "Carbon sinks are increasingly being overwhelmed by the volume of anthropogenic emissions.",
+    "ko": "탄소 흡수원은 인위적 배출량의 규모에 점점 압도당하고 있어요.",
+    "highlight": "are increasingly being overwhelmed",
+    "situation": "기후 과학",
+    "cefr": "C1",
+    "topic_id": "environment",
+    "tip": "현재진행 수동태 + increasingly는 악화되는 추세를 생생하게 표현해요."
+  },
+  {
+    "id": "s_environment_C1_03",
+    "en": "Decarbonizing the energy sector is widely regarded as the most urgent priority.",
+    "ko": "에너지 부문의 탈탄소화는 가장 시급한 과제로 널리 여겨지고 있어요.",
+    "highlight": "is widely regarded as the most urgent",
+    "situation": "기후 과학",
+    "cefr": "C1",
+    "topic_id": "environment",
+    "tip": "수동태 + widely는 광범위한 전문가 의견을 전달해요."
+  },
+  {
+    "id": "s_environment_C2_01",
+    "en": "Radiative forcing data confirm that positive feedbacks are amplifying initial warming signals.",
+    "ko": "복사 강제력 데이터는 양의 피드백이 초기 온난화 신호를 증폭시키고 있음을 확인해줘요.",
+    "highlight": "confirm that positive feedbacks are amplifying",
+    "situation": "기후 과학",
+    "cefr": "C2",
+    "topic_id": "environment",
+    "tip": "confirm that + 절은 데이터에 근거한 단정적 결론을 표현해요."
+  },
+  {
+    "id": "s_environment_C2_04",
+    "en": "Crossing planetary boundaries simultaneously increases the likelihood of abrupt, nonlinear Earth system transitions.",
+    "ko": "행성 한계를 동시에 넘으면 갑작스럽고 비선형적인 지구 시스템 전환이 발생할 가능성이 높아져요.",
+    "highlight": "increases the likelihood of abrupt, nonlinear",
+    "situation": "기후 과학",
+    "cefr": "C2",
+    "topic_id": "environment",
+    "tip": "increase the likelihood of + 명사는 확률적 위험을 학술적으로 표현해요."
+  },
+  {
+    "id": "s_environment_C2_03",
+    "en": "Permafrost thaw is projected to release gigatons of carbon, potentially creating a runaway feedback loop.",
+    "ko": "영구 동토층 해빙은 수십억 톤의 탄소를 방출해 통제 불가능한 피드백 루프를 만들 가능성이 있어요.",
+    "highlight": "is projected to release...potentially creating",
+    "situation": "기후 과학",
+    "cefr": "C2",
+    "topic_id": "environment",
+    "tip": "is projected to + 동사원형은 모델 기반 전망을, -ing는 동반 결과를 표현해요."
+  },
+  {
+    "id": "s_environment_C2_05",
+    "en": "Teleconnections demonstrate that seemingly localised climate events can propagate disruptions across hemispheres.",
+    "ko": "원격 상관은 겉으로 보기에 국지적인 기후 현상이 반구를 가로질러 교란을 전파할 수 있음을 보여줘요.",
+    "highlight": "demonstrate that...can propagate disruptions across",
+    "situation": "기후 과학",
+    "cefr": "C2",
+    "topic_id": "environment",
+    "tip": "demonstrate that + 절은 메커니즘의 입증을, across는 지리적 범위를 강조해요."
+  },
+  {
+    "id": "s_environment_C2_07",
+    "en": "Achieving net zero necessitates a systemic transformation of energy, agriculture, and land-use paradigms.",
+    "ko": "넷제로 달성은 에너지, 농업, 토지 이용 패러다임의 전면적 전환을 필요로 해요.",
+    "highlight": "necessitates a systemic transformation of",
+    "situation": "기후 과학",
+    "cefr": "C2",
+    "topic_id": "environment",
+    "tip": "necessitate + 명사는 단순한 필요를 넘어 근본적 변화의 불가피성을 나타내요."
+  },
+  {
+    "id": "s_environment_C2_06",
+    "en": "Dendroclimatological proxies corroborate instrumental records, strengthening confidence in reconstructed temperature anomalies.",
+    "ko": "수목기후학 대리자료는 기기 기록을 뒷받침하여 재구성된 기온 이상에 대한 신뢰도를 높여요.",
+    "highlight": "corroborate...strengthening confidence in",
+    "situation": "기후 과학",
+    "cefr": "C2",
+    "topic_id": "environment",
+    "tip": "corroborate + 목적어는 복수의 증거가 일치함을 표현하는 학술적 동사예요."
+  },
+  {
+    "id": "s_environment_C2_02",
+    "en": "Thermohaline circulation disruption could have cascading consequences for global heat distribution.",
+    "ko": "열염 순환 붕괴는 전 지구적 열 분배에 연쇄적 결과를 초래할 수 있어요.",
+    "highlight": "could have cascading consequences for",
+    "situation": "기후 과학",
+    "cefr": "C2",
+    "topic_id": "environment",
+    "tip": "could have + 명사는 잠재적이지만 심각한 결과를 신중하게 표현해요."
+  },
+  {
+    "id": "s_news_A1_05",
+    "en": "They said on the news that...",
+    "ko": "뉴스에서 ...라고 했어요.",
+    "highlight": "They said on the news",
+    "situation": "뉴스 인용",
+    "cefr": "A1",
+    "topic_id": "news",
+    "tip": "불특정 뉴스 출처를 인용할 때 \"They said\"를 써요. 구어체에서 아주 자주 쓰이는 표현이에요."
+  },
+  {
+    "id": "s_news_A1_03",
+    "en": "What happened?",
+    "ko": "무슨 일이 있었어요?",
+    "highlight": "What happened",
+    "situation": "사건 질문",
+    "cefr": "A1",
+    "topic_id": "news",
+    "tip": "사건에 대해 더 알고 싶을 때 쓰는 가장 기본적인 질문이에요. 간단하지만 어디서든 쓸 수 있어요."
+  },
+  {
+    "id": "s_news_A1_02",
+    "en": "I saw on the news that...",
+    "ko": "뉴스에서 ...라는 걸 봤어요.",
+    "highlight": "I saw on the news",
+    "situation": "뉴스 전달",
+    "cefr": "A1",
+    "topic_id": "news",
+    "tip": "TV나 온라인 뉴스에서 본 내용을 전달할 때 써요. \"I saw on the news that there was a big flood.\" 처럼 that절을 이어요."
+  },
+  {
+    "id": "s_news_A1_01",
+    "en": "Did you hear about...?",
+    "ko": "...에 대해 들었어요?",
+    "highlight": "Did you hear about",
+    "situation": "뉴스 공유",
+    "cefr": "A1",
+    "topic_id": "news",
+    "tip": "최근 소식이나 뉴스를 자연스럽게 공유할 때 쓰는 첫 마디예요. \"Did you hear about the fire?\" 처럼 명사를 바로 이어 붙여요."
+  },
+  {
+    "id": "s_news_A1_07",
+    "en": "The government said...",
+    "ko": "정부가 ...라고 했어요.",
+    "highlight": "The government said",
+    "situation": "공식 발표 인용",
+    "cefr": "A1",
+    "topic_id": "news",
+    "tip": "공식 발표나 성명을 인용할 때 가장 기본적인 구조예요. 뒤에 직접 또는 간접 인용을 붙여요."
+  },
+  {
+    "id": "s_news_A1_06",
+    "en": "A lot of people were hurt.",
+    "ko": "많은 사람들이 다쳤어요.",
+    "highlight": "A lot of people were hurt",
+    "situation": "피해 상황",
+    "cefr": "A1",
+    "topic_id": "news",
+    "tip": "사고나 재난 보도에서 자주 나오는 문장 구조예요. \"were hurt\"는 수동태로 피해를 표현해요."
+  },
+  {
+    "id": "s_news_A1_04",
+    "en": "Is it true that...?",
+    "ko": "...가 사실이에요?",
+    "highlight": "Is it true that",
+    "situation": "사실 확인",
+    "cefr": "A1",
+    "topic_id": "news",
+    "tip": "들은 이야기가 사실인지 확인할 때 써요. \"Is it true that the president resigned?\" 처럼 that절을 이어요."
+  },
+  {
+    "id": "s_news_A2_03",
+    "en": "It is believed that...",
+    "ko": "...라고 여겨져요.",
+    "highlight": "It is believed that",
+    "situation": "불확실 정보",
+    "cefr": "A2",
+    "topic_id": "news",
+    "tip": "확실하지 않은 정보를 전달할 때 쓰는 수동태 표현이에요. 직접 단정하는 것을 피할 수 있어요."
+  },
+  {
+    "id": "s_news_A2_02",
+    "en": "The police are investigating...",
+    "ko": "경찰이 ...을 조사하고 있어요.",
+    "highlight": "are investigating",
+    "situation": "사건 보도",
+    "cefr": "A2",
+    "topic_id": "news",
+    "tip": "범죄나 사고에 관한 뉴스에서 매우 자주 나오는 표현이에요. 현재진행형으로 진행 중임을 나타내요."
+  },
+  {
+    "id": "s_news_A2_01",
+    "en": "According to reports, ...",
+    "ko": "보도에 따르면, ...",
+    "highlight": "According to reports",
+    "situation": "출처 인용",
+    "cefr": "A2",
+    "topic_id": "news",
+    "tip": "뉴스 출처를 인용할 때 쓰는 표현이에요. 좀 더 격식 있는 느낌이 나고 사실 여부를 단정하지 않는 표현이에요."
+  },
+  {
+    "id": "s_news_A2_06",
+    "en": "Thousands of people took to the streets.",
+    "ko": "수천 명이 거리로 나왔어요.",
+    "highlight": "took to the streets",
+    "situation": "시위 묘사",
+    "cefr": "A2",
+    "topic_id": "news",
+    "tip": "많은 사람들이 시위를 위해 나온 것을 표현할 때 \"take to the streets\"를 써요. 뉴스에서 자주 보이는 관용 표현이에요."
+  },
+  {
+    "id": "s_news_A2_07",
+    "en": "A ceasefire has been agreed.",
+    "ko": "휴전이 합의됐어요.",
+    "highlight": "has been agreed",
+    "situation": "협상 결과",
+    "cefr": "A2",
+    "topic_id": "news",
+    "tip": "수동태로 협상 결과를 간결하게 전달하는 뉴스 문체 표현이에요. 주어가 누구인지 모르거나 중요하지 않을 때 써요."
+  },
+  {
+    "id": "s_news_A2_05",
+    "en": "The government has announced that...",
+    "ko": "정부는 ...라고 발표했어요.",
+    "highlight": "has announced",
+    "situation": "공식 발표",
+    "cefr": "A2",
+    "topic_id": "news",
+    "tip": "현재완료형으로 방금 또는 최근에 이루어진 공식 발표를 자연스럽게 표현해요."
+  },
+  {
+    "id": "s_news_A2_04",
+    "en": "Protests broke out in...",
+    "ko": "...에서 시위가 발생했어요.",
+    "highlight": "broke out",
+    "situation": "시위·사건 발생",
+    "cefr": "A2",
+    "topic_id": "news",
+    "tip": "갑작스럽게 시작된 시위나 사건을 설명할 때 \"break out\"을 써요. 폭동, 화재, 전쟁 등에도 써요."
+  },
+  {
+    "id": "s_news_B1_03",
+    "en": "The opposition has called for an inquiry into...",
+    "ko": "야당이 ...에 대한 조사를 요구했어요.",
+    "highlight": "has called for an inquiry into",
+    "situation": "야당 성명",
+    "cefr": "B1",
+    "topic_id": "news",
+    "tip": "야당의 공식 요구를 표현할 때 써요. \"call for\"는 공식적으로 요구하다는 뜻이에요."
+  },
+  {
+    "id": "s_news_B1_01",
+    "en": "The government is under pressure to...",
+    "ko": "정부가 ...에 대한 압박을 받고 있어요.",
+    "highlight": "is under pressure to",
+    "situation": "정치 논의",
+    "cefr": "B1",
+    "topic_id": "news",
+    "tip": "정치·외교 논의에서 자주 쓰이는 표현이에요. \"under pressure to reform\" 처럼 동사 원형을 이어 써요."
+  },
+  {
+    "id": "s_news_B1_02",
+    "en": "Critics have accused the minister of...",
+    "ko": "비평가들이 장관을 ...혐의로 비난했어요.",
+    "highlight": "Critics have accused",
+    "situation": "비난·고발",
+    "cefr": "B1",
+    "topic_id": "news",
+    "tip": "현재완료형으로 최근의 비난·고발을 전달해요. \"of + 동명사\" 패턴을 외워두면 편리해요."
+  },
+  {
+    "id": "s_news_B1_04",
+    "en": "Unemployment figures rose to... percent.",
+    "ko": "실업률이 ...%로 올랐어요.",
+    "highlight": "rose to",
+    "situation": "경제 지표",
+    "cefr": "B1",
+    "topic_id": "news",
+    "tip": "경제 지표를 보도할 때 쓰는 패턴이에요. \"rose to\", \"fell to\", \"hit a record high/low\"와 함께 외워두세요."
+  },
+  {
+    "id": "s_news_B1_07",
+    "en": "Inflation has reached its highest level in... years.",
+    "ko": "인플레이션이 ...년 만에 최고치에 달했어요.",
+    "highlight": "has reached its highest level",
+    "situation": "경제 보도",
+    "cefr": "B1",
+    "topic_id": "news",
+    "tip": "경제 기사에서 최고점을 강조할 때 쓰는 현재완료 표현이에요. \"lowest level\", \"highest point\" 등을 바꿔 써요."
+  },
+  {
+    "id": "s_news_B1_05",
+    "en": "The legislation was passed by a majority of...",
+    "ko": "법안이 ...의 다수결로 통과됐어요.",
+    "highlight": "was passed by a majority",
+    "situation": "입법 보도",
+    "cefr": "B1",
+    "topic_id": "news",
+    "tip": "의회에서 법안이 통과됐을 때 쓰는 수동태 표현이에요. \"slim majority(근소한 다수)\" 등의 수식어를 붙여요."
+  },
+  {
+    "id": "s_news_B1_06",
+    "en": "The minister resigned amid allegations of...",
+    "ko": "장관이 ...혐의 속에 사임했어요.",
+    "highlight": "resigned amid allegations of",
+    "situation": "스캔들 보도",
+    "cefr": "B1",
+    "topic_id": "news",
+    "tip": "스캔들로 인한 사임 보도에서 자주 나오는 구조예요. \"amid\"는 \"~속에/~가운데\"라는 뜻이에요."
+  },
+  {
+    "id": "s_news_B2_03",
+    "en": "The two nations agreed to resume diplomatic talks.",
+    "ko": "두 나라가 외교 회담 재개에 합의했어요.",
+    "highlight": "agreed to resume diplomatic talks",
+    "situation": "외교 관계",
+    "cefr": "B2",
+    "topic_id": "news",
+    "tip": "관계 정상화를 향한 첫 걸음을 표현할 때 써요. \"resume\"은 중단됐다가 다시 시작함을 의미해요."
+  },
+  {
+    "id": "s_news_B2_05",
+    "en": "A multilateral agreement was reached at the summit.",
+    "ko": "정상 회담에서 다자간 합의가 이루어졌어요.",
+    "highlight": "multilateral agreement was reached",
+    "situation": "정상 회담",
+    "cefr": "B2",
+    "topic_id": "news",
+    "tip": "다자 외교의 결과를 보도할 때 쓰는 표현이에요. \"bilateral\"(양자), \"multilateral\"(다자)을 구분해서 써요."
+  },
+  {
+    "id": "s_news_B2_04",
+    "en": "The international community has condemned the attack.",
+    "ko": "국제 사회가 공격을 규탄했어요.",
+    "highlight": "has condemned",
+    "situation": "국제 규탄",
+    "cefr": "B2",
+    "topic_id": "news",
+    "tip": "규탄 성명에서 항상 나오는 표현이에요. \"condemn\"은 \"강하게 비난하다\"는 뜻이에요."
+  },
+  {
+    "id": "s_news_B2_06",
+    "en": "The regime faces growing pressure from the international community.",
+    "ko": "그 정권은 국제 사회로부터 점점 커지는 압박에 직면해 있어요.",
+    "highlight": "faces growing pressure",
+    "situation": "국제 압박",
+    "cefr": "B2",
+    "topic_id": "news",
+    "tip": "정권이 국내외 압박을 받는 상황을 설명할 때 써요. \"growing\"은 압박이 점점 강해지고 있음을 나타내요."
+  },
+  {
+    "id": "s_news_B2_01",
+    "en": "Diplomatic tensions have escalated between... and...",
+    "ko": "...와 ... 사이의 외교적 긴장이 고조됐어요.",
+    "highlight": "Diplomatic tensions have escalated",
+    "situation": "국제 분쟁",
+    "cefr": "B2",
+    "topic_id": "news",
+    "tip": "두 나라 간의 갈등 고조를 표현할 때 써요. \"escalate\"는 상황이 점점 심각해지는 것을 나타내요."
+  },
+  {
+    "id": "s_news_B2_02",
+    "en": "Sanctions have been imposed on... in response to...",
+    "ko": "...에 대응해 ...에 제재가 부과됐어요.",
+    "highlight": "Sanctions have been imposed on",
+    "situation": "제재 보도",
+    "cefr": "B2",
+    "topic_id": "news",
+    "tip": "제재 부과를 수동태로 표현하는 국제 뉴스 정형 문구예요. \"in response to\"는 이유를 나타내요."
+  },
+  {
+    "id": "s_news_B2_07",
+    "en": "The referendum resulted in a vote for independence.",
+    "ko": "국민 투표 결과 독립 찬성으로 나왔어요.",
+    "highlight": "referendum resulted in",
+    "situation": "국민 투표",
+    "cefr": "B2",
+    "topic_id": "news",
+    "tip": "국민 투표 결과를 보도할 때 쓰는 표현이에요. \"result in\"은 특정 결과로 이어짐을 나타내요."
+  },
+  {
+    "id": "s_news_C1_05",
+    "en": "The court's ruling may have far-reaching implications for...",
+    "ko": "법원의 판결은 ...에 광범위한 영향을 미칠 수 있어요.",
+    "highlight": "may have far-reaching implications for",
+    "situation": "사법 분석",
+    "cefr": "C1",
+    "topic_id": "news",
+    "tip": "법적 판결이 더 넓은 영역에 미치는 파급 효과를 분석할 때 써요. \"far-reaching\"은 \"광범위한\"이라는 뜻이에요."
+  },
+  {
+    "id": "s_news_C1_03",
+    "en": "The bilateral relationship has deteriorated significantly in recent months.",
+    "ko": "양자 관계가 최근 몇 달 동안 크게 악화됐어요.",
+    "highlight": "has deteriorated significantly",
+    "situation": "외교 분석",
+    "cefr": "C1",
+    "topic_id": "news",
+    "tip": "관계 악화를 표현할 때 \"deteriorate\"를 써요. \"improve dramatically\", \"stabilize gradually\"와 반대 표현으로 외워요."
+  },
+  {
+    "id": "s_news_C1_02",
+    "en": "The sanctions regime has failed to achieve its stated objectives.",
+    "ko": "제재 체제가 명시된 목표를 달성하는 데 실패했어요.",
+    "highlight": "has failed to achieve its stated objectives",
+    "situation": "정책 비판 분석",
+    "cefr": "C1",
+    "topic_id": "news",
+    "tip": "정책 효과를 비판적으로 분석할 때 쓰는 표현이에요. \"stated objectives\"는 공식적으로 밝힌 목표를 뜻해요."
+  },
+  {
+    "id": "s_news_C1_07",
+    "en": "Analysts warn of the risk of further escalation in the region.",
+    "ko": "분석가들은 지역 내 추가 확전 위험을 경고해요.",
+    "highlight": "warn of the risk of further escalation",
+    "situation": "분쟁 분석",
+    "cefr": "C1",
+    "topic_id": "news",
+    "tip": "분쟁 지역 상황 분석에서 자주 쓰이는 표현이에요. \"escalation\"은 갈등 심화를, \"further\"는 추가적임을 나타내요."
+  },
+  {
+    "id": "s_news_C1_06",
+    "en": "The government invoked emergency powers to suppress dissent.",
+    "ko": "정부가 반대 의견을 억압하기 위해 비상 권한을 발동했어요.",
+    "highlight": "invoked emergency powers to suppress",
+    "situation": "권위주의 분석",
+    "cefr": "C1",
+    "topic_id": "news",
+    "tip": "강압적 통치를 보도하거나 분석할 때 쓰는 표현이에요. \"invoke\"는 법이나 권한을 공식 발동하는 뜻이에요."
+  },
+  {
+    "id": "s_news_C1_04",
+    "en": "There are growing concerns about the erosion of democratic norms.",
+    "ko": "민주주의 규범 침식에 대한 우려가 커지고 있어요.",
+    "highlight": "growing concerns about the erosion of",
+    "situation": "민주주의 분석",
+    "cefr": "C1",
+    "topic_id": "news",
+    "tip": "추상적인 제도나 가치의 약화를 표현할 때 써요. \"erosion of\"는 서서히 무너지는 것을 나타내요."
+  },
+  {
+    "id": "s_news_C1_01",
+    "en": "The decision sets a significant precedent for international law.",
+    "ko": "그 결정은 국제법에 중요한 선례를 남겨요.",
+    "highlight": "sets a significant precedent",
+    "situation": "국제법 분석",
+    "cefr": "C1",
+    "topic_id": "news",
+    "tip": "법적·외교적 판단이 미래에 미치는 영향을 설명할 때 써요. \"landmark precedent\", \"dangerous precedent\"도 자주 쓰여요."
+  },
+  {
+    "id": "s_news_C2_04",
+    "en": "The normative framework underpinning the international order is being contested.",
+    "ko": "국제 질서를 뒷받침하는 규범적 틀이 도전받고 있어요.",
+    "highlight": "normative framework underpinning the international order is being contested",
+    "situation": "규범 분석",
+    "cefr": "C2",
+    "topic_id": "news",
+    "tip": "국제 규범의 위기를 설명하는 학술적 표현이에요. \"underpin\"은 \"뒷받침하다\", \"contest\"는 \"이의를 제기하다\"는 뜻이에요."
+  },
+  {
+    "id": "s_news_C2_05",
+    "en": "The crisis exposes the epistemic limits of mainstream IR theory.",
+    "ko": "위기는 주류 국제 관계 이론의 인식론적 한계를 드러내요.",
+    "highlight": "exposes the epistemic limits of",
+    "situation": "IR 이론 비판",
+    "cefr": "C2",
+    "topic_id": "news",
+    "tip": "국제 관계(IR) 학문에서 이론의 설명력 한계를 비판할 때 써요. \"epistemic\"은 지식·인식에 관련된 형용사예요."
+  },
+  {
+    "id": "s_news_C2_02",
+    "en": "The conflict can be read as a manifestation of postcolonial tensions.",
+    "ko": "그 분쟁은 탈식민적 긴장의 표현으로 읽힐 수 있어요.",
+    "highlight": "can be read as a manifestation of",
+    "situation": "탈식민 분석",
+    "cefr": "C2",
+    "topic_id": "news",
+    "tip": "학문적·비판적 분석에서 쓰이는 표현이에요. \"manifestation of\"는 어떤 현상의 구체적 발현을 뜻해요."
+  },
+  {
+    "id": "s_news_C2_03",
+    "en": "Securitization of the issue has foreclosed alternative policy responses.",
+    "ko": "그 문제의 안보화가 대안적 정책 대응을 차단했어요.",
+    "highlight": "Securitization of the issue has foreclosed",
+    "situation": "안보화 이론",
+    "cefr": "C2",
+    "topic_id": "news",
+    "tip": "코펜하겐 학파의 안보화 이론을 적용한 분석 표현이에요. \"foreclose\"는 가능성을 원천 봉쇄하는 것을 뜻해요."
+  },
+  {
+    "id": "s_news_C2_06",
+    "en": "Subaltern voices remain systematically excluded from diplomatic discourse.",
+    "ko": "하위 주체의 목소리는 외교 담론에서 체계적으로 배제돼요.",
+    "highlight": "Subaltern voices remain systematically excluded",
+    "situation": "탈식민 비판",
+    "cefr": "C2",
+    "topic_id": "news",
+    "tip": "탈식민 이론과 비판 IR에서 쓰이는 표현이에요. \"subaltern\"은 권력 구조에서 소외된 주체를 뜻해요."
+  },
+  {
+    "id": "s_news_C2_01",
+    "en": "The hegemon's unilateral actions undermine the multilateral rules-based order.",
+    "ko": "패권국의 일방적 행동이 다자 규칙 기반 질서를 약화시켜요.",
+    "highlight": "unilateral actions undermine the multilateral rules-based order",
+    "situation": "국제 질서 분석",
+    "cefr": "C2",
+    "topic_id": "news",
+    "tip": "국제 정치 분석에서 핵심 패턴이에요. \"rules-based order\"는 현 국제 체계를 가리키는 전문 용어예요."
+  },
+  {
+    "id": "s_news_C2_07",
+    "en": "The state's ontological security imperative drove its foreign policy choices.",
+    "ko": "국가의 존재론적 안보 요구가 외교 정책 선택을 이끌었어요.",
+    "highlight": "ontological security imperative drove its foreign policy choices",
+    "situation": "존재론적 안보",
+    "cefr": "C2",
+    "topic_id": "news",
+    "tip": "미어샤이머나 스틸(Steele) 등의 이론에서 나온 분석 틀이에요. \"ontological security\"는 국가의 정체성 안정감을 뜻해요."
+  },
+  {
+    "id": "s_sports_A1_06",
+    "en": "Our team won the game!",
+    "ko": "우리 팀이 경기에서 이겼어요!",
+    "highlight": "Our team won",
+    "situation": "결과 말하기",
+    "cefr": "A1",
+    "topic_id": "sports",
+    "tip": "과거형 won은 win의 불규칙 과거예요. 경기 결과를 말할 때 자주 써요."
+  },
+  {
+    "id": "s_sports_A1_02",
+    "en": "I like to swim in summer.",
+    "ko": "저는 여름에 수영하는 걸 좋아해요.",
+    "highlight": "I like to",
+    "situation": "취미 소개",
+    "cefr": "A1",
+    "topic_id": "sports",
+    "tip": "좋아하는 운동을 말할 때 \"I like to + 동사원형\"을 쓰면 간단하고 자연스러워요."
+  },
+  {
+    "id": "s_sports_A1_03",
+    "en": "Can you run fast?",
+    "ko": "빠르게 달릴 수 있어요?",
+    "highlight": "Can you",
+    "situation": "능력 묻기",
+    "cefr": "A1",
+    "topic_id": "sports",
+    "tip": "Can you + 동사원형?은 능력을 묻는 가장 간단한 방법이에요."
+  },
+  {
+    "id": "s_sports_A1_07",
+    "en": "I go to the gym every week.",
+    "ko": "저는 매주 헬스장에 가요.",
+    "highlight": "I go to the gym",
+    "situation": "운동 습관",
+    "cefr": "A1",
+    "topic_id": "sports",
+    "tip": "주기를 말할 때 every day / every week / every weekend처럼 뒤에 붙여요."
+  },
+  {
+    "id": "s_sports_A1_04",
+    "en": "What is your favourite sport?",
+    "ko": "제일 좋아하는 스포츠가 뭐예요?",
+    "highlight": "What is your favourite",
+    "situation": "선호 묻기",
+    "cefr": "A1",
+    "topic_id": "sports",
+    "tip": "favourite 대신 favorite으로도 써요 (미국식). 좋아하는 것을 물을 때 꼭 외워두세요."
+  },
+  {
+    "id": "s_sports_A1_05",
+    "en": "Let's play together after school!",
+    "ko": "방과 후에 같이 운동해요!",
+    "highlight": "Let's play together",
+    "situation": "함께하기 제안",
+    "cefr": "A1",
+    "topic_id": "sports",
+    "tip": "Let's + 동사원형은 상대방을 함께 하도록 초대할 때 써요."
+  },
+  {
+    "id": "s_sports_A1_01",
+    "en": "Do you play any sports?",
+    "ko": "운동 하세요?",
+    "highlight": "Do you play",
+    "situation": "운동 화제",
+    "cefr": "A1",
+    "topic_id": "sports",
+    "tip": "play는 규칙이 있는 스포츠(축구·야구·농구)에 쓰고, do는 개인 운동(yoga·taekwondo)에 써요."
+  },
+  {
+    "id": "s_sports_A2_07",
+    "en": "He broke the record by two seconds.",
+    "ko": "그는 기록을 2초 차이로 깼어요.",
+    "highlight": "broke the record",
+    "situation": "기록 표현",
+    "cefr": "A2",
+    "topic_id": "sports",
+    "tip": "break a record는 \"기록을 깨다\"는 뜻의 관용 표현이에요. broke는 break의 불규칙 과거형이에요."
+  },
+  {
+    "id": "s_sports_A2_02",
+    "en": "The score was three to one.",
+    "ko": "점수는 3대 1이었어요.",
+    "highlight": "The score was",
+    "situation": "경기 결과",
+    "cefr": "A2",
+    "topic_id": "sports",
+    "tip": "영어로 점수를 말할 때 \"three to one\" 또는 \"three-one\"으로 읽어요."
+  },
+  {
+    "id": "s_sports_A2_05",
+    "en": "The game ended in a draw.",
+    "ko": "경기가 무승부로 끝났어요.",
+    "highlight": "ended in a draw",
+    "situation": "경기 결과",
+    "cefr": "A2",
+    "topic_id": "sports",
+    "tip": "end in a draw는 \"무승부로 끝나다\"를 뜻하는 고정 표현이에요. ended in a tie도 같은 의미예요."
+  },
+  {
+    "id": "s_sports_A2_04",
+    "en": "I can't believe they lost again.",
+    "ko": "또 졌다니 믿을 수가 없어요.",
+    "highlight": "I can't believe",
+    "situation": "감탄·놀람",
+    "cefr": "A2",
+    "topic_id": "sports",
+    "tip": "I can't believe + (that) 절 패턴은 놀람을 표현할 때 자주 써요."
+  },
+  {
+    "id": "s_sports_A2_03",
+    "en": "She scored twice in the second half.",
+    "ko": "그녀는 후반전에 두 번 득점했어요.",
+    "highlight": "scored twice",
+    "situation": "득점 표현",
+    "cefr": "A2",
+    "topic_id": "sports",
+    "tip": "twice = 두 번. 특정 숫자의 경우 once, twice, three times처럼 써요."
+  },
+  {
+    "id": "s_sports_A2_01",
+    "en": "Did you watch the match last night?",
+    "ko": "어젯밤 경기 봤어요?",
+    "highlight": "Did you watch",
+    "situation": "경기 이야기",
+    "cefr": "A2",
+    "topic_id": "sports",
+    "tip": "Did you + 동사원형? 패턴으로 과거 행동을 자연스럽게 물어볼 수 있어요."
+  },
+  {
+    "id": "s_sports_A2_06",
+    "en": "Who do you think will win the final?",
+    "ko": "결승에서 누가 이길 것 같아요?",
+    "highlight": "Who do you think will",
+    "situation": "예측 묻기",
+    "cefr": "A2",
+    "topic_id": "sports",
+    "tip": "Who do you think will + 동사?는 예측을 물을 때 쓰는 자연스러운 표현이에요."
+  },
+  {
+    "id": "s_sports_B1_05",
+    "en": "The referee should have given a penalty in that situation.",
+    "ko": "심판은 그 상황에서 패널티를 줬어야 했어요.",
+    "highlight": "should have given",
+    "situation": "판정 논평",
+    "cefr": "B1",
+    "topic_id": "sports",
+    "tip": "should have + 과거분사는 과거에 하지 않은 일에 대한 아쉬움이나 비판을 나타내요."
+  },
+  {
+    "id": "s_sports_B1_02",
+    "en": "Our strategy was to press high and win the ball back quickly.",
+    "ko": "우리 전략은 높게 압박하고 빠르게 공을 되찾는 것이었어요.",
+    "highlight": "Our strategy was to",
+    "situation": "팀 전략",
+    "cefr": "B1",
+    "topic_id": "sports",
+    "tip": "strategy was to + 동사원형으로 계획을 설명할 수 있어요."
+  },
+  {
+    "id": "s_sports_B1_07",
+    "en": "Sportsmanship matters more than winning at all costs.",
+    "ko": "스포츠맨십은 어떤 대가를 치르더라도 이기는 것보다 더 중요해요.",
+    "highlight": "matters more than",
+    "situation": "스포츠 가치관",
+    "cefr": "B1",
+    "topic_id": "sports",
+    "tip": "A matters more than B 패턴은 비교 우선순위를 말할 때 써요."
+  },
+  {
+    "id": "s_sports_B1_06",
+    "en": "I'm not sure why they didn't substitute the tired striker earlier.",
+    "ko": "왜 지친 스트라이커를 더 일찍 교체하지 않았는지 모르겠어요.",
+    "highlight": "I'm not sure why",
+    "situation": "전술 의문",
+    "cefr": "B1",
+    "topic_id": "sports",
+    "tip": "I'm not sure why + 절은 의문과 불만을 부드럽게 표현해요."
+  },
+  {
+    "id": "s_sports_B1_01",
+    "en": "The coach changed the formation at halftime.",
+    "ko": "코치가 하프타임에 포메이션을 바꿨어요.",
+    "highlight": "changed the formation",
+    "situation": "전술 분석",
+    "cefr": "B1",
+    "topic_id": "sports",
+    "tip": "at halftime은 \"하프타임에\"라는 표현으로 경기 분석 시 자주 나와요."
+  },
+  {
+    "id": "s_sports_B1_03",
+    "en": "If we had scored first, the result might have been different.",
+    "ko": "우리가 먼저 득점했다면, 결과가 달라졌을 수도 있어요.",
+    "highlight": "might have been",
+    "situation": "가정 표현",
+    "cefr": "B1",
+    "topic_id": "sports",
+    "tip": "If + 과거완료, might have + 과거분사 패턴은 반사실 상황을 말할 때 써요 (3형식 가정법)."
+  },
+  {
+    "id": "s_sports_B1_04",
+    "en": "The team focused on maintaining possession throughout the game.",
+    "ko": "팀은 경기 내내 볼 점유율 유지에 집중했어요.",
+    "highlight": "focused on maintaining",
+    "situation": "전술 묘사",
+    "cefr": "B1",
+    "topic_id": "sports",
+    "tip": "focus on + 동명사 패턴으로 집중한 대상을 표현해요."
+  },
+  {
+    "id": "s_sports_B2_06",
+    "en": "Despite the injury setback, she managed to qualify for the finals.",
+    "ko": "부상이라는 역경에도 불구하고, 그녀는 결승 진출에 성공했어요.",
+    "highlight": "Despite the",
+    "situation": "역경 극복",
+    "cefr": "B2",
+    "topic_id": "sports",
+    "tip": "Despite + 명사(구)는 \"~에도 불구하고\"를 뜻하고, Although + 절과 구별해서 써요."
+  },
+  {
+    "id": "s_sports_B2_01",
+    "en": "Performance analytics has transformed the way teams approach match preparation.",
+    "ko": "퍼포먼스 분석이 팀들이 경기 준비에 접근하는 방식을 바꿔놨어요.",
+    "highlight": "has transformed the way",
+    "situation": "스포츠 분석",
+    "cefr": "B2",
+    "topic_id": "sports",
+    "tip": "has transformed는 현재완료로 변화의 영향이 지금도 이어짐을 나타내요."
+  },
+  {
+    "id": "s_sports_B2_02",
+    "en": "The data suggests that high-pressing tactics significantly increase the chance of winning.",
+    "ko": "데이터에 따르면 강한 압박 전술이 승리 가능성을 크게 높여요.",
+    "highlight": "The data suggests that",
+    "situation": "데이터 인용",
+    "cefr": "B2",
+    "topic_id": "sports",
+    "tip": "The data suggests that + 절은 분석 결과를 객관적으로 제시하는 학문적 표현이에요."
+  },
+  {
+    "id": "s_sports_B2_07",
+    "en": "It's worth noting that doping undermines the integrity of the sport.",
+    "ko": "도핑이 스포츠의 무결성을 훼손한다는 점은 주목할 만해요.",
+    "highlight": "It's worth noting that",
+    "situation": "이슈 제기",
+    "cefr": "B2",
+    "topic_id": "sports",
+    "tip": "It's worth noting that은 중요한 사실을 강조할 때 쓰는 격식 표현이에요."
+  },
+  {
+    "id": "s_sports_B2_03",
+    "en": "Without proper periodization, athletes risk overtraining and burnout.",
+    "ko": "적절한 주기화 없이는 선수들이 과훈련과 번아웃의 위험에 처해요.",
+    "highlight": "risk overtraining",
+    "situation": "위험 표현",
+    "cefr": "B2",
+    "topic_id": "sports",
+    "tip": "risk + 동명사는 \"~할 위험에 처하다\"는 뜻이에요. risk doing something 형태로 기억하세요."
+  },
+  {
+    "id": "s_sports_B2_04",
+    "en": "Her tactical awareness sets her apart from other players in the league.",
+    "ko": "그녀의 전술적 감각이 리그의 다른 선수들과 그녀를 구별해줘요.",
+    "highlight": "sets her apart from",
+    "situation": "비교 강조",
+    "cefr": "B2",
+    "topic_id": "sports",
+    "tip": "set apart from은 \"~에서 구별되다, 뛰어나다\"는 관용 표현이에요."
+  },
+  {
+    "id": "s_sports_B2_05",
+    "en": "The coaching staff is reviewing biomechanics footage to correct his running form.",
+    "ko": "코칭 스태프가 달리기 자세를 교정하기 위해 생체역학 영상을 검토 중이에요.",
+    "highlight": "is reviewing",
+    "situation": "훈련 분석",
+    "cefr": "B2",
+    "topic_id": "sports",
+    "tip": "현재진행형(is + -ing)은 현재 진행 중인 지속적 행동을 나타내요."
+  },
+  {
+    "id": "s_sports_C1_02",
+    "en": "Proprioceptive deficits are commonly observed following ankle sprains in athletes.",
+    "ko": "고유 감각 결손은 선수들의 발목 염좌 후에 흔히 관찰돼요.",
+    "highlight": "Proprioceptive deficits are commonly observed",
+    "situation": "의학적 관찰",
+    "cefr": "C1",
+    "topic_id": "sports",
+    "tip": "수동태(are observed)는 학술 및 의학 텍스트에서 관찰 사실을 객관적으로 서술할 때 자주 써요."
+  },
+  {
+    "id": "s_sports_C1_05",
+    "en": "Without adequate recovery, neuromuscular fatigue accumulates and performance deteriorates.",
+    "ko": "충분한 회복 없이는 신경근 피로가 쌓이고 경기력이 저하돼요.",
+    "highlight": "accumulates and deteriorates",
+    "situation": "과훈련 경고",
+    "cefr": "C1",
+    "topic_id": "sports",
+    "tip": "두 동사를 and로 연결해 결과의 연쇄를 표현해요. deteriorate(저하되다)는 기억해두세요."
+  },
+  {
+    "id": "s_sports_C1_04",
+    "en": "Governance failures within sporting bodies have eroded public trust significantly.",
+    "ko": "스포츠 단체 내의 거버넌스 실패가 대중의 신뢰를 크게 잠식했어요.",
+    "highlight": "have eroded",
+    "situation": "스포츠 거버넌스",
+    "cefr": "C1",
+    "topic_id": "sports",
+    "tip": "erode는 \"점진적으로 침식하다, 잠식하다\"는 뜻이에요. 추상적 개념(신뢰·가치)에 자주 써요."
+  },
+  {
+    "id": "s_sports_C1_01",
+    "en": "Training at the lactate threshold elicits significant aerobic adaptations over time.",
+    "ko": "젖산 역치에서의 훈련은 시간이 지남에 따라 상당한 유산소 적응을 이끌어내요.",
+    "highlight": "elicits significant",
+    "situation": "스포츠 과학",
+    "cefr": "C1",
+    "topic_id": "sports",
+    "tip": "elicit는 \"이끌어내다, 유발하다\"는 뜻의 격식 동사예요. produce나 cause보다 학술적이에요."
+  },
+  {
+    "id": "s_sports_C1_07",
+    "en": "Ethical considerations in elite sport extend well beyond the arena itself.",
+    "ko": "엘리트 스포츠의 윤리적 고려 사항은 경기장 자체를 훨씬 넘어서요.",
+    "highlight": "extend well beyond",
+    "situation": "스포츠 윤리",
+    "cefr": "C1",
+    "topic_id": "sports",
+    "tip": "extend well beyond는 \"훨씬 넘어서 확장된다\"는 강조 표현이에요. well은 강조 부사예요."
+  },
+  {
+    "id": "s_sports_C1_03",
+    "en": "Sport psychology interventions can help athletes reframe failure as a learning opportunity.",
+    "ko": "스포츠 심리학 개입은 선수들이 실패를 학습 기회로 재해석하도록 도울 수 있어요.",
+    "highlight": "reframe failure as",
+    "situation": "심리적 접근",
+    "cefr": "C1",
+    "topic_id": "sports",
+    "tip": "reframe A as B는 \"A를 B로 재해석하다\"는 표현으로 인지 변화를 나타내요."
+  },
+  {
+    "id": "s_sports_C1_06",
+    "en": "Periodization frameworks must account for individual variation in recovery capacity.",
+    "ko": "주기화 프레임워크는 회복 능력의 개인 차이를 반드시 고려해야 해요.",
+    "highlight": "must account for",
+    "situation": "훈련 설계",
+    "cefr": "C1",
+    "topic_id": "sports",
+    "tip": "must account for는 \"반드시 고려해야 한다\"는 의무를 나타내는 격식 표현이에요."
+  },
+  {
+    "id": "s_sports_C2_01",
+    "en": "Tensiomyography provides a non-invasive means of quantifying skeletal muscle contractile properties.",
+    "ko": "텐시오미오그라피는 골격근 수축 특성을 정량화하는 비침습적 수단을 제공해요.",
+    "highlight": "non-invasive means of quantifying",
+    "situation": "스포츠 과학 연구",
+    "cefr": "C2",
+    "topic_id": "sports",
+    "tip": "means of + 동명사는 \"~하는 수단\"이라는 뜻이에요. 학술 논문에서 흔히 나오는 구조예요."
+  },
+  {
+    "id": "s_sports_C2_02",
+    "en": "Chronobiological factors, including circadian rhythm, critically modulate athletic performance across disciplines.",
+    "ko": "일주기 리듬을 포함한 시간 생물학적 요인이 다양한 종목에서 운동 능력을 결정적으로 조절해요.",
+    "highlight": "critically modulate",
+    "situation": "시간 생물학",
+    "cefr": "C2",
+    "topic_id": "sports",
+    "tip": "modulate는 \"조절하다, 변조하다\"는 뜻의 고급 동사예요. critically는 \"결정적으로\"라는 부사예요."
+  },
+  {
+    "id": "s_sports_C2_07",
+    "en": "Myofascial dysfunction, if left unaddressed, may perpetuate compensatory movement patterns and predispose athletes to recurrent injury.",
+    "ko": "근막 기능 장애가 방치될 경우 보상 운동 패턴을 지속시키고 선수들을 재발성 부상에 취약하게 할 수 있어요.",
+    "highlight": "if left unaddressed",
+    "situation": "부상 예방",
+    "cefr": "C2",
+    "topic_id": "sports",
+    "tip": "if left unaddressed는 \"방치될 경우\"라는 뜻의 분사구문 조건절이에요. predispose A to B는 \"A를 B에 취약하게 만들다\"예요."
+  },
+  {
+    "id": "s_sports_C2_05",
+    "en": "Allometric scaling must be applied when comparing strength outputs across athletes of differing body masses.",
+    "ko": "서로 다른 체중을 가진 선수들의 근력 출력을 비교할 때 이형성장 척도를 적용해야 해요.",
+    "highlight": "must be applied when comparing",
+    "situation": "데이터 비교",
+    "cefr": "C2",
+    "topic_id": "sports",
+    "tip": "must be applied는 수동 의무 구조예요. when + 동명사(-ing)와 함께 조건을 표현해요."
+  },
+  {
+    "id": "s_sports_C2_03",
+    "en": "The ergogenic potential of phosphocreatine supplementation remains a subject of ongoing inquiry.",
+    "ko": "포스포크레아틴 보충의 경기력 향상 잠재력은 계속 진행 중인 연구의 주제로 남아 있어요.",
+    "highlight": "remains a subject of ongoing inquiry",
+    "situation": "학술 논의",
+    "cefr": "C2",
+    "topic_id": "sports",
+    "tip": "remains a subject of ongoing inquiry는 학술적으로 \"아직 연구 중인 주제이다\"를 표현해요."
+  },
+  {
+    "id": "s_sports_C2_06",
+    "en": "The psychomotor demands of elite competition necessitate a training environment that replicates high-pressure decision-making.",
+    "ko": "엘리트 경쟁의 정신운동적 요구는 고압적 의사결정을 재현하는 훈련 환경을 필요로 해요.",
+    "highlight": "necessitate a training environment that",
+    "situation": "훈련 설계",
+    "cefr": "C2",
+    "topic_id": "sports",
+    "tip": "necessitate는 \"필요로 하다\"는 뜻의 고급 타동사예요. demand나 require보다 강한 어조예요."
+  },
+  {
+    "id": "s_sports_C2_04",
+    "en": "Neuromotor adaptations to resistance training are mediated by both central and peripheral mechanisms.",
+    "ko": "저항 훈련에 대한 신경운동 적응은 중추 및 말초 메커니즘 모두에 의해 매개돼요.",
+    "highlight": "are mediated by",
+    "situation": "신경과학 설명",
+    "cefr": "C2",
+    "topic_id": "sports",
+    "tip": "be mediated by는 \"~에 의해 매개되다\"로 복잡한 인과관계를 학술적으로 설명할 때 써요."
+  }
+]
