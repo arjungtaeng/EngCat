@@ -162,7 +162,49 @@ function ECScreenHome() {
             <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}.</span>
           </div>
         </div>
-        <span style={{ flexShrink: 0, display: 'flex', marginRight: 12 }}>{ECIcon.mascot(T.text === '#F8F5EF', 56)}</span>
+        {/* 마스코트 + Hi 말풍선 */}
+        <div style={{ flexShrink: 0, position: 'relative', marginRight: 28 }}>
+          {/* 말풍선 */}
+          <div style={{
+            position: 'absolute',
+            bottom: 'calc(100% - 4px)',
+            right: 4,
+            background: T.bg2,
+            color: T.text,
+            fontFamily: T.serif,
+            fontSize: 14,
+            fontStyle: 'italic',
+            padding: '4px 12px',
+            borderRadius: 14,
+            border: `1px solid ${T.hair}`,
+            whiteSpace: 'nowrap',
+            lineHeight: 1.2,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+          }}>
+            Hi
+            {/* 꼬리 */}
+            <span style={{
+              position: 'absolute',
+              bottom: -5,
+              right: 12,
+              width: 0, height: 0,
+              borderLeft: '5px solid transparent',
+              borderRight: '5px solid transparent',
+              borderTop: `5px solid ${T.bg2}`,
+            }} />
+            <span style={{
+              position: 'absolute',
+              bottom: -6,
+              right: 11,
+              width: 0, height: 0,
+              borderLeft: '6px solid transparent',
+              borderRight: '6px solid transparent',
+              borderTop: `6px solid ${T.hair}`,
+              zIndex: -1,
+            }} />
+          </div>
+          <span style={{ display: 'flex' }}>{ECIcon.mascot(T.text === '#F8F5EF', 56)}</span>
+        </div>
       </div>
 
       {/* Today's mission card — hero */}
