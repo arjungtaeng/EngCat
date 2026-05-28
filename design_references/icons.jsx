@@ -107,7 +107,7 @@ const ECIcon = {
   // EngCat 마스코트 로고 (dark=true: 다크모드용 크림 고양이 / false: 라이트모드용 검정 고양이)
   mascot: (dark = true, s = 64) => (
     <img
-      src={dark ? 'icons/engcat-dark.png' : 'icons/engcat-light.png'}
+      src={dark ? 'icons/cat-dark-512.png' : 'icons/cat-light-512.png'}
       alt="EngCat"
       width={s}
       height={s}
