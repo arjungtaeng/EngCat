@@ -9,6 +9,7 @@ import { useCardsStore } from '../store/useCardsStore';
 import { useUserStore } from '../store/useUserStore';
 import { Icon } from '../components/icons';
 import { Placeholder } from '../components/primitives/Placeholder';
+import { Logo } from '../components/Logo';
 import { getTodaySession, getReviewSession, getDayOfYear } from '../utils/todaySession';
 import { loadRecord, yesterdayKey, LearningRecord } from '../utils/learningRecord';
 
@@ -99,9 +100,8 @@ export default function HomeScreen({ navigation }: Props) {
       >
         {/* ── Top bar ── */}
         <View style={styles.topbar}>
-          <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 6 }}>
-            <Text style={[styles.logo, { color: T.text, fontFamily: T.serif }]}>EngCat</Text>
-          </View>
+          <Logo size="sm" style={{ width: 32, height: 32 }} />
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }} />
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
             <View style={[styles.streakChip, { backgroundColor: T.bg2, borderColor: T.hair }]}>
               <Icon.flame color={T.accent} size={14} />

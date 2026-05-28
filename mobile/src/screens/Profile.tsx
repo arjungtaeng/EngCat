@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTokens } from '../theme/useTokens';
 import { useUserStore, CefrLevel } from '../store/useUserStore';
 import { Icon } from '../components/icons';
+import { Logo } from '../components/Logo';
 
 const CEFR_OPTIONS: { value: CefrLevel; label: string; ko: string }[] = [
   { value: 'A1', label: 'A1', ko: '왕초보' },
@@ -96,6 +97,7 @@ export default function ProfileScreen() {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
         {/* Header */}
         <View style={styles.header}>
+          <Logo size="sm" style={{ width: 28, height: 28 }} />
           <Text style={[styles.title, { color: T.text, fontFamily: T.serif }]}>내 정보</Text>
         </View>
 
@@ -202,7 +204,7 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   safe:          { flex: 1 },
-  header:        { paddingHorizontal: 22, paddingTop: 8, paddingBottom: 16 },
+  header:        { paddingHorizontal: 22, paddingTop: 8, paddingBottom: 16, flexDirection: 'row', alignItems: 'center', gap: 12 },
   title:         { fontSize: 26, letterSpacing: -0.3 },
   profileCard:   { marginHorizontal: 18, borderRadius: 22, borderWidth: 1, padding: 20, flexDirection: 'row', alignItems: 'center', gap: 16, marginBottom: 12 },
   avatar:        { width: 64, height: 64, borderRadius: 32, borderWidth: 1, alignItems: 'center', justifyContent: 'center' },

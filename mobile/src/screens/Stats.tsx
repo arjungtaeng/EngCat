@@ -5,6 +5,7 @@ import { useTokens } from '../theme/useTokens';
 import { useUserStore } from '../store/useUserStore';
 import { useCardsStore } from '../store/useCardsStore';
 import { Icon } from '../components/icons';
+import { Logo } from '../components/Logo';
 
 const DAYS_KO = ['월', '화', '수', '목', '금', '토', '일'];
 
@@ -42,6 +43,7 @@ export default function StatsScreen() {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
         {/* Header */}
         <View style={styles.header}>
+          <Logo size="sm" style={{ width: 28, height: 28 }} />
           <Text style={[styles.title, { color: T.text, fontFamily: T.serif }]}>나의 진도</Text>
         </View>
 
@@ -137,7 +139,7 @@ export default function StatsScreen() {
 
 const styles = StyleSheet.create({
   safe:          { flex: 1 },
-  header:        { paddingHorizontal: 22, paddingTop: 8, paddingBottom: 16 },
+  header:        { paddingHorizontal: 22, paddingTop: 8, paddingBottom: 16, flexDirection: 'row', alignItems: 'center', gap: 12 },
   title:         { fontSize: 26, letterSpacing: -0.3 },
   streakCard:    { marginHorizontal: 18, borderRadius: 22, borderWidth: 1, padding: 18, flexDirection: 'row', alignItems: 'center', position: 'relative', overflow: 'hidden', marginBottom: 12 },
   streakGlow:    { position: 'absolute', top: -30, right: -30, width: 140, height: 140, borderRadius: 70 },

@@ -1,415 +1,234 @@
-// EngCat — Expression card (패턴 · 콜로 · 이디엄 · 뉘앙스)
-// 단일 카드 화면에서 4가지 표현 타입을 모두 처리합니다.
-// 진입 소스(window.ECCardSource.expressions)가 있으면 그 리스트를 사용,
-// 없으면 사용자 레벨에 맞는 ECData.patterns만 보여줍니다.
-
-const EC_TYPE_LABELS = { pattern: '패턴', collocation: '콜로', idiom: '이디엄', nuance: '뉘앙스' };
+// EngCat — Sentence card (pattern-based)
+// 패턴("I'd like ~")과 그 패턴을 활용한 예문 3~4개를 한 카드에 표시.
+// Supabase sentences 테이블에 ex1~ex4 컬럼 필요.
 
 function ECScreenSentenceCard() {
   const T = ECTokens;
   const isDark = T.text === '#F8F5EF';
-  const session = window.ECSession;
-  const [dataVersion, setDataVersion] = React.useState(0);
+  const todaySession = React.useMemo(() => window.ECGetTodaySession(), []);
+  // 오늘 분량의 표현 (패턴 → 콜로 → 이디엄 → 뉘앙스 순서)
+  const sentences = todaySession.expressions.length > 0 ? todaySession.expressions : ECData.sentences;
+  const session = ECSession;
 
-  React.useEffect(() => {
-    window.ECDataLoaded && window.ECDataLoaded.then(() => setDataVersion(v => v + 1));
-  }, []);
-
-  // 사용자 레벨 가져오기
-  const userLevel = (() => {
-    try { return JSON.parse(localStorage.getItem('engcat_user'))?.level || 'B1'; }
-    catch(e) { return 'B1'; }
-  })();
-
-  // 진입 소스: 홈에서 표현 리스트로 들어온 경우 그 목록을 사용
-  const cardSource = React.useRef(window.ECCardSource || null);
-  React.useEffect(() => { window.ECCardSource = null; }, []);
-
-  // 데이터 소스: 외부 source가 있으면 그걸, 아니면 사용자 레벨의 패턴들
-  const allPatterns = (window.ECData && window.ECData.patterns) || [];
-  const externalList = cardSource.current && cardSource.current.expressions;
-  const patterns = (externalList && externalList.length > 0)
-    ? externalList
-    : allPatterns.filter(p => p.level === userLevel);
-
-  const [idx, setIdx] = React.useState(
-    (cardSource.current && typeof cardSource.current.startIndex === 'number')
-      ? cardSource.current.startIndex
-      : (session && session.sentenceIndex) || 0
-  );
-
-  // sentenceIndex가 범위를 벗어나면 0으로 보정
-  React.useEffect(() => {
-    if (patterns.length > 0 && idx >= patterns.length) {
-      setIdx(0);
-      if (session) session.sentenceIndex = 0;
-    }
-  }, [patterns.length]);
-
+  const [idx, setIdx] = React.useState(session.sentenceIndex);
   const [animKey, setAnimKey] = React.useState(0);
-  const [bookmarked, setBookmarked] = React.useState(() => new Set((session && session.bookmarkedIds) || []));
-  const [heroDim, setHeroDim] = React.useState(0);
+  const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
+  const [swipeX, setSwipeX] = React.useState(0);
+  const [slideOut, setSlideOut] = React.useState(0);
   const touchStartX = React.useRef(null);
   const touchStartY = React.useRef(null);
+  const swipeDir = React.useRef(null);
 
-  const handleScrollDim = React.useCallback((e) => {
-    const st = e.currentTarget.scrollTop;
-    const triggerEnd = window.innerHeight * 0.30;
-    const opacity = Math.min(st / triggerEnd, 1) * 0.65;
-    setHeroDim(opacity);
-  }, []);
-
-  const p = patterns[idx] || null;
-  if (!p) {
-    const isLoading = dataVersion === 0;
-    return (
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: T.bg0, padding: '0 32px', gap: 16 }}>
-        <div style={{ color: T.textDim, fontFamily: T.mono, fontSize: 13, textAlign: 'center' }}>
-          {isLoading ? '데이터 불러오는 중...' : `${userLevel} 레벨의 패턴이 아직 없어요.`}
-        </div>
-        <div onClick={() => window.ECNav?.go('home')} style={{
-          padding: '12px 28px', borderRadius: 12, background: T.accent,
-          color: T.accentText, fontFamily: T.mono, fontSize: 12, fontWeight: 600, cursor: 'pointer',
-        }}>홈으로</div>
-      </div>
-    );
-  }
-
-  const isLast = idx === patterns.length - 1;
+  const s = sentences[idx];
+  const isLast = idx === sentences.length - 1;
   const isFirst = idx === 0;
-  const isBookmarked = bookmarked.has(p.id);
+  const isBookmarked = bookmarked.has(s.id);
+
+  // 카드 타입(패턴/콜로/이디엄/뉘앙스)별 정규화 — patterns만 examples 배열을 가짐
+  const examples = Array.isArray(s.examples) && s.examples.length > 0
+    ? s.examples.map(ex => typeof ex === 'string' ? { en: ex } : ex)
+    : [
+        s.ex1 && { en: s.ex1, ko: s.ex1Ko },
+        s.ex2 && { en: s.ex2, ko: s.ex2Ko },
+        s.ex3 && { en: s.ex3, ko: s.ex3Ko },
+        s.ex4 && { en: s.ex4, ko: s.ex4Ko },
+      ].filter(Boolean);
+  const typeLabel = s.type === 'collocation' ? '콜로'
+                  : s.type === 'idiom'       ? '이디엄'
+                  : s.type === 'nuance'      ? '뉘앙스'
+                  : '패턴';
 
   const goTo = (dir) => {
     if (dir === 'next') {
-      session.markSentenceDone(p.id);
-      if (isLast) { session.sentenceIndex = 0; window.ECNav?.go('home'); return; }
+      session.markSentenceDone(s.id);
+      if (isLast) { session.sentenceIndex = 0; window.ECNav?.go('quiz'); return; }
     }
     if (dir === 'prev' && isFirst) return;
     const next = idx + (dir === 'next' ? 1 : -1);
-    session.sentenceIndex = next;
-    setIdx(next);
-    setAnimKey(k => k + 1);
-    setHeroDim(0);
+    setSlideOut(dir === 'next' ? -110 : 110);
+    setTimeout(() => {
+      session.sentenceIndex = next;
+      setIdx(next);
+      setAnimKey(k => k + 1);
+      setSlideOut(0);
+      setSwipeX(0);
+    }, 240);
   };
 
   const handleTouchStart = (e) => {
+    if (slideOut !== 0) return;
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
+    swipeDir.current = null;
   };
 
-  const handleTouchEnd = (e) => {
+  const handleTouchMove = (e) => {
+    if (touchStartX.current === null || slideOut !== 0) return;
+    const dx = e.touches[0].clientX - touchStartX.current;
+    const dy = e.touches[0].clientY - touchStartY.current;
+    if (swipeDir.current === null) {
+      if (Math.abs(dx) > Math.abs(dy) + 8) swipeDir.current = 'h';
+      else if (Math.abs(dy) > Math.abs(dx) + 8) swipeDir.current = 'v';
+    }
+    if (swipeDir.current === 'h') setSwipeX(dx * 0.9);
+  };
+
+  const handleTouchEnd = () => {
     if (touchStartX.current === null) return;
-    const t = e.changedTouches[0];
-    const dx = t.clientX - touchStartX.current;
-    const dy = t.clientY - touchStartY.current;
+    const threshold = window.innerWidth * 0.5;
+    if (swipeX < -threshold) goTo('next');
+    else if (swipeX > threshold && !isFirst) goTo('prev');
+    else setSwipeX(0);
     touchStartX.current = null;
-    touchStartY.current = null;
-    if (Math.abs(dx) < window.innerWidth * 0.25) return;
-    if (Math.abs(dy) > Math.abs(dx)) return;
-    if (dx < 0) goTo('next');
-    else if (dx > 0 && !isFirst) goTo('prev');
+    swipeDir.current = null;
   };
 
   const toggleBookmark = () => {
     const next = new Set(bookmarked);
-    if (next.has(p.id)) { next.delete(p.id); session.bookmarkedIds.delete(p.id); }
-    else { next.add(p.id); session.bookmarkedIds.add(p.id); }
+    if (next.has(s.id)) { next.delete(s.id); session.bookmarkedIds.delete(s.id); }
+    else { next.add(s.id); session.bookmarkedIds.add(s.id); }
     session.saveBookmarks();
     setBookmarked(next);
   };
 
-  const speak = (text) => window.ECSpeak && window.ECSpeak(text);
+  const speak = (text) => window.ECSpeak(text || s.en);
 
-  const STOP = new Set(['a','an','the','is','are','was','were','be','been','to','of','in','for','on','with','at','by','i','you','he','she','we','they','and','or','but','that','this','it','its','my','your','his','her','our','their']);
+  const swipingPrev = swipeX > 30 && !isFirst;
+  const btnLabel = swipingPrev ? '이전 카드' : isLast ? '퀴즈 시작하기' : '다음 카드';
+  const btnBg    = swipingPrev ? (isDark ? 'rgba(255,255,255,0.10)' : T.bg2) : T.accent;
+  const btnColor = swipingPrev ? T.text : T.accentText;
+  const btnBd    = swipingPrev ? T.hair : 'none';
 
-  function renderEx(ex, highlight) {
-    if (!ex) return ex;
-    // 1. {마커} 있으면 우선 사용
-    if (ex.includes('{')) {
-      const parts = ex.split(/\{([^}]+)\}/);
-      return parts.map((part, i) =>
-        i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
-      );
-    }
-    if (!highlight) return ex;
+  const contentTransform = slideOut !== 0 ? `translateX(${slideOut}%)` : `translateX(${swipeX}px)`;
+  const contentTransition = slideOut !== 0 ? 'transform 0.24s cubic-bezier(0.4,0,0.2,1)' : 'none';
 
-    let pattern;
-    if (Array.isArray(highlight)) {
-      // 패턴 고정 파트: 각 부분을 exact 매칭 (2글자 이상)
-      const terms = highlight.filter(t => t.length >= 2).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-      if (!terms.length) return ex;
-      pattern = terms.join('|');
-    } else {
-      // 단어/표현: 유효 단어별 prefix 매칭으로 동사 변형 커버
-      const words = highlight.toLowerCase().replace(/[^a-z\s'-]/g, ' ').split(/\s+/).filter(w => w.length >= 2 && !STOP.has(w));
-      if (!words.length) return ex;
-      // 4자 이상: \w* 접미어 매칭(변형형 커버), 3자 이하: 정확히 단어 경계만 매칭(오탐 방지)
-      pattern = words.map(w => {
-        const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        return w.length >= 4 ? `\\b${esc}\\w*` : `\\b${esc}\\b`;
-      }).join('|');
-    }
-
-    const parts = ex.split(new RegExp(`(${pattern})`, 'gi'));
-    if (parts.length <= 1) return ex;
-    return parts.map((part, i) =>
-      i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
-    );
-  }
-
-  // ───── Type-based field derivation ──────────────────────────────────────────
-  const type = p.type
-    || (p.pattern ? 'pattern'
-      : (p.verb || p.noun) ? 'collocation'
-      : p.literalKo ? 'idiom'
-      : (p.wordA || p.wordB) ? 'nuance'
-      : 'pattern');
-
-  const title = type === 'pattern' ? p.pattern
-    : type === 'nuance' ? `${p.wordA || ''} vs ${p.wordB || ''}${p.wordC ? ` vs ${p.wordC}` : ''}`
-    : (p.en || '');
-
-  const desc = type === 'pattern' ? p.explanation
-    : type === 'nuance' ? p.comparison
-    : p.ko;
-
-  const literal = type === 'idiom' ? (p.literalKo || '') : '';
-  const tip = (type !== 'pattern') ? (p.tip || '') : '';
-
-  // pattern 타입: [placeholder][suffix] 또는 ~ 기준으로 쪽개 고정 파트 배열 생성
-  // 예: "I've been [verb]-ing for [duration]" → ["I've been", "for"]
-  // 예: "I want to ~" → ["I want to"]
-  const patternParts = type === 'pattern'
-    ? (p.pattern || '')
-        .replace(/\[[^\]]+\][a-z'-]*/gi, '\x00')  // [bracket] 플레이스홀더
-        .replace(/~/g, '\x00')                      // ~ 플레이스홀더
-        .split('\x00')
-        .map(s => s.replace(/[?!.,]$/, '').trim())
-        .filter(s => s.length >= 2)
-    : null;
-
-  const examples = type === 'pattern' ? (p.examples || []).map(ex => ({ ...ex, highlight: patternParts }))
-    : type === 'nuance' ? [
-        p.exA ? { en: p.exA, ko: `${p.wordA}${p.koA ? ` · ${p.koA}` : ''}`, highlight: p.wordA } : null,
-        p.exB ? { en: p.exB, ko: `${p.wordB}${p.koB ? ` · ${p.koB}` : ''}`, highlight: p.wordB } : null,
-        p.exC ? { en: p.exC, ko: `${p.wordC}${p.koC ? ` · ${p.koC}` : ''}`, highlight: p.wordC } : null,
-        p.ex4 ? { en: p.ex4, ko: p.ex4Ko || '', highlight: p.wordA } : null,
-        p.ex5 ? { en: p.ex5, ko: p.ex5Ko || '', highlight: p.wordA } : null,
-      ].filter(Boolean)
-    : [
-        p.ex1 ? { en: p.ex1, ko: p.ex1Ko || '', highlight: p.en } : null,
-        p.ex2 ? { en: p.ex2, ko: p.ex2Ko || '', highlight: p.en } : null,
-        p.ex3 ? { en: p.ex3, ko: p.ex3Ko || '', highlight: p.en } : null,
-        p.ex4 ? { en: p.ex4, ko: p.ex4Ko || '', highlight: p.en } : null,
-        p.ex5 ? { en: p.ex5, ko: p.ex5Ko || '', highlight: p.en } : null,
-      ].filter(Boolean);
-
-  const levelLabel = p.level || p.cefr || '';
-  const topicLabel = p.topic || p.topicId || '';
-  const typeLabel = EC_TYPE_LABELS[type] || '표현';
-
-  // Resolve hero image — prefer own image, fallback to a word sharing the topic.
-  // Use pattern id hash to spread across the image pool (avoid consecutive duplicates).
-  const heroImg = React.useMemo(() => {
-    if (p.img) return p.img;
-    const words = (window.ECData && window.ECData.words) || [];
-    const pool = words.filter(w => w.topicId === topicLabel && w.img);
-    if (!pool.length) return null;
-    let hash = 0;
-    for (let i = 0; i < p.id.length; i++) hash = (hash * 31 + p.id.charCodeAt(i)) >>> 0;
-    return pool[hash % pool.length].img;
-  }, [p.id, p.img, topicLabel, dataVersion]);
-  const heroTint = React.useMemo(() => {
-    if (p.tint) return p.tint;
-    const words = (window.ECData && window.ECData.words) || [];
-    const match = words.find(w => w.topicId === topicLabel);
-    return (match && match.tint) || '#1a2a3a';
-  }, [p.id, p.tint, topicLabel, dataVersion]);
-
-  const btnLabel = isLast ? '홈으로' : `다음 ${typeLabel}`;
+  const overlayGrad = isDark
+    ? 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 15%, transparent 26%, rgba(0,0,0,0.88) 42%, #000 50%)'
+    : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 14%, transparent 26%, ${T.bg1}D0 38%, ${T.bg1} 50%)`;
 
   return (
     <div
-      style={{ flex: 1, minHeight: 0, background: T.bg1, position: 'relative', overflow: 'hidden' }}
+      style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}
       onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
 
+      {/* Full-bleed landscape image */}
+      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+        {s.img
+          ? <img src={s.img} style={{ width: '100%', height: '50%', objectFit: 'cover', objectPosition: 'center' }} alt={s.en} />
+          : <div style={{ width: '100%', height: '50%' }}><ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.sit}/></div>
+        }
+        <div style={{ position: 'absolute', inset: 0, background: overlayGrad }}/>
+      </div>
+
       {/* Top chrome */}
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10, paddingTop: 'env(safe-area-inset-top, 0px)' }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
         <ECStatusBar/>
-        <div style={{ padding: '6px 18px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div onClick={() => window.ECNav?.go('home')} style={{
-            width: 36, height: 36, borderRadius: 999,
-            background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`,
-            backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-            border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-          }}>{ECIcon.chev('left', T.text, 18)}</div>
+        <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{
             padding: '7px 14px', borderRadius: 999,
-            background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`,
-            backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+            background: isDark ? 'rgba(0,0,0,0.35)' : `${T.bg2}CC`, backdropFilter: 'blur(20px)',
             border: `1px solid ${isDark ? 'rgba(255,255,255,0.12)' : T.hair}`,
             fontFamily: T.mono, fontSize: 10.5, color: T.textDim, letterSpacing: 1, textTransform: 'uppercase',
-          }}>{idx + 1} / {patterns.length} · {typeLabel}</div>
-          <div style={{ width: 36 }}/>
+          }}>{idx + 1} / {sentences.length} · {typeLabel}</div>
         </div>
       </div>
 
-      {/* Card content layers (no horizontal transform — swipe navigates but doesn't move) */}
+      {/* Scrollable content */}
       <div
+        key={animKey}
+        className="ec-fade-up"
         style={{
           position: 'absolute',
           top: 0,
           bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)',
           left: 0, right: 0,
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          zIndex: 5,
+          display: 'flex',
+          flexDirection: 'column',
+          transform: contentTransform,
+          transition: contentTransition,
         }}
       >
-        {/* Hero — fixed background at top (z:1). Bottom gradient fades into body bg. */}
-        <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, height: '70%',
-          zIndex: 1, overflow: 'hidden',
-        }}>
-          {heroImg
-            ? <img src={heroImg} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={title} />
-            : <ECPlaceholder height="100%" tint={heroTint} radius={0} label={`hero · ${topicLabel}`}/>
-          }
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: isDark
-              ? `linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, ${T.bg1} 100%)`
-              : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 25%, transparent 55%, ${T.bg1} 100%)`,
-          }}/>
-          {/* 스크롤 딥 오버레이 — 다크: 어둥게, 라이트: bg1 그라데이션 색으로 밝게 */}
-          <div style={{ position: 'absolute', inset: 0, background: isDark ? '#000' : T.bg1, opacity: heroDim, pointerEvents: 'none' }}/>
-        </div>
+        <div style={{ flex: '0 0 40%', minHeight: 120 }} />
 
-        {/* Text scroll layer (z:5) — flows over the hero as the user scrolls up */}
-        <div
-          key={animKey}
-          className="ec-fade-up"
-          style={{
-            position: 'absolute', inset: 0,
-            overflowY: 'auto',
-            WebkitOverflowScrolling: 'touch',
-            zIndex: 5,
-          }}
-          onScroll={handleScrollDim}
-        >
-          {/* Peek-through spacer matching hero height — text starts just below hero */}
-          <div style={{ height: '52%', flexShrink: 0, pointerEvents: 'none' }} />
-          <div style={{ padding: '4px 22px 24px' }}>
+        <div style={{ padding: '0 22px 20px' }}>
 
-
-          {/* Type + Level + Topic chips */}
-          <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              padding: '5px 10px', borderRadius: 6,
-              background: T.accentSoft, color: T.accent,
-              fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase', fontWeight: 600,
-            }}>
-              {typeLabel}
-            </div>
-            {levelLabel && (
+          {/* Situation tag (패턴만 있음) */}
+          {s.sit && (
+            <div style={{ marginBottom: 12 }}>
               <div style={{
-                display: 'inline-flex', alignItems: 'center',
+                display: 'inline-flex', alignItems: 'center', gap: 6,
                 padding: '5px 10px', borderRadius: 6,
-                background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2, color: T.textDim,
-                fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase', fontWeight: 600,
-              }}>
-                {levelLabel}
-              </div>
-            )}
-            {topicLabel && (
-              <div style={{
-                display: 'inline-flex', alignItems: 'center',
-                padding: '5px 10px', borderRadius: 6,
-                background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2, color: T.textDim,
+                background: T.accentSoft, color: T.accent,
                 fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase',
               }}>
-                {topicLabel}
+                <span style={{ width: 5, height: 5, borderRadius: 3, background: T.accent }}/>
+                {s.sit}
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
-          {/* Title — pattern/en/comparison head (단어 카드와 같은 T.thin 폰트) */}
+          {/* Pattern */}
           <div style={{
-            fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 38, lineHeight: 1.15,
-            color: T.text, letterSpacing: -0.5, marginBottom: 14, wordBreak: 'break-word',
-          }}>
-            {title}
+            fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 36, lineHeight: 1.15, color: T.text,
+            letterSpacing: -0.3, marginBottom: 6,
+          }}>{s.en}</div>
+
+          {/* Ko explanation */}
+          <div style={{ fontSize: 16, color: T.accent, fontWeight: 500, marginBottom: 14, letterSpacing: -0.2 }}>
+            {s.ko}
           </div>
 
-          {/* Korean explanation */}
-          {desc && (
+          {/* Tip */}
+          {s.tip ? (
             <div style={{
-              fontSize: 14.5, color: T.textDim, lineHeight: 1.55, marginBottom: literal || tip ? 14 : 28, letterSpacing: -0.1,
+              padding: '11px 14px', borderRadius: 12, marginBottom: 20,
+              background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
+              border: `1px solid ${T.hair}`,
+              display: 'flex', gap: 10, alignItems: 'flex-start',
             }}>
-              {desc}
+              <div style={{ color: T.accent, flexShrink: 0, marginTop: 1 }}>{ECIcon.sparkle(T.accent, 14)}</div>
+              <div style={{ fontSize: 12.5, color: T.textDim, lineHeight: 1.45 }}>
+                <span style={{ color: T.text, fontWeight: 600 }}>{typeLabel} 팁 · </span>{s.tip}
+              </div>
             </div>
-          )}
+          ) : <div style={{ marginBottom: 20 }}/>}
 
-          {/* Literal (idiom only) */}
-          {literal && (
-            <div style={{
-              fontFamily: T.mono, fontSize: 12, color: T.textMute, lineHeight: 1.5,
-              padding: '10px 14px', borderRadius: 10,
-              background: isDark ? 'rgba(255,255,255,0.04)' : T.bg2,
-              border: `1px dashed ${T.hair}`,
-              marginBottom: tip ? 14 : 28,
-            }}>
-              <span style={{ color: T.accent, letterSpacing: 1.2, textTransform: 'uppercase', fontWeight: 600, fontSize: 9.5 }}>직역 </span>
-              <span style={{ marginLeft: 6 }}>{literal}</span>
-            </div>
-          )}
-
-          {/* Tip (collocation / idiom / nuance) */}
-          {tip && (
-            <div style={{
-              fontSize: 13, color: T.text, lineHeight: 1.5,
-              padding: '12px 14px', borderRadius: 12,
-              background: T.accentSoft,
-              border: `1px solid ${T.accent}22`,
-              marginBottom: 28,
-            }}>
-              <div style={{ fontFamily: T.mono, fontSize: 9.5, color: T.accent, letterSpacing: 1.2, textTransform: 'uppercase', fontWeight: 600, marginBottom: 4 }}>Tip</div>
-              {tip}
-            </div>
-          )}
-
-          {/* Examples section */}
-          {examples && examples.length > 0 ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {/* Examples (pattern / collocation / idiom / nuance) */}
+          {examples.length > 0 ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <div style={{
                 fontFamily: T.mono, fontSize: 9.5, color: T.textMute,
                 letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 4,
-              }}>예문</div>
+              }}>{typeLabel} 예문</div>
               {examples.map((ex, i) => (
                 <div key={i} style={{
-                  padding: '14px 16px', borderRadius: 14,
-                  background: isDark ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.75)',
+                  padding: '12px 14px', borderRadius: 12,
+                  background: isDark ? 'rgba(255,255,255,0.08)' : T.bg2,
                   border: `1px solid ${T.hair}`,
-                  display: 'flex', alignItems: 'flex-start', gap: 12,
+                  display: 'flex', alignItems: 'center', gap: 12,
                 }}>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{
-                      fontFamily: T.thin, fontWeight: isDark ? 200 : 300,
-                      fontSize: 17, color: T.text, lineHeight: 1.4, letterSpacing: -0.2,
-                    }}>
-                      {renderEx(ex.en, ex.highlight)}
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 15, color: T.text, lineHeight: 1.35 }}>
+                      {ex.en}
                     </div>
-                    <div style={{ fontSize: 13, color: T.textDim, marginTop: 4, lineHeight: 1.5 }}>
-                      {ex.ko}
-                    </div>
+                    {ex.ko && (
+                      <div style={{ fontSize: 12, color: T.textDim, marginTop: 4, lineHeight: 1.4 }}>
+                        {ex.ko}
+                      </div>
+                    )}
                   </div>
                   <div onClick={() => speak(ex.en)} style={{
-                    width: 36, height: 36, borderRadius: 999, flexShrink: 0, marginTop: 2,
-                    background: T.accentSoft,
-                    border: `1px solid ${T.accentSoft}`,
+                    width: 32, height: 32, borderRadius: 999, flexShrink: 0,
+                    background: isDark ? 'rgba(255,255,255,0.10)' : T.bg3,
+                    border: `1px solid ${T.hair}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-                  }}>{ECIcon.speaker(T.accent, 15)}</div>
+                  }}>{ECIcon.speaker(T.accent, 13)}</div>
                 </div>
               ))}
             </div>
@@ -419,7 +238,6 @@ function ECScreenSentenceCard() {
             </div>
           )}
         </div>
-        </div>
       </div>
 
       {/* Bottom nav */}
@@ -427,19 +245,25 @@ function ECScreenSentenceCard() {
         position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 12,
         padding: '0 18px',
         paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 66px)',
-        background: `linear-gradient(to top, ${T.bg1} 70%, ${T.bg1}00 100%)`,
-        paddingTop: 16,
       }}>
         <div style={{ display: 'flex', gap: 8 }}>
-          <div onClick={() => goTo('next')} style={{
+          <div onClick={() => goTo(swipingPrev ? 'prev' : 'next')} style={{
             flex: 1, height: 46, borderRadius: 14,
-            background: T.accent,
+            background: btnBg, border: `1px solid ${btnBd}`,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            color: T.accentText, fontSize: 14, fontWeight: 600, cursor: 'pointer',
+            color: btnColor, fontSize: 14, fontWeight: 600, cursor: 'pointer',
+            transition: 'background 0.15s, color 0.15s',
           }}>
+            {swipingPrev && ECIcon.chev('left', btnColor, 14)}
             <span>{btnLabel}</span>
-            {!isLast && ECIcon.chev('right', T.accentText, 14)}
+            {!swipingPrev && !isLast && ECIcon.chev('right', btnColor, 14)}
           </div>
+          <div onClick={() => speak(s.en)} style={{
+            width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+            background: isDark ? 'rgba(255,255,255,0.10)' : T.bg2,
+            border: `1px solid ${T.hair}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+          }}>{ECIcon.speaker(T.text, 18)}</div>
           <div onClick={toggleBookmark} style={{
             width: 46, height: 46, borderRadius: 14, flexShrink: 0,
             background: isBookmarked ? T.accent : (isDark ? 'rgba(255,255,255,0.10)' : T.bg2),
@@ -448,9 +272,9 @@ function ECScreenSentenceCard() {
           }}>{ECIcon.heart(isBookmarked ? T.accentText : T.text, 18, isBookmarked)}</div>
         </div>
 
-        {/* Progress strip */}
+        {/* Progress strip — current pattern position in feed */}
         <div style={{ marginTop: 12, display: 'flex', gap: 3, alignItems: 'center' }}>
-          {patterns.map((_, i) => (
+          {sentences.map((_, i) => (
             <div key={i} style={{
               flex: 1, height: 2.5, borderRadius: 2,
               background: i <= idx ? T.accent : (isDark ? 'rgba(255,255,255,0.22)' : T.hairStr),
@@ -462,3 +286,5 @@ function ECScreenSentenceCard() {
     </div>
   );
 }
+
+Object.assign(window, { ECScreenSentenceCard });
