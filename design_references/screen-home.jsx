@@ -163,17 +163,17 @@ function ECScreenHome() {
           </div>
         </div>
         {/* 마스코트 + Hi 말풍선 */}
-        <div style={{ flexShrink: 0, position: 'relative', marginRight: 28 }}>
-          {/* 말풍선 */}
+        <div style={{ flexShrink: 0, position: 'relative', marginRight: 52 }}>
+          {/* 말풍선 — 마스코트보다 살짝 오른쪽으로 빼고, 꼬리는 고양이 머리쪽으로 */}
           <div style={{
             position: 'absolute',
             bottom: 'calc(100% - 4px)',
-            right: 4,
+            right: -16,
             background: T.bg2,
             color: T.text,
-            fontFamily: T.serif,
+            fontFamily: T.display,
+            fontWeight: 500,
             fontSize: 14,
-            fontStyle: 'italic',
             padding: '4px 12px',
             borderRadius: 14,
             border: `1px solid ${T.hair}`,
@@ -182,11 +182,11 @@ function ECScreenHome() {
             boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
           }}>
             Hi
-            {/* 꼬리 */}
+            {/* 꼬리 — 고양이 머리쪽 (오른쪽 끝 가까이) */}
             <span style={{
               position: 'absolute',
               bottom: -5,
-              right: 12,
+              right: 28,
               width: 0, height: 0,
               borderLeft: '5px solid transparent',
               borderRight: '5px solid transparent',
@@ -195,7 +195,7 @@ function ECScreenHome() {
             <span style={{
               position: 'absolute',
               bottom: -6,
-              right: 11,
+              right: 27,
               width: 0, height: 0,
               borderLeft: '6px solid transparent',
               borderRight: '6px solid transparent',
