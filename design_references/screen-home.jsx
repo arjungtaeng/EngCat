@@ -180,6 +180,8 @@ function ECScreenHome() {
             const isDarkMode = T.text === '#F8F5EF';
             const bubbleFill = isDarkMode ? '#F4ECDD' : '#1A1A21';
             const textFill = isDarkMode ? '#1A1A21' : '#F4ECDD';
+            // 텍스트가 풍선 안에 들어가도록 길이별 fontSize 자동 축소 (Outfit 600 char ≈ 0.55*fontSize)
+            const greetingFontSize = Math.min(72, Math.floor(280 / (bubbleGreeting.length * 0.55)));
             return (
               <div style={{
                 position: 'absolute',
@@ -200,13 +202,14 @@ function ECScreenHome() {
                     fill={bubbleFill}
                   />
                   <text
-                    x="190" y="100"
+                    x="190" y="84"
                     textAnchor="middle"
+                    dominantBaseline="middle"
                     fontFamily="Outfit, system-ui, sans-serif"
-                    fontSize="72"
+                    fontSize={greetingFontSize}
                     fontWeight="600"
                     fill={textFill}
-                  >Hi</text>
+                  >{bubbleGreeting}</text>
                 </svg>
               </div>
             );
