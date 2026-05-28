@@ -193,14 +193,14 @@ function ECScreenHome() {
                     background: bubbleFill,
                     color: textFill,
                     borderRadius: 60,
-                    padding: '6px 20px',
-                    minHeight: 32,
+                    padding: '0 20px',
+                    height: 28,
                     display: 'flex',
                     alignItems: 'center',
                     fontFamily: '"Instrument Serif", serif',
                     fontStyle: 'italic',
                     fontSize: 18,
-                    lineHeight: 1.4,
+                    lineHeight: 1,
                     boxShadow: '0 3px 12px rgba(0,0,0,0.18)',
                   }}>
                     {bubbleGreeting}
