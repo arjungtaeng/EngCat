@@ -233,7 +233,13 @@ function ECScreenHome() {
               const isDone = completedSet.has(c.id);
               return (
                 <div key={c.id} onClick={() => {
-                  window.ECCardSource = { mode: isPreview ? 'preview' : 'review', words: reviewWords, startIndex: i };
+                  // 단어 클릭 — 단어 + 표현 모두 전달해서 word↔sentence 카드 양방향 이동 가능
+                  window.ECCardSource = {
+                    mode: isPreview ? 'preview' : 'review',
+                    words: reviewWords,
+                    expressions: reviewExpressions,
+                    startIndex: i,
+                  };
                   window.ECSession.wordIndex = i;
                   window.ECNav?.go('word-card');
                 }} style={{ flex: '0 0 130px', cursor: 'pointer', opacity: isDone ? 0.45 : 1, transition: 'opacity 0.2s' }}>
@@ -288,8 +294,10 @@ function ECScreenHome() {
             const isDone = completedExprSet.has(e.id);
             return (
               <div key={e.id || i} onClick={() => {
+                // 표현 클릭 — 단어 + 표현 모두 전달 (sentence-card에서 prev 스와이프 시 단어 끝으로)
                 window.ECCardSource = {
                   mode: isPreview ? 'preview' : 'review',
+                  words: reviewWords,
                   expressions: reviewExpressions,
                   startIndex: i,
                 };

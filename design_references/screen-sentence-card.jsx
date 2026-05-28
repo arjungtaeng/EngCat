@@ -51,6 +51,8 @@ function ECScreenSentenceCard() {
   // review / preview 진입 시 퀴즈 X, 홈으로 복귀. today 흐름만 퀴즈로.
   const sourceMode = cardSource.current && cardSource.current.mode;
   const isReviewOrPreview = sourceMode === 'review' || sourceMode === 'preview';
+  const sourceWords = (cardSource.current && cardSource.current.words) || [];
+  const hasWordsForBack = sourceWords.length > 0;
 
   const goTo = (dir) => {
     if (dir === 'next') {
@@ -61,7 +63,20 @@ function ECScreenSentenceCard() {
         return;
       }
     }
-    if (dir === 'prev' && isFirst) return;
+    if (dir === 'prev' && isFirst) {
+      // 첫 카드에서 뒤로 — 단어가 있으면 단어 마지막으로 이동
+      if (hasWordsForBack) {
+        window.ECCardSource = {
+          mode: sourceMode || 'review',
+          words: sourceWords,
+          expressions: sentences,
+          startIndex: sourceWords.length - 1,
+        };
+        window.ECSession.wordIndex = sourceWords.length - 1;
+        window.ECNav?.go('word-card');
+      }
+      return;
+    }
     const next = idx + (dir === 'next' ? 1 : -1);
     setSlideOut(dir === 'next' ? -110 : 110);
     setTimeout(() => {
