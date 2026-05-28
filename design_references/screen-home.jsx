@@ -186,43 +186,36 @@ function ECScreenHome() {
                 bottom: 'calc(100% - 5px)',
                 right: 5,
                 pointerEvents: 'none',
+                lineHeight: 0,
               }}>
-                {/* EngCat-5 컴포저블 말풍선 — 높이만 낮춤 */}
-                <div style={{ position: 'relative', display: 'inline-block' }}>
-                  <div style={{
-                    background: bubbleFill,
-                    color: textFill,
-                    borderRadius: 60,
-                    padding: '0 20px',
-                    height: 28,
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontFamily: '"Instrument Serif", serif',
-                    fontStyle: 'italic',
-                    fontSize: 18,
-                    lineHeight: 1,
-                    boxShadow: '0 3px 12px rgba(0,0,0,0.18)',
-                  }}>
-                    {bubbleGreeting}
-                  </div>
-                  <svg
-                    viewBox="-20 0 80 60"
-                    width="80"
-                    height="60"
-                    style={{
-                      position: 'absolute',
-                      bottom: -52,
-                      left: 40,
-                      pointerEvents: 'none',
-                    }}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M 60 0 C 52 0 48 6 40 16 C 26 32 8 42 -16 52 C -6 36 2 22 6 12 C 9 4 7 0 0 0 Z"
-                      fill={bubbleFill}
-                    />
-                  </svg>
-                </div>
+                {/* EngCat-7 (v9) 통합 말풍선 — SVG 그대로 + 텍스트 오버레이 */}
+                <svg
+                  viewBox="0 0 380 200"
+                  width="80"
+                  height="42"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ display: 'block' }}
+                >
+                  <defs>
+                    <filter id="bubble-shadow-v9" x="-10%" y="-10%" width="120%" height="140%">
+                      <feDropShadow dx="0" dy="3" stdDeviation="8" floodColor="#000" floodOpacity="0.12" />
+                    </filter>
+                  </defs>
+                  <path
+                    filter="url(#bubble-shadow-v9)"
+                    d="M 76 16 L 304 16 Q 364 16 364 76 Q 364 136 304 136 L 168 136 C 160 136 156 142 148 152 C 134 168 116 178 92 188 C 102 172 110 158 114 148 C 117 140 115 136 108 136 L 76 136 Q 16 136 16 76 Q 16 16 76 16 Z"
+                    fill={bubbleFill}
+                  />
+                  <text
+                    x="190" y="90"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fontFamily='"Instrument Serif", serif'
+                    fontStyle="italic"
+                    fontSize="58"
+                    fill={textFill}
+                  >{bubbleGreeting}</text>
+                </svg>
               </div>
             );
           })()}
