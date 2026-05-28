@@ -139,7 +139,7 @@ function ECScreenLogin() {
         const isDark = T.text === '#F8F5EF';
         return (
           <div style={{ textAlign: 'center', marginBottom: 20 }}>
-            <span style={{ display: 'inline-flex' }}>{ECIcon.mascot(isDark, 140)}</span>
+            <span style={{ display: 'inline-flex' }}>{ECIcon.mascot(isDark, 120)}</span>
           </div>
         );
       })()}
