@@ -201,23 +201,24 @@ function ECScreenHome() {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
                 }}>
                   {bubbleGreeting}
-                  {/* 꼬리 — v151 비율(54x28 안의 곡선 꼬리)에 맞춘 크기 */}
+                  {/* 꼬리 — EngCat-5 곡선 path, 우측에 붙여 고양이 쪽으로 향함 (좌우반전) */}
                   <svg
-                    viewBox="130 130 76 60"
-                    width="11"
-                    height="9"
+                    viewBox="-20 0 80 60"
+                    width="20"
+                    height="15"
                     style={{
                       position: 'absolute',
                       top: '100%',
-                      right: 14,
+                      right: 8,
                       marginTop: -1,
+                      transform: 'scaleX(-1)',
                       overflow: 'visible',
                       display: 'block',
                     }}
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M 198 136 C 190 136 186 142 180 152 C 170 166 156 176 136 184 C 144 170 150 156 152 148 C 154 140 152 136 144 136 L 198 136 Z"
+                      d="M 60 0 C 52 0 48 6 40 16 C 26 32 8 42 -16 52 C -6 36 2 22 6 12 C 9 4 7 0 0 0 Z"
                       fill={bubbleFill}
                     />
                   </svg>
