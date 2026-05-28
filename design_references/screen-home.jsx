@@ -187,37 +187,38 @@ function ECScreenHome() {
                 right: -40,
                 pointerEvents: 'none',
               }}>
-                <div style={{
-                  position: 'relative',
-                  background: bubbleFill,
-                  color: textFill,
-                  fontFamily: 'Outfit, system-ui, sans-serif',
-                  fontWeight: 600,
-                  fontSize: 11,
-                  lineHeight: 1.3,
-                  padding: '5px 11px',
-                  borderRadius: 12,
-                  whiteSpace: 'nowrap',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
-                }}>
-                  {bubbleGreeting}
-                  {/* 꼬리 — v151 비율(54x28 안의 곡선 꼬리)에 맞춘 크기 */}
+                {/* EngCat-5 컴포저블 말풍선 — 스펙 그대로 */}
+                <div style={{ position: 'relative', display: 'inline-block' }}>
+                  <div style={{
+                    background: bubbleFill,
+                    color: textFill,
+                    borderRadius: 60,
+                    padding: '18px 32px',
+                    minHeight: 84,
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontFamily: '"Instrument Serif", serif',
+                    fontStyle: 'italic',
+                    fontSize: 18,
+                    lineHeight: 1.4,
+                    boxShadow: '0 3px 12px rgba(0,0,0,0.18)',
+                  }}>
+                    {bubbleGreeting}
+                  </div>
                   <svg
-                    viewBox="130 130 76 60"
-                    width="11"
-                    height="9"
+                    viewBox="-20 0 80 60"
+                    width="80"
+                    height="60"
                     style={{
                       position: 'absolute',
-                      top: '100%',
-                      right: 14,
-                      marginTop: -1,
-                      overflow: 'visible',
-                      display: 'block',
+                      bottom: -52,
+                      left: 40,
+                      pointerEvents: 'none',
                     }}
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M 198 136 C 190 136 186 142 180 152 C 170 166 156 176 136 184 C 144 170 150 156 152 148 C 154 140 152 136 144 136 L 198 136 Z"
+                      d="M 60 0 C 52 0 48 6 40 16 C 26 32 8 42 -16 52 C -6 36 2 22 6 12 C 9 4 7 0 0 0 Z"
                       fill={bubbleFill}
                     />
                   </svg>
