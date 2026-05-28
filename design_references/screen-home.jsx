@@ -184,17 +184,17 @@ function ECScreenHome() {
               <div style={{
                 position: 'absolute',
                 bottom: 'calc(100% - 5px)',
-                right: -40,
+                right: 5,
                 pointerEvents: 'none',
               }}>
-                {/* EngCat-5 컴포저블 말풍선 — 스펙 그대로 */}
+                {/* EngCat-5 컴포저블 말풍선 — 높이만 낮춤 */}
                 <div style={{ position: 'relative', display: 'inline-block' }}>
                   <div style={{
                     background: bubbleFill,
                     color: textFill,
                     borderRadius: 60,
-                    padding: '18px 32px',
-                    minHeight: 84,
+                    padding: '6px 20px',
+                    minHeight: 32,
                     display: 'flex',
                     alignItems: 'center',
                     fontFamily: '"Instrument Serif", serif',
