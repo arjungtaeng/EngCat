@@ -152,7 +152,8 @@ function ECScreenHome() {
       </div>
 
       {/* Greeting */}
-      <div style={{ padding: '24px 22px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
+      <div style={{ padding: '24px 22px 18px', display: 'flex', alignItems: 'center', gap: 16 }}>
+        <span style={{ flexShrink: 0, display: 'flex' }}>{ECIcon.mascot(T.text === '#F8F5EF', 56)}</span>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ fontSize: 13, color: T.textDim, marginBottom: 6 }}>
             {dateStr}
@@ -162,7 +163,6 @@ function ECScreenHome() {
             <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}.</span>
           </div>
         </div>
-        <span style={{ flexShrink: 0, display: 'flex' }}>{ECIcon.mascot(T.text === '#F8F5EF', 64)}</span>
       </div>
 
       {/* Today's mission card — hero */}
