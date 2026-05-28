@@ -17,7 +17,7 @@ export function Logo({ size = 'md', style, ...props }: LogoProps) {
   return (
     <Image
       source={source}
-      style={style}
+      style={[style, { transform: [{ scaleX: -1 }] }]}
       {...props}
     />
   );
