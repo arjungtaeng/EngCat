@@ -201,11 +201,11 @@ function ECScreenHome() {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
                 }}>
                   {bubbleGreeting}
-                  {/* 꼬리 — 풍선 우측 기준 고정 위치 (텍스트 길이 변해도 그대로) */}
+                  {/* 꼬리 — v151 비율(54x28 안의 곡선 꼬리)에 맞춘 크기 */}
                   <svg
                     viewBox="130 130 76 60"
-                    width="22"
-                    height="17"
+                    width="11"
+                    height="9"
                     style={{
                       position: 'absolute',
                       top: '100%',
