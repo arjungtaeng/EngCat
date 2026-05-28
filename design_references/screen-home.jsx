@@ -201,16 +201,26 @@ function ECScreenHome() {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
                 }}>
                   {bubbleGreeting}
-                  {/* 꼬리 — 고양이 머리쪽 */}
-                  <span style={{
-                    position: 'absolute',
-                    bottom: -5,
-                    right: 16,
-                    width: 0, height: 0,
-                    borderLeft: '5px solid transparent',
-                    borderRight: '5px solid transparent',
-                    borderTop: `6px solid ${bubbleFill}`,
-                  }} />
+                  {/* 꼬리 — 원본 SVG path 그대로 (왼쪽으로 휘는 곡선) */}
+                  <svg
+                    viewBox="130 130 76 60"
+                    width="22"
+                    height="17"
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      right: 14,
+                      marginTop: -1,
+                      overflow: 'visible',
+                      display: 'block',
+                    }}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M 198 136 C 190 136 186 142 180 152 C 170 166 156 176 136 184 C 144 170 150 156 152 148 C 154 140 152 136 144 136 L 198 136 Z"
+                      fill={bubbleFill}
+                    />
+                  </svg>
                 </div>
               </div>
             );
