@@ -74,7 +74,8 @@ function _matchesLevel(item, target, position) {
 }
 
 // 사용자 레벨에 따른 콘텐츠 믹스 + 폴백
-window.ECGetLeveledContent = function(allItems, userLevel, countNeeded) {
+// seed를 주면 deterministic (하루 동안 동일), 없으면 Math.random
+window.ECGetLeveledContent = function(allItems, userLevel, countNeeded, seed) {
   if (countNeeded <= 0) return [];
   const dist = _LEVEL_DISTRIBUTION[userLevel];
   if (!dist) return [];
@@ -84,7 +85,10 @@ window.ECGetLeveledContent = function(allItems, userLevel, countNeeded) {
   const prev = allItems.filter(x => _matchesLevel(x, userLevel, 'prev'));
   const curr = allItems.filter(x => _matchesLevel(x, userLevel, 'current'));
   const next = allItems.filter(x => _matchesLevel(x, userLevel, 'next'));
-  const sh = a => [...a].sort(() => Math.random() - 0.5);
+  // seed가 있으면 stable shuffle, 없으면 random
+  const sh = seed != null
+    ? (a) => _shuffleStable(a, seed)
+    : (a) => [...a].sort(() => Math.random() - 0.5);
   const result = [];
   const used = new Set();
   const take = (pool, n) => {
@@ -162,9 +166,9 @@ window.ECGetTodaySession = function() {
     };
   }
 
-  // 토픽 내에서 레벨별 분배 적용 (mobile과 동일)
+  // 토픽 내에서 레벨별 분배 적용 — 하루 동안 동일하게 (seed = dayOfYear)
   const wordsForTopic = (data.words || []).filter(w => w.topicId === topic);
-  const todayWords = window.ECGetLeveledContent(wordsForTopic, level, comp.words);
+  const todayWords = window.ECGetLeveledContent(wordsForTopic, level, comp.words, seed);
 
   // 패턴: window.ECData.patterns(레벨 정확 일치) 우선, 없으면 sentences에서 레벨 분배
   const newPatterns = ((window.ECData && window.ECData.patterns) || []).filter(p => p.topic === topic && p.level === level);
@@ -172,16 +176,16 @@ window.ECGetTodaySession = function() {
   const sentencePool = sentences.filter(s => s.topicId === topic && (s.type === 'pattern' || !s.type));
   const patterns = newPatterns.length > 0
     ? _shuffleStable(newPatterns, seed).slice(0, comp.patterns)
-    : window.ECGetLeveledContent(sentencePool, level, comp.patterns);
+    : window.ECGetLeveledContent(sentencePool, level, comp.patterns, seed);
 
   const collPool = (data.collocations || []).filter(c => c.topicId === topic);
-  const collocations = window.ECGetLeveledContent(collPool, level, comp.collocations);
+  const collocations = window.ECGetLeveledContent(collPool, level, comp.collocations, seed);
 
   const idiomPool = (data.idioms || []).filter(i => i.topicId === topic);
-  const idioms = window.ECGetLeveledContent(idiomPool, level, comp.idioms);
+  const idioms = window.ECGetLeveledContent(idiomPool, level, comp.idioms, seed);
 
   const nuancePool = (data.nuances || []).filter(n => n.topicId === topic);
-  const nuances = window.ECGetLeveledContent(nuancePool, level, comp.nuances);
+  const nuances = window.ECGetLeveledContent(nuancePool, level, comp.nuances, seed);
 
   const expressions = [...patterns, ...collocations, ...idioms, ...nuances];
 
@@ -213,14 +217,22 @@ function _getItemWeight(id, quizStats) {
   return Math.max(0.2, Math.min(3.0, (s.w + 1) / (s.c + 1)));
 }
 
-// 가중치 기반 무작위 비복원 샘플링
-function _weightedSample(items, weightFn, n) {
+// 가중치 기반 비복원 샘플링
+// seed가 있으면 deterministic (LCG 기반), 없으면 Math.random
+function _weightedSample(items, weightFn, n, seed) {
   if (!items.length || n <= 0) return [];
   const pool = items.map(item => ({ item, w: weightFn(item) }));
+  // Linear Congruential Generator — seed 기반 deterministic random
+  let s = seed != null ? Math.abs(seed) || 1 : null;
+  const rand = () => {
+    if (s == null) return Math.random();
+    s = (s * 9301 + 49297) % 233280;
+    return s / 233280;
+  };
   const result = [];
   for (let i = 0; i < Math.min(n, pool.length); i++) {
-    const total = pool.reduce((s, x) => s + x.w, 0);
-    let r = Math.random() * total;
+    const total = pool.reduce((acc, x) => acc + x.w, 0);
+    let r = rand() * total;
     let idx = 0;
     for (; idx < pool.length - 1; idx++) { r -= pool[idx].w; if (r <= 0) break; }
     result.push(pool[idx].item);
@@ -262,9 +274,13 @@ window.ECGetReviewSession = function() {
 
   const tagType = (arr, type) => arr.map(x => Object.assign({}, x, { _type: x._type || type }));
 
+  // "더 보기" 클릭마다 +1 — 같은 날에도 새 셋을 보여줌
+  const offset = (window.ECReviewSeedOffset || 0);
+  const seed = window.ECGetDayOfYear() + offset * 1000;
+
   const { wordIds: learnedWordIds, sentenceIds: learnedSentenceIds } = _getAllLearnedIds();
 
-  // 학습 이력이 있으면 가중치 기반 무작위 복습
+  // 학습 이력이 있으면 가중치 기반 복습 (하루 + offset 동안 동일)
   if (learnedWordIds.size > 0 || learnedSentenceIds.size > 0) {
     const quizStats = _loadQuizStats();
     const getW = item => _getItemWeight(item.id, quizStats);
@@ -275,11 +291,11 @@ window.ECGetReviewSession = function() {
     const learnedIdioms   = allIdioms.filter(i => learnedSentenceIds.has(i.id));
     const learnedNuances  = allNuances.filter(n => learnedSentenceIds.has(n.id));
 
-    const reviewWords    = _weightedSample(learnedWords,    getW, comp.words);
-    const reviewPatterns = tagType(_weightedSample(learnedPatterns, getW, comp.patterns),           'pattern');
-    const reviewColloc   = tagType(_weightedSample(learnedColloc,   getW, comp.collocations || 0),  'collocation');
-    const reviewIdioms   = tagType(_weightedSample(learnedIdioms,   getW, comp.idioms       || 0),  'idiom');
-    const reviewNuances  = tagType(_weightedSample(learnedNuances,  getW, comp.nuances      || 0),  'nuance');
+    const reviewWords    = _weightedSample(learnedWords,    getW, comp.words,            seed);
+    const reviewPatterns = tagType(_weightedSample(learnedPatterns, getW, comp.patterns,            seed + 1), 'pattern');
+    const reviewColloc   = tagType(_weightedSample(learnedColloc,   getW, comp.collocations || 0,   seed + 2), 'collocation');
+    const reviewIdioms   = tagType(_weightedSample(learnedIdioms,   getW, comp.idioms       || 0,   seed + 3), 'idiom');
+    const reviewNuances  = tagType(_weightedSample(learnedNuances,  getW, comp.nuances      || 0,   seed + 4), 'nuance');
 
 
     return {
@@ -295,12 +311,12 @@ window.ECGetReviewSession = function() {
     };
   }
 
-  // 첫날 (학습 이력 없음): 예습 — 레벨별 분배 적용
-  const previewWords    = window.ECGetLeveledContent(allWords,    level, comp.words);
-  const previewPatterns = tagType(window.ECGetLeveledContent(allPatterns, level, comp.patterns),          'pattern');
-  const previewColloc   = tagType(window.ECGetLeveledContent(allColloc,   level, comp.collocations || 0), 'collocation');
-  const previewIdioms   = tagType(window.ECGetLeveledContent(allIdioms,   level, comp.idioms       || 0), 'idiom');
-  const previewNuances  = tagType(window.ECGetLeveledContent(allNuances,  level, comp.nuances      || 0), 'nuance');
+  // 첫날 (학습 이력 없음): 예습 — 레벨별 분배 (하루 + offset 동안 동일)
+  const previewWords    = window.ECGetLeveledContent(allWords,    level, comp.words,            seed);
+  const previewPatterns = tagType(window.ECGetLeveledContent(allPatterns, level, comp.patterns,            seed + 1), 'pattern');
+  const previewColloc   = tagType(window.ECGetLeveledContent(allColloc,   level, comp.collocations || 0,   seed + 2), 'collocation');
+  const previewIdioms   = tagType(window.ECGetLeveledContent(allIdioms,   level, comp.idioms       || 0,   seed + 3), 'idiom');
+  const previewNuances  = tagType(window.ECGetLeveledContent(allNuances,  level, comp.nuances      || 0,   seed + 4), 'nuance');
 
   return {
     isPreview: true,

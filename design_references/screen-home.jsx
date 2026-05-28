@@ -250,7 +250,11 @@ function ECScreenHome() {
               </div>
             )}
           </div>
-          <div onClick={() => { window.ECSession.sentenceIndex = 0; window.ECNav?.go('sentence-card'); }} style={{ fontSize: 12, color: T.accent, cursor: 'pointer' }}>전체 보기</div>
+          <div onClick={() => {
+            // "더 보기" — offset을 올려 복습 단어/표현 모두 새 셋으로 교체
+            window.ECReviewSeedOffset = (window.ECReviewSeedOffset || 0) + 1;
+            setDataVersion(v => v + 1);
+          }} style={{ fontSize: 12, color: T.accent, cursor: 'pointer' }}>더 보기</div>
         </div>
         <div style={{ padding: '0 22px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {reviewExpressions.map((e, i) => {

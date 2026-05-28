@@ -55,12 +55,13 @@ function matchesLevel<T extends { cefr?: string; usageFrequency?: number }>(
 
 /**
  * 사용자 레벨에 맞는 콘텐츠 믹스 생성
- * 겹침과 반복을 통해 자연스러운 학습 구성
+ * seed를 주면 deterministic (하루 동안 동일), 없으면 Math.random
  */
 export function getLeveledContent<T extends { cefr?: string; usageFrequency?: number }>(
   allItems: T[],
   userLevel: CEFRLevel,
   countNeeded: number,
+  seed?: number,
 ): T[] {
   const dist = LEVEL_DISTRIBUTION[userLevel];
   const prevCount = Math.round((countNeeded * dist.prev) / 100);
@@ -71,10 +72,17 @@ export function getLeveledContent<T extends { cefr?: string; usageFrequency?: nu
   const current = allItems.filter(item => matchesLevel(item, userLevel, 'current'));
   const next = allItems.filter(item => matchesLevel(item, userLevel, 'next'));
 
-  const shuffle = <T,>(arr: T[]): T[] => {
+  // seed가 있으면 LCG 기반 deterministic shuffle, 없으면 Math.random
+  const shuffle = <U,>(arr: U[]): U[] => {
     const result = [...arr];
+    let s = seed != null ? Math.abs(seed) || 1 : null;
+    const rand = (): number => {
+      if (s == null) return Math.random();
+      s = (s * 9301 + 49297) % 233280;
+      return s / 233280;
+    };
     for (let i = result.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = Math.floor(rand() * (i + 1));
       [result[i], result[j]] = [result[j], result[i]];
     }
     return result;

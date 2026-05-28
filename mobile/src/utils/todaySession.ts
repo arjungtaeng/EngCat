@@ -114,9 +114,9 @@ export function getTodaySession(
     };
   }
 
-  // 토픽 내에서 레벨별 분배 적용
+  // 토픽 내에서 레벨별 분배 적용 — 하루 동안 동일 (seed = dayOfYear)
   const topicWordsAll = words.filter(w => w.topicId === topic);
-  const leveledWords = getLeveledContent(topicWordsAll, level as CEFRLevel, comp.words);
+  const leveledWords = getLeveledContent(topicWordsAll, level as CEFRLevel, comp.words, seed);
   const wordsWithImg    = shuffleStable(leveledWords.filter(w => w.img), seed);
   const wordsWithoutImg = shuffleStable(leveledWords.filter(w => !w.img), seed);
   const todayWords = [...wordsWithImg, ...wordsWithoutImg].slice(0, comp.words);
@@ -124,8 +124,8 @@ export function getTodaySession(
   const topicExp = expressions.filter(e => e.topicId === topic);
   const pickWithImg = (arr: SentenceCard[], n: number) => {
     if (n === 0) return [];
-    // 레벨별 분배 적용
-    const leveledArr = getLeveledContent(arr, level as CEFRLevel, n);
+    // 레벨별 분배 적용 (seed로 하루 동안 고정)
+    const leveledArr = getLeveledContent(arr, level as CEFRLevel, n, seed);
     const withImg = shuffleStable(leveledArr.filter(e => e.img), seed);
     const noImg   = shuffleStable(leveledArr.filter(e => !e.img), seed);
     return [...withImg, ...noImg].slice(0, n);
@@ -185,21 +185,21 @@ export function getReviewSession(
     };
   }
 
-  // 첫날: 레벨별 분배를 적용한 예습 세션
+  // 첫날: 레벨별 분배를 적용한 예습 세션 — 하루 동안 고정 (seed = dayOfYear)
   const seed = getDayOfYear();
-  const previewWords = getLeveledContent(allWords, level as CEFRLevel, comp.words);
+  const previewWords = getLeveledContent(allWords, level as CEFRLevel, comp.words, seed);
 
-  const pickByType = (type: SentenceCard['type'], n: number) => {
+  const pickByType = (type: SentenceCard['type'], n: number, seedOffset: number) => {
     if (n === 0) return [];
     const pool = allExpressions.filter(e => e.type === type);
-    const leveledPool = getLeveledContent(pool, level as CEFRLevel, n);
+    const leveledPool = getLeveledContent(pool, level as CEFRLevel, n, seed + seedOffset);
     return shuffleStable(leveledPool, seed).slice(0, n);
   };
   const previewExpressions = [
-    ...pickByType('pattern',     comp.patterns),
-    ...pickByType('collocation', comp.collocations),
-    ...pickByType('idiom',       comp.idioms),
-    ...pickByType('nuance',      comp.nuances),
+    ...pickByType('pattern',     comp.patterns,     1),
+    ...pickByType('collocation', comp.collocations, 2),
+    ...pickByType('idiom',       comp.idioms,       3),
+    ...pickByType('nuance',      comp.nuances,      4),
   ];
 
   return {
