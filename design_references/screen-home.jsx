@@ -184,7 +184,7 @@ function ECScreenHome() {
               <div style={{
                 position: 'absolute',
                 bottom: 'calc(100% + 2px)',
-                right: -22,
+                right: -44,
                 pointerEvents: 'none',
               }}>
                 <div style={{
