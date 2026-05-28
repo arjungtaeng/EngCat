@@ -30,3 +30,12 @@ if [ -f "$VERSION_FILE" ]; then
   printf '{"v": %s}\n' "$VERSION" > "$VERSION_FILE"
   git add "$VERSION_FILE"
 fi
+
+# 4. Service Worker cache name — must change each release so browsers
+#    receive new sw.js, drop old cache, and serve fresh code.
+SW_FILE="sw.js"
+if [ -f "$SW_FILE" ]; then
+  sed -i.bak "s/const CACHE *= *'engcat-v[0-9]\{1,\}';/const CACHE = 'engcat-v$VERSION';/" "$SW_FILE"
+  rm -f "$SW_FILE.bak"
+  git add "$SW_FILE"
+fi
