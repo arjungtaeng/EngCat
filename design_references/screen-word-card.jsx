@@ -251,8 +251,8 @@ function ECScreenWordCard() {
             <div style={{ fontFamily: T.mono, fontSize: 11, color: T.textMute }}>{word.ipa}</div>
           </div>
 
-          {/* Word + speaker */}
-          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, marginBottom: 4 }}>
+          {/* Word + speaker — 스피커는 단어 밑에 배치해 단어 가로폭 확보 */}
+          <div style={{ marginBottom: 4 }}>
             <div style={{
               fontFamily: T.display, fontWeight: 400,
               fontSize: 56, lineHeight: 1, color: T.text,
@@ -260,8 +260,8 @@ function ECScreenWordCard() {
               wordBreak: 'break-word',
             }}>{word.en}</div>
             <div onClick={() => speak(word.en)} style={{
-              marginBottom: 5, cursor: 'pointer', flexShrink: 0,
-              display: 'flex', alignItems: 'center',
+              marginTop: 6, cursor: 'pointer',
+              display: 'inline-flex', alignItems: 'center',
             }}>{ECIcon.speaker(isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.3)', 19)}</div>
           </div>
 
