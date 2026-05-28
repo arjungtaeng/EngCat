@@ -7,7 +7,7 @@
 //   node scripts/backfill-pexels.mjs
 //
 // What it does:
-//   1. Reads rows from words, sentences, collocations, idioms with
+//   1. Reads rows from words, sentences, collocations, idioms, nuances with
 //      image_keyword IS NOT NULL AND image_url IS NULL
 //   2. Searches Pexels API for matching landscape photo
 //   3. UPDATEs row with src.large URL
@@ -38,6 +38,7 @@ const TABLES = [
   { name: 'sentences',    idCol: 'id', topicCol: 'topic_id' },
   { name: 'collocations', idCol: 'id', topicCol: 'topic_id' },
   { name: 'idioms',       idCol: 'id', topicCol: 'topic_id' },
+  { name: 'nuances',      idCol: 'id', topicCol: 'topic_id' },
 ];
 
 const HOURLY_LIMIT = 180;

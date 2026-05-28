@@ -1,5 +1,5 @@
 // EngCat — Supabase 클라이언트 초기화
-const EC_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprbnF6anJ5bWtzd2txb3RyaW9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk0NjU4NTEsImV4cCI6MjA5NTA0MTg1MX0.yyHg9Yck3pRlkzL4xIATdnwDKZcA1ANhflrbynnlVIk';
+const EC_SUPABASE_ANON_KEY = 'sb_publishable_-PyhiOHtQJsKafpoDZIMLg_q09S3yRJ';
 window.EC_SUPABASE_ANON_KEY = EC_SUPABASE_ANON_KEY;
 
 if (window.supabase && window.supabase.createClient) {

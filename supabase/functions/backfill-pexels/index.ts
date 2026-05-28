@@ -23,7 +23,7 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
-const TABLES = ['words', 'sentences', 'collocations', 'idioms'] as const;
+const TABLES = ['words', 'sentences', 'collocations', 'idioms', 'nuances'] as const;
 
 async function searchPexels(keyword: string, apiKey: string): Promise<string | null> {
   const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(keyword)}&per_page=1&orientation=landscape`;
