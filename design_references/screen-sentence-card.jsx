@@ -176,9 +176,9 @@ function ECScreenSentenceCard() {
 
         <div style={{ padding: '0 22px 20px' }}>
 
-          {/* Pattern */}
+          {/* Pattern — 단어 카드와 동일한 폰트/굵기 */}
           <div style={{
-            fontFamily: T.thin, fontWeight: isDark ? 500 : 600, fontSize: 36, lineHeight: 1.15, color: T.text,
+            fontFamily: T.display, fontWeight: 400, fontSize: 36, lineHeight: 1.15, color: T.text,
             letterSpacing: -0.3, marginBottom: 6,
           }}>{s.en}</div>
 
