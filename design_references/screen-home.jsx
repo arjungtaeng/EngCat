@@ -131,8 +131,10 @@ function ECScreenHome() {
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         background: T.bg1,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ flexShrink: 0, display: 'flex' }}>{ECIcon.mascot(T.text === '#F8F5EF', 32)}</span>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+          <div style={{ fontFamily: T.serif, fontSize: 22, letterSpacing: -0.4, color: T.text }}>
+            EngCat
+          </div>
           <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: 0.5, color: T.textMute }}>{'v' + (window.EC_VER || 1)}</div>
         </div>
         <div style={{
