@@ -117,14 +117,17 @@ export default function HomeScreen({ navigation }: Props) {
         </View>
 
         {/* ── Greeting ── */}
-        <View style={{ paddingHorizontal: 22, paddingTop: 24, paddingBottom: 18 }}>
-          <Text style={[styles.date, { color: T.textDim }]}>{dateStr}</Text>
-          <Text style={[styles.greeting, { color: T.text, fontFamily: T.serif }]}>
-            {greetingWord}{'\n'}
-            <Text style={{ fontFamily: 'InstrumentSerif-Italic', color: T.accent, fontStyle: 'italic' }}>
-              {displayName}.
+        <View style={{ paddingHorizontal: 22, paddingTop: 24, paddingBottom: 18, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16 }}>
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.date, { color: T.textDim }]}>{dateStr}</Text>
+            <Text style={[styles.greeting, { color: T.text, fontFamily: T.serif }]}>
+              {greetingWord}{'\n'}
+              <Text style={{ fontFamily: 'InstrumentSerif-Italic', color: T.accent, fontStyle: 'italic' }}>
+                {displayName}.
+              </Text>
             </Text>
-          </Text>
+          </View>
+          <Logo size="sm" style={{ width: 56, height: 56, marginTop: 4 }} />
         </View>
 
         {/* ── Hero card: 오늘의 학습 ── */}
