@@ -180,8 +180,21 @@ function ECScreenHome() {
             const isDarkMode = T.text === '#F8F5EF';
             const bubbleFill = isDarkMode ? '#F4ECDD' : '#1A1A21';
             const textFill = isDarkMode ? '#1A1A21' : '#F4ECDD';
-            // 텍스트가 풍선 안에 들어가도록 길이별 fontSize 자동 축소 (Outfit 600 char ≈ 0.55*fontSize)
-            const greetingFontSize = Math.min(72, Math.floor(280 / (bubbleGreeting.length * 0.55)));
+            // fontSize는 72 고정. 글자 길이에 따라 풍선만 왼쪽으로 늘림 (우측 + 꼬리 고정)
+            const greetingFontSize = 72;
+            const charWidthVB = greetingFontSize * 0.55; // Outfit 600 평균 글자 폭
+            const textWidthVB = bubbleGreeting.length * charWidthVB;
+            // 원본 풍선 flat top 폭 228 + 좌우 패딩 40 → 188보다 넓으면 그만큼 왼쪽으로 확장
+            const eL = Math.max(0, Math.ceil(textWidthVB - 188));
+            const viewBoxW = 380 + eL;
+            const svgWidthPx = Math.round(viewBoxW * 0.142);
+            const textCx = 190 - eL / 2;
+            const bubblePath =
+              `M ${76 - eL} 16 L 304 16 Q 364 16 364 76 Q 364 136 304 136 ` +
+              `L 198 136 C 190 136 186 142 180 152 C 170 166 156 176 136 184 ` +
+              `C 144 170 150 156 152 148 C 154 140 152 136 144 136 ` +
+              `L ${76 - eL} 136 Q ${16 - eL} 136 ${16 - eL} 76 ` +
+              `Q ${16 - eL} 16 ${76 - eL} 16 Z`;
             return (
               <div style={{
                 position: 'absolute',
@@ -190,7 +203,7 @@ function ECScreenHome() {
                 lineHeight: 0,
                 pointerEvents: 'none',
               }}>
-                <svg viewBox="0 0 380 200" width="54" height="28" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox={`${-eL} 0 ${viewBoxW} 200`} width={svgWidthPx} height="28" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <filter id="bubble-shadow" x="-10%" y="-10%" width="120%" height="140%">
                       <feDropShadow dx="0" dy="3" stdDeviation="8" floodColor="#000" floodOpacity="0.12" />
@@ -198,11 +211,11 @@ function ECScreenHome() {
                   </defs>
                   <path
                     filter="url(#bubble-shadow)"
-                    d="M 76 16 L 304 16 Q 364 16 364 76 Q 364 136 304 136 L 198 136 C 190 136 186 142 180 152 C 170 166 156 176 136 184 C 144 170 150 156 152 148 C 154 140 152 136 144 136 L 76 136 Q 16 136 16 76 Q 16 16 76 16 Z"
+                    d={bubblePath}
                     fill={bubbleFill}
                   />
                   <text
-                    x="190" y="84"
+                    x={textCx} y="84"
                     textAnchor="middle"
                     dominantBaseline="middle"
                     fontFamily="Outfit, system-ui, sans-serif"
