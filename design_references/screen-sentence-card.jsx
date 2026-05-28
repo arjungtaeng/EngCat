@@ -128,7 +128,7 @@ function ECScreenSentenceCard() {
       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
         {s.img
           ? <img src={s.img} style={{ width: '100%', height: '50%', objectFit: 'cover', objectPosition: 'center' }} alt={s.en} />
-          : <div style={{ width: '100%', height: '50%' }}><ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.sit}/></div>
+          : <div style={{ width: '100%', height: '50%' }}><ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.en}/></div>
         }
         <div style={{ position: 'absolute', inset: 0, background: overlayGrad }}/>
       </div>
@@ -167,21 +167,6 @@ function ECScreenSentenceCard() {
         <div style={{ flex: '0 0 40%', minHeight: 120 }} />
 
         <div style={{ padding: '0 22px 20px' }}>
-
-          {/* Situation tag (패턴만 있음) */}
-          {s.sit && (
-            <div style={{ marginBottom: 12 }}>
-              <div style={{
-                display: 'inline-flex', alignItems: 'center', gap: 6,
-                padding: '5px 10px', borderRadius: 6,
-                background: T.accentSoft, color: T.accent,
-                fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, textTransform: 'uppercase',
-              }}>
-                <span style={{ width: 5, height: 5, borderRadius: 3, background: T.accent }}/>
-                {s.sit}
-              </div>
-            </div>
-          )}
 
           {/* Pattern */}
           <div style={{

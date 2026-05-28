@@ -174,13 +174,10 @@ window.ECGetTodaySession = function() {
   const wordsForTopic = (data.words || []).filter(w => w.topicId === topic);
   const todayWords = window.ECGetLeveledContent(wordsForTopic, level, comp.words, seed);
 
-  // 패턴: window.ECData.patterns(레벨 정확 일치) 우선, 없으면 sentences에서 레벨 분배
-  const newPatterns = ((window.ECData && window.ECData.patterns) || []).filter(p => p.topic === topic && p.level === level);
+  // 패턴: DB의 sentences (type='pattern')에서 레벨 분배. 정적 데이터(window.ECData.patterns)는 사용하지 않음 — 다른 토픽 패턴 섞임 방지.
   const sentences = data.sentences || [];
   const sentencePool = sentences.filter(s => s.topicId === topic && (s.type === 'pattern' || !s.type));
-  const patterns = newPatterns.length > 0
-    ? _shuffleStable(newPatterns, seed).slice(0, comp.patterns)
-    : window.ECGetLeveledContent(sentencePool, level, comp.patterns, seed);
+  const patterns = window.ECGetLeveledContent(sentencePool, level, comp.patterns, seed);
 
   const collPool = (data.collocations || []).filter(c => c.topicId === topic);
   const collocations = window.ECGetLeveledContent(collPool, level, comp.collocations, seed);
@@ -285,9 +282,10 @@ function _getAllLearnedIds() {
 window.ECGetReviewSession = function() {
   const level = _getLevel();
   const comp = window.EC_CEFR_COMPOSITIONS[level] || window.EC_CEFR_COMPOSITIONS.B1;
-  const data = window.ECData || { words: [], patterns: [], collocations: [], idioms: [], nuances: [] };
+  const data = window.ECData || { words: [], sentences: [], collocations: [], idioms: [], nuances: [] };
   const allWords    = data.words        || [];
-  const allPatterns = data.patterns     || [];
+  // 패턴은 DB의 sentences (type='pattern')에서 가져옴. 정적 data.patterns는 사용 안 함.
+  const allPatterns = (data.sentences || []).filter(s => s.type === 'pattern' || !s.type);
   const allColloc   = data.collocations || [];
   const allIdioms   = data.idioms       || [];
   const allNuances  = data.nuances      || [];
