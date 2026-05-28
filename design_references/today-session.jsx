@@ -157,6 +157,10 @@ window.ECGetTodaySession = function() {
 
   const topic = window.ECGetTodayTopic(data.words || []);
   const topicLabel = topic ? (window.EC_TOPIC_NAMES[topic] || topic) : '오늘의 학습';
+  // DEBUG: 화면에서 보이는 토픽과 실제 단어의 topicId 일치 여부 확인용
+  if (window.EC_DEBUG) {
+    console.log('[ECGetTodaySession]', { level, topic, topicLabel, seed, dataWords: (data.words||[]).length });
+  }
 
   if (!topic) {
     return {
@@ -186,6 +190,22 @@ window.ECGetTodaySession = function() {
 
   const nuancePool = (data.nuances || []).filter(n => n.topicId === topic);
   const nuances = window.ECGetLeveledContent(nuancePool, level, comp.nuances, seed);
+
+  // DEBUG: 실제 카드의 topicId 일치 검증
+  if (window.EC_DEBUG) {
+    const mismatch = [
+      ...todayWords.filter(w => w.topicId !== topic).map(w => ({ kind: 'word', id: w.id, topicId: w.topicId, en: w.en })),
+      ...collocations.filter(c => c.topicId !== topic).map(c => ({ kind: 'colloc', id: c.id, topicId: c.topicId, en: c.en })),
+      ...idioms.filter(i => i.topicId !== topic).map(i => ({ kind: 'idiom', id: i.id, topicId: i.topicId, en: i.en })),
+      ...nuances.filter(n => n.topicId !== topic).map(n => ({ kind: 'nuance', id: n.id, topicId: n.topicId, en: n.en })),
+    ];
+    console.log('[ECGetTodaySession result]', {
+      topic,
+      counts: { words: todayWords.length, patterns: patterns.length, collocations: collocations.length, idioms: idioms.length, nuances: nuances.length },
+      wordSample: todayWords.slice(0, 3).map(w => `${w.cefr}/${w.topicId}/${w.en}`),
+      mismatch: mismatch.length === 0 ? 'NONE — 모든 카드가 토픽 일치 ✓' : mismatch,
+    });
+  }
 
   const expressions = [...patterns, ...collocations, ...idioms, ...nuances];
 
