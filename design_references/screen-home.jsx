@@ -280,22 +280,20 @@ function ECScreenHome() {
                   };
                   window.ECSession.wordIndex = i;
                   window.ECNav?.go('word-card');
-                }} style={{ flex: '0 0 130px', cursor: 'pointer' }}>
-                  <div style={{ position: 'relative', borderRadius: 14, overflow: 'hidden' }}>
+                }} style={{ flex: '0 0 130px', cursor: 'pointer', opacity: isDone ? 0.45 : 1, transition: 'opacity 0.2s' }}>
+                  <div style={{ position: 'relative' }}>
                     {c.img
-                      ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={c.en} />
-                      : <ECPlaceholder height={150} tint={c.tint} radius={0} label={c.en}/>
+                      ? <img src={c.img} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', borderRadius: 14 }} alt={c.en} />
+                      : <ECPlaceholder height={150} tint={c.tint} radius={14} label={c.en}/>
                     }
-                    {/* 완료 표시 — 이미지 우측 끝에 붙음, 상단에서 10% 아래, 가로 짧은 바 */}
                     {isDone && (
                       <div style={{
-                        position: 'absolute',
-                        top: '10%',
-                        right: 0,
-                        width: 26,
-                        height: 3,
-                        background: T.accent,
-                      }} />
+                        position: 'absolute', top: 8, right: 8,
+                        width: 24, height: 24, borderRadius: 999,
+                        background: T.accent, color: T.bg0,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 14, fontWeight: 700, lineHeight: 1,
+                      }}>✓</div>
                     )}
                   </div>
                   <div style={{ marginTop: 8, fontFamily: T.display, fontWeight: 400, fontSize: 17, color: T.text }}>{c.en}</div>
@@ -348,20 +346,8 @@ function ECScreenHome() {
                 background: T.bg2, border: `1px solid ${T.hair}`,
                 display: 'flex', alignItems: 'center', gap: 12,
                 cursor: 'pointer',
-                position: 'relative',
+                opacity: isDone ? 0.45 : 1, transition: 'opacity 0.2s',
               }}>
-                {/* 완료 표시 — 우측 상단, 오른쪽에서 10% 안쪽, 세로 짧은 바 */}
-                {isDone && (
-                  <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    right: '10%',
-                    width: 3,
-                    height: 22,
-                    background: T.accent,
-                    borderRadius: '0 0 2px 2px',
-                  }} />
-                )}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                     <div style={{
@@ -369,6 +355,14 @@ function ECScreenHome() {
                       background: T.accentSoft, color: T.accent,
                       fontFamily: T.mono, fontSize: 9, letterSpacing: 1, textTransform: 'uppercase', fontWeight: 600,
                     }}>{typeLabel}</div>
+                    {isDone && (
+                      <div style={{
+                        width: 18, height: 18, borderRadius: 999,
+                        background: T.accent, color: T.bg0,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 10, fontWeight: 700, lineHeight: 1,
+                      }}>✓</div>
+                    )}
                   </div>
                   <div style={{
                     fontFamily: T.display, fontWeight: 400,
