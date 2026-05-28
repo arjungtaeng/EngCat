@@ -162,36 +162,43 @@ function ECScreenHome() {
             <span style={{ fontStyle: 'italic', color: T.accent }}>{displayName}.</span>
           </div>
         </div>
-        {/* 마스코트 + Hi 말풍선 */}
+        {/* 마스코트 + Hi 말풍선 (SVG, 다크: 크림 / 라이트: 다크) */}
         <div style={{ flexShrink: 0, position: 'relative', marginRight: 40 }}>
-          {/* 말풍선 — 액센트 컬러로 또렷하게, 꼬리는 고양이 머리쪽 */}
-          <div style={{
-            position: 'absolute',
-            bottom: 'calc(100% - 2px)',
-            right: -25,
-            background: T.accent,
-            color: T.accentText,
-            fontFamily: T.display,
-            fontWeight: 600,
-            fontSize: 15,
-            padding: '5px 14px',
-            borderRadius: 16,
-            whiteSpace: 'nowrap',
-            lineHeight: 1.2,
-            boxShadow: '0 2px 10px rgba(0,0,0,0.18)',
-          }}>
-            Hi
-            {/* 꼬리 — 고양이 머리쪽 */}
-            <span style={{
-              position: 'absolute',
-              bottom: -7,
-              right: 32,
-              width: 0, height: 0,
-              borderLeft: '7px solid transparent',
-              borderRight: '7px solid transparent',
-              borderTop: `8px solid ${T.accent}`,
-            }} />
-          </div>
+          {(() => {
+            const isDarkMode = T.text === '#F8F5EF';
+            const bubbleFill = isDarkMode ? '#F4ECDD' : '#1A1A21';
+            const textFill = isDarkMode ? '#1A1A21' : '#F4ECDD';
+            return (
+              <div style={{
+                position: 'absolute',
+                bottom: 'calc(100% - 14px)',
+                right: -22,
+                lineHeight: 0,
+                pointerEvents: 'none',
+              }}>
+                <svg viewBox="0 0 320 200" width="86" height="54" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <filter id="bubble-shadow" x="-10%" y="-10%" width="120%" height="140%">
+                      <feDropShadow dx="0" dy="3" stdDeviation="8" floodColor="#000" floodOpacity="0.12" />
+                    </filter>
+                  </defs>
+                  <path
+                    filter="url(#bubble-shadow)"
+                    d="M 48 16 L 272 16 Q 304 16 304 48 L 304 96 Q 304 128 272 128 L 170 128 C 162 128 158 134 152 144 C 142 158 128 168 108 176 C 116 162 122 148 124 140 C 126 132 124 128 116 128 L 48 128 Q 16 128 16 96 L 16 48 Q 16 16 48 16 Z"
+                    fill={bubbleFill}
+                  />
+                  <text
+                    x="160" y="92"
+                    textAnchor="middle"
+                    fontFamily="Outfit, system-ui, sans-serif"
+                    fontSize="64"
+                    fontWeight="600"
+                    fill={textFill}
+                  >Hi</text>
+                </svg>
+              </div>
+            );
+          })()}
           <span style={{ display: 'flex' }}>{ECIcon.mascot(T.text === '#F8F5EF', 56)}</span>
         </div>
       </div>
