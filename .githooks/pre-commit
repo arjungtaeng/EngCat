@@ -23,3 +23,10 @@ if [ -f "$INDEX_FILE" ]; then
   rm -f "$INDEX_FILE.bak"
   git add "$INDEX_FILE"
 fi
+
+# 3. version.json (polled by index.html every few seconds for auto-reload)
+VERSION_FILE="version.json"
+if [ -f "$VERSION_FILE" ]; then
+  printf '{"v": %s}\n' "$VERSION" > "$VERSION_FILE"
+  git add "$VERSION_FILE"
+fi
