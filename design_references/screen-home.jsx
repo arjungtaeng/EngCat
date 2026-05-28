@@ -214,7 +214,6 @@ function ECScreenHome() {
       {reviewWords.length > 0 && (() => {
         const completedSet = session.completedWordIds || new Set();
         const doneCount = reviewWords.filter(c => completedSet.has(c.id)).length;
-        const allDone = doneCount === reviewWords.length && reviewWords.length > 0;
         return (<>
           <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
             <div>
@@ -259,26 +258,6 @@ function ECScreenHome() {
               );
             })}
           </div>
-          {/* 완료 후 추천 박스 */}
-          {allDone && (
-            <div style={{ padding: '12px 22px 0' }}>
-              <div onClick={() => {
-                window.ECReviewSeedOffset = (window.ECReviewSeedOffset || 0) + 1;
-                setDataVersion(v => v + 1);
-              }} style={{
-                padding: '14px 16px', borderRadius: 14,
-                background: T.accentSoft, border: `1px dashed ${T.accent}`,
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
-                cursor: 'pointer',
-              }}>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: T.accent, marginBottom: 2 }}>🎉 {reviewWords.length}개 모두 끝!</div>
-                  <div style={{ fontSize: 11.5, color: T.accent, opacity: 0.85 }}>새 단어 {reviewWords.length}개 더 학습해 볼까요?</div>
-                </div>
-                <div style={{ color: T.accent, fontSize: 13, fontWeight: 600, fontFamily: T.mono }}>+ 추천받기</div>
-              </div>
-            </div>
-          )}
         </>);
       })()}
 
@@ -286,7 +265,6 @@ function ECScreenHome() {
       {reviewExpressions.length > 0 && (() => {
         const completedExprSet = session.completedSentenceIds || new Set();
         const doneExprCount = reviewExpressions.filter(e => completedExprSet.has(e.id)).length;
-        const allExprDone = doneExprCount === reviewExpressions.length && reviewExpressions.length > 0;
         return (<>
         <div style={{ padding: '28px 22px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
           <div>
@@ -356,25 +334,6 @@ function ECScreenHome() {
               </div>
             );
           })}
-          {/* 완료 후 추천 박스 */}
-          {allExprDone && (
-            <div onClick={() => {
-              window.ECReviewSeedOffset = (window.ECReviewSeedOffset || 0) + 1;
-              setDataVersion(v => v + 1);
-            }} style={{
-              marginTop: 4,
-              padding: '14px 16px', borderRadius: 14,
-              background: T.accentSoft, border: `1px dashed ${T.accent}`,
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
-              cursor: 'pointer',
-            }}>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: T.accent, marginBottom: 2 }}>🎉 {reviewExpressions.length}개 모두 끝!</div>
-                <div style={{ fontSize: 11.5, color: T.accent, opacity: 0.85 }}>새 표현 {reviewExpressions.length}개 더 학습해 볼까요?</div>
-              </div>
-              <div style={{ color: T.accent, fontSize: 13, fontWeight: 600, fontFamily: T.mono }}>+ 추천받기</div>
-            </div>
-          )}
         </div>
         </>);
       })()}
