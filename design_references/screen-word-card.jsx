@@ -251,18 +251,23 @@ function ECScreenWordCard() {
             <div style={{ fontFamily: T.mono, fontSize: 11, color: T.textMute }}>{word.ipa}</div>
           </div>
 
-          {/* Word + speaker — 스피커는 단어 밑에 배치해 단어 가로폭 확보 */}
-          <div style={{ marginBottom: 4 }}>
-            <div style={{
-              fontFamily: T.display, fontWeight: 400,
-              fontSize: 56, lineHeight: 1, color: T.text,
-              letterSpacing: -1,
-              wordBreak: 'break-word',
-            }}>{word.en}</div>
-            <div onClick={() => speak(word.en)} style={{
-              marginTop: 6, cursor: 'pointer',
-              display: 'inline-flex', alignItems: 'center',
-            }}>{ECIcon.speaker(isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.3)', 19)}</div>
+          {/* Word + speaker — 인라인 흐름: 짧으면 같은 줄, 길어 줄바꿈되면 단어 마지막 글자 옆 아래 */}
+          <div style={{
+            fontFamily: T.display, fontWeight: 400,
+            fontSize: 56, lineHeight: 1, color: T.text,
+            letterSpacing: -1,
+            marginBottom: 4,
+            wordBreak: 'break-word',
+          }}>
+            {word.en}
+            <span onClick={() => speak(word.en)} style={{
+              display: 'inline-block',
+              marginLeft: 10,
+              verticalAlign: 'baseline',
+              position: 'relative',
+              top: 6,
+              cursor: 'pointer',
+            }}>{ECIcon.speaker(isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.3)', 19)}</span>
           </div>
 
           {/* Korean meaning */}
