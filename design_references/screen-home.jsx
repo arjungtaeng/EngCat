@@ -184,37 +184,29 @@ function ECScreenHome() {
               <div style={{
                 position: 'absolute',
                 bottom: 'calc(100% - 5px)',
-                right: 5,
-                pointerEvents: 'none',
+                right: -40,
                 lineHeight: 0,
+                pointerEvents: 'none',
               }}>
-                {/* EngCat-7 (v9) 통합 말풍선 — SVG 그대로 + 텍스트 오버레이 */}
-                <svg
-                  viewBox="0 0 380 200"
-                  width="80"
-                  height="42"
-                  xmlns="http://www.w3.org/2000/svg"
-                  style={{ display: 'block' }}
-                >
+                <svg viewBox="0 0 380 200" width="54" height="28" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <filter id="bubble-shadow-v9" x="-10%" y="-10%" width="120%" height="140%">
+                    <filter id="bubble-shadow" x="-10%" y="-10%" width="120%" height="140%">
                       <feDropShadow dx="0" dy="3" stdDeviation="8" floodColor="#000" floodOpacity="0.12" />
                     </filter>
                   </defs>
                   <path
-                    filter="url(#bubble-shadow-v9)"
-                    d="M 76 16 L 304 16 Q 364 16 364 76 Q 364 136 304 136 L 168 136 C 160 136 156 142 148 152 C 134 168 116 178 92 188 C 102 172 110 158 114 148 C 117 140 115 136 108 136 L 76 136 Q 16 136 16 76 Q 16 16 76 16 Z"
+                    filter="url(#bubble-shadow)"
+                    d="M 76 16 L 304 16 Q 364 16 364 76 Q 364 136 304 136 L 198 136 C 190 136 186 142 180 152 C 170 166 156 176 136 184 C 144 170 150 156 152 148 C 154 140 152 136 144 136 L 76 136 Q 16 136 16 76 Q 16 16 76 16 Z"
                     fill={bubbleFill}
                   />
                   <text
-                    x="190" y="90"
+                    x="190" y="100"
                     textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontFamily='"Instrument Serif", serif'
-                    fontStyle="italic"
-                    fontSize="58"
+                    fontFamily="Outfit, system-ui, sans-serif"
+                    fontSize="72"
+                    fontWeight="600"
                     fill={textFill}
-                  >{bubbleGreeting}</text>
+                  >Hi</text>
                 </svg>
               </div>
             );
