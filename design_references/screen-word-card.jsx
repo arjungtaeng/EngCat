@@ -90,10 +90,18 @@ function ECScreenWordCard() {
   const isFirst = idx === 0;
   const isBookmarked = bookmarked.has(word.id);
 
+  // review / preview 진입 시 sentence-card로 안 이어짐, 홈으로 복귀.
+  const sourceMode = cardSource.current && cardSource.current.mode;
+  const isReviewOrPreview = sourceMode === 'review' || sourceMode === 'preview';
+
   const goTo = (dir) => {
     if (dir === 'next') {
       session.markWordDone(word.id);
-      if (isLast) { session.wordIndex = 0; window.ECNav?.go('sentence-card'); return; }
+      if (isLast) {
+        session.wordIndex = 0;
+        window.ECNav?.go(isReviewOrPreview ? 'home' : 'sentence-card');
+        return;
+      }
     }
     if (dir === 'prev' && isFirst) return;
     const next = idx + (dir === 'next' ? 1 : -1);
@@ -160,7 +168,7 @@ function ECScreenWordCard() {
     );
   }
 
-  const btnLabel = isLast ? '문장 학습하기' : '다음 카드';
+  const btnLabel = isLast ? (isReviewOrPreview ? '학습 마치기' : '문장 학습하기') : '다음 카드';
   const isDark = T.text === '#F8F5EF';
 
   const railIcon = isDark ? 'rgba(255,255,255,0.9)' : T.text;

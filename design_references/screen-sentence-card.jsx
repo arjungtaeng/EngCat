@@ -48,10 +48,18 @@ function ECScreenSentenceCard() {
                   : s.type === 'nuance'      ? '뉘앙스'
                   : '패턴';
 
+  // review / preview 진입 시 퀴즈 X, 홈으로 복귀. today 흐름만 퀴즈로.
+  const sourceMode = cardSource.current && cardSource.current.mode;
+  const isReviewOrPreview = sourceMode === 'review' || sourceMode === 'preview';
+
   const goTo = (dir) => {
     if (dir === 'next') {
       session.markSentenceDone(s.id);
-      if (isLast) { session.sentenceIndex = 0; window.ECNav?.go('quiz'); return; }
+      if (isLast) {
+        session.sentenceIndex = 0;
+        window.ECNav?.go(isReviewOrPreview ? 'home' : 'quiz');
+        return;
+      }
     }
     if (dir === 'prev' && isFirst) return;
     const next = idx + (dir === 'next' ? 1 : -1);
@@ -104,7 +112,7 @@ function ECScreenSentenceCard() {
   const speak = (text) => window.ECSpeak(text || s.en);
 
   const swipingPrev = swipeX > 30 && !isFirst;
-  const btnLabel = swipingPrev ? '이전 카드' : isLast ? '퀴즈 시작하기' : '다음 카드';
+  const btnLabel = swipingPrev ? '이전 카드' : isLast ? (isReviewOrPreview ? '학습 마치기' : '퀴즈 시작하기') : '다음 카드';
   const btnBg    = swipingPrev ? (isDark ? 'rgba(255,255,255,0.10)' : T.bg2) : T.accent;
   const btnColor = swipingPrev ? T.text : T.accentText;
   const btnBd    = swipingPrev ? T.hair : 'none';
