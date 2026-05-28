@@ -26,11 +26,7 @@ export default function SentenceCardScreen({ navigation }: Props) {
   const T = useTokens();
   const store = useCardsStore();
   const { level, id: userId } = useUserStore();
-  const session = useMemo(
-    () => getTodaySession(store.words, store.expressions, level),
-    [store.words, store.expressions, level],
-  );
-  const expressions = session.expressions.length ? session.expressions : (store.expressions.length ? store.expressions : store.sentences);
+  const expressions = store.expressions.length ? store.expressions : store.sentences;
 
   const [idx, setIdx] = useState(store.sentenceIndex);
 
