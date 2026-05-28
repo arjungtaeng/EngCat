@@ -25,7 +25,6 @@ export interface SentenceCard {
   ko: string;
   highlight?: string;
   tip?: string;
-  sit?: string;
   examples?: { en: string; ko: string }[];
   // collocation
   verb?: string;

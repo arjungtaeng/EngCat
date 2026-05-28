@@ -71,7 +71,7 @@ export default function SentenceCardScreen({ navigation }: Props) {
     <View style={[styles.typeChip, { backgroundColor: T.accentSoft }]}>
       <View style={[styles.typeDot, { backgroundColor: T.accent }]} />
       <Text style={[styles.typeText, { color: T.accent, fontFamily: T.mono }]}>
-        {(s.type === 'pattern' && s.sit) ? s.sit : typeLabel}
+        {typeLabel}
       </Text>
     </View>
   );

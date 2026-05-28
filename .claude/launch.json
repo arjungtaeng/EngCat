@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "engcat",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-l", "3001", "."],
-      "port": 3001
+      "name": "expo",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start", "--prefix", "mobile"],
+      "port": 8081
     }
   ]
 }

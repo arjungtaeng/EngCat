@@ -76,7 +76,6 @@ export async function loadCardsFromSupabase(userLevel: string = 'B1'): Promise<L
     ko:        s.ko,
     highlight: s.highlight || undefined,
     tip:       s.tip || undefined,
-    sit:       s.situation || undefined,
     cefr:      s.cefr || s.level || 'B1',
     priority:  s.priority || 3,
     topicId:   s.topic_id || '',
