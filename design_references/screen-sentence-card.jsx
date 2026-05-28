@@ -110,7 +110,8 @@ function ECScreenSentenceCard() {
     if (touchStartX.current === null) return;
     const threshold = window.innerWidth * 0.5;
     if (swipeX < -threshold) goTo('next');
-    else if (swipeX > threshold && !isFirst) goTo('prev');
+    // 첫 카드에서도 prev 스와이프 허용 — goTo('prev')가 단어 카드로 점프 처리
+    else if (swipeX > threshold && (!isFirst || hasWordsForBack)) goTo('prev');
     else setSwipeX(0);
     touchStartX.current = null;
     swipeDir.current = null;
@@ -126,7 +127,7 @@ function ECScreenSentenceCard() {
 
   const speak = (text) => window.ECSpeak(text || s.en);
 
-  const swipingPrev = swipeX > 30 && !isFirst;
+  const swipingPrev = swipeX > 30 && (!isFirst || hasWordsForBack);
   const btnLabel = swipingPrev ? '이전 카드' : isLast ? (isReviewOrPreview ? '학습 마치기' : '퀴즈 시작하기') : '다음 카드';
   const btnBg    = swipingPrev ? (isDark ? 'rgba(255,255,255,0.10)' : T.bg2) : T.accent;
   const btnColor = swipingPrev ? T.text : T.accentText;
