@@ -178,7 +178,7 @@ function ECScreenSentenceCard() {
 
           {/* Pattern */}
           <div style={{
-            fontFamily: T.thin, fontWeight: isDark ? 400 : 500, fontSize: 36, lineHeight: 1.15, color: T.text,
+            fontFamily: T.thin, fontWeight: isDark ? 500 : 600, fontSize: 36, lineHeight: 1.15, color: T.text,
             letterSpacing: -0.3, marginBottom: 6,
           }}>{s.en}</div>
 
