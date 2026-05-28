@@ -171,12 +171,12 @@ function ECScreenHome() {
             return (
               <div style={{
                 position: 'absolute',
-                bottom: 'calc(100% - 14px)',
+                bottom: 'calc(100% - 4px)',
                 right: -40,
                 lineHeight: 0,
                 pointerEvents: 'none',
               }}>
-                <svg viewBox="0 0 380 200" width="64" height="34" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 380 200" width="54" height="28" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <filter id="bubble-shadow" x="-10%" y="-10%" width="120%" height="140%">
                       <feDropShadow dx="0" dy="3" stdDeviation="8" floodColor="#000" floodOpacity="0.12" />
