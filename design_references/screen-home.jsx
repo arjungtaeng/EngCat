@@ -163,44 +163,33 @@ function ECScreenHome() {
           </div>
         </div>
         {/* 마스코트 + Hi 말풍선 */}
-        <div style={{ flexShrink: 0, position: 'relative', marginRight: 52 }}>
-          {/* 말풍선 — 마스코트보다 살짝 오른쪽으로 빼고, 꼬리는 고양이 머리쪽으로 */}
+        <div style={{ flexShrink: 0, position: 'relative', marginRight: 40 }}>
+          {/* 말풍선 — 액센트 컬러로 또렷하게, 꼬리는 고양이 머리쪽 */}
           <div style={{
             position: 'absolute',
-            bottom: 'calc(100% - 4px)',
-            right: -16,
-            background: T.bg2,
-            color: T.text,
+            bottom: 'calc(100% - 2px)',
+            right: -25,
+            background: T.accent,
+            color: T.accentText,
             fontFamily: T.display,
-            fontWeight: 500,
-            fontSize: 14,
-            padding: '4px 12px',
-            borderRadius: 14,
-            border: `1px solid ${T.hair}`,
+            fontWeight: 600,
+            fontSize: 15,
+            padding: '5px 14px',
+            borderRadius: 16,
             whiteSpace: 'nowrap',
             lineHeight: 1.2,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.18)',
           }}>
             Hi
-            {/* 꼬리 — 고양이 머리쪽 (오른쪽 끝 가까이) */}
+            {/* 꼬리 — 고양이 머리쪽 */}
             <span style={{
               position: 'absolute',
-              bottom: -5,
-              right: 28,
+              bottom: -7,
+              right: 32,
               width: 0, height: 0,
-              borderLeft: '5px solid transparent',
-              borderRight: '5px solid transparent',
-              borderTop: `5px solid ${T.bg2}`,
-            }} />
-            <span style={{
-              position: 'absolute',
-              bottom: -6,
-              right: 27,
-              width: 0, height: 0,
-              borderLeft: '6px solid transparent',
-              borderRight: '6px solid transparent',
-              borderTop: `6px solid ${T.hair}`,
-              zIndex: -1,
+              borderLeft: '7px solid transparent',
+              borderRight: '7px solid transparent',
+              borderTop: `8px solid ${T.accent}`,
             }} />
           </div>
           <span style={{ display: 'flex' }}>{ECIcon.mascot(T.text === '#F8F5EF', 56)}</span>
