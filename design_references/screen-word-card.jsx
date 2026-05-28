@@ -11,13 +11,19 @@ const getTTSSettings = () => ({
 });
 
 // 단어 + 스피커 — 스피커는 항상 옆에 inline.
-// 단어가 한 줄에 안 들어가면 fontSize를 줄여서 한 줄에 맞춤 (최소 36px까지).
+// - 다단어 (공백 포함): 자연 줄바꿈, fontSize 그대로. 스피커는 마지막 단어 끝 옆.
+// - 단일 단어가 한 줄에 안 들어가면 fontSize 축소 (최소 36px).
 function WordWithSpeaker({ word, speak, T, isDark }) {
   const containerRef = React.useRef(null);
   const measureRef = React.useRef(null);
   const [fontSize, setFontSize] = React.useState(56);
+  const isMultiWord = (word.en || '').trim().includes(' ');
 
   React.useLayoutEffect(() => {
+    if (isMultiWord) {
+      setFontSize(56);  // 다단어 — 자연 줄바꿈, 폰트 유지
+      return;
+    }
     if (!containerRef.current || !measureRef.current) return;
     const available = containerRef.current.clientWidth - 32; // 스피커 + 여백
     const MAX = 56;
@@ -29,28 +35,30 @@ function WordWithSpeaker({ word, speak, T, isDark }) {
       measureRef.current.style.fontSize = fs + 'px';
     }
     setFontSize(fs);
-  }, [word.en]);
+  }, [word.en, isMultiWord]);
 
   const speakerColor = isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.3)';
 
   return (
     <div ref={containerRef} style={{ marginBottom: 4 }}>
-      {/* hidden 측정용 — nowrap 폭을 잼 */}
-      <div ref={measureRef} aria-hidden="true" style={{
-        visibility: 'hidden',
-        position: 'absolute',
-        whiteSpace: 'nowrap',
-        pointerEvents: 'none',
-        fontFamily: T.display, fontWeight: 400,
-        lineHeight: 1,
-        letterSpacing: -1,
-      }}>{word.en}</div>
+      {/* hidden 측정용 — nowrap 폭을 잼 (단일 단어용) */}
+      {!isMultiWord && (
+        <div ref={measureRef} aria-hidden="true" style={{
+          visibility: 'hidden',
+          position: 'absolute',
+          whiteSpace: 'nowrap',
+          pointerEvents: 'none',
+          fontFamily: T.display, fontWeight: 400,
+          lineHeight: 1,
+          letterSpacing: -1,
+        }}>{word.en}</div>
+      )}
 
       <div style={{
         fontFamily: T.display, fontWeight: 400,
         fontSize: fontSize, lineHeight: 1, color: T.text,
         letterSpacing: -1,
-        overflowWrap: 'break-word', // 최소 fontSize에서도 안 맞으면 단어 줄바꿈
+        overflowWrap: 'break-word',
       }}>
         {word.en}
         <span onClick={() => speak(word.en)} style={{
