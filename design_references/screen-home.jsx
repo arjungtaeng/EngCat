@@ -36,7 +36,7 @@ function ECScreenHome() {
     return pool[Math.floor(Math.random() * pool.length)];
   }, []);
 
-  const session = window.ECSession || { completedWordIds: new Set(), completedSentenceIds: new Set() };
+  const session = window.ECSession || { completedWordIds: new Set(), completedSentenceIds: new Set(), completedReviewWordIds: new Set(), completedReviewSentenceIds: new Set() };
   const doneWords = session.completedWordIds.size;
   const doneSentences = session.completedSentenceIds.size;
   const userLevel = localStorage.getItem('ec_user_level') || 'B1';
@@ -283,7 +283,7 @@ function ECScreenHome() {
 
       {/* Section: 복습 단어 (or 예습 단어) */}
       {reviewWords.length > 0 && (() => {
-        const completedSet = session.completedWordIds || new Set();
+        const completedSet = session.completedReviewWordIds || new Set();
         const doneCount = reviewWords.filter(c => completedSet.has(c.id)).length;
         return (<>
           <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -340,7 +340,7 @@ function ECScreenHome() {
 
       {/* Section: 복습 표현 (or 예습 표현) — 패턴 + 콜로 + 이디엄 + 뉘앙스 */}
       {reviewExpressions.length > 0 && (() => {
-        const completedExprSet = session.completedSentenceIds || new Set();
+        const completedExprSet = session.completedReviewSentenceIds || new Set();
         const doneExprCount = reviewExpressions.filter(e => completedExprSet.has(e.id)).length;
         return (<>
         <div style={{ padding: '28px 22px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>

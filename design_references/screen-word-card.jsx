@@ -162,7 +162,7 @@ function ECScreenWordCard() {
 
   const goTo = (dir) => {
     if (dir === 'next') {
-      session.markWordDone(word.id);
+      session.markWordDone(word.id, isReviewOrPreview);
       if (isLast) {
         session.wordIndex = 0;
         if (isReviewOrPreview) {

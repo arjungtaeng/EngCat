@@ -67,7 +67,7 @@ function ECScreenSentenceCard() {
 
   const goTo = (dir) => {
     if (dir === 'next') {
-      session.markSentenceDone(s.id);
+      session.markSentenceDone(s.id, isReviewOrPreview);
       if (isLast) {
         session.sentenceIndex = 0;
         window.ECNav?.go(isReviewOrPreview ? 'home' : 'quiz');

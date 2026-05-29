@@ -16,14 +16,19 @@ if (!window.ECSession) {
   window.ECSession = {
     wordIndex: 0,
     sentenceIndex: 0,
+    // 오늘의 학습 완료 / 복습·예습 완료를 분리해서 추적 (서로 영향 없음)
     completedWordIds: new Set(),
     completedSentenceIds: new Set(),
+    completedReviewWordIds: new Set(),
+    completedReviewSentenceIds: new Set(),
     bookmarkedIds: savedBookmarks,
     saveBookmarks() {
       localStorage.setItem('ec_bookmarks', JSON.stringify([...this.bookmarkedIds]));
     },
-    markWordDone(id) {
-      this.completedWordIds.add(id);
+    // isReview=true면 복습/예습 완료 세트에, 아니면 오늘의 학습 세트에 기록.
+    // 학습 이력(localStorage)에는 둘 다 기록 (스트릭·간격반복용).
+    markWordDone(id, isReview = false) {
+      (isReview ? this.completedReviewWordIds : this.completedWordIds).add(id);
       const key = _ecTodayKey();
       const stored = (() => { try { return JSON.parse(localStorage.getItem(key) || '{}'); } catch(e) { return {}; } })();
       const wordIds = new Set(stored.wordIds || []);
@@ -31,8 +36,8 @@ if (!window.ECSession) {
       stored.wordIds = [...wordIds];
       localStorage.setItem(key, JSON.stringify(stored));
     },
-    markSentenceDone(id) {
-      this.completedSentenceIds.add(id);
+    markSentenceDone(id, isReview = false) {
+      (isReview ? this.completedReviewSentenceIds : this.completedSentenceIds).add(id);
       const key = _ecTodayKey();
       const stored = (() => { try { return JSON.parse(localStorage.getItem(key) || '{}'); } catch(e) { return {}; } })();
       const sentenceIds = new Set(stored.sentenceIds || []);
@@ -45,6 +50,8 @@ if (!window.ECSession) {
       this.sentenceIndex = 0;
       this.completedWordIds = new Set();
       this.completedSentenceIds = new Set();
+      this.completedReviewWordIds = new Set();
+      this.completedReviewSentenceIds = new Set();
     },
   };
 }
