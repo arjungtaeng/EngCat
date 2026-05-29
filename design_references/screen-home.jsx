@@ -267,9 +267,17 @@ function ECScreenHome() {
 
           {/* CTA */}
           <div onClick={() => {
-            // 오늘의 학습 흐름 — 이전 복습/예습 클릭 잔재 청소
-            window.ECCardSource = null;
-            window.ECNav?.go('word-card');
+            // 단어를 다 끝냈으면 문장(표현) 카드로 이어서, 아니면 단어 카드로.
+            const tw = todaySession.words || [];
+            const te = todaySession.expressions || [];
+            const wordsAllDone = tw.length > 0 && tw.every(w => session.completedWordIds.has(w.id));
+            if (wordsAllDone && te.length > 0) {
+              window.ECCardSource = { mode: 'today', words: tw, expressions: te, startIndex: session.sentenceIndex || 0 };
+              window.ECNav?.go('sentence-card');
+            } else {
+              window.ECCardSource = null;
+              window.ECNav?.go('word-card');
+            }
           }} style={{
             marginTop: 16, height: 50, borderRadius: 14, background: T.accent,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
