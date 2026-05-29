@@ -125,7 +125,35 @@ function ECScreenSentenceCard() {
     setBookmarked(next);
   };
 
-  const speak = (text) => window.ECSpeak(text || s.en);
+  const stripMarkers = (text) => (text || '').replace(/\{([^}]+)\}/g, '$1');
+  const speak = (text) => window.ECSpeak(stripMarkers(text) || s.en);
+
+  // 패턴 예문에서 핵심 어구(highlight)를 액센트 색으로 강조.
+  // 1) {중괄호} 마커 우선  2) 없으면 highlight 단어를 prefix 매칭(동사 변형 커버).
+  //    highlight의 '~'(슬롯)·기호는 [^a-z\s'-] strip으로 자동 제외되어 고정 어구만 매칭됨.
+  function renderEx(ex, highlight) {
+    if (!ex) return ex;
+    if (ex.includes('{')) {
+      const parts = ex.split(/\{([^}]+)\}/);
+      return parts.map((part, i) =>
+        i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
+      );
+    }
+    if (!highlight) return ex;
+    const STOP = new Set(['a','an','the','is','are','was','were','be','been','to','of','in','for','on','with','at','by','i','you','he','she','we','they','and','or','but','that','this','it','its','my','your','his','her','our','their']);
+    const words = highlight.toLowerCase().replace(/[^a-z\s'-]/g, ' ').split(/\s+/).filter(w => w.length >= 2 && !STOP.has(w));
+    if (!words.length) return ex;
+    // 4자 이상: \b단어\w* (변형형 커버, work→works), 3자 이하: 정확 매칭(오탐 방지)
+    const pattern = words.map(w => {
+      const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return w.length >= 4 ? `\\b${esc}\\w*` : `\\b${esc}\\b`;
+    }).join('|');
+    const parts = ex.split(new RegExp(`(${pattern})`, 'gi'));
+    if (parts.length <= 1) return ex;
+    return parts.map((part, i) =>
+      i % 2 === 1 ? React.createElement('span', { key: i, style: { color: T.accent } }, part) : part
+    );
+  }
 
   const swipingPrev = swipeX > 30 && (!isFirst || hasWordsForBack);
   const btnLabel = swipingPrev ? '이전 카드' : isLast ? (isReviewOrPreview ? '학습 마치기' : '퀴즈 시작하기') : '다음 카드';
@@ -234,7 +262,7 @@ function ECScreenSentenceCard() {
                 }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontFamily: T.thin, fontWeight: isDark ? 200 : 300, fontSize: 15, color: T.text, lineHeight: 1.35 }}>
-                      {ex.en}
+                      {renderEx(ex.en, s.highlight)}
                     </div>
                     {ex.ko && (
                       <div style={{ fontSize: 12, color: T.textDim, marginTop: 4, lineHeight: 1.4 }}>
