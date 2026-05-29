@@ -120,7 +120,7 @@ function ECScreenSentenceCard() {
 
   const handleTouchEnd = () => {
     if (touchStartX.current === null) return;
-    const threshold = window.innerWidth * 0.5;
+    const threshold = window.innerWidth * 0.25;  // 단어 카드와 동일한 감도
     if (swipeX < -threshold) goTo('next');
     // 첫 카드에서도 prev 스와이프 허용 — goTo('prev')가 단어 카드로 점프 처리
     else if (swipeX > threshold && (!isFirst || hasWordsForBack)) goTo('prev');

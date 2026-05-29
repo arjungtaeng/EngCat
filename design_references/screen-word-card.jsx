@@ -180,6 +180,15 @@ function ECScreenWordCard() {
             window.ECNav?.go('home');
           }
         } else {
+          // 오늘의 학습 흐름: 단어→문장 이동 시에도 words를 넘겨, 문장 카드 첫장에서
+          // 뒤로 스와이프하면 단어 마지막 카드로 돌아갈 수 있게 함.
+          window.ECCardSource = {
+            mode: sourceMode || 'today',
+            words: words,
+            expressions: todaySession.expressions,
+            startIndex: 0,
+          };
+          window.ECSession.sentenceIndex = 0;
           window.ECNav?.go('sentence-card');
         }
         return;
