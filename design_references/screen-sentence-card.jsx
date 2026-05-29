@@ -25,6 +25,7 @@ function ECScreenSentenceCard() {
   const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
   const [swipeX, setSwipeX] = React.useState(0);
   const [slideOut, setSlideOut] = React.useState(0);
+  const [heroDim, setHeroDim] = React.useState(0);
   const touchStartX = React.useRef(null);
   const touchStartY = React.useRef(null);
   const swipeDir = React.useRef(null);
@@ -95,6 +96,7 @@ function ECScreenSentenceCard() {
       setAnimKey(k => k + 1);
       setSlideOut(0);
       setSwipeX(0);
+      setHeroDim(0);
     }, 240);
   };
 
@@ -165,6 +167,14 @@ function ECScreenSentenceCard() {
     );
   }
 
+  // 단어 카드와 동일한 스크롤 딤 — 스크롤할수록 히어로 이미지가 어두워짐
+  const handleScrollDim = React.useCallback((e) => {
+    const st = e.currentTarget.scrollTop;
+    const triggerEnd = window.innerHeight * 0.30;
+    const opacity = Math.min(st / triggerEnd, 1) * 0.65;
+    setHeroDim(opacity);
+  }, []);
+
   const swipingPrev = swipeX > 30 && (!isFirst || hasWordsForBack);
   const btnLabel = swipingPrev ? '이전 카드' : isLast ? (isReviewOrPreview ? '학습 마치기' : '퀴즈 시작하기') : '다음 카드';
   const btnBg    = swipingPrev ? (isDark ? 'rgba(255,255,255,0.10)' : T.bg2) : T.accent;
@@ -174,10 +184,6 @@ function ECScreenSentenceCard() {
   const contentTransform = slideOut !== 0 ? `translateX(${slideOut}%)` : `translateX(${swipeX}px)`;
   const contentTransition = slideOut !== 0 ? 'transform 0.24s cubic-bezier(0.4,0,0.2,1)' : 'none';
 
-  const overlayGrad = isDark
-    ? 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 15%, transparent 26%, rgba(0,0,0,0.88) 42%, #000 50%)'
-    : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 14%, transparent 26%, ${T.bg1}D0 38%, ${T.bg1} 50%)`;
-
   return (
     <div
       style={{ flex: 1, minHeight: 0, background: T.bg0, position: 'relative', overflow: 'hidden' }}
@@ -186,13 +192,23 @@ function ECScreenSentenceCard() {
       onTouchEnd={handleTouchEnd}
     >
 
-      {/* Full-bleed landscape image — 단어 카드와 동일한 70% 높이 */}
-      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+      {/* Hero — 단어 카드와 동일: 70% 컨테이너 + 이미지 100% + 그라데이션 + 스크롤 딤 */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: '70%',
+        zIndex: 1, overflow: 'hidden',
+      }}>
         {s.img
-          ? <img src={s.img} style={{ width: '100%', height: '70%', objectFit: 'cover', objectPosition: 'center' }} alt={s.en} />
-          : <div style={{ width: '100%', height: '70%' }}><ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.en}/></div>
+          ? <img src={s.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={s.en} />
+          : <ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.en}/>
         }
-        <div style={{ position: 'absolute', inset: 0, background: overlayGrad }}/>
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: isDark
+            ? `linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, ${T.bg0} 100%)`
+            : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 25%, transparent 55%, ${T.bg0} 100%)`,
+        }}/>
+        {/* 스크롤 딤 오버레이 */}
+        <div style={{ position: 'absolute', inset: 0, background: isDark ? '#000' : T.bg0, opacity: heroDim, pointerEvents: 'none' }}/>
       </div>
 
       {/* Top chrome */}
@@ -225,6 +241,7 @@ function ECScreenSentenceCard() {
           transform: contentTransform,
           transition: contentTransition,
         }}
+        onScroll={handleScrollDim}
       >
         <div style={{ flex: '0 0 52%', minHeight: 120 }} />
 
