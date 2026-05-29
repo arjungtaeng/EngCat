@@ -14,6 +14,7 @@ import { loadCardsFromSupabase } from './src/services/supabase';
 
 function AppContent() {
   const { setWords, setSentences, setExpressions } = useCardsStore();
+  const cardsLoaded = useCardsStore(s => s.words.length > 0);
   const level = useUserStore(s => s.level);
   const [status, setStatus] = useState<'loading' | 'done' | 'fallback'>('loading');
 
@@ -26,17 +27,14 @@ function AppContent() {
         if (cancelled) return;
 
         const hasData = result.words.length > 0 || result.expressions.length > 0;
-        if (hasData) {
-          setWords(result.words);
-          setSentences(result.sentences);
-          setExpressions(result.expressions);
-          setStatus('done');
-        } else {
-          setWords(SEED_WORDS);
-          setSentences(SEED_SENTENCES);
-          setExpressions(SEED_SENTENCES);
-          setStatus('fallback');
-        }
+        const words = hasData ? result.words : SEED_WORDS;
+        const sentences = hasData ? result.sentences : SEED_SENTENCES;
+        const expressions = hasData ? result.expressions : SEED_SENTENCES;
+
+        setWords(words);
+        setSentences(sentences);
+        setExpressions(expressions);
+        setStatus(hasData ? 'done' : 'fallback');
       } catch {
         if (cancelled) return;
         setWords(SEED_WORDS);
@@ -49,7 +47,7 @@ function AppContent() {
     return () => { cancelled = true; };
   }, [level, setWords, setSentences, setExpressions]);
 
-  if (status === 'loading') {
+  if (status === 'loading' || !cardsLoaded) {
     return (
       <View style={{ flex: 1, backgroundColor: '#0D0D11', alignItems: 'center', justifyContent: 'center' }}>
         <Text style={{ color: 'rgba(248,245,239,0.5)', fontSize: 13, letterSpacing: 1 }}>

@@ -52,8 +52,10 @@ export const CEFR_COMPOSITIONS: Record<string, Composition> = {
 };
 
 export function getDayOfYear(now: Date = new Date()): number {
-  const start = new Date(now.getFullYear(), 0, 0);
-  return Math.floor((now.getTime() - start.getTime()) / 86400000);
+  // 한국 시간대(KST, UTC+9)의 자정을 기준으로 일차 계산
+  const kstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  const start = new Date(kstNow.getFullYear(), 0, 0);
+  return Math.floor((kstNow.getTime() - start.getTime()) / 86400000);
 }
 
 export function shuffleStable<T>(arr: T[], seed: number): T[] {
@@ -63,23 +65,27 @@ export function shuffleStable<T>(arr: T[], seed: number): T[] {
     .map(o => o.x);
 }
 
-export function getTodayTopic(words: WordCard[]): string | null {
-  const availableTopics = Array.from(new Set(words.map(w => w.topicId).filter(Boolean)));
+export function getTodayTopic(words: WordCard[], expressions: SentenceCard[]): string | null {
+  // words와 expressions 모두에서 토픽 추출
+  const allCards = [...words, ...expressions];
+  const availableTopics = Array.from(new Set(allCards.map(c => c.topicId).filter(Boolean)));
   if (availableTopics.length === 0) return null;
+  console.log(`[getTodayTopic] 사용 가능한 토픽: ${availableTopics.length}개 - ${availableTopics.sort().join(', ')}`);
 
   // 토픽별 이미지 보유 수 계산
   const topicScore = new Map<string, number>();
-  for (const w of words) {
-    if (!w.topicId) continue;
-    if (w.img) topicScore.set(w.topicId, (topicScore.get(w.topicId) ?? 0) + 1);
-    else if (!topicScore.has(w.topicId)) topicScore.set(w.topicId, 0);
+  for (const card of allCards) {
+    if (!card.topicId) continue;
+    if (card.img) topicScore.set(card.topicId, (topicScore.get(card.topicId) ?? 0) + 1);
+    else if (!topicScore.has(card.topicId)) topicScore.set(card.topicId, 0);
   }
 
   // 이미지 있는 토픽 우선, 없는 토픽 후순위
-  const withImg = TOPIC_ORDER.filter(t => (topicScore.get(t) ?? 0) > 0);
+  const withImg = TOPIC_ORDER.filter(t => availableTopics.includes(t) && (topicScore.get(t) ?? 0) > 0);
   const withoutImg = TOPIC_ORDER.filter(t => availableTopics.includes(t) && (topicScore.get(t) ?? 0) === 0);
   const ordered = [...withImg, ...withoutImg];
   if (ordered.length === 0) return availableTopics[0];
+  // 모든 가용 토픽을 순환 — 매일 다른 토픽 표시
   return ordered[getDayOfYear() % ordered.length];
 }
 
@@ -103,7 +109,7 @@ export function getTodaySession(
 ): TodaySession {
   const comp = CEFR_COMPOSITIONS[level] ?? CEFR_COMPOSITIONS.B1;
   const seed = getDayOfYear();
-  const topic = getTodayTopic(words);
+  const topic = getTodayTopic(words, expressions);
   const topicLabel = topic ? (TOPIC_NAMES[topic] ?? topic) : '오늘의 학습';
 
   if (!topic) {
@@ -162,12 +168,14 @@ export function getReviewSession(
   level:          string,
 ): ReviewSession {
   const comp = CEFR_COMPOSITIONS[level] ?? CEFR_COMPOSITIONS.B1;
+  const totalExpressions = comp.patterns + comp.collocations + comp.idioms + comp.nuances;
   const yWordIds     = new Set(yesterday.wordIds);
   const ySentenceIds = new Set(yesterday.sentenceIds);
 
   if (yWordIds.size > 0 || ySentenceIds.size > 0) {
-    const reviewWords       = allWords.filter(w => yWordIds.has(w.id));
-    const reviewExpressions = allExpressions.filter(e => ySentenceIds.has(e.id));
+    // 복습 세션: 오늘의 학습 개수에 맞춤
+    const reviewWords       = allWords.filter(w => yWordIds.has(w.id)).slice(0, comp.words);
+    const reviewExpressions = allExpressions.filter(e => ySentenceIds.has(e.id)).slice(0, totalExpressions);
 
     let topic: string | null = null;
     if (reviewWords.length > 0 && reviewWords[0].topicId) {
