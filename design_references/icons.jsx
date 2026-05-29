@@ -20,6 +20,13 @@ const ECIcon = {
       <rect x="17" y="13" width="3" height="4" rx="0.5" fill={c}/>
     </svg>
   ),
+  trophy: (c = 'currentColor', s = 22) => (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
+      <path d="M7 4h10v5a5 5 0 0 1-10 0V4z" stroke={c} strokeWidth="1.6" strokeLinejoin="round"/>
+      <path d="M7 6H4.5a2.5 2.5 0 0 0 2.5 2.5M17 6h2.5a2.5 2.5 0 0 1-2.5 2.5" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
+      <path d="M12 14v3M9 20h6M10 20v-1.5a2 2 0 0 1 4 0V20" stroke={c} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  ),
   user: (c = 'currentColor', s = 22) => (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
       <circle cx="12" cy="8" r="4" stroke={c} strokeWidth="1.6"/>

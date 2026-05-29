@@ -71,6 +71,7 @@ function ECScreenQuiz() {
     setSelected(id);
     const ok = q.choices.find(c => c.id === id)?.ok;
     _saveQuizStat(q.word.id, ok);   // 복습 가중치용 퀴즈 결과 저장
+    if (window.ECLogQuiz) window.ECLogQuiz(!!ok);  // 리더보드 주간 점수용 일자별 기록
     if (ok) setScore(s => s + 1);
     else setLives(l => l - 1);
   };

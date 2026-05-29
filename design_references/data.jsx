@@ -336,7 +336,7 @@ window.ECReloadData = function() {
 // Safari·PWA·재로그인 간 동기화한다. user_progress 테이블이 없으면 조용히 무시.
 function _ecCollectProgress() {
   const email = _ecGetUserId();
-  const blob = { learned: {}, quizStats: {}, level: null, topic: null, nickname: null, bookmarks: [] };
+  const blob = { learned: {}, quizStats: {}, quizLog: {}, level: null, topic: null, nickname: null, bookmarks: [] };
   const prefix = 'ec_learned_' + email + '_';
   for (let i = 0; i < localStorage.length; i++) {
     const k = localStorage.key(i);
@@ -345,6 +345,7 @@ function _ecCollectProgress() {
     }
   }
   try { blob.quizStats = JSON.parse(localStorage.getItem('ec_quiz_stats_' + email) || '{}'); } catch (_) {}
+  try { blob.quizLog   = JSON.parse(localStorage.getItem('ec_quizlog_' + email) || '{}'); } catch (_) {}
   blob.level    = localStorage.getItem('ec_user_level');
   blob.topic    = localStorage.getItem('ec_user_topic');
   blob.nickname = localStorage.getItem('engcat_nickname');
@@ -373,6 +374,16 @@ function _ecApplyProgress(email, remote) {
     }
     localStorage.setItem('ec_quiz_stats_' + email, JSON.stringify(merged));
   }
+  // 일자별 퀴즈 로그: 날짜별로 시도수 많은 쪽 채택
+  if (remote.quizLog) {
+    let local = {}; try { local = JSON.parse(localStorage.getItem('ec_quizlog_' + email) || '{}'); } catch (_) {}
+    const merged = { ...local };
+    for (const dte in remote.quizLog) {
+      const a = local[dte], b = remote.quizLog[dte];
+      merged[dte] = (!a) ? b : (((a.c||0)+(a.w||0)) >= ((b.c||0)+(b.w||0)) ? a : b);
+    }
+    localStorage.setItem('ec_quizlog_' + email, JSON.stringify(merged));
+  }
   // 설정: 서버 값이 있으면 적용
   if (remote.level)    localStorage.setItem('ec_user_level', remote.level);
   if (remote.topic)    localStorage.setItem('ec_user_topic', remote.topic);
@@ -389,8 +400,18 @@ async function _ecSyncSaveNow() {
   const db = window.ECSupabaseClient; if (!db) return;
   const { email, blob } = _ecCollectProgress();
   if (!email || email === 'guest') return;
+  let lb = {};
   try {
-    await db.from('user_progress').upsert({ email, data: blob, updated_at: new Date().toISOString() }, { onConflict: 'email' });
+    const st = _ecComputeStats();
+    lb = { nickname: st.nickname, league: st.league, week_id: st.weekId, weekly_score: st.weeklyScore, streak: st.streak };
+  } catch (_) {}
+  try {
+    // league_points는 포함하지 않음(주간 정산 cron이 소유) → upsert가 기존 값 보존
+    const r = await db.from('user_progress').upsert({ email, data: blob, updated_at: new Date().toISOString(), ...lb }, { onConflict: 'email' });
+    // 리더보드 컬럼이 아직 없으면(에러) data만이라도 저장
+    if (r && r.error) {
+      await db.from('user_progress').upsert({ email, data: blob, updated_at: new Date().toISOString() }, { onConflict: 'email' });
+    }
   } catch (_) { /* 테이블 없거나 권한 문제 시 무시 */ }
 }
 window.ECSyncSave = function () { clearTimeout(_ecSyncTimer); _ecSyncTimer = setTimeout(_ecSyncSaveNow, 1500); };
@@ -409,6 +430,102 @@ window.ECSyncLoad = async function () {
 // 화면 이탈/백그라운드 전환 시 마지막 저장 (퀴즈·설정·북마크 변경까지 포착)
 window.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') _ecSyncSaveNow(); });
 window.addEventListener('pagehide', () => { _ecSyncSaveNow(); });
+
+// ── 리더보드: 점수 계산 ────────────────────────────────────────────
+// 점수: 카드 학습 +2, 퀴즈 정답 +3, 출석(그날 학습) +20/일.
+// 주간 점수 = 이번 주 분, 누적 XP = 전체. 리그 = 레벨 묶음(비기너/인터/어드밴스드).
+function _ecWeekId(d) {
+  const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  const day = (date.getUTCDay() + 6) % 7;            // 월=0
+  date.setUTCDate(date.getUTCDate() - day + 3);       // 그 주 목요일
+  const firstThu = new Date(Date.UTC(date.getUTCFullYear(), 0, 4));
+  const week = 1 + Math.round(((date - firstThu) / 86400000 - 3 + ((firstThu.getUTCDay() + 6) % 7)) / 7);
+  return date.getUTCFullYear() + '-W' + String(week).padStart(2, '0');
+}
+function _ecLeagueOf(level) {
+  if (level === 'A1' || level === 'A2') return 'beginner';
+  if (level === 'C1' || level === 'C2') return 'advanced';
+  return 'intermediate';
+}
+function _ecComputeStats() {
+  const email = _ecGetUserId();
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0, 10);
+  const weekId = _ecWeekId(now);
+  const lp = 'ec_learned_' + email + '_';
+  let cardsWeek = 0, totalCards = 0;
+  const daysWeek = new Set(), totalDays = new Set();
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith(lp)) continue;
+    const date = k.slice(lp.length);
+    let v = {}; try { v = JSON.parse(localStorage.getItem(k) || '{}'); } catch (_) {}
+    const n = (v.wordIds || []).length + (v.sentenceIds || []).length;
+    if (n > 0) { totalCards += n; totalDays.add(date); }
+    if (n > 0 && _ecWeekId(new Date(date + 'T00:00:00')) === weekId) { cardsWeek += n; daysWeek.add(date); }
+  }
+  let qlog = {}; try { qlog = JSON.parse(localStorage.getItem('ec_quizlog_' + email) || '{}'); } catch (_) {}
+  let quizWeek = 0, quizTotal = 0;
+  for (const d in qlog) {
+    const c = (qlog[d] || {}).c || 0; quizTotal += c;
+    if (_ecWeekId(new Date(d + 'T00:00:00')) === weekId) quizWeek += c;
+  }
+  // streak: 오늘(또는 어제)부터 연속 학습일
+  let streak = 0;
+  for (let i = totalDays.has(todayStr) ? 0 : 1; i < 400; i++) {
+    const dd = new Date(now); dd.setDate(now.getDate() - i);
+    if (totalDays.has(dd.toISOString().slice(0, 10))) streak++; else break;
+  }
+  const level = localStorage.getItem('ec_user_level') || 'B1';
+  let nickname = localStorage.getItem('engcat_nickname');
+  if (!nickname) { try { nickname = (JSON.parse(localStorage.getItem('engcat_user') || '{}').name) || null; } catch (_) {} }
+  return {
+    email, weekId, league: _ecLeagueOf(level),
+    weeklyScore: cardsWeek * 2 + quizWeek * 3 + daysWeek.size * 20,
+    allTimeXP:   totalCards * 2 + quizTotal * 3 + totalDays.size * 20,
+    streak, nickname: nickname || '학습자',
+  };
+}
+
+// 퀴즈 결과를 날짜별로 기록 (주간 점수용). 퀴즈 화면에서 호출.
+window.ECLogQuiz = function (correct) {
+  const email = _ecGetUserId();
+  const key = 'ec_quizlog_' + email;
+  let log = {}; try { log = JSON.parse(localStorage.getItem(key) || '{}'); } catch (_) {}
+  const d = new Date().toISOString().slice(0, 10);
+  if (!log[d]) log[d] = { c: 0, w: 0 };
+  if (correct) log[d].c++; else log[d].w++;
+  localStorage.setItem(key, JSON.stringify(log));
+  if (window.ECSyncSave) window.ECSyncSave();
+};
+
+// ── 리더보드: 조회 ────────────────────────────────────────────────
+// tab: 'weekly'(이번 주 XP) | 'alltime'(누적 리그 포인트)
+window.ECGetLeaderboard = async function (tab) {
+  const db = window.ECSupabaseClient; if (!db) return null;
+  const st = _ecComputeStats();
+  const orderCol = tab === 'alltime' ? 'league_points' : 'weekly_score';
+  let q = db.from('user_progress')
+    .select('nickname, league, weekly_score, league_points, streak, week_id')
+    .eq('league', st.league);
+  if (tab !== 'alltime') q = q.eq('week_id', st.weekId);
+  const { data, error } = await q.order(orderCol, { ascending: false }).limit(100);
+  if (error) return { error: error.message, league: st.league, me: st, rows: [] };
+  // 내 누적 포인트(서버) 가져오기
+  let myLeaguePoints = 0;
+  try {
+    const mine = await db.from('user_progress').select('league_points').eq('email', st.email).maybeSingle();
+    myLeaguePoints = (mine.data && mine.data.league_points) || 0;
+  } catch (_) {}
+  const myScore = tab === 'alltime' ? myLeaguePoints : st.weeklyScore;
+  // 내 순위 (같은 리그 내 나보다 높은 점수 수 + 1)
+  let rankQ = db.from('user_progress').select('email', { count: 'exact', head: true })
+    .eq('league', st.league).gt(orderCol, myScore);
+  if (tab !== 'alltime') rankQ = rankQ.eq('week_id', st.weekId);
+  let myRank = null;
+  try { const { count } = await rankQ; myRank = (count || 0) + 1; } catch (_) {}
+  return { league: st.league, tab, rows: data || [], myRank, myScore, myNickname: st.nickname, myStreak: st.streak };
+};
 
 // Pattern templates by level & topic
 window.ECData.patterns = [
