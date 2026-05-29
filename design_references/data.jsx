@@ -403,7 +403,7 @@ async function _ecSyncSaveNow() {
   let lb = {};
   try {
     const st = _ecComputeStats();
-    lb = { nickname: st.nickname, league: st.league, week_id: st.weekId, weekly_score: st.weeklyScore, streak: st.streak };
+    lb = { nickname: st.nickname, league: st.league, week_id: st.weekId, weekly_score: st.weeklyScore, day_id: st.dayId, today_score: st.dailyScore, streak: st.streak };
   } catch (_) {}
   try {
     // league_points는 포함하지 않음(주간 정산 cron이 소유) → upsert가 기존 값 보존
@@ -453,7 +453,7 @@ function _ecComputeStats() {
   const todayStr = now.toISOString().slice(0, 10);
   const weekId = _ecWeekId(now);
   const lp = 'ec_learned_' + email + '_';
-  let cardsWeek = 0, totalCards = 0;
+  let cardsWeek = 0, totalCards = 0, cardsToday = 0;
   const daysWeek = new Set(), totalDays = new Set();
   for (let i = 0; i < localStorage.length; i++) {
     const k = localStorage.key(i);
@@ -463,13 +463,16 @@ function _ecComputeStats() {
     const n = (v.wordIds || []).length + (v.sentenceIds || []).length;
     if (n > 0) { totalCards += n; totalDays.add(date); }
     if (n > 0 && _ecWeekId(new Date(date + 'T00:00:00')) === weekId) { cardsWeek += n; daysWeek.add(date); }
+    if (date === todayStr) cardsToday += n;
   }
   let qlog = {}; try { qlog = JSON.parse(localStorage.getItem('ec_quizlog_' + email) || '{}'); } catch (_) {}
-  let quizWeek = 0, quizTotal = 0;
+  let quizWeek = 0, quizTotal = 0, quizToday = 0;
   for (const d in qlog) {
     const c = (qlog[d] || {}).c || 0; quizTotal += c;
     if (_ecWeekId(new Date(d + 'T00:00:00')) === weekId) quizWeek += c;
+    if (d === todayStr) quizToday += c;
   }
+  const studiedToday = cardsToday > 0 || quizToday > 0;
   // streak: 오늘(또는 어제)부터 연속 학습일
   let streak = 0;
   for (let i = totalDays.has(todayStr) ? 0 : 1; i < 400; i++) {
@@ -480,7 +483,8 @@ function _ecComputeStats() {
   let nickname = localStorage.getItem('engcat_nickname');
   if (!nickname) { try { nickname = (JSON.parse(localStorage.getItem('engcat_user') || '{}').name) || null; } catch (_) {} }
   return {
-    email, weekId, league: _ecLeagueOf(level),
+    email, weekId, dayId: todayStr, league: _ecLeagueOf(level),
+    dailyScore:  cardsToday * 2 + quizToday * 3 + (studiedToday ? 20 : 0),
     weeklyScore: cardsWeek * 2 + quizWeek * 3 + daysWeek.size * 20,
     allTimeXP:   totalCards * 2 + quizTotal * 3 + totalDays.size * 20,
     streak, nickname: nickname || '학습자',
@@ -500,28 +504,34 @@ window.ECLogQuiz = function (correct) {
 };
 
 // ── 리더보드: 조회 ────────────────────────────────────────────────
-// tab: 'weekly'(이번 주 XP) | 'alltime'(누적 리그 포인트)
+// tab: 'daily'(오늘 XP) | 'weekly'(이번 주 XP) | 'alltime'(누적 리그 포인트)
 window.ECGetLeaderboard = async function (tab) {
   const db = window.ECSupabaseClient; if (!db) return null;
   const st = _ecComputeStats();
-  const orderCol = tab === 'alltime' ? 'league_points' : 'weekly_score';
+  const cfg = {
+    daily:   { col: 'today_score',   filt: ['day_id', st.dayId],   mine: st.dailyScore },
+    weekly:  { col: 'weekly_score',  filt: ['week_id', st.weekId], mine: st.weeklyScore },
+    alltime: { col: 'league_points', filt: null,                   mine: null },
+  }[tab] || null;
+  if (!cfg) return null;
   let q = db.from('user_progress')
-    .select('nickname, league, weekly_score, league_points, streak, week_id')
+    .select('nickname, league, today_score, weekly_score, league_points, streak')
     .eq('league', st.league);
-  if (tab !== 'alltime') q = q.eq('week_id', st.weekId);
-  const { data, error } = await q.order(orderCol, { ascending: false }).limit(100);
-  if (error) return { error: error.message, league: st.league, me: st, rows: [] };
-  // 내 누적 포인트(서버) 가져오기
-  let myLeaguePoints = 0;
-  try {
-    const mine = await db.from('user_progress').select('league_points').eq('email', st.email).maybeSingle();
-    myLeaguePoints = (mine.data && mine.data.league_points) || 0;
-  } catch (_) {}
-  const myScore = tab === 'alltime' ? myLeaguePoints : st.weeklyScore;
+  if (cfg.filt) q = q.eq(cfg.filt[0], cfg.filt[1]);
+  const { data, error } = await q.order(cfg.col, { ascending: false }).limit(100);
+  if (error) return { error: error.message, league: st.league, rows: [] };
+  // 누적 탭은 내 점수를 서버 league_points에서 가져옴
+  let myScore = cfg.mine;
+  if (tab === 'alltime') {
+    try {
+      const mine = await db.from('user_progress').select('league_points').eq('email', st.email).maybeSingle();
+      myScore = (mine.data && mine.data.league_points) || 0;
+    } catch (_) { myScore = 0; }
+  }
   // 내 순위 (같은 리그 내 나보다 높은 점수 수 + 1)
   let rankQ = db.from('user_progress').select('email', { count: 'exact', head: true })
-    .eq('league', st.league).gt(orderCol, myScore);
-  if (tab !== 'alltime') rankQ = rankQ.eq('week_id', st.weekId);
+    .eq('league', st.league).gt(cfg.col, myScore);
+  if (cfg.filt) rankQ = rankQ.eq(cfg.filt[0], cfg.filt[1]);
   let myRank = null;
   try { const { count } = await rankQ; myRank = (count || 0) + 1; } catch (_) {}
   return { league: st.league, tab, rows: data || [], myRank, myScore, myNickname: st.nickname, myStreak: st.streak };

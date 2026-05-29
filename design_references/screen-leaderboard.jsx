@@ -5,7 +5,7 @@
 function ECScreenLeaderboard() {
   const T = ECTokens;
   const isDark = T.text === '#F8F5EF';
-  const [tab, setTab] = React.useState('weekly');     // 'weekly' | 'alltime'
+  const [tab, setTab] = React.useState('daily');      // 'daily' | 'weekly' | 'alltime'
   const [state, setState] = React.useState({ loading: true, data: null, error: null });
 
   React.useEffect(() => {
@@ -28,7 +28,7 @@ function ECScreenLeaderboard() {
   const LEAGUE_KO = { beginner: '비기너', intermediate: '인터미디어트', advanced: '어드밴스드' };
   const d = state.data;
   const leagueKo = d ? (LEAGUE_KO[d.league] || d.league) : '';
-  const scoreOf = (r) => tab === 'alltime' ? (r.league_points || 0) : (r.weekly_score || 0);
+  const scoreOf = (r) => tab === 'alltime' ? (r.league_points || 0) : tab === 'daily' ? (r.today_score || 0) : (r.weekly_score || 0);
   const unit = tab === 'alltime' ? 'P' : 'pt';
   const medal = (rank) => rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : null;
 
@@ -75,11 +75,11 @@ function ECScreenLeaderboard() {
         </div>
 
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: 8, padding: '14px 18px 6px' }}>
-          {[['weekly', '이번 주'], ['alltime', '명예의 전당']].map(([k, label]) => (
+        <div style={{ display: 'flex', gap: 6, padding: '14px 18px 6px' }}>
+          {[['daily', '오늘'], ['weekly', '이번 주'], ['alltime', '명예의 전당']].map(([k, label]) => (
             <div key={k} onClick={() => setTab(k)} style={{
               flex: 1, textAlign: 'center', padding: '10px 0', borderRadius: 12, cursor: 'pointer',
-              fontSize: 14, fontWeight: 600,
+              fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap',
               background: tab === k ? T.accent : (isDark ? 'rgba(255,255,255,0.06)' : T.bg2),
               color: tab === k ? T.accentText : T.textDim,
               border: `1px solid ${tab === k ? T.accent : T.hair}`,
@@ -88,7 +88,9 @@ function ECScreenLeaderboard() {
         </div>
 
         <div style={{ fontSize: 12, color: T.textMute, padding: '2px 22px 12px', lineHeight: 1.5 }}>
-          {tab === 'weekly'
+          {tab === 'daily'
+            ? '오늘 학습·퀴즈·출석 점수. 매일 자정에 초기화돼요.'
+            : tab === 'weekly'
             ? '이번 주 학습·퀴즈·출석 점수. 매주 월요일 초기화돼요.'
             : '매주 순위로 쌓인 누적 포인트. 초기화되지 않아요.'}
         </div>
@@ -106,7 +108,7 @@ function ECScreenLeaderboard() {
             <>
               {(d.rows || []).length === 0 && (
                 <div style={{ textAlign: 'center', color: T.textMute, fontSize: 13, padding: '40px 16px', lineHeight: 1.6 }}>
-                  {tab === 'weekly' ? '이번 주 첫 주자가 되어 보세요!' : '아직 집계된 누적 포인트가 없어요.'}
+                  {tab === 'daily' ? '오늘 첫 주자가 되어 보세요!' : tab === 'weekly' ? '이번 주 첫 주자가 되어 보세요!' : '아직 집계된 누적 포인트가 없어요.'}
                 </div>
               )}
               {(d.rows || []).map((r, i) => (
