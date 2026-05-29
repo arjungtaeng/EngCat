@@ -230,16 +230,40 @@ function ECScreenSentenceCard() {
 
         <div style={{ padding: '0 22px 20px' }}>
 
-          {/* Pattern */}
-          <div style={{
-            fontFamily: T.thin, fontWeight: isDark ? 500 : 600, fontSize: 40, lineHeight: 1.15, color: T.text,
-            letterSpacing: -0.3, marginBottom: 6,
-          }}>{s.en}</div>
+          {s.type === 'nuance' ? (
+            <>
+              {/* 비교 단어들 (word_a / word_b / word_c + 뜻) */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 14 }}>
+                {[[s.wordA, s.koA], [s.wordB, s.koB], [s.wordC, s.koC]]
+                  .filter(([w]) => w)
+                  .map(([w, k], i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
+                      <span style={{ fontFamily: T.thin, fontWeight: isDark ? 500 : 600, fontSize: 28, color: T.text, letterSpacing: -0.3 }}>{w}</span>
+                      {k && <span style={{ fontSize: 14, color: T.accent, fontWeight: 500 }}>{k}</span>}
+                    </div>
+                  ))}
+              </div>
+              {/* 차이 설명 */}
+              {s.comparison && (
+                <div style={{ fontSize: 15, color: T.textDim, lineHeight: 1.5, marginBottom: 14, letterSpacing: -0.2 }}>
+                  {s.comparison}
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              {/* Pattern / collocation / idiom */}
+              <div style={{
+                fontFamily: T.thin, fontWeight: isDark ? 500 : 600, fontSize: 40, lineHeight: 1.15, color: T.text,
+                letterSpacing: -0.3, marginBottom: 6,
+              }}>{s.en}</div>
 
-          {/* Ko explanation */}
-          <div style={{ fontSize: 16, color: T.accent, fontWeight: 500, marginBottom: 14, letterSpacing: -0.2 }}>
-            {s.ko}
-          </div>
+              {/* Ko explanation */}
+              <div style={{ fontSize: 16, color: T.accent, fontWeight: 500, marginBottom: 14, letterSpacing: -0.2 }}>
+                {s.ko}
+              </div>
+            </>
+          )}
 
           {/* Tip */}
           {s.tip ? (
