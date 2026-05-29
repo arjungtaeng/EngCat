@@ -228,7 +228,8 @@ function ECScreenSentenceCard() {
       >
         <div style={{ flex: '0 0 52%', minHeight: 120 }} />
 
-        <div style={{ padding: '0 22px 20px' }}>
+        {/* paddingTop 31: 단어 카드의 '품사·발음' 줄 높이만큼 내려 큰 제목 위치를 단어 카드와 맞춤 */}
+        <div style={{ padding: '31px 22px 20px' }}>
 
           {s.type === 'nuance' ? (
             <>
