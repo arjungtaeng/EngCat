@@ -42,6 +42,7 @@ function ECScreenSentenceCard() {
         s.ex2 && { en: s.ex2, ko: s.ex2Ko },
         s.ex3 && { en: s.ex3, ko: s.ex3Ko },
         s.ex4 && { en: s.ex4, ko: s.ex4Ko },
+        s.ex5 && { en: s.ex5, ko: s.ex5Ko },
       ].filter(Boolean);
   const typeLabel = s.type === 'collocation' ? '콜로'
                   : s.type === 'idiom'       ? '이디엄'
