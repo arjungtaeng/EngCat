@@ -46,14 +46,15 @@ const DELAY_MS     = 250;
 let calls = 0;
 
 async function searchPexels(keyword) {
-  const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(keyword)}&per_page=1&orientation=landscape`;
+  // per_page=15: 주제 내 중복을 피하려고 여러 후보를 받아온다.
+  const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(keyword)}&per_page=15&orientation=landscape`;
   const res = await fetch(url, { headers: { Authorization: PEXELS_KEY } });
   if (!res.ok) {
     if (res.status === 429) throw new Error('Pexels rate limit hit');
-    return null;
+    return [];
   }
   const data = await res.json();
-  return data.photos?.[0]?.src?.large ?? null;
+  return (data.photos || []).map(p => p.src?.large).filter(Boolean);
 }
 
 // 토픽별로 순환(round-robin)하여 모든 토픽에 골고루 이미지를 채웁니다.
@@ -97,6 +98,19 @@ async function backfillTable(table) {
   }
   console.log(`  ${rows.length} rows to process (round-robin by topic)`);
 
+  // 주제별로 이미 쓰인 image_url 집합 — 같은 주제에 같은 사진이 들어가지 않게.
+  const usedByTopic = {};
+  {
+    let f = 0;
+    while (true) {
+      const { data } = await db.from(table.name)
+        .select(`${table.topicCol}, image_url`).not('image_url', 'is', null).range(f, f + 999);
+      if (!data || !data.length) break;
+      for (const d of data) { const t = d[table.topicCol] || '__none__'; (usedByTopic[t] = usedByTopic[t] || new Set()).add(d.image_url); }
+      if (data.length < 1000) break; f += 1000;
+    }
+  }
+
   const ordered = roundRobinByTopic(rows, table.topicCol);
   let ok = 0, fail = 0, skip = 0;
   for (const row of ordered) {
@@ -108,8 +122,11 @@ async function backfillTable(table) {
     if (!keyword) { skip++; continue; }
 
     try {
-      const url = await searchPexels(keyword);
+      const urls = await searchPexels(keyword);
       calls++;
+      const t = row[table.topicCol] || '__none__';
+      const used = usedByTopic[t] = usedByTopic[t] || new Set();
+      const url = urls.find(u => !used.has(u)) || urls[0];  // 주제 내 안 쓴 것 우선, 없으면 첫 결과
       if (!url) { fail++; continue; }
 
       const { error: upErr } = await db
@@ -117,6 +134,7 @@ async function backfillTable(table) {
         .update({ image_url: url })
         .eq(table.idCol, row[table.idCol]);
       if (upErr) { console.error(`  update fail ${row[table.idCol]}: ${upErr.message}`); fail++; continue; }
+      used.add(url);
       ok++;
       if (ok % 25 === 0) console.log(`  progress: ${ok} done, ${fail} failed`);
     } catch (e) {
