@@ -515,7 +515,7 @@ window.ECGetLeaderboard = async function (tab) {
   }[tab] || null;
   if (!cfg) return null;
   let q = db.from('user_progress')
-    .select('nickname, league, today_score, weekly_score, league_points, streak')
+    .select('email, nickname, league, today_score, weekly_score, league_points, streak')
     .eq('league', st.league);
   if (cfg.filt) q = q.eq(cfg.filt[0], cfg.filt[1]);
   const { data, error } = await q.order(cfg.col, { ascending: false }).limit(100);
@@ -534,7 +534,7 @@ window.ECGetLeaderboard = async function (tab) {
   if (cfg.filt) rankQ = rankQ.eq(cfg.filt[0], cfg.filt[1]);
   let myRank = null;
   try { const { count } = await rankQ; myRank = (count || 0) + 1; } catch (_) {}
-  return { league: st.league, tab, rows: data || [], myRank, myScore, myNickname: st.nickname, myStreak: st.streak };
+  return { league: st.league, tab, rows: data || [], myRank, myScore, myEmail: st.email, myNickname: st.nickname, myStreak: st.streak };
 };
 
 // Pattern templates by level & topic

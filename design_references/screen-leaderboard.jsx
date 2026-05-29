@@ -60,7 +60,7 @@ function ECScreenLeaderboard() {
   );
 
   // 상위 100 안에 내가 없으면 별도 내 순위 카드 표시
-  const meInList = d && (d.rows || []).some(r => r.nickname === d.myNickname && scoreOf(r) === d.myScore);
+  const meInList = d && d.myEmail && (d.rows || []).some(r => r.email === d.myEmail);
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
@@ -77,7 +77,7 @@ function ECScreenLeaderboard() {
           {leagueInfo && (
             <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
               <div style={{ fontFamily: T.mono, fontSize: 10, color: T.textMute, letterSpacing: 0.5 }}>{leagueInfo.levels}</div>
-              <div style={{ fontFamily: T.mono, fontSize: 12, color: T.accent, letterSpacing: 0.5, fontWeight: 600 }}>{leagueInfo.name} 리그</div>
+              <div style={{ fontFamily: T.mono, fontSize: 12, color: T.accent, letterSpacing: 0.5, fontWeight: 600 }}>{leagueInfo.name} League</div>
             </div>
           )}
         </div>
@@ -121,7 +121,7 @@ function ECScreenLeaderboard() {
               )}
               {(d.rows || []).map((r, i) => (
                 <Row key={i} rank={i + 1} nickname={r.nickname} score={scoreOf(r)} streak={r.streak || 0}
-                     me={!meInList ? false : (r.nickname === d.myNickname && scoreOf(r) === d.myScore)} />
+                     me={!!d.myEmail && r.email === d.myEmail} />
               ))}
 
               {/* 내가 100위 밖이면 내 순위 별도 표시 */}
