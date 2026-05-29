@@ -147,11 +147,18 @@ function ECScreenStats() {
       {/* Header */}
       <div style={{ padding: '8px 22px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ fontFamily: T.serif, fontSize: 26, color: T.text, letterSpacing: -0.3 }}>나의 진도</div>
-        <div onClick={() => window.ECNav?.go('leaderboard')} style={{
-          width: 36, height: 36, borderRadius: 12, background: T.bg2, cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          border: `1px solid ${T.hair}`,
-        }}>{ECIcon.trophy(T.accent, 18)}</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div onClick={() => window.ECNav?.go('friends')} style={{
+            width: 36, height: 36, borderRadius: 12, background: T.bg2, cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            border: `1px solid ${T.hair}`,
+          }}>{ECIcon.userPlus(T.text, 18)}</div>
+          <div onClick={() => window.ECNav?.go('leaderboard')} style={{
+            width: 36, height: 36, borderRadius: 12, background: T.bg2, cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            border: `1px solid ${T.hair}`,
+          }}>{ECIcon.trophy(T.accent, 18)}</div>
+        </div>
       </div>
 
       {/* Streak hero */}

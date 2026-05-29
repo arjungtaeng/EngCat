@@ -33,6 +33,13 @@ const ECIcon = {
       <path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
     </svg>
   ),
+  userPlus: (c = 'currentColor', s = 22) => (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
+      <circle cx="9" cy="8" r="3.6" stroke={c} strokeWidth="1.6"/>
+      <path d="M3 20c1.2-3.4 3.6-5 6-5s4.8 1.6 6 5" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
+      <path d="M18 8.5v5M15.5 11h5" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
+    </svg>
+  ),
   flame: (c = 'currentColor', s = 20) => (
     <svg width={s} height={s} viewBox="0 0 24 24" fill={c}>
       <path d="M12 2c1.5 3 4.5 5 4.5 9a4.5 4.5 0 11-9 0c0-1.5.5-2.5 1-3 .5 1 1.5 1.5 2 1.5 0-2 .5-5.5 1.5-7.5z"/>

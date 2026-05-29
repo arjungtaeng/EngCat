@@ -537,6 +537,96 @@ window.ECGetLeaderboard = async function (tab) {
   return { league: st.league, tab, rows: data || [], myRank, myScore, myEmail: st.email, myNickname: st.nickname, myStreak: st.streak };
 };
 
+// ── 친구 (양방향 수락, friend_edges 테이블) ───────────────────────────
+// friend_edges 행: { requester, addressee, status('pending'|'accepted') }
+// 관계는 행 1개로 양방향 표현 — 상대 데이터 블롭을 건드리지 않아 안전.
+function _ecFriendErr(e) {
+  const m = (e && e.message) || String(e || '');
+  if (/relation.*friend_edges.*does not exist|could not find the table|schema cache|does not exist/i.test(m))
+    return '친구 기능이 아직 준비되지 않았어요. (DB 테이블 설정 필요)';
+  return m;
+}
+
+// 이메일로 친구 요청 (상대가 이미 나를 요청했다면 즉시 수락)
+window.ECSendFriendRequest = async function (rawEmail) {
+  const db = window.ECSupabaseClient; if (!db) return { error: '연결 오류' };
+  const me = _ecGetUserId(); if (!me || me === 'guest') return { error: '로그인이 필요해요.' };
+  const email = (rawEmail || '').trim().toLowerCase();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { error: '올바른 이메일을 입력해 주세요.' };
+  if (email === me.toLowerCase()) return { error: '본인은 추가할 수 없어요.' };
+  try {
+    const { data: u } = await db.from('user_progress').select('email').eq('email', email).maybeSingle();
+    if (!u) return { error: '아직 EngCat 사용자가 아니에요.' };
+    const { data: edges, error: e1 } = await db.from('friend_edges')
+      .select('requester, addressee, status')
+      .or(`and(requester.eq.${me},addressee.eq.${email}),and(requester.eq.${email},addressee.eq.${me})`);
+    if (e1) return { error: _ecFriendErr(e1) };
+    const ex = (edges || [])[0];
+    if (ex) {
+      if (ex.status === 'accepted') return { ok: true, msg: '이미 친구예요.' };
+      if (ex.requester === email) {
+        const { error } = await db.from('friend_edges').update({ status: 'accepted' })
+          .eq('requester', email).eq('addressee', me);
+        return error ? { error: _ecFriendErr(error) } : { ok: true, msg: '친구가 되었어요!' };
+      }
+      return { ok: true, msg: '이미 친구 요청을 보냈어요.' };
+    }
+    const { error: e2 } = await db.from('friend_edges').insert({ requester: me, addressee: email, status: 'pending' });
+    return e2 ? { error: _ecFriendErr(e2) } : { ok: true, msg: '친구 요청을 보냈어요.' };
+  } catch (e) { return { error: _ecFriendErr(e) }; }
+};
+
+// 내 친구/요청 목록 (프로필 조인)
+window.ECGetFriends = async function () {
+  const empty = { friends: [], incoming: [], outgoing: [] };
+  const db = window.ECSupabaseClient; if (!db) return { error: '연결 오류', ...empty };
+  const me = _ecGetUserId(); if (!me || me === 'guest') return { error: '로그인이 필요해요.', ...empty };
+  try {
+    const { data: edges, error } = await db.from('friend_edges')
+      .select('requester, addressee, status')
+      .or(`requester.eq.${me},addressee.eq.${me}`);
+    if (error) return { error: _ecFriendErr(error), ...empty };
+    const fE = [], inc = [], out = [];
+    for (const e of (edges || [])) {
+      const other = e.requester === me ? e.addressee : e.requester;
+      if (e.status === 'accepted') fE.push(other);
+      else if (e.addressee === me) inc.push(other);
+      else out.push(other);
+    }
+    const all = [...new Set([...fE, ...inc, ...out, me])];
+    const prof = {};
+    if (all.length) {
+      const { data: ps } = await db.from('user_progress')
+        .select('email, nickname, league, today_score, weekly_score, league_points, streak')
+        .in('email', all);
+      (ps || []).forEach(p => { prof[p.email] = p; });
+    }
+    const fill = (em) => prof[em] || { email: em, nickname: null };
+    return { friends: fE.map(fill), incoming: inc.map(fill), outgoing: out.map(fill), mine: fill(me), myEmail: me };
+  } catch (e) { return { error: _ecFriendErr(e), ...empty }; }
+};
+
+window.ECAcceptFriend = async function (email) {
+  const db = window.ECSupabaseClient; const me = _ecGetUserId();
+  if (!db || !me || me === 'guest') return { error: '연결 오류' };
+  try {
+    const { error } = await db.from('friend_edges').update({ status: 'accepted' })
+      .eq('requester', email).eq('addressee', me);
+    return error ? { error: _ecFriendErr(error) } : { ok: true };
+  } catch (e) { return { error: _ecFriendErr(e) }; }
+};
+
+// 거절·삭제·요청취소 (양방향 행 제거)
+window.ECRemoveFriend = async function (email) {
+  const db = window.ECSupabaseClient; const me = _ecGetUserId();
+  if (!db || !me || me === 'guest') return { error: '연결 오류' };
+  try {
+    const { error } = await db.from('friend_edges').delete()
+      .or(`and(requester.eq.${me},addressee.eq.${email}),and(requester.eq.${email},addressee.eq.${me})`);
+    return error ? { error: _ecFriendErr(error) } : { ok: true };
+  } catch (e) { return { error: _ecFriendErr(e) }; }
+};
+
 // Pattern templates by level & topic
 window.ECData.patterns = [
   // ─── A1 LEVEL ───────────────────────────────────────────────────────────────
