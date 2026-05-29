@@ -368,7 +368,7 @@ function ECScreenWordCard() {
                 }}>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{
-                      fontFamily: T.thin, fontWeight: isDark ? 200 : 300,
+                      fontFamily: T.thin, fontWeight: 300,
                       fontSize: 17, color: T.text, lineHeight: 1.4, letterSpacing: -0.2,
                     }}>
                       {renderEx(ex.en, word.en)}
