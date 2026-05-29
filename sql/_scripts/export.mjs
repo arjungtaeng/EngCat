@@ -45,7 +45,7 @@ const TABLES = {
     order: ['topic_id','cefr','id'],
   },
   nuances: {
-    cols: ['id','word_a','word_b','word_c','ko_a','ko_b','ko_c','comparison','tip','cefr','topic_id','priority','sort_order','image_keyword','ex_a','ex_b','ex_c','ex4','ex4_ko','ex5','ex5_ko'],
+    cols: ['id','word_a','word_b','word_c','ko_a','ko_b','ko_c','comparison','tip','cefr','topic_id','priority','sort_order','image_keyword','ex_a','ex_a_ko','ex_b','ex_b_ko','ex_c','ex_c_ko','ex4','ex4_ko','ex5','ex5_ko'],
     seed: 'sql/expressions/nuances-seed.sql',
     backup: 'sql/backup/nuances-seed.sql',
     order: ['topic_id','cefr','id'],

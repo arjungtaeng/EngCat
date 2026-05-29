@@ -40,9 +40,9 @@ function ECScreenSentenceCard() {
     ? s.examples.map(ex => typeof ex === 'string' ? { en: ex } : ex)
     : s.type === 'nuance'
     ? [
-        s.exA && { en: s.exA },
-        s.exB && { en: s.exB },
-        s.exC && { en: s.exC },
+        s.exA && { en: s.exA, ko: s.exAKo },
+        s.exB && { en: s.exB, ko: s.exBKo },
+        s.exC && { en: s.exC, ko: s.exCKo },
         s.ex4 && { en: s.ex4, ko: s.ex4Ko },
         s.ex5 && { en: s.ex5, ko: s.ex5Ko },
       ].filter(Boolean)
