@@ -35,6 +35,7 @@ if (!window.ECSession) {
       wordIds.add(id);
       stored.wordIds = [...wordIds];
       localStorage.setItem(key, JSON.stringify(stored));
+      if (window.ECSyncSave) window.ECSyncSave();
     },
     markSentenceDone(id, isReview = false) {
       (isReview ? this.completedReviewSentenceIds : this.completedSentenceIds).add(id);
@@ -44,6 +45,7 @@ if (!window.ECSession) {
       sentenceIds.add(id);
       stored.sentenceIds = [...sentenceIds];
       localStorage.setItem(key, JSON.stringify(stored));
+      if (window.ECSyncSave) window.ECSyncSave();
     },
     resetDaily() {
       this.wordIndex = 0;
@@ -310,14 +312,14 @@ async function _runECDataLoad() {
   }
 }
 
-// 초기 로딩: 실패 시 5초 후 1회 자동 재시도
+// 초기 로딩: 실패 시 5초 후 1회 자동 재시도. 로드 후 사용자 진행 서버 동기화.
 window.ECDataLoaded = _runECDataLoad().catch(async (err) => {
   await new Promise(r => setTimeout(r, 5000));
   return _runECDataLoad().catch(e => {
     window.ECDataError = _formatSupabaseError(e);
     console.error('Supabase 재시도 실패:', e);
   });
-});
+}).then(() => { if (window.ECSyncLoad) return window.ECSyncLoad(); });
 
 // 수동 재시도용 (카드 화면에서 호출)
 window.ECReloadData = function() {
@@ -328,6 +330,85 @@ window.ECReloadData = function() {
   });
   return window.ECDataLoaded;
 };
+
+// ── 사용자 진행 서버 동기화 (Supabase user_progress) ──────────────────
+// 진행(학습 이력·퀴즈 통계·레벨·주제·닉네임·북마크)을 이메일 키로 서버에 저장/불러와
+// Safari·PWA·재로그인 간 동기화한다. user_progress 테이블이 없으면 조용히 무시.
+function _ecCollectProgress() {
+  const email = _ecGetUserId();
+  const blob = { learned: {}, quizStats: {}, level: null, topic: null, nickname: null, bookmarks: [] };
+  const prefix = 'ec_learned_' + email + '_';
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k && k.startsWith(prefix)) {
+      try { blob.learned[k.slice(prefix.length)] = JSON.parse(localStorage.getItem(k) || '{}'); } catch (_) {}
+    }
+  }
+  try { blob.quizStats = JSON.parse(localStorage.getItem('ec_quiz_stats_' + email) || '{}'); } catch (_) {}
+  blob.level    = localStorage.getItem('ec_user_level');
+  blob.topic    = localStorage.getItem('ec_user_topic');
+  blob.nickname = localStorage.getItem('engcat_nickname');
+  try { blob.bookmarks = JSON.parse(localStorage.getItem('ec_bookmarks') || '[]'); } catch (_) {}
+  return { email, blob };
+}
+
+function _ecApplyProgress(email, remote) {
+  if (!remote) return;
+  // 학습 이력: 날짜별 wordIds/sentenceIds 합집합
+  const r = remote.learned || {};
+  for (const date in r) {
+    const k = 'ec_learned_' + email + '_' + date;
+    let local = {}; try { local = JSON.parse(localStorage.getItem(k) || '{}'); } catch (_) {}
+    const w = new Set([...(local.wordIds || []), ...((r[date] || {}).wordIds || [])]);
+    const s = new Set([...(local.sentenceIds || []), ...((r[date] || {}).sentenceIds || [])]);
+    localStorage.setItem(k, JSON.stringify({ wordIds: [...w], sentenceIds: [...s] }));
+  }
+  // 퀴즈 통계: id별로 시도수(c+w) 많은 쪽 채택
+  if (remote.quizStats) {
+    let local = {}; try { local = JSON.parse(localStorage.getItem('ec_quiz_stats_' + email) || '{}'); } catch (_) {}
+    const merged = { ...local };
+    for (const id in remote.quizStats) {
+      const a = local[id], b = remote.quizStats[id];
+      merged[id] = (!a) ? b : (((a.c||0)+(a.w||0)) >= ((b.c||0)+(b.w||0)) ? a : b);
+    }
+    localStorage.setItem('ec_quiz_stats_' + email, JSON.stringify(merged));
+  }
+  // 설정: 서버 값이 있으면 적용
+  if (remote.level)    localStorage.setItem('ec_user_level', remote.level);
+  if (remote.topic)    localStorage.setItem('ec_user_topic', remote.topic);
+  if (remote.nickname) localStorage.setItem('engcat_nickname', remote.nickname);
+  // 북마크: 합집합
+  if (Array.isArray(remote.bookmarks)) {
+    let local = []; try { local = JSON.parse(localStorage.getItem('ec_bookmarks') || '[]'); } catch (_) {}
+    localStorage.setItem('ec_bookmarks', JSON.stringify([...new Set([...local, ...remote.bookmarks])]));
+  }
+}
+
+let _ecSyncTimer = null;
+async function _ecSyncSaveNow() {
+  const db = window.ECSupabaseClient; if (!db) return;
+  const { email, blob } = _ecCollectProgress();
+  if (!email || email === 'guest') return;
+  try {
+    await db.from('user_progress').upsert({ email, data: blob, updated_at: new Date().toISOString() }, { onConflict: 'email' });
+  } catch (_) { /* 테이블 없거나 권한 문제 시 무시 */ }
+}
+window.ECSyncSave = function () { clearTimeout(_ecSyncTimer); _ecSyncTimer = setTimeout(_ecSyncSaveNow, 1500); };
+
+window.ECSyncLoad = async function () {
+  const db = window.ECSupabaseClient; if (!db) return;
+  const email = _ecGetUserId(); if (!email || email === 'guest') return;
+  try {
+    const { data, error } = await db.from('user_progress').select('data').eq('email', email).maybeSingle();
+    if (error || !data || !data.data) return;
+    _ecApplyProgress(email, data.data);
+    _ecSyncSaveNow(); // 병합 결과를 다시 서버에 반영
+  } catch (_) {}
+};
+
+// 화면 이탈/백그라운드 전환 시 마지막 저장 (퀴즈·설정·북마크 변경까지 포착)
+window.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') _ecSyncSaveNow(); });
+window.addEventListener('pagehide', () => { _ecSyncSaveNow(); });
 
 // Pattern templates by level & topic
 window.ECData.patterns = [

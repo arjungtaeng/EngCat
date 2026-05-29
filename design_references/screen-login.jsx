@@ -101,9 +101,11 @@ function ECScreenLogin() {
             headers: { Authorization: 'Bearer ' + tokenResponse.access_token },
           })
             .then((r) => r.json())
-            .then((info) => {
+            .then(async (info) => {
               const user = { name: info.name, email: info.email, picture: info.picture || null };
               localStorage.setItem('engcat_user', JSON.stringify(user));
+              // 서버에 저장된 진행을 불러와 병합한 뒤 홈으로 (Safari·PWA·재로그인 동기화)
+              if (window.ECSyncLoad) { try { await window.ECSyncLoad(); } catch (_) {} }
               window.ECNav && window.ECNav.go('home');
             })
             .catch((e) => console.error('userinfo fetch error', e));
