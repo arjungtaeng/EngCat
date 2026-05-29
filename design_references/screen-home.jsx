@@ -130,6 +130,11 @@ function ECScreenHome() {
   const FLAME_FILL = [0.26, 0.26, 0.38, 0.52, 0.66, 0.76, 0.94];
   const flameScale = 0.62 / FLAME_FILL[homeFlameStage];
 
+  // 데이터 로드 전까지 빈 화면
+  if (dataVersion === 0) {
+    return <div style={{ flex: 1, background: T.bg1 }} />;
+  }
+
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <ECStatusBar />
