@@ -25,9 +25,13 @@ function ECScreenLeaderboard() {
     return () => { alive = false; };
   }, [tab]);
 
-  const LEAGUE_KO = { beginner: '비기너', intermediate: '인터미디어트', advanced: '어드밴스드' };
+  const LEAGUE_INFO = {
+    beginner:     { name: 'Beginner',     levels: 'A1·A2' },
+    intermediate: { name: 'Intermediate', levels: 'B1·B2' },
+    advanced:     { name: 'Advanced',     levels: 'C1·C2' },
+  };
   const d = state.data;
-  const leagueKo = d ? (LEAGUE_KO[d.league] || d.league) : '';
+  const leagueInfo = d ? (LEAGUE_INFO[d.league] || { name: d.league, levels: '' }) : null;
   const scoreOf = (r) => tab === 'alltime' ? (r.league_points || 0) : tab === 'daily' ? (r.today_score || 0) : (r.weekly_score || 0);
   const unit = tab === 'alltime' ? 'P' : 'pt';
   const medal = (rank) => rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : null;
@@ -68,10 +72,14 @@ function ECScreenLeaderboard() {
           <div onClick={() => window.ECNav?.go('stats')} style={{
             width: 36, height: 36, borderRadius: 12, background: T.bg2, cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center', border: `1px solid ${T.hair}`,
-            transform: 'scaleX(-1)',
-          }}>{ECIcon.chev(T.text, 18)}</div>
+          }}>{ECIcon.chev('left', T.text, 18)}</div>
           <div style={{ fontFamily: T.serif, fontSize: 26, color: T.text, letterSpacing: -0.3 }}>랭킹</div>
-          {d && <div style={{ marginLeft: 'auto', fontFamily: T.mono, fontSize: 11, color: T.accent, letterSpacing: 1, textTransform: 'uppercase' }}>{leagueKo} 리그</div>}
+          {leagueInfo && (
+            <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
+              <div style={{ fontFamily: T.mono, fontSize: 10, color: T.textMute, letterSpacing: 0.5 }}>{leagueInfo.levels}</div>
+              <div style={{ fontFamily: T.mono, fontSize: 12, color: T.accent, letterSpacing: 0.5, fontWeight: 600 }}>{leagueInfo.name} 리그</div>
+            </div>
+          )}
         </div>
 
         {/* Tabs */}
