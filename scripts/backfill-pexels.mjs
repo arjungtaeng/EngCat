@@ -7,10 +7,11 @@
 //   node scripts/backfill-pexels.mjs
 //
 // What it does:
-//   1. Reads rows from words, sentences, collocations, idioms, nuances with
+//   1. Reads rows from words, collocations, idioms, nuances with
 //      image_keyword IS NOT NULL AND image_url IS NULL
-//   2. Searches Pexels API for matching landscape photo
-//   3. UPDATEs row with src.large URL
+//      (sentences 제외 — image_keyword 컬럼 없음; fetch-images-4.html로 관리)
+//   2. Searches Pexels API: words → portrait, others → landscape
+//   3. UPDATEs row with appropriate src URL
 //
 // Pexels rate limit: 200 req/hr (free tier).
 // Script throttles to 1 req per 200ms (~5 req/sec) and stops after 180/hr.
@@ -33,27 +34,33 @@ if (!PEXELS_KEY) {
 
 const db = createClient(SUPABASE_URL, SERVICE_KEY, { auth: { persistSession: false } });
 
+// sentences 제외: image_keyword 컬럼이 없어 쿼리 오류 발생. fetch-images-4.html로 별도 관리.
+// words는 portrait (세로 카드), 나머지는 landscape (가로 카드).
 const TABLES = [
-  { name: 'words',        idCol: 'id', topicCol: 'topic_id' },
-  { name: 'sentences',    idCol: 'id', topicCol: 'topic_id' },
-  { name: 'collocations', idCol: 'id', topicCol: 'topic_id' },
-  { name: 'idioms',       idCol: 'id', topicCol: 'topic_id' },
-  { name: 'nuances',      idCol: 'id', topicCol: 'topic_id' },
+  { name: 'words',        idCol: 'id', topicCol: 'topic_id', orientation: 'portrait' },
+  { name: 'collocations', idCol: 'id', topicCol: 'topic_id', orientation: 'landscape' },
+  { name: 'idioms',       idCol: 'id', topicCol: 'topic_id', orientation: 'landscape' },
+  { name: 'nuances',      idCol: 'id', topicCol: 'topic_id', orientation: 'landscape' },
 ];
 
 const HOURLY_LIMIT = 180;
 const DELAY_MS     = 250;
 let calls = 0;
 
-async function searchPexels(keyword) {
-  const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(keyword)}&per_page=1&orientation=landscape`;
+async function searchPexels(keyword, orientation = 'landscape') {
+  const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(keyword)}&per_page=1&orientation=${orientation}`;
   const res = await fetch(url, { headers: { Authorization: PEXELS_KEY } });
   if (!res.ok) {
     if (res.status === 429) throw new Error('Pexels rate limit hit');
     return null;
   }
   const data = await res.json();
-  return data.photos?.[0]?.src?.large ?? null;
+  const photo = data.photos?.[0];
+  if (!photo) return null;
+  // portrait → src.portrait (800×1200), landscape → src.landscape (1200×627)
+  return orientation === 'portrait'
+    ? (photo.src?.portrait ?? photo.src?.large ?? null)
+    : (photo.src?.landscape ?? photo.src?.large ?? null);
 }
 
 // 토픽별로 순환(round-robin)하여 모든 토픽에 골고루 이미지를 채웁니다.
@@ -108,7 +115,7 @@ async function backfillTable(table) {
     if (!keyword) { skip++; continue; }
 
     try {
-      const url = await searchPexels(keyword);
+      const url = await searchPexels(keyword, table.orientation || 'landscape');
       calls++;
       if (!url) { fail++; continue; }
 

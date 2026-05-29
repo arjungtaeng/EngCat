@@ -30,6 +30,29 @@ function ECScreenSentenceCard() {
   const swipeDir = React.useRef(null);
 
   const s = sentences[idx];
+
+  if (!s) {
+    const isLoading = (window.ECData && window.ECData.sentences && window.ECData.sentences.length === 0);
+    return (
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: T.bg0, padding: '0 32px', gap: 16 }}>
+        <div style={{ color: T.textDim, fontFamily: T.mono, fontSize: 13, textAlign: 'center' }}>
+          {isLoading ? '데이터 불러오는 중...' : '표현을 불러오지 못했어요.'}
+        </div>
+        {!isLoading && window.ECDataError && (
+          <div style={{ color: T.textMute, fontFamily: T.mono, fontSize: 10, textAlign: 'center', lineHeight: 1.5, wordBreak: 'break-all' }}>
+            {window.ECDataError}
+          </div>
+        )}
+        {!isLoading && (
+          <div onClick={() => window.ECNav?.go('home')} style={{
+            padding: '12px 28px', borderRadius: 12, background: T.accent,
+            color: T.accentText, fontFamily: T.mono, fontSize: 12, fontWeight: 600, cursor: 'pointer',
+          }}>홈으로</div>
+        )}
+      </div>
+    );
+  }
+
   const isLast = idx === sentences.length - 1;
   const isFirst = idx === 0;
   const isBookmarked = bookmarked.has(s.id);

@@ -23,17 +23,23 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 };
 
-const TABLES = ['words', 'sentences', 'collocations', 'idioms', 'nuances'] as const;
+// sentences 제외: image_keyword 컬럼이 없어 SQL 오류 발생. fetch-images-4.html로 별도 관리.
+const TABLES = ['words', 'collocations', 'idioms', 'nuances'] as const;
 
-async function searchPexels(keyword: string, apiKey: string): Promise<string | null> {
-  const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(keyword)}&per_page=1&orientation=landscape`;
+async function searchPexels(keyword: string, apiKey: string, orientation = 'landscape'): Promise<string | null> {
+  const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(keyword)}&per_page=1&orientation=${orientation}`;
   const res = await fetch(url, { headers: { Authorization: apiKey } });
   if (!res.ok) {
     if (res.status === 429) throw new Error('rate_limit');
     return null;
   }
   const data = await res.json();
-  return data.photos?.[0]?.src?.large ?? null;
+  const photo = data.photos?.[0];
+  if (!photo) return null;
+  // portrait → src.portrait (800×1200), landscape → src.landscape (1200×627)
+  return orientation === 'portrait'
+    ? (photo.src?.portrait ?? photo.src?.large ?? null)
+    : (photo.src?.landscape ?? photo.src?.large ?? null);
 }
 
 serve(async (req) => {
@@ -86,7 +92,8 @@ serve(async (req) => {
       const keyword = (row.image_keyword || '').trim();
       if (!keyword) { fail++; continue; }
       try {
-        const url = await searchPexels(keyword, PEXELS_KEY);
+        const orientation = table === 'words' ? 'portrait' : 'landscape';
+        const url = await searchPexels(keyword, PEXELS_KEY, orientation);
         if (!url) { fail++; continue; }
         const { error: upErr } = await supabase
           .from(table)
