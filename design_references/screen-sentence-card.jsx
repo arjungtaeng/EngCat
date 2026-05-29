@@ -35,8 +35,17 @@ function ECScreenSentenceCard() {
   const isBookmarked = bookmarked.has(s.id);
 
   // 카드 타입(패턴/콜로/이디엄/뉘앙스)별 정규화 — patterns만 examples 배열을 가짐
+  // 뉘앙스는 예문이 exA/exB/exC(단어별) + ex4/ex5 구조라 별도로 모음.
   const examples = Array.isArray(s.examples) && s.examples.length > 0
     ? s.examples.map(ex => typeof ex === 'string' ? { en: ex } : ex)
+    : s.type === 'nuance'
+    ? [
+        s.exA && { en: s.exA },
+        s.exB && { en: s.exB },
+        s.exC && { en: s.exC },
+        s.ex4 && { en: s.ex4, ko: s.ex4Ko },
+        s.ex5 && { en: s.ex5, ko: s.ex5Ko },
+      ].filter(Boolean)
     : [
         s.ex1 && { en: s.ex1, ko: s.ex1Ko },
         s.ex2 && { en: s.ex2, ko: s.ex2Ko },
