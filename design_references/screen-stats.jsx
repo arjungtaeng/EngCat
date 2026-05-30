@@ -47,15 +47,20 @@ function ECScreenStats() {
     return { totalWords: totalWords.size, totalSentences: totalSentences.size, streak, dailyCounts };
   }, [userId]);
 
-  const quizRate = React.useMemo(() => {
-    try {
-      const qs = JSON.parse(localStorage.getItem('ec_quiz_stats_' + userId) || '{}');
-      let correct = 0, wrong = 0;
-      Object.values(qs).forEach(s => { correct += (s.c || 0); wrong += (s.w || 0); });
-      const total = correct + wrong;
-      return total > 0 ? Math.round((correct / total) * 100) + '%' : '—';
-    } catch(e) { return '—'; }
+  // 나의 랭킹 (이번 주, 같은 리그 내)
+  const [myRank, setMyRank] = React.useState(null);
+  React.useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        if (window.ECDataLoaded) { try { await window.ECDataLoaded; } catch (_) {} }
+        const res = window.ECGetLeaderboard ? await window.ECGetLeaderboard('weekly') : null;
+        if (alive && res && !res.error) setMyRank(res.myRank || null);
+      } catch (_) {}
+    })();
+    return () => { alive = false; };
   }, [userId]);
+  const rankDisplay = myRank ? myRank + '위' : '—';
 
   const { weekBars, todayIdx, weekTotal } = React.useMemo(() => {
     const today = new Date();
@@ -245,12 +250,13 @@ function ECScreenStats() {
         {[
           { num: learningStats.totalWords, label: '익힌 단어' },
           { num: learningStats.totalSentences, label: '익힌 표현' },
-          { num: quizRate, label: '정답률' },
+          { num: rankDisplay, label: '나의 랭킹', onClick: () => window.ECNav?.go('leaderboard') },
         ].map((s, i) => (
-          <div key={i} style={{
+          <div key={i} onClick={s.onClick} style={{
             padding: '14px 14px', borderRadius: 16, background: T.bg2, border: `1px solid ${T.hair}`,
+            cursor: s.onClick ? 'pointer' : 'default',
           }}>
-            <div style={{ fontFamily: T.serif, fontSize: 26, color: T.text, lineHeight: 1, letterSpacing: -0.5 }}>{s.num}</div>
+            <div style={{ fontFamily: T.serif, fontSize: 26, color: s.onClick ? T.accent : T.text, lineHeight: 1, letterSpacing: -0.5 }}>{s.num}</div>
             <div style={{ fontSize: 11.5, color: T.textDim, marginTop: 6 }}>{s.label}</div>
           </div>
         ))}
