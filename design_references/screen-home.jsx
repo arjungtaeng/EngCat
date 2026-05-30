@@ -60,18 +60,36 @@ function ECScreenHome() {
     let alive = true;
     (async () => {
       try {
-        if (!_notifEmail || !window.ECGetFriends) return;
+        if (!_notifEmail) return;
         let seen = []; try { seen = JSON.parse(localStorage.getItem('ec_seen_notifs_' + _notifEmail) || '[]'); } catch (e) {}
         const seenSet = new Set(seen);
-        const res = await window.ECGetFriends();
-        if (!alive || !res || res.error) return;
-        const unseen = (res.incoming || []).filter(p => !seenSet.has('friend_req:' + (p.email || p)));
-        if (alive && unseen.length > 0) {
-          setNotif({
-            ids: unseen.map(p => 'friend_req:' + (p.email || p)),
-            bubble: unseen.length === 1 ? '친구 신청!' : `친구 신청 ${unseen.length}`,
-            target: 'friends',
-          });
+        // 1) 친구 신청 (우선) — 한글 + '외침' 애니메이션
+        if (window.ECGetFriends) {
+          const res = await window.ECGetFriends();
+          if (!alive) return;
+          if (res && !res.error) {
+            const unseen = (res.incoming || []).filter(p => !seenSet.has('friend_req:' + (p.email || p)));
+            if (unseen.length > 0) {
+              setNotif({
+                ids: unseen.map(p => 'friend_req:' + (p.email || p)),
+                bubble: unseen.length === 1 ? '친구 신청!' : `친구 신청 ${unseen.length}`,
+                target: 'friends', animate: true,
+              });
+              return;
+            }
+          }
+        }
+        // 2) 주간 랭킹 Top 3 축하 — 영어, 애니메이션 없음, 주 단위로 한 번
+        if (window.ECGetLeaderboard) {
+          const lb = await window.ECGetLeaderboard('weekly');
+          if (!alive) return;
+          if (lb && !lb.error && lb.myRank && lb.myRank <= 3) {
+            const wk = (new Date().getFullYear()) + '-w' + (window.ECGetWeekOfYear ? window.ECGetWeekOfYear() : 0);
+            const id = 'rank:' + wk;
+            if (!seenSet.has(id)) {
+              setNotif({ ids: [id], bubble: 'Congrats! Top 3!', target: 'leaderboard', animate: false });
+            }
+          }
         }
       } catch (e) {}
     })();
@@ -307,7 +325,7 @@ function ECScreenHome() {
                 pointerEvents: isNotif ? 'auto' : 'none',
                 cursor: isNotif ? 'pointer' : 'default',
                 transformOrigin: 'bottom center',
-                animation: isNotif ? 'ecBubbleLoud 3.7s ease-out infinite' : 'none',
+                animation: (isNotif && notif.animate) ? 'ecBubbleLoud 3.7s ease-out infinite' : 'none',
               }}>
                 <svg viewBox={`${vbX} 0 ${viewBoxW} 200`} width={svgWidthPx} height="28" xmlns="http://www.w3.org/2000/svg">
                   <defs>
