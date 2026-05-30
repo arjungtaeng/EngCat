@@ -61,14 +61,6 @@ function WordWithSpeaker({ word, speak, T, isDark }) {
         overflowWrap: 'break-word',
       }}>
         {word.en}
-        <span onClick={() => speak(word.en)} style={{
-          display: 'inline-block',
-          marginLeft: 10,
-          verticalAlign: 'baseline',
-          position: 'relative',
-          top: 6,
-          cursor: 'pointer',
-        }}>{ECIcon.speaker(speakerColor, 19)}</span>
       </div>
     </div>
   );
@@ -425,6 +417,11 @@ function ECScreenWordCard() {
             {btnLabel}
             {ECIcon.chev('right', T.accentText, 14)}
           </div>
+          <div onClick={() => speak(word.en)} style={{
+            width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+            background: railBg, border: `1px solid ${railBd}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+          }}>{ECIcon.speaker(railIcon, 18)}</div>
           <div onClick={toggleBookmark} style={{
             width: 46, height: 46, borderRadius: 14, flexShrink: 0,
             background: isBookmarked ? T.accent : railBg,

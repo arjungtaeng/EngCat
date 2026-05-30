@@ -213,7 +213,7 @@ function ECScreenSentenceCard() {
       </div>
 
       {/* Top chrome */}
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10 }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10, paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         <ECStatusBar/>
         <div style={{ padding: '6px 18px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <div style={{
