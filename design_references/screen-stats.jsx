@@ -250,7 +250,7 @@ function ECScreenStats() {
         {[
           { num: learningStats.totalWords, label: '익힌 단어' },
           { num: learningStats.totalSentences, label: '익힌 표현' },
-          { num: rankDisplay, label: '나의 랭킹', onClick: () => window.ECNav?.go('leaderboard'),
+          { num: rankDisplay, label: '나의 랭킹',
             numColor: (myRank && myRank <= 3) ? T.accent : T.text },
         ].map((s, i) => (
           <div key={i} onClick={s.onClick} style={{
