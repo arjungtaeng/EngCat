@@ -195,7 +195,7 @@ function ECScreenHome() {
           </div>
         </div>
         {/* 마스코트 + 인사 말풍선 — 우측 고정 + 좌측 가변 + 꼬리 절대 위치 */}
-        <div style={{ flexShrink: 0, position: 'relative', marginRight: 40 }}>
+        <div style={{ flexShrink: 0, position: 'relative', marginRight: 10 }}>
           {(() => {
             const isDarkMode = T.text === '#F8F5EF';
             const bubbleFill = isDarkMode ? '#F4ECDD' : '#3A3A42'; // 라이트: 짙은 회색 (살짝 어둡게)
@@ -251,7 +251,7 @@ function ECScreenHome() {
               </div>
             );
           })()}
-          <span style={{ display: 'flex', marginLeft: 30 }}>{ECIcon.mascot(T.text === '#F8F5EF', 56)}</span>
+          <span style={{ display: 'flex' }}>{ECIcon.mascot(T.text === '#F8F5EF', 56)}</span>
         </div>
       </div>
 
