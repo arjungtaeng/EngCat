@@ -247,7 +247,8 @@ function _weightedSample(items, weightFn, n, seed) {
     return s / 233280;
   };
   const result = [];
-  for (let i = 0; i < Math.min(n, pool.length); i++) {
+  const take = Math.min(n, pool.length);  // 미리 고정 — 루프 중 pool.splice로 줄어드는 length 재평가 방지
+  for (let i = 0; i < take; i++) {
     const total = pool.reduce((acc, x) => acc + x.w, 0);
     let r = rand() * total;
     let idx = 0;
@@ -279,76 +280,72 @@ function _getAllLearnedIds(excludeToday) {
   return { wordIds, sentenceIds };
 }
 
-// 복습 세션: 전체 학습 이력에서 가중치 기반 무작위 복습
-// - 퀴즈에서 많이 틀린 카드 → weight↑ (더 자주)
-// - 퀴즈에서 많이 맞은 카드 → weight↓ (덜 자주, 하한 0.2)
-// - 학습 이력 없으면 isPreview: true (예습)
+// 오늘(현재 날짜) 이미 학습/복습한 ID — 복습/예습 풀에서 제외 (더 보기 시 오늘 한 카드 재등장 방지)
+function _getTodayLearnedIds() {
+  const wordIds = new Set(), sentenceIds = new Set();
+  try {
+    const d = JSON.parse(localStorage.getItem(_todayKey()) || '{}');
+    (d.wordIds || []).forEach(id => wordIds.add(id));
+    (d.sentenceIds || []).forEach(id => sentenceIds.add(id));
+  } catch (e) {}
+  return { wordIds, sentenceIds };
+}
+
+// 복습 세션: 복습 우선 → 복습이 부족하면 예습(새 카드)으로 채움.
+// - 복습 후보 = 과거에 배운 카드 − 오늘 한 카드 (퀴즈 오답 가중치)
+// - 예습 후보 = 아직 안 배운 카드 − 오늘 한 카드 (레벨별 분배)
+// - 항목마다 _source: 'review' | 'preview' 태깅 → 섹션 라벨(복습/예습)에 사용
+// - "더 보기"(ECReviewSeedOffset)마다 새 셋
 window.ECGetReviewSession = function() {
   const level = _getLevel();
   const comp = window.EC_CEFR_COMPOSITIONS[level] || window.EC_CEFR_COMPOSITIONS.B1;
   const data = window.ECData || { words: [], sentences: [], collocations: [], idioms: [], nuances: [] };
   const allWords    = data.words        || [];
-  // 패턴은 DB의 sentences (type='pattern')에서 가져옴. 정적 data.patterns는 사용 안 함.
   const allPatterns = (data.sentences || []).filter(s => s.type === 'pattern' || !s.type);
   const allColloc   = data.collocations || [];
   const allIdioms   = data.idioms       || [];
   const allNuances  = data.nuances      || [];
 
-  const tagType = (arr, type) => arr.map(x => Object.assign({}, x, { _type: x._type || type }));
-
-  // "더 보기" 클릭마다 +1 — 같은 날에도 새 셋을 보여줌
   const offset = (window.ECReviewSeedOffset || 0);
   const seed = window.ECGetDayOfYear() + offset * 1000;
 
   const { wordIds: learnedWordIds, sentenceIds: learnedSentenceIds } = _getAllLearnedIds(true);
+  const { wordIds: todayWordIds, sentenceIds: todaySentIds } = _getTodayLearnedIds();
+  const quizStats = _loadQuizStats();
+  const getW = item => _getItemWeight(item.id, quizStats);
 
-  // 학습 이력이 있으면 가중치 기반 복습 (하루 + offset 동안 동일)
-  if (learnedWordIds.size > 0 || learnedSentenceIds.size > 0) {
-    const quizStats = _loadQuizStats();
-    const getW = item => _getItemWeight(item.id, quizStats);
-
-    const learnedWords    = allWords.filter(w => learnedWordIds.has(w.id));
-    const learnedPatterns = allPatterns.filter(p => learnedSentenceIds.has(p.id));
-    const learnedColloc   = allColloc.filter(c => learnedSentenceIds.has(c.id));
-    const learnedIdioms   = allIdioms.filter(i => learnedSentenceIds.has(i.id));
-    const learnedNuances  = allNuances.filter(n => learnedSentenceIds.has(n.id));
-
-    const reviewWords    = _weightedSample(learnedWords,    getW, comp.words,            seed);
-    const reviewPatterns = tagType(_weightedSample(learnedPatterns, getW, comp.patterns,            seed + 1), 'pattern');
-    const reviewColloc   = tagType(_weightedSample(learnedColloc,   getW, comp.collocations || 0,   seed + 2), 'collocation');
-    const reviewIdioms   = tagType(_weightedSample(learnedIdioms,   getW, comp.idioms       || 0,   seed + 3), 'idiom');
-    const reviewNuances  = tagType(_weightedSample(learnedNuances,  getW, comp.nuances      || 0,   seed + 4), 'nuance');
-
-
-    return {
-      isPreview: false,
-      topic: null,
-      topicLabel: null,
-      words: reviewWords,
-      patterns: reviewPatterns,
-      collocations: reviewColloc,
-      idioms: reviewIdioms,
-      nuances: reviewNuances,
-      expressions: [...reviewPatterns, ...reviewColloc, ...reviewIdioms, ...reviewNuances],
-    };
+  // 한 카테고리 채우기: 복습(과거학습−오늘) 우선, 모자라면 예습(미학습−오늘)으로 top-up
+  function fill(allItems, learnedSet, todaySet, target, sd, type) {
+    if (target <= 0) return [];
+    const reviewPool  = allItems.filter(x => learnedSet.has(x.id) && !todaySet.has(x.id));
+    const picks = _weightedSample(reviewPool, getW, target, sd)
+      .map(x => Object.assign({}, x, { _type: x._type || type, _source: 'review' }));
+    if (picks.length < target) {
+      const newPool = allItems.filter(x => !learnedSet.has(x.id) && !todaySet.has(x.id));
+      const more = window.ECGetLeveledContent(newPool, level, target - picks.length, sd + 7)
+        .map(x => Object.assign({}, x, { _type: x._type || type, _source: 'preview' }));
+      picks.push(...more);
+    }
+    return picks;
   }
 
-  // 첫날 (학습 이력 없음): 예습 — 레벨별 분배 (하루 + offset 동안 동일)
-  const previewWords    = window.ECGetLeveledContent(allWords,    level, comp.words,            seed);
-  const previewPatterns = tagType(window.ECGetLeveledContent(allPatterns, level, comp.patterns,            seed + 1), 'pattern');
-  const previewColloc   = tagType(window.ECGetLeveledContent(allColloc,   level, comp.collocations || 0,   seed + 2), 'collocation');
-  const previewIdioms   = tagType(window.ECGetLeveledContent(allIdioms,   level, comp.idioms       || 0,   seed + 3), 'idiom');
-  const previewNuances  = tagType(window.ECGetLeveledContent(allNuances,  level, comp.nuances      || 0,   seed + 4), 'nuance');
+  const words       = fill(allWords,    learnedWordIds,     todayWordIds, comp.words,            seed,     'word');
+  const patterns    = fill(allPatterns, learnedSentenceIds, todaySentIds, comp.patterns,         seed + 1, 'pattern');
+  const collocations = fill(allColloc,  learnedSentenceIds, todaySentIds, comp.collocations || 0, seed + 2, 'collocation');
+  const idioms      = fill(allIdioms,   learnedSentenceIds, todaySentIds, comp.idioms || 0,       seed + 3, 'idiom');
+  const nuances     = fill(allNuances,  learnedSentenceIds, todaySentIds, comp.nuances || 0,      seed + 4, 'nuance');
+  const expressions = [...patterns, ...collocations, ...idioms, ...nuances];
+
+  // 섹션별 라벨용: 그 섹션에 복습 카드가 하나도 없으면 '예습'
+  const isPreviewWords = words.length > 0 && words.every(w => w._source === 'preview');
+  const isPreviewExpr  = expressions.length > 0 && expressions.every(e => e._source === 'preview');
 
   return {
-    isPreview: true,
+    isPreview: isPreviewWords && isPreviewExpr,  // 둘 다 예습일 때만 (대체로 첫날)
+    isPreviewWords,
+    isPreviewExpr,
     topic: null,
     topicLabel: null,
-    words: previewWords,
-    patterns: previewPatterns,
-    collocations: previewColloc,
-    idioms: previewIdioms,
-    nuances: previewNuances,
-    expressions: [...previewPatterns, ...previewColloc, ...previewIdioms, ...previewNuances],
+    words, patterns, collocations, idioms, nuances, expressions,
   };
 };

@@ -66,7 +66,31 @@ function ECScreenHome() {
   const reviewWords = reviewSession.words;
   const reviewExpressions = reviewSession.expressions || reviewSession.patterns || [];
   const isPreview = reviewSession.isPreview;
+  // 섹션별 복습/예습 라벨 (복습이 떨어져 예습으로 채워진 섹션은 '예습')
+  const isPreviewWords = reviewSession.isPreviewWords != null ? reviewSession.isPreviewWords : isPreview;
+  const isPreviewExpr  = reviewSession.isPreviewExpr  != null ? reviewSession.isPreviewExpr  : isPreview;
   const reviewTopicLabel = reviewSession.topicLabel;
+
+  // 복습(예습) 완료 감지 — 단어·표현을 모두 보면 축하 + 더 보기 노출
+  const _crwSet = session.completedReviewWordIds || new Set();
+  const _crsSet = session.completedReviewSentenceIds || new Set();
+  const allReviewDone =
+    (reviewWords.length > 0 || reviewExpressions.length > 0) &&
+    reviewWords.every(c => _crwSet.has(c.id)) &&
+    reviewExpressions.every(e => _crsSet.has(e.id));
+
+  // "그만하기"로 축하 카드를 접었는지 — 접어도 작은 재진입 링크는 남아 언제든 다시 이어갈 수 있음
+  const [reviewMoreDismissed, setReviewMoreDismissed] = React.useState(false);
+
+  // 더 보기 — seed offset을 올려 복습/예습 세트를 새 단어·표현으로 재구성하고 완료 상태 초기화
+  const handleReviewMore = () => {
+    window.ECReviewSeedOffset = (window.ECReviewSeedOffset || 0) + 1;
+    session.completedReviewWordIds = new Set();
+    session.completedReviewSentenceIds = new Set();
+    setReviewMoreDismissed(false);   // 새 세트 → 접힘 해제 (다 끝내면 축하 카드 다시 노출)
+    setDataVersion(v => v + 1);
+    setTimeout(() => { if (scrollRef.current) scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' }); }, 40);
+  };
 
   // 토픽 사이클: 주 단위 (today-session.jsx와 동기)
   const _now = new Date();
@@ -327,7 +351,7 @@ function ECScreenHome() {
         return (<>
           <div style={{ padding: '28px 22px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
             <div>
-              <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 단어' : '복습 단어'}</div>
+              <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreviewWords ? '예습 단어' : '복습 단어'}</div>
               {!isPreview && reviewTopicLabel && (
                 <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.2, textTransform: 'uppercase', marginTop: 4, fontWeight: 600 }}>
                   복습 토픽 · {reviewTopicLabel}
@@ -345,7 +369,7 @@ function ECScreenHome() {
                 <div key={c.id} onClick={() => {
                   // 단어 클릭 — 단어 + 표현 모두 전달해서 word↔sentence 카드 양방향 이동 가능
                   window.ECCardSource = {
-                    mode: isPreview ? 'preview' : 'review',
+                    mode: 'review',
                     words: reviewWords,
                     expressions: reviewExpressions,
                     startIndex: i,
@@ -384,7 +408,7 @@ function ECScreenHome() {
         return (<>
         <div style={{ padding: '28px 22px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
           <div>
-            <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreview ? '예습 표현' : '복습 표현'}</div>
+            <div style={{ fontSize: 17, fontWeight: 600, color: T.text, letterSpacing: -0.2 }}>{isPreviewExpr ? '예습 표현' : '복습 표현'}</div>
             {!isPreview && reviewTopicLabel && (
               <div style={{ fontFamily: T.mono, fontSize: 10, color: T.accent, letterSpacing: 1.2, textTransform: 'uppercase', marginTop: 4, fontWeight: 600 }}>
                 복습 토픽 · {reviewTopicLabel}
@@ -406,7 +430,7 @@ function ECScreenHome() {
               <div key={e.id || i} onClick={() => {
                 // 표현 클릭 — 단어 + 표현 모두 전달 (sentence-card에서 prev 스와이프 시 단어 끝으로)
                 window.ECCardSource = {
-                  mode: isPreview ? 'preview' : 'review',
+                  mode: 'review',
                   words: reviewWords,
                   expressions: reviewExpressions,
                   startIndex: i,
@@ -455,6 +479,55 @@ function ECScreenHome() {
         </div>
         </>);
       })()}
+
+      {/* 복습/예습 완료 축하 — 더 보기 / 그만하기 선택 */}
+      {allReviewDone && !reviewMoreDismissed && (
+        <div style={{ padding: '28px 18px 0' }}>
+          <div style={{
+            borderRadius: 20, padding: 20,
+            background: `linear-gradient(150deg, ${T.accentSoft} 0%, ${T.bg2} 100%)`,
+            border: `1px solid ${T.accent}`, textAlign: 'center',
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
+              {ECIcon.sparkle(T.accent, 24)}
+            </div>
+            <div style={{ fontFamily: T.serif, fontSize: 20, color: T.text, letterSpacing: -0.3 }}>
+              {isPreview ? '오늘 예습을 모두 끝냈어요!' : '오늘 복습을 모두 끝냈어요!'}
+            </div>
+            <div style={{ fontSize: 13, color: T.textDim, marginTop: 6, lineHeight: 1.5 }}>
+              새로운 단어와 표현으로 더 학습해 볼까요?
+            </div>
+            <div onClick={handleReviewMore} style={{
+              marginTop: 16, height: 46, borderRadius: 14, background: T.accent,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+              color: T.accentText, fontWeight: 600, fontSize: 14, cursor: 'pointer',
+            }}>
+              {ECIcon.sparkle(T.accentText, 15)}
+              <span>{isPreview ? '새 예습 더 보기' : '새 복습 더 보기'}</span>
+            </div>
+            <div onClick={() => setReviewMoreDismissed(true)} style={{
+              marginTop: 10, fontSize: 13, color: T.textMute, fontWeight: 500, cursor: 'pointer',
+            }}>
+              그만하기
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 그만한 뒤에도 마음이 바뀌면 다시 이어갈 수 있는 작은 재진입 링크 */}
+      {allReviewDone && reviewMoreDismissed && (
+        <div style={{ padding: '24px 22px 0', display: 'flex', justifyContent: 'center' }}>
+          <div onClick={handleReviewMore} style={{
+            display: 'flex', alignItems: 'center', gap: 6,
+            padding: '8px 14px', borderRadius: 999,
+            background: T.bg2, border: `1px solid ${T.hair}`,
+            color: T.textDim, fontSize: 13, fontWeight: 600, cursor: 'pointer',
+          }}>
+            {ECIcon.sparkle(T.accent, 14)}
+            <span>{isPreview ? '예습 더 하기' : '복습 더 하기'}</span>
+          </div>
+        </div>
+      )}
 
       {/* Section: 오늘의 퀴즈 */}
       <div style={{ padding: '28px 22px 24px' }}>
