@@ -60,18 +60,24 @@ function ECScreenSavedCards() {
           <div style={{ padding: '16px 18px 0', display: 'flex', flexDirection: 'column', gap: 10 }}>
             {savedWords.map((w) => (
               <div key={w.id} style={{
-                padding: '14px 16px', borderRadius: 16,
+                padding: '12px 14px', borderRadius: 16,
                 background: T.bg2, border: `1px solid ${T.hair}`,
                 display: 'flex', alignItems: 'center', gap: 14,
               }}>
                 <div
                   onClick={() => { const i = (window.ECData?.words || []).findIndex(x => x.id === w.id); if (i >= 0) { window.ECSession.wordIndex = i; window.ECNav?.go('word-card'); }}}
-                  style={{ flex: 1, minWidth: 0, cursor: 'pointer' }}
+                  style={{ flex: 1, minWidth: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14 }}
                 >
-                  <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 19, color: T.text }}>{w.en}</div>
-                  {w.ipa && <div style={{ fontSize: 11.5, color: T.textMute, fontFamily: T.mono, marginTop: 1 }}>{w.ipa}</div>}
-                  <div style={{ fontSize: 13, color: T.textDim, marginTop: 3 }}>{w.ko}</div>
-                  {w.ex && <div style={{ fontSize: 12, color: T.textMute, marginTop: 4, fontStyle: 'italic', fontFamily: T.serif }}>"{w.ex.replace(/\{([^}]+)\}/g, '$1')}"</div>}
+                  {/* 프로필 아바타처럼 왼쪽 원형 썸네일 */}
+                  {w.img
+                    ? <img src={w.img} alt={w.en} style={{ width: 52, height: 52, borderRadius: 999, objectFit: 'cover', flexShrink: 0, border: `1px solid ${T.hairStr}` }} />
+                    : <ECPlaceholder height={52} tint={w.tint} radius={999} style={{ width: 52, flexShrink: 0 }} />
+                  }
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 19, color: T.text }}>{w.en}</div>
+                    {w.ipa && <div style={{ fontSize: 11.5, color: T.textMute, fontFamily: T.mono, marginTop: 1 }}>{w.ipa}</div>}
+                    <div style={{ fontSize: 13, color: T.textDim, marginTop: 3 }}>{w.ko}</div>
+                  </div>
                 </div>
                 <div
                   onClick={() => removeWord(w.id)}
@@ -92,13 +98,21 @@ function ECScreenSavedCards() {
                 key={s.id}
                 onClick={() => { const i = (window.ECData?.sentences || []).findIndex(x => x.id === s.id); if (i >= 0) { window.ECSession.sentenceIndex = i; window.ECNav?.go('sentence-card'); }}}
                 style={{
-                  padding: '14px 16px', borderRadius: 16,
+                  padding: '12px 14px', borderRadius: 16,
                   background: T.bg2, border: `1px solid ${T.hair}`,
                   cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', gap: 14,
                 }}
               >
-                <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 16, color: T.text, lineHeight: 1.35 }}>{s.en}</div>
-                <div style={{ fontSize: 12.5, color: T.textDim, marginTop: 4 }}>{s.ko}</div>
+                {/* 프로필 아바타처럼 왼쪽 원형 썸네일 */}
+                {s.img
+                  ? <img src={s.img} alt={s.en} style={{ width: 52, height: 52, borderRadius: 999, objectFit: 'cover', flexShrink: 0, border: `1px solid ${T.hairStr}` }} />
+                  : <ECPlaceholder height={52} tint={s.tint} radius={999} style={{ width: 52, flexShrink: 0 }} />
+                }
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 16, color: T.text, lineHeight: 1.35 }}>{s.en}</div>
+                  <div style={{ fontSize: 12.5, color: T.textDim, marginTop: 4 }}>{s.ko}</div>
+                </div>
               </div>
             ))}
           </div>
