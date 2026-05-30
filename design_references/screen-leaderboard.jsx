@@ -10,7 +10,7 @@ function ECScreenLeaderboard() {
 
   React.useEffect(() => {
     let alive = true;
-    setState({ loading: true, data: null, error: null });
+    setState(prev => ({ loading: true, data: prev.data, error: null }));
     (async () => {
       try {
         if (window.ECDataLoaded) { try { await window.ECDataLoaded; } catch (_) {} }
