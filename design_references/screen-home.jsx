@@ -150,9 +150,12 @@ function ECScreenHome() {
   // 조금 더 크게(17·16), 2번을 최소(15)로 두고 3~6번은 단계적으로 키워 "자란다"는 느낌.
   const FLAME_TARGET_H = [17, 16, 15, 16, 17, 18, 19];
   const FLAME_TARGET_BASE = 22;  // 모든 단계 밑면이 오는 y
+  const FLAME_BADGE_SIZE = 20;   // 배지 불꽃 렌더 크기(px). viewBox는 24라 px 환산 필요.
+  const flamePx = FLAME_BADGE_SIZE / 24;
   const [flameTop, flameBase] = FLAME_VIS[homeFlameStage];
-  const flameScale = FLAME_TARGET_H[homeFlameStage] / (flameBase - flameTop);
-  const flameTy = FLAME_TARGET_BASE - flameBase; // 밑면 정렬용 세로 이동 (viewBox=px, size 24)
+  const flameScale = FLAME_TARGET_H[homeFlameStage] / (flameBase - flameTop); // 배율은 무차원
+  const flameTy = (FLAME_TARGET_BASE - flameBase) * flamePx;  // 밑면 정렬 세로 이동(px)
+  const flameOriginY = flameBase * flamePx;                   // 확대 기준점(px)
 
   // 데이터 로드 전까지 빈 화면
   if (dataVersion === 0) {
@@ -179,21 +182,21 @@ function ECScreenHome() {
           <div style={{ fontFamily: T.mono, fontSize: 10, letterSpacing: 0.5, color: T.textMute }}>{'v' + (window.EC_VER || 1)}</div>
         </div>
         <div style={{
-          display: 'flex', alignItems: 'center', gap: 5,
-          padding: '6px 11px', borderRadius: 999,
+          display: 'flex', alignItems: 'center', gap: 4,
+          padding: '5px 9px', borderRadius: 999,
           background: T.bg2, border: `1px solid ${T.hair}`,
         }}>
-          <span style={{ width: 24, height: 24, display: 'inline-flex', alignItems: 'flex-end', justifyContent: 'center', overflow: 'visible' }}>
-            <span style={{ display: 'flex', transform: `translateY(${flameTy}px) scale(${flameScale.toFixed(3)})`, transformOrigin: `center ${flameBase}px` }}>
-              {ECIcon.flameStage(homeFlameStage, 24)}
+          <span style={{ width: FLAME_BADGE_SIZE, height: FLAME_BADGE_SIZE, display: 'inline-flex', alignItems: 'flex-end', justifyContent: 'center', overflow: 'visible' }}>
+            <span style={{ display: 'flex', transform: `translateY(${flameTy.toFixed(2)}px) scale(${flameScale.toFixed(3)})`, transformOrigin: `center ${flameOriginY.toFixed(2)}px` }}>
+              {ECIcon.flameStage(homeFlameStage, FLAME_BADGE_SIZE)}
             </span>
           </span>
-          <span style={{ fontSize: 13, fontWeight: 600, color: T.text }}>{streak}</span>
+          <span style={{ fontSize: 12, fontWeight: 600, color: T.text }}>{streak}</span>
         </div>
       </div>
 
       {/* Greeting */}
-      <div style={{ padding: '24px 22px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
+      <div style={{ padding: '12px 22px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ fontSize: 13, color: T.textDim, marginBottom: 6 }}>
             {dateStr}
@@ -204,7 +207,7 @@ function ECScreenHome() {
           </div>
         </div>
         {/* 마스코트 + 인사 말풍선 — 우측 고정 + 좌측 가변 + 꼬리 절대 위치 */}
-        <div style={{ flexShrink: 0, position: 'relative', marginRight: 40 }}>
+        <div style={{ flexShrink: 0, position: 'relative', marginRight: 40, marginTop: 14 }}>
           {(() => {
             const isDarkMode = T.text === '#F8F5EF';
             const bubbleFill = isDarkMode ? '#F4ECDD' : '#3A3A42'; // 라이트: 짙은 회색 (살짝 어둡게)
