@@ -251,7 +251,7 @@ function ECScreenHome() {
               </div>
             );
           })()}
-          <span style={{ display: 'flex', marginLeft: 10 }}>{ECIcon.mascot(T.text === '#F8F5EF', 56)}</span>
+          <span style={{ display: 'flex', marginLeft: 30 }}>{ECIcon.mascot(T.text === '#F8F5EF', 56)}</span>
         </div>
       </div>
 
