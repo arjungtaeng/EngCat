@@ -51,6 +51,46 @@ function ECScreenHome() {
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => _ecFontTick());
   }, []);
 
+  // 말풍선 알림 — 받은 친구 신청 중 '미확인'이 있으면 인사말 대신 알림 표시.
+  // 확인 여부는 ec_seen_notifs_<이메일>(localStorage)에 저장 → 로그아웃(engcat_user만 삭제)·
+  // 재시작·페이지 이동과 무관하게 확인 전까지 유지. 알림 원천은 서버(friend_edges)라 지속됨.
+  const _notifEmail = (() => { try { return JSON.parse(localStorage.getItem('engcat_user') || '{}').email || null; } catch (e) { return null; } })();
+  const [notif, setNotif] = React.useState(null);
+  React.useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        if (!_notifEmail || !window.ECGetFriends) return;
+        let seen = []; try { seen = JSON.parse(localStorage.getItem('ec_seen_notifs_' + _notifEmail) || '[]'); } catch (e) {}
+        const seenSet = new Set(seen);
+        const res = await window.ECGetFriends();
+        if (!alive || !res || res.error) return;
+        const unseen = (res.incoming || []).filter(p => !seenSet.has('friend_req:' + (p.email || p)));
+        if (alive && unseen.length > 0) {
+          setNotif({
+            ids: unseen.map(p => 'friend_req:' + (p.email || p)),
+            bubble: unseen.length === 1 ? '친구 신청!' : `친구 신청 ${unseen.length}`,
+            target: 'friends',
+          });
+        }
+      } catch (e) {}
+    })();
+    return () => { alive = false; };
+  }, [_notifEmail]);
+
+  const dismissNotif = () => {
+    if (!notif) return;
+    try {
+      const key = 'ec_seen_notifs_' + _notifEmail;
+      let seen = []; try { seen = JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) {}
+      const set = new Set(seen); notif.ids.forEach(id => set.add(id));
+      localStorage.setItem(key, JSON.stringify([...set]));
+    } catch (e) {}
+    const target = notif.target;
+    setNotif(null);
+    window.ECNav?.go(target);
+  };
+
   const session = window.ECSession || { completedWordIds: new Set(), completedSentenceIds: new Set(), completedReviewWordIds: new Set(), completedReviewSentenceIds: new Set() };
   const doneWords = session.completedWordIds.size;
   const doneSentences = session.completedSentenceIds.size;
@@ -234,12 +274,15 @@ function ECScreenHome() {
         <div style={{ flexShrink: 0, position: 'relative', marginRight: 40, marginTop: 14 }}>
           {(() => {
             const isDarkMode = T.text === '#F8F5EF';
-            const bubbleFill = isDarkMode ? '#F4ECDD' : '#3A3A42'; // 라이트: 짙은 회색 (살짝 어둡게)
-            const textFill = isDarkMode ? '#1A1A21' : '#F4ECDD';
+            const isNotif = !!notif;
+            const bubbleText = isNotif ? notif.bubble : bubbleGreeting;
+            // 알림: 액센트 색 말풍선 + 탭 가능. 평상시: 기존 인사말 색.
+            const bubbleFill = isNotif ? T.accent : (isDarkMode ? '#F4ECDD' : '#3A3A42');
+            const textFill = isNotif ? (T.accentText || '#1A1A21') : (isDarkMode ? '#1A1A21' : '#F4ECDD');
             const greetingFontSize = 72;
             // 실제 텍스트 폭 측정 → 우측·꼬리는 고정, 좌측만 늘려 항상 동일 여백
-            const Wt = _ecMeasureTextW(bubbleGreeting, `600 ${greetingFontSize}px Outfit, system-ui, sans-serif`);
-            const FP = 30;            // 고정 좌우 여백(viewBox) — 모든 문장 동일, 이전보다 더 좁게
+            const Wt = _ecMeasureTextW(bubbleText, `600 ${greetingFontSize}px Outfit, system-ui, sans-serif`);
+            const FP = 10;            // 고정 좌우 여백(viewBox) — 모든 문장 동일, 더 좁게
             const R = 60;             // 모서리 반경
             const Xr = 304;           // 우측 직선부 끝(고정)
             const innerW = Math.max(Math.round(Wt) + 2 * FP, 168); // 꼬리 들어갈 최소 폭 보장
@@ -256,12 +299,13 @@ function ECScreenHome() {
               `L ${Xl} 136 Q ${leftOuter} 136 ${leftOuter} 76 ` +
               `Q ${leftOuter} 16 ${Xl} 16 Z`;
             return (
-              <div style={{
+              <div onClick={isNotif ? dismissNotif : undefined} style={{
                 position: 'absolute',
                 bottom: 'calc(100% - 5px)',
                 right: -35,
                 lineHeight: 0,
-                pointerEvents: 'none',
+                pointerEvents: isNotif ? 'auto' : 'none',
+                cursor: isNotif ? 'pointer' : 'default',
               }}>
                 <svg viewBox={`${vbX} 0 ${viewBoxW} 200`} width={svgWidthPx} height="28" xmlns="http://www.w3.org/2000/svg">
                   <defs>
@@ -282,7 +326,7 @@ function ECScreenHome() {
                     fontSize={greetingFontSize}
                     fontWeight="600"
                     fill={textFill}
-                  >{bubbleGreeting}</text>
+                  >{bubbleText}</text>
                 </svg>
               </div>
             );
