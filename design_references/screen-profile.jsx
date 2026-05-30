@@ -90,7 +90,7 @@ function ECScreenProfile() {
 
       {/* Header */}
       <div style={{ padding: '8px 22px 0' }}>
-        <div style={{ fontFamily: T.serif, fontSize: 26, color: T.text, letterSpacing: -0.3 }}>내 정보</div>
+        <div style={{ fontFamily: T.serif, fontSize: 26, color: T.text, letterSpacing: -0.3 }}>설정</div>
       </div>
 
       {/* Profile card */}
@@ -161,11 +161,8 @@ function ECScreenProfile() {
         </div>
       </div>
 
-      {/* Section: Learning */}
-      <div style={{ padding: '24px 22px 8px', fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, color: T.textMute, textTransform: 'uppercase' }}>
-        학습
-      </div>
-      <div style={{ padding: '0 18px' }}>
+      {/* Settings (학습 + 앱 통합) — 섹션 헤더 없음, 탭바 라벨이 '설정' */}
+      <div style={{ padding: '20px 18px 0' }}>
         <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}` }}>
           <SegRow
             label="레벨"
@@ -202,33 +199,19 @@ function ECScreenProfile() {
               </div>
             </div>
           )}
-          <Row label="하루 목표"        value="15분"/>
           <Row label="알림"             value="오전 8:00"/>
           <SegRow
             label="음성"
             options={[{ label: 'Jenny', value: 'en-US-JennyNeural' }, { label: 'Aria', value: 'en-US-AriaNeural' }, { label: 'Guy', value: 'en-US-GuyNeural' }, { label: 'Davis', value: 'en-US-DavisNeural' }]}
             value={ttsVoice}
             onChange={setVoice}
-            last
           />
-        </div>
-      </div>
-
-      {/* Section: App */}
-      <div style={{ padding: '20px 22px 8px', fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, color: T.textMute, textTransform: 'uppercase' }}>
-        앱
-      </div>
-      <div style={{ padding: '0 18px' }}>
-        <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}` }}>
           <SegRow
             label="테마"
             options={[{ label: '시스템', value: 'system' }, { label: '다크', value: 'dark' }, { label: '라이트', value: 'light' }]}
             value={themePref}
             onChange={changeTheme}
           />
-          <Row label="저장한 카드"      value="68"/>
-          <Row label="친구 / 랭킹"      value=""/>
-          <Row label="구독 관리"        value="EngCat Pro"/>
           <Row label="도움말"           value="" last/>
         </div>
       </div>
@@ -239,7 +222,6 @@ function ECScreenProfile() {
       </div>
       <div style={{ padding: '0 18px 24px' }}>
         <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}` }}>
-          <Row label="개인정보 보호"  value=""/>
           <Row label="로그아웃" danger last onPress={handleLogout}/>
         </div>
       </div>
