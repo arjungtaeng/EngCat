@@ -296,7 +296,15 @@ function _getTodayLearnedIds() {
 // - 예습 후보 = 아직 안 배운 카드 − 오늘 한 카드 (레벨별 분배)
 // - 항목마다 _source: 'review' | 'preview' 태깅 → 섹션 라벨(복습/예습)에 사용
 // - "더 보기"(ECReviewSeedOffset)마다 새 셋
+// - 카드 스와이프 시 todaySet이 바뀌어도 홈 화면 카드 목록이 바뀌지 않도록
+//   offset+날짜 단위로 결과를 캐시. "더 보기" 클릭 시 offset이 올라가 자동 무효화.
+window._ecReviewSessionCache = null;
 window.ECGetReviewSession = function() {
+  const offset = (window.ECReviewSeedOffset || 0);
+  const cacheKey = window.ECGetDayOfYear() + '_' + offset;
+  if (window._ecReviewSessionCache && window._ecReviewSessionCache.key === cacheKey) {
+    return window._ecReviewSessionCache.result;
+  }
   const level = _getLevel();
   const comp = window.EC_CEFR_COMPOSITIONS[level] || window.EC_CEFR_COMPOSITIONS.B1;
   const data = window.ECData || { words: [], sentences: [], collocations: [], idioms: [], nuances: [] };
@@ -340,7 +348,7 @@ window.ECGetReviewSession = function() {
   const isPreviewWords = words.length > 0 && words.every(w => w._source === 'preview');
   const isPreviewExpr  = expressions.length > 0 && expressions.every(e => e._source === 'preview');
 
-  return {
+  const result = {
     isPreview: isPreviewWords && isPreviewExpr,  // 둘 다 예습일 때만 (대체로 첫날)
     isPreviewWords,
     isPreviewExpr,
@@ -348,4 +356,6 @@ window.ECGetReviewSession = function() {
     topicLabel: null,
     words, patterns, collocations, idioms, nuances, expressions,
   };
+  window._ecReviewSessionCache = { key: cacheKey, result };
+  return result;
 };
