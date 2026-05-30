@@ -87,7 +87,7 @@ function ECScreenHome() {
             const wk = (new Date().getFullYear()) + '-w' + (window.ECGetWeekOfYear ? window.ECGetWeekOfYear() : 0);
             const id = 'rank:' + wk;
             if (!seenSet.has(id)) {
-              setNotif({ ids: [id], bubble: 'Congrats! Top 3!', target: 'leaderboard', animate: false });
+              setNotif({ ids: [id], bubble: `Congrats! Top ${lb.myRank}!`, target: 'leaderboard', animate: false });
             }
           }
         }
