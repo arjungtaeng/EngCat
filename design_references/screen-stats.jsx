@@ -60,7 +60,7 @@ function ECScreenStats() {
     })();
     return () => { alive = false; };
   }, [userId]);
-  const rankDisplay = myRank ? myRank + '위' : '—';
+  const rankDisplay = myRank ? String(myRank) : '—';
 
   const { weekBars, todayIdx, weekTotal } = React.useMemo(() => {
     const today = new Date();

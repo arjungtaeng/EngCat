@@ -183,23 +183,24 @@ function ECScreenHome() {
         <div style={{ flexShrink: 0, position: 'relative', marginRight: 40 }}>
           {(() => {
             const isDarkMode = T.text === '#F8F5EF';
-            const bubbleFill = isDarkMode ? '#F4ECDD' : '#1A1A21';
+            const bubbleFill = isDarkMode ? '#F4ECDD' : '#3A3A42'; // 라이트: 검정 대신 짙은 회색
             const textFill = isDarkMode ? '#1A1A21' : '#F4ECDD';
             // fontSize는 72 고정. 글자 길이에 따라 풍선만 왼쪽으로 늘림 (우측 + 꼬리 고정)
             const greetingFontSize = 72;
             const charWidthVB = greetingFontSize * 0.55; // Outfit 600 평균 글자 폭
             const textWidthVB = bubbleGreeting.length * charWidthVB;
-            // 원본 풍선 flat top 폭 228 + 좌우 패딩 40 → 188보다 넓으면 그만큼 왼쪽으로 확장
-            const eL = Math.max(0, Math.ceil(textWidthVB - 188));
+            const pad = 12; // 좌우 벽을 안쪽으로 → 폭·여백 살짝 축소
+            // flat top 폭 + 좌우 패딩 → 176보다 넓으면 그만큼 왼쪽으로 확장
+            const eL = Math.max(0, Math.ceil(textWidthVB - 176));
             const viewBoxW = 380 + eL;
             const svgWidthPx = Math.round(viewBoxW * 0.142);
             const textCx = 190 - eL / 2;
             const bubblePath =
-              `M ${76 - eL} 16 L 304 16 Q 364 16 364 76 Q 364 136 304 136 ` +
+              `M ${76 + pad - eL} 16 L ${304 - pad} 16 Q ${364 - pad} 16 ${364 - pad} 76 Q ${364 - pad} 136 ${304 - pad} 136 ` +
               `L 198 136 C 190 136 186 142 180 152 C 170 166 156 176 136 184 ` +
               `C 144 170 150 156 152 148 C 154 140 152 136 144 136 ` +
-              `L ${76 - eL} 136 Q ${16 - eL} 136 ${16 - eL} 76 ` +
-              `Q ${16 - eL} 16 ${76 - eL} 16 Z`;
+              `L ${76 + pad - eL} 136 Q ${16 + pad - eL} 136 ${16 + pad - eL} 76 ` +
+              `Q ${16 + pad - eL} 16 ${76 + pad - eL} 16 Z`;
             return (
               <div style={{
                 position: 'absolute',
