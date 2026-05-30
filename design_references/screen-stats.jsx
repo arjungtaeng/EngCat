@@ -250,13 +250,14 @@ function ECScreenStats() {
         {[
           { num: learningStats.totalWords, label: '익힌 단어' },
           { num: learningStats.totalSentences, label: '익힌 표현' },
-          { num: rankDisplay, label: '나의 랭킹', onClick: () => window.ECNav?.go('leaderboard') },
+          { num: rankDisplay, label: '나의 랭킹', onClick: () => window.ECNav?.go('leaderboard'),
+            numColor: (myRank && myRank <= 3) ? T.accent : T.text },
         ].map((s, i) => (
           <div key={i} onClick={s.onClick} style={{
             padding: '14px 14px', borderRadius: 16, background: T.bg2, border: `1px solid ${T.hair}`,
             cursor: s.onClick ? 'pointer' : 'default',
           }}>
-            <div style={{ fontFamily: T.serif, fontSize: 26, color: s.onClick ? T.accent : T.text, lineHeight: 1, letterSpacing: -0.5 }}>{s.num}</div>
+            <div style={{ fontFamily: T.serif, fontSize: 26, color: s.numColor || T.text, lineHeight: 1, letterSpacing: -0.5 }}>{s.num}</div>
             <div style={{ fontSize: 11.5, color: T.textDim, marginTop: 6 }}>{s.label}</div>
           </div>
         ))}
