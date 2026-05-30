@@ -494,7 +494,7 @@ function ECTabBar({ active = 'home', visible = true }) {
     { id: 'home',   label: '홈',      icon: ECIcon.home,  screen: 'home' },
     { id: 'cards',  label: '저장',    icon: ECIcon.cards, screen: 'saved-cards' },
     { id: 'stats',  label: '진도',    icon: ECIcon.chart, screen: 'stats' },
-    { id: 'me',     label: '내 정보', icon: ECIcon.user,  screen: 'profile' },
+    { id: 'me',     label: '설정', icon: ECIcon.gear,  screen: 'profile' },
   ];
   return (
     <div id="ec-tabbar" style={{

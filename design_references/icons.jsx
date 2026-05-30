@@ -33,6 +33,12 @@ const ECIcon = {
       <path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6" stroke={c} strokeWidth="1.6" strokeLinecap="round"/>
     </svg>
   ),
+  gear: (c = 'currentColor', s = 22) => (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3" stroke={c} strokeWidth="1.6"/>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V15z" stroke={c} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  ),
   userPlus: (c = 'currentColor', s = 22) => (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
       <circle cx="9" cy="8" r="3.6" stroke={c} strokeWidth="1.6"/>
