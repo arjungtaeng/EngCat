@@ -161,32 +161,6 @@ function ECScreenProfile() {
         </div>
       </div>
 
-      {/* Quick stats row */}
-      <div style={{ padding: '12px 18px 0', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0 }}>
-        <div style={{
-          padding: '14px 8px', borderRadius: '16px 0 0 16px',
-          background: T.bg2, borderTop: `1px solid ${T.hair}`, borderLeft: `1px solid ${T.hair}`, borderBottom: `1px solid ${T.hair}`,
-          textAlign: 'center',
-        }}>
-          <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1 }}>0</div>
-          <div style={{ fontSize: 10.5, color: T.textDim, marginTop: 5, letterSpacing: 0.3 }}>스트릭</div>
-        </div>
-        <div style={{
-          padding: '14px 8px', background: T.bg2, border: `1px solid ${T.hair}`, textAlign: 'center',
-        }}>
-          <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1 }}>0</div>
-          <div style={{ fontSize: 10.5, color: T.textDim, marginTop: 5, letterSpacing: 0.3 }}>단어</div>
-        </div>
-        <div style={{
-          padding: '14px 8px', borderRadius: '0 16px 16px 0',
-          background: T.bg2, borderTop: `1px solid ${T.hair}`, borderRight: `1px solid ${T.hair}`, borderBottom: `1px solid ${T.hair}`,
-          textAlign: 'center',
-        }}>
-          <div style={{ fontFamily: T.serif, fontSize: 22, color: T.text, lineHeight: 1 }}>—</div>
-          <div style={{ fontSize: 10.5, color: T.textDim, marginTop: 5, letterSpacing: 0.3 }}>랭킹</div>
-        </div>
-      </div>
-
       {/* Section: Learning */}
       <div style={{ padding: '24px 22px 8px', fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, color: T.textMute, textTransform: 'uppercase' }}>
         학습
