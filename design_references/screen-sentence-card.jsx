@@ -192,23 +192,24 @@ function ECScreenSentenceCard() {
       onTouchEnd={handleTouchEnd}
     >
 
-      {/* Hero — 단어 카드와 동일: 70% 컨테이너 + 이미지 100% + 그라데이션 + 스크롤 딤 */}
-      <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0, height: '70%',
-        zIndex: 1, overflow: 'hidden',
-      }}>
-        {s.img
-          ? <img src={s.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={s.en} />
-          : <ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.en}/>
-        }
+      {/* Hero — 단어 카드와 동일: 콘텐츠 영역(하단 132px 제외)의 70% (사진 하단 위치 일치) */}
+      <div style={{ position: 'absolute', top: 0, bottom: 'calc(env(safe-area-inset-bottom, 0px) + 132px)', left: 0, right: 0, zIndex: 1 }}>
         <div style={{
-          position: 'absolute', inset: 0,
-          background: isDark
-            ? `linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, ${T.bg0} 100%)`
-            : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 25%, transparent 55%, ${T.bg0} 100%)`,
-        }}/>
-        {/* 스크롤 딤 오버레이 */}
-        <div style={{ position: 'absolute', inset: 0, background: isDark ? '#000' : T.bg0, opacity: heroDim, pointerEvents: 'none' }}/>
+          position: 'absolute', top: 0, left: 0, right: 0, height: '70%', overflow: 'hidden',
+        }}>
+          {s.img
+            ? <img src={s.img} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} alt={s.en} />
+            : <ECPlaceholder height="100%" tint={s.tint} radius={0} label={s.en}/>
+          }
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: isDark
+              ? `linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, ${T.bg0} 100%)`
+              : `linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 25%, transparent 55%, ${T.bg0} 100%)`,
+          }}/>
+          {/* 스크롤 딤 오버레이 */}
+          <div style={{ position: 'absolute', inset: 0, background: isDark ? '#000' : T.bg0, opacity: heroDim, pointerEvents: 'none' }}/>
+        </div>
       </div>
 
       {/* Top chrome */}
