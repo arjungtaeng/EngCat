@@ -65,13 +65,19 @@ function ECScreenSavedCards() {
                 display: 'flex', alignItems: 'center', gap: 14,
               }}>
                 <div
-                  onClick={() => { const i = (window.ECData?.words || []).findIndex(x => x.id === w.id); if (i >= 0) { window.ECSession.wordIndex = i; window.ECNav?.go('word-card'); }}}
+                  onClick={() => {
+                    const i = Math.max(0, savedWords.findIndex(x => x.id === w.id));
+                    // 저장 목록을 그대로 카드 소스로 전달 → 탭한 카드가 정확히 열림 (저장 카드끼리 스와이프)
+                    window.ECCardSource = { mode: 'review', words: savedWords, expressions: [], startIndex: i };
+                    window.ECSession.wordIndex = i;
+                    window.ECNav?.go('word-card');
+                  }}
                   style={{ flex: 1, minWidth: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14 }}
                 >
                   {/* 프로필 아바타처럼 왼쪽 원형 썸네일 */}
                   {w.img
-                    ? <img src={w.img} alt={w.en} style={{ width: 52, height: 52, borderRadius: 999, objectFit: 'cover', flexShrink: 0, border: `1px solid ${T.hairStr}` }} />
-                    : <ECPlaceholder height={52} tint={w.tint} radius={999} style={{ width: 52, flexShrink: 0 }} />
+                    ? <img src={w.img} alt={w.en} style={{ width: 52, height: 52, borderRadius: 12, objectFit: 'cover', flexShrink: 0, border: `1px solid ${T.hairStr}` }} />
+                    : <ECPlaceholder height={52} tint={w.tint} radius={12} style={{ width: 52, flexShrink: 0 }} />
                   }
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 19, color: T.text }}>{w.en}</div>
@@ -96,7 +102,13 @@ function ECScreenSavedCards() {
             {savedSentences.map((s) => (
               <div
                 key={s.id}
-                onClick={() => { const i = (window.ECData?.sentences || []).findIndex(x => x.id === s.id); if (i >= 0) { window.ECSession.sentenceIndex = i; window.ECNav?.go('sentence-card'); }}}
+                onClick={() => {
+                  const i = Math.max(0, savedSentences.findIndex(x => x.id === s.id));
+                  // 저장 문장 목록을 카드 소스로 전달 → 탭한 카드가 정확히 열림
+                  window.ECCardSource = { mode: 'review', words: [], expressions: savedSentences, startIndex: i };
+                  window.ECSession.sentenceIndex = i;
+                  window.ECNav?.go('sentence-card');
+                }}
                 style={{
                   padding: '12px 14px', borderRadius: 16,
                   background: T.bg2, border: `1px solid ${T.hair}`,
@@ -106,8 +118,8 @@ function ECScreenSavedCards() {
               >
                 {/* 프로필 아바타처럼 왼쪽 원형 썸네일 */}
                 {s.img
-                  ? <img src={s.img} alt={s.en} style={{ width: 52, height: 52, borderRadius: 999, objectFit: 'cover', flexShrink: 0, border: `1px solid ${T.hairStr}` }} />
-                  : <ECPlaceholder height={52} tint={s.tint} radius={999} style={{ width: 52, flexShrink: 0 }} />
+                  ? <img src={s.img} alt={s.en} style={{ width: 52, height: 52, borderRadius: 12, objectFit: 'cover', flexShrink: 0, border: `1px solid ${T.hairStr}` }} />
+                  : <ECPlaceholder height={52} tint={s.tint} radius={12} style={{ width: 52, flexShrink: 0 }} />
                 }
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 16, color: T.text, lineHeight: 1.35 }}>{s.en}</div>
