@@ -314,7 +314,6 @@ window.ECGetReviewSession = function() {
   const allIdioms   = data.idioms       || [];
   const allNuances  = data.nuances      || [];
 
-  const offset = (window.ECReviewSeedOffset || 0);
   const seed = window.ECGetDayOfYear() + offset * 1000;
 
   const { wordIds: learnedWordIds, sentenceIds: learnedSentenceIds } = _getAllLearnedIds(true);
@@ -356,6 +355,9 @@ window.ECGetReviewSession = function() {
     topicLabel: null,
     words, patterns, collocations, idioms, nuances, expressions,
   };
-  window._ecReviewSessionCache = { key: cacheKey, result };
+  // 데이터가 로드된 상태에서만 캐시 — 로드 전 빈 결과가 굳는 것 방지
+  if (allWords.length > 0 || allPatterns.length > 0 || allColloc.length > 0) {
+    window._ecReviewSessionCache = { key: cacheKey, result };
+  }
   return result;
 };
