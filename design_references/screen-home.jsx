@@ -198,12 +198,12 @@ function ECScreenHome() {
         <div style={{ flexShrink: 0, position: 'relative', marginRight: 40 }}>
           {(() => {
             const isDarkMode = T.text === '#F8F5EF';
-            const bubbleFill = isDarkMode ? '#F4ECDD' : '#4A4A52'; // 라이트: 살짝 진한 회색
+            const bubbleFill = isDarkMode ? '#F4ECDD' : '#3A3A42'; // 라이트: 짙은 회색 (살짝 어둡게)
             const textFill = isDarkMode ? '#1A1A21' : '#F4ECDD';
             const greetingFontSize = 72;
             // 실제 텍스트 폭 측정 → 우측·꼬리는 고정, 좌측만 늘려 항상 동일 여백
             const Wt = _ecMeasureTextW(bubbleGreeting, `600 ${greetingFontSize}px Outfit, system-ui, sans-serif`);
-            const FP = 50;            // 고정 좌우 여백(viewBox) — 모든 문장 동일, 이전보다 더 좁게
+            const FP = 30;            // 고정 좌우 여백(viewBox) — 모든 문장 동일, 이전보다 더 좁게
             const R = 60;             // 모서리 반경
             const Xr = 304;           // 우측 직선부 끝(고정)
             const innerW = Math.max(Math.round(Wt) + 2 * FP, 168); // 꼬리 들어갈 최소 폭 보장
