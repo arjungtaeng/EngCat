@@ -238,7 +238,7 @@ function ECScreenStats() {
               <div style={{ fontFamily: T.serif, fontSize: 56, color: T.text, lineHeight: 1, letterSpacing: -1.5 }}>{learningStats.streak}</div>
               <div style={{ fontSize: 16, color: T.textDim }}>일</div>
             </div>
-            <div style={{ marginTop: 8, fontSize: 12.5, color: T.textDim }}>
+            <div style={{ marginTop: 8, fontSize: 12.5, color: T.textDim, whiteSpace: 'nowrap', marginRight: -178 }}>
               {flameMeta.desc}
             </div>
           </div>
