@@ -141,9 +141,18 @@ function ECScreenHome() {
 
   // 연속일 → 불꽃 단계 (진도 화면과 동일 매핑)
   const homeFlameStage = streak === 0 ? 0 : streak < 2 ? 1 : streak < 3 ? 2 : streak < 4 ? 3 : streak < 5 ? 4 : streak < 6 ? 5 : 6;
-  // 단계별로 불꽃이 viewBox에서 차지하는 세로 비율 → 어느 단계든 같은 크기로 보이게 정규화
-  const FLAME_FILL = [0.26, 0.26, 0.38, 0.52, 0.66, 0.76, 0.94];
-  const flameScale = 0.62 / FLAME_FILL[homeFlameStage];
+  // 단계별 불꽃의 "보이는 영역"(viewBox 24 기준 [윗면, 밑면]) 실측값.
+  // 이전엔 SVG 박스 밑변(y=24)을 기준으로 확대해 작은 단계(0·1)의 불꽃이
+  // 위로 뜨고 더 크게 보였음 → 실제 밑면을 기준으로 배율·세로 오프셋을 다시 잡아
+  // 모든 단계가 같은 크기·같은 바닥선에 오도록 정규화.
+  const FLAME_VIS = [[9, 20], [12.8, 20.8], [11.4, 20], [8.5, 21], [6, 21.5], [3.7, 22], [0.2, 23]];
+  // 단계별 목표 세로 크기 (viewBox 단위). 작은 불씨(0)·작은 불꽃(1)은 가시성을 위해
+  // 조금 더 크게(17·16), 2번을 최소(15)로 두고 3~6번은 단계적으로 키워 "자란다"는 느낌.
+  const FLAME_TARGET_H = [17, 16, 15, 16, 17, 18, 19];
+  const FLAME_TARGET_BASE = 22;  // 모든 단계 밑면이 오는 y
+  const [flameTop, flameBase] = FLAME_VIS[homeFlameStage];
+  const flameScale = FLAME_TARGET_H[homeFlameStage] / (flameBase - flameTop);
+  const flameTy = FLAME_TARGET_BASE - flameBase; // 밑면 정렬용 세로 이동 (viewBox=px, size 24)
 
   // 데이터 로드 전까지 빈 화면
   if (dataVersion === 0) {
@@ -175,7 +184,7 @@ function ECScreenHome() {
           background: T.bg2, border: `1px solid ${T.hair}`,
         }}>
           <span style={{ width: 24, height: 24, display: 'inline-flex', alignItems: 'flex-end', justifyContent: 'center', overflow: 'visible' }}>
-            <span style={{ display: 'flex', transform: `scale(${flameScale.toFixed(2)})`, transformOrigin: 'center bottom' }}>
+            <span style={{ display: 'flex', transform: `translateY(${flameTy}px) scale(${flameScale.toFixed(3)})`, transformOrigin: `center ${flameBase}px` }}>
               {ECIcon.flameStage(homeFlameStage, 24)}
             </span>
           </span>
