@@ -282,7 +282,7 @@ function ECScreenHome() {
             const greetingFontSize = 72;
             // 실제 텍스트 폭 측정 → 우측·꼬리는 고정, 좌측만 늘려 항상 동일 여백
             const Wt = _ecMeasureTextW(bubbleText, `600 ${greetingFontSize}px Outfit, system-ui, sans-serif`);
-            const FP = 10;            // 고정 좌우 여백(viewBox) — 모든 문장 동일, 더 좁게
+            const FP = 5;             // 고정 좌우 여백(viewBox) — 모든 문장 동일, 더 좁게
             const R = 60;             // 모서리 반경
             const Xr = 304;           // 우측 직선부 끝(고정)
             const innerW = Math.max(Math.round(Wt) + 2 * FP, 168); // 꼬리 들어갈 최소 폭 보장
@@ -306,6 +306,8 @@ function ECScreenHome() {
                 lineHeight: 0,
                 pointerEvents: isNotif ? 'auto' : 'none',
                 cursor: isNotif ? 'pointer' : 'default',
+                transformOrigin: 'bottom center',
+                animation: isNotif ? 'ecBubbleLoud 3.7s ease-out infinite' : 'none',
               }}>
                 <svg viewBox={`${vbX} 0 ${viewBoxW} 200`} width={svgWidthPx} height="28" xmlns="http://www.w3.org/2000/svg">
                   <defs>

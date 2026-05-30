@@ -73,6 +73,25 @@ if (!window.ECSession) {
     }
     .ec-fade-up   { animation: ecFadeUp   0.28s cubic-bezier(0.2,0.8,0.2,1) both; }
     .ec-fade-down { animation: ecFadeDown 0.28s cubic-bezier(0.2,0.8,0.2,1) both; }
+    /* iMessage '외침(Loud)' 풍 — 펑 커지며 큰 상태로 부르르 떨다가, 서서히 가라앉고, 잠깐 멈췄다 반복 */
+    @keyframes ecBubbleLoud {
+      /* 총 3.7s: 모션 0~33%(~1.2s, 짧은 가속 부르르 → 멈춤 → 줄어듦) + 휴지 33~100%(~2.5s) */
+      0%   { transform: scale(1)    rotate(0deg); }
+      3%    { transform: scale(1.1)  rotate(0deg); }
+      5.5%  { transform: scale(1.12) rotate(-6deg); }
+      7.5%  { transform: scale(1.1)  rotate(6deg); }
+      9%    { transform: scale(1.12) rotate(-6deg); }
+      10%   { transform: scale(1.1)  rotate(6deg); }
+      11%   { transform: scale(1.12) rotate(-6deg); }
+      12%   { transform: scale(1.1)  rotate(6deg); }
+      13%   { transform: scale(1.12) rotate(-6deg); }
+      14%   { transform: scale(1.1)  rotate(6deg); }
+      15%   { transform: scale(1.12) rotate(-4deg); }
+      16%   { transform: scale(1.1)  rotate(0deg); }
+      24%   { transform: scale(1.1)  rotate(0deg); }   /* 커진 채 잠시 멈춤 */
+      33%  { transform: scale(1)    rotate(0deg); }   /* 서서히 줄어듦 */
+      100% { transform: scale(1)    rotate(0deg); }   /* 다음 텀까지 멈춤 (~2.5s) */
+    }
   `;
   document.head.appendChild(s);
 })();
