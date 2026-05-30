@@ -1,6 +1,15 @@
 // EngCat — Home screen (오늘의 학습)
 // Premium dark, B1-B2 learner. Polite formal tone.
 
+// 말풍선 텍스트 실제 렌더 폭 측정 (글자 수 추정 대신 → 문장마다 여백 동일)
+function _ecMeasureTextW(text, font) {
+  try {
+    const ctx = _ecMeasureTextW._c || (_ecMeasureTextW._c = document.createElement('canvas').getContext('2d'));
+    ctx.font = font;
+    return ctx.measureText(text).width;
+  } catch (_) { return (text || '').length * 39.6; } // 폴백: 추정
+}
+
 const TOPIC_NAMES = {
   greeting: '인사·소개', emotion: '감정 표현', weather: '날씨', shopping: '쇼핑',
   cafe: '카페·식당', transport: '교통', health: '건강', travel: '여행', home: '주거·생활',
@@ -34,6 +43,12 @@ function ECScreenHome() {
                 : 'Good night';
     const pool = [timed, 'Hi', 'Hello', 'Hey', "How are you?", 'Howdy', "How's it going?", 'Nice to see you'];
     return pool[Math.floor(Math.random() * pool.length)];
+  }, []);
+
+  // 폰트 로드 완료 시 재렌더 → 말풍선 폭 정확히 재측정
+  const [, _ecFontTick] = React.useReducer((x) => x + 1, 0);
+  React.useEffect(() => {
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => _ecFontTick());
   }, []);
 
   const session = window.ECSession || { completedWordIds: new Set(), completedSentenceIds: new Set(), completedReviewWordIds: new Set(), completedReviewSentenceIds: new Set() };
@@ -183,24 +198,27 @@ function ECScreenHome() {
         <div style={{ flexShrink: 0, position: 'relative', marginRight: 40 }}>
           {(() => {
             const isDarkMode = T.text === '#F8F5EF';
-            const bubbleFill = isDarkMode ? '#F4ECDD' : '#3A3A42'; // 라이트: 검정 대신 짙은 회색
+            const bubbleFill = isDarkMode ? '#F4ECDD' : '#4A4A52'; // 라이트: 살짝 진한 회색
             const textFill = isDarkMode ? '#1A1A21' : '#F4ECDD';
-            // fontSize는 72 고정. 글자 길이에 따라 풍선만 왼쪽으로 늘림 (우측 + 꼬리 고정)
             const greetingFontSize = 72;
-            const charWidthVB = greetingFontSize * 0.55; // Outfit 600 평균 글자 폭
-            const textWidthVB = bubbleGreeting.length * charWidthVB;
-            const pad = 12; // 좌우 벽을 안쪽으로 → 폭·여백 살짝 축소
-            // flat top 폭 + 좌우 패딩 → 176보다 넓으면 그만큼 왼쪽으로 확장
-            const eL = Math.max(0, Math.ceil(textWidthVB - 176));
-            const viewBoxW = 380 + eL;
+            // 실제 텍스트 폭 측정 → 우측·꼬리는 고정, 좌측만 늘려 항상 동일 여백
+            const Wt = _ecMeasureTextW(bubbleGreeting, `600 ${greetingFontSize}px Outfit, system-ui, sans-serif`);
+            const FP = 50;            // 고정 좌우 여백(viewBox) — 모든 문장 동일, 이전보다 더 좁게
+            const R = 60;             // 모서리 반경
+            const Xr = 304;           // 우측 직선부 끝(고정)
+            const innerW = Math.max(Math.round(Wt) + 2 * FP, 168); // 꼬리 들어갈 최소 폭 보장
+            const Xl = Xr - innerW;   // 좌측 직선부 시작
+            const leftOuter = Xl - R;
+            const textCx = (Xl + Xr) / 2;
+            const vbX = leftOuter - 16;
+            const viewBoxW = 380 - vbX; // 우측 viewBox 끝을 380으로 고정 → 마스코트 기준 우측 정렬 유지
             const svgWidthPx = Math.round(viewBoxW * 0.142);
-            const textCx = 190 - eL / 2;
             const bubblePath =
-              `M ${76 + pad - eL} 16 L ${304 - pad} 16 Q ${364 - pad} 16 ${364 - pad} 76 Q ${364 - pad} 136 ${304 - pad} 136 ` +
+              `M ${Xl} 16 L ${Xr} 16 Q 364 16 364 76 Q 364 136 ${Xr} 136 ` +
               `L 198 136 C 190 136 186 142 180 152 C 170 166 156 176 136 184 ` +
               `C 144 170 150 156 152 148 C 154 140 152 136 144 136 ` +
-              `L ${76 + pad - eL} 136 Q ${16 + pad - eL} 136 ${16 + pad - eL} 76 ` +
-              `Q ${16 + pad - eL} 16 ${76 + pad - eL} 16 Z`;
+              `L ${Xl} 136 Q ${leftOuter} 136 ${leftOuter} 76 ` +
+              `Q ${leftOuter} 16 ${Xl} 16 Z`;
             return (
               <div style={{
                 position: 'absolute',
@@ -209,7 +227,7 @@ function ECScreenHome() {
                 lineHeight: 0,
                 pointerEvents: 'none',
               }}>
-                <svg viewBox={`${-eL} 0 ${viewBoxW} 200`} width={svgWidthPx} height="28" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox={`${vbX} 0 ${viewBoxW} 200`} width={svgWidthPx} height="28" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <filter id="bubble-shadow" x="-10%" y="-10%" width="120%" height="140%">
                       <feDropShadow dx="0" dy="3" stdDeviation="8" floodColor="#000" floodOpacity="0.12" />
