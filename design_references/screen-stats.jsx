@@ -79,18 +79,26 @@ function ECScreenStats() {
   }, [learningStats]);
   const maxBar = Math.max(...weekBars, 1);
 
+  // 레벨별 하루 목표 카드 수 — 히트맵 색 기준을 목표 비율로 (모든 레벨 일관)
+  const dailyTarget = React.useMemo(() => {
+    const lv = localStorage.getItem('ec_user_level') || 'B1';
+    const c = (window.EC_CEFR_COMPOSITIONS || {})[lv] || { words: 10, patterns: 5 };
+    return Object.values(c).reduce((a, b) => a + (b || 0), 0) || 15;
+  }, []);
+
   const grid = React.useMemo(() => {
     const g = Array(84).fill(0);
     const today = new Date();
+    const half = dailyTarget * 0.5;
     for (let i = 0; i < 84; i++) {
       const d = new Date(today);
       d.setDate(today.getDate() - (83 - i));
       const ds = d.toISOString().slice(0, 10);
       const count = learningStats.dailyCounts[ds] || 0;
-      g[i] = count === 0 ? 0 : count < 6 ? 1 : count < 15 ? 2 : 3;
+      g[i] = count === 0 ? 0 : count < half ? 1 : count < dailyTarget ? 2 : 3;
     }
     return g;
-  }, [learningStats]);
+  }, [learningStats, dailyTarget]);
 
   const flameStage = learningStats.streak === 0 ? 0
     : learningStats.streak < 2 ? 1

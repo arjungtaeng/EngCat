@@ -452,19 +452,30 @@ function _ecComputeStats() {
   const now = new Date();
   const todayStr = now.toISOString().slice(0, 10);
   const weekId = _ecWeekId(now);
+  // 카드 점수: 처음 배운 카드 +3, 복습(이전에 배운 걸 다른 날 다시) +1.
+  // 같은 날 중복은 날짜별 Set이라 이미 1회. 날짜를 시간순으로 훑어 ID 첫 등장 추적.
   const lp = 'ec_learned_' + email + '_';
-  let cardsWeek = 0, totalCards = 0, cardsToday = 0;
-  const daysWeek = new Set(), totalDays = new Set();
+  const learnedByDate = {};
   for (let i = 0; i < localStorage.length; i++) {
     const k = localStorage.key(i);
     if (!k || !k.startsWith(lp)) continue;
-    const date = k.slice(lp.length);
-    let v = {}; try { v = JSON.parse(localStorage.getItem(k) || '{}'); } catch (_) {}
-    const n = (v.wordIds || []).length + (v.sentenceIds || []).length;
-    if (n > 0) { totalCards += n; totalDays.add(date); }
-    if (n > 0 && _ecWeekId(new Date(date + 'T00:00:00')) === weekId) { cardsWeek += n; daysWeek.add(date); }
-    if (date === todayStr) cardsToday += n;
+    try { learnedByDate[k.slice(lp.length)] = JSON.parse(localStorage.getItem(k) || '{}'); } catch (_) {}
   }
+  const NEW_PT = 3, REVIEW_PT = 1;
+  const seenW = new Set(), seenS = new Set();
+  let scoreWeek = 0, scoreTotal = 0, scoreToday = 0, cardsToday = 0;
+  const daysWeek = new Set(), totalDays = new Set();
+  Object.keys(learnedByDate).sort().forEach(date => {
+    const v = learnedByDate[date] || {};
+    let nw = 0, rv = 0;
+    (v.wordIds || []).forEach(id => { if (seenW.has(id)) rv++; else { nw++; seenW.add(id); } });
+    (v.sentenceIds || []).forEach(id => { if (seenS.has(id)) rv++; else { nw++; seenS.add(id); } });
+    const cards = nw + rv;
+    const sc = nw * NEW_PT + rv * REVIEW_PT;
+    if (cards > 0) { scoreTotal += sc; totalDays.add(date); }
+    if (cards > 0 && _ecWeekId(new Date(date + 'T00:00:00')) === weekId) { scoreWeek += sc; daysWeek.add(date); }
+    if (date === todayStr) { scoreToday += sc; cardsToday += cards; }
+  });
   let qlog = {}; try { qlog = JSON.parse(localStorage.getItem('ec_quizlog_' + email) || '{}'); } catch (_) {}
   let quizWeek = 0, quizTotal = 0, quizToday = 0;
   for (const d in qlog) {
@@ -484,9 +495,9 @@ function _ecComputeStats() {
   if (!nickname) { try { nickname = (JSON.parse(localStorage.getItem('engcat_user') || '{}').name) || null; } catch (_) {} }
   return {
     email, weekId, dayId: todayStr, league: _ecLeagueOf(level),
-    dailyScore:  cardsToday * 2 + quizToday * 3 + (studiedToday ? 20 : 0),
-    weeklyScore: cardsWeek * 2 + quizWeek * 3 + daysWeek.size * 20,
-    allTimeXP:   totalCards * 2 + quizTotal * 3 + totalDays.size * 20,
+    dailyScore:  scoreToday + quizToday * 3 + (studiedToday ? 20 : 0),
+    weeklyScore: scoreWeek + quizWeek * 3 + daysWeek.size * 20,
+    allTimeXP:   scoreTotal + quizTotal * 3 + totalDays.size * 20,
     streak, nickname: nickname || '학습자',
   };
 }
