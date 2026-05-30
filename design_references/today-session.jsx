@@ -258,13 +258,17 @@ function _weightedSample(items, weightFn, n, seed) {
   return result;
 }
 
-// 지금까지 학습한 모든 단어/표현 ID 수집 (날짜 무관)
-function _getAllLearnedIds() {
+// 지금까지 학습한 모든 단어/표현 ID 수집
+// excludeToday=true면 오늘 학습한 항목은 제외 — 복습은 "이전에" 익힌 것만 대상.
+// (오늘 막 학습한 내용이 같은 날 복습 섹션에 나타나는 문제 방지)
+function _getAllLearnedIds(excludeToday) {
   const prefix = 'ec_learned_' + _getUserId() + '_';
+  const todayDate = new Date().toISOString().slice(0, 10);
   const wordIds = new Set(), sentenceIds = new Set();
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     if (key && key.startsWith(prefix)) {
+      if (excludeToday && key.slice(prefix.length) === todayDate) continue;
       try {
         const d = JSON.parse(localStorage.getItem(key) || '{}');
         (d.wordIds || []).forEach(id => wordIds.add(id));
@@ -296,7 +300,7 @@ window.ECGetReviewSession = function() {
   const offset = (window.ECReviewSeedOffset || 0);
   const seed = window.ECGetDayOfYear() + offset * 1000;
 
-  const { wordIds: learnedWordIds, sentenceIds: learnedSentenceIds } = _getAllLearnedIds();
+  const { wordIds: learnedWordIds, sentenceIds: learnedSentenceIds } = _getAllLearnedIds(true);
 
   // 학습 이력이 있으면 가중치 기반 복습 (하루 + offset 동안 동일)
   if (learnedWordIds.size > 0 || learnedSentenceIds.size > 0) {
