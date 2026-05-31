@@ -220,9 +220,16 @@ function ECScreenProfile() {
       <div style={{ padding: '20px 22px 8px', fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, color: T.textMute, textTransform: 'uppercase' }}>
         계정
       </div>
-      <div style={{ padding: '0 18px 24px' }}>
+      <div style={{ padding: '0 18px 28px' }}>
         <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}` }}>
           <Row label="로그아웃" danger last onPress={handleLogout}/>
+        </div>
+      </div>
+
+      {/* ARSCHOOLING */}
+      <div style={{ padding: '0 18px 28px', textAlign: 'center' }}>
+        <div style={{ fontSize: 24, fontFamily: 'ARSCHOOLING', color: T.textMute, letterSpacing: 1 }}>
+          ARSCHOOLING
         </div>
       </div>
 
