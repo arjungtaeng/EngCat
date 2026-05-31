@@ -26,7 +26,7 @@ function ECScreenHelp() {
 
       {/* 복습 없음 선 (지수적 감소 - Ebbinghaus 곡선) */}
       <path
-        d="M 30 20 Q 65 55, 100 80 Q 130 95, 160 103 Q 200 108, 240 110"
+        d="M 30 20 Q 80 65, 100 85 Q 130 98, 160 105 Q 200 108, 240 109"
         fill="none"
         stroke={T.textMute}
         strokeWidth="1.5"
