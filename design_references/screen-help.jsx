@@ -50,26 +50,26 @@ function ECScreenHelp() {
 
       {/* 두 번째 구간: 1일 복습 후 → 3일 (덜 가파른 망각) */}
       <path
-        d="M 100 28 Q 130 45, 160 62"
+        d="M 100 28 Q 130 38, 160 50"
         fill="none"
         stroke={T.accent}
         strokeWidth="2"
       />
       {/* 두 번째 복습 (3일) */}
-      <circle cx="160" cy="62" r="2.5" fill={T.accent} />
-      <line x1="160" y1="62" x2="160" y2="30" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
+      <circle cx="160" cy="50" r="2.5" fill={T.accent} />
+      <line x1="160" y1="50" x2="160" y2="30" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
       <circle cx="160" cy="30" r="2.5" fill={T.accent} />
 
       {/* 세 번째 구간: 3일 복습 후 → 1주 (더욱 완만한 망각) */}
       <path
-        d="M 160 30 Q 200 48, 240 58"
+        d="M 160 30 Q 200 40, 240 48"
         fill="none"
         stroke={T.accent}
         strokeWidth="2"
       />
       {/* 세 번째 복습 (1주) */}
-      <circle cx="240" cy="58" r="2.5" fill={T.accent} />
-      <line x1="240" y1="58" x2="240" y2="32" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
+      <circle cx="240" cy="48" r="2.5" fill={T.accent} />
+      <line x1="240" y1="48" x2="240" y2="32" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
       <circle cx="240" cy="32" r="2.5" fill={T.accent} />
 
       {/* Y축 레이블 */}
