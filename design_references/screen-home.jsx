@@ -544,35 +544,44 @@ function ECScreenHome() {
         </>);
       })()}
 
-      {/* 복습/예습 완료 축하 — 더 보기 / 그만하기 선택 */}
+      {/* 복습/예습 완료 축하 — 더 보기 / 그만하기 (미니 버전) */}
       {allReviewDone && !reviewMoreDismissed && (
-        <div style={{ padding: '28px 18px 0' }}>
+        <div style={{ margin: '8px 22px 0', padding: 0 }}>
           <div style={{
-            borderRadius: 20, padding: 20,
-            background: `linear-gradient(150deg, ${T.accentSoft} 0%, ${T.bg2} 100%)`,
-            border: `1px solid ${T.accent}`, textAlign: 'center',
+            borderRadius: 14, padding: '8px 12px',
+            background: `linear-gradient(135deg, rgba(232,178,106,0.15) 0%, rgba(232,178,106,0.05) 100%)`,
+            border: `1px solid ${T.hair}`,
+            display: 'flex', gap: 10, alignItems: 'center', justifyContent: 'space-between',
+            width: 331, height: 59, boxSizing: 'border-box',
           }}>
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
-              {ECIcon.sparkle(T.accent, 24)}
+            <div style={{ flex: 1, display: 'flex', gap: 8, alignItems: 'center', minWidth: 0 }}>
+              {ECIcon.star(T.accent, 16)}
+              <div style={{ minWidth: 0 }}>
+                <div style={{ fontFamily: T.serif, fontSize: 13, color: T.text, fontWeight: 500, whiteSpace: 'nowrap' }}>
+                  {isPreview ? '오늘 예습을 모두 끝냈어요!' : '오늘 학습을 모두 끝냈어요!'}
+                </div>
+                <div style={{ fontFamily: T.sans, fontSize: 10, color: T.textMute }}>
+                  새 단어와 표현으로 더 학습해 볼까요?
+                </div>
+              </div>
             </div>
-            <div style={{ fontFamily: T.serif, fontSize: 18, color: T.text, letterSpacing: -0.3 }}>
-              {isPreview ? '오늘 예습을 모두 끝냈어요!' : '오늘 복습을 모두 끝냈어요!'}
-            </div>
-            <div style={{ fontSize: 13, color: T.textDim, marginTop: 6, lineHeight: 1.5 }}>
-              새로운 단어와 표현으로 더 학습해 볼까요?
-            </div>
-            <div onClick={handleReviewMore} style={{
-              marginTop: 16, height: 46, borderRadius: 14, background: T.accent,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              color: T.accentText, fontWeight: 600, fontSize: 14, cursor: 'pointer',
-            }}>
-              {ECIcon.sparkle(T.accentText, 15)}
-              <span>{isPreview ? '새 예습 더 보기' : '새 복습 더 보기'}</span>
-            </div>
-            <div onClick={() => setReviewMoreDismissed(true)} style={{
-              marginTop: 10, fontSize: 13, color: T.textMute, fontWeight: 500, cursor: 'pointer',
-            }}>
-              그만하기
+            <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexShrink: 0 }}>
+              <div onClick={handleReviewMore} style={{
+                padding: '5px 10px', borderRadius: 6, border: 'none',
+                background: T.accent, color: T.accentText,
+                fontFamily: T.sans, fontSize: 11, fontWeight: 600,
+                cursor: 'pointer', whiteSpace: 'nowrap',
+              }}>
+                새 학습
+              </div>
+              <div onClick={() => setReviewMoreDismissed(true)} style={{
+                padding: '5px 10px', borderRadius: 6,
+                border: `1px solid ${T.hair}`, background: 'transparent',
+                color: T.text, fontFamily: T.sans, fontSize: 11,
+                cursor: 'pointer', whiteSpace: 'nowrap',
+              }}>
+                그만하기
+              </div>
             </div>
           </div>
         </div>
