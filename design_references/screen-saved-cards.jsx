@@ -60,7 +60,7 @@ function ECScreenSavedCards() {
           <div style={{ padding: '16px 18px 0', display: 'flex', flexDirection: 'column', gap: 10 }}>
             {savedWords.map((w) => (
               <div key={w.id} style={{
-                padding: '10px 14px', borderRadius: 16,
+                padding: '7px 7px', borderRadius: 16,
                 background: T.bg2, border: `1px solid ${T.hair}`,
                 display: 'flex', alignItems: 'center', gap: 14,
               }}>
@@ -76,8 +76,8 @@ function ECScreenSavedCards() {
                 >
                   {/* 프로필 아바타처럼 왼쪽 원형 썸네일 */}
                   {w.img
-                    ? <img src={w.img} alt={w.en} style={{ width: 60, height: 60, borderRadius: 12, objectFit: 'cover', flexShrink: 0, border: `1px solid ${T.hairStr}` }} />
-                    : <ECPlaceholder height={60} tint={w.tint} radius={12} style={{ width: 52, flexShrink: 0 }} />
+                    ? <img src={w.img} alt={w.en} style={{ width: 65, height: 65, borderRadius: 12, objectFit: 'cover', flexShrink: 0, border: `1px solid ${T.hairStr}` }} />
+                    : <ECPlaceholder height={65} tint={w.tint} radius={12} style={{ width: 52, flexShrink: 0 }} />
                   }
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 19, color: T.text }}>{w.en}</div>
@@ -110,7 +110,7 @@ function ECScreenSavedCards() {
                   window.ECNav?.go('sentence-card');
                 }}
                 style={{
-                  padding: '10px 14px', borderRadius: 16,
+                  padding: '7px 7px', borderRadius: 16,
                   background: T.bg2, border: `1px solid ${T.hair}`,
                   cursor: 'pointer',
                   display: 'flex', alignItems: 'center', gap: 14,
@@ -118,8 +118,8 @@ function ECScreenSavedCards() {
               >
                 {/* 프로필 아바타처럼 왼쪽 원형 썸네일 */}
                 {s.img
-                  ? <img src={s.img} alt={s.en} style={{ width: 60, height: 60, borderRadius: 12, objectFit: 'cover', flexShrink: 0, border: `1px solid ${T.hairStr}` }} />
-                  : <ECPlaceholder height={60} tint={s.tint} radius={12} style={{ width: 52, flexShrink: 0 }} />
+                  ? <img src={s.img} alt={s.en} style={{ width: 65, height: 65, borderRadius: 12, objectFit: 'cover', flexShrink: 0, border: `1px solid ${T.hairStr}` }} />
+                  : <ECPlaceholder height={65} tint={s.tint} radius={12} style={{ width: 52, flexShrink: 0 }} />
                 }
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontFamily: T.display, fontWeight: 400, fontSize: 16, color: T.text, lineHeight: 1.35 }}>{s.en}</div>
