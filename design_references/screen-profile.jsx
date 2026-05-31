@@ -212,7 +212,7 @@ function ECScreenProfile() {
             value={themePref}
             onChange={changeTheme}
           />
-          <Row label="도움말"           value="" last/>
+          <Row label="도움말" value="" last onPress={() => window.ECNav?.go('help')} />
         </div>
       </div>
 

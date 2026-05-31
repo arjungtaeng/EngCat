@@ -35,7 +35,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 231;</script>
+<script>window.EC_VER = 232;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/supabase.jsx"></script>
@@ -44,6 +44,7 @@
 <script type="text/babel" src="design_references/screen-login.jsx"></script>
 <script type="text/babel" src="design_references/screen-onboarding.jsx"></script>
 <script type="text/babel" src="design_references/screen-home.jsx"></script>
+<script type="text/babel" src="design_references/screen-help.jsx"></script>
 <script type="text/babel" src="design_references/screen-word-card.jsx"></script>
 <script type="text/babel" src="design_references/screen-sentence-card.jsx"></script>
 <script type="text/babel" src="design_references/screen-saved-cards.jsx"></script>
@@ -112,6 +113,7 @@
       'onboarding':      ECScreenOnboarding,
       'onboarding-goal': ECScreenOnboardingGoal,
       'home':            ECScreenHome,
+      'help':            ECScreenHelp,
       'word-card':       ECScreenWordCard,
       'sentence-card':   ECScreenSentenceCard,
       'saved-cards':     ECScreenSavedCards,
@@ -124,8 +126,8 @@
 
     const Screen = screenMap[screen] || screenMap['home'] || (() => null);
 
-    const tabScreens = ['home', 'stats', 'profile', 'word-card', 'sentence-card', 'saved-cards'];
-    const tabActive = { 'home': 'home', 'word-card': 'home', 'sentence-card': 'home', 'saved-cards': 'cards', 'stats': 'stats', 'profile': 'me' };
+    const tabScreens = ['home', 'stats', 'profile', 'help', 'word-card', 'sentence-card', 'saved-cards'];
+    const tabActive = { 'home': 'home', 'word-card': 'home', 'sentence-card': 'home', 'saved-cards': 'cards', 'stats': 'stats', 'profile': 'me', 'help': 'me' };
     const showTab = tabScreens.includes(screen);
     const isImmersive = screen === 'word-card' || screen === 'sentence-card';
 
