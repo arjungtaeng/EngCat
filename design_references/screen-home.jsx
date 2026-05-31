@@ -555,7 +555,7 @@ function ECScreenHome() {
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
               {ECIcon.sparkle(T.accent, 24)}
             </div>
-            <div style={{ fontFamily: T.serif, fontSize: 20, color: T.text, letterSpacing: -0.3 }}>
+            <div style={{ fontFamily: T.serif, fontSize: 18, color: T.text, letterSpacing: -0.3 }}>
               {isPreview ? '오늘 예습을 모두 끝냈어요!' : '오늘 복습을 모두 끝냈어요!'}
             </div>
             <div style={{ fontSize: 13, color: T.textDim, marginTop: 6, lineHeight: 1.5 }}>

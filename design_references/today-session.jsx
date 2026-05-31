@@ -322,25 +322,28 @@ window.ECGetReviewSession = function() {
   const getW = item => _getItemWeight(item.id, quizStats);
 
   // 한 카테고리 채우기: 복습(과거학습−오늘) 우선, 모자라면 예습(미학습−오늘)으로 top-up
-  function fill(allItems, learnedSet, todaySet, target, sd, type) {
+  // 단, 같은 표현(en)이 다른 카테고리에서 반복되지 않도록 excludeExpressions 추적
+  function fill(allItems, learnedSet, todaySet, target, sd, type, excludeExpressions = new Set()) {
     if (target <= 0) return [];
-    const reviewPool  = allItems.filter(x => learnedSet.has(x.id) && !todaySet.has(x.id));
+    const reviewPool  = allItems.filter(x => learnedSet.has(x.id) && !todaySet.has(x.id) && !excludeExpressions.has(x.en || x.pattern || ''));
     const picks = _weightedSample(reviewPool, getW, target, sd)
       .map(x => Object.assign({}, x, { _type: x._type || type, _source: 'review' }));
     if (picks.length < target) {
-      const newPool = allItems.filter(x => !learnedSet.has(x.id) && !todaySet.has(x.id));
+      const newPool = allItems.filter(x => !learnedSet.has(x.id) && !todaySet.has(x.id) && !excludeExpressions.has(x.en || x.pattern || ''));
       const more = window.ECGetLeveledContent(newPool, level, target - picks.length, sd + 7)
         .map(x => Object.assign({}, x, { _type: x._type || type, _source: 'preview' }));
       picks.push(...more);
     }
+    picks.forEach(p => excludeExpressions.add(p.en || p.pattern || ''));
     return picks;
   }
 
+  const excludeExprs = new Set();
   const words       = fill(allWords,    learnedWordIds,     todayWordIds, comp.words,            seed,     'word');
-  const patterns    = fill(allPatterns, learnedSentenceIds, todaySentIds, comp.patterns,         seed + 1, 'pattern');
-  const collocations = fill(allColloc,  learnedSentenceIds, todaySentIds, comp.collocations || 0, seed + 2, 'collocation');
-  const idioms      = fill(allIdioms,   learnedSentenceIds, todaySentIds, comp.idioms || 0,       seed + 3, 'idiom');
-  const nuances     = fill(allNuances,  learnedSentenceIds, todaySentIds, comp.nuances || 0,      seed + 4, 'nuance');
+  const patterns    = fill(allPatterns, learnedSentenceIds, todaySentIds, comp.patterns,         seed + 1, 'pattern', excludeExprs);
+  const collocations = fill(allColloc,  learnedSentenceIds, todaySentIds, comp.collocations || 0, seed + 2, 'collocation', excludeExprs);
+  const idioms      = fill(allIdioms,   learnedSentenceIds, todaySentIds, comp.idioms || 0,       seed + 3, 'idiom', excludeExprs);
+  const nuances     = fill(allNuances,  learnedSentenceIds, todaySentIds, comp.nuances || 0,      seed + 4, 'nuance', excludeExprs);
   const expressions = [...patterns, ...collocations, ...idioms, ...nuances];
 
   // 섹션별 라벨용: 그 섹션에 복습 카드가 하나도 없으면 '예습'

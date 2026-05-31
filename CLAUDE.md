@@ -88,6 +88,16 @@ src/
 - 절대 emoji 사용 금지. 모든 아이콘은 inline SVG / lucide-react-native
 
 ## 데이터
+
+### 카드 타입 정의
+- **Word**: 단어 카드. `{ id, en, ko, cefr, topicId, ... }`
+- **Pattern**: 기초 문형. 예) "I want to ~", "Where is ~?". `{ id, pattern, explanation, examples: [{...}], ...}`
+- **Collocation** (콜로): 어휘 조합. 예) "break news", "sharp increase". `{ id, en, ko, explanation, ...}`
+- **Idiom** (이디엄): 관용구. 예) "piece of cake", "raining cats and dogs". `{ id, en, literalKo, explanation, ...}`
+- **Nuance** (뉘앙스): 유사 단어 구분. 예) "actually" vs "really". `{ id, wordA, wordB, comparison, ...}`
+
+복습 시 patterns/collocations/idioms/nuances 간에 같은 문장이 중복되지 않도록 관리 — `today-session.jsx`의 `fill()` 함수가 `excludeIds` 셋으로 추적함.
+
 초기 카드 데이터는 `src/data/cards.ts`에 정적 JSON으로 시작. B1-B2 레벨 일상 회화 주제별로 묶기:
 - 여행 (공항·호텔·길찾기) ← 현재 mock에 있음
 - 카페·식당
