@@ -170,10 +170,10 @@ function ECScreenProfile() {
               transform="rotate(-90 40 40)"
             />
             {/* 중앙 텍스트 */}
-            <text x="40" y="38" textAnchor="middle" fontSize="20" fontWeight="600" fill={T.text} fontFamily={T.serif}>
+            <text x="40" y="35" textAnchor="middle" dominantBaseline="middle" fontSize="20" fontWeight="600" fill={T.text} fontFamily={T.serif}>
               B2
             </text>
-            <text x="40" y="52" textAnchor="middle" fontSize="10" fill={T.textMute} fontFamily={T.mono}>
+            <text x="40" y="50" textAnchor="middle" dominantBaseline="middle" fontSize="10" fill={T.textMute} fontFamily={T.mono}>
               47개
             </text>
           </svg>
