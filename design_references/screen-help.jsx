@@ -35,8 +35,8 @@ function ECScreenHelp() {
         strokeLinecap="round"
       />
 
-      {/* 복습 있음 선 (톱니형 패턴) */}
-      {/* 첫 번째 구간: 학습 → 1일 */}
+      {/* 복습 있음 선 (톱니형 패턴 - 반복할수록 망각이 덜함) */}
+      {/* 첫 번째 구간: 학습 → 1일 (가파른 망각) */}
       <path
         d="M 30 20 Q 65 50, 100 70"
         fill="none"
@@ -45,32 +45,32 @@ function ECScreenHelp() {
       />
       {/* 첫 복습 (1일) */}
       <circle cx="100" cy="70" r="2.5" fill={T.accent} />
-      <line x1="100" y1="70" x2="100" y2="32" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
-      <circle cx="100" cy="32" r="2.5" fill={T.accent} />
+      <line x1="100" y1="70" x2="100" y2="28" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
+      <circle cx="100" cy="28" r="2.5" fill={T.accent} />
 
-      {/* 두 번째 구간: 1일 복습 후 → 3일 */}
+      {/* 두 번째 구간: 1일 복습 후 → 3일 (덜 가파른 망각) */}
       <path
-        d="M 100 32 Q 130 50, 160 68"
+        d="M 100 28 Q 130 45, 160 62"
         fill="none"
         stroke={T.accent}
         strokeWidth="2"
       />
       {/* 두 번째 복습 (3일) */}
-      <circle cx="160" cy="68" r="2.5" fill={T.accent} />
-      <line x1="160" y1="68" x2="160" y2="36" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
-      <circle cx="160" cy="36" r="2.5" fill={T.accent} />
+      <circle cx="160" cy="62" r="2.5" fill={T.accent} />
+      <line x1="160" y1="62" x2="160" y2="30" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
+      <circle cx="160" cy="30" r="2.5" fill={T.accent} />
 
-      {/* 세 번째 구간: 3일 복습 후 → 1주 */}
+      {/* 세 번째 구간: 3일 복습 후 → 1주 (더욱 완만한 망각) */}
       <path
-        d="M 160 36 Q 200 55, 240 75"
+        d="M 160 30 Q 200 48, 240 58"
         fill="none"
         stroke={T.accent}
         strokeWidth="2"
       />
       {/* 세 번째 복습 (1주) */}
-      <circle cx="240" cy="75" r="2.5" fill={T.accent} />
-      <line x1="240" y1="75" x2="240" y2="38" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
-      <circle cx="240" cy="38" r="2.5" fill={T.accent} />
+      <circle cx="240" cy="58" r="2.5" fill={T.accent} />
+      <line x1="240" y1="58" x2="240" y2="32" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
+      <circle cx="240" cy="32" r="2.5" fill={T.accent} />
 
       {/* Y축 레이블 */}
       <text x="20" y="25" fontSize="9" fill={T.textMute} textAnchor="end">100%</text>
