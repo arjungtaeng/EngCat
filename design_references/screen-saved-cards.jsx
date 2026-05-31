@@ -8,8 +8,12 @@ function ECScreenSavedCards() {
   const [tab, setTab] = React.useState('words');
   const [bookmarked, setBookmarked] = React.useState(() => new Set(session.bookmarkedIds));
 
-  const savedWords = (window.ECData?.words || []).filter(w => bookmarked.has(w.id));
-  const savedSentences = (window.ECData?.sentences || []).filter(s => bookmarked.has(s.id));
+  // 최근 저장 순서대로 정렬 (Set은 삽입 순서 보존 → 역순 = 최신이 위)
+  const bookmarkedOrder = [...bookmarked].reverse();
+  const wordById = new Map((window.ECData?.words || []).map(w => [w.id, w]));
+  const sentenceById = new Map((window.ECData?.sentences || []).map(s => [s.id, s]));
+  const savedWords = bookmarkedOrder.map(id => wordById.get(id)).filter(Boolean);
+  const savedSentences = bookmarkedOrder.map(id => sentenceById.get(id)).filter(Boolean);
 
   const removeWord = (id) => {
     session.bookmarkedIds.delete(id);
