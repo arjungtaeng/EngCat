@@ -125,6 +125,13 @@ function ECScreenHelp() {
         </div>
       </div>
 
+      {/* CC attribution - text only, no box */}
+      <div style={{ padding: '28px 18px 28px', textAlign: 'center' }}>
+        <div style={{ fontSize: 10, color: T.textFaint, lineHeight: 1.8, fontFamily: T.mono, letterSpacing: 0.3 }}>
+          App icon "Cat" by Icojam, SVG Repo · CC BY 4.0
+        </div>
+      </div>
+
       </div>{/* end scrollable */}
     </div>
   );
