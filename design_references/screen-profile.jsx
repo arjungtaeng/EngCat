@@ -27,7 +27,7 @@ function ECScreenProfile() {
 
   const topicNames = window.EC_TOPIC_NAMES || {};
   const topicOrder = window.EC_TOPIC_ORDER || [];
-  const currentTopicLabel = userTopic ? (topicNames[userTopic] || userTopic) : '자동 (주간 순환)';
+  const currentTopicLabel = userTopic ? (topicNames[userTopic] || userTopic) : '자동 (매일 순환)';
 
   const setVoice = (v) => { setTtsVoice(v); localStorage.setItem('ec_azure_voice', v); window.ECSpeak('Hello! I am your English learning assistant.', v); };
 
