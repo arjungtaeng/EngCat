@@ -228,7 +228,7 @@ function ECScreenProfile() {
 
       {/* ARSCHOOLING */}
       <div style={{ padding: '0 18px 28px', textAlign: 'center' }}>
-        <div style={{ fontSize: 24, fontFamily: 'ARSCHOOLING', color: T.textMute, letterSpacing: 1 }}>
+        <div style={{ fontSize: 15, fontWeight: 500, fontFamily: 'ARSCHOOLING', color: T.textMute, letterSpacing: 1 }}>
           ARSCHOOLING
         </div>
       </div>
