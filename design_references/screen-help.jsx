@@ -26,12 +26,13 @@ function ECScreenHelp() {
 
       {/* 복습 없음 선 (지수적 감소 - Ebbinghaus 곡선) */}
       <path
-        d="M 30 20 Q 80 65, 100 85 Q 130 98, 160 105 Q 200 108, 240 109"
+        d="M 30 20 L 60 50 L 90 75 L 120 88 L 150 98 L 180 104 L 210 107 L 240 109"
         fill="none"
         stroke={T.textMute}
         strokeWidth="1.5"
         strokeDasharray="3,3"
         opacity="0.5"
+        strokeLinecap="round"
       />
 
       {/* 복습 있음 선 (톱니형 패턴) */}
