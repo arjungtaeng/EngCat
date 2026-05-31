@@ -127,7 +127,7 @@ function ECScreenHelp() {
 
       {/* Credits */}
       <div style={{ padding: '28px 18px 8px', fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, color: T.textMute, textTransform: 'uppercase' }}>
-        앱 정보
+        크레딧
       </div>
       <div style={{ padding: '0 18px 28px' }}>
         <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}`, padding: 18, textAlign: 'center' }}>
