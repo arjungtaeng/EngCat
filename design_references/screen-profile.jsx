@@ -101,12 +101,12 @@ function ECScreenProfile() {
           display: 'flex', alignItems: 'center', gap: 16,
         }}>
           {user?.picture
-            ? <img src={user.picture} alt={user.name} referrerPolicy="no-referrer" style={{ width: 70, height: 70, borderRadius: 999, objectFit: 'cover', border: `1px solid ${T.hairStr}` }} />
+            ? <img src={user.picture} alt={user.name} referrerPolicy="no-referrer" style={{ width: 80, height: 80, borderRadius: 999, objectFit: 'cover', border: `1px solid ${T.hairStr}` }} />
             : <div style={{
-                width: 70, height: 70, borderRadius: 999,
+                width: 80, height: 80, borderRadius: 999,
                 background: `linear-gradient(135deg, ${T.art1} 0%, ${T.art2} 100%)`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: T.serif, fontSize: 26, color: T.text, fontStyle: 'italic',
+                fontFamily: T.serif, fontSize: 28, color: T.text, fontStyle: 'italic',
                 border: `1px solid ${T.hairStr}`,
               }}>{(user?.name || '?').slice(0, 2)}</div>
           }
