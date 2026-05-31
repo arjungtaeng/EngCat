@@ -4,9 +4,9 @@ function ECScreenHelp() {
   const T = ECTokens;
   const scrollRef = React.useRef(null);
 
-  // 망각 곡선 시각화 (간단한 SVG)
+  // 망각 곡선 시각화 (Ebbinghaus 곡선)
   const ForgettingCurve = () => (
-    <svg viewBox="0 0 300 140" style={{ width: '100%', height: 'auto' }}>
+    <svg viewBox="0 0 300 150" style={{ width: '100%', height: 'auto' }}>
       <defs>
         <linearGradient id="curveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stopColor={T.accent} stopOpacity="0.15" />
@@ -14,16 +14,19 @@ function ECScreenHelp() {
         </linearGradient>
       </defs>
 
-      <line x1="30" y1="120" x2="290" y2="120" stroke={T.hairStr} strokeWidth="1" />
-      <line x1="30" y1="20" x2="30" y2="120" stroke={T.hairStr} strokeWidth="1" />
+      {/* 축 */}
+      <line x1="30" y1="110" x2="290" y2="110" stroke={T.hairStr} strokeWidth="1" />
+      <line x1="30" y1="20" x2="30" y2="110" stroke={T.hairStr} strokeWidth="1" />
 
-      <text x="50" y="135" fontSize="10" fill={T.textMute} textAnchor="middle">학습</text>
-      <text x="120" y="135" fontSize="10" fill={T.textMute} textAnchor="middle">1일</text>
-      <text x="180" y="135" fontSize="10" fill={T.textMute} textAnchor="middle">3일</text>
-      <text x="240" y="135" fontSize="10" fill={T.textMute} textAnchor="middle">1주</text>
+      {/* 시간 레이블 */}
+      <text x="30" y="130" fontSize="10" fill={T.textMute} textAnchor="middle">학습</text>
+      <text x="100" y="130" fontSize="10" fill={T.textMute} textAnchor="middle">1일</text>
+      <text x="160" y="130" fontSize="10" fill={T.textMute} textAnchor="middle">3일</text>
+      <text x="240" y="130" fontSize="10" fill={T.textMute} textAnchor="middle">1주</text>
 
+      {/* 복습 없음 선 (지수적 감소 - Ebbinghaus 곡선) */}
       <path
-        d="M 50 35 Q 85 60 120 85 T 180 100 T 240 110"
+        d="M 30 20 Q 65 55, 100 80 Q 130 95, 160 103 Q 200 108, 240 110"
         fill="none"
         stroke={T.textMute}
         strokeWidth="1.5"
@@ -31,19 +34,46 @@ function ECScreenHelp() {
         opacity="0.5"
       />
 
+      {/* 복습 있음 선 (톱니형 패턴) */}
+      {/* 첫 번째 구간: 학습 → 1일 */}
       <path
-        d="M 50 35 L 120 40 L 180 50 L 240 60"
-        fill="url(#curveGradient)"
+        d="M 30 20 Q 65 50, 100 70"
+        fill="none"
         stroke={T.accent}
         strokeWidth="2"
       />
+      {/* 첫 복습 (1일) */}
+      <circle cx="100" cy="70" r="2.5" fill={T.accent} />
+      <line x1="100" y1="70" x2="100" y2="32" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
+      <circle cx="100" cy="32" r="2.5" fill={T.accent} />
 
-      <circle cx="120" cy="40" r="3" fill={T.accent} />
-      <circle cx="180" cy="50" r="3" fill={T.accent} />
-      <circle cx="240" cy="60" r="3" fill={T.accent} />
+      {/* 두 번째 구간: 1일 복습 후 → 3일 */}
+      <path
+        d="M 100 32 Q 130 50, 160 68"
+        fill="none"
+        stroke={T.accent}
+        strokeWidth="2"
+      />
+      {/* 두 번째 복습 (3일) */}
+      <circle cx="160" cy="68" r="2.5" fill={T.accent} />
+      <line x1="160" y1="68" x2="160" y2="36" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
+      <circle cx="160" cy="36" r="2.5" fill={T.accent} />
 
+      {/* 세 번째 구간: 3일 복습 후 → 1주 */}
+      <path
+        d="M 160 36 Q 200 55, 240 75"
+        fill="none"
+        stroke={T.accent}
+        strokeWidth="2"
+      />
+      {/* 세 번째 복습 (1주) */}
+      <circle cx="240" cy="75" r="2.5" fill={T.accent} />
+      <line x1="240" y1="75" x2="240" y2="38" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
+      <circle cx="240" cy="38" r="2.5" fill={T.accent} />
+
+      {/* Y축 레이블 */}
       <text x="20" y="25" fontSize="9" fill={T.textMute} textAnchor="end">100%</text>
-      <text x="20" y="125" fontSize="9" fill={T.textMute} textAnchor="end">0%</text>
+      <text x="20" y="115" fontSize="9" fill={T.textMute} textAnchor="end">0%</text>
     </svg>
   );
 
@@ -75,8 +105,9 @@ function ECScreenHelp() {
 
           <div style={{ margin: '20px 0', padding: '16px', background: T.bg1, borderRadius: 12 }}>
             <ForgettingCurve />
-            <div style={{ fontSize: 10, color: T.textMute, textAlign: 'center', marginTop: 8 }}>
-              점선: 복습 없음 | 실선: EngCat으로 복습
+            <div style={{ fontSize: 10, color: T.textMute, textAlign: 'center', marginTop: 8, display: 'flex', gap: 16, justifyContent: 'center' }}>
+              <div>점선: 복습 없음</div>
+              <div>실선: EngCat으로 복습</div>
             </div>
           </div>
 
