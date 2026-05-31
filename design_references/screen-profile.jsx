@@ -101,9 +101,9 @@ function ECScreenProfile() {
           display: 'flex', alignItems: 'center', gap: 16,
         }}>
           {user?.picture
-            ? <img src={user.picture} alt={user.name} referrerPolicy="no-referrer" style={{ width: 72, height: 72, borderRadius: 999, objectFit: 'cover', border: `1px solid ${T.hairStr}` }} />
+            ? <img src={user.picture} alt={user.name} referrerPolicy="no-referrer" style={{ width: 73, height: 73, borderRadius: 999, objectFit: 'cover', border: `1px solid ${T.hairStr}` }} />
             : <div style={{
-                width: 72, height: 72, borderRadius: 999,
+                width: 73, height: 73, borderRadius: 999,
                 background: `linear-gradient(135deg, ${T.art1} 0%, ${T.art2} 100%)`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontFamily: T.serif, fontSize: 26, color: T.text, fontStyle: 'italic',
