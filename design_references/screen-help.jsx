@@ -92,7 +92,7 @@ function ECScreenHelp() {
       </div>
       <div style={{ padding: '0 18px 28px' }}>
         {/* Advantage 1 */}
-        <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}`, padding: 16, marginBottom: 12, display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+        <div onClick={() => window.ECNav?.go('help-detail-images')} style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}`, padding: 16, marginBottom: 12, display: 'flex', gap: 14, alignItems: 'flex-start', cursor: 'pointer', transition: 'all 0.15s' }}>
           <div style={{ fontSize: 20, fontWeight: 600, color: T.accent, minWidth: 28 }}>1</div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 14, fontWeight: 600, color: T.text, marginBottom: 4 }}>이미지로 배워요</div>
@@ -103,7 +103,7 @@ function ECScreenHelp() {
         </div>
 
         {/* Advantage 2 */}
-        <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}`, padding: 16, marginBottom: 12, display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+        <div onClick={() => window.ECNav?.go('help-detail-topics')} style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}`, padding: 16, marginBottom: 12, display: 'flex', gap: 14, alignItems: 'flex-start', cursor: 'pointer', transition: 'all 0.15s' }}>
           <div style={{ fontSize: 20, fontWeight: 600, color: T.accent, minWidth: 28 }}>2</div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 14, fontWeight: 600, color: T.text, marginBottom: 4 }}>다양한 상황을 배워요</div>
@@ -114,25 +114,13 @@ function ECScreenHelp() {
         </div>
 
         {/* Advantage 3 */}
-        <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}`, padding: 16, display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+        <div onClick={() => window.ECNav?.go('help-detail-daily')} style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}`, padding: 16, display: 'flex', gap: 14, alignItems: 'flex-start', cursor: 'pointer', transition: 'all 0.15s' }}>
           <div style={{ fontSize: 20, fontWeight: 600, color: T.accent, minWidth: 28 }}>3</div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 14, fontWeight: 600, color: T.text, marginBottom: 4 }}>매일 짧게만 하면 돼요</div>
             <div style={{ fontSize: 13, color: T.textDim, lineHeight: 1.5 }}>
               10개 단어 + 5개 문장. 꾸준히 할 수 있어요.
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Credits */}
-      <div style={{ padding: '28px 18px 8px', fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, color: T.textMute, textTransform: 'uppercase' }}>
-        크레딧
-      </div>
-      <div style={{ padding: '0 18px 28px' }}>
-        <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}`, padding: 18, textAlign: 'center' }}>
-          <div style={{ fontSize: 11, color: T.textFaint, lineHeight: 1.8, fontFamily: T.mono, letterSpacing: 0.3 }}>
-            App icon "Cat" by Icojam, SVG Repo · CC BY 4.0
           </div>
         </div>
       </div>

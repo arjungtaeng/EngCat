@@ -35,7 +35,7 @@
 
 <script>window.ECRealDevice = true;</script>
 
-<script>window.EC_VER = 238;</script>
+<script>window.EC_VER = 239;</script>
 <script type="text/babel" src="design_references/tokens.jsx"></script>
 <script type="text/babel" src="design_references/icons.jsx"></script>
 <script type="text/babel" src="design_references/supabase.jsx"></script>
@@ -45,6 +45,9 @@
 <script type="text/babel" src="design_references/screen-onboarding.jsx"></script>
 <script type="text/babel" src="design_references/screen-home.jsx"></script>
 <script type="text/babel" src="design_references/screen-help.jsx"></script>
+<script type="text/babel" src="design_references/screen-help-detail-images.jsx"></script>
+<script type="text/babel" src="design_references/screen-help-detail-topics.jsx"></script>
+<script type="text/babel" src="design_references/screen-help-detail-daily.jsx"></script>
 <script type="text/babel" src="design_references/screen-word-card.jsx"></script>
 <script type="text/babel" src="design_references/screen-sentence-card.jsx"></script>
 <script type="text/babel" src="design_references/screen-saved-cards.jsx"></script>
@@ -109,19 +112,22 @@
     }, []);
 
     const screenMap = {
-      'login':           ECScreenLogin,
-      'onboarding':      ECScreenOnboarding,
-      'onboarding-goal': ECScreenOnboardingGoal,
-      'home':            ECScreenHome,
-      'help':            ECScreenHelp,
-      'word-card':       ECScreenWordCard,
-      'sentence-card':   ECScreenSentenceCard,
-      'saved-cards':     ECScreenSavedCards,
-      'quiz':            ECScreenQuiz,
-      'stats':           ECScreenStats,
-      'leaderboard':     ECScreenLeaderboard,
-      'friends':         ECScreenFriends,
-      'profile':         ECScreenProfile,
+      'login':                  ECScreenLogin,
+      'onboarding':             ECScreenOnboarding,
+      'onboarding-goal':        ECScreenOnboardingGoal,
+      'home':                   ECScreenHome,
+      'help':                   ECScreenHelp,
+      'help-detail-images':     ECScreenHelpDetailImages,
+      'help-detail-topics':     ECScreenHelpDetailTopics,
+      'help-detail-daily':      ECScreenHelpDetailDaily,
+      'word-card':              ECScreenWordCard,
+      'sentence-card':          ECScreenSentenceCard,
+      'saved-cards':            ECScreenSavedCards,
+      'quiz':                   ECScreenQuiz,
+      'stats':                  ECScreenStats,
+      'leaderboard':            ECScreenLeaderboard,
+      'friends':                ECScreenFriends,
+      'profile':                ECScreenProfile,
     };
 
     const Screen = screenMap[screen] || screenMap['home'] || (() => null);
