@@ -60,7 +60,7 @@ function ECScreenSavedCards() {
           <div style={{ padding: '16px 18px 0', display: 'flex', flexDirection: 'column', gap: 10 }}>
             {savedWords.map((w) => (
               <div key={w.id} style={{
-                padding: '7px 7px', borderRadius: 16,
+                padding: '10px 10px', borderRadius: 16,
                 background: T.bg2, border: `1px solid ${T.hair}`,
                 display: 'flex', alignItems: 'center', gap: 14,
               }}>
@@ -110,7 +110,7 @@ function ECScreenSavedCards() {
                   window.ECNav?.go('sentence-card');
                 }}
                 style={{
-                  padding: '7px 7px', borderRadius: 16,
+                  padding: '10px 10px', borderRadius: 16,
                   background: T.bg2, border: `1px solid ${T.hair}`,
                   cursor: 'pointer',
                   display: 'flex', alignItems: 'center', gap: 14,
