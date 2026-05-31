@@ -36,9 +36,9 @@ function ECScreenHelp() {
       />
 
       {/* 복습 있음 선 (톱니형 패턴 - 반복할수록 망각이 덜함) */}
-      {/* 첫 번째 구간: 학습 → 1일 (가파른 망각) */}
+      {/* 첫 번째 구간: 학습 → 1일 (가파른 망각, 지수적 감소) */}
       <path
-        d="M 30 20 Q 65 50, 100 70"
+        d="M 30 20 Q 50 35, 70 55 Q 85 65, 100 70"
         fill="none"
         stroke={T.accent}
         strokeWidth="2"
@@ -48,9 +48,9 @@ function ECScreenHelp() {
       <line x1="100" y1="70" x2="100" y2="28" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
       <circle cx="100" cy="28" r="2.5" fill={T.accent} />
 
-      {/* 두 번째 구간: 1일 복습 후 → 3일 (덜 가파른 망각) */}
+      {/* 두 번째 구간: 1일 복습 후 → 3일 (덜 가파른 망각, 지수적 감소) */}
       <path
-        d="M 100 28 Q 130 38, 160 50"
+        d="M 100 28 Q 120 35, 140 42 Q 150 46, 160 50"
         fill="none"
         stroke={T.accent}
         strokeWidth="2"
@@ -60,9 +60,9 @@ function ECScreenHelp() {
       <line x1="160" y1="50" x2="160" y2="30" stroke={T.accent} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
       <circle cx="160" cy="30" r="2.5" fill={T.accent} />
 
-      {/* 세 번째 구간: 3일 복습 후 → 1주 (더욱 완만한 망각) */}
+      {/* 세 번째 구간: 3일 복습 후 → 1주 (더욱 완만한 망각, 지수적 감소) */}
       <path
-        d="M 160 30 Q 200 40, 240 48"
+        d="M 160 30 Q 180 36, 200 42 Q 220 45, 240 48"
         fill="none"
         stroke={T.accent}
         strokeWidth="2"
