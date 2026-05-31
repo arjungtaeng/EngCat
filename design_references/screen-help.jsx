@@ -1,49 +1,17 @@
-// EngCat — Help screen (with icons & animations)
+// EngCat — Help screen (with icons)
 
 function ECScreenHelp() {
   const T = ECTokens;
   const scrollRef = React.useRef(null);
-  const [animatedSteps, setAnimatedSteps] = React.useState([false, false, false]);
-  const [flameBlink, setFlameBlink] = React.useState(0);
-
-  // 단계별 페이드인 애니메이션
-  React.useEffect(() => {
-    const timings = [100, 400, 700];
-    const timeouts = timings.map((delay, idx) =>
-      setTimeout(() => {
-        setAnimatedSteps(prev => {
-          const next = [...prev];
-          next[idx] = true;
-          return next;
-        });
-      }, delay)
-    );
-    return () => timeouts.forEach(t => clearTimeout(t));
-  }, []);
-
-  // 스트릭 불 깜빡임 애니메이션
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setFlameBlink(prev => (prev + 1) % 2);
-    }, 800);
-    return () => clearInterval(interval);
-  }, []);
 
   const StepCard = ({ idx, icon, title, desc }) => (
-    <div
-      style={{
-        padding: 18,
-        borderBottom: idx < 2 ? `1px solid ${T.hair}` : 'none',
-        display: 'flex',
-        gap: 12,
-        alignItems: 'flex-start',
-        animation: animatedSteps[idx]
-          ? `fadeInUp 0.5s ease-out forwards`
-          : 'none',
-        opacity: animatedSteps[idx] ? 1 : 0,
-        transform: animatedSteps[idx] ? 'translateY(0)' : 'translateY(8px)',
-      }}
-    >
+    <div style={{
+      padding: 18,
+      borderBottom: idx < 2 ? `1px solid ${T.hair}` : 'none',
+      display: 'flex',
+      gap: 12,
+      alignItems: 'flex-start',
+    }}>
       <div style={{
         width: 48, height: 48, borderRadius: 14,
         background: T.accentSoft, color: T.accent,
@@ -60,30 +28,12 @@ function ECScreenHelp() {
           {desc}
         </div>
       </div>
-      {idx < 2 && (
-        <div style={{
-          position: 'absolute',
-          right: -24,
-          top: 'calc(50% + 24px)',
-          color: T.textMute,
-          opacity: 0.4,
-        }}>
-          {ECIcon.chev('down', T.textMute, 16)}
-        </div>
-      )}
     </div>
   );
 
   return (
     <div style={{ flex: 1, minHeight: 0, background: T.bg1, display: 'flex', flexDirection: 'column' }}>
       <ECStatusBar />
-
-      <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
 
       <div ref={scrollRef} style={{ flex: 1, minHeight: 0, overflowY: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: 90 }}>
 
@@ -96,7 +46,7 @@ function ECScreenHelp() {
       <div style={{ padding: '28px 22px 8px', fontFamily: T.mono, fontSize: 10, letterSpacing: 1.4, color: T.textMute, textTransform: 'uppercase' }}>
         학습 흐름
       </div>
-      <div style={{ padding: '0 18px 28px', position: 'relative' }}>
+      <div style={{ padding: '0 18px 28px' }}>
         <div style={{ background: T.bg2, borderRadius: 18, border: `1px solid ${T.hair}`, overflow: 'hidden' }}>
           <StepCard
             idx={0}
@@ -172,7 +122,6 @@ function ECScreenHelp() {
               background: T.accentSoft, color: T.accent,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0,
-              animation: flameBlink === 0 ? 'none' : 'pulse 0.6s ease-in-out',
             }}>
               {ECIcon.flame(T.accent, 28)}
             </div>
