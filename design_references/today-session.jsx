@@ -1,5 +1,5 @@
 // EngCat — Today's session helper (web)
-// 토픽: 일주일 단위로 변경 (사용자가 선택 가능)
+// 토픽: 매일 변경 (사용자가 선택 가능)
 // 복습: 어제 학습한 단어/패턴
 // 첫날 (복습 없음): 예습 단어/패턴 무작위
 
@@ -123,7 +123,7 @@ function _loadLearned(key) {
   catch(e) { return {}; }
 }
 
-// 이번 주 토픽: 사용자가 선택한 토픽이 있으면 사용, 없으면 주차별 자동 순환
+// 오늘의 토픽: 사용자가 선택한 토픽이 있으면 사용, 없으면 매일 자동 순환
 window.ECGetTodayTopic = function(words) {
   const userTopic = localStorage.getItem('ec_user_topic');
   if (userTopic && window.EC_TOPIC_NAMES[userTopic]) return userTopic;
@@ -133,12 +133,12 @@ window.ECGetTodayTopic = function(words) {
     const patterns = (window.ECData && window.ECData.patterns) || [];
     const patternTopics = Array.from(new Set(patterns.map(p => p.topic).filter(Boolean)));
     if (patternTopics.length === 0) return null;
-    return patternTopics[window.ECGetWeekOfYear() % patternTopics.length];
+    return patternTopics[window.ECGetDayOfYear() % patternTopics.length];
   }
 
   const ordered = window.EC_TOPIC_ORDER.filter(t => available.includes(t));
   if (ordered.length === 0) return available[0];
-  return ordered[window.ECGetWeekOfYear() % ordered.length];
+  return ordered[window.ECGetDayOfYear() % ordered.length];
 };
 
 // 레벨 읽기: ec_user_level 우선, 없으면 engcat_user.level (온보딩 저장) 사용
