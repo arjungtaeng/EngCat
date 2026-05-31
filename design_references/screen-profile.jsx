@@ -147,17 +147,36 @@ function ECScreenProfile() {
               </div>
             )}
 
-            <div style={{ marginTop: 8, display: 'flex', gap: 6 }}>
+            <div style={{ marginTop: 8 }}>
               <span style={{
                 padding: '3px 8px', borderRadius: 6, background: T.accentSoft,
                 color: T.accent, fontSize: 10.5, fontWeight: 600, fontFamily: T.mono, letterSpacing: 0.4,
               }}>B1 · 중급</span>
-              <span style={{
-                padding: '3px 8px', borderRadius: 6, background: T.bg3,
-                color: T.textDim, fontSize: 10.5, fontWeight: 600, fontFamily: T.mono, letterSpacing: 0.4,
-              }}>PRO</span>
             </div>
           </div>
+
+          {/* 다음 레벨 진행도 원형 차트 */}
+          <svg viewBox="0 0 80 80" style={{ width: 80, height: 80, flexShrink: 0 }}>
+            {/* 배경 원 */}
+            <circle cx="40" cy="40" r="35" fill="none" stroke={T.hair} strokeWidth="3" />
+            {/* 진행 원 (60% = 216도 = 60 * 360 / 100) */}
+            <circle
+              cx="40" cy="40" r="35"
+              fill="none"
+              stroke={T.accent}
+              strokeWidth="3"
+              strokeDasharray={`132 220`}
+              strokeLinecap="round"
+              transform="rotate(-90 40 40)"
+            />
+            {/* 중앙 텍스트 */}
+            <text x="40" y="38" textAnchor="middle" fontSize="20" fontWeight="600" fill={T.text} fontFamily={T.serif}>
+              B2
+            </text>
+            <text x="40" y="52" textAnchor="middle" fontSize="10" fill={T.textMute} fontFamily={T.mono}>
+              47개
+            </text>
+          </svg>
         </div>
       </div>
 
