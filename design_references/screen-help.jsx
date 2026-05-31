@@ -24,9 +24,9 @@ function ECScreenHelp() {
       <text x="160" y="130" fontSize="10" fill={T.textMute} textAnchor="middle">3일</text>
       <text x="240" y="130" fontSize="10" fill={T.textMute} textAnchor="middle">1주</text>
 
-      {/* 복습 없음 선 (지수적 감소 - Ebbinghaus 곡선) */}
+      {/* 복습 없음 선 (지수적 감소 - Ebbinghaus 곡선, 부드러운 곡선) */}
       <path
-        d="M 30 20 L 60 50 L 90 75 L 120 88 L 150 98 L 180 104 L 210 107 L 240 109"
+        d="M 30 20 Q 45 35, 60 50 Q 75 65, 90 75 Q 105 82, 120 88 Q 135 93, 150 97 Q 165 101, 180 104 Q 195 106, 210 107 Q 225 108, 240 109"
         fill="none"
         stroke={T.textMute}
         strokeWidth="1.5"
